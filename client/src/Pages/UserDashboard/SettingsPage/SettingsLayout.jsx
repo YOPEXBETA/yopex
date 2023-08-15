@@ -21,17 +21,17 @@ const SettingsLayout = () => {
         </div>
 
         {value === 0 && (
-          <div className="col-span-12 md:col-span-9  mt-8 lg:px-16 px-2">
+          <div className="col-span-12 lg:col-span-9 md:col-span-12 mt-8 lg:px-16 px-2">
             <GeneralInformations />
           </div>
         )}
         {value === 1 && (
-          <div className="col-span-12 md:col-span-9  mt-8 px-16">
+          <div className="col-span-12 lg:col-span-9 md:col-span-12 mt-8 lg:px-16 px-2">
             <Privacy />
           </div>
         )}
         {value === 2 && (
-          <div className="col-span-12 md:col-span-9  mt-8 px-16">
+          <div className="col-span-12 lg:col-span-9 md:col-span-12 mt-8 lg:px-16 px-2">
             <Billing />
           </div>
         )}
