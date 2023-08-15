@@ -50,7 +50,7 @@ const CustomNavbar = () => {
       </div>
       {/* Mobile menu content */}
       {showMobileMenu && (
-        <div className="lg:hidden md:block bg-white p-4">
+        <div className="lg:hidden  bg-white  p-4 md:flex flex-col items-center">
           <NavbarTabTop />
           <MenuIcons />
         </div>
