@@ -24,7 +24,12 @@ const {
   challengeSchemaValidator,
 } = require("../validators/challenge.validators");
 
-ChallengeRouter.post("/add", authenticateToken, CreateChallenge);
+ChallengeRouter.post(
+  "/add",
+  authenticateToken,
+  CreateChallenge
+  /*validate(challengeSchemaValidator)*/
+);
 
 ChallengeRouter.get(
   "/single/:challengeId",
