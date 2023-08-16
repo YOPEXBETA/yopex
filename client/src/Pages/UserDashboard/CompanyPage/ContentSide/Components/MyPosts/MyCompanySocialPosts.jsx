@@ -3,8 +3,9 @@ import { useUserPosts } from "../../../../../../hooks/react-query/usePosts";
 import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 
 const MyCompanySocialPosts = () => {
-  const { userId } = useParams();
-  const { data: posts, isLoading } = useUserPosts(userId);
+  const { companyId } = useParams();
+  const { data: posts, isLoading } = useUserPosts(companyId);
+  console.log(companyId, posts);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-11 py-5">

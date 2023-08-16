@@ -13,7 +13,7 @@ import PostMenuIcon from "./components/PostMenuIcon";
 const SocialPostCard = ({ post }) => {
   const { user } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.global);
-
+  console.log(post);
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
   const { mutate: sharePost } = useSharePost(user._id, post.userId, category);
 
@@ -28,12 +28,12 @@ const SocialPostCard = ({ post }) => {
           />
           <div>
             <Link
-              key={post.userId._id}
-              to={`/profile/${post.userId._id}`}
+              key={post.userId}
+              to={post.companyName!==undefined? `/company/${post.userId}`  :`/profile/${post.userId}`}
               style={{ textDecoration: "none", color: "#000000" }}
             >
               <p className="text-md font-medium ">
-                {`${post.userId.firstname} ${post.userId.lastname}`}
+                {post.companyName!==undefined? `${post.companyName}` :`${post.firstname} ${post.lastname}`}
               </p>
             </Link>
             <p className=" text-[14px]  text-gray-500">

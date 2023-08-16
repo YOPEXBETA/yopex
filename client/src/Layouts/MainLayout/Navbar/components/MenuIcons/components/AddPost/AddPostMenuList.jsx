@@ -11,6 +11,8 @@ import WorkIcon from "@mui/icons-material/Work";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import { AddWorkOfferModal } from "./AddWorkOfferModal";
 import { AddChallengeModal } from "./AddChallengeModal";
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import { AddPostModal } from "./AddPostsModal";
 
 // import { useSelector } from "react-redux";
 // ==============================|| STYLING ||============================== //
@@ -92,6 +94,16 @@ const AddPostMenuList = () => {
   const handleCloseModalChallenge = () => {
     setOpenChallengeModal(false);
   };
+  // ==============================|| ADD A POST CODE ||============================== //
+  const [openPostModal, setOpenPostModal] = useState(false);
+
+  const handleClickOpenModalPost = () => {
+    setOpenPostModal(true);
+  };
+
+  const handleCloseModalPost = () => {
+    setOpenPostModal(false);
+  };
 
   return (
     <React.Fragment>
@@ -140,6 +152,12 @@ const AddPostMenuList = () => {
           Add a challenge
         </MenuItem>
         {/* )} */}
+        <MenuItem onClick={handleClickOpenModalPost}>
+          <ListItemIcon>
+            <PostAddIcon fontSize="small" />
+          </ListItemIcon>
+          Add a post
+        </MenuItem>
       </Menu>
 
       <AddWorkOfferModal
@@ -150,6 +168,10 @@ const AddPostMenuList = () => {
         open={openChallengeModal}
         handleClose={handleCloseModalChallenge}
       />
+      <AddPostModal
+        open={openPostModal}
+        handleClose={handleCloseModalPost}
+      />  
     </React.Fragment>
   );
 };

@@ -7,9 +7,8 @@ const CompanyModel = require("../models/company.model");
 const CreatePost = async (req, res) => {
   try {
     // Find the current user by ID
-    const user = await UserModel.findById(req.userId);
-    const company = await CompanyModel.findById(req.userId);
-
+    const user = await UserModel.findById(req.body.userId);
+    const company = await CompanyModel.findById(req.body.userId);
     // Determine whether the current user is a UserModel or CompanyModel
     let owner;
     let isUser = true;
@@ -27,11 +26,11 @@ const CreatePost = async (req, res) => {
 
     // Create a new post with the current user's information
     const newPost = new Post({
-      userId: req.userId,
+      userId: req.body.userId,
       firstname: isUser ? owner.firstname : undefined,
       lastname: isUser ? owner.lastname : undefined,
       companyName: !isUser ? owner.companyName : undefined,
-      userPicturePath: owner.picturePath || owner.picturePath,
+      userPicturePath: owner.picturePath!=undefined?owner.picturePath: owner.companyLogo,
       description: req.body.description,
       postPicturePath: req.body.postPicturePath,
       postVideoePath: req.body.postVideoPath,
@@ -40,7 +39,7 @@ const CreatePost = async (req, res) => {
     savedpost = await newPost.save();
 
     const data = await Model.findOneAndUpdate(
-      { _id: req.userId },
+      { _id: req.body.userId },
       { $push: { posts: savedpost._id } },
       { new: true }
     ).populate("posts");
@@ -80,7 +79,6 @@ const getFeedPosts = async (req, res) => {
   };
   try {
     const posts = await Post.find(filters)
-      .populate({ path: "userId", model: "User" })
       .sort({ createdAt: "desc" });
     res.status(200).json(posts);
   } catch (err) {
@@ -107,14 +105,15 @@ const deletePost = async (req, res) => {
 const getUserPosts = async (req, res) => {
   try {
     const userId = req.params.userId;
-
+    const user = await UserModel.findById(userId);
+    const company = await CompanyModel.findById(userId);
     // Find the owner of the posts by ID
     let owner;
     let isUser = true;
-    if (userId) {
-      owner = await UserModel.findById(userId);
+    if (user) {
+      owner = user
     } else {
-      owner = await CompanyModel.findById(userId);
+      owner = company
       isUser = false;
     }
 
@@ -127,12 +126,9 @@ const getUserPosts = async (req, res) => {
           { companyId: userId },
           { _id: { $in: sharedPostIds } },
         ],
-      }).populate({ path: "userId", model: "User" });
+      })
     } else {
-      posts = await Post.find({ companyId: userId }).populate({
-        path: "companyId",
-        model: "User",
-      });
+      posts = await Post.find({ userId: userId })
     }
 
     res.status(200).json(posts);
@@ -140,6 +136,8 @@ const getUserPosts = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+
 
 //like/dislike post
 const likePost = async (req, res) => {

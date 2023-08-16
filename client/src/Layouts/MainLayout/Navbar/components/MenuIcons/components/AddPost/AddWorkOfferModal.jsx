@@ -25,6 +25,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
     const companyId = selectedOption;
 
     mutate({ companyId, JobData });
+    handleClose();
   };
 
   return (

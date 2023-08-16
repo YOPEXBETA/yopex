@@ -6,7 +6,7 @@ import SocialPostCard from "../../../../../Components/shared/cards/SocialMediaPo
 const SocialPosts = () => {
   const { category } = useSelector((state) => state.global);
   const { data: posts, isLoading } = usePostsByCategory(category);
-
+  console.log(posts);
   return (
     <Stack spacing={2}>
       {isLoading ? (

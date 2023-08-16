@@ -18,6 +18,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+
 ///login with google
 const passportSetup = require("./config/passport");
 const passport = require("passport");
@@ -55,7 +56,7 @@ createAdminUser();
 // }
 
 // addYearsRegisteredToUsers();
-
+  
 const server = http.createServer(app);
 const io = new Server(server);
 io.on("connection", (client) => {
