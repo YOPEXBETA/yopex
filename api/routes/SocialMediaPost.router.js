@@ -10,6 +10,8 @@ const {
   getUserPosts,
   likePost,
   sharePost,
+  BookmarkPost,
+  getBookmarks,
 } = require("../controllers/SocialMediaPost.controllers");
 
 // Require authentication middleware
@@ -24,5 +26,7 @@ SocialMediaPostRouter.delete("/:id", authenticateToken, deletePost);
 SocialMediaPostRouter.put("/:id", authenticateToken, updateAPost);
 SocialMediaPostRouter.patch("/:id/like", authenticateToken, likePost);
 SocialMediaPostRouter.patch("/share", authenticateToken, sharePost);
+SocialMediaPostRouter.patch("/:userId/bookmark/:postId", authenticateToken, BookmarkPost);
+SocialMediaPostRouter.get("/bookmarks/:userId", authenticateToken, getBookmarks);
 
 module.exports = SocialMediaPostRouter;

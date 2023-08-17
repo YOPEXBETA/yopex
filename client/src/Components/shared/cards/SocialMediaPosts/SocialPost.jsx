@@ -1,21 +1,36 @@
 import { Favorite, FavoriteBorder, Share } from "@mui/icons-material";
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import { Checkbox } from "@mui/material";
 import { formatDistance } from "date-fns";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CommentButton from "../../comments/CommentButton";
 import {
   useLikePost,
-  useSharePost,
+  useBookmarkPost,
 } from "../../../../hooks/react-query/usePosts";
 import PostMenuIcon from "./components/PostMenuIcon";
 
-const SocialPostCard = ({ post }) => {
+
+const SocialPostCard = ({ post,bookmarks,companyId }) => {
   const { user } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.global);
   console.log(post);
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
-  const { mutate: sharePost } = useSharePost(user._id, post.userId, category);
+  const { mutate: BookmarkPost } = useBookmarkPost(user._id, post._id,category);
+  let ownerId=user._id;
+  if (companyId){
+    ownerId=companyId;
+  }
+  
+  
+
+  const bookmark = async ()=>{
+    
+    BookmarkPost()
+
+  }
+  
 
   return (
     <div className="shadow-md bg-white w-full mx-auto h-full rounded-lg border-green-500 border-b-2">
@@ -83,12 +98,20 @@ const SocialPostCard = ({ post }) => {
         </div>
 
         {/* Share button */}
+        {
+          ownerId==post.userId? "":(
+        
         <div className=" flex items-center gap-1">
-          <button onClick={() => sharePost(post._id)}>
-            <Share sx={{ color: "silver" }} />
+          <button onClick={bookmark}>
+          <Checkbox
+              icon={<BookmarksIcon/>}
+              checkedIcon={<BookmarksIcon sx={{ color: "green" }} />}
+              checked={bookmarks.includes(post._id)}
+            />
           </button>
-          <p className="">{post.shareCount}</p>
+          
         </div>
+        )}
       </div>
     </div>
   );

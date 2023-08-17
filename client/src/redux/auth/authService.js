@@ -26,6 +26,7 @@ const edit = async (data) => {
     data,
     { withCredentials: true }
   );
+  console.log("this is the user",user.data);
   return user.data;
 };
 

@@ -5,8 +5,10 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUserReviews } from "../../../../../hooks/react-query/useReviews";
 import { useUserById } from "../../../../../hooks/react-query/useUsers";
+import { useSelector } from "react-redux";
 
 export const ProfileNavigationTab = ({ changeValue, value }) => {
+  const { user } = useSelector((state) => state.auth);
   const { userId } = useParams();
   const { data: userProfile } = useUserById(userId);
   const { data: reviews } = useUserReviews(userId);
@@ -27,6 +29,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
             <Tab label="Followings" />
             <Tab label={`Feedbacks (${reviews?.length || 0})`} />
             {/*userProfile.role === "company" && <Tab label="Posted Jobs" />*/}
+            {userId==user._id?<Tab label="Bookmarks" />:""}
           </Tabs>
         </Box>
       </Box>

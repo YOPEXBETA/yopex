@@ -5,6 +5,8 @@ import Followings from "./Components/Followings/Followings";
 import MyChallenges from "./Components/MyChallenges/MyChallenges";
 import MySocialPosts from "./Components/MyPosts/MySocialPosts";
 import MyJobs from "./Components/MyJobs/MyJobs";
+import Bookmarks from "./Components/Bookmarks/bookmarks";
+
 
 const ProfilePageContent = ({ changeValue, value }) => {
   return (
@@ -50,10 +52,11 @@ const ProfilePageContent = ({ changeValue, value }) => {
       {value === 5 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
-            <MyJobs />
+            <Bookmarks />
           </div>
         </div>
       )}
+
     </div>
   );
 };

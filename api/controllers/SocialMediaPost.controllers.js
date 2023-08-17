@@ -202,6 +202,59 @@ const sharePost = async (req, res) => {
   }
 };
 
+
+const BookmarkPost = async (req, res) => {
+  try {
+    // Find the current user by ID
+    const user = await UserModel.findById(req.params.userId);
+    let owner;
+    let Model;
+    if (user) {
+      owner = user;
+      Model = UserModel;
+    } else {
+      throw new Error("User not found");
+    }
+    // Find the post to bookmark
+    const postId=req.params.postId
+    const isbookmarked = owner.bookmarks.includes(postId);
+    if(isbookmarked){
+      const indexOfPost = owner.bookmarks.indexOf(postId);
+      owner.bookmarks.splice(indexOfPost,1);
+    }else{
+      owner.bookmarks.push(postId);
+    }
+    console.log(owner.bookmarks);
+    const data = await UserModel.findByIdAndUpdate(
+      owner._id,
+      {bookmarks:owner.bookmarks},
+      { new: true }
+    )
+    
+    res.status(201).json(data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const getBookmarks = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await UserModel.findById(userId).populate("bookmarks");
+    if (user){
+      const bookmarks = user.bookmarks;
+      res.status(200).json(bookmarks);
+    }else{
+      throw new Error("User not found");
+    }
+    
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+
 module.exports = {
   CreatePost,
   updateAPost,
@@ -210,4 +263,6 @@ module.exports = {
   getUserPosts,
   likePost,
   sharePost,
+  BookmarkPost,
+  getBookmarks,
 };

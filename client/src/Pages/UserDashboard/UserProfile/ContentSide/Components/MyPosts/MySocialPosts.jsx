@@ -11,7 +11,7 @@ const MySocialPosts = () => {
       {isLoading ? (
         <p>Loading posts...</p>
       ) : (
-        posts?.map((post) => <SocialPostCard key={post._id} post={post} />)
+        posts?.map((post) => <SocialPostCard key={post._id} post={post}  />)
       )}
     </div>
   );
