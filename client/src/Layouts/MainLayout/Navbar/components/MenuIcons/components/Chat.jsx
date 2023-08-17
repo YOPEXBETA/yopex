@@ -1,22 +1,6 @@
-import ChatIcon from "@mui/icons-material/Chat";
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemText,
-  Stack,
-} from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import Badge from "@mui/material/Badge";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
+import ChatIcon from "@mui/icons-material/Chat";
 import { Link } from "react-router-dom";
-
 import axios from "axios";
 import { formatDistance, isValid } from "date-fns";
 import { useQuery } from "react-query";
@@ -41,183 +25,94 @@ const Chat = () => {
     queryFn: () => getConversations(user._id),
   });
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   if (!isLoading)
     return (
-      <div>
-        <React.Fragment>
-          <Box sx={{ flexShrink: 0, ml: 0.75 }}>
-            <IconButton
+      <div className="relative">
+        <div className="relative">
+          <div className="absolute top-0 right-0">
+            <button
               onClick={handleClick}
-              size="small"
-              aria-controls={open ? "profile-grow" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              className="flex items-center justify-center rounded-full  w-8 h-8 text-gray-600"
             >
-              <Badge badgeContent={conversations.length} color="primary">
-                <ChatIcon />
-              </Badge>
-            </IconButton>
+              <ChatIcon />
+            </button>
+          </div>
+          <div className="w-8 h-8">
+            <div className="absolute -top-1 -right-1 bg-green-500 rounded-full w-4 h-4 text-white text-[10px] flex items-center justify-center">
+              {conversations.length}
+            </div>
+          </div>
+        </div>
 
-            <Menu
-              anchorEl={anchorEl}
-              id="account-menu"
-              open={open}
-              onClose={handleClose}
-              onClick={handleClose}
-              disableScrollLock={true}
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                  mt: 1.5,
-                  minWidth: 380,
-                  maxWidth: 380,
-                  "& .MuiAvatar-root": {
-                    width: 45,
-                    height: 45,
-                    mr: 1.5,
-                  },
-                  "&:before": {
-                    content: '""',
-                    display: "block",
-                    position: "absolute",
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: "background.paper",
-                    transform: "translateY(-50%) rotate(45deg)",
-                    zIndex: 0,
-                  },
-                },
-              }}
-              transformOrigin={{ horizontal: "right", vertical: "top" }}
-              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-            >
-              {/*==============================|| Content ||==============================*/}
+        {isMenuOpen && (
+          <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible">
+            <ul>
+              <li>
+                <div className="p-4">
+                  <h4 className="text-xl font-bold">Chats</h4>
+                </div>
+                <hr className="border-t border-gray-200" />
+              </li>
+              {conversations.map((conversation) => {
+                const otherUser = conversation.members.find(
+                  (member) => member.id !== user._id
+                );
 
-              <List>
-                <ListItem>
-                  <ListItemText
-                    primary={
-                      <Stack flexDirection={"row"} columnGap={1}>
-                        <Typography variant="h4">Chats</Typography>
-                      </Stack>
-                    }
-                  />
-                </ListItem>
-                <Divider />
-                {conversations.map((conversation) => {
-                  // Find the other user in the conversation
-                  const otherUser = conversation.members.find(
-                    (member) => member.id !== user._id
-                  );
+                if (!otherUser) return null;
+                const createdAt = new Date(otherUser.createdAt);
+                if (!isValid(createdAt)) return null;
 
-                  if (!otherUser) return null;
-                  const createdAt = new Date(otherUser.createdAt);
-                  if (!isValid(createdAt)) return null;
-
-                  return (
-                    <React.Fragment key={conversation.conversationId}>
-                      <ListItemButton
-                        component={Link}
+                return (
+                  <div key={conversation.conversationId}>
+                    <li>
+                      <Link
                         to={`/chat/${conversation.conversationId}`}
+                        className="flex items-center p-4 space-x-4 hover:bg-gray-100"
                       >
-                        <ListItemAvatar>
-                          <Avatar src={otherUser.picturePath} />
-                        </ListItemAvatar>
-                        <ListItemText
-                          primary={
-                            <Typography variant="h6">
-                              <Typography
-                                component="span"
-                                variant="h6"
-                                noWrap
-                                fontWeight={"bold"}
-                              >
-                                {otherUser.firstname} {otherUser.lastname}
-                              </Typography>
-                            </Typography>
-                          }
-                          secondary={
-                            <React.Fragment>
-                              <Stack
-                                flexDirection={"row"}
-                                columnGap={1}
-                                alignItems={"flex-end"}
-                              >
-                                <Typography
-                                  sx={{ display: "inline" }}
-                                  variant="body2"
-                                  color="text.secondary"
-                                  noWrap
-                                >
-                                  {otherUser.latestMessage}
-                                </Typography>
-                                <Typography>.</Typography>
-                                <Typography
-                                  sx={{ display: "inline" }}
-                                  variant="body2"
-                                  color="text.secondary"
-                                  noWrap
-                                >
-                                  {formatDistance(
-                                    new Date(otherUser.createdAt),
-                                    new Date(),
-                                    {
-                                      addSuffix: true,
-                                    }
-                                  )}
-                                </Typography>
-                              </Stack>
-                            </React.Fragment>
-                          }
+                        <img
+                          src={otherUser.picturePath}
+                          className="bg-green-500 rounded-full w-11 h-11"
                         />
-                      </ListItemButton>
-                      <Divider />
-                    </React.Fragment>
-                  );
-                })}
-                <ListItem disablePadding>
-                  <ListItemButton
-                    component={Link}
-                    to="/chat"
-                    sx={{
-                      textAlign: "center",
-                      pb: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary={
-                        <Typography variant="body1">
-                          <Typography
-                            color="primary"
-                            variant="body1"
-                            sx={{
-                              textDecoration: "none",
-                            }}
-                          >
-                            View all in Chat
-                          </Typography>
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
-                </ListItem>
-              </List>
-            </Menu>
-          </Box>
-        </React.Fragment>
+
+                        <div className="flex-grow">
+                          <h6 className="text-md font-semibold">
+                            {otherUser.firstname} {otherUser.lastname}
+                          </h6>
+                          <div className="flex items-center space-x-1 text-sm text-gray-500">
+                            <div className="truncate max-w-[190px]">
+                              {otherUser.latestMessage}
+                            </div>
+                            <span>.</span>
+                            <span>
+                              {formatDistance(createdAt, new Date(), {
+                                addSuffix: true,
+                              })}
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+                    </li>
+                    <hr className="border-t border-gray-200" />
+                  </div>
+                );
+              })}
+              <li>
+                <Link
+                  to="/chat"
+                  className="block p-4 text-center hover:bg-gray-100"
+                >
+                  <p className="text-green-500">View all in Chat</p>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     );
 };
