@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import YopexLogo from "../../../images/LogoYopex.png";
 import { Link } from "react-router-dom";
+import { FiMenu } from "react-icons/fi";
 import MenuIcons from "./components/MenuIcons/MenuIcons";
 import NavbarTabTop from "./components/NavbarNavigation/NavbarTabTop";
 import NavbarSearchDropDown from "./components/NavbarSearch/NavbarSearchDropDown";
-import { FiMenu } from "react-icons/fi";
 
 const CustomNavbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
