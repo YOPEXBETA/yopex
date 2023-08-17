@@ -4,7 +4,6 @@ import Followers from "./Components/Followers/Followers";
 import Followings from "./Components/Followings/Followings";
 import MyChallenges from "./Components/MyChallenges/MyChallenges";
 import MySocialPosts from "./Components/MyPosts/MySocialPosts";
-import MyJobs from "./Components/MyJobs/MyJobs";
 import Bookmarks from "./Components/Bookmarks/bookmarks";
 
 
