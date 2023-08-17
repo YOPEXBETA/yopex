@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Divider from "@mui/material/Divider";
 import { Box } from "@mui/material";
 import ProfileMenu from "./components/ProfileMenu";
@@ -13,13 +13,16 @@ const MenuIcons = () => {
 
   return (
     <div>
-      <Box sx={{ display: { xs: "flex", sm: "flex", alignItems: "center" } }}>
+      <div className="flex gap-2 items-center">
         <AddPostMenuList />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <Chat />
-        {user.role === "user" ? <NotificationBell2 /> : <NotificationBell />}
+
+        <div className="flex">
+          <Chat />
+          {user.role === "user" ? <NotificationBell2 /> : <NotificationBell />}
+        </div>
         <ProfileMenu />
-      </Box>
+      </div>
     </div>
   );
 };
