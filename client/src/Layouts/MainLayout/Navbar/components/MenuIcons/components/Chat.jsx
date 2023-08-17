@@ -51,7 +51,7 @@ const Chat = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible">
+          <div className="absolute z-10 right-0 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible">
             <ul>
               <li>
                 <div className="p-4">

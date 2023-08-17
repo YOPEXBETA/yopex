@@ -1,20 +1,5 @@
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import {
-  Avatar,
-  Badge,
-  Box,
-  Divider,
-  IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemText,
-  Menu,
-  Stack,
-  Typography,
-} from "@mui/material";
 import React, { useState } from "react";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useSelector } from "react-redux";
 import { useUserNotifications } from "../../../../../../../hooks/react-query/useUsers";
 import { NotificationsModal } from "./NotificationsModal";
@@ -24,141 +9,88 @@ const NotificationBell = () => {
   const { user } = useSelector((state) => state.auth);
   const { data: notifications } = useUserNotifications(user._id);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
 
   return (
     <div>
-      <IconButton
-        onClick={handleClick}
-        size="small"
-        aria-controls={open ? "notification-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-      >
-        <Badge badgeContent={notifications?.length} color="primary">
-          <NotificationsIcon />
-        </Badge>
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        disableScrollLock={true}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            minWidth: 320,
-            maxWidth: 380,
-            "& .MuiAvatar-root": {
-              width: 45,
-              height: 45,
-              mr: 1.5,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        <List>
-          <ListItem>
-            <ListItemText
-              primary={
-                <Stack flexDirection={"row"} columnGap={1}>
-                  <Typography variant="h4">Notifications</Typography>
-                </Stack>
-              }
-            />
-          </ListItem>
-          <Divider />
-          {notifications?.map((notification) => (
-            <React.Fragment key={notification._id}>
-              <ListItemButton onClick={handleClose}>
-                <ListItemAvatar>
-                  <Avatar
-                    src={
-                      notification?.job
-                        ? notification?.job.company?.picturePath
-                        : user.picturePath
-                    }
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={
-                    <React.Fragment>
-                      <Typography variant="h5">
+      <div className="relative">
+        <div className="absolute top-0 right-0">
+          <button
+            onClick={handleClick}
+            className="flex items-center justify-center rounded-full  w-8 h-8 text-gray-600"
+          >
+            <NotificationsIcon />
+          </button>
+        </div>
+        <div className="w-8 h-8">
+          <div className="absolute -top-1 -right-1 bg-green-500 rounded-full w-4 h-4 text-white text-[10px] flex items-center justify-center">
+            {notifications?.length}
+          </div>
+        </div>
+      </div>
+      {isMenuOpen && (
+        <div
+          className={`absolute z-10 right-28 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible filter drop-shadow(0px 2px 8px rgba(0,0,0,0.32)) `}
+        >
+          <ul>
+            <li>
+              <div className="p-4">
+                <h4 className="text-xl font-bold">Notifications</h4>
+              </div>
+              <hr className="border-t border-gray-200" />
+            </li>
+            {notifications?.map((notification) => (
+              <div key={notification._id}>
+                <li>
+                  <button className="flex items-center p-4 space-x-4 hover:bg-gray-100 w-full text-left">
+                    <img
+                      src={
+                        notification?.job
+                          ? notification?.job.company?.picturePath
+                          : user.picturePath
+                      }
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <div className="flex-grow">
+                      <h5 className="text-lg">
                         {notification.job
                           ? notification?.job.company?.companyName
                           : user.firstname}
-                      </Typography>
-                      <Typography variant="body1" noWrap>
+                      </h5>
+                      <p className="text-sm text-gray-500">
                         {notification.message}
-                        <Typography component="span" fontWeight="bold">
+                        <span className="font-bold">
                           {notification.job ? notification.job.title : ""}
-                        </Typography>
-                      </Typography>
-                    </React.Fragment>
-                  }
-                  secondary={
-                    <React.Fragment>
-                      <Box>{`sent ${timeSince(
-                        notification.createdAt
-                      )} ago`}</Box>
-                    </React.Fragment>
-                  }
-                />
-              </ListItemButton>
-              <Divider />
-            </React.Fragment>
-          ))}
-          <ListItem disablePadding>
-            <ListItemButton
-              sx={{
-                textAlign: "center",
-                pb: 1,
-              }}
-              onClick={toggleOpen}
-            >
-              <ListItemText
-                primary={
-                  <Typography variant="body1">
-                    <Typography
-                      color="primary"
-                      variant="body1"
-                      sx={{
-                        textDecoration: "none",
-                      }}
-                    >
-                      View all notifications
-                    </Typography>
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Menu>
+                        </span>
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        sent {timeSince(notification.createdAt)} ago
+                      </p>
+                    </div>
+                  </button>
+                </li>
+                <hr className="border-t border-gray-200" />
+              </div>
+            ))}
+            <li>
+              <button
+                onClick={toggleOpen}
+                className="block p-4 text-center hover:bg-gray-100 w-full"
+              >
+                <p className="text-green-500">View all notifications</p>
+              </button>
+            </li>
+          </ul>
+        </div>
+      )}
+
       <NotificationsModal open={isOpen} handleClose={toggleOpen} />
     </div>
   );

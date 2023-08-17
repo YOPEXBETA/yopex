@@ -9,7 +9,7 @@ import NotificationBell from "./components/Notifications/Notification";
 import { useSelector } from "react-redux";
 
 const MenuIcons = () => {
-  const { user } = useSelector((state) => state.auth);
+  //const { user } = useSelector((state) => state.auth);
 
   return (
     <div>
@@ -19,7 +19,9 @@ const MenuIcons = () => {
 
         <div className="flex">
           <Chat />
-          {user.role === "user" ? <NotificationBell2 /> : <NotificationBell />}
+          {/*<NotificationBell2 /> this notification supposed to be for the company but we don't work with role anymore
+          so there is only on notfication component */}
+          <NotificationBell />
         </div>
         <ProfileMenu />
       </div>
