@@ -2,10 +2,9 @@ import React from "react";
 import HighlightSection from "./components/HighlightSection";
 import HomeSection from "./components/HomeSection";
 import Features from "./components/Features";
-import Partners from "./components/Partners";
-import RecentChallenges from "./components/RecentChallenges";
 import Contact from "./components/Contact";
-import SocialLinks from "./components/SocialLinks";
+import RecentJobs from "./components/RecentJobs";
+import Companies from "./components/Companies";
 
 const HomeContent = () => {
   return (
@@ -13,10 +12,9 @@ const HomeContent = () => {
       <HomeSection />
       <HighlightSection />
       <Features />
-      <Partners />
-      <RecentChallenges />
+      <Companies />
+      <RecentJobs />
       <Contact />
-      <SocialLinks />
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Company = () => {
   return (
     <div>
       <CompanyProfileInformations changeValue={changeValue} value={value} />
-      <CompanyPageContent value={value} changeValue={changeValue} />{" "}
+      <CompanyPageContent value={value} changeValue={changeValue} />
     </div>
   );
 };

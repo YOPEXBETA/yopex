@@ -8,7 +8,7 @@ const HomeHeader = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center w-full h-20 px-4 text-white bg-black fixed z-10">
+      <div className="flex justify-between items-center w-full h-20 px-4 text-white bg-white fixed z-10 border-b-2">
         <div className="flex items-center gap-8">
           <img src={YopexLogo} width={35} alt="Yopex Logo" />
           <ul className="hidden md:flex">
@@ -36,7 +36,7 @@ const HomeHeader = () => {
             </button>
           </a>
           <a href="/register" className="block">
-            <button className="bg-white text-black rounded-3xl px-4 py-2 font-medium hover:scale-105 duration-200">
+            <button className="bg-black text-white rounded-3xl px-4 py-2 font-medium hover:scale-105 duration-200">
               Sign up
             </button>
           </a>

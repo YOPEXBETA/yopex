@@ -21,7 +21,7 @@ const Guests = [
   },
 ];
 
-const Partners = () => {
+const Companies = () => {
   const [currPage, setCurrPage] = useState(0);
 
   const itemsPerPage = 3;
@@ -46,7 +46,7 @@ const Partners = () => {
       id="about"
     >
       <div className="pb-8">
-        <p className="text-4xl font-bold text-center">Partners</p>
+        <p className="text-4xl font-bold text-center">Companies</p>
       </div>
       <div className="flex flex-wrap justify-center">
         {Guests.slice(
@@ -84,4 +84,4 @@ const Partners = () => {
   );
 };
 
-export default Partners;
+export default Companies;

@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 
 import { useCompanyById } from "../../../../hooks/react-query/useCompany";
 import { CompanyNavigationTab } from "./CompanyNavigationTab";
@@ -37,12 +36,24 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 <div className="flex items-center gap-3">
                   <p className="text-xl font-semibold">{company.companyName}</p>
 
-                  {/*<button className="flex items-center gap-1">
-                    <span className="text-xl font-bold text-green-500 ">5</span>
-                    <FaStar className="text-green-500 w-5 h-5 mb-[0.15rem]" />
-                  </button>*/}
+                  <button
+                    className="flex items-center gap-1"
+                    disabled={!company.verified}
+                  >
+                    <FaCheckCircle
+                      className={`text-${
+                        company.verified ? "green" : "gray"
+                      }-500 w-5 h-5 mb-[0.15rem] ${
+                        !company.verified ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    />
+                  </button>
                 </div>
                 <div className=" flex justify-between gap-4">
+                  <div className=" flex items-center gap-2 justify-between">
+                    <p className="text-zinc-500 text-md">Posts</p>
+                    <p className="text-lg font-bold">{company?.posts.length}</p>
+                  </div>
                   <div className=" flex items-center gap-2 justify-between">
                     <p className="text-zinc-500 text-md">Challenges</p>
                     <p className="text-lg font-bold">
