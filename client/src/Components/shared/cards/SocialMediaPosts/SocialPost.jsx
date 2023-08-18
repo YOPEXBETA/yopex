@@ -9,6 +9,8 @@ import {
   useSharePost,
 } from "../../../../hooks/react-query/usePosts";
 import PostMenuIcon from "./components/PostMenuIcon";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useState } from "react";
 
 const SocialPostCard = ({ post }) => {
   const { user } = useSelector((state) => state.auth);
@@ -16,6 +18,17 @@ const SocialPostCard = ({ post }) => {
 
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
   const { mutate: sharePost } = useSharePost(user._id, post.userId, category);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageCount = post.postPicturePath.length;
+
+  const handlePrevious = () => {
+    setCurrentPage(Math.max(currentPage - 1, 0));
+  };
+
+  const handleNext = () => {
+    setCurrentPage(Math.min(currentPage + 1, pageCount - 1));
+  };
 
   return (
     <div className="bg-white w-full mx-auto h-full rounded-lg border-green-500 border-b-2 shadow-md">
@@ -54,14 +67,43 @@ const SocialPostCard = ({ post }) => {
         <p>{post.description}</p>
       </div>
 
-      {post.postPicturePath.map((item) => (
-        <button key={item}>
-          <img alt="photo" src={item} />
-        </button>
-      ))}
+      <div className="relative">
+        <div className="overflow-x-auto py-2">
+          <div className="flex relative">
+            <button
+              onClick={handlePrevious}
+              disabled={currentPage === 0}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2"
+              style={{ background: "transparent", border: "none" }}
+            >
+              <FaChevronLeft size={40} className=" text-white" />
+            </button>
+
+            {post.postPicturePath
+              .slice(currentPage, currentPage + 1)
+              .map((item, index) => (
+                <div key={item}>
+                  <img
+                    alt="photo"
+                    src={item}
+                    className="max-w-[calc(100% - 0.5rem)] h-full w-screen object-cover"
+                  />
+                </div>
+              ))}
+
+            <button
+              onClick={handleNext}
+              disabled={currentPage === pageCount - 1}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2"
+              style={{ background: "transparent", border: "none" }}
+            >
+              <FaChevronRight size={40} className=" text-white" />
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div className=" flex items-center py-1 gap-2">
-        {/* Like button */}
         <div className="flex items-center gap-1">
           <button
             aria-label="add to favorites"
