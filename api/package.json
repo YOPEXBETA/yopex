@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"nodemon server\" \"cd.. && cd client && yarn start\"",
+    "start": "concurrently \"nodemon server\" \"cd.. && cd client && npm start\"",
     "dev": "nodemon server",
     "start:dev": "node ./dev-build/main.js",
     "build:dev": "webpack --config webpack.dev.js --mode development",
