@@ -27,7 +27,7 @@ const evaluationSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Evaluation = mongoose.model("Evaluation", evaluationSchema);

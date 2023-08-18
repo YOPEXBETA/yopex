@@ -34,7 +34,7 @@ const Verify = async (req, res) => {
           apppublic: "b9a38d39-a2e6-4928-81bf-8c27eebb9c1e",
           appsecret: process.env.FLOUCI_SECRET,
         },
-      }
+      },
     );
     res.json(result.data);
   } catch (err) {

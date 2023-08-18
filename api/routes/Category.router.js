@@ -9,7 +9,7 @@ CategoryRouter.put("/updateCategory/:id", isAdmin, controller.updateCategory);
 CategoryRouter.delete(
   "/deleteCategory/:id",
   isAdmin,
-  controller.deleteCategory
+  controller.deleteCategory,
 );
 
 module.exports = CategoryRouter;

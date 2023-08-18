@@ -29,7 +29,7 @@ const JobSchema = new mongoose.Schema(
     appliers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     acceptedAppliers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Job", JobSchema);

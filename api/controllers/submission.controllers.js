@@ -42,8 +42,6 @@ const CreateSubmission = async (req, res, next) => {
   }
 };
 
-
-
 module.exports = {
   CreateSubmission,
 };

@@ -42,7 +42,7 @@ const CreatePost = async (req, res) => {
     const data = await Model.findOneAndUpdate(
       { _id: req.userId },
       { $push: { posts: savedpost._id } },
-      { new: true }
+      { new: true },
     ).populate("posts");
 
     res.status(201).json(data);
@@ -162,7 +162,7 @@ const likePost = async (req, res) => {
     const updatedPost = await Post.findByIdAndUpdate(
       id,
       { likes: post.likes, likesCount },
-      { new: true }
+      { new: true },
     );
 
     res.status(200).json(updatedPost);

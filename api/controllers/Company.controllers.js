@@ -5,7 +5,7 @@ const { pick } = require("lodash");
 const ChallengeModel = require("../models/Challenge.model");
 const Company = require("../models/company.model");
 const userModel = require("../models/user.model");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { sendEmail } = require("../middlewares/mail.middleware");
 const { updateUserChallengesBadges } = require("../utils/utilities");
 

@@ -27,8 +27,8 @@ const {
 ChallengeRouter.post(
   "/add",
   authenticateToken,
-  CreateChallenge
-  /*validate(challengeSchemaValidator)*/
+  CreateChallenge,
+  validate(challengeSchemaValidator)
 );
 
 ChallengeRouter.get(

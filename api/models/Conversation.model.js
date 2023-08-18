@@ -8,7 +8,7 @@ const ConversationSchema = new mongoose.Schema(
       ref: "Message",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Conversation", ConversationSchema);

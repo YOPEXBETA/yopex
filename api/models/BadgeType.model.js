@@ -10,7 +10,7 @@ const badgeTypeSchema = new mongoose.Schema(
     badgeImg: String,
     Etat: Boolean,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const BadgeType = mongoose.model("BadgeType", badgeTypeSchema);

@@ -18,11 +18,11 @@ const SocialPostCard = ({ post }) => {
   const { mutate: sharePost } = useSharePost(user._id, post.userId, category);
 
   return (
-    <div className="shadow-md bg-white w-full mx-auto h-full rounded-lg border-green-500 border-b-2">
+    <div className="bg-white w-full mx-auto h-full rounded-lg border-green-500 border-b-2">
       <div className=" flex justify-between items-start">
         <div className=" flex items-center gap-3 py-6 px-4">
           <img
-            alt=""
+            alt="post"
             src={post.userPicturePath}
             className=" w-11 h-11 rounded-full object-cover bg-green-500"
           />

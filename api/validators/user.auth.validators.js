@@ -16,7 +16,7 @@ const userRegisterValidator = yup.object().shape({
     .min(8, "Password must be at least 8 characters long")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/,
-      "Password must contain at least one uppercase letter, one lowercase letter, and one number"
+      "Password must contain at least one uppercase letter, one lowercase letter, and one number",
     ),
   email: yup
     .string()
@@ -38,14 +38,14 @@ const userEditProfileValidator = yup.object().shape({
     .min(8, "Password must be at least 8 characters long")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/,
-      "Password must contain at least one uppercase letter, one lowercase letter, and one number"
+      "Password must contain at least one uppercase letter, one lowercase letter, and one number",
     ),
   email: yup.string().email("Email must be a valid email address"),
   phoneNumber: yup
     .string()
     .matches(
       /^\+?\d{1,14}$/,
-      "Phone number must start with a '+' and have a maximum of 14 characters"
+      "Phone number must start with a '+' and have a maximum of 14 characters",
     ),
   country: yup.string(),
   birthDate: yup.date(),
@@ -64,8 +64,7 @@ const loginValidator = yup.object().shape({
     .required()
     .max(1024, "Password must be at most 1024 characters long.")
     .min(6, "Password must be at least 6 characters long."),
-  rememberMe: yup
-  .boolean(),
+  rememberMe: yup.boolean(),
 });
 
 const forgotPasswordValidator = yup.object().shape({

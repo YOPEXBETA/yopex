@@ -27,14 +27,14 @@ companyRouter.put(
   "/:id/",
   validate(companyEditProfileValidator),
   authenticateToken,
-  editProfile
+  editProfile,
 );
 companyRouter.get("/get/:companyId/", authenticateToken, getCompany);
 companyRouter.post("/challengeWinner", authenticateToken, ChallengeWinner);
 companyRouter.get(
   "/company/:companyId/notifications",
   authenticateToken,
-  getCompanyNotifications
+  getCompanyNotifications,
 );
 
 module.exports = companyRouter;

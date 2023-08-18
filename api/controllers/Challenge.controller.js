@@ -50,9 +50,8 @@ const getChallengeById = async (req, res) => {
   const challengeId = req.params.challengeId; // Assuming you're passing the challenge ID as a URL parameter
 
   try {
-    const challenge = await ChallengeModel.findById(challengeId).populate(
-      "company"
-    );
+    const challenge =
+      await ChallengeModel.findById(challengeId).populate("company");
 
     if (!challenge) {
       return res.status(404).json({ message: "Challenge not found" });
@@ -116,9 +115,8 @@ const getAllChallenges = async (req, res) => {
   };
 
   try {
-    const ChallengePosts = await ChallengeModel.find(filters).populate(
-      "company"
-    );
+    const ChallengePosts =
+      await ChallengeModel.find(filters).populate("company");
 
     res.status(200).json(ChallengePosts);
   } catch (err) {
@@ -148,7 +146,7 @@ const getChallengeUserSubmit = async (req, res) => {
       path: "submissions",
     });
     const ChallengeUserSubmit = Challenge.submissions.filter(
-      (submission) => submission.userId == userId
+      (submission) => submission.userId == userId,
     );
 
     res.status(200).json(ChallengeUserSubmit);

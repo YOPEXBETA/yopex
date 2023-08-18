@@ -42,7 +42,7 @@ const createConversation = async (req, res) => {
                 picturePath: user.picturePath,
               };
             }
-          })
+          }),
         );
         // Remove any undefined members from the array
         const filteredMembers = membersWithDetails.filter(Boolean);
@@ -67,7 +67,7 @@ const createConversation = async (req, res) => {
           conversationId: conversation._id,
           members: filteredMembers,
         };
-      })
+      }),
     );
     res.status(200).json(conversationsWithUsers);
   } catch (error) {
@@ -98,7 +98,7 @@ const getConversations = async (req, res) => {
                 picturePath: user.picturePath,
               };
             }
-          })
+          }),
         );
         // Remove any undefined members from the array
         const filteredMembers = membersWithDetails.filter(Boolean);
@@ -123,7 +123,7 @@ const getConversations = async (req, res) => {
           conversationId: conversation._id,
           members: filteredMembers,
         };
-      })
+      }),
     );
 
     res.status(200).json(conversationsWithUsers);

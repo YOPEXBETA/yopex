@@ -16,7 +16,7 @@ app.use(
     secret: "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", // set your secret key
     resave: false,
     saveUninitialized: false,
-  })
+  }),
 );
 ///login with google
 const passportSetup = require("./config/passport");
@@ -29,7 +29,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
-  })
+  }),
 );
 connectDB();
 
@@ -43,19 +43,6 @@ const PORT = process.env.PORT || 5000;
 
 createAdminUser();
 
-// async function addYearsRegisteredToUsers() {
-//   const users = await User.find({});
-//   for (const user of users) {
-//     user.yearsRegistered = user.yearsRegistered || 0;
-//     console.log(user.yearsRegistered);
-//     await user.save();
-//   }
-//   console.log("Years registered added to all users.");
-//   process.exit();
-// }
-
-// addYearsRegisteredToUsers();
-
 const server = http.createServer(app);
 const io = new Server(server);
 io.on("connection", (client) => {
@@ -65,5 +52,3 @@ server.listen(PORT, (error) => {
   if (error) throw console.error(error);
   console.log("Server is listening on port" + " " + PORT);
 });
-
-//jawna bh

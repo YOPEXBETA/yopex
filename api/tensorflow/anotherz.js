@@ -37,13 +37,13 @@ async function sortappliers(users) {
         // Use the model to make predictions
 
         const prediction = model.predict(
-          tf.tensor2d([[user.yearsRegistered, user.challengesDone]])
+          tf.tensor2d([[user.yearsRegistered, user.challengesDone]]),
         );
         predictionssum = predictionssum + prediction.dataSync()[0];
       }
       console.log(`Predicted job score: ${index}  ${predictionssum}`);
       return { ...user.toObject(), jobScore: predictionssum };
-    })
+    }),
   );
   // Sort users by job score
   const sortedPredictions = predictions.sort((a, b) => b.jobScore - a.jobScore);

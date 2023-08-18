@@ -44,8 +44,8 @@ const stripePayment = async (req, res) => {
 const endpointSecret =
   "whsec_aa6e74acff9d46da6694fb845f98b64f3df5642b944b9fb4552ca419177afce9";
 
-const stripeUpdate = async (request, response) => {
-  const event = request.body;
+const stripeUpdate = async (req, res) => {
+  const event = req.body;
   const session = event.data.object;
   console.log(session);
   try {
@@ -78,9 +78,8 @@ const stripeUpdate = async (request, response) => {
           const newCompany = await company.save();
           console.log(newCompany);
         }
-        const subscription = await stripe.subscriptions.retrieve(
-          subscriptionId
-        );
+        const subscription =
+          await stripe.subscriptions.retrieve(subscriptionId);
         console.log("sub", subscriptionId);
         await stripe.subscriptions.del(subscriptionId);
         break;
@@ -95,7 +94,7 @@ const stripeUpdate = async (request, response) => {
   } catch (error) {}
 
   // Return a 200 response to acknowledge receipt of the event
-  response.json({ received: true });
+  res.json({ received: true });
 };
 
 module.exports = { stripePayment, stripeUpdate };

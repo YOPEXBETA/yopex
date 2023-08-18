@@ -41,7 +41,7 @@ userRouter.put(
   "/users/:id/",
   validate(userEditProfileValidator),
   authenticateToken,
-  editProfile
+  editProfile,
 );
 userRouter.get("/users", authenticateToken, SearchUsers); //seach users
 userRouter.get("/allusers", authenticateToken, getUsers); //seach users
@@ -50,12 +50,12 @@ userRouter.get("/find/friends/:userId", authenticateToken, getUserFriends);
 userRouter.get(
   "/find/followings/:userId",
   authenticateToken,
-  getUserFollowings
+  getUserFollowings,
 );
 userRouter.put(
   "/toggleFollow/:otherUserId",
   authenticateToken,
-  followUnfollowUser
+  followUnfollowUser,
 );
 userRouter.get("/find/suggestedUsers", authenticateToken, getsuggestedUsers);
 userRouter.get("/:userId/badges", authenticateToken, getBadgesEarnedByUser);
@@ -65,7 +65,7 @@ userRouter.get("/user/challenges", authenticateToken, getUserChallenges);
 userRouter.get(
   "/user/:userId/notifications",
   authenticateToken,
-  getUserNotifications
+  getUserNotifications,
 );
 userRouter.get("/users/stats", authenticateToken, getUserStats);
 userRouter.post("/review/create", authenticateToken, createReview);

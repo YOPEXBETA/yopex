@@ -94,7 +94,7 @@ const geJobById = async (req, res, next) => {
 
     // Find all job offers related to the company and populate the 'company' field
     const jobOffers = await Job.find({ company: companyId }).populate(
-      "company"
+      "company",
     );
 
     res.status(200).json(jobOffers);
@@ -191,7 +191,7 @@ const unapplyJob = async (req, res) => {
 
     // Remove user from acceptedAppliers array if they were accepted
     const acceptedApplierIndex = job.acceptedAppliers.indexOf(
-      req.params.userId
+      req.params.userId,
     );
     if (acceptedApplierIndex !== -1) {
       job.acceptedAppliers.splice(acceptedApplierIndex, 1);

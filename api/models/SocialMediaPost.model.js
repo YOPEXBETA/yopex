@@ -58,12 +58,12 @@ const SocialMediaPostSchema = new mongoose.Schema(
     },
     user: { type: mongoose.Types.ObjectId, ref: "User" },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const SocialMediaPost = mongoose.model(
   "SocialMediaPost",
-  SocialMediaPostSchema
+  SocialMediaPostSchema,
 );
 
 module.exports = SocialMediaPost;

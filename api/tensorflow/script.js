@@ -8,7 +8,7 @@ const fetch = require("node-fetch");
  */
 async function getData() {
   const carsDataResponse = await fetch(
-    "https://storage.googleapis.com/tfjs-tutorials/carsData.json"
+    "https://storage.googleapis.com/tfjs-tutorials/carsData.json",
   );
   const carsData = await carsDataResponse.json();
   const cleaned = carsData
@@ -36,7 +36,7 @@ async function run() {
       xLabel: "Horsepower",
       yLabel: "MPG",
       height: 300,
-    }
+    },
   );
 
   // More code will be added below
@@ -136,7 +136,7 @@ async function trainModel(model, inputs, labels) {
     callbacks: tfvis.show.fitCallbacks(
       { name: "Training Performance" },
       ["loss", "mse"],
-      { height: 200, callbacks: ["onEpochEnd"] }
+      { height: 200, callbacks: ["onEpochEnd"] },
     ),
   });
 }
@@ -180,6 +180,6 @@ function testModel(model, inputData, normalizationData) {
       xLabel: "Horsepower",
       yLabel: "MPG",
       height: 300,
-    }
+    },
   );
 }

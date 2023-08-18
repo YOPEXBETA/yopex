@@ -15,10 +15,9 @@ const UserCard = () => {
               alt=""
               className="w-24 h-24 rounded-full object-cover bg-green-500"
             />
-            <h4 className="text-xl font-medium">
-              {" "}
+            <p className="text-xl font-md">
               {`${user.firstname} ${user.lastname}`}
-            </h4>
+            </p>
           </div>
 
           <div className="flex items-center gap-5">

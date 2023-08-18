@@ -1,8 +1,8 @@
 const User = require("../models/user.model");
+const bcrypt = require("bcryptjs");
+
 const Company = require("../models/company.model");
 const companySchema = require("../models/company.model");
-
-const bcrypt = require("bcryptjs");
 
 const getUsers = async (req, res) => {
   try {

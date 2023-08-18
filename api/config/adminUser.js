@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const UserSchema = require("../models/user.model");
 
 module.exports = function createAdminUser() {

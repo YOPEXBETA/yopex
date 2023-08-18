@@ -47,7 +47,7 @@ authRouter.post(
       return validate(companyRegisterValidator)(req, res, next);
     }
   },
-  signUp
+  signUp,
 );
 authRouter.post("/login", validate(loginValidator), signIn);
 authRouter.post("/logout", logout);
@@ -70,14 +70,14 @@ authRouter.get("/login/failed", (req, res) => {
 
 authRouter.get(
   "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("google", { scope: ["profile", "email"] }),
 );
 
 authRouter.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: CLIENT_URL+"feed",
+    successRedirect: CLIENT_URL + "feed",
     failureRedirect: "/login/failed",
-  })
+  }),
 );
 module.exports = authRouter;

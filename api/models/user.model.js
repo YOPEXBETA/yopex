@@ -99,7 +99,7 @@ const UserSchema = new mongoose.Schema(
     },
   },
 
-  { timestamps: true }
+  { timestamps: true },
 );
 
 UserSchema.virtual("yearsRegisteredCalcu").get(function () {

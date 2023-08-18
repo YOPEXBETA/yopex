@@ -48,7 +48,7 @@ const ChallengeSchema = new mongoose.Schema(
       default: [],
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Challenge", ChallengeSchema);

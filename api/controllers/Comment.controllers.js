@@ -39,7 +39,7 @@ const getComments = async (req, res, next) => {
       {
         path: "userId",
         model: "User",
-      }
+      },
     );
     res.status(200).json(comments);
   } catch (err) {

@@ -1,7 +1,7 @@
 const userSchema = require("../models/user.model");
 const companySchema = require("../models/company.model");
 const challengeSchema = require("../models/Challenge.model");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const Job = require("../models/job.model");
 const { pick } = require("lodash");
 
