@@ -30,7 +30,7 @@ const UserProfileCard = () => {
 
   if (userProfile)
     return (
-      <div className="bg-white p-6 rounded-lg flex flex-col items-center gap-6 mr-11 border-2 border-gray-200">
+      <div className="bg-white p-6 rounded-lg flex flex-col items-center gap-6 lg:mr-11 shadow-md border-green-500 border-b-2 mr-0">
         <div className="relative">
           <div className="w-36 h-36">
             <img
@@ -86,18 +86,20 @@ const UserProfileCard = () => {
         <div className="w-full">
           <HighlightSection />
         </div>
-        <div className="w-full">
-          <Badges userProfile={userProfile} />
-        </div>
+        {userProfile?.badges?.length === 0 && (
+          <div className="w-full">
+            <Badges userProfile={userProfile} />
+          </div>
+        )}
         <div className="w-full ">
-          <p className="mb-2 text-left text-gray-400">Companies</p>
+          <p className="mb-2 text-left text-gray-500">Companies</p>
           <ul className="flex justify-start gap-2">
             {userProfile.companies.map((company, index) => (
               <Link key={index} to={`/company/${company._id}`}>
                 <img
                   src={company.companyLogo}
                   alt={`Company ${index + 1}`}
-                  className="rounded-full w-11 h-11 cursor-pointer"
+                  className="rounded-lg w-11 h-11 cursor-pointer"
                 />
               </Link>
             ))}

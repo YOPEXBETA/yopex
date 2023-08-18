@@ -8,8 +8,8 @@ const UserProfileLayout = () => {
   const changeValue = (e, params) => setValue(params);
 
   return (
-    <div className="grid grid-cols-12 gap-2 py-6 mx-16">
-      <div className="lg:col-span-4 md:col-span-4  col-span-12">
+    <div className="grid grid-cols-12 gap-2 py-6 lg:mx-16">
+      <div className="lg:col-span-4 md:col-span-4 col-span-12">
         <UserProfileCard />
       </div>
       <div className="lg:col-span-8 col-span-12 space-y-2">
