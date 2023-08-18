@@ -7,22 +7,23 @@ const UserCard = () => {
 
   return (
     <div>
-      <div className="rounded-lg p-5 bg-white border-green-500 border-b-2 h-full shadow-lg">
-        <div className="flex flex-col items-center space-y-4">
-          <div className="flex flex-col items-center space-y-2">
+      <div className="rounded-lg px-6 py-[1.15rem] bg-white border-green-500 border-b-2 h-full shadow-md">
+        <div className="flex flex-col space-y-5">
+          <div className="flex items-center gap-4">
             <img
               src={user.picturePath}
               alt=""
-              className="w-24 h-24 rounded-full object-cover bg-green-500"
+              className="w-20 h-20 rounded-full object-cover bg-green-500"
             />
-            <p className="text-xl font-md">
-              {`${user.firstname} ${user.lastname}`}
-            </p>
+            <div className=" space-y-1">
+              <p className="text-lg font-md">
+                {`${user.firstname} ${user.lastname}`}
+              </p>
+              <p className="text-md font-md text-zinc-500">{user.country}</p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-5">
-            <LevelLoading />
-          </div>
+          <LevelLoading />
         </div>
       </div>
     </div>

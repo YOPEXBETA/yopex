@@ -13,17 +13,6 @@ import HighlightSection from "./HighlightSection/HighlightSection";
 import { useUserReviews } from "../../../../hooks/react-query/useReviews";
 import { getUserLevelData } from "../../../../utils";
 
-// Placeholder data
-const userData = {
-  profilePicture: "path_to_profile_picture.jpg",
-  name: "John Doe",
-  followers: 1500,
-  following: 500,
-  completedChallenges: 30,
-  badges: ["Badge 1", "Badge 2", "Badge 3"],
-  ownedCompanies: ["Company A", "Company B"],
-};
-
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
   console.log("rojla", user);
