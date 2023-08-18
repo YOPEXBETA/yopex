@@ -8,9 +8,6 @@ const app = express();
 const dotenv = require("dotenv");
 const connectDB = require("./config/connectDB"); //connect to the database
 const createAdminUser = require("./config/adminUser"); //create the admin user
-const { sendNotificationEmail } = require("./middlewares/mail.middleware");
-const User = require("./models/user.model");
-const swaggerRouter = require("./routes/swagger.router");
 app.use(
   session({
     secret: "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", // set your secret key
@@ -18,9 +15,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-///login with google
-const passportSetup = require("./config/passport");
-const passport = require("passport");
 
 dotenv.config();
 app.use(express.json());
@@ -33,10 +27,8 @@ app.use(
 );
 connectDB();
 
-app.use(passport.initialize());
 //app routes
 const indexRouter = require("./routes/index.router"); //the routes of all the project
-app.use("/docs", swaggerRouter);
 app.use("/", indexRouter);
 
 const PORT = process.env.PORT || 5000;
