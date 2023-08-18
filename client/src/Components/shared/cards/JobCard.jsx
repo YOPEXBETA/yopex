@@ -13,7 +13,7 @@ const JobCard = ({ job }) => {
     <div>
       <div
         onClick={toggleOpen}
-        className="border-solid border-zinc-200 border rounded-md bg-white hover:scale-105 duration-500 hover:shadow-green-500"
+        className="shadow-md border-green-500 border-b-2 rounded-lg bg-white hover:scale-102 duration-500 hover:shadow-green-500"
       >
         <div className="flex flex-col">
           <div className="bg- rounded-md p-4 h-full">

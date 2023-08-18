@@ -50,16 +50,7 @@ const ChallengeCard = ({ challenge }) => {
     <div>
       <Divider />
       <Link to={`/browse/contestDetails/${challenge._id}`}>
-        <Card
-          className={classes.root}
-          elevation={0}
-          variant="outlined"
-          sx={{
-            ":hover": {
-              boxShadow: "5",
-            },
-          }}
-        >
+        <div className="shadow-md border-green-500 border-b-2 rounded-lg flex hover:scale-105">
           <img
             src={challenge.company?.companyLogo}
             className="object-cover  bg-gray-400 h-40 w-40"
@@ -127,7 +118,7 @@ const ChallengeCard = ({ challenge }) => {
               </Stack>
             </div>
           </div>
-        </Card>
+        </div>
       </Link>
     </div>
   );
