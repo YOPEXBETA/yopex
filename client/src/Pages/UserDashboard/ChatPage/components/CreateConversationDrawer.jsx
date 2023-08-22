@@ -17,12 +17,12 @@ import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
 import { useCreateConversation } from "../../../../hooks/react-query/useConversations";
-import { useUsers } from "../../../../hooks/react-query/useUsers";
+import { useSuggestedUsers, useUsers } from "../../../../hooks/react-query/useUsers";
 
 export default function CreateConversationDrawer() {
   const { user } = useSelector((state) => state.auth);
   const { mutate } = useCreateConversation(user._id);
-  const { data: users } = useUsers();
+  const { data: users } = useSuggestedUsers();
 
   const [state, setState] = useState({
     top: false,
@@ -49,6 +49,9 @@ export default function CreateConversationDrawer() {
   };
 
   const handleUserClick = (otherUser) => {
+    if (otherUser.companyName){
+      mutate({ senderId: user._id, receiverId: otherUser.user,company:otherUser._id });
+    }
     mutate({ senderId: user._id, receiverId: otherUser._id });
     setState({ ...state, left: false });
   };
@@ -71,13 +74,23 @@ export default function CreateConversationDrawer() {
               sx={{ alignItems: "center" }}
             >
               <ListItemAvatar>
-                <Avatar src={user.picturePath} />
+                <Avatar src={user.companyName?user.companyLogo:user.picturePath} />
               </ListItemAvatar>
               <ListItemText
                 primary={
-                  <Stack flexDirection={"row"} columnGap={"0.2rem"}>
-                    <Typography variant="h6">{user.firstname}</Typography>
-                    <Typography variant="h6">{user.lastname}</Typography>
+                  <Stack flexDirection={"row"} columnGap={"0.2rem"}>{
+                    user.companyName?
+                    (
+                      <Typography variant="h6">{user.companyName}</Typography>
+                    ):(
+                      <div>
+                        <Typography variant="h6">{user.firstname}</Typography>
+                        <Typography variant="h6">{user.lastname}</Typography>
+                      </div>
+                      
+                    )
+                  }
+                    
                   </Stack>
                 }
               />

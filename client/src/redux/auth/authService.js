@@ -30,4 +30,10 @@ const edit = async (data) => {
   return user.data;
 };
 
-export const authService = { register, login, edit };
+const getcurrentuser = async () =>{
+  const user = await axios.get("http://localhost:8000/me",{ withCredentials: true });
+  return user.data;
+   
+}
+
+export const authService = { register, login, edit, getcurrentuser };

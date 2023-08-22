@@ -3,11 +3,12 @@ import Paper from "@mui/material/Paper";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { useConversations } from "../../../hooks/react-query/useConversations";
 import Conversation from "./components/Conversation";
 import UsersMsgs from "./components/UsersMsgs";
+import useSocket from "../../../hooks/useSocket";
 
 const useStyles = makeStyles({
   headBG: {
@@ -20,20 +21,36 @@ const useStyles = makeStyles({
 
 const Chat = () => {
   const classes = useStyles();
-
   const { user } = useSelector((state) => state.auth);
   const { data: conversations } = useConversations(user._id);
   const { selectedConversationId } = useParams();
-
   const [otherUser, setOtherUser] = useState({});
+  const navigate = useNavigate();
+
+  const socket = useSocket();
+  
 
   useEffect(() => {
     if (!conversations) return;
-    setOtherUser(conversations.find((item) => item._id !== user._id));
-  }, [conversations, user._id]);
+    else{
+      
+      const conn = conversations.find((item) => item.conversationId === selectedConversationId);
+      
+      if (!conn) navigate("/chat");
+      else {
+        if (conn.members[0].role === "company") {
+          setOtherUser(conn.members[1]);
+        }else{
+          setOtherUser(conn.members[0]);
+        }
+      }
+      console.log(otherUser);
+    }
+  }, [selectedConversationId,conversations]);
 
-  const socket = io.connect("localhost:8900");
-
+  
+  socket.emit("addUser", {id:user._id,roomid:selectedConversationId});
+  
   return (
     <div>
       <Grid container component={Paper}>

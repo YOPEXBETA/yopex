@@ -9,7 +9,6 @@ let users = [];
 const addUser = (userId, socketId) => {
   !users.some((user) => user.userId === userId) &&
     users.push({ userId, socketId });
-  console.log("Added user:", { userId, socketId });
   console.log("Users array:", users);  
 };
 
@@ -20,22 +19,21 @@ const removeUser = (socketId) => {
 const getUser = (userId) => {
   const user = users.find((user) => user.userId === userId);
   console.log("getUser called with userId:", userId);
-  console.log("getUser found user:", user);
   return user;
 };
 
 io.on("connection", (socket) => {
   console.log("a user connected.");
-  socket.on("addUser", (userId) => {
-    socket.join(userId);
-    addUser(userId, socket.id);
-    io.emit("getUsers", users);
+  socket.on("addUser", (data) => {
+    socket.join(data.roomid);
+    addUser(data.id, socket.id);
+    
   });
   //when disconnect
   socket.on("disconnect", () => {
     console.log("a user disconnected!");
     removeUser(socket.id);
-    io.emit("getUsers", users);
+    
   });
 
   //send and get message
@@ -43,9 +41,9 @@ io.on("connection", (socket) => {
     console.log(`sendMessage called with data: ${JSON.stringify(data)}`);
     const user = getUser(data.receiverId);
     if (user) {
-      console.log(`Message sent to user ${user.userId}`);
-      io.emit("getMessage", data);
-      //io.to(user.socketId).emit("getMessage", data);
+      //console.log(`Message sent to user ${user.userId}`);
+      //io.emit("getMessage", data);
+      io.to(data.conversationId).emit("getMessage", data);
     } else {
       console.log("User not found");
     }

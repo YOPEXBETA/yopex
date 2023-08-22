@@ -268,10 +268,30 @@ const resetpassword = async (req, res) => {
 };
 // ==============================|| signInWithGoogle ||============================== //
 
+const signInWithGoogle = async (req, res) => {
+  const user = req.user;
+  const cookiesOptions = {
+    expires: moment().add("15", "days").toDate(),
+  };
+  const token = jwt.sign(
+    {
+      id: user._id,
+      role: user.role,
+      email: user.email,
+    },
+    process.env.passwordToken
+  );
+  res.cookie("accessToken", token, cookiesOptions)
+
+  res.redirect("http://localhost:3000/feed");
+}
+
+
 module.exports = {
   signUp,
   signIn,
   logout,
   forgetpassword,
   resetpassword,
+  signInWithGoogle
 };

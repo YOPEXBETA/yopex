@@ -14,7 +14,7 @@ import CreateConversationDrawer from "./CreateConversationDrawer";
 const UsersMsgs = ({ onConversationSelect }) => {
   const { user } = useSelector((state) => state.auth);
   const { data: conversations } = useConversations(user._id);
-
+  console.log(conversations);
   return (
     <div
       sx={{
@@ -47,7 +47,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
           </ListItem>
           {conversations?.map((conversation) => {
             const otherUser = conversation?.members.find(
-              (member) => member.id !== user._id
+              (member) => member.id !== user._id 
             );
             if (otherUser) {
               return (
@@ -67,7 +67,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
                               {otherUser.firstname}
                             </Typography>
                             <Typography variant="h6">
-                              {otherUser.lastname}
+                              {otherUser.lastname} {otherUser.companyName?`(${otherUser.companyName})`:""}
                             </Typography>
                           </Stack>
                         }

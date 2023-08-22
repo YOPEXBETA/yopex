@@ -3,6 +3,8 @@ const passport = require("passport");
 const userSchema = require("../models/user.model");
 const companySchema = require("../models/company.model");
 const badgeSchema = require("../models/BadgeType.model");
+const jwt = require("jsonwebtoken");
+const moment = require("moment");
 require("dotenv").config();
 
 passport.use(
@@ -59,7 +61,6 @@ const googleAuthSignup = async (
   //   Etat: true,
   // });
   // await newBadge.save();
-
   return cb(null, user);
 }
 

@@ -29,6 +29,17 @@ export const edit = createAsyncThunk("auth/edit", async (data) => {
   }
 });
 
+export const getCurrentUser = createAsyncThunk("auth/current", async () => {
+  try {
+    const response = await authService.getcurrentuser();
+    return response;
+  } catch (error) {
+    throw new Error(error?.response?.data?.error?.msg);
+  }
+});
+
+
+
 const initialState = {
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
@@ -97,6 +108,21 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(edit.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+    builder
+      .addCase(getCurrentUser.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        localStorage.setItem("user", JSON.stringify(action.payload));
+        state.success = true;
+        state.loading = false;
+      })
+      .addCase(getCurrentUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
