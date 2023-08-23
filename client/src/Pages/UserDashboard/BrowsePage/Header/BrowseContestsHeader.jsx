@@ -1,72 +1,22 @@
-import React, { useEffect } from "react";
-import { Typography, Stack, Grid, CardMedia, TextField } from "@mui/material";
-import Box from "@mui/material/Box";
-import { makeStyles } from "@mui/styles";
-// import browseBackground from "../../../../assets/images/browseBackground.png";
+import React from "react";
 import BrowseNavigationTab from "../Content/BrowseNavigationTabs/BrowseNavigationTab";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: 200,
-    padding: "0rem 10rem",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
-
-    backgroundColor: `${theme.palette.secondary.darker}`,
-    [theme.breakpoints.down("sm")]: {
-      padding: "0% 2%",
-    },
-  },
-  media: {
-    position: "relative",
-    height: 200,
-    backgroundColor: "#f5f5f5",
-  },
-  title: {
-    color: `${theme.palette.secondary.lighter}`,
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-    },
-  },
-
-  gridItem: {
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-    },
-  },
-}));
-
-const BrowseChallengesHeader = ({ changeValue, value, setContestQuery }) => {
-  const classes = useStyles();
-
+const BrowseContestsHeader = ({ changeValue, value, setContestQuery }) => {
   return (
-    <div>
-      <Box className={classes.root}>
-        <Box>
-          <Stack
-            spacing={1}
-            alignItems={"flex-Start"}
-            justifyContent={"flex-end"}
-          >
-            <Typography fontSize={25} fontWeight={"bold"} color={"white"}>
-              Browse Contests
-            </Typography>
-            <TextField
-              placeholder="Search for Contests"
-              variant="outlined"
-              fullWidth
-              onChange={(e) => setContestQuery(e.currentTarget.value)}
-              inputProps={{
-                style: { color: "white" },
-              }}
-            />
-            <BrowseNavigationTab changeValue={changeValue} value={value} />
-          </Stack>
-        </Box>
-      </Box>
+    <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end bg-black ">
+      <div className="space-y-2 items-start">
+        <h1 className="text-white text-2xl font-bold">Browse Contests</h1>
+
+        <input
+          type="text"
+          placeholder="Search for Contests"
+          className="w-full py-2 px-3 outline-none rounded border border-white text-white bg-black hover:border-green-500"
+          onChange={(e) => setContestQuery(e.currentTarget.value)}
+        />
+        <BrowseNavigationTab changeValue={changeValue} value={value} />
+      </div>
     </div>
   );
 };
 
-export default BrowseChallengesHeader;
+export default BrowseContestsHeader;
