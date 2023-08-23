@@ -11,6 +11,7 @@ const {
   logout,
   forgetpassword,
   resetpassword,
+  signInWithGoogle,
 } = require("../controllers/auth.user.controller");
 
 //imported schema validator
@@ -76,8 +77,8 @@ authRouter.get(
 authRouter.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: CLIENT_URL + "feed",
     failureRedirect: "/login/failed",
-  }),
+  }),signInWithGoogle
 );
+
 module.exports = authRouter;

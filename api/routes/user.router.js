@@ -19,6 +19,7 @@ const {
   getUserNotifications,
   banUser,
   CreateCompany,
+  getCurrentUser,
 } = require("../controllers/user.controller");
 
 const validate = require("../middlewares/SchemaValidation.middleware");
@@ -43,6 +44,7 @@ userRouter.put(
   authenticateToken,
   editProfile,
 );
+userRouter.get("/me", authenticateToken, getCurrentUser); //seach users
 userRouter.get("/users", authenticateToken, SearchUsers); //seach users
 userRouter.get("/allusers", authenticateToken, getUsers); //seach users
 userRouter.get("/:id", authenticateToken, getUser);

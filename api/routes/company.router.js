@@ -32,7 +32,7 @@ companyRouter.put(
 companyRouter.get("/get/:companyId/", authenticateToken, getCompany);
 companyRouter.post("/challengeWinner", authenticateToken, ChallengeWinner);
 companyRouter.get(
-  "/company/:companyId/notifications",
+  "/company/:userId/notifications",
   authenticateToken,
   getCompanyNotifications,
 );

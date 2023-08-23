@@ -3,11 +3,13 @@ import React, { useState } from "react";
 //import Appliers from "./Appliers";
 
 import { useSelector } from "react-redux";
+import JobOfferModal from "./JobOfferModal";
 
 const JobCard = ({ job }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const { user } = useSelector((state) => state.auth);
+  const handleClose = () => setIsOpen(false);
 
   return (
     <div>
@@ -34,7 +36,7 @@ const JobCard = ({ job }) => {
             </div>
             <div>
               <p className="text-md font-normal text-left mb-6">
-                {job.description}
+              {job.description.length > 100 ? `${job.description.substring(0, 150)} ....` : job.description}
               </p>
             </div>
             <div>
@@ -49,6 +51,11 @@ const JobCard = ({ job }) => {
         </div>
       </div>
       {/* Additional static content for other cards can be added similarly */}
+      <JobOfferModal
+        open={isOpen}
+        handleClose={handleClose}
+        job={job}
+      />
     </div>
   );
 };

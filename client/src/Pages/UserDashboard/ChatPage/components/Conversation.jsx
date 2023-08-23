@@ -36,6 +36,7 @@ const useStyles = makeStyles({
 
 const Conversation = ({ conversationId, socket, otherUser }) => {
   const classes = useStyles();
+  console.log(otherUser);
 
   const { user } = useSelector((state) => state.auth);
   const { data: messages } = useMessages(conversationId);
@@ -43,35 +44,37 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
 
   const [message, setMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState([]);
-
+  
   useEffect(() => {
     setArrivalMessage(messages);
+
   }, [messages]);
 
-  // Set up socket.io connection and listen for incoming messages
   useEffect(() => {
     socket.on("getMessage", (data) => {
+      console.log(data);
       setArrivalMessage((prev) => [...prev, data]);
     });
-
-    socket.emit("addUser", user._id);
-
-    socket.on("getUsers", (users) => {
-      console.log("users", users);
-    });
-  }, [socket, user._id]);
+  
+    return () => {
+      socket.off("getMessage"); // This will remove the listener when the component unmounts or before the effect runs again
+    };
+  }, [socket]);
+  
 
   const handleCreateMessage = async (event) => {
     event.preventDefault();
 
     const { id: receiverId } = otherUser;
-
+    
+    
     socket.emit("sendMessage", {
       sender: {
         _id: user._id,
         firstname: user.firstname,
-        picturePath: user.picturePath,
+        picturePath: otherUser.companyLogo? otherUser.companyLogo : user.picturePath,
       },
+      conversationId,
       receiverId,
       message,
       createdAt: new Date(),
@@ -113,7 +116,7 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
                             <Stack flexDirection={"row"} alignItems={"center"}>
                               {message.sender.picturePath && (
                                 <ListItemAvatar>
-                                  <Avatar src={message.sender.picturePath} />
+                                  <Avatar src={message.sender.companyLogo?message.sender.companyLogo:message.sender.picturePath} />
                                 </ListItemAvatar>
                               )}
                               <ListItemText

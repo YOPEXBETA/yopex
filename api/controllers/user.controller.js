@@ -430,6 +430,18 @@ const CreateCompany = async (req, res) => {
   }
 };
 
+const getCurrentUser = async (req, res) => {
+  try {
+    const user = await userSchema
+      .findById(req.userId)
+      .select("-password")
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 module.exports = {
   editProfile,
   SearchUsers,
@@ -447,4 +459,5 @@ module.exports = {
   getUserNotifications,
   banUser,
   CreateCompany,
+  getCurrentUser
 };

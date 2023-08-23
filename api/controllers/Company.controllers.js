@@ -116,17 +116,26 @@ const ChallengeWinner = async (req, res) => {
 };
 const getCompanyNotifications = async (req, res) => {
   try {
-    const company = await companySchema
-      .findById(req.params.companyId)
-      .populate({
-        path: "notificationsCompany",
-        populate: {
-          path: "user",
-          select: "firstname lastname picturePath",
-        },
-      });
-    if (!company) throw new Error("Company not found");
-    res.json(company.notificationsCompany);
+    const userId = req.params.userId;
+    const user = await userModel.findById(userId);
+    const companies = user.companies;
+    let notification = [];
+    for (const companyId of companies) {
+      const company = await companySchema
+        .findById(companyId)
+        .populate({
+          path: "notificationsCompany",
+          match: { seen: false },
+          populate: {
+            path: "user",
+            select: "firstname lastname picturePath",
+          },
+        });
+
+      notification = notification.concat(company.notificationsCompany);
+    }
+    
+    res.status(200).json(notification);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: "Server Error" });

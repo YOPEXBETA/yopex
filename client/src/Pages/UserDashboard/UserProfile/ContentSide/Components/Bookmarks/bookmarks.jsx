@@ -1,15 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useUserPosts,useBookmarkedPosts } from "../../../../../../hooks/react-query/usePosts";
+import { useBookmarkedPosts } from "../../../../../../hooks/react-query/usePosts";
 import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
-import { useSelector } from "react-redux";
 
-const MySocialPosts = () => {
-  const { user } = useSelector((state) => state.auth);
+const Bookmarks = () => {
   const { userId } = useParams();
-  const { data: posts, isLoading } = useUserPosts(userId);
-  const {data} = useBookmarkedPosts(user._id);
+  const { data: posts, isLoading } = useBookmarkedPosts(userId);
+  console.log("bookmarks ==>",posts);
   let bookmarksId=[];
-  data?.map((book)=>{
+  posts?.map((book)=>{
     bookmarksId.push(book._id)
   })
 
@@ -24,4 +22,4 @@ const MySocialPosts = () => {
   );
 };
 
-export default MySocialPosts;
+export default Bookmarks;

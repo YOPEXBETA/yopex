@@ -51,6 +51,17 @@ const UserSchema = new mongoose.Schema(
       ],
       default: [],
     },
+
+    bookmarks: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "SocialMediaPost",
+        },
+      ],
+      default: [],
+    },
+
     challenges: [{ type: mongoose.Types.ObjectId, ref: "Challenge" }],
 
     badgesEarned: {

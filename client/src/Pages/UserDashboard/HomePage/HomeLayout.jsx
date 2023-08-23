@@ -8,6 +8,7 @@ import UserCard from "./userCard/userCard/UserCard";
 import UserHighlights from "./userCard/UserHighlights/UserHighlights";
 
 const HomeLayout = () => {
+  
   return (
     <div className="grid grid-cols-12 gap-4 lg:py-6 lg:px-16 px-0 py-0">
       <div className="col-span-12 md:col-span-12 lg:col-span-3 space-y-4 ">

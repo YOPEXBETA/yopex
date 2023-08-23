@@ -26,7 +26,14 @@ const edit = async (data) => {
     data,
     { withCredentials: true }
   );
+  console.log("this is the user",user.data);
   return user.data;
 };
 
-export const authService = { register, login, edit };
+const getcurrentuser = async () =>{
+  const user = await axios.get("http://localhost:8000/me",{ withCredentials: true });
+  return user.data;
+   
+}
+
+export const authService = { register, login, edit, getcurrentuser };

@@ -4,10 +4,12 @@ import FireBaseSocialIcons from "./components/FirebaseSocialIcons";
 
 function GoogleSignIn({ mode }) {
   // const [isActionCompleted, setIsActionCompleted] = useState(false);
-
   const handleSignIn = () => {
     window.open("http://localhost:8000/auth/google", "_self");
+    
   };
+
+  
 
   return (
     <div>

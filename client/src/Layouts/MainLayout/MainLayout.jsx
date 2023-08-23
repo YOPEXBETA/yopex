@@ -4,18 +4,40 @@ import CustomNavbar from "./Navbar/CustomNavbar";
 
 //render the data under the navbar
 import { Outlet, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser } from "../../redux/auth/authSlice";
+import useSocket from "../../hooks/useSocket";
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
 const MainLayout = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, error } = useSelector((state) => state.auth); // Assuming you have an error state in your Redux slice
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  
 
   useEffect(() => {
-    if (!user) navigate("/login");
-  }, [navigate, user]);
+    console.log("layout");
+    if (!user) {
+      dispatch(getCurrentUser()).then((response) => {
+        // Check if fetching current user was successful
+        if (response.meta.requestStatus === "fulfilled") {
+          // Successfully fetched user, continue rendering
+        } else {
+          // Fetching user failed, navigate to /login
+          navigate("/login");
+        }
+      });
+    }
+  }, [dispatch, user]);
 
+  // Render the loading state if user data is being fetched
+  if (!user) {
+    return <div>Loading...</div>; // Or you can render a loading component
+  }
+
+  // Render the main layout once user data is available
   return (
     <div className="">
       <CustomNavbar />

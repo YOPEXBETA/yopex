@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
+
 // get all the posts
 export const usePosts = () => {
   return useQuery({
@@ -37,6 +38,21 @@ export const useUserPosts = (userId) => {
       const { data } = await axios.get(`http://localhost:8000/post/${userId}`, {
         withCredentials: true,
       });
+      return data;
+    },
+  });
+};
+
+// get a bookmarked posts
+export const useBookmarkedPosts = (userId) => {
+  return useQuery({
+    queryKey: ["posts", userId, "bookmarked"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `http://localhost:8000/post/bookmarks/${userId}`,
+        {
+          withCredentials: true,
+        });
       return data;
     },
   });
@@ -136,3 +152,24 @@ export const useSharePost = (userId, ownerId, category = "") => {
     },
   });
 };
+
+export const useBookmarkPost = (userId, postId,category="") => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async () => {
+
+      await axios.patch(
+        `http://localhost:8000/post/${userId}/bookmark/${postId}`,
+        { userId },
+        { withCredentials: true }
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["posts", userId, "bookmarked"],
+      });
+      
+    },
+  });
+}
