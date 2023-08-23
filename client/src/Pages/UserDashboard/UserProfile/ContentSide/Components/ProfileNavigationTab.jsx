@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useUserReviews } from "../../../../../hooks/react-query/useReviews";
 import { useUserById } from "../../../../../hooks/react-query/useUsers";

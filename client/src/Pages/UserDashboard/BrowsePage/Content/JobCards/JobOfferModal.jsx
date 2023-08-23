@@ -29,13 +29,13 @@ const JobOfferModal = ({ open, handleClose, job }) => {
     isSuccess: isSuccessfullyApplied,
     isError: isApplyError,
     error: applyError,
-  } = useApplyJob(job, user._id);
+  } = useApplyJob(job, user?._id);
   const {
     mutate: unapply,
     isSuccess: isSuccessfullyUnapplied,
     isError: isUnapplyError,
     error: unapplyError,
-  } = useUnapplyJob(job, user._id);
+  } = useUnapplyJob(job, user?._id);
 
   console.log(applyError);
 

@@ -17,7 +17,7 @@ import { formatDistance } from "date-fns";
  const JobOfferModal = ({ open, handleClose,job }) => {
     // Global states |  @redux/toolkit
     const { user } = useSelector((state) => state.auth);
-    const applyJobMutation = useApplyJob(job, user._id);
+    const applyJobMutation = useApplyJob(job, user?._id);
     // Data fetching | react-query
 
     // React-hook-form
@@ -74,12 +74,13 @@ import { formatDistance } from "date-fns";
             <Button variant="outlined" onClick={handleClose}>
               Cancel
             </Button>
+            {user? 
             <button
               className=" bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded"
               onClick={onclick}
             >
               Apply
-            </button>
+            </button>:""}
         </Stack>
         
       </Dialog>
