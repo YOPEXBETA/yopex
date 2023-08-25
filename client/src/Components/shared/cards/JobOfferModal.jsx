@@ -1,90 +1,81 @@
-import {
-    Button,
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    Divider,
-    Stack,
-    DialogContentText,
-  } from "@mui/material";
-  import React, { useState } from "react";
-  import { Controller, useForm } from "react-hook-form";
-  import { useSelector } from "react-redux";
-  import { useUserById } from "../../../hooks/react-query/useUsers";
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { useUserById } from "../../../hooks/react-query/useUsers";
 import { useApplyJob } from "../../../hooks/react-query/useJobs";
 import { formatDistance } from "date-fns";
-  
- const JobOfferModal = ({ open, handleClose,job }) => {
-    // Global states |  @redux/toolkit
-    const { user } = useSelector((state) => state.auth);
-    const applyJobMutation = useApplyJob(job, user?._id);
-    // Data fetching | react-query
 
-    // React-hook-form
-    const onclick =() =>{
-      applyJobMutation.mutate();
-      handleClose();
-    }
+const JobOfferModal = ({ open, handleClose, job }) => {
+  // Global states |  @redux/toolkit
+  const { user } = useSelector((state) => state.auth);
+  const applyJobMutation = useApplyJob(job, user?._id);
+  // Data fetching | react-query
 
-  
-    return (
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-        <DialogTitle variant="h5">{job.title}</DialogTitle>
-        <Divider />
-        <DialogContent sx={{ pb: 0 }}>
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
-            <div>
-              <DialogContentText >
-                By {job.company.companyName}
-              </DialogContentText>
-              <DialogContentText >
-                {job.company.companyDescription}
-              </DialogContentText>
-            </div>
+  // React-hook-form
+  const onclick = () => {
+    applyJobMutation.mutate();
+    handleClose();
+  };
 
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+  return (
+    <div
+      className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}
+      onClick={handleClose}
+    >
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="bg-transparent absolute inset-0 flex justify-center items-center">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-sm">
+            <div className="p-8">
+              <div className="flex items-center gap-4">
                 <img
                   src={job.company.companyLogo}
                   alt="Icon"
                   className="w-16 h-16 rounded-lg object-cover"
                 />
+                <div>
+                  <p className="text-lg font-bold">{job.title}</p>
+                  <p>By {job.company.companyName}</p>
+                </div>
               </div>
-          </Stack>
-          <Divider className="my-4"/>
-          <DialogContentText >
-            {job.description}
-          </DialogContentText>
-          <Divider className="my-4"/>
-          <p className="text-md  text-left font-normal text-green-500">
-                {formatDistance(new Date(job.createdAt), new Date(), {
-                  addSuffix: true,
-                })}
-          </p>
-          
-        </DialogContent>
 
-        <Stack
-            direction={"row"}
-            sx={{
-              justifyContent: "space-between",
-              px: 0,
-              padding: "20px 20px",
-            }}
-          >
-            <Button variant="outlined" onClick={handleClose}>
-              Cancel
-            </Button>
-            {user? 
-            <button
-              className=" bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded"
-              onClick={onclick}
-            >
-              Apply
-            </button>:""}
-        </Stack>
-        
-      </Dialog>
-    );
-  };
-  
-  export default JobOfferModal;
+              <hr className="my-4 border-t" />
+
+              <p className="mb-4">{job.description}</p>
+
+              <hr className="my-4 border-t" />
+
+              <div className="flex justify-between">
+                <p className="text-md font-semibold">Posted from</p>
+                <p className="text-md font-normal text-green-500">
+                  {formatDistance(new Date(job.createdAt), new Date(), {
+                    addSuffix: true,
+                  })}
+                </p>
+              </div>
+            </div>
+            <hr className="my-2" />
+
+            <div className="flex justify-between px-4 py-2 bg-white">
+              <button
+                className="border-2 border-green-500 hover:bg-gray-200 text-green-500 px-4 py-2 rounded"
+                onClick={handleClose}
+              >
+                Cancel
+              </button>
+              {user && (
+                <button
+                  className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded"
+                  onClick={onclick}
+                >
+                  Apply
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default JobOfferModal;

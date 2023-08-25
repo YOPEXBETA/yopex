@@ -88,6 +88,7 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
                         <div className="flex gap-2 items-center">
                           {message.sender.picturePath && (
                             <img
+                              alt="image"
                               className="h-11 w-11 rounded-full bg-green-500"
                               src={
                                 message.sender.companyLogo

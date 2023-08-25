@@ -29,6 +29,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
               >
                 <div className="flex gap-4 items-center">
                   <img
+                    alt="image"
                     src={otherUser?.picturePath}
                     className="h-14 w-14 rounded-full bg-green-500"
                   />

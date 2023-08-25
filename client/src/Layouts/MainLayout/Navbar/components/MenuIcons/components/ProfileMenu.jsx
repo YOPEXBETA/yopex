@@ -29,7 +29,11 @@ const ProfileMenu = () => {
           onClick={handleClick}
           className="flex items-center justify-center w-8 h-8 text-gray-600 rounded-full"
         >
-          <img src={user.picturePath} className="rounded-full" />
+          <img
+            alt="picture"
+            src={user.picturePath}
+            className="rounded-full bg-green-500 object-contain"
+          />
         </button>
       </div>
       <div className="relative">

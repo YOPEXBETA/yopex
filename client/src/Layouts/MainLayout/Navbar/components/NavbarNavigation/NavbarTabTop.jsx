@@ -23,7 +23,7 @@ const NavbarTabTop = () => {
     } else if (path === "/leaderboard") {
       setValue(2);
     } else {
-      setValue(0);
+      setValue("");
     }
   }, [location]);
 
