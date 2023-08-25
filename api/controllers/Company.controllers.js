@@ -79,6 +79,7 @@ const getCompanyChallenges = async (req, res) => {
 
 const ChallengeWinner = async (req, res) => {
   try {
+    console.log(req.body);
     const idCompany = req.body.idCompany; // Get idChallenge from the query parameter
     const idChallenge = req.body.idChallenge; // Get idChallenge from the query parameter
     const idUser = req.body.idUser; // Get idUser from the query parameter
@@ -89,21 +90,21 @@ const ChallengeWinner = async (req, res) => {
 
     // get Admin account
     const AdminUser = await userModel.findOne({ role: "admin" });
-    User.balance = User.balance + Challenge.price * 0.9;
-    AdminUser.balance = AdminUser.balance + Challenge.price * 0.1;
+    User.balance = (User.balance ? User.balance : 0) + Challenge.price * 0.9;
+    AdminUser.balance = (AdminUser.balance ? AdminUser.balance : 0) + Challenge.price * 0.1;
 
     company.balance = company.balance - Challenge.price;
     Challenge.winner = User._id;
     User.challengesWon = (User.challengesWon ? User.challengesWon : 0) + 1;
 
-    updateUserChallengesBadges(User);
+    //updateUserChallengesBadges(User);
     console.log("passed the badges challenges");
     User.score += 100;
 
     User.notifications.push({
       message: `You won the challenge ${Challenge.title}`,
     });
-    sendEmail(User.email, `You won the challenge ${Challenge.title}`);
+    //sendEmail(User.email, `You won the challenge ${Challenge.title}`);
     const newChallenge = await Challenge.save();
     User.save();
     console.log(User);

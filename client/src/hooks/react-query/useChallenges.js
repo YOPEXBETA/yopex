@@ -54,7 +54,7 @@ export const useUserSubmission = (challengeId, participant) => {
         `http://localhost:8000/challenge/getChallengeUserSubmit`,
         {
           params: {
-            userId: participant._id,
+            userId: participant.user._id,
             challengeId: challengeId,
           },
           withCredentials: true,
@@ -168,6 +168,7 @@ export const useChooseWinner = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (challengeData) => {
+      console.log("winner");
       const { data } = await axios.post(
         "http://localhost:8000/company/challengeWinner",
         challengeData,
@@ -175,6 +176,7 @@ export const useChooseWinner = () => {
           withCredentials: true,
         }
       );
+      console.log(data);
       return data;
     },
     onSuccess: () => {

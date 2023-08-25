@@ -52,8 +52,8 @@ const ParticipantsDialog = ({ open, toggleOpen, participant }) => {
                 title={
                   <Typography component="div" variant="h4">
                     User :{" "}
-                    <Link to={`/profile/${participant._id}`}>
-                      {participant.firstname + participant.lastname}
+                    <Link to={`/profile/${participant.user._id}`}>
+                      {participant.user.firstname +" "+ participant.user.lastname}
                     </Link>
                   </Typography>
                 }

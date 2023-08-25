@@ -15,11 +15,11 @@ const ChooseWinner = () => {
   
   const handleSubmit = async () => {
     const companyId = data.company._id;
-    const winnerId = selectedUser._id;
+    const winnerId = selectedUser;
     
     chooseWinner({ idChallenge: id, idCompany: companyId, idUser: winnerId })
     
-    window.location.reload();
+    
   };
 
   return (
@@ -39,8 +39,8 @@ const ChooseWinner = () => {
             onChange={(event) => setSelectedUser(event.target.value)}
           >
             {data?.users.map((user) => (
-              <MenuItem value={user} key={user._id}>
-                {`${user.firstname} ${user.lastname}`}
+              <MenuItem value={user.user._id} key={user._id}>
+                {`${user.user.firstname} ${user.user.lastname}`}
               </MenuItem>
             ))}
           </Select>
