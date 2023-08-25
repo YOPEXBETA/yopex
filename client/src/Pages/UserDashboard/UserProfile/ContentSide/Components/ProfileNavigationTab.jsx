@@ -1,6 +1,3 @@
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useUserReviews } from "../../../../../hooks/react-query/useReviews";
@@ -15,24 +12,73 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
 
   return (
     <div>
-      <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={changeValue}
-            aria-label="basic tabs example"
-          >
-            <Tab label="My Posts" />
-            <Tab label="My Challenges" />
+      <div className="flex space-x-4">
+        <button
+          className={`py-2 px-4 border-b-2 ${
+            value === 0
+              ? "border-green-500 text-green-500"
+              : "text-zinc-500 border-zinc-500"
+          }`}
+          onClick={() => changeValue(0)}
+        >
+          My Posts
+        </button>
+        <button
+          className={`py-2 px-4 border-b-2 ${
+            value === 1
+              ? "border-green-500 text-green-500"
+              : "text-zinc-500 border-gray-500"
+          }`}
+          onClick={() => changeValue(1)}
+        >
+          My Challenges
+        </button>
+        <button
+          className={`py-2 px-4 border-b-2 ${
+            value === 2
+              ? "border-green-500 text-green-500"
+              : "text-zinc-500 border-gray-500"
+          }`}
+          onClick={() => changeValue(2)}
+        >
+          Followers
+        </button>
+        <button
+          className={`py-2 px-4 border-b-2 ${
+            value === 3
+              ? "border-green-500 text-green-500"
+              : "text-zinc-500 border-gray-500"
+          }`}
+          onClick={() => changeValue(3)}
+        >
+          Followings
+        </button>
 
-            <Tab label="Followers" />
-            <Tab label="Followings" />
-            <Tab label={`Feedbacks (${reviews?.length || 0})`} />
-            {/*userProfile.role === "company" && <Tab label="Posted Jobs" />*/}
-            {userId==user._id?<Tab label="Bookmarks" />:""}
-          </Tabs>
-        </Box>
-      </Box>
+        <button
+          className={`py-2 px-4 border-b-2 ${
+            value === 4
+              ? "border-green-500 text-green-500"
+              : "text-zinc-500 border-gray-500"
+          }`}
+          onClick={() => changeValue(4)}
+        >
+          {`Feedbacks (${reviews?.length || 0})`}{" "}
+        </button>
+        {userId == user._id ? (
+          <button
+            className={`py-2 px-4 border-b-2 ${
+              value === 5
+                ? "border-green-500 text-green-500"
+                : "text-zinc-500 border-gray-500"
+            }`}
+            onClick={() => changeValue(5)}
+          >
+            {` Bookmarks (${userProfile?.bookmarks.length || 0})`}{" "}
+          </button>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

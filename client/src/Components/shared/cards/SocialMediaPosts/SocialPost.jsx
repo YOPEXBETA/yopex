@@ -1,8 +1,8 @@
 import { Favorite, FavoriteBorder, Share } from "@mui/icons-material";
-import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import { Checkbox } from "@mui/material";
 import { formatDistance } from "date-fns";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CommentButton from "../../comments/CommentButton";
 import {
@@ -13,26 +13,24 @@ import PostMenuIcon from "./components/PostMenuIcon";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
 
-
-const SocialPostCard = ({ post,bookmarks,companyId }) => {
+const SocialPostCard = ({ post, bookmarks, companyId }) => {
   const { user } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.global);
   console.log(post);
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
-  const { mutate: BookmarkPost } = useBookmarkPost(user._id, post._id,category);
-  let ownerId=user._id;
-  if (companyId){
-    ownerId=companyId;
+  const { mutate: BookmarkPost } = useBookmarkPost(
+    user._id,
+    post._id,
+    category
+  );
+  let ownerId = user._id;
+  if (companyId) {
+    ownerId = companyId;
   }
-  
-  
 
-  const bookmark = async ()=>{
-    
-    BookmarkPost()
-
-  }
-  
+  const bookmark = async () => {
+    BookmarkPost();
+  };
 
   const [currentPage, setCurrentPage] = useState(0);
   const pageCount = post.postPicturePath.length;
@@ -57,11 +55,17 @@ const SocialPostCard = ({ post,bookmarks,companyId }) => {
           <div>
             <Link
               key={post.userId}
-              to={post.companyName!==undefined? `/company/${post.userId}`  :`/profile/${post.userId}`}
+              to={
+                post.companyName !== undefined
+                  ? `/company/${post.userId}`
+                  : `/profile/${post.userId}`
+              }
               style={{ textDecoration: "none", color: "#000000" }}
             >
               <p className="text-md font-medium ">
-                {post.companyName!==undefined? `${post.companyName}` :`${post.firstname} ${post.lastname}`}
+                {post.companyName !== undefined
+                  ? `${post.companyName}`
+                  : `${post.firstname} ${post.lastname}`}
               </p>
             </Link>
             <p className=" text-[14px]  text-gray-500">
@@ -140,19 +144,18 @@ const SocialPostCard = ({ post,bookmarks,companyId }) => {
         </div>
 
         {/* Share button */}
-        {
-          ownerId==post.userId? "":(
-        
-        <div className=" flex items-center gap-1">
-          <button onClick={bookmark}>
-          <Checkbox
-              icon={<BookmarksIcon/>}
-              checkedIcon={<BookmarksIcon sx={{ color: "green" }} />}
-              checked={bookmarks.includes(post._id)}
-            />
-          </button>
-          
-        </div>
+        {ownerId == post.userId ? (
+          ""
+        ) : (
+          <div className=" flex items-center gap-1">
+            <button onClick={bookmark}>
+              <Checkbox
+                icon={<BookmarksIcon />}
+                checkedIcon={<BookmarksIcon sx={{ color: "green" }} />}
+                checked={bookmarks.includes(post._id)}
+              />
+            </button>
+          </div>
         )}
       </div>
     </div>
