@@ -12,7 +12,7 @@ export const selectCompanyChallenges = (state) =>
   state.Challenge.companyChallenges;
 export const selectUserChallenges = (state) => state.Challenge.userChallenges;
 
-export const selectChallengeUsers = (state) => state.Challenge.challengeUsers;
+export const selectChallengeUsers = (state) => state.Challenge?.challengeUsers;
 export const selectError = (state) => state.Challenge.error;
 export const selectSuccess = (state) => state.Challenge.success;
 

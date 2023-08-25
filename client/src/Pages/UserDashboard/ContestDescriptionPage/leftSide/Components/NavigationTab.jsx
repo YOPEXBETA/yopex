@@ -4,11 +4,11 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import React from "react";
-import { useQuery } from "react-query";
-import axios from "axios";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import getDeadlineDifference from "../../TopSide/deadlineModif";
+import { useChallengeById } from "../../../../../hooks/react-query/useChallenges";
+import { useSelector } from "react-redux";
 
 function TabPanel({ children, value, index, ...other }) {
   return (
@@ -35,23 +35,13 @@ TabPanel.propTypes = {
 };
 
 export const NavigationTab = ({ changeValue, value }) => {
-  const { id } = useParams();
-  const { user } = useSelector((state) => state.auth);
-  const { data } = useQuery({
-    queryKey: ["challenges", user._id],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        ` http://localhost:8000/company/get/${user._id}`,
-        {
-          withCredentials: true,
-        }
-      );
-      return data;
-    },
-  });
+  const { id: challengeId } = useParams();
+  
+  const { data: challenge } = useChallengeById(challengeId);
+  const {user} =useSelector((state)=>state.auth);
+  
 
-  let challenge = data?.challenges.find((item) => item._id === id);
-  const isOwner = challenge ? true : false;
+  const isOwner = user.companies.find((company) => company===challenge.company._id) ? true : false;
 
   const handleProgress = (card) => {
     if (getDeadlineDifference(card?.deadline) === "0 Days 0 Hours 0 Minutes")

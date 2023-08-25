@@ -104,10 +104,11 @@ const ChallengeWinner = async (req, res) => {
       message: `You won the challenge ${Challenge.title}`,
     });
     sendEmail(User.email, `You won the challenge ${Challenge.title}`);
-    newChallenge = await Challenge.save();
+    const newChallenge = await Challenge.save();
     User.save();
+    console.log(User);
     AdminUser.save();
-    newCompany = await company.save();
+    const newCompany = await company.save();
     console.log(newCompany);
     res.status(200).json({ newCompany, newChallenge });
   } catch (err) {

@@ -8,9 +8,7 @@ import List from "@mui/material/List";
 import Slide from "@mui/material/Slide";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
 import React from "react";
-import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { useUserSubmission } from "../../../../../../hooks/react-query/useChallenges";
 
@@ -20,8 +18,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const ParticipantsDialog = ({ open, toggleOpen, participant }) => {
   const { id: challengeId } = useParams();
+  console.log("participant", participant);
   const { data: submissions } = useUserSubmission(challengeId, participant);
-
+  console.log("submissions", submissions);
   return (
     <div>
       <Dialog

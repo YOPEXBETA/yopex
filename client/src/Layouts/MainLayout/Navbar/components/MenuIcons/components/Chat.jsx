@@ -45,7 +45,7 @@ const Chat = () => {
           </div>
           <div className="w-8 h-8">
             <div className="absolute -top-1 -right-1 bg-green-500 rounded-full w-4 h-4 text-white text-[10px] flex items-center justify-center">
-              {conversations.length}
+              {conversations?.length}
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@ const Chat = () => {
                 </div>
                 <hr className="border-t border-gray-200" />
               </li>
-              {conversations.map((conversation) => {
+              {conversations?.map((conversation) => {
                 const otherUser = conversation.members.find(
                   (member) => member.id !== user._id
                 );

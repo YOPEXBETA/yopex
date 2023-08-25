@@ -37,7 +37,7 @@ ChallengeRouter.get(
   getChallengeById
 );
 
-ChallengeRouter.get("/:companyId", authenticateToken, getCompanyChallenges);
+ChallengeRouter.get("/company/:companyId", authenticateToken, getCompanyChallenges);
 ChallengeRouter.get("/challenges/all", authenticateToken, getAllChallenges);
 ChallengeRouter.get("/getChallengeUsers", authenticateToken, getChallengeUsers);
 ChallengeRouter.get(

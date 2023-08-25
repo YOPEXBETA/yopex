@@ -16,6 +16,7 @@ const BadgeTypeRouter = require("./BadgeType.router");
 const CategoryRouter = require("./Category.router");
 const CommentRouter = require("./comment.router");
 const payementRouter = require("./payment.router");
+const skillRouter = require("./skill.router");
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -32,5 +33,6 @@ router.use("/badgeType", BadgeTypeRouter);
 router.use("/category", CategoryRouter);
 router.use("/comment", CommentRouter);
 router.use("/api", payementRouter);
+router.use("/skill", skillRouter);
 
 module.exports = router;

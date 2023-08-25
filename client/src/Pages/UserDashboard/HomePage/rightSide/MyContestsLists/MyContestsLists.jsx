@@ -61,8 +61,9 @@ const MyContestLists = () => {
     setInProgress(
       data.challenges?.filter((challenge) => handleProgress(challenge))
     );
+    
   }, [data]);
-
+  console.log(inProgress);
   return (
     <div>
       {inProgress?.length > 0 && (
@@ -86,13 +87,11 @@ const MyContestLists = () => {
                 }}
               >
                 <BoxContentUser>
-                  <Avatar className={classes.Avatar} src={user.picturePath} />
+                  <Avatar className={classes.Avatar} src={user.company.companyLogo} />
                   <Stack>
                     <Stack>
                       <Typography variant="h6" fontWeight={"bold"}>
-                        {user.role === "company"
-                          ? user.companyName
-                          : user?.companyId.companyName}
+                        {user?.company.companyName}
                       </Typography>
                     </Stack>
                     <Typography variant="caption" noWrap color={"primary"}>

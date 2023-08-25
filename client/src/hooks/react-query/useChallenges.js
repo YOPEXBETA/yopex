@@ -35,7 +35,7 @@ export const useChallengesById = (companyId) => {
     ["challenges", companyId],
     async () => {
       const { data } = await axios.get(
-        `http://localhost:8000/challenge/${companyId}`,
+        `http://localhost:8000/challenge/company/${companyId}`,
         { withCredentials: true }
       );
       return data;
@@ -105,6 +105,7 @@ export const useCreateChallenge = () => {
 
   return useMutation(
     async ({ companyId, challengeData }) => {
+      console.log("called");
       await axios.post(
         `http://localhost:8000/challenge/add`,
         { companyId, ...challengeData },
@@ -134,6 +135,9 @@ export const useUnregisterChallenge = (challenge, user) => {
       queryClient.invalidateQueries({
         queryKey: ["user/challenges", user._id],
       });
+      queryClient.invalidateQueries(
+        { queryKey: ["challenges", challenge._id] },
+      );
     },
   });
 };
@@ -152,6 +156,29 @@ export const useRegisterChallenge = (challenge, user) => {
       queryClient.invalidateQueries({
         queryKey: ["user/challenges", user._id],
       });
+      queryClient.invalidateQueries(
+        { queryKey: ["challenges", challenge._id] },
+      );
+    },
+  });
+};
+
+
+export const useChooseWinner = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (challengeData) => {
+      const { data } = await axios.post(
+        "http://localhost:8000/company/challengeWinner",
+        challengeData,
+        {
+          withCredentials: true,
+        }
+      );
+      return data;
+    },
+    onSuccess: () => {
+      
     },
   });
 };

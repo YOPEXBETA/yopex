@@ -19,7 +19,7 @@ const ParticipantsTable = () => {
 
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
-
+  console.log("challenge", challenge);
   const handleChangePage = (_, newPage) => setPage(newPage);
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));

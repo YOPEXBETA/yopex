@@ -3,25 +3,20 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import {
-  useCategories,
-  useCreateCategory,
-  useDeleteCategory,
-  useUpdateCategory,
-} from "../../../hooks/react-query/useCategories";
 import { useForm } from "react-hook-form";
+import { useCreateSkill, useDeleteSkill, useSkills, useUpdateSkill } from "../../../hooks/react-query/useSkills";
 
-const Categories = () => {
-  const { data } = useCategories();
-  const { mutate } = useCreateCategory();
-  const { mutate: deleteCategory } = useDeleteCategory();
-  const { mutate: updateCategory } = useUpdateCategory();
+const Skills = () => {
+  const { data } = useSkills();
+  const { mutate } = useCreateSkill();
+  const { mutate: deleteSkill } = useDeleteSkill();
+  const { mutate: updateSkill } = useUpdateSkill();
 
   const form = useForm();
   const onSubmit = (data) => mutate(data.name);
   const handleSubmit = (e, id) => {
     const name = e.target["name"].value;
-    updateCategory({ name, id });
+    updateSkill({ name, id });
     e.preventDefault();
   };
 
@@ -30,10 +25,10 @@ const Categories = () => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <input
           type="text"
-          placeholder="Category name"
+          placeholder="Skill name"
           {...form.register("name", { required: true })}
         />
-        <button type="submit">Add category</button>
+        <button type="submit">Add skill</button>
       </form>
 
       <Grid className="mt-4" container rowSpacing={2} columnSpacing={2}>
@@ -48,7 +43,7 @@ const Categories = () => {
                       flexDirection={"row"}
                       columnGap={1}
                     >
-                      <Typography variant="h5">Category :</Typography>
+                      <Typography variant="h5">Skill :</Typography>
                       <Typography variant="h5" noWrap color={"primary.dark"}>
                         {badgeData.name}
                       </Typography>
@@ -59,7 +54,7 @@ const Categories = () => {
                       <button type="submit">Update</button>
                     </form>
 
-                    <button onClick={() => deleteCategory(badgeData._id)}>
+                    <button onClick={() => deleteSkill(badgeData.name)}>
                       Delete
                     </button>
                   </CardContent>
@@ -72,4 +67,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Skills;

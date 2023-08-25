@@ -61,12 +61,12 @@ const Banner = () => {
   const { data } = useUserChallenges(user);
 
   const { data: submissions } = useUserSubmission(challengeId, user);
-  const { mutate: unRegisterMutate } = useUnregisterChallenge(challenge, user);
-  const { mutate: registerMutate } = useRegisterChallenge(challenge, user);
+  const { mutate: unRegisterMutate,isLoading:isloadingun } = useUnregisterChallenge(challenge, user);
+  const { mutate: registerMutate,isLoading } = useRegisterChallenge(challenge, user);
 
   // Check if the user has submitted something
   useEffect(() => {
-    if (!user.role === "user") return;
+    //if (!user.role === "user") return;
     const submitted = submissions?.find(
       (item) => item.challengeId === challenge._id
     );
@@ -83,6 +83,7 @@ const Banner = () => {
   // Check if the user is registered
   useEffect(() => {
     if (!data) return;
+    console.log("data",data.challenges);
     const registered = data.challenges.find(
       (item) => item._id === challenge._id
     );
@@ -118,14 +119,16 @@ const Banner = () => {
                     variant="outlined"
                     onClick={unRegisterMutate}
                     className={classes.gridItem}
+                    disabled={isloadingun}
                   >
                     Unregister
                   </Button>
                 ) : (
                   <Button
-                    variant="outlined"
+
                     onClick={registerMutate}
                     className={classes.gridItem}
+                    disabled={isLoading}
                   >
                     Register
                   </Button>

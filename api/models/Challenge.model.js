@@ -29,15 +29,13 @@ const ChallengeSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    users: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-        },
-      ],
-      default: [],
-    },
+    users: [
+      {
+        user: {type: mongoose.Schema.Types.ObjectId,ref: "User",},
+        registrationDate: { type: Date, default: Date.now },
+        submissionDate: { type: Date },
+      }
+    ],
     submissions: {
       type: [
         {

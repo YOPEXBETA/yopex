@@ -1,16 +1,16 @@
 const ChallengeModel = require("../models/Challenge.model");
 const CompanyModel = require("../models/company.model");
 const UserModel = require("../models/user.model");
+const mongoose = require("mongoose");
 
 const CreateChallenge = async (req, res, next) => {
   try {
-    const { title, description, category, price, companyId, deadline } =
+    
+    const { title, description, category, price, companyId, deadline,RecommendedSkills } =
       req.body;
-
+    console.log("req.body:", req.body);
     const userId = req.userId;
-    console.log("userId:", userId);
     const user = await UserModel.findById(userId);
-    console.log("user:", user);
 
     const company = await CompanyModel.findOne({
       user: user._id,
@@ -29,6 +29,7 @@ const CreateChallenge = async (req, res, next) => {
       category,
       deadline,
       price,
+      RecommendedSkills
     });
 
     await challenge.save();
@@ -51,7 +52,15 @@ const getChallengeById = async (req, res) => {
 
   try {
     const challenge =
-      await ChallengeModel.findById(challengeId).populate("company");
+      await ChallengeModel.findById(challengeId)
+      .populate("company")
+      .populate({
+        path: "users",
+        populate: {
+          path: "user",
+          select: "picturePath firstname lastname",
+        },
+      });
 
     if (!challenge) {
       return res.status(404).json({ message: "Challenge not found" });
@@ -142,6 +151,9 @@ const getChallengeUserSubmit = async (req, res) => {
   try {
     const challengeId = req.query.challengeId; // Get idChallenge from the query parameter
     const userId = req.query.userId; // Get idUser from the query parameter
+    
+    
+
     const Challenge = await ChallengeModel.findById(challengeId).populate({
       path: "submissions",
     });

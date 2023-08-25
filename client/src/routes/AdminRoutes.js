@@ -3,6 +3,7 @@ import { lazy } from "react";
 // project import
 import Loadable from "../Components/PageLoading/Loadable";
 import AdminLayout from "../Layouts/AdminLayout/AdminLayout";
+import Skills from "../Pages/AdminDashboard/Skills/Skills";
 
 // render -
 
@@ -54,6 +55,10 @@ const AdminRoutes = {
       path: "evaluation",
       element: <EvaluationPage />,
     },
+    {
+      path: "skills",
+      element: <Skills />
+    }
   ],
 };
 

@@ -3,34 +3,22 @@ import { Stack } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  chooseWinner,
-  getChallengeUsers,
-} from "../../../../../../redux/actions/ChallengeAction";
-import { selectChallengeUsers } from "../../../../../../redux/reducers/ChallengeReducer";
+import { useChallengeById, useChooseWinner, useUserSubmission } from "../../../../../../hooks/react-query/useChallenges";
 
 const ChooseWinner = () => {
   const [selectedUser, setSelectedUser] = useState("");
   const myData = JSON.parse(localStorage.getItem("user"));
 
   const { id } = useParams();
-  const dispatch = useDispatch();
-  console.log(id);
-  useEffect(() => {
-    async function fetchData() {
-      return await dispatch(getChallengeUsers(id));
-    }
-    fetchData();
-  }, [dispatch, id]);
-
-  const data = useSelector(selectChallengeUsers);
-
+  const { data } = useChallengeById(id);
+  const { mutate:chooseWinner } = useChooseWinner();
+  
   const handleSubmit = async () => {
-    const companyId = myData._id;
+    const companyId = data.company._id;
     const winnerId = selectedUser._id;
-    await dispatch(
-      chooseWinner({ idChallenge: id, idCompany: companyId, idUser: winnerId })
-    );
+    
+    chooseWinner({ idChallenge: id, idCompany: companyId, idUser: winnerId })
+    
     window.location.reload();
   };
 
@@ -50,7 +38,7 @@ const ChooseWinner = () => {
             fullWidth
             onChange={(event) => setSelectedUser(event.target.value)}
           >
-            {data.map((user) => (
+            {data?.users.map((user) => (
               <MenuItem value={user} key={user._id}>
                 {`${user.firstname} ${user.lastname}`}
               </MenuItem>

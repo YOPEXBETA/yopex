@@ -28,20 +28,20 @@ const ParticipantRow = ({ user, index }) => {
 
       <TableCell>
         <Stack flexDirection={"row"} alignItems={"center"} columnGap={2}>
-          {<Avatar src={user.picturePath} className={classes.avatar} />}
+          {<Avatar src={user.user.picturePath} className={classes.avatar} />}
           <Stack flexDirection={"row"} columnGap={1}>
-            <Typography variant="h6">{user.firstname}</Typography>
-            <Typography variant="h6">{user.lastname}</Typography>
+            <Typography variant="h6">{user.user.firstname}</Typography>
+            <Typography variant="h6">{user.user.lastname}</Typography>
           </Stack>
         </Stack>
       </TableCell>
 
       <TableCell>
-        {/* <Typography variant="h6">{user.submissionDate}</Typography> */}
+        <Typography variant="h6">{user.submissionDate}</Typography>
       </TableCell>
       <TableCell>
         <Typography variant="h6" align="right">
-          {/* {user.registrationDate} */}
+          {user.registrationDate}
         </Typography>
       </TableCell>
 

@@ -9,10 +9,16 @@ import AlertSuccess from "../../../../../../../Components/successalert";
 import { useForm, Controller } from "react-hook-form";
 import { useCreateChallenge } from "../../../../../../../hooks/react-query/useChallenges";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
+import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
+import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
 
 export const AddChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
-
+  const { data:Skills } = useSkills();
+  const itSkills = Skills?.map((skill) => skill.name);
+  const {data:categorys} = useCategories();
+  const itCategory = categorys?.map((category) => category.name);
+  const [category, setCategory] = useState("");
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -26,7 +32,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
     setValue,
   } = useForm({
     defaultValues: {
-      RecommendedSkills: ["Any"],
+      RecommendedSkills: [],
     },
   });
 
@@ -41,8 +47,9 @@ export const AddChallengeModal = ({ open, handleClose }) => {
 
   const onSubmit = (challengeData) => {
     const companyId = selectedOption;
-
+    
     mutate({ companyId, challengeData });
+    
   };
 
   const now = new Date().toISOString().slice(0, -8);
@@ -71,7 +78,6 @@ export const AddChallengeModal = ({ open, handleClose }) => {
             </h2>
             <div className="mt-2">
               <form
-                component="form"
                 onSubmit={handleSubmit(onSubmit)}
                 sx={{ width: "100%" }}
                 spacing={2}
@@ -101,8 +107,8 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                   <Controller
                     control={control}
                     name="RecommendedSkills"
-                    defaultValue={[itSkills[0]]}
-                    render={({ field }) => (
+                    defaultValue={"Any"}
+                    render={({ field }) => itSkills && (
                       <Autocomplete
                         multiple
                         id="tags-outlined"
@@ -137,12 +143,28 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                   placeholder="challenge prize"
                   {...register("price", { required: true })}
                 />
-                <input
-                  className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
-                  type="text"
-                  placeholder="challenge category"
-                  {...register("category", { required: true })}
-                />
+                <div className="mb-2">
+                  
+                      {itCategory && (<Autocomplete
+                        disablePortal
+                        id="tags-outlined"
+                        options={itCategory}
+                        value={category}
+                        onChange={(e,value) =>{
+                          console.log(value);
+                          
+                          setValue("category", value);
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            placeholder="Category"
+                          />
+                        )}
+                      />)}
+                    
+                </div>
 
                 {isError && (
                   <AlertContainer error={error?.response?.data?.error?.msg} />
@@ -153,7 +175,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                   <Controller
                     control={control}
                     name="deadline"
-                    defaultValue={"2023-07-12T19:55"}
+                    defaultValue={new Date().toISOString().slice(0, -8)}
                     render={({ field }) => (
                       <TextField
                         required
@@ -183,22 +205,24 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                   />
                 </div>
 
-                <div className=" flex justify-between">
+                <div className="flex justify-between">
                   <button
-                    className=" bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500"
+                    type="button"
+                    className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500"
                     onClick={handleClose}
                   >
                     Cancel
                   </button>
                   <button
-                    className=" bg-green-500 px-6 py-2 text-white rounded-md"
+                    className="bg-green-500 px-6 py-2 text-white rounded-md"
                     type="submit"
                     disabled={isSubmitting}
-                    // onClick={handleSubmit}
+                    
                   >
-                    Create Challenge
+                    Add Challenge
                   </button>
                 </div>
+              
               </form>
             </div>
           </div>
@@ -208,37 +232,3 @@ export const AddChallengeModal = ({ open, handleClose }) => {
   );
 };
 
-const itSkills = [
-  "Any",
-  "Python",
-  "Java",
-  "JavaScript",
-  "C++",
-  "C#",
-  "HTML",
-  "CSS",
-  "SQL",
-  "Machine Learning",
-  "Artificial Intelligence",
-  "Data Science",
-  "Big Data",
-  "Cloud Computing",
-  "Cybersecurity",
-  "Blockchain",
-  "Mobile App Development",
-  "Web Development",
-  "DevOps",
-  "Agile Methodology",
-  "Project Management",
-  "UI/UX Design",
-  "Digital Marketing",
-  "Content Management System",
-  "Network Administration",
-  "Virtualization",
-  "Linux Administration",
-  "Windows Administration",
-  "ITIL",
-  "Microsoft Azure",
-  "Amazon Web Services (AWS)",
-  "Google Cloud Platform (GCP)",
-];

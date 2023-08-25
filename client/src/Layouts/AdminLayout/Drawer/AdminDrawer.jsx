@@ -90,6 +90,7 @@ const AdminDrawer = () => {
     { name: "Users", icon: <GroupIcon />, path: "users" },
     { name: "Companies", icon: <BusinessIcon />, path: "companies" },
     { name: "Categories", icon: <CategoryIcon />, path: "categories" },
+    { name: "Skills", icon:<CategoryIcon />, path: "skills"},
     { name: "Badges", icon: <TokenIcon />, path: "badges" },
     { name: "Evaluation", icon: <ReviewsIcon />, path: "evaluation" },
     {

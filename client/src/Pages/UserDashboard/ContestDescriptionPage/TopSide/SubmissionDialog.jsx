@@ -130,12 +130,12 @@ const SubmissionDialog = ({ open, handleClose, setIsSubmitted }) => {
       const file = files[i];
 
       if (
-        file.type !== "application/zip" &&
-        file.type !== "image/jpeg" &&
-        file.type !== "image/png" &&
-        file.type !== "image/gif" &&
-        file.type !== "video/mp4" &&
-        file.type !== "video/avi" &&
+        (file.type === "application/zip" ||
+        file.type === "image/jpeg" ||
+        file.type === "image/png" ||
+        file.type === "image/gif" ||
+        file.type === "video/mp4" ||
+        file.type === "video/avi") &&
         file.size <= maxSize
       ) {
         validFiles.push(file);
@@ -225,11 +225,10 @@ const SubmissionDialog = ({ open, handleClose, setIsSubmitted }) => {
                   <Button
                     variant="contained"
                     color="primary"
+                    component="span"
                     onClick={handleSubmit}
                     disabled={
-                      !(filesPaths.length === filesSelected.length
-                        ? true
-                        : false)
+                      (SubmissionTitle === "" || SubmissionDescription === "")?true:false 
                     }
                   >
                     Submit your work

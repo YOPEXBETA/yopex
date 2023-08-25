@@ -1,12 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useChallengeById } from "../../../../../../hooks/react-query/useChallenges";
 
 const ClientCard = () => {
   const { id: challengeId } = useParams();
+  
   const { data: challenge } = useChallengeById(challengeId);
-
+  
   return (
     <div className="border-2 border-gray-100 bg-white p-4 rounded-lg">
       <div className="space-y-3">

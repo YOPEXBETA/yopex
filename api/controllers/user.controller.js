@@ -274,13 +274,20 @@ const JoinChallenge = async (req, res) => {
   try {
     const user = await userSchema.findById(req.body.idUser).select("-password");
     const challenge = await challengeSchema.findById(req.body.idChallenge);
-
+    console.log(challenge.users);
+    console.log(user._id);
+    if (challenge.users.includes(user._id)) {
+      return res.status(400).json({ message: "User already joined challenge" });
+    }
     // Add challenge to user's challenges array
     user.challenges.push(challenge._id);
     user.challengesDone = ++user.challengesDone;
     await user.save();
     // Add user to challenge's users array
-    challenge.users.push(user._id);
+    challenge.users.push({
+      user:user._id,
+      registrationDate: Date.now(),
+    });
     await challenge.save();
 
     res.status(200).send(user);
@@ -302,8 +309,9 @@ const unjoinChallenge = async (req, res) => {
     await user.save();
 
     // Remove user from challenge's users array
+    
     challenge.users = challenge.users.filter(
-      (userId) => userId.toString() !== user._id.toString()
+      (part) => part.user.toString() !== user._id.toString()
     );
     await challenge.save();
 
@@ -316,13 +324,13 @@ const unjoinChallenge = async (req, res) => {
 
 const getUserChallenges = async (req, res) => {
   try {
-    const userId = req.query.userId; // Get idChallenge from the query parameter
+    const userId = req.query.userId; // Get userId from the query parameter
     console.log(userId);
     const challenges = await userSchema.findById(userId).populate({
       path: "challenges",
       model: "Challenge",
       populate: {
-        path: "companyId",
+        path: "company",
         model: "Company",
         select: "-password",
       },
