@@ -1,4 +1,3 @@
-import { Box, Grid } from "@mui/material";
 import React from "react";
 import NewUsers from "./components/NewUsers";
 import TotalUsers from "./components/TotalUsers";

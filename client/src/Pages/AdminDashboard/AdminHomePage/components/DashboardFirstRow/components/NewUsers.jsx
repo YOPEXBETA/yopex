@@ -20,7 +20,7 @@ const NewUsers = () => {
     <div className=" px-4 py-6 h-full bg-gradient-to-t from-green-800 to-green-500 rounded-xl shadow-md border text-white">
       <div className=" space-y-3">
         <div className=" flex gap-3 items-center">
-          <p className=" text-lg items-end">Total Recruiters</p>
+          <p className=" text-lg items-end">Total Companies</p>
         </div>
         <p className=" font-bold text-2xl">{data?.length}</p>
       </div>

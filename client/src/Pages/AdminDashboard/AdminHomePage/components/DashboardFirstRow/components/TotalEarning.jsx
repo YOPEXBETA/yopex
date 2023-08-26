@@ -1,5 +1,4 @@
 import React from "react";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
 import { useSelector } from "react-redux";
 
 const TotalEarning = () => {

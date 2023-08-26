@@ -39,7 +39,7 @@ const Login = () => {
 
     if (isAdmin) {
       dispatch(resetAuth());
-      return navigate("/adminDashboard");
+      return navigate("/Dashboard");
     }
 
     navigate("/feed");
