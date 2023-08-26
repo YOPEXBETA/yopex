@@ -64,7 +64,7 @@ const ProfileMenu = () => {
             <hr className="border-t border-gray-200 mb-2" />
             {user.role === "admin" && (
               <a
-                href="/adminDashboard"
+                href="/Dashboard"
                 className="p-3 hover:bg-gray-100 space-x-2 flex items-center cursor-pointer"
               >
                 <AdminPanelSettingsIcon className="w-6 h-6 text-gray-600" />

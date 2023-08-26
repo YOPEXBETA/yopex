@@ -2,7 +2,15 @@ import { lazy } from "react";
 
 // project import
 import Loadable from "../Components/PageLoading/Loadable";
-import AdminLayout from "../Layouts/AdminLayout/AdminLayout";
+import AdminLayout from "../Layouts/admin";
+import {
+  MdDashboard,
+  MdBusiness,
+  MdPeople,
+  MdCategory,
+  MdAssessment,
+  MdStar,
+} from "react-icons/md";
 
 // render -
 
@@ -31,27 +39,33 @@ const AdminRoutes = {
   element: <AdminLayout />,
   children: [
     {
-      path: "adminDashboard",
+      icon: <MdDashboard className="h-6 w-6" />,
+      path: "Dashboard",
       element: <AdminDashboard />,
     },
     {
-      path: "users",
+      icon: <MdPeople className="h-6 w-6" />,
+      path: "Users",
       element: <UsersPage2 />,
     },
     {
-      path: "companies",
+      icon: <MdBusiness className="h-6 w-6" />,
+      path: "Companies",
       element: <CompanyPage />,
     },
     {
-      path: "categories",
+      icon: <MdCategory className="h-6 w-6" />,
+      path: "Categories",
       element: <Categories />,
     },
     {
-      path: "badges",
+      icon: <MdStar className="h-6 w-6" />,
+      path: "Badges",
       element: <BadgesPage />,
     },
     {
-      path: "evaluation",
+      icon: <MdAssessment className="h-6 w-6" />,
+      path: "Evaluation",
       element: <EvaluationPage />,
     },
   ],

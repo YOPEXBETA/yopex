@@ -26,7 +26,7 @@ const DashboardSecondRow = () => {
                 <Typography variant="h6"> Year Statistics</Typography>
               </Stack>
               <Grid item xs={12}>
-                <MonthlyBarChart />
+                {/*<MonthlyBarChart />*/}
               </Grid>
             </CardContent>
           </Card>

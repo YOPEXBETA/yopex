@@ -150,9 +150,9 @@ const MonthlyBarChart = () => {
     monthlyEarnings,
   ]);
 
-  return (
-    <ReactApexChart options={options} series={series} type="bar" height={365} />
-  );
+  return {
+    /*<ReactApexChart options={options} series={series} type="bar" height={365} />*/
+  };
 };
 
 export default MonthlyBarChart;

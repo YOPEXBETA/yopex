@@ -20,9 +20,9 @@ import { useNavigate } from "react-router-dom";
 
 //redux
 import { useDispatch } from "react-redux";
-import { addBadge } from "../../../../redux/actions/BadgeTypeAction";
+import { addBadge } from "../../../redux/actions/BadgeTypeAction";
 //firebase
-import storage from "../../../../../src/config/firebase";
+import storage from "../../../../src/config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const AddBadgeModal = ({ open, handleClose }) => {
