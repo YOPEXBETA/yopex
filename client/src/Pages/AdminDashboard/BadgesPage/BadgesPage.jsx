@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   useBadges,
   useDeleteBadge,
@@ -41,7 +41,7 @@ const BadgesPage = () => {
 
                   <button
                     onClick={() => mutate(badgeData._id)}
-                    className="bg-red-600 text-white px-4 py-2 mt-4 rounded-lg hover:bg-red-700 transition duration-300"
+                    className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full hover:bg-red-700 transition duration-300"
                   >
                     Delete
                   </button>
