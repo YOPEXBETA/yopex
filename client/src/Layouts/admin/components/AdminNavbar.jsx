@@ -7,7 +7,6 @@ import Logout from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/auth/authSlice";
-import AdminMenuList from "./AdminMenuList";
 
 const AdminNavbar = (props) => {
   const { onOpenSidenav, brandText } = props;
@@ -65,7 +64,6 @@ const AdminNavbar = (props) => {
         >
           <FiAlignJustify className="h-5 w-5" />
         </span>
-        <AdminMenuList />
 
         <div
           className="cursor-pointer text-gray-600"

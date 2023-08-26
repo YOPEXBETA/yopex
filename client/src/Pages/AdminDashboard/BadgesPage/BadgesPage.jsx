@@ -1,51 +1,54 @@
-import { Grid, Stack } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import React from "react";
 import {
   useBadges,
   useDeleteBadge,
 } from "../../../hooks/react-query/useBadges";
+import AdminMenuList from "./components/AdminMenuList";
 
 const BadgesPage = () => {
   const { data } = useBadges();
   const { mutate } = useDeleteBadge();
 
   return (
-    <div>
-      <Grid container rowSpacing={2} columnSpacing={2}>
+    <div className="space-y-4">
+      <AdminMenuList />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {data
           ?.filter((badge) => badge.badgeName)
           .map(
             (badgeData) =>
               badgeData && (
-                <Grid item key={badgeData._id} lg={3} md={6} xs={12}>
-                  <Card>
-                    <CardContent>
-                      <Stack spacing={2} alignItems={"center"}>
-                        <Avatar
-                          sx={{ width: 110, height: 110 }}
-                          src={badgeData.badgeImg}
-                        />
-                        <Typography variant="h5" noWrap color={"primary"}>
-                          {badgeData.badgeName}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary" Wrap>
-                          {badgeData.badgeDescription}
-                        </Typography>
-                      </Stack>
+                <div
+                  key={badgeData._id}
+                  className="bg-white p-4 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 border-2 border-green-400"
+                >
+                  <div className="flex flex-col items-center space-y-2">
+                    <img
+                      src={badgeData.badgeImg}
+                      alt={badgeData.badgeName}
+                      className="w-28 h-28 rounded-full border-4 border-green-200 bg-white p-1"
+                    />
+                    <div className="flex items-center flex-col">
+                      <h5 className="text-green-500 text-lg font-semibold truncate">
+                        {badgeData.badgeName}
+                      </h5>
+                      <p className="text-gray-500 text-sm">
+                        {badgeData.badgeDescription}
+                      </p>
+                    </div>
+                  </div>
 
-                      <button onClick={() => mutate(badgeData._id)}>
-                        Delete
-                      </button>
-                    </CardContent>
-                  </Card>
-                </Grid>
+                  <button
+                    onClick={() => mutate(badgeData._id)}
+                    className="bg-red-600 text-white px-4 py-2 mt-4 rounded-lg hover:bg-red-700 transition duration-300"
+                  >
+                    Delete
+                  </button>
+                </div>
               )
           )}
-      </Grid>
+      </div>
     </div>
   );
 };
