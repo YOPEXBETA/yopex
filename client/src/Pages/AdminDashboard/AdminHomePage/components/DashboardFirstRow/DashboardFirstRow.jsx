@@ -1,7 +1,7 @@
 import React from "react";
-import NewUsers from "./components/NewUsers";
 import TotalUsers from "./components/TotalUsers";
 import TotalEarning from "./components/TotalEarning";
+import Companies from "./components/Companies";
 
 const DashboardFirstRow = () => {
   return (
@@ -14,7 +14,7 @@ const DashboardFirstRow = () => {
           <TotalUsers />
         </div>
         <div className="w-full">
-          <NewUsers />
+          <Companies />
         </div>
       </div>
     </div>

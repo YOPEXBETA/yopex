@@ -1,23 +1,24 @@
 import React from "react";
 import UserTableMenuItem from "./components/UserTableMenuItem";
+import { Link } from "react-router-dom";
 
 const UserRow2 = ({ user }) => {
   return (
     <tr key={user._id} className="hover:bg-gray-50 bg-white">
       <td className="py-4 px-4">
-        <div className="flex items-center">
+        <Link to={`/profile/${user._id}`} className="flex items-center">
           <div className="lg:w-1/6">
             <img
               alt={`${user.firstname} ${user.lastname}`}
               src={user.picturePath}
-              className="w-10 h-10 rounded-full"
+              className="w-10 h-10 rounded-full bg-green-500"
             />
           </div>
           <div className="flex items-center gap-1">
             <span className="text-sm">{user.firstname}</span>
             <span className="text-sm">{user.lastname}</span>
           </div>
-        </div>
+        </Link>
       </td>
       <td className="text-sm text-left">{user.email}</td>
 
