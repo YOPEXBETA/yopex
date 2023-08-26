@@ -80,7 +80,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                     onChange={(value) => setValue("picture", value)}
                   />
                 )}
-              />
+              /> 
 
        
         </DialogContent>
@@ -90,7 +90,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
           sx={{
             justifyContent: "space-between",
             px: 0,
-            padding: "20px 20px",
+            padding: "20px 19px",
           }}
         >
           <Button variant="outlined" onClick={handleClose}>
