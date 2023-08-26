@@ -28,7 +28,7 @@ const CompanyPage = () => {
               <th className="py-2 px-4 text-left">COMPANY</th>
               <th className="py-2 text-left">JOBS</th>
               <th className="py-2  text-left">CHALLENGES</th>
-              <th className="py-2 px-4 text-right">STATUS</th>
+              <th className="py-2 text-left">STATUS</th>
               <th className="py-2 px-4 text-right">ACTION</th>
             </tr>
           </thead>

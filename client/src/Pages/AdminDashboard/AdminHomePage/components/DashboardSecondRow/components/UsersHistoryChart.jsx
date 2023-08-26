@@ -1,8 +1,7 @@
-import { useTheme } from "@mui/material/styles";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ReactApexChart from "react-apexcharts";
 import { useQuery } from "react-query";
+import ReactApexChart from "react-apexcharts";
 
 // chart options
 const splineAreaChartOptions = {
@@ -17,7 +16,6 @@ const splineAreaChartOptions = {
     type: "area",
     stacked: true,
   },
-  // other options...
 };
 
 const UsersHistoryChart = () => {
@@ -30,11 +28,6 @@ const UsersHistoryChart = () => {
       return data;
     },
   });
-
-  const theme = useTheme();
-
-  const { primary, secondary } = theme.palette.text;
-  const info = theme.palette.info.light;
 
   const [series, setSeries] = useState([
     {
@@ -55,28 +48,6 @@ const UsersHistoryChart = () => {
     // Update chart options
     setOptions((prevState) => ({
       ...prevState,
-      colors: [primary],
-      xaxis: {
-        title: {
-          text: "Years",
-        },
-        labels: {
-          style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-            ],
-          },
-        },
-      },
-      tooltip: {
-        theme: "light",
-      },
       chart: {
         type: "area",
         height: 350,
@@ -101,20 +72,12 @@ const UsersHistoryChart = () => {
         },
         min: 0,
       },
-      legend: {
-        show: true,
-        labels: {
-          colors: [primary],
-          useSeriesColors: true,
-        },
-      },
-
       labels: data?.map((data) => `${data._id.month}/${data._id.year}`),
     }));
-  }, [primary, info, secondary, data]);
+  }, [data]);
 
   return (
-    <div id="chart">
+    <div className="bg-white p-4 rounded-lg">
       <ReactApexChart
         options={options}
         series={series}

@@ -1,45 +1,15 @@
-import {
-  Avatar,
-  Grid,
-  Stack,
-  TableCell,
-  TableRow,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import CompanyTableMenuItem from "./CompanyTableMenuItem";
-import ChallengeDialog from "./challengeDialog";
-
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    backgroundColor: theme.palette.secondary.light,
-    color: theme.palette.getContrastText(theme.palette.primary.light),
-  },
-  name: {
-    fontWeight: "bold",
-    color: theme.palette.secondary.dark,
-  },
-  status: {
-    fontWeight: "bold",
-    fontSize: "0.75rem",
-    color: "white",
-    backgroundColor: "grey",
-    borderRadius: 8,
-    padding: "3px 10px",
-    display: "inline-block",
-  },
-}));
 
 const CompanyRow = ({ company }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
 
-  const classes = useStyles();
   return (
-    <TableRow
+    <tr
       key={company._id}
-      hover
+      className="hover:bg-gray-50 bg-white"
       onClick={(event) => {
         if (
           !(
@@ -53,71 +23,40 @@ const CompanyRow = ({ company }) => {
         toggleOpen();
       }}
     >
-      <TableCell>
-        <Grid
-          container
-          spacing={1}
-          sx={{ display: "flex", alignItems: "center" }}
-        >
-          <Grid item lg={2}>
-            <Avatar
-              alt={`${company.companyName}`}
+      <td className="py-4 px-4">
+        <Link to={`/company/${company._id}`} className="flex items-center">
+          <div className="lg:w-1/6">
+            <img
               src={company.companyLogo}
-              className={classes.avatar}
+              className="w-10 h-10 rounded-lg bg-green-500"
             />
-          </Grid>
-          <Grid item lg={10}>
-            <Stack flexDirection={"row"} columnGap={1}>
-              <Typography
-                className={classes.name}
-                color="textSecondary"
-                variant="body1"
-              >
-                {company.companyName}
-              </Typography>
-            </Stack>
-          </Grid>
-        </Grid>
-      </TableCell>
-      <TableCell>
-        <Typography
-          className={classes.name}
-          color="textSecondary"
-          variant="body1"
-        >
-          {company.jobs.length}
-        </Typography>
-      </TableCell>
-      <TableCell>
-        <Typography
-          className={classes.name}
-          color="textSecondary"
-          variant="body1"
-        >
-          {company.challenges.length}
-        </Typography>
-      </TableCell>
-      <TableCell>
-        <Typography
-          className={classes.status}
-          style={{
-            backgroundColor:
-              (company.verified === true && "green") ||
-              (company.verified === false && "red"),
-          }}
-        >
-          {company.verified ? "Verified" : "Not Verified"}
-        </Typography>
-      </TableCell>
-      <TableCell>
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="text-sm font-bold"> {company.companyName}</span>
+          </div>
+        </Link>
+      </td>
+
+      <td className="text-sm text-left"> {company.jobs.length}</td>
+
+      <td className="text-sm text-left"> {company.challenges.length}</td>
+
+      <td
+        className={`font-bold text-white text-xs mt-5 py-2 px-3 rounded-full inline-block ${
+          company.verified === true
+            ? "bg-green-500"
+            : company.verified === false
+            ? "bg-red-500"
+            : ""
+        }`}
+      >
+        {company.verified ? "Verified" : "Not Verified"}
+      </td>
+
+      <td className="py-4 px-4 text-right">
         <CompanyTableMenuItem companyId={company._id} />
-      </TableCell>
-      <ChallengeDialog
-        open={isOpen}
-        handleClose={toggleOpen}
-        company={company}
-      />
-    </TableRow>
+      </td>
+    </tr>
   );
 };
 
