@@ -1,8 +1,5 @@
-import { Grid, Stack } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import React from "react";
+import { MdCategory } from "react-icons/md";
 import {
   useCategories,
   useCreateCategory,
@@ -27,47 +24,71 @@ const Categories = () => {
 
   return (
     <div>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          placeholder="Category name"
-          {...form.register("name", { required: true })}
-        />
-        <button type="submit">Add category</button>
-      </form>
+      <div className="space-y-2">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex gap-11">
+            <input
+              type="text"
+              className=" w-full p-3 border rounded-full focus:outline-none focus:ring focus:border-blue-300 text-[#000000] bg-gray-100"
+              placeholder="Category name"
+              {...form.register("name", { required: true })}
+            />
+            <button
+              type="submit"
+              className="bg-zinc-800 rounded-full text-white px-4 py-2 w-1/6"
+            >
+              Add category
+            </button>
+          </div>
+        </form>
 
-      <Grid container rowSpacing={2} columnSpacing={2}>
-        {data?.map(
-          (badgeData) =>
-            badgeData && (
-              <Grid item key={badgeData._id} lg={3} md={6} xs={12}>
-                <Card>
-                  <CardContent>
-                    <Stack
-                      alignItems={"center"}
-                      flexDirection={"row"}
-                      columnGap={1}
-                    >
-                      <Typography variant="h5">Category :</Typography>
-                      <Typography variant="h5" noWrap color={"primary.dark"}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {data?.map(
+            (badgeData) =>
+              badgeData && (
+                <div key={badgeData._id} className="col-span-1">
+                  <div className="bg-white shadow-md p-4 rounded-md">
+                    <div className="flex items-center space-x-1 mb-2">
+                      <div className="text-green-500 text-lg">
+                        <MdCategory />
+                      </div>
+                      <p className="text-lg text-zinc-800 truncate w-34 uppercase font-bold">
                         {badgeData.name}
-                      </Typography>
-                    </Stack>
+                      </p>
+                    </div>
 
-                    <form onSubmit={(e) => handleSubmit(e, badgeData._id)}>
-                      <input type="text" placeholder="Update" name="name" />
-                      <button type="submit">Update</button>
-                    </form>
+                    <div>
+                      <form onSubmit={(e) => handleSubmit(e, badgeData._id)}>
+                        <input
+                          type="text"
+                          placeholder="Update"
+                          name="name"
+                          className=" w-full p-2 border rounded-full focus:outline-none focus:ring focus:border-blue-300 text-[#000000] bg-gray-100"
+                        />
+                      </form>
 
-                    <button onClick={() => deleteCategory(badgeData._id)}>
-                      Delete
-                    </button>
-                  </CardContent>
-                </Card>
-              </Grid>
-            )
-        )}
-      </Grid>
+                      <div className="mt-2 flex gap-2">
+                        <button
+                          type="submit"
+                          className="bg-green-500 text-white px-4 py-2 rounded-md w-full"
+                          onSubmit={(e) => handleSubmit(e, badgeData._id)}
+                        >
+                          Update
+                        </button>
+                        <button
+                          onClick={() => deleteCategory(badgeData._id)}
+                          className="bg-red-500 text-white px-4 py-2 rounded-md w-full"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+          )}
+        </div>
+      </div>
     </div>
   );
 };

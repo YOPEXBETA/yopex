@@ -22,7 +22,7 @@ const EvaluationPage = () => {
     <div className="rounded-xl shadow-lg">
       <table className="w-full">
         <thead className="text-white">
-          <tr className="bg-green-500 h-11">
+          <tr className="bg-zinc-800 h-11">
             <th className="py-2 px-4 text-left ">USERNAME</th>
             <th className="py-2 px-4 text-left ">LEVEL</th>
             <th className="py-2 px-4 text-left ">COMPLETED CHALLENGES</th>
@@ -62,7 +62,7 @@ const EvaluationPage = () => {
             ))}
         </tbody>
       </table>
-      <div className="flex items-center justify-between py-2 px-4 text-white bg-green-500">
+      <div className="flex items-center justify-between py-2 px-4 text-white bg-zinc-800">
         <div className="flex items-center gap-3">
           <span className="text-sm">Rows per page:</span>
           <select
