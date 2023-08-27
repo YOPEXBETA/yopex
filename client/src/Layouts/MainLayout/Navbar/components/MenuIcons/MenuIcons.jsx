@@ -4,7 +4,6 @@ import NotificationBell2 from "./components/NotificationCompany";
 import Chat from "./components/Chat";
 import AddPostMenuList from "./components/AddPost/AddPostMenuList";
 import NotificationBell from "./components/Notifications/Notification";
-import { useSelector } from "react-redux";
 
 const MenuIcons = () => {
   //const { user } = useSelector((state) => state.auth);
