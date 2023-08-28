@@ -51,9 +51,9 @@ createAdminUser();
 // }
 
 // addYearsRegisteredToUsers();
-  
+
 const server = http.createServer(app);
-const io = new Server(server,{
+const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
   },
@@ -64,7 +64,7 @@ let users = [];
 const addUser = (userId, socketId) => {
   !users.some((user) => user.userId === userId) &&
     users.push({ userId, socketId });
-  console.log("Users array:", users);  
+  console.log("Users array:", users);
 };
 
 const removeUser = (socketId) => {
@@ -82,13 +82,11 @@ io.on("connection", (socket) => {
   socket.on("addUser", (data) => {
     socket.join(data.roomid);
     addUser(data.id, socket.id);
-    
   });
   //when disconnect
   socket.on("disconnect", () => {
     console.log("a user disconnected!");
     removeUser(socket.id);
-    
   });
 
   //send and get message
