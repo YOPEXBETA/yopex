@@ -35,8 +35,10 @@ const JobCard = ({ job }) => {
               </div>
             </div>
             <div>
-              <p className="text-md font-normal text-left mb-6">
-              {job.description.length > 100 ? `${job.description.substring(0, 150)} ....` : job.description}
+              <p className="text-md font-normal text-left mb-6 truncate w-80">
+                {job.description.length > 100
+                  ? `${job.description.substring(0, 150)} ....`
+                  : job.description}
               </p>
             </div>
             <div>
@@ -51,11 +53,7 @@ const JobCard = ({ job }) => {
         </div>
       </div>
       {/* Additional static content for other cards can be added similarly */}
-      <JobOfferModal
-        open={isOpen}
-        handleClose={handleClose}
-        job={job}
-      />
+      <JobOfferModal open={isOpen} handleClose={handleClose} job={job} />
     </div>
   );
 };
