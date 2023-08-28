@@ -27,22 +27,19 @@ const Companies = () => {
   const itemsPerPage = 3;
   const totalPages = Math.ceil(Guests.length / itemsPerPage);
 
-  // Function to go to the next page automatically every 2 seconds
   const goToNextPage = () => {
     setCurrPage((prevPage) => (prevPage + 1) % totalPages);
   };
 
   useEffect(() => {
-    // Set the interval to call goToNextPage every 2 seconds
     const interval = setInterval(goToNextPage, 2000);
 
-    // Clear the interval when the component unmounts
     return () => clearInterval(interval);
-  }, []); // Empty dependency array to run the effect only once on mount
+  }, []);
 
   return (
     <div
-      className="mx-auto py-10 lg:px-24 md:px-11 bg-black text-white border-b-[1px] border-gray-500"
+      className="mx-auto py-10 lg:px-24 md:px-11 bg-white text-black border-b-[1px] border-gray-500"
       id="about"
     >
       <div className="pb-8">
