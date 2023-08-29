@@ -1,135 +1,101 @@
-import {
-  Avatar,
-  Grid,
-  Paper,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useAdminUsers } from "../../../hooks/react-query/useUsers";
 import { getUserLevelData } from "../../../utils";
 
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    backgroundColor: theme.palette.secondary.light,
-    color: theme.palette.getContrastText(theme.palette.primary.light),
-  },
-  name: {
-    fontWeight: "bold",
-    color: theme.palette.secondary.dark,
-  },
-  status: {
-    fontWeight: "bold",
-    fontSize: "0.75rem",
-    color: "white",
-    backgroundColor: "grey",
-    borderRadius: 8,
-    padding: "3px 10px",
-    display: "inline-block",
-  },
-}));
-
 const EvaluationPage = () => {
-  const classes = useStyles();
-  // const dispatch = useDispatch();
-  // let users = useSelector((state) => state.User.users);
   const { data } = useAdminUsers();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  // useEffect(() => {
-  //   dispatch(getAllUsers()).catch(() => console.log("Error loading posts"));
-  // }, [dispatch]);
-
-  // Sort users based on their score in descending order
-  // data?.sort((a, b) => b.score - a.score);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const handleChangePage = (newPage) => {
+    if (newPage >= 0 && newPage <= Math.ceil(data.length / rowsPerPage)) {
+      setPage(newPage);
+    }
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  // Replace the sample data with your actual user data
-  // data = data.map((user) => ({
-  //   picturePath: user.picturePath,
-  //   firstName: user.firstname,
-  //   lastName: user.lastname,
-  //   level: getUserLevelData(user.score).level,
-  //   challengesCompleted: user.submissions.length,
-  //   challengesWon: user.challengesWon,
-  //   score: user.score,
-  // }));
-
   return (
-    <TableContainer component={Paper} elevation={0} variant="outlined">
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>USER</TableCell>
-            <TableCell>LEVEL</TableCell>
-            <TableCell>COMPLETED CHALLENGES</TableCell>
-            <TableCell>CHALLENGES WON</TableCell>
-            <TableCell>SCORE</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+    <div className="rounded-xl shadow-lg">
+      <table className="w-full">
+        <thead className="text-white">
+          <tr className="bg-zinc-800 h-11">
+            <th className="py-2 px-4 text-left ">USERNAME</th>
+            <th className="py-2 px-4 text-left ">LEVEL</th>
+            <th className="py-2 px-4 text-left ">COMPLETED CHALLENGES</th>
+            <th className="py-2 px-4 text-left ">CHALLENGES WON</th>
+            <th className="py-2 px-4 text-left">SCORE</th>
+          </tr>
+        </thead>
+        <tbody>
           {data
             ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((user, index) => (
-              <TableRow key={index} hover>
-                <TableCell>
-                  <Grid
-                    container
-                    spacing={1}
-                    sx={{ display: "flex", alignItems: "center" }}
-                  >
-                    <Grid item lg={2}>
-                      <Avatar
+              <tr key={index} className="hover:bg-gray-50 bg-white">
+                <td className="py-4 px-4">
+                  <div className="flex items-center">
+                    <div className="lg:w-1/6">
+                      <img
                         alt={`${user.firstname} ${user.lastname}`}
                         src={user.picturePath}
-                        className={classes.avatar}
+                        className="w-10 h-10 rounded-full"
                       />
-                    </Grid>
-                    <Grid item lg={10}>
-                      <Stack flexDirection={"row"} columnGap={1}>
-                        <Typography variant="body1">
-                          {user.firstname}
-                        </Typography>
-                        <Typography variant="body1">{user.lastname}</Typography>
-                      </Stack>
-                    </Grid>
-                  </Grid>
-                </TableCell>
-                <TableCell>{getUserLevelData(user.score).level}</TableCell>
-                <TableCell>{user.challengesDone}</TableCell>
-                <TableCell>{user.challengesWon}</TableCell>
-                <TableCell>{user.score}</TableCell>
-              </TableRow>
+                    </div>
+                    <div className="">
+                      <div className="flex items-center gap-1">
+                        <span className="text-sm">{user.firstname}</span>
+                        <span className="text-sm">{user.lastname}</span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td className="py-4 px-4">
+                  {getUserLevelData(user.score).level}
+                </td>
+                <td className="py-4 px-4">{user.challengesDone}</td>
+                <td className="py-4 px-4">{user.challengesWon}</td>
+                <td className="py-4 px-4">{user.score}</td>
+              </tr>
             ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 50]}
-        component="div"
-        count={data?.length || 0}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </TableContainer>
+        </tbody>
+      </table>
+      <div className="flex items-center justify-between py-2 px-4 text-white bg-zinc-800">
+        <div className="flex items-center gap-3">
+          <span className="text-sm">Rows per page:</span>
+          <select
+            className="mx-2 px-2 py-1 border rounded-md text-black "
+            value={rowsPerPage}
+            onChange={handleChangeRowsPerPage}
+          >
+            <option value={10}>10</option>
+            <option value={25}>25</option>
+            <option value={50}>50</option>
+          </select>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-sm">
+            {page * rowsPerPage + 1} -{" "}
+            {Math.min((page + 1) * rowsPerPage, data?.length || 0)} of{" "}
+            {data?.length || 0}
+          </span>
+          <button
+            className="px-2 py-1 rounded-full hover:bg-gray-700 transition-colors duration-200"
+            onClick={() => handleChangePage(page - 1)}
+          >
+            <FaChevronLeft />
+          </button>
+          <button
+            className="px-2 py-1 rounded-full hover:bg-gray-700 transition-colors duration-200"
+            onClick={() => handleChangePage(page + 1)}
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

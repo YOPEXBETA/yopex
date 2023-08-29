@@ -49,7 +49,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     />
                   </button>
                 </div>
-                <div className=" flex justify-between gap-4">
+                <div className=" flex justify-between gap-4 w-72">
                   <div className=" flex items-center gap-2 justify-between">
                     <p className="text-zinc-500 text-md">Posts</p>
                     <p className="text-lg font-bold">{company?.posts.length}</p>
@@ -65,7 +65,9 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     <p className="text-lg font-bold">{company?.jobs.length}</p>
                   </div>
                 </div>
-                <p>.</p>
+                <p className="truncate w-[1000px]">
+                  {company?.companyDescription}
+                </p>
               </div>
             </div>
             <a href="/settings" className="block">

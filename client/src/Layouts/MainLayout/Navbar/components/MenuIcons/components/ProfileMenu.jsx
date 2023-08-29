@@ -23,13 +23,17 @@ const ProfileMenu = () => {
   };
 
   return (
-    <div>
-      <div className="relative">
+    <div className="relative z-50">
+      <div className="relative z-10">
         <button
           onClick={handleClick}
           className="flex items-center justify-center w-8 h-8 text-gray-600 rounded-full"
         >
-          <img src={user.picturePath} className="rounded-full" />
+          <img
+            alt="picture"
+            src={user.picturePath}
+            className="rounded-full bg-green-500 object-contain"
+          />
         </button>
       </div>
       <div className="relative">
@@ -60,7 +64,7 @@ const ProfileMenu = () => {
             <hr className="border-t border-gray-200 mb-2" />
             {user.role === "admin" && (
               <a
-                href="/adminDashboard"
+                href="/Dashboard"
                 className="p-3 hover:bg-gray-100 space-x-2 flex items-center cursor-pointer"
               >
                 <AdminPanelSettingsIcon className="w-6 h-6 text-gray-600" />

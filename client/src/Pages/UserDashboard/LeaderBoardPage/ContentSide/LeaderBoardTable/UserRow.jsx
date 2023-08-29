@@ -1,45 +1,36 @@
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import { Avatar, TableCell, TableRow, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const UserRow = ({ user, index }) => {
+const UserRow = ({ user }) => {
   return (
-    <TableRow key={user._id} hover>
-      <TableCell>
-        <Stack flexDirection={"row"} alignItems={"flex-end"} columnGap={1}>
-          <EmojiEventsIcon />
-          <Typography variant="h5">{user.rank}</Typography>
-        </Stack>
-      </TableCell>
-
-      <TableCell>
-        <Link
-          to={`/profile/${user._id}`}
-          style={{ textDecoration: "none", color: "#000000" }}
-        >
-          <Stack flexDirection={"row"} alignItems={"center"} columnGap={2}>
-            <img
-              src={user.picturePath}
-              width={30}
-              className="rounded-full object-cover bg-green-500 border-2 h-16 w-16"
-            />
-            <div className=" flex gap-2">
-              <p className="">{user.firstname}</p>
-              <p className="">{user.lastname}</p>
-            </div>
-          </Stack>
-        </Link>
-      </TableCell>
-
-      <TableCell>
-        <p className="">{user.country}</p>
-      </TableCell>
-      <TableCell>
-        <h6 className="text-right pr-4">{user.score}</h6>
-      </TableCell>
-    </TableRow>
+    <tr key={user._id} className="hover:bg-gray-50 bg-white">
+      <td colSpan="4">
+        {/* Set colSpan to the number of columns in your table */}
+        <div className="flex items-center justify-between py-4 px-4">
+          <div className="flex items-center gap-60">
+            <span className="text-sm">{user.rank}</span>
+            <Link
+              to={`/profile/${user._id}`}
+              className="flex items-center gap-4"
+            >
+              <div className="">
+                <img
+                  alt={`${user.firstname} ${user.lastname}`}
+                  src={user.picturePath}
+                  className="w-10 h-10 rounded-full bg-green-500"
+                />
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-sm">{user.firstname}</span>
+                <span className="text-sm">{user.lastname}</span>
+              </div>
+            </Link>
+          </div>
+          <div className="text-sm text-left">{user.country}</div>
+          <div className="text-sm text-right">{user.score}</div>
+        </div>
+      </td>
+    </tr>
   );
 };
 

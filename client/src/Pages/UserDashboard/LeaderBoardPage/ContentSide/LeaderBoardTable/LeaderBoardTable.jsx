@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import UserRow from "./UserRow";
 
 const LeaderbordTable = ({ data, query }) => {
@@ -19,41 +20,25 @@ const LeaderbordTable = ({ data, query }) => {
     console.log(res);
   }, [data]);
 
+  const handleChangePage = (newPage) => {
+    if (newPage >= 0 && newPage <= Math.ceil(data.length / rowsPerPage)) {
+      setPage(newPage);
+    }
+  };
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 8));
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
   return (
     <div>
       <div className="border border-gray-300 rounded-md overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="">
-            <tr>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-md font-medium text-green-500 uppercase tracking-wider"
-              >
-                RANK
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-md font-medium text-green-500 uppercase tracking-wider"
-              >
-                USER
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-md font-medium text-green-500 uppercase tracking-wider"
-              >
-                COUNTRY
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-right text-md font-medium text-green-500 uppercase tracking-wider"
-              >
-                POINTS
-              </th>
+          <thead className="text-black">
+            <tr className="bg-white h-11">
+              <th className="py-2 px-4 text-left ">RANK</th>
+              <th className="py-2 pr-8 text-left ">USER</th>
+              <th className="py-2 text-right ">COUNTRY</th>
+              <th className="py-2 px-4 text-right ">POINTS</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -69,25 +54,37 @@ const LeaderbordTable = ({ data, query }) => {
           </tbody>
         </table>
       </div>
-      <div className="p-2 flex justify-between items-center">
-        <div className="text-sm">
-          Showing {page * rowsPerPage + 1} to{" "}
-          {Math.min((page + 1) * rowsPerPage, data?.length || 0)} of{" "}
-          {data?.length || 0} entries
-        </div>
-        <div className="space-x-2">
+      <div className="flex items-center justify-between py-2 px-4 text-black bg-white border-2">
+        <div className="flex items-center gap-3">
+          <span className="text-sm">Rows per page:</span>
           <select
-            name="rowsPerPage"
-            id="rowsPerPage"
-            className="border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-500"
+            className="mx-2 px-2 py-1 border rounded-md text-black "
             value={rowsPerPage}
             onChange={handleChangeRowsPerPage}
           >
             <option value={10}>10</option>
             <option value={25}>25</option>
-            <option value={100}>100</option>
+            <option value={50}>50</option>
           </select>
-          <div className="text-sm text-gray-500">rows per page</div>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-sm">
+            {page * rowsPerPage + 1} -{" "}
+            {Math.min((page + 1) * rowsPerPage, data?.length || 0)} of{" "}
+            {data?.length || 0}
+          </span>
+          <button
+            className="px-2 py-1 rounded-full hover:bg-gray-700 transition-colors duration-200"
+            onClick={() => handleChangePage(page - 1)}
+          >
+            <FaChevronLeft />
+          </button>
+          <button
+            className="px-2 py-1 rounded-full hover:bg-gray-700 transition-colors duration-200"
+            onClick={() => handleChangePage(page + 1)}
+          >
+            <FaChevronRight />
+          </button>
         </div>
       </div>
     </div>

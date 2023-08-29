@@ -1,77 +1,48 @@
-import {
-  Avatar,
-  Grid,
-  Stack,
-  TableCell,
-  TableRow,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React from "react";
 import UserTableMenuItem from "./components/UserTableMenuItem";
-
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    backgroundColor: theme.palette.secondary.light,
-    color: theme.palette.getContrastText(theme.palette.primary.light),
-  },
-
-  status: {
-    fontWeight: "bold",
-    fontSize: "0.75rem",
-    color: "white",
-    backgroundColor: "grey",
-    borderRadius: 8,
-    padding: "3px 10px",
-    display: "inline-block",
-  },
-}));
+import { Link } from "react-router-dom";
 
 const UserRow2 = ({ user }) => {
-  const classes = useStyles();
-
   return (
-    <TableRow key={user._id} hover>
-      <TableCell>
-        <Grid container sx={{ display: "flex", alignItems: "center" }}>
-          <Grid item lg={2}>
-            <Avatar
+    <tr key={user._id} className="hover:bg-gray-50 bg-white">
+      <td className="py-4 px-4">
+        <Link to={`/profile/${user._id}`} className="flex items-center">
+          <div className="lg:w-1/6">
+            <img
               alt={`${user.firstname} ${user.lastname}`}
               src={user.picturePath}
-              className={classes.avatar}
+              className="w-10 h-10 rounded-full bg-green-500"
             />
-          </Grid>
-          <Grid item lg={10}>
-            <Stack flexDirection={"row"} columnGap={1}>
-              <Typography variant="body1">{user.firstname}</Typography>
-              <Typography variant="body1">{user.lastname}</Typography>
-            </Stack>
-          </Grid>
-        </Grid>
-      </TableCell>
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="text-sm">{user.firstname}</span>
+            <span className="text-sm">{user.lastname}</span>
+          </div>
+        </Link>
+      </td>
+      <td className="text-sm text-left">{user.email}</td>
 
-      <TableCell>{user.email}</TableCell>
-      <TableCell>
-        <Typography
-          className={classes.status}
-          style={{
-            backgroundColor:
-              (user?.status === "active" && "green") ||
-              (user?.status === "disabled" && "red") ||
-              (user?.isActive && "green") ||
-              (user?.isActive && "red"),
-          }}
-        >
-          {user.status ? user.status : user.isActive ? "active" : "disabled"}
-        </Typography>
-      </TableCell>
-      <TableCell>
+      <td
+        className={`font-bold text-white text-xs mt-5 py-2 px-3 rounded-full inline-block ${
+          user?.status === "active"
+            ? "bg-green-500"
+            : user?.status === "disabled"
+            ? "bg-gray-500"
+            : user?.isActive
+            ? "bg-green-500"
+            : "bg-red-500"
+        }`}
+      >
+        {user.status ? user.status : user.isActive ? "active" : "disabled"}
+      </td>
+
+      <td className="py-4 px-4 text-right">
         <UserTableMenuItem
           userId={user._id}
           accountStatus={user.status ? user.status : user.isActive}
         />
-      </TableCell>
-    </TableRow>
+      </td>
+    </tr>
   );
 };
 

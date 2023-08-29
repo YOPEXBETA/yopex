@@ -1,11 +1,3 @@
-import {
-  Avatar,
-  Card,
-  CardContent,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUserFollowings } from "../../../../../../hooks/react-query/useUsers";
@@ -22,7 +14,7 @@ const Followings = () => {
         <p>Loading posts...</p>
       ) : (
         followings?.map((following) => (
-          <FollowingsCard key={following._id} following={following} />
+          <FollowingsCard key={following?._id} following={following} />
         ))
       )}
     </div>

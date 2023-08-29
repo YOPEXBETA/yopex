@@ -3,11 +3,11 @@ import React from "react";
 const HomeSection = () => {
   return (
     <div id="home">
-      <div className="flex items-center justify-center bg-zinc-100 border-gray-500 border-b-2">
-        <div className=" flex my-48 mx-4">
+      <div className="flex items-center justify-center bg-white border-gray-500 border-b-[1px] relative overflow-hidden">
+        <div className="flex my-48 mx-4">
           <div className="space-y-8 flex flex-col items-center">
             <div className="space-y-2 flex flex-col items-center">
-              <h2 className="text-black text-[2.5rem] font-bold mb-1 ">
+              <h2 className="text-black text-[2.5rem] font-bold mb-1">
                 Connect With Fellow Freelancers
               </h2>
 
@@ -17,7 +17,7 @@ const HomeSection = () => {
               </p>
             </div>
             <a href="/login" className="block">
-              <button className=" border-2 border-green-500 py-4 px-8 text-green-500 rounded-lg hover:border-green-700 hover:text-green-700">
+              <button className="border-2 border-green-500 py-4 px-8 text-green-500 rounded-lg hover:border-green-700 hover:text-green-700 transition duration-300 ease-in-out transform hover:scale-105">
                 GET STARTED
               </button>
             </a>

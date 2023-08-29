@@ -1,16 +1,4 @@
 import AddIcon from "@mui/icons-material/Add";
-import {
-  Avatar,
-  IconButton,
-  ListItemAvatar,
-  ListItemButton,
-  Stack,
-  Typography,
-} from "@mui/material";
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import TextField from "@mui/material/TextField";
 import React, { useEffect, useState } from "react";
@@ -20,6 +8,8 @@ import { useCreateConversation } from "../../../../hooks/react-query/useConversa
 import { useSuggestedUsers, useUserById } from "../../../../hooks/react-query/useUsers";
 
 export default function CreateConversationDrawer() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const { user } = useSelector((state) => state.auth);
   const { mutate } = useCreateConversation(user._id);
   let { data: users } = useSuggestedUsers();
@@ -61,8 +51,12 @@ export default function CreateConversationDrawer() {
   
 
   const handleUserClick = (otherUser) => {
-    if (otherUser.companyName){
-      mutate({ senderId: user._id, receiverId: otherUser.user,company:otherUser._id });
+    if (otherUser.companyName) {
+      mutate({
+        senderId: user._id,
+        receiverId: otherUser.user,
+        company: otherUser._id,
+      });
     }
     else if (selectedOption !== user._id) {
       mutate({ senderId: otherUser._id, receiverId: user._id , company:selectedOption });
@@ -95,49 +89,47 @@ export default function CreateConversationDrawer() {
             ))}
         </select>}
 
-        {filteredUsers?.map((user) => (
-          <ListItemButton key={user._id} onClick={() => handleUserClick(user)} >
-            <ListItem
-              key={user.id}
-              alignItems="flex-start"
-              sx={{ alignItems: "center" }}
+        {users?.map((user) => (
+          <li key={user._id} className="px-8 py-4 hover:bg-gray-100">
+            <button
+              className="flex items-center w-full"
+              onClick={() => handleUserClick(user)}
             >
-              <ListItemAvatar>
-                <Avatar src={user.companyName?user.companyLogo:user.picturePath} />
-              </ListItemAvatar>
-              <ListItemText
-                primary={
-                  <Stack flexDirection={"row"} columnGap={"0.2rem"}>{
-                    user.companyName?
-                    (
-                      <Typography variant="h6">{user.companyName}</Typography>
-                    ):(
-                      <div>
-                        <Typography variant="h6">{user.firstname}</Typography>
-                        <Typography variant="h6">{user.lastname}</Typography>
-                      </div>
-                      
-                    )
-                  }
-                    
-                  </Stack>
-                }
-              />
-            </ListItem>
-          </ListItemButton>
+              <div className="flex items-center space-x-2">
+                <div className="w-12 h-12">
+                  <img
+                    src={user.companyName ? user.companyLogo : user.picturePath}
+                    alt="User Avatar"
+                    className="w-full h-full rounded-full bg-green-500"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  {user.companyName ? (
+                    <h6 className="text-[1rem]">{user.companyName}</h6>
+                  ) : (
+                    <div className="flex gap-1">
+                      <h6 className="text-[1rem]">{user.firstname}</h6>
+                      <h6 className="text-[1rem]">{user.lastname}</h6>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </button>
+          </li>
         ))}
-      </List>
-    </Box>
+      </ul>
+    </div>
   );
 
   return (
     <div>
-      <IconButton
+      <button
         onClick={toggleDrawer("left", true)}
         style={{ pointerEvents: state.left ? "none" : "auto" }}
       >
         <AddIcon label="Open Left Sidebar" variant="outlined" />
-      </IconButton>
+      </button>
+
       <SwipeableDrawer
         anchor="left"
         open={state["left"]}

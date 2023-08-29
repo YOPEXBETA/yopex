@@ -11,7 +11,9 @@ import WorkIcon from "@mui/icons-material/Work";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import { AddWorkOfferModal } from "./AddWorkOfferModal";
 import { AddChallengeModal } from "./AddChallengeModal";
+import { AddCompanyModal } from "./addCompanyModal";
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import BusinessIcon from '@mui/icons-material/Business';
 import { AddPostModal } from "./AddPostsModal";
 
 // import { useSelector } from "react-redux";
@@ -105,6 +107,17 @@ const AddPostMenuList = () => {
     setOpenPostModal(false);
   };
 
+  // ==============================|| ADD A COMPANY CODE ||============================== //
+  const [openCompanyModal, setOpenCompanyModal] = useState(false);
+
+  const handleClickOpenModalCompany = () => {
+    setOpenCompanyModal(true);
+  };
+
+  const handleCloseModalCompany = () => {
+    setOpenCompanyModal(false);
+  };
+
   return (
     <React.Fragment>
       <Box>
@@ -158,6 +171,12 @@ const AddPostMenuList = () => {
           </ListItemIcon>
           Add a post
         </MenuItem>
+        <MenuItem onClick={handleClickOpenModalCompany}>
+          <ListItemIcon>
+            <BusinessIcon fontSize="small" />
+          </ListItemIcon>
+          Add a company
+        </MenuItem>
       </Menu>
 
       <AddWorkOfferModal
@@ -171,6 +190,10 @@ const AddPostMenuList = () => {
       <AddPostModal
         open={openPostModal}
         handleClose={handleCloseModalPost}
+      />  
+      <AddCompanyModal
+        open={openCompanyModal}
+        handleClose={handleCloseModalCompany}
       />  
     </React.Fragment>
   );

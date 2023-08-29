@@ -17,7 +17,7 @@ const RecentJobs = () => {
 
   return (
     <div
-      className="mx-auto py-10 lg:px-24 md:px-11 bg-white border-b-2 border-gray-500"
+      className="mx-auto py-10 lg:px-24 md:px-11 bg-white border-b-[1px] border-gray-500"
       id="about"
     >
       <div className="pb-8">

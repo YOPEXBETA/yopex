@@ -99,7 +99,7 @@ const UserProfileCard = () => {
                 <img
                   src={company.companyLogo}
                   alt={`Company ${index + 1}`}
-                  className="rounded-lg w-11 h-11 cursor-pointer"
+                  className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
                 />
               </Link>
             ))}

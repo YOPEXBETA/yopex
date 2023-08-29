@@ -33,6 +33,20 @@ export const useApproveCompany = () => {
   });
 };
 
+export const useCreateCompany = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (companyData) => {
+      await axios.post("http://localhost:8000/create/", companyData, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () =>
+    queryClient.invalidateQueries("companies"),
+  });
+};
+
 export const useCompanyById = (companyId) => {
   return useQuery(
     ["company", companyId],

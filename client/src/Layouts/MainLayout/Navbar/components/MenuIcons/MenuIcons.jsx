@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import Divider from "@mui/material/Divider";
-import { Box } from "@mui/material";
+import React from "react";
 import ProfileMenu from "./components/ProfileMenu";
 import Chat from "./components/Chat";
 import AddPostMenuList from "./components/AddPost/AddPostMenuList";
@@ -13,7 +11,7 @@ const MenuIcons = () => {
     <div>
       <div className="flex gap-2 items-center">
         <AddPostMenuList />
-        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+        <div className="h-6 my-0.5 border-l border-gray-300" />
 
         <div className="flex">
           <Chat />
