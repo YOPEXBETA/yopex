@@ -13,16 +13,19 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
 import { useCreateConversation } from "../../../../hooks/react-query/useConversations";
-import { useSuggestedUsers, useUsers } from "../../../../hooks/react-query/useUsers";
+import { useSuggestedUsers, useUserById } from "../../../../hooks/react-query/useUsers";
 
 export default function CreateConversationDrawer() {
   const { user } = useSelector((state) => state.auth);
   const { mutate } = useCreateConversation(user._id);
-  const { data: users } = useSuggestedUsers();
+  let { data: users } = useSuggestedUsers();
+  const { data: userProfile} = useUserById(user._id);
+  const [selectedOption, setSelectedOption] = useState(user._id);
+  const [filteredUsers, setFilteredUsers] = useState(users);
 
   const [state, setState] = useState({
     top: false,
@@ -47,12 +50,25 @@ export default function CreateConversationDrawer() {
     event.stopPropagation();
     event.preventDefault();
   };
+  useEffect(() => {
+    if (selectedOption !== user._id && users) {
+      const filtered = users?.filter((user) => user.role === "user");
+      setFilteredUsers(filtered);
+    } else {
+      setFilteredUsers(users);
+    }
+  }, [selectedOption, users]);
+  
 
   const handleUserClick = (otherUser) => {
     if (otherUser.companyName){
       mutate({ senderId: user._id, receiverId: otherUser.user,company:otherUser._id });
     }
-    mutate({ senderId: user._id, receiverId: otherUser._id });
+    else if (selectedOption !== user._id) {
+      mutate({ senderId: otherUser._id, receiverId: user._id , company:selectedOption });
+    }else{
+      mutate({ senderId: user._id, receiverId: otherUser._id });
+    }
     setState({ ...state, left: false });
   };
 
@@ -65,9 +81,22 @@ export default function CreateConversationDrawer() {
         <ListItem>
           <TextField fullWidth onClick={handleTextFieldClick} />
         </ListItem>
+        {userProfile?.companies.length!==0 && <select
+          id="selectField"
+          className="block p-2 border rounded-md focus:ring focus:ring-blue-300 mb-2 mx-5"
+          value={selectedOption}
+          onChange={(e) => setSelectedOption(e.target.value)}
+          >
+            <option value={user._id}>Current User</option>
+            {userProfile?.companies.map((option) => (
+            <option key={option._id} value={option._id}>
+              {option.companyName}
+            </option>
+            ))}
+        </select>}
 
-        {users?.map((user) => (
-          <ListItemButton key={user._id} onClick={() => handleUserClick(user)}>
+        {filteredUsers?.map((user) => (
+          <ListItemButton key={user._id} onClick={() => handleUserClick(user)} >
             <ListItem
               key={user.id}
               alignItems="flex-start"

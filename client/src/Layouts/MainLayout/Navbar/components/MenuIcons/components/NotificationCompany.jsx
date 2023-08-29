@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import axios from "axios";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+
 const NotificationBell = () => {
   const [notifications, setNotifications] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);

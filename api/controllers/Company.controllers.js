@@ -8,6 +8,9 @@ const userModel = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const { sendEmail } = require("../middlewares/mail.middleware");
 const { updateUserChallengesBadges } = require("../utils/utilities");
+const notificationModel = require("../models/notification.model");
+const main = require("../server");
+
 
 const editProfile = async (req, res) => {
   try {
@@ -100,10 +103,14 @@ const ChallengeWinner = async (req, res) => {
     //updateUserChallengesBadges(User);
     console.log("passed the badges challenges");
     User.score += 100;
-
-    User.notifications.push({
+    const notification = new notificationModel({
+      type: "won a challenge",
       message: `You won the challenge ${Challenge.title}`,
     });
+    notification.save();
+    main
+    User.notifications.push(notification._id);
+    main.sendNotification(User._id.toString(), notification);
     //sendEmail(User.email, `You won the challenge ${Challenge.title}`);
     const newChallenge = await Challenge.save();
     User.save();
@@ -117,31 +124,31 @@ const ChallengeWinner = async (req, res) => {
   }
 };
 const getCompanyNotifications = async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const user = await userModel.findById(userId);
-    const companies = user.companies;
-    let notification = [];
-    for (const companyId of companies) {
-      const company = await companySchema
-        .findById(companyId)
-        .populate({
-          path: "notificationsCompany",
-          match: { seen: false },
-          populate: {
-            path: "user",
-            select: "firstname lastname picturePath",
-          },
-        });
+  // try {
+  //   const userId = req.params.userId;
+  //   const user = await userModel.findById(userId);
+  //   const companies = user.companies;
+  //   let notification = [];
+  //   for (const companyId of companies) {
+  //     const company = await companySchema
+  //       .findById(companyId)
+  //       .populate({
+  //         path: "notificationsCompany",
+  //         match: { seen: false },
+  //         populate: {
+  //           path: "user",
+  //           select: "firstname lastname picturePath",
+  //         },
+  //       });
 
-      notification = notification.concat(company.notificationsCompany);
-    }
+  //     notification = notification.concat(company.notificationsCompany);
+  //   }
     
-    res.status(200).json(notification);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ error: "Server Error" });
-  }
+  //   res.status(200).json(notification);
+  // } catch (error) {
+  //   console.error(error.message);
+  //   res.status(500).json({ error: "Server Error" });
+  // }
 };
 module.exports = {
   editProfile,

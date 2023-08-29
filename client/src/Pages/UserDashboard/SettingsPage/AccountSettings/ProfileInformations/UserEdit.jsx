@@ -162,8 +162,8 @@ const UserEdit = () => {
                 displayEmpty
                 MenuProps={MenuProps}
                 defaultValue={
-                  user.country.charAt(0).toUpperCase() +
-                    user.country.slice(1) || ""
+                  user.country?.charAt(0).toUpperCase() +
+                    user.country?.slice(1) || ""
                 }
                 {...register("country")}
               >

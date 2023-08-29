@@ -5,6 +5,7 @@ const useSocket = () => {
   const socket = io.connect("http://localhost:8000");
 
   useEffect(() => {
+
     return () => {
       socket.disconnect(); // Disconnect when the component unmounts
     };

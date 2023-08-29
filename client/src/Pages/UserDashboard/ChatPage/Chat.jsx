@@ -27,7 +27,7 @@ const Chat = () => {
   const [otherUser, setOtherUser] = useState({});
   const navigate = useNavigate();
 
-  const socket = useSocket();
+  
   
 
   useEffect(() => {
@@ -47,9 +47,10 @@ const Chat = () => {
       console.log(otherUser);
     }
   }, [selectedConversationId,conversations]);
-
+  const socket = useSocket();
   
-  socket.emit("addUser", {id:user._id,roomid:selectedConversationId});
+  socket.emit("joinRoom", {id:user._id,roomid:selectedConversationId});
+  
   
   return (
     <div>

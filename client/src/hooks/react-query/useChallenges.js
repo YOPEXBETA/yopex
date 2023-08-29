@@ -50,11 +50,14 @@ export const useUserSubmission = (challengeId, participant) => {
   return useQuery({
     queryKey: ["submissions", participant._id, challengeId],
     queryFn: async () => {
+      let participantId;
+      if (participant.user === undefined) participantId=participant._id;
+      else participantId=participant.user._id;
       const { data } = await axios.get(
         `http://localhost:8000/challenge/getChallengeUserSubmit`,
         {
           params: {
-            userId: participant.user._id,
+            userId: participantId,
             challengeId: challengeId,
           },
           withCredentials: true,
@@ -165,7 +168,7 @@ export const useRegisterChallenge = (challenge, user) => {
 
 
 export const useChooseWinner = () => {
-  const queryClient = useQueryClient();
+  //const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (challengeData) => {
       console.log("winner");

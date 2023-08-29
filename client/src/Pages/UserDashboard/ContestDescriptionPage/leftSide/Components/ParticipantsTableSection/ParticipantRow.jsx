@@ -4,6 +4,7 @@ import { makeStyles } from "@mui/styles";
 import { Stack } from "@mui/system";
 import React, { useState } from "react";
 import ParticipantsDialog from "./ParticipantsDialog";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -12,13 +13,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ParticipantRow = ({ user, index }) => {
+const ParticipantRow = ({ user, index,challenge }) => {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
+  const {user:currentUser} = useSelector((state) => state.auth);
+  const isOwner = currentUser.companies.find((company) => company===challenge.company._id) ? true : false;
 
   return (
-    <TableRow key={user._id} hover onClick={toggleOpen}>
+    <TableRow key={user._id} hover onClick={isOwner? toggleOpen:null}>
       <TableCell>
         <Stack flexDirection={"row"} alignItems={"flex-end"} columnGap={1}>
           <EmojiEventsIcon />
@@ -37,19 +40,19 @@ const ParticipantRow = ({ user, index }) => {
       </TableCell>
 
       <TableCell>
-        <Typography variant="h6">{user.submissionDate}</Typography>
+        <Typography variant="h6">{user.registrationDate}</Typography>
       </TableCell>
       <TableCell>
         <Typography variant="h6" align="right">
-          {user.registrationDate}
+          {user.submissionDate}
         </Typography>
       </TableCell>
 
-      <ParticipantsDialog
+      {user && (<ParticipantsDialog
         open={isOpen}
         participant={user}
         handleClose={toggleOpen}
-      />
+      />)}
     </TableRow>
   );
 };

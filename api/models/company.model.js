@@ -44,12 +44,8 @@ const companySchema = new mongoose.Schema(
     },
     notificationsCompany: [
       {
-        message: String,
-        createdAt: { type: Date, default: Date.now },
-        job: { type: mongoose.Schema.Types.ObjectId, ref: "Job" },
-        challenge: { type: mongoose.Schema.Types.ObjectId, ref: "Challenge" },
-        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-        seen: { type: Boolean, default: false }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Notification",
       },
     ],
   },

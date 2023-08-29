@@ -55,23 +55,24 @@ const Banner = () => {
   const [deadline, setDeadline] = useState(null);
 
   const { user } = useSelector((state) => state.auth);
-
+  
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
   const { data } = useUserChallenges(user);
-
   const { data: submissions } = useUserSubmission(challengeId, user);
   const { mutate: unRegisterMutate,isLoading:isloadingun } = useUnregisterChallenge(challenge, user);
   const { mutate: registerMutate,isLoading } = useRegisterChallenge(challenge, user);
-
+  
   // Check if the user has submitted something
   useEffect(() => {
     //if (!user.role === "user") return;
     const submitted = submissions?.find(
       (item) => item.challengeId === challenge._id
     );
+    
     if (submitted) setIsSubmitted(true);
-  }, [challenge._id, submissions, user.role]);
+    
+  }, [challenge._id, submissions]);
 
   useEffect(() => {
     const formatteDate = getDeadlineDifference(challenge.deadline);

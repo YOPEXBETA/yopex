@@ -5,6 +5,8 @@ const Company = require("../models/company.model");
 
 const { sendEmail } = require("../middlewares/mail.middleware");
 const { sortappliers } = require("../tensorflow/anotherz");
+const notificationModel = require("../models/notification.model");
+const main = require("../server");
 
 // companyRoutes.js
 
@@ -143,34 +145,36 @@ const applyJob = async (req, res) => {
 
     const user = await User.findById(req.params.userId).exec();
     if (!user) return res.status(400).json("User not found");
-
+ 
     // Check if user has already applied
     if (job.appliers.includes(req.params.userId))
       return res.status(400).json("You have already applied for this job");
-
+ 
     // Check if user has already been accepted
     if (job.acceptedAppliers.includes(req.params.userId))
-      return res
+      return res  
         .status(400)
         .json("You have already been accepted for this job");
 
     job.appliers.push(req.params.userId);
     await job.save();
-
+    
     // add notification to company
     const company = await Company.findById(job.company).exec();
-    company.notificationsCompany.push({
+    const notification = new notificationModel({
+      type: "applied for a job",
       message: `Applied for your job of : ${job.title}`,
       job: job._id,
       user: user._id,
-      userFirstname: user.firstname,
-      userLastname: user.lastname,
-      userPicture: user.picturePath,
       createdAt: new Date(),
     });
+    notification.save();
+    //use socket io to send notification to company
+    console.log("company.user.toString():", company.user.toString());
+    main.sendNotification(company.user.toString(), notification);
+    company.notificationsCompany.push(notification._id);
     await company.save();
-
-    return res.status(200).json("Applied successfully");
+    return res.status(200).json("Applied successfully"); 
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
@@ -251,10 +255,13 @@ const acceptApplier = async (req, res) => {
 
     // Add the user to the acceptedAppliers array of the job
     job.acceptedAppliers.push(user._id);
-    user.notifications.push({
-      message: "You have been accepted for The Job: ",
-      job: job._id,
+    notification = new notificationModel({
+      type: "accepted for a job",
+      message: `You have been accepted for the job of : ${job.title}`,
+      createdAt: new Date(),
     });
+    notification.save();
+    user.notifications.push(notification._id);
     sendEmail(user.email, "You have been accepted for a Job: ");
     await user.save();
     await job.save();

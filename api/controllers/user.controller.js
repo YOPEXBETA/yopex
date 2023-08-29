@@ -4,6 +4,7 @@ const challengeSchema = require("../models/Challenge.model");
 const bcrypt = require("bcryptjs");
 const Job = require("../models/job.model");
 const { pick } = require("lodash");
+const ChallengeModel = require("../models/Challenge.model");
 
 // ==============================|| EditProfile ||============================== //
 const editProfile = async (req, res) => {
@@ -342,48 +343,84 @@ const getUserChallenges = async (req, res) => {
 };
 const getUserNotifications = async (req, res) => {
   try {
-    const user = await userSchema.findById(req.params.userId);
-    if (!user) throw new Error("User not found");
-    console.log(user.notifications);
-
-    const processedJobs = new Set();
-    const notifications = await Promise.all(
-      user.notifications.map(async (notification) => {
-        if (
-          notification.job &&
-          !processedJobs.has(notification.job.toString())
-        ) {
-          processedJobs.add(notification.job.toString());
-          const job = await Job.findById(notification.job).populate("company");
-          console.log(job);
-
-          if (job) {
-            notification.job = job;
-            return {
-              message: notification.message,
-              createdAt: notification.createdAt,
-              job: job,
-              challenge: null,
-            };
-          }
-        } else if (notification.challenge) {
-          const challenge = await Challenge.findById(
-            notification.challenge
-          ).populate("company");
-          if (challenge) {
-            return {
-              message: notification.message,
-              createdAt: notification.createdAt,
-              job: null,
-              challenge: challenge,
-            };
-          }
-        }
+    const user = await userSchema.findById(req.params.userId)
+      .populate("notifications")
+      .populate({
+        path: "notifications",
+        populate: {
+          path: "job",
+          populate: {
+            path: "company",
+            select: "companyName",
+          },
+        },
       })
-    );
-    console.log("test : ", user.notifications);
+      .populate({
+        path: "notifications",
+        populate: {
+          path: "challenge",
+          populate: {
+            path: "company",
+            select: "companyName",
+          },
+        },
+      });
+      if (!user) throw new Error("User not found");
+    //const processedJobs = new Set();
+    // const notifications = await Promise.all(
+    //   user.notifications.map(async (notification) => {
+    //     if (
+    //       notification.job &&
+    //       !processedJobs.has(notification.job.toString())
+    //     ) {
+    //       processedJobs.add(notification.job.toString());
+    //       const job = await Job.findById(notification.job).populate("company");
+    //       console.log(job);
 
-    res.status(200).json(user.notifications);
+    //       if (job) {
+    //         notification.job = job;
+    //         return {
+    //           message: notification.message,
+    //           createdAt: notification.createdAt,
+    //           job: job,
+    //           challenge: null,
+    //         };
+    //       }
+    //     } else if (notification.challenge) {
+    //       const challenge = await ChallengeModel.findById(
+    //         notification.challenge
+    //       ).populate("company");
+    //       if (challenge) {
+    //         return {
+    //           message: notification.message,
+    //           createdAt: notification.createdAt,
+    //           job: null,
+    //           challenge: challenge,
+    //         };
+    //       }
+    //     }
+    //   })
+    // );
+    
+    const companies = user.companies;
+    notifications = user.notifications;
+    for (const companyId of companies) {
+      const company = await companySchema
+        .findById(companyId)
+        .populate("notificationsCompany")
+        .populate({
+          path: "notificationsCompany",
+          match: { seen: false },
+          populate: {
+            path: "user",
+            select: "firstname lastname picturePath",
+          },
+        });
+
+        notifications = notifications.concat(company.notificationsCompany);
+    }
+    notifications.sort((a, b) => b.createdAt - a.createdAt);
+    res.status(200).json(notifications);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Server Error" });

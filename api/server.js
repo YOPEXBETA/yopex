@@ -77,12 +77,15 @@ const getUser = (userId) => {
   return user;
 };
 
+const sendNotification = (userId, notification) => {
+  io.to(userId).emit("notification", notification );
+}
+ 
 io.on("connection", (socket) => {
   console.log("a user connected.");
-  socket.on("addUser", (data) => {
+  socket.on("joinRoom", (data) => {
+    console.log("joinRoom called with data:", data);
     socket.join(data.roomid);
-    addUser(data.id, socket.id);
-    
   });
   //when disconnect
   socket.on("disconnect", () => {
@@ -94,15 +97,12 @@ io.on("connection", (socket) => {
   //send and get message
   socket.on("sendMessage", (data) => {
     console.log(`sendMessage called with data: ${JSON.stringify(data)}`);
-    const user = getUser(data.receiverId);
-    if (user) {
-      //console.log(`Message sent to user ${user.userId}`);
-      //io.emit("getMessage", data);
-      io.to(data.conversationId).emit("getMessage", data);
-    } else {
-      console.log("User not found");
-    }
+    //console.log(`Message sent to user ${user.userId}`);
+    //io.emit("getMessage", data);
+    io.to(data.conversationId).emit("getMessage", data);
+    
   });
+
 });
 
 
@@ -110,3 +110,6 @@ server.listen(PORT, (error) => {
   if (error) throw console.error(error);
   console.log("Server is listening on port" + " " + PORT);
 });
+
+exports.sendNotification = sendNotification;
+   

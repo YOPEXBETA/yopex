@@ -197,11 +197,12 @@ export const useUserNotifications = (userId) => {
   return useQuery({
     queryKey: ["notifications", userId],
     queryFn: async () => {
-      const { data } = await axios.get(
+      const response = await axios.get(
         `http://localhost:8000/user/${userId}/notifications`,
         { withCredentials: true }
       );
-      return data;
+      console.log(response.data);
+      return response.data;
     },
   });
 };

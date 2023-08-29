@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const User = require("../models/user.model");
 const Company = require("../models/company.model");
 const { sendEmail } = require("../middlewares/mail.middleware");
+const notificationModel = require("../models/notification.model");
 
 // Add middleware to parse incoming request bodies
 
@@ -63,9 +64,12 @@ const stripeUpdate = async (req, res) => {
         const user = await User.findById(paymentIntentMetadata.userId);
         if (user) {
           user.balance = user.balance + paymentIntent.amount / 100;
-          user.notifications.push({
+          const notification = new notificationModel({
+            type: "success",
             message: `You Added ${paymentIntent.amount / 100}$ to your balance`,
           });
+          notification.save();
+          user.notifications.push(notification._id);
           sendEmail(
             user.email,
             `You Added ${paymentIntent.amount / 100}$ to your balance`

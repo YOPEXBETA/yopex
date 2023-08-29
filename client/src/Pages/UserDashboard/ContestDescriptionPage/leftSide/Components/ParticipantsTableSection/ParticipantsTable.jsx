@@ -44,7 +44,7 @@ const ParticipantsTable = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((user, index) => {
                   return (
-                    <ParticipantRow key={user._id} index={index} user={user} />
+                    <ParticipantRow key={user._id} index={index} user={user} challenge={challenge} />
                   );
                 })}
             </TableBody>

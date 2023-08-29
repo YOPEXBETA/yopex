@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import Divider from "@mui/material/Divider";
 import { Box } from "@mui/material";
 import ProfileMenu from "./components/ProfileMenu";
-import NotificationBell2 from "./components/NotificationCompany";
 import Chat from "./components/Chat";
 import AddPostMenuList from "./components/AddPost/AddPostMenuList";
-import { useSelector } from "react-redux";
+import NotificationBell from "./components/Notifications/Notification";
 
 const MenuIcons = () => {
   //const { user } = useSelector((state) => state.auth);
@@ -18,9 +17,7 @@ const MenuIcons = () => {
 
         <div className="flex">
           <Chat />
-          {/*<NotificationBell2 /> this notification supposed to be for the company but we don't work with role anymore
-          so there is only on notfication component */}
-          <NotificationBell2 />
+          <NotificationBell />
         </div>
         <ProfileMenu />
       </div>

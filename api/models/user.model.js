@@ -94,9 +94,8 @@ const UserSchema = new mongoose.Schema(
     jobs: [{ type: mongoose.Types.ObjectId, ref: "Job", required: true }],
     notifications: [
       {
-        job: { type: mongoose.Schema.Types.ObjectId, ref: "Job" },
-        message: String,
-        createdAt: { type: Date, default: Date.now },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Notification",
       },
     ],
     companies: {

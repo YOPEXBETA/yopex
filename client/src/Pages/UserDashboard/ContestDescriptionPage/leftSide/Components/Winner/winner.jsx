@@ -19,7 +19,7 @@ const ChooseWinner = () => {
     
     chooseWinner({ idChallenge: id, idCompany: companyId, idUser: winnerId })
     
-    
+    window.location.reload();
   };
 
   return (

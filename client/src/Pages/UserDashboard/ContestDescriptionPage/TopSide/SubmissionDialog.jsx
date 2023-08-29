@@ -64,7 +64,7 @@ const SubmissionDialog = ({ open, handleClose, setIsSubmitted }) => {
   const { id } = useParams();
 
   const { user } = useSelector((state) => state.auth);
-  const { mutate, isSuccess } = useSubmitToChallenge(id);
+  const { mutate, isSuccess,isLoading } = useSubmitToChallenge(id);
 
   const handleFileUpload = async (file) => {
     const storageRef = ref(storage);
@@ -91,17 +91,7 @@ const SubmissionDialog = ({ open, handleClose, setIsSubmitted }) => {
       description: SubmissionDescription,
       filesPaths: filesPaths,
     });
-    // const data = dispatch(
-    //   submitChallenge({
-    //     challengeId: id,
-    //     userId: user._id,
-    //     title: SubmissionTitle,
-    //     description: SubmissionDescription,
-    //     filesPaths: filesPaths,
-    //   })
-    // ).catch((err) => {
-    //   console.log(err);
-    // });
+    
     if (isSuccess) {
       setIsSubmitted(true);
       handleClose();
@@ -228,7 +218,7 @@ const SubmissionDialog = ({ open, handleClose, setIsSubmitted }) => {
                     component="span"
                     onClick={handleSubmit}
                     disabled={
-                      (SubmissionTitle === "" || SubmissionDescription === "")?true:false 
+                      (!isLoading && (SubmissionTitle === "" || SubmissionDescription === ""))?true:false 
                     }
                   >
                     Submit your work

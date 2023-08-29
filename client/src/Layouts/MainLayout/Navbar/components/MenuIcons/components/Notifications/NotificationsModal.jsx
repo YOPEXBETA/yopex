@@ -39,6 +39,7 @@ export const NotificationsModal = ({ open, handleClose }) => {
                 <ListItemAvatar>
                   <Avatar
                     src={
+                      notification?.user? notification?.user?.picturePath :
                       notification?.job
                         ? notification?.job.company?.picturePath
                         : user.picturePath
@@ -49,7 +50,8 @@ export const NotificationsModal = ({ open, handleClose }) => {
                   primary={
                     <React.Fragment>
                       <Typography variant="h5">
-                        {notification.job
+                        {notification?.user ? notification.user.firstname+" "+notification.user.lastname :
+                        notification.job
                           ? notification?.job.company?.companyName
                           : user.firstname}
                       </Typography>
