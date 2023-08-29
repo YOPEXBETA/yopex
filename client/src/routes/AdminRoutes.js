@@ -76,10 +76,7 @@ const AdminRoutes = {
       path: "Evaluation",
       element: <EvaluationPage />,
     },
-    {
-      path: "skills",
-      element: <Skills />
-    }
+    
   ],
 };
 

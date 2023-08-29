@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBadge } from "../../../redux/actions/BadgeTypeAction";
 //firebase
-import storage from "../../../../src/config/firebase";
+import storage from "../../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-export const AddBadgeModal = ({ open, handleClose }) => {
+const AddBadgeModal = ({ open, handleClose }) => {
   const myData = JSON.parse(localStorage.getItem("user")) ?? {};
   const [badgeName, setBadgeName] = useState("");
   const [badgeDescription, setBadgeDescription] = useState("");
@@ -169,3 +169,5 @@ export const AddBadgeModal = ({ open, handleClose }) => {
     </div>
   );
 };
+
+export default AddBadgeModal;

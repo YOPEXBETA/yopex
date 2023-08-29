@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { AddBadgeModal } from "../../../../Components/shared/Modals/AddBadgeModal";
-
+import AddBadgeModal from "../../../../Components/shared/Modals/AddBadgeModal"
 const AdminMenuList = () => {
   const [openWorkModal, setOpenWorkModal] = useState(false);
 

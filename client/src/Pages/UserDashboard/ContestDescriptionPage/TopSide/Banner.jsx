@@ -14,6 +14,7 @@ import {
 } from "../../../../hooks/react-query/useChallenges";
 import SubmissionDialog from "./SubmissionDialog";
 import getDeadlineDifference from "./deadlineModif";
+import SubmitModal from "../../../../Components/shared/Modals/SubmitModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -170,7 +171,7 @@ const Banner = () => {
             </Stack>
           </Grid>
         </Grid>
-        <SubmissionDialog
+        <SubmitModal
           open={modalOpen}
           handleClose={toggleModal}
           setIsSubmitted={setIsSubmitted}

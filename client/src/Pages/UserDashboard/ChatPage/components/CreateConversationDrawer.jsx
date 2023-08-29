@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useCreateConversation } from "../../../../hooks/react-query/useConversations";
 import { useSuggestedUsers, useUserById } from "../../../../hooks/react-query/useUsers";
+import { ListItem } from "@mui/material";
 
 export default function CreateConversationDrawer() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -67,11 +68,11 @@ export default function CreateConversationDrawer() {
   };
 
   const list = (anchor) => (
-    <Box
+    <div
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 300 }}
       role="presentation"
     >
-      <List>
+      <ul>
         <ListItem>
           <TextField fullWidth onClick={handleTextFieldClick} />
         </ListItem>
