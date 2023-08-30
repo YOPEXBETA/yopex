@@ -2,32 +2,28 @@ import React, { useEffect, useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useSelector } from "react-redux";
 import { useUserNotifications } from "../../../../../../../hooks/react-query/useUsers";
-import { NotificationsModal } from "./NotificationsModal";
 import { timeSince } from "../../../../../../../utils";
 import useSocket from "../../../../../../../hooks/useSocket";
 import { io } from "socket.io-client";
-
+import { NotificationsModal } from "../../../../../../../Components/shared/Modals/NotificationsModal";
 
 const NotificationBell = () => {
   const { user } = useSelector((state) => state.auth);
-  const { data: notification } = useUserNotifications(user._id);
+  const { data: notification } = useUserNotifications(user?._id);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [socket, setSocket] = useState(null);
-  
-  
+
   useEffect(() => {
     const newSocket = io("http://localhost:8000");
     setSocket(newSocket);
-    newSocket.emit("joinRoom", {roomid:user._id});
+    newSocket.emit("joinRoom", { roomid: user?._id });
     return () => newSocket.close();
   }, [user]);
 
-
   useEffect(() => {
-      setNotifications(notification);
+    setNotifications(notification);
   }, [notification]);
-
 
   useEffect(() => {
     if (!socket) return;
@@ -37,7 +33,6 @@ const NotificationBell = () => {
     });
     return () => socket.off("notification");
   }, [socket]);
-  
 
   const handleClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -74,34 +69,38 @@ const NotificationBell = () => {
               </div>
               <hr className="border-t border-gray-200" />
             </li>
-            {notifications?.slice(0,4).map((notification) => (
-              <div key={notification._id}>
+            {notifications?.slice(0, 4).map((notification) => (
+              <div key={notification?._id}>
                 <li>
                   <button className="flex items-center p-4 space-x-4 hover:bg-gray-100 w-full text-left">
                     <img
                       src={
-                        notification?.user? notification?.user?.picturePath :
-                      notification?.job
-                        ? notification?.job.company?.picturePath
-                        : user.picturePath
+                        notification?.user
+                          ? notification?.user?.picturePath
+                          : notification?.job
+                          ? notification?.job.company?.picturePath
+                          : user.picturePath
                       }
                       className="w-10 h-10 rounded-full"
                     />
                     <div className="flex-grow">
-                      <h5 className="text-lg">
-                        {notification?.user ? notification.user.firstname+" "+notification.user.lastname :
-                        notification.job
+                      <h5 className="text-md font-bold">
+                        {notification?.user
+                          ? notification.user.firstname +
+                            " " +
+                            notification.user.lastname
+                          : notification?.job
                           ? notification?.job.company?.companyName
                           : user.firstname}
                       </h5>
                       <p className="text-sm text-gray-500">
-                        {notification.message}
+                        {notification?.message}
                         <span className="font-bold">
-                          {notification.job ? notification.job.title : ""}
+                          {notification?.job ? notification?.job?.title : ""}
                         </span>
                       </p>
                       <p className="text-xs text-gray-500">
-                        sent {timeSince(notification.createdAt)} ago
+                        sent {timeSince(notification?.createdAt)} ago
                       </p>
                     </div>
                   </button>
