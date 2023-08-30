@@ -4,7 +4,7 @@ const User = require("../models/user.model");
 const { updateUserSubmissionsBadges } = require("../utils/utilities");
 
 const CreateSubmission = async (req, res, next) => {
-  const { challengeId, userId, title, description, filesPaths } = req.body;
+  const { challengeId, userId, title, description, filesPaths, links } = req.body;
 
   // Create submission object
   const submission = new Submission({
@@ -13,6 +13,7 @@ const CreateSubmission = async (req, res, next) => {
     title,
     description,
     filesPaths,
+    links,
   });
 
   try {

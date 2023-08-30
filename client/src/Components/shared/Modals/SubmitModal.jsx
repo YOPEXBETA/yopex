@@ -15,6 +15,9 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
     const [SubmissionTitle, setSubmissionTitle] = useState("");
     const [SubmissionDescription, setSubmissionDescription] = useState("");
     const [filesPaths, setFilesPaths] = useState([]);
+    const [link, setLink] = useState("");
+    const [platform, setPlatform] = useState("");
+    const [links, setLinks] = useState([]);
   
     const { id } = useParams();
   
@@ -45,6 +48,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
         title: SubmissionTitle,
         description: SubmissionDescription,
         filesPaths: filesPaths,
+        links: links,
       });
       
       if (isSuccess) {
@@ -52,7 +56,12 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
         handleClose();
       }
     };
-  
+
+    const handleAddLink = () => {
+      setLinks([...links, {platform:platform,link:link}]);
+      setPlatform("");
+      setLink("");
+    }
 
   
     const validFiles = [];
@@ -139,6 +148,36 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
 
              
             </div>
+            <div>
+             <label className="block text-gray-600">Add Link</label>
+             <div className="flex gap-2">
+             <input 
+             type="text" 
+             name="platform"
+             placeholder="platform"
+             value={platform}
+              onChange={(e)=>setPlatform(e.target.value)}
+              className="w-[30%] border border-gray-300 rounded-md px-3 py-2 mt-1"
+            />
+              <input
+                type="text"
+                name="link"
+                placeholder="link"
+                value={link}
+                onChange={(e)=>setLink(e.target.value)}
+                className="w-[70%] border border-gray-300 rounded-md px-3 py-2 mt-1"
+              />
+              <button onClick={handleAddLink}>Add</button>
+             </div>
+             </div>
+             {links.length > 0 &&
+                      links.map((link) => {
+                        return (
+                          <p key={link.link}>
+                            {" "}{link.platform} : {link.link}
+                          </p>
+                        );
+                    })}
             {filesSelected.length > 0 &&
                       filesSelected.map((file) => {
                         return (

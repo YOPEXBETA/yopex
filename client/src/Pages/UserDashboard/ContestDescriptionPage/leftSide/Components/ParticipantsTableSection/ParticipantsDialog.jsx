@@ -119,6 +119,36 @@ const ParticipantsDialog = ({ open, toggleOpen, participant }) => {
                     </CardContent>
                   </>
                 )}
+                {submissions[0].links &&
+                submissions[0].links.length > 0 && (
+                  <>
+                    <Divider />
+                    <CardHeader
+                      title={
+                        <Typography component="div" variant="h4">
+                          Links Attached
+                        </Typography>
+                      }
+                    />
+                    <Divider />
+                    <CardContent>
+                      <Stack spacing={2}>
+                        {submissions[0].links.map((item, i) => (
+                          <Typography key={i} variant="body1">
+                            
+                            <a
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {item.platform+" link"}
+                            </a>
+                          </Typography>
+                        ))}
+                      </Stack>
+                    </CardContent>
+                  </>
+                )}
             </Card>
           )}
         </List>

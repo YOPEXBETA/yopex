@@ -26,6 +26,10 @@ const SubmissionSchema = new mongoose.Schema(
       type: [String],
       required: true,
     },
+    links: {
+      type: [{ platform: String, link: String }],
+      required: true,
+    },
   },
   { timestamps: true },
 );

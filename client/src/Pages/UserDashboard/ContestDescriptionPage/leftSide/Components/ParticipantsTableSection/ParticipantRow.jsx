@@ -5,6 +5,7 @@ import { Stack } from "@mui/system";
 import React, { useState } from "react";
 import ParticipantsDialog from "./ParticipantsDialog";
 import { useSelector } from "react-redux";
+import ParticipantsDialogModal from "../../../../../../Components/shared/Modals/ParticipantsDialogModal";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -48,7 +49,7 @@ const ParticipantRow = ({ user, index,challenge }) => {
         </Typography>
       </TableCell>
 
-      {user && (<ParticipantsDialog
+      {user && (<ParticipantsDialogModal
         open={isOpen}
         participant={user}
         handleClose={toggleOpen}
