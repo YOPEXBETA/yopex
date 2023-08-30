@@ -5,8 +5,6 @@ import AddPostMenuList from "./components/AddPost/AddPostMenuList";
 import NotificationBell from "./components/Notifications/Notification";
 
 const MenuIcons = () => {
-  //const { user } = useSelector((state) => state.auth);
-
   return (
     <div>
       <div className="flex gap-2 items-center">

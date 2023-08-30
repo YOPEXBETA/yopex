@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
+const url = process.env.URL || "http://localhost:8000";
 
 // get all the posts
 export const usePosts = () => {
   return useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:8000/post/posts", {
+      const { data } = await axios.get(`${url}/post/posts`, {
         withCredentials: true,
       });
       return data;
@@ -20,9 +21,9 @@ export const usePostsByCategory = (category) => {
   return useQuery({
     queryKey: ["posts", category],
     queryFn: async () => {
-      let url = "http://localhost:8000/post/posts";
-      if (category !== "") url += `?categories=${category}`;
-      const { data } = await axios.get(url, {
+      let apiUrl = `${url}/post/posts`;
+      if (category !== "") apiUrl += `?categories=${category}`;
+      const { data } = await axios.get(apiUrl, {
         withCredentials: true,
       });
       return data;
@@ -35,7 +36,7 @@ export const useUserPosts = (userId) => {
   return useQuery({
     queryKey: ["posts", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:8000/post/${userId}`, {
+      const { data } = await axios.get(`${url}/post/${userId}`, {
         withCredentials: true,
       });
       return data;
@@ -48,11 +49,9 @@ export const useBookmarkedPosts = (userId) => {
   return useQuery({
     queryKey: ["posts", userId, "bookmarked"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/post/bookmarks/${userId}`,
-        {
-          withCredentials: true,
-        });
+      const { data } = await axios.get(`${url}/post/bookmarks/${userId}`, {
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -64,7 +63,7 @@ export const useCreatePost = (category) => {
 
   return useMutation({
     mutationFn: async (postData) => {
-      await axios.post("http://localhost:8000/post/", postData, {
+      await axios.post(`${url}/post/`, postData, {
         withCredentials: true,
       });
     },
@@ -153,12 +152,11 @@ export const useSharePost = (userId, ownerId, category = "") => {
   });
 };
 
-export const useBookmarkPost = (userId, postId,category="") => {
+export const useBookmarkPost = (userId, postId, category = "") => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async () => {
-
       await axios.patch(
         `http://localhost:8000/post/${userId}/bookmark/${postId}`,
         { userId },
@@ -169,7 +167,6 @@ export const useBookmarkPost = (userId, postId,category="") => {
       queryClient.invalidateQueries({
         queryKey: ["posts", userId, "bookmarked"],
       });
-      
     },
   });
-}
+};

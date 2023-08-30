@@ -1,79 +1,19 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import { makeStyles } from "@mui/styles";
-import AddIcon from "@mui/icons-material/Add";
-import WorkIcon from "@mui/icons-material/Work";
-import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
+// ==============================|| ICONS ||============================== //
+import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
+// ==============================|| MODALS||============================== //
 import { AddWorkOfferModal } from "./AddWorkOfferModal";
 import { AddChallengeModal } from "./AddChallengeModal";
 import { AddCompanyModal } from "./addCompanyModal";
-import PostAddIcon from '@mui/icons-material/PostAdd';
-import BusinessIcon from '@mui/icons-material/Business';
 import { AddPostModal } from "./AddPostsModal";
-
-// import { useSelector } from "react-redux";
-// ==============================|| STYLING ||============================== //
-
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    width: 32,
-    height: 32,
-  },
-  menu: {
-    overflow: "visible",
-    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-    width: "100%",
-    minWidth: 260,
-    maxWidth: 300,
-    mt: 1.5,
-    borderRadius: "10px",
-    "& .MuiAvatar-root": {
-      width: 50,
-      height: 50,
-      ml: -0.5,
-      mr: 1,
-    },
-    "&:before": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      top: 0,
-      right: 14,
-      width: 10,
-      height: 10,
-      bgcolor: "background.paper",
-      transform: "translateY(-50%) rotate(45deg)",
-      zIndex: 0,
-    },
-  },
-  name: {
-    fontSize: 14,
-  },
-  title: {
-    color: theme.palette.text.secondary,
-  },
-}));
 
 // ==============================|| CODE ||============================== //
 
 const AddPostMenuList = () => {
-  const classes = useStyles();
-  // const { user } = useSelector((state) => state.auth);
-  // const user = localStorage.getItem("user");
-  // const myData = JSON.parse(user);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
   };
 
   // ==============================|| ADD WORK OFFER CODE ||============================== //
@@ -119,65 +59,66 @@ const AddPostMenuList = () => {
   };
 
   return (
-    <React.Fragment>
-      <Box>
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
+    <div className="relative">
+      <div className="relative">
+        <button
+          onClick={handleClick}
+          className="ml-2 p-1 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <AddIcon />
-          </IconButton>
-        </Tooltip>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        disableScrollLock={true}
-        PaperProps={{
-          elevation: 0,
-          className: classes.menu,
-        }}
-        sx={{ mt: 1 }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        {/* {user.role === "company" && ( */}
-        <MenuItem onClick={handleClickOpenModalWork}>
-          <ListItemIcon>
-            <WorkIcon fontSize="small" />
-          </ListItemIcon>
-          Add work offer
-        </MenuItem>
-        {/* )} */}
-        {/* {user.role === "company" && ( */}
-        <MenuItem onClick={handleClickOpenModalChallenge}>
-          <ListItemIcon>
-            <LocalFireDepartmentIcon fontSize="small" />
-          </ListItemIcon>
-          Add a challenge
-        </MenuItem>
-        {/* )} */}
-        <MenuItem onClick={handleClickOpenModalPost}>
-          <ListItemIcon>
-            <PostAddIcon fontSize="small" />
-          </ListItemIcon>
-          Add a post
-        </MenuItem>
-        <MenuItem onClick={handleClickOpenModalCompany}>
-          <ListItemIcon>
-            <BusinessIcon fontSize="small" />
-          </ListItemIcon>
-          Add a company
-        </MenuItem>
-      </Menu>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            />
+          </svg>
+        </button>
+      </div>
+      {isOpen && (
+        <div
+          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="options-menu"
+        >
+          <div className="py-1" role="none">
+            <button
+              onClick={handleClickOpenModalWork}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+            >
+              <FaSuitcase className="mr-2 inline-block" /> Add work offer
+            </button>
+            <button
+              onClick={handleClickOpenModalChallenge}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+            >
+              <FaFire className="mr-2 inline-block" /> Add a challenge
+            </button>
+            <button
+              onClick={handleClickOpenModalPost}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+            >
+              <FaPen className="mr-2 inline-block" /> Add a post
+            </button>
+            <button
+              onClick={handleClickOpenModalCompany}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            >
+              <FaBuilding className="mr-2 inline-block" /> Add a company
+            </button>
+          </div>
+        </div>
+      )}
 
       <AddWorkOfferModal
         open={openWorkModal}
@@ -187,15 +128,12 @@ const AddPostMenuList = () => {
         open={openChallengeModal}
         handleClose={handleCloseModalChallenge}
       />
-      <AddPostModal
-        open={openPostModal}
-        handleClose={handleCloseModalPost}
-      />  
+      <AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />
       <AddCompanyModal
         open={openCompanyModal}
         handleClose={handleCloseModalCompany}
-      />  
-    </React.Fragment>
+      />
+    </div>
   );
 };
 

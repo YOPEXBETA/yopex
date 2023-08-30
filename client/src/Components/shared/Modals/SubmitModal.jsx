@@ -9,15 +9,11 @@ import storage from "../../../config/firebase";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
-
 const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
     const [filesSelected, setFilesSelected] = useState([]);
     const [SubmissionTitle, setSubmissionTitle] = useState("");
     const [SubmissionDescription, setSubmissionDescription] = useState("");
     const [filesPaths, setFilesPaths] = useState([]);
-    const [link, setLink] = useState("");
-    const [platform, setPlatform] = useState("");
-    const [links, setLinks] = useState([]);
   
     const { id } = useParams();
   
@@ -48,7 +44,6 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
         title: SubmissionTitle,
         description: SubmissionDescription,
         filesPaths: filesPaths,
-        links: links,
       });
       
       if (isSuccess) {
@@ -56,12 +51,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
         handleClose();
       }
     };
-
-    const handleAddLink = () => {
-      setLinks([...links, {platform:platform,link:link}]);
-      setPlatform("");
-      setLink("");
-    }
+  
 
   
     const validFiles = [];
@@ -87,18 +77,18 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
           file.type === "image/gif" ||
           file.type === "video/mp4" ||
           file.type === "video/avi") &&
-          file.size <= maxSize
-        ) {
-          validFiles.push(file);
-          setFilesSelected([...filesSelected, file]);
-        } else {
-          invalidFiles.push(file);
-        }
+        file.size <= maxSize
+      ) {
+        validFiles.push(file);
+        setFilesSelected([...filesSelected, file]);
+      } else {
+        invalidFiles.push(file);
       }
-  
-      console.log("Valid files:", validFiles);
-      console.log("Invalid files:", invalidFiles);
-    };
+    }
+
+    console.log("Valid files:", validFiles);
+    console.log("Invalid files:", invalidFiles);
+  };
 
   return (
     <div
