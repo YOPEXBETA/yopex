@@ -39,7 +39,7 @@ const {
 } = require("../middlewares/authenticateToken.middleware");
 
 userRouter.put(
-  "/users/:id/",
+  "/users/edit/",
   validate(userEditProfileValidator),
   authenticateToken,
   editProfile,

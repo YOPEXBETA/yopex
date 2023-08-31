@@ -22,7 +22,9 @@ export const login = createAsyncThunk("auth/login", async (data) => {
 
 export const edit = createAsyncThunk("auth/edit", async (data) => {
   try {
+    console.log(data);
     const response = await authService.edit(data);
+
     return response;
   } catch (error) {
     throw new Error(error?.response?.data?.error?.msg);
@@ -40,10 +42,9 @@ export const getCurrentUser = createAsyncThunk("auth/current", async () => {
 
 
 
+
 const initialState = {
-  user: localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null,
+  user:null,
   loading: false,
   error: null,
   success: false,
@@ -59,7 +60,6 @@ const authSlice = createSlice({
       state.success = false;
     },
     logout: (state, action) => {
-      localStorage.removeItem("user");
       Cookies.remove("accessToken");
       state.user = null;
       state.loading = false;
@@ -88,7 +88,6 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
-        localStorage.setItem("user", JSON.stringify(action.payload));
         state.success = true;
         state.loading = false;
       })
@@ -103,7 +102,6 @@ const authSlice = createSlice({
       })
       .addCase(edit.fulfilled, (state, action) => {
         state.user = action.payload;
-        localStorage.setItem("user", JSON.stringify(action.payload));
         state.success = true;
         state.loading = false;
       })
@@ -118,7 +116,6 @@ const authSlice = createSlice({
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        localStorage.setItem("user", JSON.stringify(action.payload));
         state.success = true;
         state.loading = false;
       })

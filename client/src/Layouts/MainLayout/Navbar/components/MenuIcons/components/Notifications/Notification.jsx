@@ -3,7 +3,6 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useSelector } from "react-redux";
 import { useUserNotifications } from "../../../../../../../hooks/react-query/useUsers";
 import { timeSince } from "../../../../../../../utils";
-import useSocket from "../../../../../../../hooks/useSocket";
 import { io } from "socket.io-client";
 import { NotificationsModal } from "../../../../../../../Components/shared/Modals/NotificationsModal";
 

@@ -1,37 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useSuggestedUsers } from "../../../../../hooks/react-query/useUsers";
+import { useSearchUsers, useSetquery, useSuggestedUsers } from "../../../../../hooks/react-query/useUsers";
 
-const searchUser = async (query) => {
-  const { data } = await axios.get(
-    `http://localhost:8000/users?search=${query}`,
-    {
-      withCredentials: true,
-    }
-  );
-  return data;
-};
+// const searchUser = async (query) => {
+//   const { data } = await axios.get(
+//     `http://localhost:8000/users?search=${query}`,
+//     {
+//       withCredentials: true,
+//     }
+//   );
+//   return data;
+// };
 
 export default function NavbarSearchDropDown() {
   const [query, setQuery] = useState("");
   const queryClient = useQueryClient();
+  const [suggestedUsers,setsuggestedUsers] = useState([]);
+  const {mutate} = useSetquery();
 
-  const { data: suggestedUsers } = useSuggestedUsers();
-
-  const { mutate } = useMutation({
-    mutationFn: searchUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries("suggestedUsers");
-    },
-  });
+  const { data: Users } = useSearchUsers();
+  console.log("suggestedUsers",suggestedUsers);
+  // const { mutate } = useMutation({
+  //   mutationFn: searchUser,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries("searchUsers");
+  //   },
+  // });
+  useEffect(()=>{
+    if (Users) setsuggestedUsers(Users);
+  },[Users])
 
   const navigate = useNavigate();
 
-  const handleSearchUsers = (event) => {
+  const handleSearchUsers = async (event) => {
     setQuery(event.target.value);
-    mutate(event.target.value);
+    await mutate(query);
+    
   };
 
   const handleKeyDown = (event) => {
@@ -64,9 +70,9 @@ export default function NavbarSearchDropDown() {
         placeholder="Search for users"
         className=" w-full p-3 border rounded-full focus:outline-none focus:ring focus:border-blue-300 text-[#000000] bg-gray-100"
       />
-      {query && (
+      {(
         <ul className="absolute z-10 mt-2 w-72 bg-white border rounded-md shadow-lg">
-          {suggestedUsers.map((option, index) => {
+          {suggestedUsers?.map((option, index) => {
             return (
               <li
                 key={option._id || index}

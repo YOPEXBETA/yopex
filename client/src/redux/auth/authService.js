@@ -15,14 +15,9 @@ const login = async (data) => {
 };
 
 const edit = async (data) => {
-  const currentUser = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
-
-  if (!currentUser) throw new Error("User not logged in");
 
   const user = await axios.put(
-    ` http://localhost:8000/users/${currentUser._id}`,
+    ` http://localhost:8000/users/edit`,
     data,
     { withCredentials: true }
   );

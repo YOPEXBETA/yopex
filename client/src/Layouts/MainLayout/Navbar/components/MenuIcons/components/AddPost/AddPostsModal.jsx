@@ -51,7 +51,7 @@ import {
     const onSubmit = async (data) => {
       const postPicturePath = [];
       for (let file of data.files) {
-        postPicturePath.push(await uploadFile(file, setUploadProgress));
+        postPicturePath.push(await uploadFile(file, setUploadProgress,"posts"));
       }
   
       mutate({

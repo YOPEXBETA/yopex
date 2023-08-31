@@ -27,8 +27,9 @@ const editProfile = async (req, res) => {
       updateFields.password = hashedPass;
     }
     const updatedUser = await userSchema
-      .findByIdAndUpdate(req.params.id, updateFields, { new: true })
+      .findByIdAndUpdate(req.userId, updateFields, { new: true })
       .select("-password");
+
     res.status(200).json(updatedUser);
   } catch (error) {
     console.log(error);
@@ -76,10 +77,10 @@ const SearchUsers = async (req, res) => {
     const users = await userSchema.find(userQuery);
     const companies = await companySchema.find(companyQuery);
 
-    const results = {
-      users,
-      companies,
-    };
+    const results = [
+      ...users,
+      ...companies
+    ];
 
     res.status(200).json(results);
   } catch (err) {

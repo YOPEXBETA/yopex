@@ -13,11 +13,11 @@ import TextField from "@mui/material/TextField";
 import { green } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import { Stack } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import countries from "world-countries";
-import { edit } from "../../../../../redux/auth/authSlice";
+import { edit, reset } from "../../../../../redux/auth/authSlice";
 import uploadFile from "../../../../../utils/uploadFile";
 import AlertContainer from "../../../../../Components/alerts";
 import AlertSuccess from "../../../../../Components/successalert";
@@ -54,7 +54,12 @@ const formatDate = (date) => {
 };
 
 const UserEdit = () => {
+  const dispatch = useDispatch();
   const { user, error, loading, success } = useSelector((state) => state.auth);
+
+  useEffect(()=>{
+    dispatch(reset())
+  },[])
 
   const {
     register,
@@ -67,15 +72,13 @@ const UserEdit = () => {
     },
   });
 
-  const dispatch = useDispatch();
-
   const [progress, setUploadProgress] = useState(0);
   const countryList = countries.map((country) => country.name.common);
 
   const onSubmit = async (data) => {
     const { file, ...values } = data;
     if (data.file.length > 0) {
-      const url = await uploadFile(data.file[0], setUploadProgress);
+      const url = await uploadFile(data.file[0], setUploadProgress, "profilePic");
       return dispatch(edit({ ...values, picturePath: url }));
     }
     return dispatch(edit(values));
@@ -229,7 +232,7 @@ const UserEdit = () => {
 
         <Grid item xs={12}>
           <Button
-            variant="contained"
+
             size="large"
             type="submit"
             disabled={isSubmitting}

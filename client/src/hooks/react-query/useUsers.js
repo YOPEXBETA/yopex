@@ -123,13 +123,46 @@ export const useUserFollowings = (userId) => {
   );
 };
 
+let query="";
+
+export const useSetquery =()=>{
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (q) => {
+      query=q;
+      console.log(query);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("searchUsers");
+    },
+  });
+}
+
+export const useSearchUsers = () => {
+  return useQuery({
+    queryKey:["searchUsers"], 
+    queryFn: async () => {
+    const { data } = await axios.get(`${url}/users?search=${query}`, {
+      withCredentials: true,
+    });
+    return data;
+  }
+});
+};
+
+
+
 export const useSuggestedUsers = () => {
-  return useQuery("suggested", async () => {
+  return useQuery({
+    queryKey:["suggestedUsers"], 
+  queryFn: async () => {
     const { data } = await axios.get(`${url}/find/suggestedUsers`, {
       withCredentials: true,
     });
     return data;
-  });
+  }
+});
 };
 
 export const useUserChallenges = (userId) => {

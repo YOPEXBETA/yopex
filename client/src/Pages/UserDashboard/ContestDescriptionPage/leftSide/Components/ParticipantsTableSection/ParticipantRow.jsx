@@ -3,7 +3,6 @@ import { Avatar, TableCell, TableRow, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Stack } from "@mui/system";
 import React, { useState } from "react";
-import ParticipantsDialog from "./ParticipantsDialog";
 import { useSelector } from "react-redux";
 import ParticipantsDialogModal from "../../../../../../Components/shared/Modals/ParticipantsDialogModal";
 
