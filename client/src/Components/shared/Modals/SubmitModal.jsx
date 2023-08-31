@@ -14,6 +14,15 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
     const [SubmissionTitle, setSubmissionTitle] = useState("");
     const [SubmissionDescription, setSubmissionDescription] = useState("");
     const [filesPaths, setFilesPaths] = useState([]);
+    const [platform, setPlatform] = useState("");
+    const [link, setLink] = useState("");
+    const [links, setLinks] = useState([]);
+
+    const handleAddLink = () => {
+      setLinks([...links, {platform,link}]);
+      setPlatform("");
+      setLink("");
+    }
   
     const { id } = useParams();
   
@@ -24,6 +33,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
       const storageRef = ref(storage);
       const fileRef = ref(storageRef, `files/${user._id}+${id}+${file.name}`);
       const uploadTask = uploadBytesResumable(fileRef, file);
+
   
       try {
         await uploadTask;
@@ -44,6 +54,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
         title: SubmissionTitle,
         description: SubmissionDescription,
         filesPaths: filesPaths,
+        links: links,
       });
       
       if (isSuccess) {

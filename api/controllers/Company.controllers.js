@@ -108,7 +108,6 @@ const ChallengeWinner = async (req, res) => {
       message: `You won the challenge ${Challenge.title}`,
     });
     notification.save();
-    main
     User.notifications.push(notification._id);
     main.sendNotification(User._id.toString(), notification);
     //sendEmail(User.email, `You won the challenge ${Challenge.title}`);

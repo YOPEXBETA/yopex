@@ -1,6 +1,10 @@
 const Post = require("../models/SocialMediaPost.model");
 const UserModel = require("../models/user.model");
 const CompanyModel = require("../models/company.model");
+const userModel = require("../models/user.model");
+const notificationModel = require("../models/notification.model");
+const main = require("../server");
+
 
 //create a post
 
@@ -147,6 +151,7 @@ const likePost = async (req, res) => {
     const post = await Post.findById(id);
     const isLiked = post.likes.get(userId);
     let likesCount = post.likesCount;
+    const user = await userModel.findById(userId);
 
     if (isLiked) {
       post.likes.delete(userId);
@@ -156,6 +161,14 @@ const likePost = async (req, res) => {
     } else {
       post.likes.set(userId, true);
       likesCount += 1;
+      const notification = new notificationModel({
+        type: "like",
+        message: `${user.firstname+" "+user.lastname} liked your post`,
+      });
+      notification.save();
+      main.sendNotification(post.userId, notification);
+      const owner = await userModel.findById(post.userId);
+      owner.notifications.push(notification._id);
     }
     const updatedPost = await Post.findByIdAndUpdate(
       id,
