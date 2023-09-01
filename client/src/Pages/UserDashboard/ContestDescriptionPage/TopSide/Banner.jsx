@@ -11,8 +11,9 @@ import {
 import getDeadlineDifference from "../../../../utils/deadlineModif";
 import SubmitModal from "../../../../Components/shared/Modals/SubmitModal";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
+import ChallengeNavigationTab from "../../../../Components/Tabs/ChallengeNavigtionTab";
 
-const Banner = () => {
+const Banner = ({ changeValue, value }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(null);
@@ -56,9 +57,9 @@ const Banner = () => {
   }, [challenge, data]);
 
   return (
-    <div className="bg-black w-full h-48 p-6 lg:px-8 xl:px-36 flex flex-col justify-between">
-      <React.Fragment key={challenge._id}>
-        <div className="grid grid-cols-12">
+    <div className="pt-8 px-6 lg:px-8 xl:px-32 flex flex-col justify-end bg-black">
+      <div className="space-y-8 items-start" key={challenge._id}>
+        <div className="grid grid-cols-12 mb-11">
           <div className="lg:col-span-8 md:col-span-8 sm:col-span-8 col-span-12">
             <h3 className="text-2xl text-white truncate w-96">
               {challenge.title}
@@ -123,13 +124,16 @@ const Banner = () => {
             </div>
           </div>
         </div>
+        <div>
+          <ChallengeNavigationTab changeValue={changeValue} value={value} />
+        </div>
 
         <SubmitModal
           open={modalOpen}
           handleClose={toggleModal}
           setIsSubmitted={setIsSubmitted}
         />
-      </React.Fragment>
+      </div>
     </div>
   );
 };
