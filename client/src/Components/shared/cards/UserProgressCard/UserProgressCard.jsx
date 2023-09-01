@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import LevelLoading from "./LevelLoading";
 
-const UserCard = () => {
+const UserProgressCard = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
@@ -30,4 +30,4 @@ const UserCard = () => {
   );
 };
 
-export default UserCard;
+export default UserProgressCard;

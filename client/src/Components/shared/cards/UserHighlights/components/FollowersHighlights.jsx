@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useUserFollowers } from "../../../../../../hooks/react-query/useUsers";
+import { useUserFollowers } from "../../../../../hooks/react-query/useUsers";
 
 const FollowersHighlights = () => {
   const { user } = useSelector((state) => state.auth);

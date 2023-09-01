@@ -3,7 +3,7 @@ import React, { useState } from "react";
 //import Appliers from "./Appliers";
 
 import { useSelector } from "react-redux";
-import JobOfferModal from "./JobOfferModal";
+import JobOfferModal from "../Modals/JobOfferModal";
 
 const JobCard = ({ job }) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,11 +1,8 @@
-import { Paper } from "@mui/material";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
 import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCategory } from "../../../../../redux/global/globalSlice";
+import { changeCategory } from "../../redux/global/globalSlice";
 
 const getCategories = async () => {
   const { data } = await axios.get(

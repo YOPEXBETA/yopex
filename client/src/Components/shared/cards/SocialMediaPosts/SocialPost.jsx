@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Favorite, FavoriteBorder, Share } from "@mui/icons-material";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import { Checkbox } from "@mui/material";
@@ -11,7 +12,6 @@ import {
 } from "../../../../hooks/react-query/usePosts";
 import PostMenuIcon from "./components/PostMenuIcon";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useState } from "react";
 
 const SocialPostCard = ({ post, bookmarks, companyId }) => {
   const { user } = useSelector((state) => state.auth);
@@ -50,7 +50,7 @@ const SocialPostCard = ({ post, bookmarks, companyId }) => {
           <img
             alt="post"
             src={post.userPicturePath}
-            className=" w-11 h-11 rounded-full object-cover bg-green-500"
+            className=" w-11 h-11 rounded-full object-cover bg-white"
           />
           <div>
             <Link

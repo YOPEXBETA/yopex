@@ -185,7 +185,7 @@ export const useChooseWinner = () => {
   });
 };
 
-export const useGetChallenges = async (userId) => {
+const getChallenges = async (userId) => {
   const { data } = await axios.get("http://localhost:8000/user/challenges", {
     params: {
       userId: userId,
@@ -193,4 +193,8 @@ export const useGetChallenges = async (userId) => {
     withCredentials: true,
   });
   return data;
+};
+
+export const useGetChallenges = (userId) => {
+  return useQuery(["challenges", userId], () => getChallenges(userId));
 };

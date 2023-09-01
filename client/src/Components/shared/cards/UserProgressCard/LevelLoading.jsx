@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getUserLevelData } from "../../../../../utils";
-import { useUserById } from "../../../../../hooks/react-query/useUsers";
+import { getUserLevelData } from "../../../../utils";
+import { useUserById } from "../../../../hooks/react-query/useUsers";
 
 function LinearProgressWithLabel(props) {
   return (

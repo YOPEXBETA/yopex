@@ -1,33 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
-import { useGetChallenges } from "../../../../../hooks/react-query/useChallenges";
-
-import getDeadlineDifference from "../../../../../utils/deadlineModif";
-import getTimeLeft from "../../../../../utils/getTimeLeft";
-
-const getChallenges = async (userId) => {
-  const { data } = await axios.get("http://localhost:8000/user/challenges", {
-    params: {
-      userId: userId,
-    },
-    withCredentials: true,
-  });
-  return data;
-};
+import { useGetChallenges } from "../../../hooks/react-query/useChallenges";
+import getDeadlineDifference from "../../../utils/deadlineModif";
+import getTimeLeft from "../../../utils/getTimeLeft";
 
 const MyContestLists = () => {
   const { user } = useSelector((state) => state.auth);
-  console.log("user", user);
   const userId = user._id;
-  //const { data: Mychallenges, isLoading, error } = useGetChallenges(userId);
-
-  const { data } = useQuery({
-    queryKey: ["challenges", user._id],
-    queryFn: () => getChallenges(user._id),
-  });
-
+  const { data } = useGetChallenges(userId);
   const [inProgress, setInProgress] = useState([]);
 
   const handleProgress = (card) => {
@@ -36,7 +16,6 @@ const MyContestLists = () => {
     return true;
   };
 
-  // filter out finished challenges
   useEffect(() => {
     if (!data) return;
     setInProgress(

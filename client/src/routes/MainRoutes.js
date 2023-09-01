@@ -8,7 +8,7 @@ import Company from "../Pages/UserDashboard/CompanyPage/Company";
 // ==============================|| USER PAGES ||============================== //
 //HomePage
 const HomeLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/HomePage/HomeLayout"))
+  lazy(() => import("../Pages/UserDashboard/HomePage/index"))
 );
 
 //UserProfilePage

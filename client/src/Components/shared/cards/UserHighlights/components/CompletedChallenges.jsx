@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useUserChallenges } from "../../../../../../hooks/react-query/useUsers";
-import getDeadlineDifference from "../../../../ContestDescriptionPage/TopSide/deadlineModif";
+import { useUserChallenges } from "../../../../../hooks/react-query/useUsers";
+import getDeadlineDifference from "../../../../../utils/deadlineModif";
 
 const CompletedChallenges = () => {
   const { user } = useSelector((state) => state.auth);

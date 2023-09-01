@@ -1,5 +1,5 @@
 import React from "react";
-import { useUserById } from "../../../../../hooks/react-query/useUsers";
+import { useUserById } from "../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 
 const MoneyBalance = () => {

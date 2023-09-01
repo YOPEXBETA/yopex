@@ -1,7 +1,6 @@
-import { Stack, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
-import { useUserFollowings } from "../../../../../../hooks/react-query/useUsers";
+import { useUserFollowings } from "../../../../../hooks/react-query/useUsers";
 
 const FollowingsHighlights = () => {
   const { user } = useSelector((state) => state.auth);

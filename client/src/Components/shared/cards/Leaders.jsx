@@ -1,19 +1,8 @@
 import React from "react";
-import axios from "axios";
-import { useQuery } from "react-query";
-
-const getAllUsers = async () => {
-  const { data } = await axios.get("http://localhost:8000/allusers", {
-    withCredentials: true,
-  });
-  return data;
-};
+import { useUsers } from "../../../hooks/react-query/useUsers";
 
 const Leaders = () => {
-  const { data: leaders } = useQuery({
-    queryKey: ["users"],
-    queryFn: getAllUsers,
-  });
+  const { data: leaders } = useUsers();
 
   if (leaders)
     return (
