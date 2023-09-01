@@ -35,10 +35,10 @@ const LeaderbordTable = ({ data, query }) => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="text-black">
             <tr className="bg-white h-11">
-              <th className="py-2 px-4 text-left ">RANK</th>
-              <th className="py-2 pr-8 text-left ">USER</th>
-              <th className="py-2 text-right ">COUNTRY</th>
-              <th className="py-2 px-4 text-right ">POINTS</th>
+              <th className="py-2 px-4 text-left">RANK</th>
+              <th className="py-2 px-4 text-left">USER</th>
+              <th className="py-2 px-4 text-left">COUNTRY</th>
+              <th className="py-2 px-4 text-right">POINTS</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">

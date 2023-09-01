@@ -1,5 +1,5 @@
 import React from "react";
-import ContentSide from "./ContentSide/ContentSide";
+import ContentSide from "./components/ContentSide";
 
 const LeaderBoardLayout = () => {
   return (

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Alert from "@mui/material/Alert";
 
 const AlertContainer = ({ error }) => {
   const [open, setOpen] = useState(false);
@@ -14,18 +13,10 @@ const AlertContainer = ({ error }) => {
   }, [error]);
 
   return (
-    <Alert
-      variant="filled"
-      severity="error"
-      sx={{
-        position: "fixed",
-        top: "32%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        zIndex: 9999,
-        opacity: open ? 1 : 0,
-        transition: "opacity 1s ease-out",
-      }}
+    <div
+      className={`bg-red-500 text-white rounded-lg px-4 py-2 fixed top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition-opacity ${
+        open ? "opacity-100" : "opacity-0"
+      }`}
     >
       {typeof error === "string"
         ? error
@@ -33,7 +24,7 @@ const AlertContainer = ({ error }) => {
           error?.error ||
           error?.response?.data?.error?.msg}{" "}
       <strong>Check it out!</strong>
-    </Alert>
+    </div>
   );
 };
 

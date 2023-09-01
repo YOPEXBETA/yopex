@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LeaderBoardTable from "./LeaderBoardTable/LeaderBoardTable";
-import SearchbarFilter from "./SearchBarFilter/SearchbarFilter";
 import { useUsers } from "../../../../hooks/react-query/useUsers";
+import SearchbarFilter from "./SearchbarFilter";
 
 const ContentSide = () => {
   const [query, setQuery] = useState("");

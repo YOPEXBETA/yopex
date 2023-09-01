@@ -17,7 +17,7 @@ const UserProfileLayout = Loadable(
 );
 //LeaderBoardPage
 const LeaderBoardLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/LeaderBoardPage/LeaderBoardLayout"))
+  lazy(() => import("../Pages/UserDashboard/LeaderBoardPage/index"))
 );
 //SettingsPage
 const SettingsLayout = Loadable(
