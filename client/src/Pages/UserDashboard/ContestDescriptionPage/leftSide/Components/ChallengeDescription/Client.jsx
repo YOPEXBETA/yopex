@@ -4,11 +4,11 @@ import { useChallengeById } from "../../../../../../hooks/react-query/useChallen
 
 const ClientCard = () => {
   const { id: challengeId } = useParams();
-  
+
   const { data: challenge } = useChallengeById(challengeId);
-  
+
   return (
-    <div className="border-2 border-gray-100 bg-white p-4 rounded-lg">
+    <div className="bg-white w-full mx-auto rounded-lg border-green-500 border-b-2 shadow-md p-4 game-container">
       <div className="space-y-3">
         <div className="space-y-4">
           <h4 className="text-xl font-bold">About the client</h4>
@@ -18,7 +18,7 @@ const ClientCard = () => {
           <img
             src={challenge?.company.companyLogo}
             alt="Client Logo"
-            className="bg-secondary w-12 h-12 rounded-lg"
+            className="bg-secondary w-12 h-12 rounded-lg object-cover"
           />
           <div className="space-y-1">
             <div className="flex flex-row items-center space-x-1">

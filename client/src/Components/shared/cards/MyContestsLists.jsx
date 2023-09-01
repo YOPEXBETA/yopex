@@ -37,7 +37,7 @@ const MyContestLists = () => {
               <div key={user._id} className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <img
-                    className="w-10 h-10 rounded-lg"
+                    className="w-10 h-10 rounded-lg object-cover"
                     src={user.company.companyLogo}
                     alt="Company Logo"
                   />

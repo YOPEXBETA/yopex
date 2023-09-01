@@ -1,79 +1,42 @@
-import {
-  Card,
-  CardContent,
-  Chip,
-  Divider,
-  Stack,
-  Typography,
-} from "@mui/material";
-import CardHeader from "@mui/material/CardHeader";
-import axios from "axios";
 import React from "react";
-import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { useChallengeById } from "../../../../../../hooks/react-query/useChallenges";
 
 const TasksDescription = () => {
   const { id: challengeId } = useParams();
-  const { data: challenge } = useQuery({
-    queryKey: ["challenge", challengeId],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/challenge/single/${challengeId}`,
-        {
-          withCredentials: true,
-        }
-      );
-      return data;
-    },
-  });
+  const { data: challenge } = useChallengeById(challengeId);
 
   if (challenge)
     return (
-      <div>
-        <Card elevation={0} variant="outlined">
-          <CardHeader
-            title={
-              <Typography component="div" variant="h4">
-                Instructions
-              </Typography>
-            }
-          />
-          <Divider />
-          <CardContent>
-            <Stack spacing={2}>
-              <Typography variant="body1">{challenge.description}</Typography>
-            </Stack>
-          </CardContent>
-          <CardHeader
-            title={
-              <Typography component="div" variant="h4">
-                Category
-              </Typography>
-            }
-          />
-          <Divider />
-          <CardContent>
-            <Stack spacing={2}>
-              <Typography variant="body1">{challenge.category}</Typography>
-            </Stack>
-          </CardContent>
-          <Divider />
-          <CardHeader
-            title={
-              <Typography component="div" variant="h4">
-                Recommended Skills
-              </Typography>
-            }
-          />
-          <Divider />
-          <CardContent>
-            <Stack direction="row" spacing={1}>
-              {challenge.RecommendedSkills.map((skill, i) => (
-                <Chip key={i} label={skill} />
-              ))}
-            </Stack>
-          </CardContent>
-        </Card>
+      <div className="bg-white w-full mx-auto rounded-lg border-green-500 border-b-2 shadow-md p-4 h-96 game-container">
+        <div className="mb-4 game-title">
+          <h4 className="text-xl font-semibold uppercase">Instructions</h4>
+        </div>
+        <hr className="my-2 game-divider" />
+        <div className="mb-4 game-description">
+          <p className="text-md">{challenge.description}</p>
+        </div>
+        <div className="mb-4 game-category">
+          <h4 className="text-xl font-semibold uppercase">Categories</h4>
+        </div>
+        <hr className="my-4 " />
+        <div className="mb-4">
+          <p className="text-md ">{challenge.category}</p>
+        </div>
+        <hr className="my-2" />
+        <div className="mb-4 game-skills">
+          <h4 className="text-xl font-semibold uppercase">
+            Recommended Skills
+          </h4>
+        </div>
+        <hr className="my-2" />
+        <div className="flex flex-row space-x-2 game-skill-icons">
+          {challenge.RecommendedSkills.map((skill, i) => (
+            <span key={i} className="px-2 py-1  text-md">
+              {skill}
+            </span>
+          ))}
+        </div>
       </div>
     );
 };

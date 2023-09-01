@@ -78,9 +78,9 @@ const getUser = (userId) => {
 };
 
 const sendNotification = (userId, notification) => {
-  io.to(userId).emit("notification", notification );
-}
- 
+  io.to(userId).emit("notification", notification);
+};
+
 io.on("connection", (socket) => {
   console.log("a user connected.");
   socket.on("joinRoom", (data) => {
@@ -99,11 +99,8 @@ io.on("connection", (socket) => {
     //console.log(`Message sent to user ${user.userId}`);
     //io.emit("getMessage", data);
     io.to(data.conversationId).emit("getMessage", data);
-    
   });
-
 });
-
 
 server.listen(PORT, (error) => {
   if (error) throw console.error(error);
@@ -111,4 +108,3 @@ server.listen(PORT, (error) => {
 });
 
 exports.sendNotification = sendNotification;
-   
