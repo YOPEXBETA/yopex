@@ -51,8 +51,8 @@ export const useUserSubmission = (challengeId, participant) => {
     queryKey: ["submissions", participant._id, challengeId],
     queryFn: async () => {
       let participantId;
-      if (participant.user === undefined) participantId=participant._id;
-      else participantId=participant.user._id;
+      if (participant.user === undefined) participantId = participant._id;
+      else participantId = participant.user._id;
       const { data } = await axios.get(
         `http://localhost:8000/challenge/getChallengeUserSubmit`,
         {
@@ -138,9 +138,9 @@ export const useUnregisterChallenge = (challenge, user) => {
       queryClient.invalidateQueries({
         queryKey: ["user/challenges", user._id],
       });
-      queryClient.invalidateQueries(
-        { queryKey: ["challenges", challenge._id] },
-      );
+      queryClient.invalidateQueries({
+        queryKey: ["challenges", challenge._id],
+      });
     },
   });
 };
@@ -159,13 +159,12 @@ export const useRegisterChallenge = (challenge, user) => {
       queryClient.invalidateQueries({
         queryKey: ["user/challenges", user._id],
       });
-      queryClient.invalidateQueries(
-        { queryKey: ["challenges", challenge._id] },
-      );
+      queryClient.invalidateQueries({
+        queryKey: ["challenges", challenge._id],
+      });
     },
   });
 };
-
 
 export const useChooseWinner = () => {
   //const queryClient = useQueryClient();
@@ -182,8 +181,16 @@ export const useChooseWinner = () => {
       console.log(data);
       return data;
     },
-    onSuccess: () => {
-      
-    },
+    onSuccess: () => {},
   });
+};
+
+export const useGetChallenges = async (userId) => {
+  const { data } = await axios.get("http://localhost:8000/user/challenges", {
+    params: {
+      userId: userId,
+    },
+    withCredentials: true,
+  });
+  return data;
 };

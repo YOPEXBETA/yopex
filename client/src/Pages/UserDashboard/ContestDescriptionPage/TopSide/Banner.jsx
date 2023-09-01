@@ -13,7 +13,7 @@ import {
   useUserSubmission,
 } from "../../../../hooks/react-query/useChallenges";
 import SubmissionDialog from "./SubmissionDialog";
-import getDeadlineDifference from "./deadlineModif";
+import getDeadlineDifference from "../../../../utils/deadlineModif";
 import SubmitModal from "../../../../Components/shared/Modals/SubmitModal";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,23 +56,26 @@ const Banner = () => {
   const [deadline, setDeadline] = useState(null);
 
   const { user } = useSelector((state) => state.auth);
-  
+
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
   const { data } = useUserChallenges(user);
   const { data: submissions } = useUserSubmission(challengeId, user);
-  const { mutate: unRegisterMutate,isLoading:isloadingun } = useUnregisterChallenge(challenge, user);
-  const { mutate: registerMutate,isLoading } = useRegisterChallenge(challenge, user);
-  
+  const { mutate: unRegisterMutate, isLoading: isloadingun } =
+    useUnregisterChallenge(challenge, user);
+  const { mutate: registerMutate, isLoading } = useRegisterChallenge(
+    challenge,
+    user
+  );
+
   // Check if the user has submitted something
   useEffect(() => {
     //if (!user.role === "user") return;
     const submitted = submissions?.find(
       (item) => item.challengeId === challenge._id
     );
-    
+
     if (submitted) setIsSubmitted(true);
-    
   }, [challenge._id, submissions]);
 
   useEffect(() => {
@@ -85,7 +88,7 @@ const Banner = () => {
   // Check if the user is registered
   useEffect(() => {
     if (!data) return;
-    console.log("data",data.challenges);
+    console.log("data", data.challenges);
     const registered = data.challenges.find(
       (item) => item._id === challenge._id
     );
@@ -127,7 +130,6 @@ const Banner = () => {
                   </Button>
                 ) : (
                   <Button
-
                     onClick={registerMutate}
                     className={classes.gridItem}
                     disabled={isLoading}
