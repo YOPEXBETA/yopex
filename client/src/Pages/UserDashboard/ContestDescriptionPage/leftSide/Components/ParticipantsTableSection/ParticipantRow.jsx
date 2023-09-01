@@ -1,22 +1,11 @@
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import { Avatar, TableCell, TableRow, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { Stack } from "@mui/system";
 import React, { useState } from "react";
-import ParticipantsDialog from "./ParticipantsDialog";
 import { useSelector } from "react-redux";
 import ParticipantsDialogModal from "../../../../../../Components/shared/Modals/ParticipantsDialogModal";
-
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    backgroundColor: theme.palette.secondary.light,
-    color: theme.palette.getContrastText(theme.palette.primary.light),
-  },
-}));
+import { Link } from "react-router-dom";
 
 const ParticipantRow = ({ user, index, challenge }) => {
-  const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
+
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const { user: currentUser } = useSelector((state) => state.auth);
   const isOwner = currentUser.companies.find(
@@ -25,34 +14,46 @@ const ParticipantRow = ({ user, index, challenge }) => {
     ? true
     : false;
 
+  function formatDate(dateString) {
+    const options = {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
   return (
-    <TableRow key={user._id} hover onClick={isOwner ? toggleOpen : null}>
-      <TableCell>
-        <Stack flexDirection={"row"} alignItems={"flex-end"} columnGap={1}>
-          <EmojiEventsIcon />
-          <Typography variant="h5">{index + 1} </Typography>
-        </Stack>
-      </TableCell>
-
-      <TableCell>
-        <Stack flexDirection={"row"} alignItems={"center"} columnGap={2}>
-          {<Avatar src={user?.user?.picturePath} className={classes.avatar} />}
-          <Stack flexDirection={"row"} columnGap={1}>
-            <Typography variant="h6">{user?.user?.firstname}</Typography>
-            <Typography variant="h6">{user?.user?.lastname}</Typography>
-          </Stack>
-        </Stack>
-      </TableCell>
-
-      <TableCell>
-        <Typography variant="h6">{user?.registrationDate}</Typography>
-      </TableCell>
-      <TableCell>
-        <Typography variant="h6" align="right">
-          {user?.submissionDate}
-        </Typography>
-      </TableCell>
-
+    <tr
+      key={user._id}
+      className="hover:bg-gray-50 bg-white"
+      onClick={isOwner ? toggleOpen : null}
+    >
+      <td className=" py-4 px-4 font-bold text-md">{index + 1} </td>
+      <td className="py-4 px-4">
+        <div className="flex items-center">
+          <Link to={`/profile/${user._id}`} className="flex items-center gap-4">
+            <div className="">
+              <img
+                alt={`${user?.user?.firstname} ${user?.user?.lastname}`}
+                src={user?.user?.picturePath}
+                className="w-10 h-10 rounded-full "
+              />
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="text-sm">{user?.user?.firstname}</span>
+              <span className="text-sm">{user?.user?.lastname}</span>
+            </div>
+          </Link>
+        </div>
+      </td>
+      <td className="text-sm text-left py-4 px-4">
+        {" "}
+        {formatDate(user?.registrationDate)}
+      </td>
+      <td className="text-sm text-right py-4 px-4">
+        {formatDate(user?.submissionDate)}
+      </td>
       {user && (
         <ParticipantsDialogModal
           open={isOpen}
@@ -60,7 +61,7 @@ const ParticipantRow = ({ user, index, challenge }) => {
           handleClose={toggleOpen}
         />
       )}
-    </TableRow>
+    </tr>
   );
 };
 
