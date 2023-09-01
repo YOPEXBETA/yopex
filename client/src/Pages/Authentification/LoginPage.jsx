@@ -8,6 +8,7 @@ const LoginPage = () => {
         <img
           src="https://source.unsplash.com/4wOkqiXNP7M"
           className=" h-screen object-cover"
+          alt="image"
         />
       </div>
 

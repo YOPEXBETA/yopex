@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
+const url = process.env.URL || "http://localhost:8000";
+
 export const useCategories = () => {
   return useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "http://localhost:8000/category/getCategories",
-        { withCredentials: true }
-      );
+      const { data } = await axios.get(`${url}/category/getCategories`, {
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -19,7 +20,7 @@ export const useCreateCategory = () => {
   return useMutation({
     mutationFn: async (name) => {
       const { data } = await axios.post(
-        "http://localhost:8000/category/addCategory",
+        `${url}/category/addCategory`,
         { name },
         { withCredentials: true }
       );
@@ -35,10 +36,9 @@ export const useDeleteCategory = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id) => {
-      await axios.delete(
-        `http://localhost:8000/category/deleteCategory/${id}`,
-        { withCredentials: true }
-      );
+      await axios.delete(`${url}/category/deleteCategory/${id}`, {
+        withCredentials: true,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
@@ -51,7 +51,7 @@ export const useUpdateCategory = () => {
   return useMutation({
     mutationFn: async (data) => {
       await axios.put(
-        `http://localhost:8000/category/updateCategory/${data.id}`,
+        `${url}/category/updateCategory/${data.id}`,
         { name: data.name },
         { withCredentials: true }
       );
@@ -66,7 +66,7 @@ export const usePostsByCategory = (category) => {
   return useQuery({
     queryKey: ["posts", category],
     queryFn: async () => {
-      let url = "http://localhost:8000/post/posts";
+      let url = `${url}/post/posts`;
       if (category !== "") url += `?categories=${category}`;
       const { data } = await axios.get(url, {
         withCredentials: true,
@@ -82,7 +82,7 @@ export const useLikePost = (currentPost, posts, userId, category) => {
   return useMutation({
     mutationFn: async () => {
       await axios.patch(
-        `http://localhost:8000/post/${currentPost._id}/like`,
+        `${url}/post/${currentPost._id}/like`,
         { userId },
         { withCredentials: true }
       );
@@ -148,7 +148,7 @@ export const useSharePost = (currentPost, userId, category) => {
   return useMutation({
     mutationFn: async () => {
       await axios.patch(
-        "http://localhost:8000/post/share",
+        `${url}/post/share`,
         { postId: currentPost._id, userId },
         { withCredentials: true }
       );

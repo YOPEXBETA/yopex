@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
+const url = process.env.URL || "http://localhost:8000";
+
 export const useChallengeById = (challengeId) => {
   return useQuery({
     queryKey: ["challenges", challengeId],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:8000/challenge/single/${challengeId}`,
+        `${url}/challenge/single/${challengeId}`,
         { withCredentials: true }
       );
       return data;
@@ -18,13 +20,10 @@ export const useUserChallenges = (user) => {
   return useQuery({
     queryKey: ["user/challenges", user._id],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "http://localhost:8000/user/challenges",
-        {
-          params: { userId: user._id },
-          withCredentials: true,
-        }
-      );
+      const { data } = await axios.get(`${url}/user/challenges`, {
+        params: { userId: user._id },
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -35,7 +34,7 @@ export const useChallengesById = (companyId) => {
     ["challenges", companyId],
     async () => {
       const { data } = await axios.get(
-        `http://localhost:8000/challenge/company/${companyId}`,
+        `${url}/challenge/company/${companyId}`,
         { withCredentials: true }
       );
       return data;
@@ -54,7 +53,7 @@ export const useUserSubmission = (challengeId, participant) => {
       if (participant.user === undefined) participantId = participant._id;
       else participantId = participant.user._id;
       const { data } = await axios.get(
-        `http://localhost:8000/challenge/getChallengeUserSubmit`,
+        `${url}/challenge/getChallengeUserSubmit`,
         {
           params: {
             userId: participantId,
@@ -78,7 +77,7 @@ export const useFindChallenges = (minAmount, maxAmount, searchQuery) => {
       if (searchQuery) query += `&search=${searchQuery}`;
 
       const { data } = await axios.get(
-        `http://localhost:8000/challenge/challenges/all?${query}`,
+        `${url}/challenge/challenges/all?${query}`,
         { withCredentials: true }
       );
 
@@ -91,11 +90,9 @@ export const useSubmitToChallenge = ({ challengeId }) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (submission) => {
-      await axios.post(
-        "http://localhost:8000/challenge/submission",
-        submission,
-        { withCredentials: true }
-      );
+      await axios.post(`${url}/challenge/submission`, submission, {
+        withCredentials: true,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["challenges", challengeId]);
@@ -110,7 +107,7 @@ export const useCreateChallenge = () => {
     async ({ companyId, challengeData }) => {
       console.log("called");
       await axios.post(
-        `http://localhost:8000/challenge/add`,
+        `${url}/challenge/add`,
         { companyId, ...challengeData },
         {
           withCredentials: true,
@@ -130,7 +127,7 @@ export const useUnregisterChallenge = (challenge, user) => {
   return useMutation({
     mutationFn: async () => {
       const challengeData = { idChallenge: challenge._id, idUser: user._id };
-      await axios.post("http://localhost:8000/unjoin", challengeData, {
+      await axios.post(`${url}/unjoin`, challengeData, {
         withCredentials: true,
       });
     },
@@ -150,7 +147,7 @@ export const useRegisterChallenge = (challenge, user) => {
   return useMutation({
     mutationFn: async () => {
       const challengeData = { idChallenge: challenge._id, idUser: user._id };
-      await axios.post("http://localhost:8000/join", challengeData, {
+      await axios.post(`${url}/join`, challengeData, {
         withCredentials: true,
       });
     },
@@ -172,7 +169,7 @@ export const useChooseWinner = () => {
     mutationFn: async (challengeData) => {
       console.log("winner");
       const { data } = await axios.post(
-        "http://localhost:8000/company/challengeWinner",
+        `${url}/company/challengeWinner`,
         challengeData,
         {
           withCredentials: true,
@@ -186,7 +183,7 @@ export const useChooseWinner = () => {
 };
 
 const getChallenges = async (userId) => {
-  const { data } = await axios.get("http://localhost:8000/user/challenges", {
+  const { data } = await axios.get(`${url}/user/challenges`, {
     params: {
       userId: userId,
     },

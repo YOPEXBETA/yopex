@@ -24,7 +24,7 @@ const SocialPosts = () => {
       {isLoading ? (
         <p>Loading posts...</p>
       ) : (
-        posts?.map((post) => (
+        posts?.map((post, index) => (
           <SocialPostCard
             key={post._id}
             post={post}
