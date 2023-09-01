@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = "http://localhost:8000";
+const url = process.env.URL || "http://localhost:8000";
 
 export const useAdminCompanies = () => {
   return useQuery({
@@ -38,12 +38,11 @@ export const useCreateCompany = () => {
 
   return useMutation({
     mutationFn: async (companyData) => {
-      await axios.post("http://localhost:8000/create/", companyData, {
+      await axios.post(`${url}/create/`, companyData, {
         withCredentials: true,
       });
     },
-    onSuccess: () =>
-    queryClient.invalidateQueries("companies"),
+    onSuccess: () => queryClient.invalidateQueries("companies"),
   });
 };
 

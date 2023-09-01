@@ -1,16 +1,15 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
+const url = process.env.URL || "http://localhost:8000";
+
 export const useConversations = (userId) => {
   return useQuery({
     queryKey: ["conversations", userId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/conversation/${userId}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axios.get(`${url}/conversation/${userId}`, {
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -20,12 +19,9 @@ export const useMessages = (conversationId) => {
   return useQuery({
     queryKey: ["messages", conversationId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/messages/${conversationId}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axios.get(`${url}/messages/${conversationId}`, {
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -45,7 +41,7 @@ export const useCreateMessage = (conversationId) => {
   return useMutation({
     mutationFn: async (data) => {
       await axios.post(
-        `http://localhost:8000/messages/`,
+        `${url}/messages/`,
         { conversationId, ...data },
         {
           withCredentials: true,
@@ -62,7 +58,7 @@ export const useCreateConversation = (userId) => {
 
   return useMutation({
     mutationFn: async (data) => {
-      await axios.post(`http://localhost:8000/conversation/`, data, {
+      await axios.post(`${url}/conversation/`, data, {
         withCredentials: true,
       });
     },

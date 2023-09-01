@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
+const url = process.env.URL || "http://localhost:8000";
+
 export const useSkills = () => {
   return useQuery({
     queryKey: ["skills"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "http://localhost:8000/skill/getskills",
-        { withCredentials: true }
-      );
+      const { data } = await axios.get(`${url}/skill/getskills`, {
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -19,7 +20,7 @@ export const useCreateSkill = () => {
   return useMutation({
     mutationFn: async (name) => {
       const { data } = await axios.post(
-        "http://localhost:8000/skill/addskill",
+        `${url}/skill/addskill`,
         { name },
         { withCredentials: true }
       );
@@ -35,10 +36,9 @@ export const useDeleteSkill = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (name) => {
-      await axios.delete(
-        `http://localhost:8000/skill/deleteskill/${name}`,
-        { withCredentials: true }
-      );
+      await axios.delete(`${url}/skill/deleteskill/${name}`, {
+        withCredentials: true,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["skills"] });
@@ -51,7 +51,7 @@ export const useUpdateSkill = () => {
   return useMutation({
     mutationFn: async (data) => {
       await axios.put(
-        `http://localhost:8000/skill/updateskill/${data.id}`,
+        `${url}/skill/updateskill/${data.id}`,
         { name: data.name },
         { withCredentials: true }
       );
@@ -61,7 +61,3 @@ export const useUpdateSkill = () => {
     },
   });
 };
-
-
-
-

@@ -19,10 +19,9 @@ export const useDeleteBadge = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.delete(
-        `http://localhost:8000/badgeType/${id}`,
-        { withCredentials: true }
-      );
+      const { data } = await axios.delete(`${url}/badgeType/${id}`, {
+        withCredentials: true,
+      });
       return data;
     },
     onSuccess: () => {

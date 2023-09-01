@@ -78,7 +78,7 @@ export const useDeletePost = (userId, category = "") => {
 
   return useMutation({
     mutationFn: async (postId) => {
-      await axios.delete(`http://localhost:8000/post/${postId}`, {
+      await axios.delete(`${url}/post/${postId}`, {
         headers: { userId: userId },
         withCredentials: true,
       });
@@ -96,7 +96,7 @@ export const useEditPost = (postId, userId, category = "") => {
 
   return useMutation({
     mutationFn: async (postData) => {
-      await axios.put(`http://localhost:8000/post/${postId}`, postData, {
+      await axios.put(`${url}/post/${postId}`, postData, {
         withCredentials: true,
       });
     },
@@ -113,7 +113,7 @@ export const useLikePost = (userId, ownerId, category = "") => {
   return useMutation({
     mutationFn: async (postId) => {
       await axios.patch(
-        `http://localhost:8000/post/${postId}/like`,
+        `${url}/post/${postId}/like`,
         { userId },
         { withCredentials: true }
       );
@@ -136,7 +136,7 @@ export const useSharePost = (userId, ownerId, category = "") => {
   return useMutation({
     mutationFn: async (postId) => {
       await axios.patch(
-        "http://localhost:8000/post/share",
+        `${url}/post/share`,
         { postId, userId },
         { withCredentials: true }
       );
@@ -158,7 +158,7 @@ export const useBookmarkPost = (userId, postId, category = "") => {
   return useMutation({
     mutationFn: async () => {
       await axios.patch(
-        `http://localhost:8000/post/${userId}/bookmark/${postId}`,
+        `${url}/post/${userId}/bookmark/${postId}`,
         { userId },
         { withCredentials: true }
       );
