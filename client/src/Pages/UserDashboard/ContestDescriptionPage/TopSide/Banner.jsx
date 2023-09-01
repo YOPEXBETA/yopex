@@ -71,7 +71,9 @@ const Banner = () => {
               <div className="space-x-1 flex">
                 {isRegistered ? (
                   <button
-                    className="px-5 py-3 text-white w-full"
+                    className={`px-5 py-3 text-white w-full bg-purple-500 hover:bg-green-600 rounded-full animate-pulse ${
+                      isloadingun ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                     onClick={unRegisterMutate}
                     disabled={isloadingun}
                   >
@@ -80,16 +82,18 @@ const Banner = () => {
                 ) : (
                   <button
                     onClick={registerMutate}
-                    className="px-5 py-3 rounded-lg bg-green-500 text-white w-full"
+                    className={`px-5 py-3 rounded-full bg-green-500 text-white w-full animate-bounce ${
+                      isLoading ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                     disabled={isLoading}
                   >
                     {isLoading ? <LoadingSpinner /> : "Register"}
                   </button>
                 )}
                 <button
-                  className={`px-5 py-3 rounded-lg w-full ${
+                  className={`px-5 py-3 rounded-full w-full ${
                     isRegistered
-                      ? "bg-green-500 text-white"
+                      ? "bg-green-500 text-white animate-bounce"
                       : "bg-gray-300 cursor-not-allowed pointer-events-none text-white truncate w-8"
                   }`}
                   disabled={!isRegistered}
@@ -103,13 +107,17 @@ const Banner = () => {
         </div>
         <div className="grid grid-cols-12">
           <div className="lg:col-span-9 md:col-span-9 sm:col-span-9 col-span-12">
-            <button className="border border-green-500 px-2 py-1 text-green-500 w-full xl:w-60 hover:bg-green-500 hover:text-white transition-transform transform hover:scale-105">
+            <button
+              className={`border border-green-500 px-4 py-2 text-green-500 bg-black hover:bg-green-500 hover:text-white w-full xl:w-60 transform transition-transform hover:scale-105 animate-pulse`}
+            >
               {deadline}
             </button>
           </div>
           <div className="lg:col-span-3 md:col-span-3 sm:col-span-3 col-span-12 lg:flex lg:justify-end">
             <div className="space-x-1 flex">
-              <button className="border border-green-500 px-2 py-1 text-green-500 w-full xl:w-36 hover:bg-green-500 hover:text-white transition-transform transform hover:scale-105">
+              <button
+                className={`border border-green-500 px-4 py-2 text-green-500 bg-black hover:bg-green-500 hover:text-white w-full xl:w-36 transform transition-transform hover:scale-105 animate-pulse`}
+              >
                 Prize: {challenge.price}
               </button>
             </div>
