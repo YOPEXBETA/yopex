@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import YopexLogo from "../../../../src/images/LogoYopex.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-scroll";
+import { useSelector } from "react-redux";
 
 const HomeHeader = () => {
   const [nav, setNav] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
+  console.log(user);
   return (
     <div>
       <div className="flex justify-between items-center w-full h-20 px-4 text-white bg-white fixed z-10 border-b-2">
@@ -29,17 +32,29 @@ const HomeHeader = () => {
             </li>
           </ul>
         </div>
+
         <div className="hidden md:flex gap-4 items-center">
-          <a href="/login" className="block">
-            <button className="cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 hover:text-green-500 duration-200">
-              Login
-            </button>
-          </a>
-          <a href="/register" className="block">
-            <button className="bg-black text-white rounded-3xl px-4 py-2 font-medium hover:scale-105 duration-200">
-              Sign up
-            </button>
-          </a>
+          {user && (
+            <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+              <a href="/feed" smooth duration={500}>
+                Feed
+              </a>
+            </li>
+          )}
+          {!user && (
+            <a href="/login" className="block">
+              <button className="cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 hover:text-green-500 duration-200">
+                Login
+              </button>
+            </a>
+          )}
+          {!user && (
+            <a href="/register" className="block">
+              <button className="bg-black text-white rounded-3xl px-4 py-2 font-medium hover:scale-105 duration-200">
+                Sign up
+              </button>
+            </a>
+          )}
         </div>
 
         <div
@@ -81,21 +96,36 @@ const HomeHeader = () => {
                 Contact
               </Link>
             </li>
-            <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
-              <a
-                onClick={() => setNav(!nav)}
-                href="/register"
-                className="block"
-              >
-                Sign up
-              </a>
-            </li>
-
-            <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
-              <a onClick={() => setNav(!nav)} href="/login" className="block">
-                Login
-              </a>
-            </li>
+            {user && (
+              <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
+                <Link
+                  onClick={() => setNav(!nav)}
+                  to="feed"
+                  smooth
+                  duration={500}
+                >
+                  Feed
+                </Link>
+              </li>
+            )}
+            {!user && (
+              <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
+                <a
+                  onClick={() => setNav(!nav)}
+                  href="/register"
+                  className="block"
+                >
+                  Sign up
+                </a>
+              </li>
+            )}
+            {!user && (
+              <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
+                <a onClick={() => setNav(!nav)} href="/login" className="block">
+                  Login
+                </a>
+              </li>
+            )}
           </ul>
         )}
       </div>
