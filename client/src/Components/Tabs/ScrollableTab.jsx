@@ -1,27 +1,12 @@
-import axios from "axios";
 import React from "react";
-import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCategory } from "../../redux/global/globalSlice";
-
-const getCategories = async () => {
-  const { data } = await axios.get(
-    "http://localhost:8000/category/getCategories",
-    {
-      withCredentials: true,
-    }
-  );
-  return data;
-};
+import { useCategories } from "../../hooks/react-query/useCategories";
 
 export default function ScrollableTabs() {
   const { category: selectedCategory } = useSelector((state) => state.global);
   const dispatch = useDispatch();
-
-  const { data: categories } = useQuery({
-    queryKey: ["categories"],
-    queryFn: getCategories,
-  });
+  const { data: categories } = useCategories();
 
   const handleChange = (_, newValue) => dispatch(changeCategory(newValue));
 
