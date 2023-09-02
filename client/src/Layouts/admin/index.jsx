@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, Outlet } from "react-router-dom";
 import AdminNavbar from "./components/AdminNavbar";
 import Sidebar from "./components/AdminSideBar";
 import routes from "../../routes/AdminRoutes";
+import { getCurrentUser } from "../../redux/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AdminLayout(props) {
+  const { user } = useSelector((state) => state.auth);
   const { ...rest } = props;
   const location = useLocation();
   const [open, setOpen] = React.useState(true);
@@ -16,6 +19,16 @@ export default function AdminLayout(props) {
     );
   }, []);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("layout");
+    if (!user) {
+      dispatch(getCurrentUser())
+    }
+  }, [dispatch, user]);
+
+
   const currentPath = location.pathname;
   const matchedRoute = routes.children.find((route) =>
     currentPath.includes(route.path)
@@ -26,7 +39,9 @@ export default function AdminLayout(props) {
       setCurrentRoute(matchedRoute.path);
     }
   }, [currentPath]);
-
+  if (!user) {
+    return <div>Loading...</div>; // Or you can render a loading component
+  }
   return (
     <div className="flex h-full w-full">
       <Sidebar open={open} onClose={() => setOpen(false)} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiAlignJustify } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
@@ -6,7 +6,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Logout from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../redux/auth/authSlice";
+import { getCurrentUser, logout } from "../../../redux/auth/authSlice";
 
 const AdminNavbar = (props) => {
   const { onOpenSidenav, brandText } = props;
@@ -19,6 +19,7 @@ const AdminNavbar = (props) => {
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+
 
   const handleLogout = () => {
     dispatch(logout());

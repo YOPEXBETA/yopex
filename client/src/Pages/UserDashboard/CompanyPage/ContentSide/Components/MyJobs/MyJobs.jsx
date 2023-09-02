@@ -6,7 +6,9 @@ import JobCard from "../../../../../../Components/shared/cards/JobCard";
 
 const MyCompanyJobs = () => {
   const { companyId } = useParams();
+  console.log(companyId);
   const { data: companyJobs, isLoading } = useJobById(companyId);
+  console.log("companyJobs",companyJobs);
 
   if (isLoading) {
     return (

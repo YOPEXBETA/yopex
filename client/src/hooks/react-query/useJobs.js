@@ -20,7 +20,7 @@ export const useJobById = (companyId) => {
   return useQuery(
     ["jobs", companyId],
     async () => {
-      const { data } = await axios.get(`${url}/${companyId}`, {
+      const { data } = await axios.get(`${url}/job/${companyId}`, {
         withCredentials: true,
       });
       return data;

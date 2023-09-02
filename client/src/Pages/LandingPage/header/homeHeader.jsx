@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import YopexLogo from "../../../../src/images/LogoYopex.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-scroll";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getCurrentUser } from "../../../redux/auth/authSlice";
 
 const HomeHeader = () => {
   const [nav, setNav] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+    const { user, error } = useSelector((state) => state.auth); // Assuming you have an error state in your Redux slice
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  
+
+  useEffect(() => {
+    console.log("layout");
+    if (!user) {
+      dispatch(getCurrentUser())
+    }
+  }, [dispatch, user]);
 
   console.log(user);
   return (

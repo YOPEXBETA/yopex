@@ -6,7 +6,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useCreateSkill, useDeleteSkill, useSkills, useUpdateSkill } from "../../../hooks/react-query/useSkills";
 
-const Skills = () => {
+const SkillsPage = () => {
   const { data } = useSkills();
   const { mutate } = useCreateSkill();
   const { mutate: deleteSkill } = useDeleteSkill();
@@ -67,4 +67,4 @@ const Skills = () => {
   );
 };
 
-export default Skills;
+export default SkillsPage;

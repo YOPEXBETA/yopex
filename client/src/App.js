@@ -4,6 +4,7 @@ import ScrollTop from "./Components/ScrollTop";
 import Routes from "./routes/index";
 import ThemeCustomization from "./themes";
 
+
 const queryClient = new QueryClient();
 
 const App = () => {

@@ -21,7 +21,7 @@ const UserProfileCard = () => {
   const { data: userProfile } = useUserById(userId);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
-
+  console.log(userProfile);
   const rating = useMemo(() => {
     if (!reviews || reviews.length === 0) return 0;
     const sum = reviews.reduce((prev, current) => current.star + prev, 0);

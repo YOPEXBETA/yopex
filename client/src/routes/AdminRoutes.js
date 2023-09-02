@@ -14,6 +14,7 @@ import {
 } from "react-icons/md";
 
 import LevelPage from "../Pages/AdminDashboard/LevelPage/LevelPage";
+import SkillsPage from "../Pages/AdminDashboard/SkillsPage/SkillsPage";
 
 // render -
 
@@ -76,6 +77,11 @@ const AdminRoutes = {
       path: "Evaluation",
       element: <EvaluationPage />,
     },
+    {
+      icon: <MdCategory className="h-6 w-6" />,
+      path: "skills",
+      element : <SkillsPage />
+    }
     
   ],
 };
