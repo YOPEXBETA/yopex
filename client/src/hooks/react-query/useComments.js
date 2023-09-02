@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
+const url = process.env.URL || "http://localhost:8000";
+
 export const useCommentsByPosts = (postId) => {
   return useQuery({
     queryKey: ["comments", postId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/comment/${postId}`,
-        { withCredentials: true }
-      );
+      const { data } = await axios.get(`${url}/comment/${postId}`, {
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -19,11 +20,9 @@ export const useAddComment = (postId, category, userId) => {
 
   return useMutation({
     mutationFn: async (comment) => {
-      const { data } = await axios.post(
-        "http://localhost:8000/comment/",
-        comment,
-        { withCredentials: true }
-      );
+      const { data } = await axios.post(`${url}/comment/`, comment, {
+        withCredentials: true,
+      });
 
       return data;
     },

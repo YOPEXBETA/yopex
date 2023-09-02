@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = "http://localhost:8000";
+const url = process.env.URL || "http://localhost:8000";
 
 export const useUsers = () => {
   return useQuery("users", async () => {
@@ -16,7 +16,7 @@ export const useAdminUsers = () => {
   return useQuery({
     queryKey: ["admin/users"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:8000/admin/Users", {
+      const { data } = await axios.get(`${url}/admin/Users`, {
         withCredentials: true,
       });
       return data;
@@ -60,7 +60,7 @@ export const usePayment = () => {
   return useMutation({
     mutationFn: async (amount) => {
       const { data } = await axios.post(
-        `http://localhost:8000/api/payment`,
+        `${url}/api/payment`,
         { amount: amount },
         { withCredentials: true }
       );
@@ -168,15 +168,12 @@ export const useUserChallenges = (userId) => {
   return useQuery({
     queryKey: ["challenges", userId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "http://localhost:8000/user/challenges",
-        {
-          params: {
-            userId: userId,
-          },
-          withCredentials: true,
-        }
-      );
+      const { data } = await axios.get(`${url}/user/challenges`, {
+        params: {
+          userId: userId,
+        },
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -186,12 +183,9 @@ export const useUserBadges = (userId) => {
   return useQuery({
     queryKey: ["badges", userId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/${userId}/badges`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axios.get(`${url}/${userId}/badges`, {
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -201,12 +195,9 @@ export const useUserJobs = (userId) => {
   return useQuery({
     queryKey: ["jobs", userId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/job/user/${userId}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axios.get(`${url}/job/user/${userId}`, {
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -216,10 +207,9 @@ export const useUserFeedbacks = (userId) => {
   return useQuery({
     queryKey: ["reviews", userId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/reviews/${userId}`,
-        { withCredentials: true }
-      );
+      const { data } = await axios.get(`${url}/reviews/${userId}`, {
+        withCredentials: true,
+      });
       return data;
     },
   });
@@ -229,10 +219,9 @@ export const useUserNotifications = (userId) => {
   return useQuery({
     queryKey: ["notifications", userId],
     queryFn: async () => {
-      const response = await axios.get(
-        `http://localhost:8000/user/${userId}/notifications`,
-        { withCredentials: true }
-      );
+      const response = await axios.get(`${url}/user/${userId}/notifications`, {
+        withCredentials: true,
+      });
       console.log(response.data);
       return response.data;
     },

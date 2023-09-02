@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = "http://localhost:8000/job";
+//const url = "http://localhost:8000/job";
+
+const url = process.env.URL || "http://localhost:8000";
 
 export const useJobs = () => {
   return useQuery({
     queryKey: ["jobs"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:8000/job/all");
+      const { data } = await axios.get(`${url}/job/all`);
       console.log("fff", data);
       return data;
     },
@@ -35,7 +37,7 @@ export const useCreateJob = (user) => {
   return useMutation({
     mutationFn: async ({ companyId, JobData }) => {
       await axios.post(
-        "http://localhost:8000/job/add",
+        `${url}/job/add`,
         { companyId, ...JobData },
         {
           withCredentials: true,
@@ -52,9 +54,7 @@ export const useAppliers = (job) => {
   return useQuery({
     queryKey: ["appliers", job._id],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/job/jobs/${job._id}/appliers`
-      );
+      const { data } = await axios.get(`${url}/job/jobs/${job._id}/appliers`);
       return data;
     },
   });
@@ -65,7 +65,7 @@ export const useSortAppliers = (job) => {
     queryKey: ["appliers", job._id],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:8000/job/jobs/${job._id}/sortedappliers`
+        `${url}/job/jobs/${job._id}/sortedappliers`
       );
       return data;
     },
@@ -77,7 +77,7 @@ export const useAcceptedAppliers = (job) => {
     queryKey: ["accepted/appliers", job._id],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:8000/job/jobs/${job._id}/accepted-appliers`
+        `${url}/job/jobs/${job._id}/accepted-appliers`
       );
       return data;
     },
@@ -89,9 +89,7 @@ export const useAcceptApplier = (job) => {
 
   return useMutation({
     mutationFn: async (userId) => {
-      await axios.put(
-        `http://localhost:8000/job/jobs/${job._id}/appliers/${userId}/accept`
-      );
+      await axios.put(`${url}/job/jobs/${job._id}/appliers/${userId}/accept`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["accepted/appliers", job._id]);
@@ -104,9 +102,7 @@ export const useApplyJob = (job, userId) => {
 
   return useMutation({
     mutationFn: async (data) => {
-      await axios.put(
-        `http://localhost:8000/job/jobs/${job._id}/apply/${userId}`
-      );
+      await axios.put(`${url}/job/jobs/${job._id}/apply/${userId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
@@ -119,9 +115,7 @@ export const useUnapplyJob = (job, userId) => {
 
   return useMutation({
     mutationFn: async (data) => {
-      await axios.put(
-        `http://localhost:8000/job/jobs/${job._id}/unapply/${userId}`
-      );
+      await axios.put(`${url}/job/jobs/${job._id}/unapply/${userId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });

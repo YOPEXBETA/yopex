@@ -4,7 +4,7 @@ import {
   useUserChallenges,
 } from "../../../../../../hooks/react-query/useUsers";
 import { useParams } from "react-router-dom";
-import getDeadlineDifference from "../../../../ContestDescriptionPage/TopSide/deadlineModif";
+import getDeadlineDifference from "../../../../../../utils/deadlineModif";
 
 const CompletedChallenges = () => {
   const { userId } = useParams();

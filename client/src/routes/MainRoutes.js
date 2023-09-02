@@ -8,7 +8,7 @@ import Company from "../Pages/UserDashboard/CompanyPage/Company";
 // ==============================|| USER PAGES ||============================== //
 //HomePage
 const HomeLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/HomePage/HomeLayout"))
+  lazy(() => import("../Pages/UserDashboard/HomePage/index"))
 );
 
 //UserProfilePage
@@ -17,7 +17,7 @@ const UserProfileLayout = Loadable(
 );
 //LeaderBoardPage
 const LeaderBoardLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/LeaderBoardPage/LeaderBoardLayout"))
+  lazy(() => import("../Pages/UserDashboard/LeaderBoardPage/index"))
 );
 //SettingsPage
 const SettingsLayout = Loadable(
@@ -25,9 +25,7 @@ const SettingsLayout = Loadable(
 );
 //ContestDetailsPage
 const ContestDetails = Loadable(
-  lazy(() =>
-    import("../Pages/UserDashboard/ContestDescriptionPage/ContestDetails")
-  )
+  lazy(() => import("../Pages/UserDashboard/ContestDescriptionPage/index"))
 );
 //BrowsePage
 const BrowseLayout = Loadable(
