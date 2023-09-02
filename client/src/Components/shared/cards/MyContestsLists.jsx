@@ -29,7 +29,7 @@ const MyContestLists = () => {
         <div className="p-4 bg-white border-green-500 border-b-2 rounded-lg shadow-md">
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <h5 className="text-lg font-semibold">My Contests</h5>
+              <h5 className="text-lg font-medium">My Contests</h5>
             </div>
             {inProgress.slice(0, 2).map((user) => (
               <div key={user._id} className="flex items-center justify-between">
