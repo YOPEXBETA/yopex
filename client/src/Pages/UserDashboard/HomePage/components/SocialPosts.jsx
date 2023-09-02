@@ -12,7 +12,6 @@ const SocialPosts = () => {
   const { user } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.global);
   const { data: posts, isLoading } = usePostsByCategory(category);
-  console.log(posts);
   const { data } = useBookmarkedPosts(user._id);
   let bookmarksId = [];
   data?.map((book) => {

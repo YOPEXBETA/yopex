@@ -22,7 +22,6 @@ const MyContestLists = () => {
       data.challenges?.filter((challenge) => handleProgress(challenge))
     );
   }, [data]);
-  console.log(inProgress);
 
   return (
     <div>

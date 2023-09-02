@@ -14,11 +14,10 @@ import PostMenuIcon from "./components/PostMenuIcon";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import SocialPostImage from "../../PostImage/SocialPostImage";
 
-const SocialPostCard = ({ post, bookmarks, companyId,height,width }) => {
+const SocialPostCard = ({ post, bookmarks, companyId, height, width }) => {
   const { user } = useSelector((state) => state.auth);
-  
+
   const { category } = useSelector((state) => state.global);
-  console.log(post);
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
   const { mutate: BookmarkPost } = useBookmarkPost(
     user._id,
@@ -104,7 +103,6 @@ const SocialPostCard = ({ post, bookmarks, companyId,height,width }) => {
               .slice(currentPage, currentPage + 1)
               .map((item, index) => (
                 <SocialPostImage item={item} height={height} width={width} />
-                
               ))}
 
             <button
