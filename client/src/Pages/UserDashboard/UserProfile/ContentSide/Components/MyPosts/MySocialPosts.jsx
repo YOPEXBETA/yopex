@@ -22,7 +22,13 @@ const MySocialPosts = () => {
         <p>Loading posts...</p>
       ) : (
         posts?.map((post) => (
-          <SocialPostCard key={post._id} post={post} bookmarks={bookmarksId} height={"48"} width={"screen"} />
+          <SocialPostCard
+            key={post._id}
+            post={post}
+            bookmarks={bookmarksId}
+            height={"48"}
+            width={"96"}
+          />
         ))
       )}
     </div>

@@ -1,25 +1,39 @@
-// material-ui
-import { styled } from "@mui/material/styles";
-import LinearProgress from "@mui/material/LinearProgress";
+import React, { useState, useEffect } from "react";
+import yopexLogo from "./../../../src/images/LogoYopex.png";
+import LoadingProgress from "./LoadingProgress";
 
-// loader style
-const LoaderWrapper = styled("div")(({ theme }) => ({
-  position: "fixed",
-  top: 0,
-  left: 0,
-  zIndex: 2001,
-  width: "100%",
-  "& > * + *": {
-    marginTop: theme.spacing(2),
-  },
-}));
+const Loader = ({ backgroundColor, delay }) => {
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
-// ==============================|| Loader ||============================== //
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLoadingProgress((prevProgress) =>
+        prevProgress < 100 ? prevProgress + 10 : 100
+      );
+    }, delay);
 
-const Loader = () => (
-  <LoaderWrapper>
-    <LinearProgress color="primary" />
-  </LoaderWrapper>
-);
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [delay]);
+
+  return (
+    <div
+      className={`fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-${backgroundColor}`}
+    >
+      <div className="flex flex-col items-center">
+        <img src={yopexLogo} alt="logo" className="mb-4 w-11 h-11" />
+
+        <LoadingProgress
+          progress={loadingProgress}
+          duration={delay}
+          backgroundColor={backgroundColor}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default Loader;

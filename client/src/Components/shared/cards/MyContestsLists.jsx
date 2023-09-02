@@ -32,7 +32,6 @@ const MyContestLists = () => {
             <div className="flex items-center justify-between">
               <h5 className="text-lg font-semibold">My Contests</h5>
             </div>
-            <hr className="border-t border-gray-300" />
             {inProgress.slice(0, 2).map((user) => (
               <div key={user._id} className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">

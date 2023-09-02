@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 import * as z from "zod";
 import AlertContainer from "../../../Components/alerts";
 import Copyright from "../../../Components/shared/Copyright";
-import { getCurrentUser, login, reset as resetAuth } from "../../../redux/auth/authSlice";
+import {
+  getCurrentUser,
+  login,
+  reset as resetAuth,
+} from "../../../redux/auth/authSlice";
 import GoogleSignIn from "../Google";
 
 // user input validation schema
@@ -19,10 +23,8 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const { error,user } = useSelector((state) => state.auth);
+  const { error, user } = useSelector((state) => state.auth);
   const [rememberMe, setRememberMe] = useState(false);
-  
-  
 
   const {
     register,
@@ -36,11 +38,11 @@ const Login = () => {
 
   // redirect user according to his role
   useEffect(() => {
-    if (!user){
-      const {data:currentUser} = dispatch(getCurrentUser());
-      console.log("currentUser",currentUser);
+    if (!user) {
+      const { data: currentUser } = dispatch(getCurrentUser());
+      console.log("currentUser", currentUser);
       if (!currentUser) return;
-    };
+    }
     const isAdmin = user.role === "admin";
 
     if (isAdmin) {
@@ -50,7 +52,7 @@ const Login = () => {
 
     navigate("/feed");
     dispatch(resetAuth());
-  }, [dispatch,navigate,user]);
+  }, [dispatch, navigate, user]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full lg:w-4/6">
@@ -139,7 +141,7 @@ const Login = () => {
         <div class="grid grid-cols-12 w-full mt-6">
           <div class="col-span-12">
             <button
-              className=" w-full bg-green-500 py-3 rounded-md text-md font-medium text-white"
+              className="w-full bg-green-500 py-3 rounded-md text-md font-medium text-white"
               disabled={isSubmitting}
             >
               Login
