@@ -74,7 +74,7 @@ const SearchUsers = async (req, res) => {
       companyName: { $regex: searchTerm, $options: "i" },
     };
 
-    const users = await userSchema.find(userQuery);
+    const users = await userSchema.find(userQuery).select("-password");
     const companies = await companySchema.find(companyQuery);
 
     const results = [

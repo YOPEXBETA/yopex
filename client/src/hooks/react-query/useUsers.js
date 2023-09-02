@@ -131,7 +131,6 @@ export const useSetquery =()=>{
   return useMutation({
     mutationFn: async (q) => {
       query=q;
-      console.log(query);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("searchUsers");
