@@ -51,6 +51,7 @@ const JobCard = ({ job }) => {
             </div>
           </div>
         </div>
+
       </div>
       {/* Additional static content for other cards can be added similarly */}
       <JobOfferModal open={isOpen} handleClose={handleClose} job={job} />

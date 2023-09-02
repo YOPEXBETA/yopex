@@ -12,9 +12,11 @@ import {
 } from "../../../../hooks/react-query/usePosts";
 import PostMenuIcon from "./components/PostMenuIcon";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import SocialPostImage from "../../PostImage/SocialPostImage";
 
-const SocialPostCard = ({ post, bookmarks, companyId }) => {
+const SocialPostCard = ({ post, bookmarks, companyId,height,width }) => {
   const { user } = useSelector((state) => state.auth);
+  
   const { category } = useSelector((state) => state.global);
   console.log(post);
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
@@ -75,7 +77,7 @@ const SocialPostCard = ({ post, bookmarks, companyId }) => {
             </p>
           </div>
         </div>
-        {post.userId === user._id && (
+        {(post.userId === user._id || user.companies.includes(post.userId)) && (
           <button className="p-2 rounded-full">
             <PostMenuIcon className="text-black" post={post} />
           </button>
@@ -101,13 +103,8 @@ const SocialPostCard = ({ post, bookmarks, companyId }) => {
             {post.postPicturePath
               .slice(currentPage, currentPage + 1)
               .map((item, index) => (
-                <div key={item}>
-                  <img
-                    alt="photo"
-                    src={item}
-                    className="max-w-[calc(100% - 0.5rem)] h-full w-screen object-cover"
-                  />
-                </div>
+                <SocialPostImage item={item} height={height} width={width} />
+                
               ))}
 
             <button

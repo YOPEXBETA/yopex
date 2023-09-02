@@ -30,6 +30,8 @@ const SocialPosts = () => {
             post={post}
             bookmarks={bookmarksId}
             posts={posts}
+            height={"full"}
+            width={"screen"}
           />
         ))
       )}
