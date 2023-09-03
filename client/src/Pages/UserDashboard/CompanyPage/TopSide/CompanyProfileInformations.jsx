@@ -100,14 +100,16 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               </button>
             </a>
             {company && company.user === user._id && (
+              <a href="/feed">
     <button 
-    href="/feed"
+    
       onClick={
         handleDeleteCompany
      }
     >
       Delete
     </button>
+    </a>
   )}
           </div>
           <EditCompanyModal 
