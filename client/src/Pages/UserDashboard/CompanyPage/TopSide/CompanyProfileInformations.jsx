@@ -6,13 +6,27 @@ import { useCompanyById } from "../../../../hooks/react-query/useCompany";
 import { CompanyNavigationTab } from "./CompanyNavigationTab";
 import { useFollowCompany } from "../../../../hooks/react-query/useUsers";
 import { EditCompanyModal } from "./EditCompanyModal";
+import { useDeleteCompany } from "../../../../hooks/react-query/useCompany";
 
 const CompanyProfileInformations = ({ changeValue, value }) => {
   const [openPostModal, setOpenPostModal] = useState(false);
   const { companyId } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { mutate, isLoadinge } = useFollowCompany( user._id,companyId);
+  const deleteCompanyMutation = useDeleteCompany();
+  const handleDeleteCompany = async () => {
+    // Call the deleteCompany mutation with the company ID
+    try {
+      await deleteCompanyMutation.mutateAsync(company._id);
 
+      // Company has been successfully deleted
+      // You can add any additional logic here, such as showing a success message
+    } catch (error) {
+      // Handle any errors that occur during deletion
+      // You can also display an error message to the user
+      console.error("Error deleting company:", error);
+    }
+  };
   const { data: company, isLoading, isError } = useCompanyById(companyId);
 
   if (isLoading) {
@@ -82,9 +96,19 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <button className="cursor-pointer capitalize font-medium hover:scale-105  bg-green-500 py-2 px-4 rounded-lg text-white w-36"
               onClick={company && company.user === user._id ? toggleModal: mutate}
               >
-              {company && company.user === user._id ? 'Edit' :  user.followings.includes(company._id) ? "Unfollow" : "Follow" }
+              {company && company.user === user._id ? 'Edit'  :  user.followings.includes(company._id) ? "Unfollow" : "Follow" }
               </button>
             </a>
+            {company && company.user === user._id && (
+    <button 
+    href="/feed"
+      onClick={
+        handleDeleteCompany
+     }
+    >
+      Delete
+    </button>
+  )}
           </div>
           <EditCompanyModal 
           open={openPostModal}
@@ -94,6 +118,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
 
           <CompanyNavigationTab changeValue={changeValue} value={value} />
         </div>
+  
       </div>
     </div>
   );

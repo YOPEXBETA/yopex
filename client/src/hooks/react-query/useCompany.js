@@ -60,6 +60,21 @@ export const useEditCompany = (companyId) => {
   });
 }
 
+export const useDeleteCompany = (companyId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (companyId) => {
+      await axios.delete(`${url}/company/${companyId}`, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["companies"]);
+    },
+  });
+};
+
 export const useCompanyById = (companyId) => {
   return useQuery(
     ["company", companyId],

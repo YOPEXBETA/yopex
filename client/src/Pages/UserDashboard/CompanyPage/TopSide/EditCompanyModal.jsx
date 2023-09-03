@@ -60,6 +60,8 @@ export const EditCompanyModal = ({ open, handleClose,company }) => {
     reset();
   };
 
+  
+
   return (
     <div
       className={`fixed z-10 inset-0 overflow-y-auto  ${

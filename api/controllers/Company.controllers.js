@@ -149,10 +149,22 @@ const getCompanyNotifications = async (req, res) => {
   //   res.status(500).json({ error: "Server Error" });
   // }
 };
+
+const deleteCompany = async (req, res) => {
+  try {
+    const company = await Company.findById(req.params.id);
+   
+      response = await Company.findByIdAndDelete(req.params.id);
+      res.status(200).send("Company has been deleted");
+  
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 module.exports = {
   editProfile,
   getCompany,
   getCompanyChallenges,
   ChallengeWinner,
-  getCompanyNotifications,
+  getCompanyNotifications,deleteCompany
 };

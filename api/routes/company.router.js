@@ -8,6 +8,7 @@ const {
   editProfile,
   ChallengeWinner,
   getCompanyNotifications,
+  deleteCompany,
 } = require("../controllers/Company.controllers");
 const { getCompany } = require("../controllers/Company.controllers");
 
@@ -36,5 +37,6 @@ companyRouter.get(
   authenticateToken,
   getCompanyNotifications,
 );
+companyRouter.delete("/:id", authenticateToken, deleteCompany);
 
 module.exports = companyRouter;
