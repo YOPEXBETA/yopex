@@ -5,24 +5,13 @@ import axios from "axios";
 import { formatDistance, isValid } from "date-fns";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
-
-export const getConversations = async (userId) => {
-  const { data } = await axios.get(
-    `http://localhost:8000/conversation/${userId}`,
-    {
-      withCredentials: true,
-    }
-  );
-
-  return data;
-};
+import { useConversations } from "../../../../../../hooks/react-query/useConversations";
 
 const Chat = () => {
   const { user } = useSelector((state) => state.auth);
-  const { data: conversations, isLoading } = useQuery({
-    queryKey: ["conversations", user._id],
-    queryFn: () => getConversations(user._id),
-  });
+
+  const userId = user._id;
+  const { data: conversations, isLoading } = useConversations(userId);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
