@@ -5,7 +5,6 @@ import axios from "axios";
 import { formatDistance, isValid } from "date-fns";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
-// import { getConversations } from "../../../../../../redux/actions/ConversationAction";
 
 export const getConversations = async (userId) => {
   const { data } = await axios.get(
@@ -59,7 +58,7 @@ const Chat = () => {
                 </div>
                 <hr className="border-t border-gray-200" />
               </li>
-              {conversations?.map((conversation) => {
+              {conversations?.slice(0, 5).map((conversation) => {
                 const otherUser = conversation.members.find(
                   (member) => member.id !== user._id
                 );
