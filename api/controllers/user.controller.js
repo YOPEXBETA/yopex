@@ -149,29 +149,79 @@ const getUserFriends = async (req, res) => {
 
 const getUserFollowings = async (req, res) => {
   try {
-    // Find the current user by their ID using both userSchema and companySchema
-    const [currentUser] = await Promise.all([
-      userSchema.findById(req.params.userId).select("-password"),
-    ]);
+    const id = req.params.userId;
+    const user = await userSchema.findById(id).select("-password");
 
-    // Fetch the details of all of the user's friends using their friend IDs
-    const userFollowings = await Promise.all(
-      currentUser.followings.map(async (friendId) => {
+
+    if (user){   
+       const userFollowingss = []; 
+       const companyFollowings = [];
+
+     const userFollowings = await Promise.all(
+      user.followings.map(async (friendId) => {
         const friend = await userSchema.findById(friendId).select("-password");
         if (friend) {
-          return friend;
+          userFollowingss.push(friend);
+        }else{
+          const company = await companySchema.findById(friendId);
+        companyFollowings.push( company);
+
         }
       })
     );
+ const followings = userFollowings.filter((friend) => friend !== null);
+ return res.status(200).json({ userFollowingss, companyFollowings });
+    }else{
+      const company = await companySchema.findById(id);
+      if (company) {
+        // Fetch company followings
+        const companyFollowings = await Promise.all(
+          user.followings.map(async (companyId) => {
+            const company = await companySchema.findById(companyId);
+            if (company) {
+              return company;
+            }
+          })
+        );
 
-    const followings = [...userFollowings].filter((friend) => friend !== null);
+        const followings = companyFollowings.filter((company) => company !== null);
 
-    // Return the list of the user's friends as a JSON response
-    return res.status(200).json(followings);
+        return res.status(200).json({ userFollowings: [], companyFollowings: followings });
+      } else {
+        return res.status(404).json({ message: "ID not found" });
+      }
+    }
+
+
   } catch (error) {
     return res.status(500).json(error.message);
   }
 };
+
+const getUserFollowingsCompanies = async (req, res) => {
+  try {
+   
+    const [currentUser] = await Promise.all([
+      userSchema.findById(req.params.userId).select("-password"),
+    ]);
+
+    const companyFollowings = await Promise.all(
+      currentUser.followings.map(async (companyId) => {
+        const company = await companySchema.findById(companyId);
+        if (company) {
+          return company;
+        }
+      })
+    );
+
+    const followings = companyFollowings.filter((company) => company !== null);
+
+    return res.status(200).json(followings);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+
+}
 
 const followUnfollowUser = async (req, res) => {
   try {
@@ -213,6 +263,35 @@ const followUnfollowUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json(error.message);
   }
+};
+
+const followUnfollowCompany = async (req, res) => {
+
+  try{
+    const currentUserId = req.userId;
+    const companyId = req.params.companyId;
+    const currentUser = await userSchema.findById(currentUserId);
+
+    if (!currentUser.followings.includes(companyId)){
+      currentUser.followings.push(companyId);
+      await currentUser.save();
+      return res
+      .status(200)
+      .json({ msg: "You have successfully followed the company!" });
+    }else{
+      currentUser.followings = currentUser.followings.filter(
+        (id) => id !== companyId
+      );
+      await currentUser.save();
+      return res
+      .status(200)
+      .json({ msg: "You have successfully unfollowed the company!" });
+    }
+
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+
 };
 
 const getsuggestedUsers = async (req, res) => {
@@ -505,5 +584,7 @@ module.exports = {
   getUserNotifications,
   banUser,
   CreateCompany,
-  getCurrentUser
+  getCurrentUser,
+  followUnfollowCompany,
+  getUserFollowingsCompanies
 };

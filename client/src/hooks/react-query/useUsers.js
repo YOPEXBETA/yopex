@@ -93,6 +93,24 @@ export const useFollowUser = (currentUserId, userId) => {
   });
 };
 
+export const useFollowCompany = (currentUserId, companyId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async () => {
+      await axios.put(
+        `${url}/toggleFollowCompany/${companyId}`,
+        { userId: currentUserId },
+        { withCredentials: true }
+      );
+    },
+    onSuccess: () => {
+     queryClient.invalidateQueries(["companies", companyId]); // Invalidate the company data query
+    },
+    enabled: !!companyId,
+  });
+};
+
 export const useUserFollowers = (userId) => {
   return useQuery(
     ["followers", userId],
