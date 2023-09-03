@@ -1,3 +1,15 @@
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  InputLabel,
+  LinearProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Stack } from "@mui/system";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateJob } from "../../../../hooks/react-query/useJobs";
@@ -5,37 +17,47 @@ import { useUserById } from "../../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 import { Controller } from "react-hook-form";
 import { MuiFileInput } from "mui-file-input";
+import { useEditCompany } from "../../../../hooks/react-query/useCompany";
+import uploadFile from "../../../../utils/uploadFile";
 
 export const EditCompanyModal = ({ open, handleClose,company }) => {
-    const {  control, setValue, reset, watch } = useForm({
-        defaultValues: {
-          name: "",
-          description: "",
-          picture: [],
-        },
-      });
-  const [selectedOption, setSelectedOption] = useState("");
 
-  const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm();
+  const { mutate } = useEditCompany(company._id);
+  console.log(company)
+  
+  const [uploadProgress, setUploadProgress] = useState(0);
   const { user } = useSelector((state) => state.auth);
-  const userId = user._id;
-  const { data: userProfile, isLoading } = useUserById(userId);
-  const { mutate } = useCreateJob(user);
-  const companyId= company._id;
+  const { register, handleSubmit, control, setValue, reset, watch } = useForm({
+    defaultValues: {
+      companyName: company.companyName,
+      companyDescription: company.companyDescription,
+      files: [],
+    },
+  });
+  const uploadedFile = watch("files");
+   
+  const onSubmit = async (data) => {
+    if (data.files.length > 0) {
+      const companyLogo = [];
+      for (let file of data.files) {
+        companyLogo.push(await uploadFile(file, setUploadProgress));
+      }
+      return mutate({ 
+        companyDescription: data.companyDescription,
+        companyName: data.companyName,
+        
+        companyLogo,
+      });
+    }
 
-  const onSubmit = (JobData) => {
-    const companyId = selectedOption;
-
-    mutate({ companyId, JobData });
+    mutate({ 
+      companyDescription: data.companyDescription,
+      companyName: data.companyName,
+    
+    });
+    setUploadProgress(0);
     handleClose();
+    reset();
   };
 
   return (
@@ -67,22 +89,39 @@ export const EditCompanyModal = ({ open, handleClose,company }) => {
                   className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                   type="text"
                   placeholder={company.companyName}
-                  {...register("name", { required: true })}
+                  {...register("companyName")}
+                margin="normal"
+                variant="outlined"
+                required
+                fullWidth
+                id="companyName"
+                label="companyName"
+                multiline
+                rows={4}
                 />
                 <textarea
                   className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
-                  {...register("description", { required: true })}
+                  {...register("companyDescription", { required: true })}
                   placeholder={company.companyDescription}
                 />
-                <Controller
-                name="picture"
+                  {uploadedFile && (
+                <Stack mb={1}>
+                  <Typography>Upload Progress: {uploadProgress}%</Typography>
+                  <LinearProgress
+                    variant="determinate"
+                    value={uploadProgress}
+                  />
+                </Stack>
+              )}
+                 <Controller
+                name="files"
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => (
                   <MuiFileInput
+                    fullWidth
                     multiple
                     value={field.value}
-
+                    onChange={(value) => setValue("files", value)}
                   />
                 )}
               />
@@ -93,14 +132,9 @@ export const EditCompanyModal = ({ open, handleClose,company }) => {
                   >
                     Cancel
                   </button>
-                  <button
-                    className="bg-green-500 px-6 py-2 text-white rounded-md"
-                    type="submit"
-                    disabled={isSubmitting}
-                    onClick={handleSubmit}
-                  >
-                   Edit your company
-                  </button>
+                  <Button variant="contained" type="submit">
+                  Edit your company
+                </Button>
                 </div>
               </form>
             </div>

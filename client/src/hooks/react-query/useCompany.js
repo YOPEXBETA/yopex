@@ -46,6 +46,20 @@ export const useCreateCompany = () => {
   });
 };
 
+export const useEditCompany = (companyId) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (companyData) => {
+      await axios.put(`${url}/company/${companyId}`, companyData, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["company", companyId]);
+    },
+  });
+}
+
 export const useCompanyById = (companyId) => {
   return useQuery(
     ["company", companyId],
