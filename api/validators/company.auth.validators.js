@@ -21,9 +21,7 @@ const companyRegisterValidator = yup.object().shape({
 });
 
 const companyEditProfileValidator = yup.object().shape({
-  companyName: yup
-    .string()
-    .matches(/^[a-zA-Z]+$/, "First name must only contain letters"),
+  companyName: yup.string().required("Company name is required"),
   password: yup
     .string()
     .min(8, "Password must be at least 8 characters long")

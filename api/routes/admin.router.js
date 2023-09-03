@@ -11,8 +11,10 @@ const {
   BanAccount,
   getCompanies,
   approveCompany,
+  createLevel
 } = require("../controllers/admin.controllers");
 
+adminRouter.post("/createLevel",createLevel);
 adminRouter.get("/Users", isAdmin, getUsers);
 adminRouter.get("/Companies", isAdmin, getCompanies);
 adminRouter.post("/addUser", addUser);

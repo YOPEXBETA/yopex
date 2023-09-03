@@ -30,7 +30,7 @@ const UserProfileCard = () => {
 
   if (userProfile)
     return (
-      <div className="bg-white p-6 rounded-lg flex flex-col items-center gap-6 lg:mr-11 shadow-md border-green-500 border-b-2 mr-0">
+      <div className="bg-white p-6 rounded-lg flex flex-col items-center gap-6 xl:mr-11 shadow-md border-green-500 border-b-2 mr-0">
         <div className="relative">
           <div className="w-36 h-36">
             <img
@@ -83,6 +83,7 @@ const UserProfileCard = () => {
         <div className="w-full">
           <HighlightSection />
         </div>
+        <hr className=" border-zinc-400 w-full h-2" />
         {userProfile?.badges?.length === 0 && (
           <div className="w-full">
             <Badges userProfile={userProfile} />

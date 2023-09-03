@@ -13,8 +13,10 @@ const NotificationBell = () => {
   const [notifications, setNotifications] = useState([]);
   const [socket, setSocket] = useState(null);
 
+  const url = process.env.URL || "http://localhost:8000";
+
   useEffect(() => {
-    const newSocket = io("http://localhost:8000");
+    const newSocket = io(`${url}`);
     setSocket(newSocket);
     newSocket.emit("joinRoom", { roomid: user?._id });
     return () => newSocket.close();
@@ -78,16 +80,16 @@ const NotificationBell = () => {
                           ? notification?.user?.picturePath
                           : notification?.job
                           ? notification?.job.company?.picturePath
-                          : user.picturePath
+                          : user?.picturePath
                       }
                       className="w-10 h-10 rounded-full"
                     />
                     <div className="flex-grow">
                       <h5 className="text-md font-bold">
                         {notification?.user
-                          ? notification.user.firstname +
+                          ? notification?.user?.firstname +
                             " " +
-                            notification.user.lastname
+                            notification?.user?.lastname
                           : notification?.job
                           ? notification?.job.company?.companyName
                           : user.firstname}

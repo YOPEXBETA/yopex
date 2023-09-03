@@ -1,58 +1,33 @@
-// material-ui
-import { useTheme } from "@mui/material/styles";
-import { useMediaQuery, Button, Stack } from "@mui/material";
+import React from "react";
 import FaceIcon from "@mui/icons-material/Face";
-
-// assets
-import Google from "../../../assets/images/icons/google.svg";
-
-// ==============================|| FIREBASE - SOCIAL BUTTON ||============================== //
+import GoogleIcon from "../../../assets/images/icons/google.svg";
 
 const FireBaseSocialIcons = ({
   showbutton,
   handleSignIn,
   handleShowWebcam,
 }) => {
-  const theme = useTheme();
-  const matchDownSM = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
-    <Stack
-      direction="row"
-      spacing={matchDownSM ? 1 : 2}
-      justifyContent={matchDownSM ? "space-around" : "space-between"}
-      sx={{
-        px: matchDownSM ? 0 : 2, // add padding to the stack
-        marginTop: "1rem", // add margin to the top of the stack
-        "& .MuiButton-startIcon": {
-          m: matchDownSM ? 0 : 1,
-          marginLeft: matchDownSM ? "0.5rem" : "1rem", // add margin to the left of the startIcon
-        },
-      }}
-    >
+    <div className="flex flex-row space-x-2 sm:space-x-4 justify-between items-center px-2 mt-4">
       {!showbutton && (
-        <Button
-          variant="outlined"
-          color="secondary"
-          fullWidth
-          startIcon={<img src={Google} alt="Google" />}
+        <button
+          className="w-full flex items-center justify-center border border-secondary text-secondary py-3  px-4 rounded-lg hover:bg-secondary"
           onClick={handleSignIn}
         >
-          {!matchDownSM && "Google"}
-        </Button>
+          <img src={GoogleIcon} alt="Google" className="w-6 h-6 mr-1" />
+          <span className="hidden sm:inline">Google</span>
+        </button>
       )}
       {showbutton && (
         <button
-          variant="outlined"
-          color="secondary"
-          fullWidth
-          startIcon={<FaceIcon />}
+          className="flex items-center border border-secondary text-secondary py-2 px-4 rounded-full hover:bg-secondary hover:text-white transition duration-300 ease-in-out"
           onClick={handleShowWebcam}
         >
-          {!matchDownSM && "Face Recognition"}
+          <FaceIcon className="w-6 h-6 mr-1" />
+          <span className="hidden sm:inline">Face Recognition</span>
         </button>
       )}
-    </Stack>
+    </div>
   );
 };
 

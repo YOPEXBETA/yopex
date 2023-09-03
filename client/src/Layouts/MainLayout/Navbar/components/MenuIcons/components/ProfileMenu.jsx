@@ -19,7 +19,7 @@ const ProfileMenu = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -51,7 +51,7 @@ const ProfileMenu = () => {
               <div className="flex-grow">
                 {user.role === "user" || user.role === "admin" ? (
                   <div>
-                    <p className="text-[1rem] font-medium">
+                    <p className="text-[1rem] text-black font-medium">
                       {user.firstname + " " + user.lastname}
                     </p>
                     <p className="text-gray-500">{user.country}</p>
@@ -79,7 +79,7 @@ const ProfileMenu = () => {
               <span className="text-gray-600">Settings</span>
             </a>
             <a
-              href="/login"
+              href="/"
               onClick={handleLogout}
               className="px-3 py-2 hover:bg-gray-100 space-x-2 flex items-center cursor-pointer"
             >

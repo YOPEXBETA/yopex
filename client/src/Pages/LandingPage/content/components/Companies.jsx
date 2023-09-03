@@ -1,32 +1,16 @@
 import React, { useState, useEffect } from "react";
-import razer from "../../../../assets/razer.png";
-import paypal from "../../../../assets/paypal.png";
-import netlfix from "../../../../assets/netflix.png";
 
-const Guests = [
-  {
-    id: 1,
-    author: "Razer",
-    image: razer,
-  },
-  {
-    id: 2,
-    author: "Paypal",
-    image: paypal,
-  },
-  {
-    id: 3,
-    author: "Netflix",
-    image: netlfix,
-  },
-];
+import { useCompanies } from "../../../../hooks/react-query/useCompany";
+
 
 const Companies = () => {
   const [currPage, setCurrPage] = useState(0);
-
+  const{data:companies} = useCompanies();
+  
   const itemsPerPage = 3;
-  const totalPages = Math.ceil(Guests.length / itemsPerPage);
-
+  
+  const totalPages = Math.ceil(3/ itemsPerPage);
+  
   const goToNextPage = () => {
     setCurrPage((prevPage) => (prevPage + 1) % totalPages);
   };
@@ -46,37 +30,30 @@ const Companies = () => {
         <p className="text-4xl font-bold text-center">Companies</p>
       </div>
       <div className="flex flex-wrap justify-center">
-        {Guests.slice(
-          currPage * itemsPerPage,
-          (currPage + 1) * itemsPerPage
-        ).map((Guest) => (
-          <div key={Guest.id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
-            <div>
-              <div className="flex gap-3 items-center mb-4 flex-col">
-                <img
-                  src={Guest.image}
-                  alt={Guest.author}
-                  className="w-32 h-32 rounded-xl object-contain mr-4"
+      {companies && Array.isArray(companies) ? (
+    companies.slice(
+      currPage * itemsPerPage,
+      (currPage + 1) * itemsPerPage
+    ).map((company) => (
+      <div key={company.id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
+        <div>
+          <div className="flex gap-3 items-center mb-4 flex-col">
+          <img
+                  src={company.companyLogo}
+                  alt="Icon"
+                  className="w-20 h-20 rounded-lg object-cover"
                 />
-                <div>
-                  <h2 className="text-2xl font-medium">{Guest.author}</h2>
-                </div>
-              </div>
+                 <div>
+              <h2 className="text-2xl font-medium">{company.companyName}</h2>
             </div>
           </div>
-        ))}
+          </div>
       </div>
-      <div className="mt-4 flex justify-center overflow-x-auto">
-        {Array.from({ length: totalPages }, (_, i) => (
-          <div
-            key={i}
-            onClick={() => setCurrPage(i)}
-            className={`${
-              i === currPage ? "bg-gray-800" : "bg-gray-300 hover:bg-gray-400"
-            } w-3 h-3 rounded-full mx-2 cursor-pointer`}
-          />
-        ))}
-      </div>
+      ))
+      ) : (
+        <p>No companies available.</p>
+      )}
+    </div>
     </div>
   );
 };

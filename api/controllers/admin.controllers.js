@@ -3,6 +3,29 @@ const bcrypt = require("bcryptjs");
 
 const Company = require("../models/company.model");
 const companySchema = require("../models/company.model");
+const Level = require("../models/Level.model");
+
+const createLevel = async () => {
+  try {
+    // Find the highest existing level
+    const highestLevel = await Level.findOne().sort({ maxScore: -1 });
+
+    // Calculate the min and max scores for the new level
+    const newMinScore = highestLevel ? highestLevel.maxScore + 1 : 0;
+    const newMaxScore = newMinScore + 999; // For example, each level coast 1000 points
+    const levelName = highestLevel
+    ? `${parseInt(highestLevel.name.replace("Level ", "")) + 1}`
+    : "1";
+
+    // Create and save the new level
+    const level = new Level({ name: `Level ${levelName}`, minScore: newMinScore, maxScore: newMaxScore });
+    await level.save();
+
+    return `Level ${levelName}`;
+  } catch (error) {
+    console.error(`Error creating level: ${error.message}`);
+  }
+};
 
 const getUsers = async (req, res) => {
   try {
@@ -139,4 +162,5 @@ module.exports = {
   BanAccount,
   approveCompany,
   getCompanies,
+  createLevel,
 };

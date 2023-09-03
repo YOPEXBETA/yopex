@@ -5,7 +5,6 @@ const userModel = require("../models/user.model");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
 
-
 //create a post
 
 const CreatePost = async (req, res) => {
@@ -34,7 +33,8 @@ const CreatePost = async (req, res) => {
       firstname: isUser ? owner.firstname : undefined,
       lastname: isUser ? owner.lastname : undefined,
       companyName: !isUser ? owner.companyName : undefined,
-      userPicturePath: owner.picturePath!=undefined?owner.picturePath: owner.companyLogo,
+      userPicturePath:
+        owner.picturePath != undefined ? owner.picturePath : owner.companyLogo,
       description: req.body.description,
       postPicturePath: req.body.postPicturePath,
       postVideoePath: req.body.postVideoPath,
@@ -45,7 +45,7 @@ const CreatePost = async (req, res) => {
     const data = await Model.findOneAndUpdate(
       { _id: req.body.userId },
       { $push: { posts: savedpost._id } },
-      { new: true },
+      { new: true }
     ).populate("posts");
 
     res.status(201).json(data);
@@ -82,8 +82,7 @@ const getFeedPosts = async (req, res) => {
     ...(q.categories && { "categories.name": q.categories }),
   };
   try {
-    const posts = await Post.find(filters)
-      .sort({ createdAt: "desc" });
+    const posts = await Post.find(filters).sort({ createdAt: "desc" });
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -115,9 +114,9 @@ const getUserPosts = async (req, res) => {
     let owner;
     let isUser = true;
     if (user) {
-      owner = user
+      owner = user;
     } else {
-      owner = company
+      owner = company;
       isUser = false;
     }
 
@@ -130,9 +129,9 @@ const getUserPosts = async (req, res) => {
           { companyId: userId },
           { _id: { $in: sharedPostIds } },
         ],
-      })
+      });
     } else {
-      posts = await Post.find({ userId: userId })
+      posts = await Post.find({ userId: userId });
     }
 
     res.status(200).json(posts);
@@ -140,8 +139,6 @@ const getUserPosts = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
-
 
 //like/dislike post
 const likePost = async (req, res) => {
@@ -163,7 +160,7 @@ const likePost = async (req, res) => {
       likesCount += 1;
       const notification = new notificationModel({
         type: "like",
-        message: `${user.firstname+" "+user.lastname} liked your post`,
+        message: `${user.firstname + " " + user.lastname} liked your post`,
       });
       notification.save();
       main.sendNotification(post.userId, notification);
@@ -173,7 +170,7 @@ const likePost = async (req, res) => {
     const updatedPost = await Post.findByIdAndUpdate(
       id,
       { likes: post.likes, likesCount },
-      { new: true },
+      { new: true }
     );
 
     res.status(200).json(updatedPost);
@@ -215,7 +212,6 @@ const sharePost = async (req, res) => {
   }
 };
 
-
 const BookmarkPost = async (req, res) => {
   try {
     // Find the current user by ID
@@ -229,21 +225,21 @@ const BookmarkPost = async (req, res) => {
       throw new Error("User not found");
     }
     // Find the post to bookmark
-    const postId=req.params.postId
+    const postId = req.params.postId;
     const isbookmarked = owner.bookmarks.includes(postId);
-    if(isbookmarked){
+    if (isbookmarked) {
       const indexOfPost = owner.bookmarks.indexOf(postId);
-      owner.bookmarks.splice(indexOfPost,1);
-    }else{
+      owner.bookmarks.splice(indexOfPost, 1);
+    } else {
       owner.bookmarks.push(postId);
     }
     console.log(owner.bookmarks);
     const data = await UserModel.findByIdAndUpdate(
       owner._id,
-      {bookmarks:owner.bookmarks},
+      { bookmarks: owner.bookmarks },
       { new: true }
-    )
-    
+    );
+
     res.status(201).json(data);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -254,19 +250,16 @@ const getBookmarks = async (req, res) => {
   try {
     const userId = req.params.userId;
     const user = await UserModel.findById(userId).populate("bookmarks");
-    if (user){
+    if (user) {
       const bookmarks = user.bookmarks;
       res.status(200).json(bookmarks);
-    }else{
+    } else {
       throw new Error("User not found");
     }
-    
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
-
-
 
 module.exports = {
   CreatePost,

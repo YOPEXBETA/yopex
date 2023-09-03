@@ -22,36 +22,35 @@ const JobCard = ({ job }) => {
             <div className="flex justify-between flex-row-reverse mb-4">
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
                 <img
-                  src={job.company.companyLogo}
+                  src={job?.company?.companyLogo}
                   alt="Icon"
                   className="w-16 h-16 rounded-lg object-cover"
                 />
               </div>
               <div>
-                <p className="text-lg font-bold text-left">{job.title}</p>
+                <p className="text-lg font-bold text-left">{job?.title}</p>
                 <p className="text-gray-500 mt-2 text-left">
-                  By {job.company.companyName}
+                  By {job?.company?.companyName}
                 </p>
               </div>
             </div>
             <div>
               <p className="text-md font-normal text-left mb-6 truncate w-80">
-                {job.description.length > 100
-                  ? `${job.description.substring(0, 150)} ....`
-                  : job.description}
+                {job?.description?.length > 100
+                  ? `${job?.description.substring(0, 150)} ....`
+                  : job?.description}
               </p>
             </div>
             <div>
               {/* <p className="text-lg  text-left font-bold">Published</p> */}
               <p className="text-md  text-left font-normal text-green-500">
-                {formatDistance(new Date(job.createdAt), new Date(), {
+                {formatDistance(new Date(job?.createdAt), new Date(), {
                   addSuffix: true,
                 })}
               </p>
             </div>
           </div>
         </div>
-
       </div>
       {/* Additional static content for other cards can be added similarly */}
       <JobOfferModal open={isOpen} handleClose={handleClose} job={job} />

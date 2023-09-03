@@ -1,7 +1,11 @@
 import React from "react";
+import { useCreateLevel } from "../../../hooks/react-query/useLevels";
 
 const LevelPage = () => {
-  return <div>LevelPage</div>;
+
+  const { mutate } =useCreateLevel() 
+  
+  return <div><button onClick={mutate}>Create New Level</button></div>;
 };
 
 export default LevelPage;

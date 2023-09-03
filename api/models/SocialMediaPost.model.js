@@ -35,6 +35,15 @@ const SocialMediaPostSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    BookMarks: {
+      type: Map,
+      of: Boolean,
+      default: {},
+    },
+    BookMarksCount: {
+      type: Number,
+      default: 0,
+    },
     shareCount: {
       type: Number,
       default: 0,
@@ -58,12 +67,12 @@ const SocialMediaPostSchema = new mongoose.Schema(
     },
     user: { type: mongoose.Types.ObjectId, ref: "User" },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const SocialMediaPost = mongoose.model(
   "SocialMediaPost",
-  SocialMediaPostSchema,
+  SocialMediaPostSchema
 );
 
 module.exports = SocialMediaPost;

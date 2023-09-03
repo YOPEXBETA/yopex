@@ -20,6 +20,8 @@ const {
   banUser,
   CreateCompany,
   getCurrentUser,
+  followUnfollowCompany,
+  getUserFollowingsCompanies
 } = require("../controllers/user.controller");
 
 const validate = require("../middlewares/SchemaValidation.middleware");
@@ -55,10 +57,21 @@ userRouter.get(
   authenticateToken,
   getUserFollowings,
 );
+userRouter.get(
+  "/find/followingsCompanies/:userId",
+  authenticateToken,
+  getUserFollowingsCompanies,
+);
 userRouter.put(
   "/toggleFollow/:otherUserId",
   authenticateToken,
   followUnfollowUser,
+);
+
+userRouter.put(
+  "/toggleFollowCompany/:companyId",
+  authenticateToken,
+  followUnfollowCompany,
 );
 userRouter.get("/find/suggestedUsers", authenticateToken, getsuggestedUsers);
 userRouter.get("/:userId/badges", authenticateToken, getBadgesEarnedByUser);

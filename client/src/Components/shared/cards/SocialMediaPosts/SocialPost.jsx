@@ -1,24 +1,32 @@
 import { useState } from "react";
-import { Favorite, FavoriteBorder, Share } from "@mui/icons-material";
-import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import { Checkbox } from "@mui/material";
 import { formatDistance } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CommentButton from "../../comments/CommentButton";
+
 import {
   useLikePost,
   useBookmarkPost,
 } from "../../../../hooks/react-query/usePosts";
-import PostMenuIcon from "./components/PostMenuIcon";
+import PostMenuIcon from "../../MenuIcons/PostMenuIcon";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+
 import SocialPostImage from "../../PostImage/SocialPostImage";
 
-const SocialPostCard = ({ post, bookmarks, companyId,height,width }) => {
+const SocialPostCard = ({
+  post,
+  bookmarks,
+  companyId,
+  height,
+  width,
+  openModal,
+}) => {
   const { user } = useSelector((state) => state.auth);
-  
+
+  console.log(post, "socialpost");
   const { category } = useSelector((state) => state.global);
-  console.log(post);
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
   const { mutate: BookmarkPost } = useBookmarkPost(
     user._id,
@@ -58,7 +66,7 @@ const SocialPostCard = ({ post, bookmarks, companyId,height,width }) => {
             <Link
               key={post.userId}
               to={
-                post.companyName !== undefined
+                post?.companyName !== undefined
                   ? `/company/${post.userId}`
                   : `/profile/${post.userId}`
               }
@@ -66,8 +74,8 @@ const SocialPostCard = ({ post, bookmarks, companyId,height,width }) => {
             >
               <p className="text-md font-medium ">
                 {post.companyName !== undefined
-                  ? `${post.companyName}`
-                  : `${post.firstname} ${post.lastname}`}
+                  ? `${post?.companyName}`
+                  : `${post?.firstname} ${post?.lastname}`}
               </p>
             </Link>
             <p className=" text-[14px]  text-gray-500">
@@ -78,18 +86,14 @@ const SocialPostCard = ({ post, bookmarks, companyId,height,width }) => {
           </div>
         </div>
         {(post.userId === user._id || user.companies.includes(post.userId)) && (
-          <button className="p-2 rounded-full">
+          <button className="py-6 px-2 rounded-full">
             <PostMenuIcon className="text-black" post={post} />
           </button>
         )}
       </div>
 
-      <div className="px-4 pb-3 ">
-        <p>{post.description}</p>
-      </div>
-
       <div className="relative">
-        <div className="overflow-x-auto py-2">
+        <div className="overflow-x-auto">
           <div className="flex relative">
             <button
               onClick={handlePrevious}
@@ -103,8 +107,12 @@ const SocialPostCard = ({ post, bookmarks, companyId,height,width }) => {
             {post.postPicturePath
               .slice(currentPage, currentPage + 1)
               .map((item, index) => (
-                <SocialPostImage item={item} height={height} width={width} />
-                
+                <SocialPostImage
+                  item={item}
+                  height={height}
+                  width={width}
+                  openModal={openModal}
+                />
               ))}
 
             <button
@@ -119,38 +127,45 @@ const SocialPostCard = ({ post, bookmarks, companyId,height,width }) => {
         </div>
       </div>
 
-      <div className=" flex items-center py-1 gap-2">
-        <div className="flex items-center gap-1">
+      <div className=" flex items-center gap-6 px-4">
+        <div className="flex items-center gap-2">
           <button
             aria-label="add to favorites"
             onClick={() => likePost(post._id)}
+            className="focus:outline-none"
           >
-            <Checkbox
-              icon={<FavoriteBorder />}
-              checkedIcon={<Favorite sx={{ color: "red" }} />}
-              checked={user._id in post.likes}
-            />
+            {user._id in post.likes ? (
+              <AiFillHeart className="text-red-500 w-6 h-6" />
+            ) : (
+              <AiOutlineHeart className="text-gray-500 w-6 h-6" />
+            )}
           </button>
           <p className="">{post.likesCount}</p>
         </div>
 
         {/* Comment button */}
-        <div className=" flex items-center gap-1">
-          <CommentButton post={post} category={category} />
-          <p className="">{post.commentCount}</p>
+        <div className=" flex items-center p-2">
+          <CommentButton
+            post={post}
+            category={category}
+            commentCount={post.commentCount}
+          />
         </div>
 
-        {/* Share button */}
         {ownerId == post.userId ? (
           ""
         ) : (
-          <div className=" flex items-center gap-1">
-            <button onClick={bookmark}>
-              <Checkbox
-                icon={<BookmarksIcon />}
-                checkedIcon={<BookmarksIcon sx={{ color: "green" }} />}
-                checked={bookmarks.includes(post._id)}
-              />
+          <div className="flex items-center gap-1">
+            <button
+              aria-label="bookmark"
+              onClick={() => bookmark(post._id)}
+              className="focus:outline-none"
+            >
+              {bookmarks.includes(post._id) ? (
+                <BsBookmarkFill className="text-green-500 w-5 h-5" />
+              ) : (
+                <BsBookmark className="text-gray-500 w-5 h-5" />
+              )}
             </button>
           </div>
         )}

@@ -6,7 +6,12 @@ import { useNavigate } from "react-router-dom";
 import * as z from "zod";
 import AlertContainer from "../../../Components/alerts";
 import Copyright from "../../../Components/shared/Copyright";
-import { getCurrentUser, login, reset as resetAuth } from "../../../redux/auth/authSlice";
+import {FaToggleOff,FaToggleOn} from 'react-icons/fa';
+import {
+  getCurrentUser,
+  login,
+  reset as resetAuth,
+} from "../../../redux/auth/authSlice";
 import GoogleSignIn from "../Google";
 
 // user input validation schema
@@ -17,12 +22,10 @@ const loginSchema = z.object({
 
 const Login = () => {
   const dispatch = useDispatch();
-
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { error,user } = useSelector((state) => state.auth);
+  const { error, user } = useSelector((state) => state.auth);
   const [rememberMe, setRememberMe] = useState(false);
-  
-  
 
   const {
     register,
@@ -31,16 +34,19 @@ const Login = () => {
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const onSubmit = (data) => dispatch(login({ ...data, rememberMe }));
 
   // redirect user according to his role
   useEffect(() => {
-    if (!user){
-      const {data:currentUser} = dispatch(getCurrentUser());
-      console.log("currentUser",currentUser);
+    if (!user) {
+      const { data: currentUser } = dispatch(getCurrentUser());
+      console.log("currentUser", currentUser);
       if (!currentUser) return;
-    };
+    }
     const isAdmin = user.role === "admin";
 
     if (isAdmin) {
@@ -50,7 +56,7 @@ const Login = () => {
 
     navigate("/feed");
     dispatch(resetAuth());
-  }, [dispatch,navigate,user]);
+  }, [dispatch, navigate, user]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full lg:w-4/6">
@@ -100,12 +106,23 @@ const Login = () => {
             </label>
             <div className="relative">
               <input
-                type="password"
+                 type={showPassword ? "text" : "password"}
                 id="input-group-2"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="password"
                 {...register("password", { required: true })}
               />
+              <button
+          type="button"
+          onClick={togglePasswordVisibility}
+          className="absolute inset-y-0 right-0 flex items-center pr-2"
+        >
+          {showPassword ? (
+           <FaToggleOn/>
+          ) : (
+            <FaToggleOff/>
+          )}
+        </button>
             </div>
           </div>
         </div>
@@ -139,7 +156,7 @@ const Login = () => {
         <div class="grid grid-cols-12 w-full mt-6">
           <div class="col-span-12">
             <button
-              className=" w-full bg-green-500 py-3 rounded-md text-md font-medium text-white"
+              className="w-full bg-green-500 py-3 rounded-md text-md font-medium text-white"
               disabled={isSubmitting}
             >
               Login

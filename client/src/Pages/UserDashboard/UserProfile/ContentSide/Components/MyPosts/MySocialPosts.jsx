@@ -5,8 +5,24 @@ import {
 } from "../../../../../../hooks/react-query/usePosts";
 import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 import { useSelector } from "react-redux";
+import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
+import { useState } from "react";
 
 const MySocialPosts = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const openModal = (post) => {
+    setSelectedPost(post);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    setIsModalOpen(false);
+  };
   const { user } = useSelector((state) => state.auth);
   const { userId } = useParams();
   const { data: posts, isLoading } = useUserPosts(userId);
@@ -18,13 +34,33 @@ const MySocialPosts = () => {
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {isLoading ? (
-        <p>Loading posts...</p>
-      ) : (
-        posts?.map((post) => (
-          <SocialPostCard key={post._id} post={post} bookmarks={bookmarksId} height={"48"} width={"screen"} />
-        ))
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {isLoading ? (
+          <p>Loading posts...</p>
+        ) : (
+          posts?.map((post, index) => (
+            <SocialPostCard
+              key={post._id}
+              post={post}
+              bookmarks={bookmarksId}
+              className="xl:h-48 xl:w-96"
+              height={"full"}
+              width={"full"}
+              openModal={() => openModal(post)}
+            />
+          ))
+        )}
+      </div>
+      {/* Render the SocialPostModal conditionally */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <SocialPostModal
+            image={selectedImage}
+            closeModal={closeModal}
+            post={selectedPost}
+          />
+        </div>
       )}
     </div>
   );

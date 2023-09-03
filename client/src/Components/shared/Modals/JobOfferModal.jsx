@@ -27,26 +27,26 @@ const JobOfferModal = ({ open, handleClose, job }) => {
             <div className="p-8">
               <div className="flex items-center gap-4">
                 <img
-                  src={job.company.companyLogo}
+                  src={job?.company?.companyLogo}
                   alt="Icon"
                   className="w-16 h-16 rounded-lg object-cover"
                 />
                 <div>
                   <p className="text-lg font-bold">{job.title}</p>
-                  <p>By {job.company.companyName}</p>
+                  <p>By {job?.company?.companyName}</p>
                 </div>
               </div>
 
               <hr className="my-4 border-t" />
 
-              <p className="mb-4">{job.description}</p>
+              <p className="mb-4">{job?.description}</p>
 
               <hr className="my-4 border-t" />
 
               <div className="flex justify-between">
                 <p className="text-md font-semibold">Posted from</p>
                 <p className="text-md font-normal text-green-500">
-                  {formatDistance(new Date(job.createdAt), new Date(), {
+                  {formatDistance(new Date(job?.createdAt), new Date(), {
                     addSuffix: true,
                   })}
                 </p>
