@@ -14,4 +14,4 @@ const FollowingsHighlights = () => {
   );
 };
 
-export default FollowingsHighlights;
+export default FollowingsHighlights;  

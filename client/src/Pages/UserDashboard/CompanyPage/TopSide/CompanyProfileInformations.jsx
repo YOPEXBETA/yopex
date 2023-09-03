@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useCompanyById } from "../../../../hooks/react-query/useCompany";
 import { CompanyNavigationTab } from "./CompanyNavigationTab";
 import { useFollowCompany } from "../../../../hooks/react-query/useUsers";
+import { EditCompanyModal } from "./EditCompanyModal";
 
 const CompanyProfileInformations = ({ changeValue, value }) => {
+  const [openPostModal, setOpenPostModal] = useState(false);
   const { companyId } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { mutate, isLoadinge } = useFollowCompany( user._id,companyId);
@@ -20,6 +22,9 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   if (isError) {
     return <p>Error loading company data.</p>;
   }
+  const toggleModal = () => {
+    setOpenPostModal(!openPostModal);
+  };
 
   return (
     <div>
@@ -75,12 +80,17 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
             </div>
             <a href="#" className="block">
               <button className="cursor-pointer capitalize font-medium hover:scale-105  bg-green-500 py-2 px-4 rounded-lg text-white w-36"
-              onClick={mutate}
+              onClick={company && company.user === user._id ? toggleModal: mutate}
               >
               {company && company.user === user._id ? 'Edit' :  user.followings.includes(company._id) ? "Unfollow" : "Follow" }
               </button>
             </a>
           </div>
+          <EditCompanyModal 
+          open={openPostModal}
+          handleClose={toggleModal}
+          company={company}
+          />
 
           <CompanyNavigationTab changeValue={changeValue} value={value} />
         </div>
