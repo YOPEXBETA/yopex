@@ -5,11 +5,12 @@ import { useUserFollowings } from "../../../../../../hooks/react-query/useUsers"
 const FollowingsNumbers = () => {
   const { userId } = useParams();
   const { data: followings } = useUserFollowings(userId);
+ 
 
   return (
     <div className=" flex items-center gap-2 justify-between">
       <p className="text-zinc-500"> Followings</p>
-      <p className="text-lg">{followings?.length}</p>
+      <p className="text-lg">{ followings?.userFollowingss.length +followings?.companyFollowings.length }</p>
     </div>
   );
 };
