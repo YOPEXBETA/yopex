@@ -9,16 +9,14 @@ import ProfileMenu from "../../../Layouts/MainLayout/Navbar/components/MenuIcons
 
 const HomeHeader = () => {
   const [nav, setNav] = useState(false);
-    const { user, error } = useSelector((state) => state.auth); // Assuming you have an error state in your Redux slice
+  const { user, error } = useSelector((state) => state.auth); // Assuming you have an error state in your Redux slice
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  
 
   useEffect(() => {
     console.log("layout");
     if (!user) {
-      dispatch(getCurrentUser())
+      dispatch(getCurrentUser());
     }
   }, [dispatch, user]);
 
@@ -48,8 +46,10 @@ const HomeHeader = () => {
         </div>
 
         <div className="hidden md:flex gap-4 items-center">
-          {user && ( 
-              <p className="hover:scale-105 " ><ProfileMenu /></p>
+          {user && (
+            <p className="hover:scale-105 ">
+              <ProfileMenu />
+            </p>
           )}
           {!user && (
             <a href="/login" className="block">

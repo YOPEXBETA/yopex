@@ -51,7 +51,7 @@ const ProfileMenu = () => {
               <div className="flex-grow">
                 {user.role === "user" || user.role === "admin" ? (
                   <div>
-                    <p className="text-[1rem] font-medium">
+                    <p className="text-[1rem] text-black font-medium">
                       {user.firstname + " " + user.lastname}
                     </p>
                     <p className="text-gray-500">{user.country}</p>

@@ -14,8 +14,8 @@ import { MuiFileInput } from "mui-file-input";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useEditPost } from "../../../../../hooks/react-query/usePosts";
-import uploadFile from "../../../../../utils/uploadFile";
+import { useEditPost } from "../../../hooks/react-query/usePosts";
+import uploadFile from "../../../utils/uploadFile";
 
 export const EditPostModal = ({ open, handleClose, post }) => {
   const { category } = useSelector((state) => state.global);
