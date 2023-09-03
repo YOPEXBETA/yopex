@@ -47,7 +47,7 @@ const FeedbacksPage = () => {
   const { user } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
-
+  console.log(reviews);
   return (
     <Box>
       {userId !== user._id &&
@@ -66,16 +66,16 @@ const FeedbacksPage = () => {
           <Box className={classes.feedbackHeader}>
             <Stack spacing={2}>
               <Stack flexDirection={"row"} alignItems={"center"} columnGap={1}>
-                <Avatar src={review.companyId.picturePath} />
+                <Avatar src={review.companyId.companyLogo} />
                 <Typography variant="h5">
-                  {review.companyId.companyName}
+                  {review.companyId.companyName}  ({review.challengeId?.title})
                 </Typography>
               </Stack>
               <Typography
                 fontSize={15}
                 className={classes.feedbackText}
                 style={{
-                  color: review.star === 5 ? "green" : "black",
+                  color: review.star >= 5 ? "green" : "black",
                 }}
               >
                 {review.description}
@@ -84,11 +84,19 @@ const FeedbacksPage = () => {
                 {new Date(review.createdAt).toLocaleDateString()}
               </Typography>
             </Stack>
-            <Rating
-              className={classes.feedbackRating}
-              value={review.star}
-              readOnly
-            />
+            <div>
+            {[...Array(10)].map((_, index) => (
+            <span
+            key={index}
+            className={`text-2xl ${
+              index < review.star ? 'text-yellow-500' : 'text-gray-400'
+            } mx-0`}
+            
+          >
+            ★
+          </span>
+        ))}
+        </div>
           </Box>
         </Card>
       ))}

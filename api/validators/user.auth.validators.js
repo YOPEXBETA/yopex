@@ -51,6 +51,7 @@ const userEditProfileValidator = yup.object().shape({
   birthDate: yup.date(),
   picturePath: yup.string(),
   gender: yup.string(),
+  userDescription: yup.string(),
 });
 
 const loginValidator = yup.object().shape({

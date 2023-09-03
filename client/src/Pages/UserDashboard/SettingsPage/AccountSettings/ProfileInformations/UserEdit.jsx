@@ -6,6 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TextareaAutosize,
 } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import Grid from "@mui/material/Grid";
@@ -69,6 +70,7 @@ const UserEdit = () => {
     defaultValues: {
       firstname: user.firstname,
       lastname: user.lastname,
+      
     },
   });
 
@@ -76,6 +78,7 @@ const UserEdit = () => {
   const countryList = countries.map((country) => country.name.common);
 
   const onSubmit = async (data) => {
+    console.log(data.values);
     const { file, ...values } = data;
     if (data.file.length > 0) {
       const url = await uploadFile(data.file[0], setUploadProgress, "profilePic");
@@ -138,6 +141,18 @@ const UserEdit = () => {
             fullWidth
             autoComplete="family-name"
             {...register("lastname")}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <InputLabel shrink={true}>Description</InputLabel>
+
+          <textarea
+            required
+            id="Description"
+            placeholder="Description"
+            className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+            value={user.userDescription}
+            {...register("userDescription")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
