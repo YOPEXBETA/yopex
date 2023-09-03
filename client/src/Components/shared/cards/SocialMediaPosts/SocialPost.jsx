@@ -15,7 +15,14 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 import SocialPostImage from "../../PostImage/SocialPostImage";
 
-const SocialPostCard = ({ post, bookmarks, companyId, height, width }) => {
+const SocialPostCard = ({
+  post,
+  bookmarks,
+  companyId,
+  height,
+  width,
+  openModal,
+}) => {
   const { user } = useSelector((state) => state.auth);
 
   console.log(post, "socialpost");
@@ -85,12 +92,8 @@ const SocialPostCard = ({ post, bookmarks, companyId, height, width }) => {
         )}
       </div>
 
-      <div className="px-4 pb-3 ">
-        <p>{post.description}</p>
-      </div>
-
       <div className="relative">
-        <div className="overflow-x-auto py-1">
+        <div className="overflow-x-auto">
           <div className="flex relative">
             <button
               onClick={handlePrevious}
@@ -104,7 +107,12 @@ const SocialPostCard = ({ post, bookmarks, companyId, height, width }) => {
             {post.postPicturePath
               .slice(currentPage, currentPage + 1)
               .map((item, index) => (
-                <SocialPostImage item={item} height={height} width={width} />
+                <SocialPostImage
+                  item={item}
+                  height={height}
+                  width={width}
+                  openModal={openModal}
+                />
               ))}
 
             <button

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import FeedbacksPage from "./Components/FeedBacks/feedbacks";
 import Followers from "./Components/Followers/Followers";
 import Followings from "./Components/Followings/Followings";
 import MyChallenges from "./Components/MyChallenges/MyChallenges";
 import MySocialPosts from "./Components/MyPosts/MySocialPosts";
 import Bookmarks from "./Components/Bookmarks/bookmarks";
-
+import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
 
 const ProfilePageContent = ({ changeValue, value }) => {
   return (
@@ -55,7 +55,6 @@ const ProfilePageContent = ({ changeValue, value }) => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

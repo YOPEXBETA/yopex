@@ -14,9 +14,6 @@ const Chat = () => {
   const [otherUser, setOtherUser] = useState({});
   const navigate = useNavigate();
 
-  
-  
-
   useEffect(() => {
     if (!conversations) return;
     else {
@@ -34,12 +31,11 @@ const Chat = () => {
       }
       console.log(otherUser);
     }
-  }, [selectedConversationId,conversations]);
+  }, [selectedConversationId, conversations]);
   const socket = useSocket();
-  
-  socket.emit("joinRoom", {id:user._id,roomid:selectedConversationId});
-  
-  
+
+  socket.emit("joinRoom", { id: user._id, roomid: selectedConversationId });
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 ">
       <div className="col-span-1 border-r border-gray-300">
