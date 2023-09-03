@@ -1,9 +1,6 @@
 import React, { lazy } from "react";
 import Loadable from "../Components/PageLoading/Loadable";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
-import Chat from "../Pages/UserDashboard/ChatPage/Chat";
-import NotFoundPage from "../Pages/UserDashboard/NotFoundPage/NotFoundPage";
-import Company from "../Pages/UserDashboard/CompanyPage/Company";
 
 // ==============================|| USER PAGES ||============================== //
 //HomePage
@@ -11,9 +8,24 @@ const HomeLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/HomePage/index"))
 );
 
+//CompanyPage
+const Company = Loadable(
+  lazy(() => import("../Pages/UserDashboard/CompanyPage/index"))
+);
+
+//NotFoundPage
+const NotFoundPage = Loadable(
+  lazy(() => import("../Pages/UserDashboard/NotFoundPage/NotFoundPage"))
+);
+
+//NotFoundPage
+const Chat = Loadable(
+  lazy(() => import("../Pages/UserDashboard/ChatPage/Chat"))
+);
+
 //UserProfilePage
 const UserProfileLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/UserProfile/UserProfileLayout"))
+  lazy(() => import("../Pages/UserDashboard/UserProfile/index"))
 );
 //LeaderBoardPage
 const LeaderBoardLayout = Loadable(

@@ -23,7 +23,7 @@ const MyChallenges = () => {
   if (data)
     return (
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-11 py-5">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-4  py-5">
           {data.challenges.length > 0 ? (
             data.challenges?.map((challenge) => (
               <ChallengeCard

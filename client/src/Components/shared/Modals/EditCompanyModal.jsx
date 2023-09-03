@@ -1,30 +1,19 @@
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  InputLabel,
-  LinearProgress,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, LinearProgress, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useCreateJob } from "../../../../hooks/react-query/useJobs";
-import { useUserById } from "../../../../hooks/react-query/useUsers";
+import { useCreateJob } from "../../../hooks/react-query/useJobs";
+import { useUserById } from "../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 import { Controller } from "react-hook-form";
 import { MuiFileInput } from "mui-file-input";
-import { useEditCompany } from "../../../../hooks/react-query/useCompany";
-import uploadFile from "../../../../utils/uploadFile";
+import { useEditCompany } from "../../../hooks/react-query/useCompany";
+import uploadFile from "../../../utils/uploadFile";
 
-export const EditCompanyModal = ({ open, handleClose,company }) => {
-
+export const EditCompanyModal = ({ open, handleClose, company }) => {
   const { mutate } = useEditCompany(company._id);
-  console.log(company)
-  
+  console.log(company);
+
   const [uploadProgress, setUploadProgress] = useState(0);
   const { user } = useSelector((state) => state.auth);
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
@@ -35,19 +24,22 @@ export const EditCompanyModal = ({ open, handleClose,company }) => {
     },
   });
   const uploadedFile = watch("files");
-   
+
   const onSubmit = async (data) => {
     if (data.files.length > 0) {
       const companyLogo = [];
       for (let file of data.files) {
         companyLogo.push(await uploadFile(file, setUploadProgress));
       }
-      return mutate({ 
+      return mutate({
         companyDescription: data.companyDescription,
         companyName: data.companyName,
+
+
         companyLogo,
       });
     }
+
 
     console.log(data);
 
@@ -56,13 +48,12 @@ export const EditCompanyModal = ({ open, handleClose,company }) => {
     companyName: data.companyName,
     companyLogo: data.companyLogo,
     
-    });
+
+   });
     setUploadProgress(0);
     handleClose();
     reset();
   };
-
-  
 
   return (
     <div
@@ -94,14 +85,14 @@ export const EditCompanyModal = ({ open, handleClose,company }) => {
                   type="text"
                   placeholder={company.companyName}
                   {...register("companyName")}
-                margin="normal"
-                variant="outlined"
-                required
-                fullWidth
-                id="companyName"
-                label="companyName"
-                multiline
-                rows={4}
+                  margin="normal"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="companyName"
+                  label="companyName"
+                  multiline
+                  rows={4}
                 />
                 <textarea
                   className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
@@ -110,37 +101,40 @@ export const EditCompanyModal = ({ open, handleClose,company }) => {
                   id="companyDescription"
                   label="companyDescription"
                 />
-                  {uploadedFile && (
-                <Stack mb={1}>
-                  <Typography>Upload Progress: {uploadProgress}%</Typography>
-                  <LinearProgress
-                    variant="determinate"
-                    value={uploadProgress}
-                  />
-                </Stack>
-              )}
-                 <Controller
-                name="files"
-                control={control}
-                render={({ field }) => (
-                  <MuiFileInput
-                    fullWidth
-                    multiple
-                    value={field.value}
-                    onChange={(value) => setValue("files", value)}
-                  />
+                {uploadedFile && (
+                  <Stack mb={1}>
+                    <Typography>Upload Progress: {uploadProgress}%</Typography>
+                    <LinearProgress
+                      variant="determinate"
+                      value={uploadProgress}
+                    />
+                  </Stack>
                 )}
-              />
-                <div className="flex justify-between">
+                <Controller
+                  name="files"
+                  control={control}
+                  render={({ field }) => (
+                    <MuiFileInput
+                      fullWidth
+                      multiple
+                      value={field.value}
+                      onChange={(value) => setValue("files", value)}
+                    />
+                  )}
+                />
+                <div className="flex justify-between mt-4">
                   <button
-                    className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500"
+                    className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500 hover:bg-gray-200"
                     onClick={handleClose}
                   >
                     Cancel
                   </button>
-                  <Button variant="contained" type="submit">
-                  Edit your company
-                </Button>
+                  <button
+                    className=" px-6 py-2 text-white rounded-md border-2 bg-green-500 hover:bg-green-600"
+                    type="submit"
+                  >
+                    Edit your company
+                  </button>
                 </div>
               </form>
             </div>
