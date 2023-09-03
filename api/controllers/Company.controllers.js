@@ -18,6 +18,7 @@ const editProfile = async (req, res) => {
 
     const updateFields = pick(req.body, [
       "companyName",
+      "companyDescription",
       "email",
       "password",
       "picturePath",
@@ -41,6 +42,17 @@ const editProfile = async (req, res) => {
     return res.status(500).json(error);
   }
 };
+
+const getAllCompanies = async (req,res)=>{
+  try {
+    const companies = await companySchema.find();
+    console.log(companies);
+    res.status(200).json(companies);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "Server Error" });
+  }
+}
 
 /*const getCompany = async (req, res) => {
   try {
@@ -166,5 +178,7 @@ module.exports = {
   getCompany,
   getCompanyChallenges,
   ChallengeWinner,
-  getCompanyNotifications,deleteCompany
+  getCompanyNotifications,
+  deleteCompany,
+  getAllCompanies
 };

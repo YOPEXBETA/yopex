@@ -60,6 +60,17 @@ export const useEditCompany = (companyId) => {
   });
 }
 
+export const useCompanies = () => {
+  return useQuery({
+    queryKey: ["companies"],
+    queryFn: async () => {
+      const { data } = await axios.get("http://localhost:8000/company/all");
+
+      return data;
+    },
+  });
+};
+
 export const useDeleteCompany = (companyId) => {
   const queryClient = useQueryClient();
 

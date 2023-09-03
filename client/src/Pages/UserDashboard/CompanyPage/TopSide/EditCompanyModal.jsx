@@ -45,14 +45,16 @@ export const EditCompanyModal = ({ open, handleClose,company }) => {
       return mutate({ 
         companyDescription: data.companyDescription,
         companyName: data.companyName,
-        
         companyLogo,
       });
     }
 
+    console.log(data);
+
     mutate({ 
       companyDescription: data.companyDescription,
-      companyName: data.companyName,
+    companyName: data.companyName,
+    companyLogo: data.companyLogo,
     
     });
     setUploadProgress(0);
@@ -103,8 +105,10 @@ export const EditCompanyModal = ({ open, handleClose,company }) => {
                 />
                 <textarea
                   className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
-                  {...register("companyDescription", { required: true })}
+                  {...register("companyDescription")}
                   placeholder={company.companyDescription}
+                  id="companyDescription"
+                  label="companyDescription"
                 />
                   {uploadedFile && (
                 <Stack mb={1}>
