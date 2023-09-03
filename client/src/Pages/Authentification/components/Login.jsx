@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import * as z from "zod";
 import AlertContainer from "../../../Components/alerts";
 import Copyright from "../../../Components/shared/Copyright";
+import {FaToggleOff,FaToggleOn} from 'react-icons/fa';
 import {
   getCurrentUser,
   login,
@@ -21,7 +22,7 @@ const loginSchema = z.object({
 
 const Login = () => {
   const dispatch = useDispatch();
-
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { error, user } = useSelector((state) => state.auth);
   const [rememberMe, setRememberMe] = useState(false);
@@ -33,6 +34,9 @@ const Login = () => {
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const onSubmit = (data) => dispatch(login({ ...data, rememberMe }));
 
@@ -102,12 +106,23 @@ const Login = () => {
             </label>
             <div className="relative">
               <input
-                type="password"
+                 type={showPassword ? "text" : "password"}
                 id="input-group-2"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="password"
                 {...register("password", { required: true })}
               />
+              <button
+          type="button"
+          onClick={togglePasswordVisibility}
+          className="absolute inset-y-0 right-0 flex items-center pr-2"
+        >
+          {showPassword ? (
+           <FaToggleOn/>
+          ) : (
+            <FaToggleOff/>
+          )}
+        </button>
             </div>
           </div>
         </div>

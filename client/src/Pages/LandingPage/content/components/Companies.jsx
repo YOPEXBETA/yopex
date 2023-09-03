@@ -9,7 +9,7 @@ const Companies = () => {
   
   const itemsPerPage = 3;
   
-  const totalPages = Math.ceil(6/ itemsPerPage);
+  const totalPages = Math.ceil(3/ itemsPerPage);
   
   const goToNextPage = () => {
     setCurrPage((prevPage) => (prevPage + 1) % totalPages);
