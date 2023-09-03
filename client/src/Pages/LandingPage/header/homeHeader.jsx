@@ -5,6 +5,7 @@ import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../../redux/auth/authSlice";
+import ProfileMenu from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/ProfileMenu";
 
 const HomeHeader = () => {
   const [nav, setNav] = useState(false);
@@ -47,12 +48,8 @@ const HomeHeader = () => {
         </div>
 
         <div className="hidden md:flex gap-4 items-center">
-          {user && (
-            <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
-              <a href="/feed" smooth duration={500}>
-                Feed
-              </a>
-            </li>
+          {user && ( 
+              <p className="hover:scale-105 " ><ProfileMenu /></p>
           )}
           {!user && (
             <a href="/login" className="block">

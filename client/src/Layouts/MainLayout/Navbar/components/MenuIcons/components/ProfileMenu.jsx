@@ -19,7 +19,7 @@ const ProfileMenu = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -79,7 +79,7 @@ const ProfileMenu = () => {
               <span className="text-gray-600">Settings</span>
             </a>
             <a
-              href="/login"
+              href="/"
               onClick={handleLogout}
               className="px-3 py-2 hover:bg-gray-100 space-x-2 flex items-center cursor-pointer"
             >
