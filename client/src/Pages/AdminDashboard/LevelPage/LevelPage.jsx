@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useCreateLevel , useGetLevels , useDeleteLevel } from "../../../hooks/react-query/useLevels";
 import RangeSlider from "./RangerSlider";
-import PostMenuIcon from "../../../Components/shared/MenuIcons/PostMenuIcon";
 
 import { AiFillDelete } from 'react-icons/ai';
 
 const LevelPage = () => {
+  const [adminDefinedPoints, setAdminDefinedPoints] = useState(0);
+  const { mutate : createLevelMutate } =useCreateLevel(adminDefinedPoints);
 
-  const { mutate : createLevelMutate } =useCreateLevel();
   const { mutate : deleteLevelMutate } =useDeleteLevel();
   const {data } = useGetLevels();
   const [showAlert, setShowAlert] = useState(false);
@@ -29,9 +29,11 @@ const LevelPage = () => {
 
   const handleAlertOK = () => {
 
-    createLevelMutate();
-
+ 
+    createLevelMutate(adminDefinedPoints);
+ 
     setShowAlert(false);
+    setAdminDefinedPoints(0);
   
   };
 
@@ -43,10 +45,22 @@ const LevelPage = () => {
 
 
   return (
-    <div>
-  <button  onClick={handleAddLevel} className="bg-zinc-800 rounded-full mb-2 text-white px-4 py-2 w-1/6" type="submit">
+    <div >
+      <div className="flex gap-11 ">
+       <input
+       className="w-full"
+          type="range"
+          min="0"
+          max="1000" // Adjust max points as needed
+          step="10"
+          value={adminDefinedPoints}
+          onChange={(e) => setAdminDefinedPoints(e.target.value) }
+        />
+        <span>{adminDefinedPoints} Points</span>
+  <button  onClick={handleAddLevel} className="bg-zinc-800 rounded-full mb-2 hover:bg-slate-800 text-white px-4 py-2 w-1/6" type="submit">
     Add a new Level
   </button>
+  </div>
   {showAlert && (
         <div
         id="alert-additional-content-5"
@@ -96,7 +110,7 @@ const LevelPage = () => {
                         {badgeData.name}
                       </h5>
                       <p className="text-gray-500 text-sm mt-4">
-                      <RangeSlider min={badgeData.minScore} max={badgeData.maxScore} value1={badgeData.minScore}  onChange={(values) => console.log(values)} />
+                      <RangeSlider min={badgeData.minScore} max={badgeData.maxScore} value1={badgeData.maxScore}  />
                       </p>
                     </div>
                   </div>
@@ -111,6 +125,10 @@ const LevelPage = () => {
               )
           )}
       </div>
+      <div> 
+      <div>
+      </div>
+    </div>
 </div>
  
   )

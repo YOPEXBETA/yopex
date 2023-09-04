@@ -11,9 +11,9 @@ const {
   BanAccount,
   getCompanies,
   approveCompany,
-  createLevel
+  
 } = require("../controllers/admin.controllers");
-const {getLevels, deleteLevel} = require ("../controllers/levels.controller");
+const {getLevels, deleteLevel,createLevel} = require ("../controllers/levels.controller");
 
 adminRouter.post("/createLevel",createLevel);
 adminRouter.get("/allLevels" , isAdmin, getLevels)
