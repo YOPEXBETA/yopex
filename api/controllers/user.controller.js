@@ -19,7 +19,9 @@ const editProfile = async (req, res) => {
       "gender",
       "phoneNumber",
       "birthDate",
+      "userDescription"
     ]);
+    console.log(req.body);
 
     if (updateFields.password) {
       const salt = await bcrypt.genSalt(10);

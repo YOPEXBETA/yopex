@@ -10,6 +10,7 @@ const { sendEmail } = require("../middlewares/mail.middleware");
 const { updateUserChallengesBadges } = require("../utils/utilities");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
+const ReviewModel = require("../models/Review.model");
 
 
 const editProfile = async (req, res) => {
@@ -101,6 +102,14 @@ const ChallengeWinner = async (req, res) => {
     const Challenge = await ChallengeModel.findById(idChallenge);
     const company = await Company.findById(idCompany).select("-password");
     const User = await userModel.findById(idUser);
+    const review = await ReviewModel.findOne({
+      challengeId: idChallenge,
+      userId: idUser,
+    });
+    if (!review) {
+      return res.status(404).json({ message: "To be able to select this participant as the winner, you should add a review." });
+    }
+
     console.log(Challenge);
 
     // get Admin account

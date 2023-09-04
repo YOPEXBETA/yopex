@@ -29,6 +29,7 @@ const validate = require("../middlewares/SchemaValidation.middleware");
 const {
   createReview,
   getReviews,
+  getReviewsByChallengeUser,
 } = require("../controllers/review.controller");
 
 const {
@@ -85,6 +86,11 @@ userRouter.get(
 userRouter.get("/users/stats", authenticateToken, getUserStats);
 userRouter.post("/review/create", authenticateToken, createReview);
 userRouter.get("/reviews/:id", authenticateToken, getReviews);
+userRouter.get(
+  "/review/challenge/:id",
+  authenticateToken,
+  getReviewsByChallengeUser,
+);
 userRouter.get("/user/ban/:id", authenticateToken, banUser);
 userRouter.post("/create", authenticateToken, CreateCompany);
 

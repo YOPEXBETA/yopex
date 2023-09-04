@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("./user.model");
 const Company = require("./company.model");
+const ChallengeModel = require("./Challenge.model");
 
 const ReviewSchema = new mongoose.Schema(
   {
@@ -24,6 +25,11 @@ const ReviewSchema = new mongoose.Schema(
       required: true,
       enum: [1, 2, 3, 4, 5],
     },
+    challengeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: ChallengeModel,
+      required: false,
+    }
   },
   { timestamps: true },
 );

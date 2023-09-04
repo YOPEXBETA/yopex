@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ParticipantsDialogModal from "../../../../../../Components/shared/Modals/ParticipantsDialogModal";
 import { Link } from "react-router-dom";
+import ReviewModel from "../../../../../../Components/shared/Modals/ReviewModel";
 
 const ParticipantRow = ({ user, index, challenge }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = () => setIsOpen((prev) => !prev);
+  const [reviewisOpen, setreviewIsOpen] = useState(false);
+  const togglereview = () => setreviewIsOpen((prev) => !prev);
+  const toggleOpen = () => {setIsOpen((prev) => !prev);console.log("close");}
   const { user: currentUser } = useSelector((state) => state.auth);
   const isOwner = currentUser.companies.find(
     (company) => company === challenge.company._id
@@ -27,7 +29,7 @@ const ParticipantRow = ({ user, index, challenge }) => {
     <tr
       key={user._id}
       className="hover:bg-gray-50 bg-white"
-      onClick={isOwner ? toggleOpen : null}
+      
     >
       <td className=" py-4 px-4 font-bold text-md">{index + 1} </td>
       <td className="py-4 px-4">
@@ -47,19 +49,32 @@ const ParticipantRow = ({ user, index, challenge }) => {
           </Link>
         </div>
       </td>
-      <td className="text-sm text-left py-4 px-4">
+      <td className="text-sm text-left py-4 px-4" >
         {" "}
         {formatDate(user?.registrationDate)}
       </td>
-      <td className="text-sm text-right py-4 px-4">
+      <td className="text-sm text-right py-4 px-4" >
+        <div onClick={isOwner ? toggleOpen : null}>
         {formatDate(user?.submissionDate)}
+        </div>
+        
       </td>
       {user && (
+        <>
         <ParticipantsDialogModal
           open={isOpen}
           participant={user}
           handleClose={toggleOpen}
+          togglereview={togglereview}
+          isOwner={isOwner}
         />
+        <ReviewModel
+        open={reviewisOpen}
+        participant={user}
+        handleClose={togglereview}
+        companyId={challenge.company._id}
+      />
+      </>
       )}
     </tr>
   );

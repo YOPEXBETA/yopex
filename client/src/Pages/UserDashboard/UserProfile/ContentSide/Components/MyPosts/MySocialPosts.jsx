@@ -30,6 +30,7 @@ const MySocialPosts = () => {
   let bookmarksId = [];
   data?.map((book) => {
     bookmarksId.push(book._id);
+    
   });
 
   return (
