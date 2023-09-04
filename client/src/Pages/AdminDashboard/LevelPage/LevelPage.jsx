@@ -13,8 +13,8 @@ const LevelPage = () => {
   
   return (
     <div>
-  <button onClick={mutate} className="bg-zinc-800 rounded-full text-white px-4 py-2 w-1/6" type="submit">
-    Add skill
+  <button onClick={mutate} className="bg-zinc-800 rounded-full mb-2 text-white px-4 py-2 w-1/6" type="submit">
+    Add a new Level
   </button>
   <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
     {data?.map(
