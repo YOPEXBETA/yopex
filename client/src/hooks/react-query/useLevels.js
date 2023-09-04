@@ -20,3 +20,15 @@ export const useCreateLevel = () => {
       },
     });
   };
+
+  export const useGetLevels = () => {
+    return useQuery({
+      queryKey: ["Levels"],
+      queryFn: async () => {
+        const { data } = await axios.get(`${url}/admin/allLevels`, {
+          withCredentials: true,
+        });
+        return data;
+      },
+    });
+  }
