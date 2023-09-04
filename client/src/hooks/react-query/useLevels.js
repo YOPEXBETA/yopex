@@ -16,7 +16,6 @@ export const useCreateLevel = () => {
       },
       onSuccess: (newLevelName) => {
         queryClient.invalidateQueries({ queryKey: ["levels"] });
-        const confirmationMessage = `A new ${newLevelName} will be created. Do you want to continue?`;
       },
     });
   };
@@ -32,3 +31,19 @@ export const useCreateLevel = () => {
       },
     });
   }
+
+  export const useDeleteLevel = () => {
+    const queryClient = useQueryClient();
+  
+    return useMutation({
+      mutationFn: async (LevelId) => {
+        await axios.delete(`${url}/admin/delLevel/${LevelId}`, {
+          withCredentials: true,
+        });
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["levels"] });
+    
+      },
+    });
+  };

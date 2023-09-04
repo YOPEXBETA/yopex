@@ -10,6 +10,18 @@ const getLevels = async (req, res) => {
     }
   };
 
+  const deleteLevel = async (req, res) => {
+    try {
+      
+    
+   await levels.findByIdAndDelete(req.params.id);
+        res.status(200).send("Level has been deleted");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  };
+
   module.exports = {
-    getLevels
+    getLevels,
+    deleteLevel
   };

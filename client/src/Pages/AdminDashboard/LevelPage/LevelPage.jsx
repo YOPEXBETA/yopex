@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { useCreateLevel , useGetLevels } from "../../../hooks/react-query/useLevels";
+import { useCreateLevel , useGetLevels , useDeleteLevel } from "../../../hooks/react-query/useLevels";
+import RangeSlider from "./RangerSlider";
+import PostMenuIcon from "../../../Components/shared/MenuIcons/PostMenuIcon";
 
+import { AiFillDelete } from 'react-icons/ai';
 
 const LevelPage = () => {
 
-  const { mutate } =useCreateLevel();
+  const { mutate : createLevelMutate } =useCreateLevel();
+  const { mutate : deleteLevelMutate } =useDeleteLevel();
   const {data } = useGetLevels();
   const [showAlert, setShowAlert] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState('');
@@ -12,32 +16,30 @@ const LevelPage = () => {
   const lastLevel  = data && data[data.length-1];
 
   const handleAddLevel = () => {
-    // Check if there is a last level
+ 
     if (lastLevel) {
       const newLevelNumber = parseInt(lastLevel.name.replace('Level ', '')) + 1;
       const message = `A new Level ${newLevelNumber} will be created. Do you want to continue?`;
 
-      // Set the confirmation message
       setConfirmationMessage(message);
 
-      // Display the custom alert
       setShowAlert(true);
     }
   };
 
   const handleAlertOK = () => {
-    // Perform the action you want when the user clicks OK
-    mutate();
 
-    // Close the alert
+    createLevelMutate();
+
     setShowAlert(false);
   
   };
 
   const handleAlertCancel = () => {
-    // Close the alert without taking any action
     setShowAlert(false);
   };
+
+
 
 
   return (
@@ -77,19 +79,38 @@ const LevelPage = () => {
           </div>
         </div>
       )}
-  <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
-    {data?.map(
-      (badgeData) =>
-        badgeData && (
-          <div key={badgeData._id} className="hover:bg-slate-200 flex flex-col items-center pb-10 cursor-pointer ">
-          <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://png.pngtree.com/png-vector/20210207/ourmid/pngtree-simple-modern-level-up-game-interface-with-stars-and-arrow-png-image_2896899.jpg" alt="Bonnie image"/>
-          <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{badgeData.name}</h5>
-          <input id="small-range" type="range" min={badgeData.minScore} max={badgeData.maxScore} value={badgeData.minScore} disabled className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"></input>
+<div className="grid grid-cols-1 mt-4 md:grid-cols-2 lg:grid-cols-4 gap-4 cursor-pointer">
+        {data
+          ?.map(
+            (badgeData) =>
+              badgeData && (
+                <div
+                  key={badgeData._id}
+                  className="bg-white p-4 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 border-2 border-green-400"
+                >
+                  <div className="flex flex-col items-center space-y-2">
+                    
+                    <div className="flex items-center flex-col">
+                      <img className="w-20 h-20 opacity-40 mb-2" src="https://w7.pngwing.com/pngs/134/138/png-transparent-star-golden-stars-angle-3d-computer-graphics-symmetry-thumbnail.png"></img>
+                      <h5 className="text-green-500 text-lg font-semibold truncate">
+                        {badgeData.name}
+                      </h5>
+                      <p className="text-gray-500 text-sm mt-4">
+                      <RangeSlider min={badgeData.minScore} max={badgeData.maxScore} value1={badgeData.minScore}  onChange={(values) => console.log(values)} />
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                  onClick={() => deleteLevelMutate(badgeData._id)}
+                    className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full hover:bg-red-700 transition duration-300"
+                  >
+                    <AiFillDelete/>
+                  </button>
+                </div>
+              )
+          )}
       </div>
-        )
-    )}
-   
-</div>
 </div>
  
   )
