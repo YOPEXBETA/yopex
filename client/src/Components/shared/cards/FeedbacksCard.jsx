@@ -10,29 +10,35 @@ const FeedbacksCard = ({ review }) => {
             alt="Company Logo"
             className="w-16 h-16 rounded-lg"
           />
-          <h2 className="text-2xl font-semibold">
-            {review.companyId.companyName}
-          </h2>
+          <div className="flex flex-col gap-1">
+            <h2 className="text-xl font-semibold">
+              {review.companyId.companyName}
+            </h2>
+            <div className="text-md text-gray-500">
+              {new Date(review.createdAt).toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
+            </div>
+          </div>
         </div>
+
         <div className="flex items-center space-x-1">
           <span className="text-3xl text-yellow-500">★</span>
           <p className="text-lg">{`${review.star} / 10`}</p>
         </div>
       </div>
-      <p className="text-lg text-gray-600">{review.challengeId?.title}</p>
 
+      <hr className="h-[1px] bg-gray-200" />
+      {/*<p className="text-lg text-gray-600">{review.challengeId?.title}</p>*/}
       <p
-        className={`text-lg ${
-          review.star >= 5 ? "text-green-500" : "text-black"
+        className={`text-lg truncate w-96 ${
+          review.star >= 5 ? "text-gray-500" : "text-green-500"
         }`}
       >
         {review.description}
       </p>
-      <div className="flex justify-between items-center">
-        <p className="text-xl text-gray-600">
-          {new Date(review.createdAt).toLocaleDateString()}
-        </p>
-      </div>
     </div>
   );
 };
