@@ -105,7 +105,7 @@ export const useFollowCompany = (currentUserId, companyId) => {
       );
     },
     onSuccess: () => {
-     queryClient.invalidateQueries(["companies", companyId]); // Invalidate the company data query
+      queryClient.invalidateQueries(["companies", companyId]); // Invalidate the company data query
     },
     enabled: !!companyId,
   });
@@ -141,45 +141,43 @@ export const useUserFollowings = (userId) => {
   );
 };
 
-let query="";
+let query = "";
 
-export const useSetquery =()=>{
+export const useSetquery = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (q) => {
-      query=q;
+      query = q;
     },
     onSuccess: () => {
       queryClient.invalidateQueries("searchUsers");
     },
   });
-}
+};
 
 export const useSearchUsers = () => {
   return useQuery({
-    queryKey:["searchUsers"], 
+    queryKey: ["searchUsers"],
     queryFn: async () => {
-    const { data } = await axios.get(`${url}/users?search=${query}`, {
-      withCredentials: true,
-    });
-    return data;
-  }
-});
+      const { data } = await axios.get(`${url}/users?search=${query}`, {
+        withCredentials: true,
+      });
+      return data;
+    },
+  });
 };
-
-
 
 export const useSuggestedUsers = () => {
   return useQuery({
-    queryKey:["suggestedUsers"], 
-  queryFn: async () => {
-    const { data } = await axios.get(`${url}/find/suggestedUsers`, {
-      withCredentials: true,
-    });
-    return data;
-  }
-});
+    queryKey: ["suggestedUsers"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/find/suggestedUsers`, {
+        withCredentials: true,
+      });
+      return data;
+    },
+  });
 };
 
 export const useUserChallenges = (userId) => {

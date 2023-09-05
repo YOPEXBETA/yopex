@@ -1,46 +1,12 @@
-import { Avatar, Box, Button, Card, Stack, Typography } from "@mui/material";
-import Rating from "@mui/material/Rating";
-import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUserById } from "../../../../../../hooks/react-query/useUsers";
 import AddReviewModal from "./addreviewmodal";
 import { useSelector } from "react-redux";
 import { useUserReviews } from "../../../../../../hooks/react-query/useReviews";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    padding: theme.spacing(4),
-  },
-  title: {
-    marginBottom: theme.spacing(2),
-  },
-  feedbackItem: {
-    padding: theme.spacing(2),
-    border: `1px solid ${theme.palette.grey[300]}`,
-    borderRadius: theme.shape.borderRadius,
-    marginBottom: theme.spacing(2),
-  },
-  feedbackHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: theme.spacing(1),
-  },
-  feedbackText: {
-    marginBottom: theme.spacing(1),
-  },
-  feedbackRating: {
-    marginRight: theme.spacing(1),
-  },
-  button: {
-    marginTop: theme.spacing(2),
-  },
-}));
+import FeedbacksCard from "../../../../../../Components/shared/cards/FeedbacksCard";
 
 const FeedbacksPage = () => {
-  const classes = useStyles();
   const { userId } = useParams();
   const { data: userProfile } = useUserById(userId);
   const { data: reviews } = useUserReviews(userId);
@@ -49,60 +15,24 @@ const FeedbacksPage = () => {
   const toggleOpen = () => setIsOpen((prev) => !prev);
   console.log(reviews);
   return (
-    <Box>
+    <div className="grid grid-cols-2 gap-4">
       {userId !== user._id &&
         user.role === "company" &&
         userProfile.role !== "company" && (
-          <Button onClick={toggleOpen}>Add Review</Button>
-        )}
-
-      {reviews?.map((review) => (
-        <Card
-          key={review._id}
-          className={classes.feedbackItem}
-          elevation={0}
-          variant="outlined"
-        >
-          <Box className={classes.feedbackHeader}>
-            <Stack spacing={2}>
-              <Stack flexDirection={"row"} alignItems={"center"} columnGap={1}>
-                <Avatar src={review.companyId.companyLogo} />
-                <Typography variant="h5">
-                  {review.companyId.companyName}  ({review.challengeId?.title})
-                </Typography>
-              </Stack>
-              <Typography
-                fontSize={15}
-                className={classes.feedbackText}
-                style={{
-                  color: review.star >= 5 ? "green" : "black",
-                }}
-              >
-                {review.description}
-              </Typography>
-              <Typography variant="h6">
-                {new Date(review.createdAt).toLocaleDateString()}
-              </Typography>
-            </Stack>
-            <div>
-            {[...Array(10)].map((_, index) => (
-            <span
-            key={index}
-            className={`text-2xl ${
-              index < review.star ? 'text-yellow-500' : 'text-gray-400'
-            } mx-0`}
-            
+          <button
+            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded"
+            onClick={toggleOpen}
           >
-            ★
-          </span>
-        ))}
+            Add Review
+          </button>
+        )}
+      {reviews?.map((review) => (
+        <div key={review._id} className="h-72">
+          <FeedbacksCard review={review} />
         </div>
-          </Box>
-        </Card>
       ))}
-
       <AddReviewModal open={isOpen} onClose={toggleOpen} />
-    </Box>
+    </div>
   );
 };
 

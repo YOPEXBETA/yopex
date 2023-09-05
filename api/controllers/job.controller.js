@@ -15,12 +15,9 @@ const addJob = async (req, res, next) => {
     const { title, description, companyId } = req.body;
 
     const userId = req.userId;
-    console.log("userId:", userId);
     const user = await User.findById(userId);
-    console.log("userId:", user);
 
     const company = await Company.findOne({ user: user._id, _id: companyId });
-    console.log("company:", company);
 
     if (!company) {
       return res.status(400).json({ error: "Company not found" });
@@ -96,7 +93,7 @@ const geJobById = async (req, res, next) => {
 
     // Find all job offers related to the company and populate the 'company' field
     const jobOffers = await Job.find({ company: companyId }).populate(
-      "company",
+      "company"
     );
 
     res.status(200).json(jobOffers);
@@ -145,20 +142,20 @@ const applyJob = async (req, res) => {
 
     const user = await User.findById(req.params.userId).exec();
     if (!user) return res.status(400).json("User not found");
- 
+
     // Check if user has already applied
     if (job.appliers.includes(req.params.userId))
       return res.status(400).json("You have already applied for this job");
- 
+
     // Check if user has already been accepted
     if (job.acceptedAppliers.includes(req.params.userId))
-      return res  
+      return res
         .status(400)
         .json("You have already been accepted for this job");
 
     job.appliers.push(req.params.userId);
     await job.save();
-    
+
     // add notification to company
     const company = await Company.findById(job.company).exec();
     const notification = new notificationModel({
@@ -174,7 +171,7 @@ const applyJob = async (req, res) => {
     main.sendNotification(company.user.toString(), notification);
     company.notificationsCompany.push(notification._id);
     await company.save();
-    return res.status(200).json("Applied successfully"); 
+    return res.status(200).json("Applied successfully");
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
@@ -195,7 +192,7 @@ const unapplyJob = async (req, res) => {
 
     // Remove user from acceptedAppliers array if they were accepted
     const acceptedApplierIndex = job.acceptedAppliers.indexOf(
-      req.params.userId,
+      req.params.userId
     );
     if (acceptedApplierIndex !== -1) {
       job.acceptedAppliers.splice(acceptedApplierIndex, 1);

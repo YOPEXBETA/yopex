@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSearchUsers, useSetquery} from "../../../../../hooks/react-query/useUsers";
-
+import {
+  useSearchUsers,
+  useSetquery,
+} from "../../../../../hooks/react-query/useUsers";
 
 export default function NavbarSearchDropDown() {
   const [query, setQuery] = useState("");
-  const {mutate,isSuccess} = useSetquery();
+  const { mutate, isSuccess } = useSetquery();
   const { data: suggestedUsers } = useSearchUsers();
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
@@ -13,23 +15,21 @@ export default function NavbarSearchDropDown() {
   const handleSearchUsers = (event) => {
     setOpen(true);
     setQuery(event.target.value);
-    mutate(event.target.value)
+    mutate(event.target.value);
   };
 
-  
   return (
-    <div className="relative w-72">
+    <div className="relative xl:w-72 w-full">
       <input
         type="text"
         value={query}
         onChange={handleSearchUsers}
-        
         placeholder="Search for users"
         className=" w-full p-3 border rounded-full focus:outline-none focus:ring focus:border-blue-300 text-[#000000] bg-gray-100"
       />
-      
-      {query &&isSuccess && open && (
-        <ul className="absolute z-10 mt-2 w-72 bg-white border rounded-md shadow-lg">
+
+      {query && isSuccess && open && (
+        <ul className="absolute z-10 mt-2 xl:w-72 w-full bg-white border rounded-md shadow-lg">
           {suggestedUsers.map((option, index) => {
             return (
               <li
@@ -76,5 +76,4 @@ export default function NavbarSearchDropDown() {
       )}
     </div>
   );
-  
 }

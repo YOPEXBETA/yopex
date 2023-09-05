@@ -1,26 +1,12 @@
-import PaidIcon from "@mui/icons-material/Paid";
-import {
-  Card,
-  CardContent,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
 import React, { useEffect } from "react";
-
 import { useForm } from "react-hook-form";
+import PaidIcon from "@mui/icons-material/Paid";
 
 const ContestsFilters = ({ setMinAmount, setMaxAmount }) => {
   const { register, watch } = useForm();
 
-  // const searchQuery = watch("searchQuery");
   const minAmount = watch("minAmount");
   const maxAmount = watch("maxAmount");
-
-  // useEffect(() => {
-  //   setSearchQuery(searchQuery);
-  // }, [searchQuery, setSearchQuery]);
 
   useEffect(() => {
     setMinAmount(minAmount);
@@ -31,60 +17,41 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount }) => {
   }, [maxAmount, setMaxAmount]);
 
   return (
-    <Card elevation={0} variant="outlined">
-      <CardContent>
-        <Stack spacing={2}>
-          {/* <Stack spacing={1}>
-            <Typography variant="body1" fontWeight={"bold"}>
-              Search contests
-            </Typography>
-            <div>
-              <TextField
-                label="Search Contest"
-                variant="outlined"
-                fullWidth
-                {...register("searchQuery")}
-              />
-            </div>
-          </Stack> */}
+    <div className="bg-white rounded-lg border-b-2 p-4 border-green-500 shadow-md">
+      <form className="space-y-4">
+        <div className="space-y-2">
+          <label htmlFor="min-amount" className="font-bold text-base">
+            Contest Prize
+          </label>
 
-          <form noValidate autoComplete="off">
-            <Stack spacing={2}>
-              <Typography variant="body1" fontWeight={"bold"}>
-                Contest Prize
-              </Typography>
+          <div className="flex items-center space-x-2">
+            <span className="flex-shrink-0">
+              <PaidIcon />
+            </span>
+            <input
+              id="min-amount"
+              type="number"
+              className="border rounded-md p-2 w-full"
+              placeholder="Min Amount"
+              {...register("minAmount")}
+            />
+          </div>
 
-              <TextField
-                id="min-amount"
-                label="Min Amount"
-                type="number"
-                {...register("minAmount")}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PaidIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                id="max-amount"
-                label="Max Amount"
-                type="number"
-                {...register("maxAmount")}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PaidIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Stack>
-          </form>
-        </Stack>
-      </CardContent>
-    </Card>
+          <div className="flex items-center space-x-2">
+            <span className="flex-shrink-0">
+              <PaidIcon />
+            </span>
+            <input
+              id="max-amount"
+              type="number"
+              className="border rounded-md p-2 w-full"
+              placeholder="Max Amount"
+              {...register("maxAmount")}
+            />
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

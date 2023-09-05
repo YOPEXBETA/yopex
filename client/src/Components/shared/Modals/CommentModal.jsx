@@ -14,11 +14,15 @@ const CommentModal = ({
   return (
     <>
       {isOpen && (
-        <div
-          className="fixed inset-0 flex items-center justify-center z-50"
-          onClick={handleDialogClose}
-        >
+        <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white p-4 shadow-md rounded-lg w-[40rem]">
+            <button
+              onClick={handleDialogClose}
+              className="text-lg font-bold py-2"
+            >
+              x
+            </button>
+            <hr className="border-2 mb-2" />
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-row space-x-2">
                 <input

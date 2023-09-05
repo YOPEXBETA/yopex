@@ -15,8 +15,8 @@ import { getUserLevelData } from "../../../../utils";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
-  console.log("rojla", user);
   const { userId } = useParams();
+  console.log({ userId });
 
   const { data: userProfile } = useUserById(userId);
   const { mutate, isLoading } = useFollowUser(user._id, userId);

@@ -26,7 +26,7 @@ const MyCompanyChallenges = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-11 py-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-16 py-5">
         {companyChallenges.length > 0 ? (
           companyChallenges?.map((challenge) => (
             <ChallengeCard

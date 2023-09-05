@@ -16,15 +16,15 @@ const ChallengeCard = ({ challenge }) => {
   return (
     <div>
       <Link to={`/browse/contestDetails/${challenge._id}`}>
-        <div className="w-full h-full flex-col lg:h-40 border-b-2 bg-white md:flex-row lg:pr-11 shadow-md border-green-500 rounded-lg flex hover:scale-105">
-          <div className="w-full md:w-[30%]">
+        <div className="w-full h-full flex-col lg:h-40 border-b-2 gap-6 bg-white md:flex-row lg:pr-8 shadow-md border-green-500 rounded-lg flex hover:scale-105">
+          <div className="w-full xl:w-[30%]">
             <img
-              className="h-full w-full lg:h-40 lg:w-60 lg:rounded-l-lg object-cover md:hidden lg:block"
+              className="h-full w-full lg:w-48 lg:rounded-l-lg object-cover md:hidden lg:block"
               src={challenge.company?.companyLogo}
               alt="picture"
             />
           </div>
-          <div className="flex w-full flex-col justify-between md:w-[70%] lg:px-0 px-4">
+          <div className="flex w-full flex-col justify-between xl:w-[70%] lg:px-0 px-4">
             <div className="py-4 pb-4">
               <h5 className="text-lg font-semibold">{challenge.title}</h5>
             </div>
