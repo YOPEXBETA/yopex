@@ -29,16 +29,19 @@ const FeedbacksCard = ({ review }) => {
           <p className="text-lg">{`${review.star} / 10`}</p>
         </div>
       </div>
-
       <hr className="h-[1px] bg-gray-200" />
-      {/*<p className="text-lg text-gray-600">{review.challengeId?.title}</p>*/}
-      <p
-        className={`text-lg truncate w-96 ${
-          review.star >= 5 ? "text-gray-500" : "text-green-500"
-        }`}
-      >
-        {review.description}
-      </p>
+      <div className="space-y-1">
+        <p className="text-lg font-bold truncate w-96">
+          {review.challengeId?.title}
+        </p>
+        <p
+          className={`text-[1rem] truncate w-96 ${
+            review.star >= 5 ? "text-gray-500" : "text-green-500"
+          }`}
+        >
+          {review.description}
+        </p>
+      </div>
     </div>
   );
 };
