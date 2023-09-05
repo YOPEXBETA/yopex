@@ -11,6 +11,7 @@ import {
   MdAssessment,
   MdStar,
   MdTrendingUp,
+  MdCode,
 } from "react-icons/md";
 
 import LevelPage from "../Pages/AdminDashboard/LevelPage/LevelPage";
@@ -63,6 +64,11 @@ const AdminRoutes = {
       element: <Categories />,
     },
     {
+      icon: <MdCode className="h-6 w-6" />,
+      path: "skills",
+      element: <SkillsPage />,
+    },
+    {
       icon: <MdTrendingUp className="h-6 w-6" />,
       path: "Level",
       element: <LevelPage />,
@@ -77,12 +83,6 @@ const AdminRoutes = {
       path: "Evaluation",
       element: <EvaluationPage />,
     },
-    {
-      icon: <MdCategory className="h-6 w-6" />,
-      path: "skills",
-      element : <SkillsPage />
-    }
-    
   ],
 };
 
