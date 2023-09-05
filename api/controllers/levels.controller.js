@@ -34,9 +34,41 @@ const getLevels = async (req, res) => {
 
   const deleteLevel = async (req, res) => {
     try {
-        await levels.findByIdAndDelete(req.params.id);
-        res.status(200).send("Level has been deleted");
+      // Find the level you want to delete and store its details
+      const levelToDelete = await levels.findById(req.params.id);
+  
+      if (!levelToDelete) {
+        return res.status(404).send("Level not found");
+      }
+  
+      const deletedMaxScore = levelToDelete.maxScore;
+
+      const previousLevel = await levels.findOne({ maxScore: levelToDelete.minScore  });
+
+  
+      // Delete the level
+      
+  
+      // Find all levels with maxScore greater than the deleted level's maxScore
+      const levelsToDowngrade = await levels.find({ maxScore: { $gt: deletedMaxScore } });
+   await levels.findByIdAndDelete(req.params.id);
+      // Update the levels to reflect the downgrade
+      for (const level of levelsToDowngrade) {
+        const newMinScore = previousLevel ? previousLevel.maxScore  : 0;
+        const newMaxScore = level.minScore + (level.maxScore - deletedMaxScore);
+        level.name = `Level ${parseInt(level.name.replace("Level ", "")) - 1}`;
+        level.minScore = newMinScore;
+        level.maxScore = newMaxScore;
+        await level.save();
+
+        previousLevel = level;
+      }
+     
+
+  
+      res.status(200).send("Level has been deleted !    ");
     } catch (err) {
+      console.error(err);
       res.status(500).json(err);
     }
   };
