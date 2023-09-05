@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import { FaPlus } from "react-icons/fa";
 import { useSubmitToChallenge } from "../../../hooks/react-query/useChallenges";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../../../config/firebase";
-// import { submitChallenge } from "../../../../redux/actions/ChallengeAction";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
@@ -93,9 +92,6 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
         invalidFiles.push(file);
       }
     }
-
-    console.log("Valid files:", validFiles);
-    console.log("Invalid files:", invalidFiles);
   };
 
   return (
@@ -103,44 +99,49 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
       className={`fixed inset-0 z-50 overflow-y-auto ${open ? "" : "hidden"}`}
     >
       <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-white w-full md:max-w-md mx-auto rounded-lg shadow-lg overflow-hidden z-50">
+        <div className="bg-white w-full md:max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden z-50">
           <div className="bg-primary p-4 text-black">
             <h5 className="text-lg font-semibold">SUBMIT YOUR WORK</h5>
           </div>
 
           <div className="p-4 md:p-6 space-y-4">
-            <div className="flex flex-row gap-9">
+            <div>
               <form onSubmit={handleSubmit}>
-                <label className="block text-gray-600">submission Title</label>
+                <label className="block text-gray-600 mb-2">
+                  submission Title
+                </label>
                 <input
                   type="text"
                   name="title"
+                  placeholder="submission Title"
                   onChange={(e) => setSubmissionTitle(e.target.value)}
-                  className="block w-full border border-gray-300 rounded-md px-3 py-2 mt-1"
+                  className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 text-[#000000] bg-gray-100 mb-2"
                   required
                 />
 
-                <label className="block text-gray-600">
+                <label className="block text-gray-600 mb-2">
                   Submission Description
                 </label>
                 <textarea
                   name="description"
+                  type="text"
+                  placeholder="Submission Description"
                   onChange={(e) => setSubmissionDescription(e.target.value)}
-                  className="block w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none"
-                  rows="6"
+                  className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 text-[#000000] bg-gray-100"
                   required
+                  rows={6}
                 />
               </form>
-              <div className=" items-center space-y-2">
-                <div className="w-36 h-36 relative">
-                  <input
-                    accept=".jpg,.jpeg,.png,.gif,.mp4,.avi,.zip,application/*"
-                    type="file"
-                    id="fileInput"
-                    onChange={handleFileSelect}
-                    multiple
-                  />
-                </div>
+            </div>
+            <div className=" items-center space-y-2 ">
+              <div>
+                <input
+                  accept=".jpg,.jpeg,.png,.gif,.mp4,.avi,.zip,application/*"
+                  type="file"
+                  id="fileInput"
+                  onChange={handleFileSelect}
+                  multiple
+                />
               </div>
             </div>
             <div>
@@ -152,7 +153,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                   placeholder="platform"
                   value={platform}
                   onChange={(e) => setPlatform(e.target.value)}
-                  className="w-[30%] border border-gray-300 rounded-md px-3 py-2 mt-1"
+                  className="w-[20%] border border-gray-300 rounded-md px-3 py-2 mt-1"
                 />
                 <input
                   type="text"
@@ -162,7 +163,12 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                   onChange={(e) => setLink(e.target.value)}
                   className="w-[70%] border border-gray-300 rounded-md px-3 py-2 mt-1"
                 />
-                <button onClick={handleAddLink}>Add</button>
+                <button
+                  onClick={handleAddLink}
+                  className="bg-black text-white rounded-full w-[10%] flex items-center justify-center hover:bg-green-500 hover:scale-105"
+                >
+                  <FaPlus />
+                </button>
               </div>
             </div>
             {links.length > 0 &&
@@ -199,7 +205,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-primary text-white rounded-md bg-black"
+                className="px-4 py-2  text-white rounded-md bg-black"
                 onClick={handleSubmit}
                 disabled={
                   !isLoading &&
