@@ -98,10 +98,9 @@ const SocialPostCard = ({
             <button
               onClick={handlePrevious}
               disabled={currentPage === 0}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2"
-              style={{ background: "transparent", border: "none" }}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-zinc-200 rounded-full hover:scale-110 hover:bg-green-500"
             >
-              <FaChevronLeft size={40} className=" text-white" />
+              <FaChevronLeft className=" text-white  w-8 h-8 p-2" />
             </button>
 
             {post.postPicturePath
@@ -118,10 +117,9 @@ const SocialPostCard = ({
             <button
               onClick={handleNext}
               disabled={currentPage === pageCount - 1}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2"
-              style={{ background: "transparent", border: "none" }}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-zinc-200 rounded-full hover:scale-110 hover:bg-green-500"
             >
-              <FaChevronRight size={40} className=" text-white" />
+              <FaChevronRight className=" text-white  w-8 h-8 p-2" />
             </button>
           </div>
         </div>

@@ -5,28 +5,27 @@ import Followings from "./Components/Followings/Followings";
 import MyChallenges from "./Components/MyChallenges/MyChallenges";
 import MySocialPosts from "./Components/MyPosts/MySocialPosts";
 import Bookmarks from "./Components/Bookmarks/bookmarks";
-import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
 
 const ProfilePageContent = ({ changeValue, value }) => {
   return (
     <div>
       {value === 0 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full pb-16 md:pb-4 ">
             <MySocialPosts />
           </div>
         </div>
       )}
       {value === 1 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <MyChallenges />
           </div>
         </div>
       )}
       {value === 2 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <Followers />
           </div>
         </div>
@@ -34,7 +33,7 @@ const ProfilePageContent = ({ changeValue, value }) => {
 
       {value === 3 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <Followings />
           </div>
         </div>
@@ -42,7 +41,7 @@ const ProfilePageContent = ({ changeValue, value }) => {
 
       {value === 4 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <FeedbacksPage />
           </div>
         </div>
@@ -50,7 +49,7 @@ const ProfilePageContent = ({ changeValue, value }) => {
 
       {value === 5 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <Bookmarks />
           </div>
         </div>

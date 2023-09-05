@@ -20,13 +20,13 @@ const CustomNavbar = () => {
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-12 bg-white items-center xl:px-16 px-6 border-gray-200 border-b-2 shadow-sm lg:py-1 py-4">
         <div className="md:col-span-9 text-white items-center lg:col-span-3">
-          <div className="flex gap-4 items-center justify-between">
+          <div className="flex items-center justify-between">
             <div className="flex gap-4 items-center ">
               <Link
                 to="/feed"
                 className="text-2xl font-bold text-primary flex items-center"
               >
-                <img src={YopexLogo} alt="Yopex Logo" width={35} />
+                <img src={YopexLogo} alt="Yopex Logo" className="w-9 h-9" />
               </Link>
               <NavbarSearchDropDown />
             </div>
@@ -51,13 +51,13 @@ const CustomNavbar = () => {
           </div>
         </div>
       </div>
-      <div className="lg:hidden  bg-white  p-4 md:flex flex-col items-center">
-        <MobileMenu userImage={user?.picturePath} />
+      <div className="lg:hidden  bg-white md:flex flex-col items-center">
+        <MobileMenu userImage={user?.picturePath} user={user} />
       </div>
 
       {/* Mobile menu content */}
       {showMobileMenu && (
-        <div className="lg:hidden bg-fixed bg-white h-screen">
+        <div className="lg:hidden  bg-white h-full border-b-2 border-gray-200">
           <NavbarTabTop />
         </div>
       )}

@@ -30,7 +30,7 @@ const UserProfileCard = () => {
 
   if (userProfile)
     return (
-      <div className="bg-white p-6 rounded-lg flex flex-col items-center gap-6 xl:mr-11 shadow-md border-green-500 border-b-2 mr-0">
+      <div className="bg-white p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 xl:shadow-md lg:shadow-md md:shadow-md md:border-green-500 border-b-2 mr-0">
         <div className="relative">
           <div className="w-36 h-36">
             <img

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import { BsThreeDots } from "react-icons/bs";
 import { HiDotsVertical } from "react-icons/hi";
 
 import { useSelector } from "react-redux";
@@ -15,7 +14,6 @@ const PostMenuIcon = ({ post }) => {
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
-    // Toggle the menu open/close state
     setAnchorEl(open ? null : event.currentTarget);
   };
 
@@ -25,12 +23,12 @@ const PostMenuIcon = ({ post }) => {
 
   const handleEditClick = () => {
     setIsEditModalOpen(true);
-    handleClose(); // Close the menu when clicking on "Edit Post"
+    handleClose();
   };
 
   const handleDeleteClick = () => {
     mutate(post._id);
-    handleClose(); // Close the menu when clicking on "Delete Post"
+    handleClose();
   };
 
   return (
@@ -48,7 +46,7 @@ const PostMenuIcon = ({ post }) => {
             <li>
               <button
                 onClick={handleDeleteClick}
-                className="flex items-center px-4 py-2 hover:bg-gray-100"
+                className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
               >
                 <FaTrash className="text-gray-500 mr-2" />
                 Delete Post
@@ -57,7 +55,7 @@ const PostMenuIcon = ({ post }) => {
             <li>
               <button
                 onClick={handleEditClick}
-                className="flex items-center px-4 py-2 hover:bg-gray-100"
+                className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
               >
                 <FaEdit className="text-gray-500 mr-2" />
                 Edit Post

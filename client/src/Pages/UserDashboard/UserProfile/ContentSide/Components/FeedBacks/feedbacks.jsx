@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUserById } from "../../../../../../hooks/react-query/useUsers";
-import AddReviewModal from "./addreviewmodal";
 import { useSelector } from "react-redux";
 import { useUserReviews } from "../../../../../../hooks/react-query/useReviews";
 import FeedbacksCard from "../../../../../../Components/shared/cards/FeedbacksCard";
+import AddReviewModal from "../../../../../../Components/shared/Modals/addreviewmodal";
 
 const FeedbacksPage = () => {
   const { userId } = useParams();
@@ -15,7 +15,7 @@ const FeedbacksPage = () => {
   const toggleOpen = () => setIsOpen((prev) => !prev);
   console.log(reviews);
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {userId !== user._id &&
         user.role === "company" &&
         userProfile.role !== "company" && (
