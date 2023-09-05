@@ -27,12 +27,12 @@ const ProfileMenu = () => {
       <div className="relative z-10">
         <button
           onClick={handleClick}
-          className="flex items-center justify-center w-8 h-8 text-gray-600 rounded-full"
+          className="flex items-center justify-center w-10 h-10 text-gray-600 rounded-full"
         >
           <img
             alt="picture"
             src={user.picturePath}
-            className="rounded-full bg-green-500 object-contain"
+            className="rounded-full  object-cover w-10 h-10 border-2 border-gray-200"
           />
         </button>
       </div>
@@ -46,7 +46,7 @@ const ProfileMenu = () => {
               <img
                 src={user.picturePath}
                 alt="User Avatar"
-                className="w-12 h-12 rounded-full bg-green-500"
+                className="w-12 h-12 rounded-full  border-2 border-gray-200"
               />
               <div className="flex-grow">
                 {user.role === "user" || user.role === "admin" ? (
