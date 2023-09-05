@@ -6,17 +6,17 @@ const url = process.env.URL || "http://localhost:8000";
 export const useCreateLevel = () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: async (name) => {
-        const { data } = await axios.post(
-          `${url}/admin/createLevel`,
-          
-          { withCredentials: true }
-        );
+      mutationFn: async (adminDefinedPoints) => {
+        console.log("adminDefinedPoints inside useCreateLevel:", adminDefinedPoints);
+
+        const { data } = await axios.post(`${url}/admin/createLevel`,
+        { adminDefinedPoints},
+         {withCredentials: true
+        });
         return data;
       },
-      onSuccess: (newLevelName) => {
+      onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["levels"] });
-        const confirmationMessage = `A new ${newLevelName} will be created. Do you want to continue?`;
       },
     });
   };
@@ -32,3 +32,19 @@ export const useCreateLevel = () => {
       },
     });
   }
+
+  export const useDeleteLevel = () => {
+    const queryClient = useQueryClient();
+  
+    return useMutation({
+      mutationFn: async (LevelId) => {
+        await axios.delete(`${url}/admin/delLevel/${LevelId}`, {
+          withCredentials: true,
+        });
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["levels"] });
+    
+      },
+    });
+  };
