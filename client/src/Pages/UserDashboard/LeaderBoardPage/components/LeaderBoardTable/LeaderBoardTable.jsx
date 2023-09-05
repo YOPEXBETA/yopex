@@ -31,7 +31,7 @@ const LeaderbordTable = ({ data, query }) => {
   };
   return (
     <div>
-      <div className="border border-gray-300 rounded-md overflow-hidden">
+      <div className="border border-gray-300 rounded-md overflow-hidden bg-white">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="text-black">
             <tr className="bg-white h-11">
