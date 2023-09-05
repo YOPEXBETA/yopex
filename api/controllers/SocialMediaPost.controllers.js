@@ -94,7 +94,7 @@ const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (post.userId.toString() === req.userId) {
-      response = await Post.findByIdAndDelete(req.params.id);
+      response = await Post.findOneAndDelete({_id:req.params.id});
       res.status(200).send("Post has been deleted");
     } else {
       res.status(403).send("You are not authorized to delete this post");

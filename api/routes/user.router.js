@@ -57,11 +57,13 @@ userRouter.get(
   authenticateToken,
   getUserFollowings,
 );
+
 userRouter.get(
   "/find/followingsCompanies/:userId",
   authenticateToken,
   getUserFollowingsCompanies,
 );
+
 userRouter.put(
   "/toggleFollow/:otherUserId",
   authenticateToken,

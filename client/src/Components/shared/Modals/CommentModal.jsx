@@ -18,7 +18,7 @@ const CommentModal = ({
           className="fixed inset-0 flex items-center justify-center z-50"
           onClick={handleDialogClose}
         >
-          <div className="bg-white p-4 shadow-md rounded-lg w-[40rem]">
+          <div className="bg-white p-4 shadow-md rounded-lg w-[40rem]" onClick={(e)=> e.stopPropagation()}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-row space-x-2">
                 <input
@@ -41,7 +41,7 @@ const CommentModal = ({
               <hr className="border-t border-gray-300" />
               {comments && comments.length > 0 ? (
                 <ul className="mt-4 space-y-4">
-                  {comments.map((comment) => (
+                  {comments.map((comment) => comment.userId? (
                     <li key={comment._id}>
                       <div className="flex items-center">
                         <img
@@ -68,7 +68,7 @@ const CommentModal = ({
                       </div>
                       <hr className="border-t border-gray-300 mt-2" />
                     </li>
-                  ))}
+                  ) :(<p>Comment has been deleted</p>))}
                 </ul>
               ) : (
                 <p className="mt-4 text-base text-gray-700">No comments yet.</p>

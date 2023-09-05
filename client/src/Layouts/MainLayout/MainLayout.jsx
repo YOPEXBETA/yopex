@@ -7,6 +7,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/auth/authSlice";
 import useSocket from "../../hooks/useSocket";
+import Loader from "../../Components/PageLoading/Loader";
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -34,7 +35,7 @@ const MainLayout = () => {
 
   // Render the loading state if user data is being fetched
   if (!user) {
-    return <div>Loading...</div>; // Or you can render a loading component
+    return <Loader />; // Or you can render a loading component
   }
 
   // Render the main layout once user data is available

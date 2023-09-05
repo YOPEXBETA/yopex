@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const SocialMediaPost = require("./SocialMediaPost.model");
+const Company = require("./company.model");
+const submissionModel = require("./submission.model");
+const notificationModel = require("./notification.model");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -127,4 +131,33 @@ UserSchema.virtual("yearsRegisteredCalcu").get(function () {
   return this.yearsRegistered;
 });
 
+
+UserSchema.pre('findOneAndDelete', { document: false, query: true }, async function (next) {
+  try {
+    console.log("Middleware executed");
+    
+    const query = this;
+    const userId = query._conditions._id;
+
+    SocialMediaPost.deleteMany({ userId: userId }).exec();
+
+    Company.deleteMany({ user: userId }).exec(); 
+
+    submissionModel.deleteMany({ userId: userId }).exec();
+
+    notificationModel.deleteMany({ user: userId }).exec();
+
+    
+
+    next();
+  } catch (error) {
+    console.log("Middleware error");
+    next(error);
+  }
+});
+
+
 module.exports = mongoose.model("User", UserSchema);
+
+
+

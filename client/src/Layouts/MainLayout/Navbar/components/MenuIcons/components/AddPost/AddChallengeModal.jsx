@@ -12,6 +12,7 @@ import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
 import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
 
+
 export const AddChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const { data:Skills } = useSkills();
@@ -152,7 +153,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                         value={category}
                         onChange={(e,value) =>{
                           console.log(value);
-                          
+                          setCategory(value);
                           setValue("category", value);
                         }}
                         renderInput={(params) => (

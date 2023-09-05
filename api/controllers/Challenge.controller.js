@@ -77,7 +77,7 @@ const getChallengeById = async (req, res) => {
 const deleteChallenge = async (req, res) => {
   try {
     console.log(req.params.id);
-    const challenge = await ChallengeModel.findByIdAndDelete(req.params.id);
+    const challenge = await ChallengeModel.findOneAndDelete({_id:req.params.id});
 
     const message = "challenge has been deleted";
 

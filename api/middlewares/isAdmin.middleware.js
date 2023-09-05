@@ -8,10 +8,9 @@ const isAdmin = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, process.env.passwordToken);
-    console.log(decoded);
+    
     const user = await User.findOne({ email: decoded.email });
-    console.log(decoded);
-    console.log(user);
+    
     if (!user) {
       throw new Error();
     }

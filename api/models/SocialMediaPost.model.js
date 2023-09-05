@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const CommentModel = require("./Comment.model");
 
 const SocialMediaPostSchema = new mongoose.Schema(
   {
@@ -70,9 +71,26 @@ const SocialMediaPostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const SocialMediaPost = mongoose.model(
+
+SocialMediaPostSchema.pre('findOneAndDelete', { document: false, query: true }, async function (next) {
+  try {
+    console.log("Middleware executed");
+    
+    const query = this;
+    const postId = query._conditions._id;
+
+    CommentModel.deleteMany({ postId: postId }).exec();
+
+    
+
+    next();
+  } catch (error) {
+    console.log("Middleware error");
+    next(error);
+  }
+});
+
+module.exports = mongoose.model(
   "SocialMediaPost",
   SocialMediaPostSchema
-);
-
-module.exports = SocialMediaPost;
+);;

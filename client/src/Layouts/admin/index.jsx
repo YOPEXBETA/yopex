@@ -5,6 +5,7 @@ import Sidebar from "./components/AdminSideBar";
 import routes from "../../routes/AdminRoutes";
 import { getCurrentUser } from "../../redux/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../Components/PageLoading/Loader";
 
 export default function AdminLayout(props) {
   const { user } = useSelector((state) => state.auth);
@@ -40,7 +41,7 @@ export default function AdminLayout(props) {
     }
   }, [currentPath]);
   if (!user) {
-    return <div>Loading...</div>; // Or you can render a loading component
+    return <Loader />; // Or you can render a loading component
   }
   return (
     <div className="flex h-full w-full">
