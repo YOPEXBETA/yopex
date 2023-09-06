@@ -114,7 +114,7 @@ const LevelPage = () => {
                         {badgeData.name}
                       </h5>
                       <p className="text-gray-500 text-sm mt-4">
-                      <RangeSlider min={badgeData.minScore} max={badgeData.maxScore} value1={badgeData.maxScore}  />
+                     <p>{badgeData.minScore} - {badgeData.maxScore}</p>
                       </p>
                     </div>
                   </div>
