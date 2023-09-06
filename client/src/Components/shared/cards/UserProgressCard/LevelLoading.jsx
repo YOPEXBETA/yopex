@@ -43,7 +43,7 @@ const LevelLoading = () => {
       <LinearProgressWithLabel
         value={userProfile?.score}
         level={userLevel}
-        difference={userLevel?.maxScore-userProfile?.score}
+        difference={userLevel?.maxScore}
       />
     </div>
   );
