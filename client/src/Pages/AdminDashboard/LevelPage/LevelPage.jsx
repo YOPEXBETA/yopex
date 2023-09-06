@@ -3,13 +3,14 @@ import { useCreateLevel , useGetLevels , useDeleteLevel } from "../../../hooks/r
 import RangeSlider from "./RangerSlider";
 
 import { AiFillDelete } from 'react-icons/ai';
+import { CircularProgress } from "@mui/material";
 
 const LevelPage = () => {
   const [adminDefinedPoints, setAdminDefinedPoints] = useState(0);
   const { mutate : createLevelMutate } =useCreateLevel(adminDefinedPoints);
 
   const { mutate : deleteLevelMutate } =useDeleteLevel();
-  const {data } = useGetLevels();
+  const {data , isLoading } = useGetLevels();
   const [showAlert, setShowAlert] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState('');
 
@@ -42,8 +43,7 @@ const LevelPage = () => {
   };
 
 
-
-
+ 
   return (
     <div >
       <div className="flex gap-11 ">
@@ -94,7 +94,11 @@ const LevelPage = () => {
         </div>
       )}
 <div className="grid grid-cols-1 mt-4 md:grid-cols-2 lg:grid-cols-4 gap-4 cursor-pointer">
-        {data
+{isLoading ? (
+        <p>Loading levels ...</p>
+        
+      ) : (
+        data
           ?.map(
             (badgeData) =>
               badgeData && (
@@ -123,7 +127,7 @@ const LevelPage = () => {
                   </button>
                 </div>
               )
-          )}
+          ) )}
       </div>
       <div> 
       <div>

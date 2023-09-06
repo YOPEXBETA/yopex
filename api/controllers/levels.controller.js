@@ -15,7 +15,7 @@ const createLevel = async (req,res) => {
 
     const level = new levels({ name: `Level ${levelName}`, minScore: newMinScore, maxScore: newMaxScore });
     await level.save();
-
+    res.json({ level });
     return `Level ${levelName}`;
   } catch (error) {
     console.error(`Error creating level: ${error.message}`);
@@ -27,7 +27,6 @@ const getLevels = async (req, res) => {
       const level = await levels.find();
       res.json(level);
     } catch (error) {
-      console.log(error);
       return res.status(500).json(error);
     }
   };

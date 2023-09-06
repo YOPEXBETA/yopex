@@ -11,17 +11,21 @@ import Badges from "./Badges/Badges";
 import HighlightSection from "./HighlightSection/HighlightSection";
 
 import { useUserReviews } from "../../../../hooks/react-query/useReviews";
-import { getUserLevelData } from "../../../../utils";
+import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
   const { userId } = useParams();
-  console.log({ userId });
-
-  const { data: userProfile } = useUserById(userId);
+  const { data: levelsData , isloading } = useGetLevels();
+ const { data: userProfile  } = useUserById(userId);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
-  console.log(userProfile);
+  
+ 
+  const userLevel = levelsData ? levelsData.find((level) => level.minScore <= userProfile?.score && level.maxScore >= userProfile?.score) : null;
+
+
+
   const rating = useMemo(() => {
     if (!reviews || reviews.length === 0) return 0;
     const sum = reviews.reduce((prev, current) => current.star + prev, 0);
@@ -41,7 +45,8 @@ const UserProfileCard = () => {
           </div>
           <div className="absolute bottom-0 right-0">
             <div className="flex items-center justify-center rounded-full bg-green-500 w-11 h-11 text-white">
-              Lv {getUserLevelData(userProfile.score).level}
+        { "LV "+parseInt(userLevel?.name.replace("Level ",""))}
+       
             </div>
           </div>
         </div>
