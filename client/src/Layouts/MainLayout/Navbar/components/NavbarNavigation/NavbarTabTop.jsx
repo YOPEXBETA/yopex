@@ -29,11 +29,11 @@ const NavbarTabTop = () => {
 
   return (
     <div className="w-full md:flex md:items-center py-4">
-      <nav className="w-full flex justify-center">
+      <nav className="w-full md:flex md:flex-row md:justify-center">
         <Link
           to="/feed"
           onClick={() => handleChange(0)}
-          className={`block px-4 py-2 text-sm font-medium ${
+          className={`block px-4 py-2  text-2xl xl:text-sm lg:text-sm  md:text-sm font-medium ${
             value === 0 ? "text-green-500" : "text-gray-500"
           } hover:text-green-500 focus:outline-none`}
         >
@@ -42,7 +42,7 @@ const NavbarTabTop = () => {
         <Link
           to="/browse"
           onClick={() => handleChange(1)}
-          className={`block px-4 py-2 text-sm font-medium ${
+          className={`block px-4 py-2 text-2xl xl:text-sm lg:text-sm  md:text-sm  font-medium ${
             value === 1 ? "text-green-500" : "text-gray-500"
           } hover:text-green-500 focus:outline-none`}
         >
@@ -51,7 +51,7 @@ const NavbarTabTop = () => {
         <Link
           to="/leaderboard"
           onClick={() => handleChange(2)}
-          className={`block px-4 py-2 text-sm font-medium ${
+          className={`block px-4 py-2  text-2xl xl:text-sm lg:text-sm md:text-sm font-medium ${
             value === 2 ? "text-green-500" : "text-gray-500"
           } hover:text-green-500 focus:outline-none`}
         >

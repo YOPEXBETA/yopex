@@ -281,11 +281,10 @@ const signInWithGoogle = async (req, res) => {
     },
     process.env.passwordToken
   );
-  res.cookie("accessToken", token, cookiesOptions)
+  res.cookie("accessToken", token, cookiesOptions);
 
   res.redirect("http://localhost:3000/feed");
-}
-
+};
 
 module.exports = {
   signUp,
@@ -293,5 +292,5 @@ module.exports = {
   logout,
   forgetpassword,
   resetpassword,
-  signInWithGoogle
+  signInWithGoogle,
 };

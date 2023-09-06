@@ -1,4 +1,6 @@
 const reviewModel = require("../models/Review.model");
+const userModel = require("../models/user.model");
+
 const challengeModel = require("../models/Challenge.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -19,7 +21,11 @@ const createReview = async (req, res) => {
   try {
 
     const savedReview = await newReview.save();
-    //we should update our challenge after we are giving a review and i'm going to increment my total stars
+    
+    const user = await userModel.findById(req.body.userId);
+    const updatedScore = user.score + (req.body.star*10);
+    await userModel.findByIdAndUpdate(req.body.userId, { score: updatedScore });
+
 
     await res.status(200).json(savedReview);
   } catch (error) {

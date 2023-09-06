@@ -23,15 +23,15 @@ const ReviewSchema = new mongoose.Schema(
     star: {
       type: Number,
       required: true,
-      enum: [1, 2, 3, 4, 5],
+      enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     },
     challengeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: ChallengeModel,
       required: false,
-    }
+    },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Review", ReviewSchema);

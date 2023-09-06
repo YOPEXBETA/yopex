@@ -12,9 +12,9 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
 
   return (
     <div>
-      <div className="flex bg-white shadow-md rounded-lg border-b-1 border-zinc-500">
+      <div className="flex flex-wrap bg-white xl:shadow-md md:shadow-md rounded-lg border-b-[1px] border-zinc-200">
         <button
-          className={`py-2 px-4  rounded-tl-lg ${
+          className={`w-1/2 sm:w-auto py-2 px-4  rounded-tl-lg ${
             value === 0
               ? "bg-green-500 text-white border-green-500"
               : "text-gray-500 border-gray-300"
@@ -24,7 +24,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           My Posts
         </button>
         <button
-          className={`py-2 px-4  ${
+          className={`w-1/2 sm:w-auto py-2 px-4  ${
             value === 1
               ? "bg-green-500 text-white border-green-500"
               : "text-gray-500 border-gray-300"
@@ -34,7 +34,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           My Challenges
         </button>
         <button
-          className={`py-2 px-4 ${
+          className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 2
               ? "bg-green-500 text-white border-green-500"
               : "text-gray-500 border-gray-300"
@@ -44,7 +44,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           Followers
         </button>
         <button
-          className={`py-2 px-4 ${
+          className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 3
               ? "bg-green-500 text-white border-green-500"
               : "text-gray-500 border-gray-300"
@@ -53,9 +53,8 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         >
           Followings
         </button>
-
         <button
-          className={`py-2 px-4 ${
+          className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 4
               ? "bg-green-500 text-white border-green-500"
               : "text-gray-500 border-gray-300"
@@ -66,7 +65,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         </button>
         {userId == user._id ? (
           <button
-            className={`py-2 px-4  rounded-tr-lg ${
+            className={`w-1/2 sm:w-auto py-2 px-4  rounded-tr-lg ${
               value === 5
                 ? "bg-green-500 text-white border-green-500"
                 : "text-gray-500 border-gray-300"

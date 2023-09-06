@@ -12,7 +12,7 @@ const UserRow = ({ user }) => {
               <img
                 alt={`${user.firstname} ${user.lastname}`}
                 src={user.picturePath}
-                className="w-10 h-10 rounded-full bg-green-500"
+                className="w-10 h-10 rounded-full object-cover bg-green-500"
               />
             </div>
             <div className="flex items-center gap-1">

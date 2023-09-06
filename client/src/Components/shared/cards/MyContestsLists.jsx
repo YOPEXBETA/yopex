@@ -28,7 +28,7 @@ const MyContestLists = () => {
       {inProgress?.length > 0 && (
         <div className="p-4 bg-white border-green-500 border-b-2 rounded-lg shadow-md">
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
+            <div className="flex justify-between items-center mb-4">
               <h5 className="text-lg font-medium">My Contests</h5>
             </div>
             {inProgress.slice(0, 2).map((user) => (

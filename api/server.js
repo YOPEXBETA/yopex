@@ -37,7 +37,7 @@ app.use("/", indexRouter);
 
 const PORT = process.env.PORT || 5000;
 
-createAdminUser();
+//createAdminUser();
 
 // async function addYearsRegisteredToUsers() {
 //   const users = await User.find({});
@@ -64,7 +64,7 @@ let users = [];
 const addUser = (userId, socketId) => {
   !users.some((user) => user.userId === userId) &&
     users.push({ userId, socketId });
-  console.log("Users array:", users);
+  //console.log("Users array:", users);
 };
 
 const removeUser = (socketId) => {
@@ -73,7 +73,7 @@ const removeUser = (socketId) => {
 
 const getUser = (userId) => {
   const user = users.find((user) => user.userId === userId);
-  console.log("getUser called with userId:", userId);
+  //console.log("getUser called with userId:", userId);
   return user;
 };
 
@@ -82,20 +82,20 @@ const sendNotification = (userId, notification) => {
 };
 
 io.on("connection", (socket) => {
-  console.log("a user connected.");
+  //console.log("a user connected.");
   socket.on("joinRoom", (data) => {
-    console.log("joinRoom called with data:", data);
+    //console.log("joinRoom called with data:", data);
     socket.join(data.roomid);
   });
   //when disconnect
   socket.on("disconnect", () => {
-    console.log("a user disconnected!");
+    //console.log("a user disconnected!");
     removeUser(socket.id);
   });
 
   //send and get message
   socket.on("sendMessage", (data) => {
-    console.log(`sendMessage called with data: ${JSON.stringify(data)}`);
+    //console.log(`sendMessage called with data: ${JSON.stringify(data)}`);
     //console.log(`Message sent to user ${user.userId}`);
     //io.emit("getMessage", data);
     io.to(data.conversationId).emit("getMessage", data);
@@ -104,7 +104,7 @@ io.on("connection", (socket) => {
 
 server.listen(PORT, (error) => {
   if (error) throw console.error(error);
-  console.log("Server is listening on port" + " " + PORT);
+  //console.log("Server is listening on port" + " " + PORT);
 });
 
 exports.sendNotification = sendNotification;

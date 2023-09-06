@@ -8,7 +8,10 @@ const ParticipantRow = ({ user, index, challenge }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [reviewisOpen, setreviewIsOpen] = useState(false);
   const togglereview = () => setreviewIsOpen((prev) => !prev);
-  const toggleOpen = () => {setIsOpen((prev) => !prev);console.log("close");}
+  const toggleOpen = () => {
+    setIsOpen((prev) => !prev);
+    console.log("close");
+  };
   const { user: currentUser } = useSelector((state) => state.auth);
   const isOwner = currentUser.companies.find(
     (company) => company === challenge.company._id
@@ -26,15 +29,14 @@ const ParticipantRow = ({ user, index, challenge }) => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
   return (
-    <tr
-      key={user._id}
-      className="hover:bg-gray-50 bg-white"
-      
-    >
+    <tr key={user._id} className="hover:bg-gray-50 bg-white">
       <td className=" py-4 px-4 font-bold text-md">{index + 1} </td>
       <td className="py-4 px-4">
         <div className="flex items-center">
-          <Link to={`/profile/${user._id}`} className="flex items-center gap-4">
+          <Link
+            to={`/profile/${user?.user._id}`}
+            className="flex items-center gap-4"
+          >
             <div className="">
               <img
                 alt={`${user?.user?.firstname} ${user?.user?.lastname}`}
@@ -49,32 +51,31 @@ const ParticipantRow = ({ user, index, challenge }) => {
           </Link>
         </div>
       </td>
-      <td className="text-sm text-left py-4 px-4" >
+      <td className="text-sm text-left py-4 px-4">
         {" "}
         {formatDate(user?.registrationDate)}
       </td>
-      <td className="text-sm text-right py-4 px-4" >
+      <td className="text-sm text-right py-4 px-4">
         <div onClick={isOwner ? toggleOpen : null}>
-        {formatDate(user?.submissionDate)}
+          {formatDate(user?.submissionDate)}
         </div>
-        
       </td>
       {user && (
         <>
-        <ParticipantsDialogModal
-          open={isOpen}
-          participant={user}
-          handleClose={toggleOpen}
-          togglereview={togglereview}
-          isOwner={isOwner}
-        />
-        <ReviewModel
-        open={reviewisOpen}
-        participant={user}
-        handleClose={togglereview}
-        companyId={challenge.company._id}
-      />
-      </>
+          <ParticipantsDialogModal
+            open={isOpen}
+            participant={user}
+            handleClose={toggleOpen}
+            togglereview={togglereview}
+            isOwner={isOwner}
+          />
+          <ReviewModel
+            open={reviewisOpen}
+            participant={user}
+            handleClose={togglereview}
+            companyId={challenge.company._id}
+          />
+        </>
       )}
     </tr>
   );

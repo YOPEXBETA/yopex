@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useAdminUsers } from "../../../hooks/react-query/useUsers";
-import { getUserLevelData } from "../../../utils";
+import { useGetLevels } from "../../../hooks/react-query/useLevels";
+
 
 const EvaluationPage = () => {
   const { data } = useAdminUsers();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const { data: levelsData , isloading } = useGetLevels();
+
 
   const handleChangePage = (newPage) => {
     if (newPage >= 0 && newPage <= Math.ceil(data.length / rowsPerPage)) {
@@ -53,7 +56,7 @@ const EvaluationPage = () => {
                   </div>
                 </td>
                 <td className="py-4 px-4">
-                  {getUserLevelData(user.score).level}
+                {levelsData?.find((level) => level.minScore <= user?.score && level.maxScore >= user?.score).name}
                 </td>
                 <td className="py-4 px-4">{user.challengesDone}</td>
                 <td className="py-4 px-4">{user.challengesWon}</td>

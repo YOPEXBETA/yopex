@@ -11,17 +11,21 @@ import Badges from "./Badges/Badges";
 import HighlightSection from "./HighlightSection/HighlightSection";
 
 import { useUserReviews } from "../../../../hooks/react-query/useReviews";
-import { getUserLevelData } from "../../../../utils";
+import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
-  console.log("rojla", user);
   const { userId } = useParams();
-
-  const { data: userProfile } = useUserById(userId);
+  const { data: levelsData , isloading } = useGetLevels();
+ const { data: userProfile  } = useUserById(userId);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
-  console.log(userProfile);
+  
+ 
+  const userLevel = levelsData ? levelsData.find((level) => level.minScore <= userProfile?.score && level.maxScore >= userProfile?.score) : null;
+
+
+
   const rating = useMemo(() => {
     if (!reviews || reviews.length === 0) return 0;
     const sum = reviews.reduce((prev, current) => current.star + prev, 0);
@@ -30,7 +34,7 @@ const UserProfileCard = () => {
 
   if (userProfile)
     return (
-      <div className="bg-white p-6 rounded-lg flex flex-col items-center gap-6 xl:mr-11 shadow-md border-green-500 border-b-2 mr-0">
+      <div className="bg-white p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 xl:shadow-md lg:shadow-md md:shadow-md md:border-green-500 border-b-2 mr-0">
         <div className="relative">
           <div className="w-36 h-36">
             <img
@@ -41,7 +45,8 @@ const UserProfileCard = () => {
           </div>
           <div className="absolute bottom-0 right-0">
             <div className="flex items-center justify-center rounded-full bg-green-500 w-11 h-11 text-white">
-              Lv {getUserLevelData(userProfile.score).level}
+        { "LV "+parseInt(userLevel?.name.replace("Level ",""))}
+       
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 // import { addReview } from "../../../../../../redux/actions/ReviewAction";
 import { useParams } from "react-router-dom";
-import { useAddReviews } from "../../../../../../hooks/react-query/useReviews";
+import { useAddReviews } from "../../../hooks/react-query/useReviews";
 
 const useStyles = makeStyles((theme) => ({
   rating: {
@@ -100,9 +100,6 @@ const AddReviewModal = ({ open, onClose }) => {
           margin="dense"
           label="Description"
           type="text"
-          // name="description"
-          // value={review.description}
-          // onChange={handleInputChange}
           {...register("description", { required: true })}
         />
       </DialogContent>

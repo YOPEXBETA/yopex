@@ -5,18 +5,27 @@ import SocialPostCard from "../../../../../../Components/shared/cards/SocialMedi
 const Bookmarks = () => {
   const { userId } = useParams();
   const { data: posts, isLoading } = useBookmarkedPosts(userId);
-  console.log("bookmarks ==>",posts);
-  let bookmarksId=[];
-  posts?.map((book)=>{
-    bookmarksId.push(book._id)
-  })
+  console.log("bookmarks ==>", posts);
+  let bookmarksId = [];
+  posts?.map((book) => {
+    bookmarksId.push(book._id);
+  });
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {isLoading ? (
         <p>Loading posts...</p>
       ) : (
-        posts?.map((post) => <SocialPostCard key={post._id} post={post} bookmarks={bookmarksId}  />)
+        posts?.map((post) => (
+          <SocialPostCard
+            className="object-cover"
+            height={"48"}
+            width={"96"}
+            key={post._id}
+            post={post}
+            bookmarks={bookmarksId}
+          />
+        ))
       )}
     </div>
   );

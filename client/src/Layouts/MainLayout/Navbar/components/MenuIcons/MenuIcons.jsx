@@ -7,7 +7,7 @@ import NotificationBell from "./components/Notifications/Notification";
 const MenuIcons = () => {
   return (
     <div>
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-3 items-center">
         <AddPostMenuList />
         <div className="h-6 my-0.5 border-l border-gray-300" />
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const FollowingsCard = ({ following }) => {
   return (
-    <div className="shadow-md border-green-500 border-b-2 rounded-lg p-4 flex items-center justify-center">
+    <div className="shadow-md border-green-500 border-b-2 rounded-lg p-4 bg-white flex items-center justify-center">
       <Link
         to={`/profile/${following?._id}`}
         key={following?._id}
@@ -14,7 +14,7 @@ const FollowingsCard = ({ following }) => {
           <img
             alt="yourphoto"
             src={following?.picturePath}
-            className="w-28 h-28 rounded-full items-center mx-auto"
+            className="w-28 h-28 rounded-full items-center mx-auto object-cover"
           />
 
           <div className="flex items-center mt-2 gap-1">

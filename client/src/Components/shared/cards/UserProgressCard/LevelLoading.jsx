@@ -2,8 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { getUserLevelData } from "../../../../utils";
 import { useUserById } from "../../../../hooks/react-query/useUsers";
+import { useGetLevels } from "../../../../hooks/react-query/useLevels";
+
 
 function LinearProgressWithLabel(props) {
+ 
   return (
     <div>
       <div spacing={1}>
@@ -32,16 +35,15 @@ function LinearProgressWithLabel(props) {
 const LevelLoading = () => {
   const { user } = useSelector((state) => state.auth);
   const { data: userProfile } = useUserById(user._id);
+  const { data: levelsData , isloading } = useGetLevels();
+  const userLevel = levelsData ? levelsData.find((level) => level.minScore <= userProfile?.score && level.maxScore >= userProfile?.score) : null;
 
-  const { level, percentage, difference } = getUserLevelData(
-    userProfile?.score || 0
-  );
   return (
     <div>
       <LinearProgressWithLabel
-        value={percentage}
-        level={level}
-        difference={difference}
+        value={userProfile?.score}
+        level={userLevel}
+        difference={userLevel?.maxScore}
       />
     </div>
   );
