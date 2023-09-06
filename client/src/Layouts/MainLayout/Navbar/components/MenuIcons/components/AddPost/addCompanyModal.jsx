@@ -27,18 +27,22 @@ export const AddCompanyModal = ({ open, handleClose }) => {
   });
   const { mutate } = useCreateCompany();
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadProgressdoc, setUploadProgressdoc] = useState(0);
   const uploadedFile = watch("picture");
+  const uploadedFiledoc = watch("document");
 
   const onSubmit = async (data) => {
-    const picturePath = await uploadFile(data.picture[0], setUploadProgress);
-   
+    const picturePath = await uploadFile(data.picture[0], setUploadProgress,"companyLogo");
+    const documentPath = await uploadFile(data.document[0], setUploadProgressdoc,"companyDocument");
     mutate({
         companyName: data.name,
         companyDescription: data.description,
         companyLogo: picturePath,
+        companyDocument: documentPath,
       });
 
     reset();
+    setUploadProgressdoc(0);
     setUploadProgress(0);
     handleClose();
   };
@@ -62,7 +66,8 @@ export const AddCompanyModal = ({ open, handleClose }) => {
             {...register("description", { required: true })}
             placeholder="Company Description"
           />
-
+          <Divider />
+          
           {uploadedFile && (
             <Stack>
               <Typography>Upload Progress: {uploadProgress}%</Typography>
@@ -70,6 +75,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
             </Stack>
           )}
           <Controller
+          className="w-full"
                 name="picture"
                 control={control}
                 rules={{ required: true }}
@@ -78,6 +84,25 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                     multiple
                     value={field.value}
                     onChange={(value) => setValue("picture", value)}
+                  />
+                )}
+              /> 
+            <Divider />
+            {uploadedFiledoc && (
+            <Stack>
+              <Typography>Upload Progress: {uploadProgressdoc}%</Typography>
+              <LinearProgress variant="determinate" value={uploadProgressdoc} />
+            </Stack>
+          )}
+          <Controller
+                name="document"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <MuiFileInput
+                    multiple
+                    value={field.value}
+                    onChange={(value) => setValue("document", value)}
                   />
                 )}
               /> 

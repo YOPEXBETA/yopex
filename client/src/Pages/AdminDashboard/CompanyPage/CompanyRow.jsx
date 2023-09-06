@@ -54,7 +54,7 @@ const CompanyRow = ({ company }) => {
       </td>
 
       <td className="py-4 px-4 text-right">
-        <CompanyTableMenuItem companyId={company._id} />
+        <CompanyTableMenuItem companyId={company._id} company={company} />
       </td>
     </tr>
   );

@@ -12,6 +12,7 @@ const companySchema = new mongoose.Schema(
     companyLogo: { type: String },
     country: { type: String },
     picturePath: { type: String },
+    companyDocument: { type: String },
     websiteUrl: { type: String },
     verified: { type: Boolean, default: false },
     isDocumentSubmitted: { type: Boolean, default: false }, // Document submission status

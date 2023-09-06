@@ -529,7 +529,8 @@ const banUser = async (req, res) => {
 
 const CreateCompany = async (req, res) => {
   try {
-    const { companyName, companyDescription, companyLogo } = req.body;
+    const { companyName, companyDescription, companyLogo,companyDocument } = req.body;
+    
     const userId = req.userId;
 
     const user = await userSchema.findById(userId);
@@ -543,6 +544,7 @@ const CreateCompany = async (req, res) => {
       companyDescription,
       companyLogo,
       user: user._id,
+      companyDocument,
     });
 
     await company.save();

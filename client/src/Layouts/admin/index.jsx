@@ -15,11 +15,6 @@ export default function AdminLayout(props) {
   const [currentRoute, setCurrentRoute] = React.useState("dashboard");
 
   
-  useEffect(() => {
-    if (user?.role !== "admin") {
-      window.location.href = "/";
-    }
-  }, [user]);
 
   React.useEffect(() => {
     window.addEventListener("resize", () =>
@@ -34,8 +29,10 @@ export default function AdminLayout(props) {
     if (!user) {
       dispatch(getCurrentUser())
     }
+    
   }, [dispatch, user]);
 
+  
 
   const currentPath = location.pathname;
   const matchedRoute = routes.children.find((route) =>
@@ -47,9 +44,13 @@ export default function AdminLayout(props) {
       setCurrentRoute(matchedRoute.path);
     }
   }, [currentPath]);
+
+
   if (!user) {
     return <Loader />; // Or you can render a loading component
-  }
+  }else if(user?.role !== "admin"){
+    return <h1>Unauthorized</h1>;
+  }else
   return (
     <div className="flex h-full w-full">
       <Sidebar open={open} onClose={() => setOpen(false)} />

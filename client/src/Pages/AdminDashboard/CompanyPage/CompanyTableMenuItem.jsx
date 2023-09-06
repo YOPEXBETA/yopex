@@ -4,7 +4,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaCheck } from "react-icons/fa";
 import { useApproveCompany } from "../../../hooks/react-query/useCompany";
 
-const CompanyTableMenuItem = ({ companyId }) => {
+const CompanyTableMenuItem = ({ companyId,company }) => {
+  console.log("company", company);
   const [open, setOpen] = useState(false);
 
   const { mutate } = useApproveCompany();
@@ -30,6 +31,13 @@ const CompanyTableMenuItem = ({ companyId }) => {
             <FaCheck className="h-5 w-5 mr-2 text-primary text-green-500" />
             Approve
           </button>
+          <a
+            href={company.companyDocument ? company.companyDocument : "#"}
+            className="px-4 py-2 flex items-center hover:bg-gray-100 focus:outline-none w-full"
+          >
+            <FaCheck className="h-5 w-5 mr-2 text-primary text-green-500" />
+            See Document
+          </a>
         </div>
       )}
     </div>
