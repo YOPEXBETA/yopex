@@ -82,37 +82,29 @@ const AddPostMenuList = () => {
         </button>
       </div>
       {isOpen && (
-        <div
-          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="options-menu"
-        >
+        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
           <div className="py-1" role="none">
             <button
               onClick={handleClickOpenModalWork}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
+              className="block px-4 py-2 text-left text-sm w-full text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
               <FaSuitcase className="mr-2 inline-block" /> Add work offer
             </button>
             <button
               onClick={handleClickOpenModalChallenge}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
+              className="block px-4 py-2 text-sm text-left text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
             >
               <FaFire className="mr-2 inline-block" /> Add a challenge
             </button>
             <button
               onClick={handleClickOpenModalPost}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
+              className="block px-4 py-2 text-left text-sm text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
             >
               <FaPen className="mr-2 inline-block" /> Add a post
             </button>
             <button
               onClick={handleClickOpenModalCompany}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-left text-sm text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
             >
               <FaBuilding className="mr-2 inline-block" /> Add a company
             </button>

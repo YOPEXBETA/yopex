@@ -9,18 +9,21 @@ const Followings = () => {
   console.log(followings);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 gap-0">
       {isLoading ? (
         <p>Loading posts...</p>
       ) : (
-       <>
-        {followings.userFollowingss.map((following) => (
-          <FollowingsCard key={following._id} following={following} />
+        <>
+          {followings.userFollowingss.map((following) => (
+            <FollowingsCard key={following._id} following={following} />
           ))}
           {followings.companyFollowings.map((following) => (
-          <FollowingsCompaniesCard key={following._id} following={following} />
-        ))}
-          </>
+            <FollowingsCompaniesCard
+              key={following._id}
+              following={following}
+            />
+          ))}
+        </>
       )}
     </div>
   );

@@ -36,7 +36,6 @@ export default function NavbarSearchDropDown() {
                 key={option._id || index}
                 className="p-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-100"
                 onClick={() => {
-                  console.log("Clicked option:", option); // Log clicked option for debugging
                   if (option.firstname && option.lastname) {
                     console.log("Navigating to user profile:", option);
                     navigate(`/profile/${option._id}`);

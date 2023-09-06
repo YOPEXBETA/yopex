@@ -2,7 +2,7 @@ import React from "react";
 
 const FeedbacksCard = ({ review }) => {
   return (
-    <div className="bg-white p-4 shadow-md rounded-lg space-y-4 border-green-500 border-b-2 ">
+    <div className="bg-white p-4 shadow-md md:rounded-lg space-y-4 border-green-500 border-b-2 ">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <img
@@ -31,12 +31,12 @@ const FeedbacksCard = ({ review }) => {
       </div>
       <hr className="h-[1px] bg-gray-200" />
       <div className="space-y-1">
-        <p className="text-lg font-bold truncate w-96">
+        <p className="text-lg font-md uppercase font-semibold">
           {review.challengeId?.title}
         </p>
         <p
-          className={`text-[1rem] truncate w-96 ${
-            review.star >= 5 ? "text-gray-500" : "text-green-500"
+          className={`className="text-md whitespace-normal" ${
+            review.star >= 5 ? "text-black" : "text-green-500"
           }`}
         >
           {review.description}
