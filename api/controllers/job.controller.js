@@ -26,6 +26,10 @@ const addJob = async (req, res, next) => {
       return res.status(400).json({ error: "Company not found" });
     }
 
+    if (company.verified === false) {
+      return res.status(400).json({ message: "Company not verified" });
+    }
+
     const jobOffer = new Job({
       company: company._id,
       title,
