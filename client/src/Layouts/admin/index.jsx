@@ -14,6 +14,13 @@ export default function AdminLayout(props) {
   const [open, setOpen] = React.useState(true);
   const [currentRoute, setCurrentRoute] = React.useState("dashboard");
 
+  
+  useEffect(() => {
+    if (user?.role !== "admin") {
+      window.location.href = "/";
+    }
+  }, [user]);
+
   React.useEffect(() => {
     window.addEventListener("resize", () =>
       window.innerWidth < 1200 ? setOpen(false) : setOpen(true)

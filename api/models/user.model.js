@@ -147,8 +147,6 @@ UserSchema.pre('findOneAndDelete', { document: false, query: true }, async funct
 
     notificationModel.deleteMany({ user: userId }).exec();
 
-    
-
     next();
   } catch (error) {
     console.log("Middleware error");

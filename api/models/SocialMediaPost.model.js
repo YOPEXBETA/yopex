@@ -81,8 +81,7 @@ SocialMediaPostSchema.pre('findOneAndDelete', { document: false, query: true }, 
 
     CommentModel.deleteMany({ postId: postId }).exec();
 
-    
-
+  
     next();
   } catch (error) {
     console.log("Middleware error");
