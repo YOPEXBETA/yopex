@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCreateLevel , useGetLevels , useDeleteLevel } from "../../../hooks/react-query/useLevels";
 import RangeSlider from "./RangerSlider";
 
-import { AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete ,AiFillEdit } from 'react-icons/ai';
 import { CircularProgress } from "@mui/material";
 
 const LevelPage = () => {
@@ -106,10 +106,9 @@ const LevelPage = () => {
                   key={badgeData._id}
                   className="bg-white p-4 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 border-2 border-green-400"
                 >
-                  <div className="flex flex-col items-center space-y-2">
+                  <div className="flex flex-col items-center space-y-2 mt-5">
                     
                     <div className="flex items-center flex-col">
-                      <img className="w-20 h-20 opacity-40 mb-2" src="https://w7.pngwing.com/pngs/134/138/png-transparent-star-golden-stars-angle-3d-computer-graphics-symmetry-thumbnail.png"></img>
                       <h5 className="text-green-500 text-lg font-semibold truncate">
                         {badgeData.name}
                       </h5>
@@ -121,9 +120,16 @@ const LevelPage = () => {
 
                   <button
                   onClick={() => deleteLevelMutate(badgeData._id)}
-                    className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full hover:bg-red-700 transition duration-300"
+                    className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full hover:bg-red-400 transition duration-300"
                   >
                     <AiFillDelete/>
+                  </button>
+                  
+                  <button
+                  onClick={() => deleteLevelMutate(badgeData._id)}
+                    className="absolute top-2 right-12 bg-zinc-600 text-white px-2 py-1 rounded-full hover:bg-zinc-400 transition duration-300"
+                  >
+                    <AiFillEdit/>
                   </button>
                 </div>
               )
