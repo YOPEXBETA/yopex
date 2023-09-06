@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import { useCreateLevel , useGetLevels , useDeleteLevel } from "../../../hooks/react-query/useLevels";
-import RangeSlider from "./RangerSlider";
 
 import { AiFillDelete ,AiFillEdit } from 'react-icons/ai';
-import { CircularProgress } from "@mui/material";
+import { EditLevelModal } from "./EditLevelModal";
+
 
 const LevelPage = () => {
   const [adminDefinedPoints, setAdminDefinedPoints] = useState(0);
   const { mutate : createLevelMutate } =useCreateLevel(adminDefinedPoints);
+  const [levelToEdit, setLevelToEdit] = useState(null);
+  const handleEditLevel = (levelData) => {
+    setLevelToEdit(levelData);
+    toggleModal();
+  };
 
   const { mutate : deleteLevelMutate } =useDeleteLevel();
   const {data , isLoading } = useGetLevels();
   const [showAlert, setShowAlert] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState('');
+  const [openPostModal, setOpenPostModal] = useState(false);
+  const toggleModal = () => setOpenPostModal((prev) => !prev);
 
   const lastLevel  = data && data[data.length-1];
 
@@ -29,10 +36,7 @@ const LevelPage = () => {
   };
 
   const handleAlertOK = () => {
-
- 
     createLevelMutate(adminDefinedPoints);
- 
     setShowAlert(false);
     setAdminDefinedPoints(0);
   
@@ -57,11 +61,11 @@ const LevelPage = () => {
           onChange={(e) => setAdminDefinedPoints(e.target.value) }
         />
         <span>{adminDefinedPoints} Points</span>
-  <button  onClick={handleAddLevel} className="bg-zinc-800 rounded-full mb-2 hover:bg-slate-800 text-white px-4 py-2 w-1/6" type="submit">
-    Add a new Level
-  </button>
-  </div>
-  {showAlert && (
+          <button  onClick={handleAddLevel} className="bg-zinc-800 rounded-full mb-2 hover:bg-slate-800 text-white px-4 py-2 w-1/6" type="submit">
+            Add a new Level
+          </button>
+      </div>
+    {showAlert && (
         <div
         id="alert-additional-content-5"
         className="p-4 border border-gray-300 rounded-lg bg-gray-50 dark:border-gray-600 dark:bg-gray-800"
@@ -126,8 +130,8 @@ const LevelPage = () => {
                   </button>
                   
                   <button
-                  onClick={() => deleteLevelMutate(badgeData._id)}
-                    className="absolute top-2 right-12 bg-zinc-600 text-white px-2 py-1 rounded-full hover:bg-zinc-400 transition duration-300"
+                  onClick={()=>handleEditLevel(badgeData)}
+                  className="absolute top-2 right-12 bg-zinc-600 text-white px-2 py-1 rounded-full hover:bg-zinc-400 transition duration-300"
                   >
                     <AiFillEdit/>
                   </button>
@@ -139,6 +143,9 @@ const LevelPage = () => {
       <div>
       </div>
     </div>
+    <EditLevelModal open={openPostModal} 
+                  handleClose={()=> {setOpenPostModal(false);
+          setLevelToEdit(null);}} levelData={levelToEdit} />
 </div>
  
   )
