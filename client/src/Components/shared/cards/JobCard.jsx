@@ -4,12 +4,16 @@ import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
 import JobOfferModal from "../Modals/JobOfferModal";
+import PostMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyJobs/Components/JobMenuIcon";
+import { useCompanyById } from "../../../hooks/react-query/useCompany";
 
 const JobCard = ({ job }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const { user } = useSelector((state) => state.auth);
   const handleClose = () => setIsOpen(false);
+  
+  console.log(job?.company);
 
   return (
     <div>
@@ -40,15 +44,22 @@ const JobCard = ({ job }) => {
                   ? `${job?.description.substring(0, 150)} ....`
                   : job?.description}
               </p>
-            </div>
-            <div>
+            </div><div className="flex justify-between items-center">
               {/* <p className="text-lg  text-left font-bold">Published</p> */}
               <p className="text-md  text-left font-normal text-green-500">
                 {formatDistance(new Date(job?.createdAt), new Date(), {
                   addSuffix: true,
                 })}
               </p>
+             
+              { user.companies.includes(job?.company._id) ?
+                <PostMenuIcon post={job}/>
+                :<p></p>}
+         
+              
+             
             </div>
+            
           </div>
         </div>
       </div>

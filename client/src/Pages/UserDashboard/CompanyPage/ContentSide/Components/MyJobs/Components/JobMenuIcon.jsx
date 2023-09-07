@@ -9,12 +9,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useDeletePost } from "../../../../../hooks/react-query/usePosts";
-import { EditPostModal } from "./EditPostModal";
+import { useDeleteJob } from "../../../../../../../hooks/react-query/useJobs";
+
 
 const PostMenuIcon = ({ post }) => {
   const { user } = useSelector((state) => state.auth);
-  const { mutate } = useDeletePost(user._id);
+
+  const {mutate : deleteJob} = useDeleteJob();
+
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -28,7 +30,7 @@ const PostMenuIcon = ({ post }) => {
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Post settings">
+        <Tooltip title="Job settings">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -76,22 +78,22 @@ const PostMenuIcon = ({ post }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={() => mutate(post._id)}>
+        <MenuItem onClick={()=>deleteJob(post._id)}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
           </ListItemIcon>
-          Delete Post
+          Delete Job
         </MenuItem>
 
         <MenuItem onClick={toggleOpen}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
-          Edit Post
+          Edit Job
         </MenuItem>
       </Menu>
 
-      <EditPostModal open={isOpen} handleClose={toggleOpen} post={post} />
+     
     </React.Fragment>
   );
 };

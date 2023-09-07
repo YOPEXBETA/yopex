@@ -138,10 +138,7 @@ const getUserPosts = async (req, res) => {
     } else {
       posts = await Post.find({ userId: userId });
     }
-
-   
-
-    res.status(200).json(posts);
+     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
