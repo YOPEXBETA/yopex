@@ -7,13 +7,12 @@ export const useCreateLevel = () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: async (adminDefinedPoints) => {
-        console.log("adminDefinedPoints inside useCreateLevel:", adminDefinedPoints);
-
-        const { data } = await axios.post(`${url}/admin/createLevel`,
+        
+        await axios.post(`${url}/admin/createLevel`,
         { adminDefinedPoints},
          {withCredentials: true
         });
-        return data;
+        
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["levels"] });

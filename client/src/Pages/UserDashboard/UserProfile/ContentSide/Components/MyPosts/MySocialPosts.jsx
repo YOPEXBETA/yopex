@@ -44,8 +44,8 @@ const MySocialPosts = () => {
               post={post}
               bookmarks={bookmarksId}
               className="xl:h-48 xl:w-96"
-              height={"full"}
-              width={"full"}
+              height={"48"}
+              width={"screen"}
               openModal={() => openModal(post)}
             />
           ))

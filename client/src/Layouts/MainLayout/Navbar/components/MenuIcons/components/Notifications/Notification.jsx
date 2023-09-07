@@ -14,7 +14,7 @@ const NotificationBell = () => {
   const [socket, setSocket] = useState(null);
 
   const url = process.env.URL || "http://localhost:8000";
-
+  
   useEffect(() => {
     const newSocket = io(`${url}`);
     setSocket(newSocket);

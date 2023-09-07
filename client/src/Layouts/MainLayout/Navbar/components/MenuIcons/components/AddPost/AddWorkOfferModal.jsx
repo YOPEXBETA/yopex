@@ -4,6 +4,7 @@ import { useCreateJob } from "../../../../../../../hooks/react-query/useJobs";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 import AlertContainer from "../../../../../../../Components/alerts";
+import AlertSuccess from "../../../../../../../Components/successalert";
 
 export const AddWorkOfferModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -20,7 +21,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
   const { data: userProfile, isLoading } = useUserById(userId);
-  const { mutate,isError,isSuccess } = useCreateJob(user);
+  const { mutate,isError,isSuccess,error } = useCreateJob(user);
 
   const onSubmit = (JobData) => {
     const companyId = selectedOption;
@@ -29,14 +30,16 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
     
   };
 
+  
+
   return (
     <div
       className={`fixed z-10 inset-0 overflow-y-auto  ${
         open ? "block" : "hidden"
       }`}
     >
-      {isError && (<AlertContainer message="Something went wrong" />)}
-      {isSuccess && (<AlertContainer message="Job offer created successfully" />)}
+      {isError && (<AlertContainer error={""} />)}
+      {isSuccess && (<AlertSuccess message="Job offer created successfully" />)}
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -92,6 +95,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                   <button
                     className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500"
                     onClick={handleClose}
+                    type="button"
                   >
                     Cancel
                   </button>
@@ -99,7 +103,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                     className="bg-green-500 px-6 py-2 text-white rounded-md"
                     type="submit"
                     disabled={isSubmitting}
-                    onClick={handleSubmit}
+                    
                   >
                     Post a job offer
                   </button>

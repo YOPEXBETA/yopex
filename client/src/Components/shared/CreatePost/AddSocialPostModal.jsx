@@ -105,15 +105,21 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                     rules={{ required: true }}
                     render={({ field }) => (
                       <div className="mt-4">
-                        <label className="block text-gray-700">
-                          Upload Files
+                        <label className="block w-full p-2 hover:bg-green-700 border rounded-md shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer">
+                          <span className="text-green-600">
+                            {field.value && field.value.length > 0
+                              ? // Display the file names when files are selected
+                                `Files selected: ${field.value.length}`
+                              : // Display this when no file is chosen
+                                "Upload File"}
+                          </span>
+                          <input
+                            type="file"
+                            multiple
+                            onChange={(e) => field.onChange(e.target.files)}
+                            className="hidden"
+                          />
                         </label>
-                        <input
-                          type="file"
-                          multiple
-                          onChange={(e) => field.onChange(e.target.files)}
-                          className="block w-full p-2 border rounded-md shadow-sm bg-green-200 focus:ring focus:ring-opacity-50"
-                        />
                       </div>
                     )}
                   />
