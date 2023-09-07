@@ -41,8 +41,7 @@ const LevelPage = () => {
     setShowAlert(false);
   };
 
-
-  return (
+return (
     <div >
       <div className="flex gap-11 justify-between ">
       <div class="relative mb-3" data-te-input-wrapper-init>
