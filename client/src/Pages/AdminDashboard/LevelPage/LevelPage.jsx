@@ -42,7 +42,6 @@ const LevelPage = () => {
   };
 
 
- 
   return (
     <div >
       <div className="flex gap-11 justify-between ">
