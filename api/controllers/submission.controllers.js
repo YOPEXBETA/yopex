@@ -32,7 +32,6 @@ const CreateSubmission = async (req, res, next) => {
 
     updateUserSubmissionsBadges(user);
 
-    user.score += 10;
     challenge.users.map((user,index)=>{
       if(user.user == userId){
         challenge.users[index].submissionDate=new Date();
