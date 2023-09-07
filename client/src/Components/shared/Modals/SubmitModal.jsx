@@ -78,12 +78,6 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
       const file = files[i];
 
       if (
-        (file.type === "application/zip" ||
-          file.type === "image/jpeg" ||
-          file.type === "image/png" ||
-          file.type === "image/gif" ||
-          file.type === "video/mp4" ||
-          file.type === "video/avi") &&
         file.size <= maxSize
       ) {
         validFiles.push(file);

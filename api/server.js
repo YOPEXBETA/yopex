@@ -82,7 +82,7 @@ const sendNotification = (userId, notification) => {
 };
 
 io.on("connection", (socket) => {
-  //console.log("a user connected.");
+  console.log("a user connected.");
   socket.on("joinRoom", (data) => {
     //console.log("joinRoom called with data:", data);
     socket.join(data.roomid);
