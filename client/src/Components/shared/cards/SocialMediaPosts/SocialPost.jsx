@@ -25,7 +25,6 @@ const SocialPostCard = ({
 }) => {
   const { user } = useSelector((state) => state.auth);
 
-  console.log(post, "socialpost");
   const { category } = useSelector((state) => state.global);
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
   const { mutate: BookmarkPost } = useBookmarkPost(

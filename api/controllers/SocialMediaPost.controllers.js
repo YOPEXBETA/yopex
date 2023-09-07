@@ -93,7 +93,8 @@ const getFeedPosts = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (post.userId.toString() === req.userId) {
+    const thisuser = await UserModel.findById(req.userId);
+    if (post.userId.toString() === req.userId || thisuser.companies.includes(post.userId) ) {
       response = await Post.findOneAndDelete({_id:req.params.id});
       res.status(200).send("Post has been deleted");
     } else {
