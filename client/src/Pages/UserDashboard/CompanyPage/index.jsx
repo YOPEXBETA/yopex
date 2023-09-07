@@ -4,7 +4,10 @@ import CompanyPageContent from "./ContentSide/ProfilePageContent";
 
 const Company = () => {
   const [value, setValue] = useState(0);
-  const changeValue = (e, params) => setValue(params);
+  const changeValue = (newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <div>
       <CompanyProfileInformations changeValue={changeValue} value={value} />

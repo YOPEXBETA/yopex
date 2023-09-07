@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useCompanyById } from "../../../../hooks/react-query/useCompany";
-import { CompanyNavigationTab } from "./CompanyNavigationTab";
 import { useFollowCompany } from "../../../../hooks/react-query/useUsers";
 import { useDeleteCompany } from "../../../../hooks/react-query/useCompany";
 import { EditCompanyModal } from "../../../../Components/shared/Modals/EditCompanyModal";
 
 import { FaUserMinus, FaTrash, FaEdit, FaUserPlus } from "react-icons/fa";
+import { CompanyProfileNavigationTab } from "../../../../Components/Tabs/CompanyProfileNavigationTab";
 
 const CompanyProfileInformations = ({ changeValue, value }) => {
   const [openPostModal, setOpenPostModal] = useState(false);
@@ -123,7 +123,10 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
             company={company}
           />
 
-          <CompanyNavigationTab changeValue={changeValue} value={value} />
+          <CompanyProfileNavigationTab
+            changeValue={changeValue}
+            value={value}
+          />
         </div>
       </div>
     </div>
