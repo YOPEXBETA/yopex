@@ -21,10 +21,10 @@ adminRouter.delete("/delLevel/:id",isAdmin, deleteLevel);
 adminRouter.get("/Users", isAdmin, getUsers);
 adminRouter.get("/Companies", isAdmin, getCompanies);
 adminRouter.post("/addUser", addUser);
-adminRouter.put("/updUsers/:id", updUser);
-adminRouter.delete("/delUsers/:id", delUser);
+adminRouter.put("/updUsers/:id",isAdmin, updUser);
+adminRouter.delete("/delUsers/:id",isAdmin, delUser);
 adminRouter.put("/users/:id/ban", isAdmin, BanAccount);
 adminRouter.put("/users/:id/:action", isAdmin, disableUser);
-adminRouter.post("/appCompany", approveCompany);
+adminRouter.post("/appCompany",isAdmin, approveCompany);
 
 module.exports = adminRouter;

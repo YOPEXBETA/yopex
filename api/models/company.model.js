@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const { boolean } = require("yup");
+const jobModel = require("./job.model");
+const ChallengeModel = require("./Challenge.model");
 
 const companySchema = new mongoose.Schema(
   {
@@ -10,6 +12,7 @@ const companySchema = new mongoose.Schema(
     companyLogo: { type: String },
     country: { type: String },
     picturePath: { type: String },
+    companyDocument: { type: String },
     websiteUrl: { type: String },
     verified: { type: Boolean, default: false },
     isDocumentSubmitted: { type: Boolean, default: false }, // Document submission status
@@ -50,6 +53,24 @@ const companySchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const Company = mongoose.model("Company", companySchema);
+companySchema.pre('findOneAndDelete', { document: false, query: true }, async function (next) {
+  try {
+    console.log("Middleware executed");
+    
+    const query = this;
+    const companyId = query._conditions._id;
 
-module.exports = Company;
+    SocialMediaPost.deleteMany({ userId: companyId }).exec();
+
+    jobModel.deleteMany({ companyId: companyId }).exec();
+
+    ChallengeModel.deleteMany({ company: companyId }).exec();
+
+    next();
+  } catch (error) {
+    console.log("Middleware error");
+    next(error);
+  }
+});
+
+module.exports = mongoose.model("Company", companySchema);

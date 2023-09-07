@@ -66,7 +66,7 @@ const updUser = async (req, res) => {
 
 const delUser = async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
+    const user = await User.findOneAndDelete({ _id: req.params.id });
     res.send(user);
   } catch (error) {
     console.log(error);

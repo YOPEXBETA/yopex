@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const submissionModel = require("./submission.model");
 
 const ChallengeSchema = new mongoose.Schema(
   {
@@ -45,8 +46,27 @@ const ChallengeSchema = new mongoose.Schema(
       ],
       default: [],
     },
+    nbruser: {type: Number, default: 0},
   },
   { timestamps: true },
 );
+
+
+ChallengeSchema.pre('findOneAndDelete', { document: false, query: true }, async function (next) {
+  try {
+    console.log("Middleware executed");
+    
+    const query = this;
+    const challengeId = query._conditions._id;
+
+    submissionModel.deleteMany({ challengeId: challengeId }).exec();
+    
+
+    next();
+  } catch (error) {
+    console.log("Middleware error");
+    next(error);
+  }
+});
 
 module.exports = mongoose.model("Challenge", ChallengeSchema);

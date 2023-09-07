@@ -175,7 +175,7 @@ const deleteCompany = async (req, res) => {
   try {
     const company = await Company.findById(req.params.id);
    
-      response = await Company.findByIdAndDelete(req.params.id);
+      response = await Company.findOneAndDelete({_id:req.params.id});
       res.status(200).send("Company has been deleted");
   
   } catch (err) {

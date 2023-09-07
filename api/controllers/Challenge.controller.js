@@ -8,7 +8,7 @@ const CreateChallenge = async (req, res, next) => {
     
     const { title, description, category, price, companyId, deadline,RecommendedSkills } =
       req.body;
-    console.log("req.body:", req.body);
+    
     const userId = req.userId;
     const user = await UserModel.findById(userId);
 
@@ -21,7 +21,9 @@ const CreateChallenge = async (req, res, next) => {
     if (!company) {
       return res.status(400).json({ error: "Company not found" });
     }
-
+    if (company.verified === false) {
+      return res.status(400).json({ message: "Company not verified" });
+    }
     const challenge = new ChallengeModel({
       company: company._id,
       title,
@@ -77,7 +79,7 @@ const getChallengeById = async (req, res) => {
 const deleteChallenge = async (req, res) => {
   try {
     console.log(req.params.id);
-    const challenge = await ChallengeModel.findByIdAndDelete(req.params.id);
+    const challenge = await ChallengeModel.findOneAndDelete({_id:req.params.id});
 
     const message = "challenge has been deleted";
 

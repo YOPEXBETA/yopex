@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useCreateJob } from "../../../../../../../hooks/react-query/useJobs";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
+import AlertContainer from "../../../../../../../Components/alerts";
 
 export const AddWorkOfferModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -19,13 +20,13 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
   const { data: userProfile, isLoading } = useUserById(userId);
-  const { mutate } = useCreateJob(user);
+  const { mutate,isError,isSuccess } = useCreateJob(user);
 
   const onSubmit = (JobData) => {
     const companyId = selectedOption;
 
     mutate({ companyId, JobData });
-    handleClose();
+    
   };
 
   return (
@@ -34,6 +35,8 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
         open ? "block" : "hidden"
       }`}
     >
+      {isError && (<AlertContainer message="Something went wrong" />)}
+      {isSuccess && (<AlertContainer message="Job offer created successfully" />)}
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>

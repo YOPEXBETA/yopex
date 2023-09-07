@@ -23,6 +23,10 @@ const addJob = async (req, res, next) => {
       return res.status(400).json({ error: "Company not found" });
     }
 
+    if (company.verified === false) {
+      return res.status(400).json({ message: "Company not verified" });
+    }
+
     const jobOffer = new Job({
       company: company._id,
       title,
@@ -158,7 +162,7 @@ const applyJob = async (req, res) => {
 
     // add notification to company
     const company = await Company.findById(job.company).exec();
-    const notification = new notificationModel({
+    let notification = new notificationModel({
       type: "applied for a job",
       message: `Applied for your job of : ${job.title}`,
       job: job._id,
@@ -167,7 +171,7 @@ const applyJob = async (req, res) => {
     });
     notification.save();
     //use socket io to send notification to company
-    console.log("company.user.toString():", company.user.toString());
+    notification = await notification.populate("user", "firstname lastname picturePath _id");
     main.sendNotification(company.user.toString(), notification);
     company.notificationsCompany.push(notification._id);
     await company.save();

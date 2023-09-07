@@ -5,6 +5,7 @@ import Sidebar from "./components/AdminSideBar";
 import routes from "../../routes/AdminRoutes";
 import { getCurrentUser } from "../../redux/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../Components/PageLoading/Loader";
 
 export default function AdminLayout(props) {
   const { user } = useSelector((state) => state.auth);
@@ -12,6 +13,8 @@ export default function AdminLayout(props) {
   const location = useLocation();
   const [open, setOpen] = React.useState(true);
   const [currentRoute, setCurrentRoute] = React.useState("dashboard");
+
+  
 
   React.useEffect(() => {
     window.addEventListener("resize", () =>
@@ -26,8 +29,10 @@ export default function AdminLayout(props) {
     if (!user) {
       dispatch(getCurrentUser())
     }
+    
   }, [dispatch, user]);
 
+  
 
   const currentPath = location.pathname;
   const matchedRoute = routes.children.find((route) =>
@@ -39,9 +44,13 @@ export default function AdminLayout(props) {
       setCurrentRoute(matchedRoute.path);
     }
   }, [currentPath]);
+
+
   if (!user) {
-    return <div>Loading...</div>; // Or you can render a loading component
-  }
+    return <Loader />; // Or you can render a loading component
+  }else if(user?.role !== "admin"){
+    return <h1>Unauthorized</h1>;
+  }else
   return (
     <div className="flex h-full w-full">
       <Sidebar open={open} onClose={() => setOpen(false)} />

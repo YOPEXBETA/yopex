@@ -1,6 +1,6 @@
 import SendIcon from "@mui/icons-material/Send";
 import { formatDistance } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   useCreateMessage,
@@ -9,6 +9,7 @@ import {
 
 const Conversation = ({ conversationId, socket, otherUser }) => {
   console.log(otherUser);
+  const chatContainerRef = useRef(null);
 
   const { user } = useSelector((state) => state.auth);
   const { data: messages } = useMessages(conversationId);
@@ -17,10 +18,17 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
   const [message, setMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState([]);
 
+  if (chatContainerRef.current!==null) chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+
+  
   useEffect(() => {
     setArrivalMessage(messages);
+    
+    
   }, [messages]);
+  
 
+  
   useEffect(() => {
     socket.on("getMessage", (data) => {
       console.log(data);
@@ -56,15 +64,15 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
   };
 
   return (
-    <div>
+    <div >
       {arrivalMessage?.length === 0 ? (
-        <div style={{ textAlign: "center", padding: "40vh 0vh" }}>
+        <div ref={chatContainerRef} style={{ textAlign: "center", padding: "40vh 0vh" }}>
           <p className="opacity-50 text-xl">
             Open a conversation to start a chat
           </p>
         </div>
       ) : (
-        <div className="fixed h-[82vh] xl:w-[75%]  overflow-auto pb-8">
+        <div className="fixed h-[82vh] xl:w-[75%]  overflow-auto pb-8" ref={chatContainerRef}>
           {arrivalMessage?.map((message, index) => {
             return (
               <div key={index} className="px-11 py-6">

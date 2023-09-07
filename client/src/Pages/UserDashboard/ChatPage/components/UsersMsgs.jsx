@@ -9,7 +9,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
   const { data: conversations } = useConversations(user._id);
   console.log(conversations);
   return (
-    <div className="w-full h-screen bg-white sticky">
+    <div className="w-full overflow-auto h-[88vh] bg-white sticky">
       <div className="flex justify-between items-center px-4 py-2">
         <p className="text-lg font-bold">Chats</p>
         <CreateConversationDrawer />
