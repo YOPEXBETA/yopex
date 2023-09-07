@@ -5,13 +5,10 @@ import {
   useDeleteLevel,
 } from "../../../hooks/react-query/useLevels";
 
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { EditLevelModal } from "./EditLevelModal";
-import LevelMenuIcon from "./LevelMenuIcon";
 import LevelCard from "../../../Components/shared/cards/LevelCard";
 
 const LevelPage = () => {
-  const [adminDefinedPoints, setAdminDefinedPoints] = useState(null);
+  const [adminDefinedPoints, setAdminDefinedPoints] = useState(0);
   const { mutate: createLevelMutate } = useCreateLevel(adminDefinedPoints);
 
   const { data, isLoading } = useGetLevels();
@@ -20,9 +17,17 @@ const LevelPage = () => {
 
   const lastLevel = data && data[data.length - 1];
 
+
   const handleAddLevel = () => {
-    if (lastLevel) {
+    if(lastLevel){
       const newLevelNumber = parseInt(lastLevel.name.replace("Level ", "")) + 1;
+      const message = `A new Level ${newLevelNumber} will be created. Do you want to continue?`;
+
+      setConfirmationMessage(message);
+
+      setShowAlert(true);
+    }else{
+      const newLevelNumber = "1";
       const message = `A new Level ${newLevelNumber} will be created. Do you want to continue?`;
 
       setConfirmationMessage(message);
@@ -40,7 +45,9 @@ const LevelPage = () => {
   const handleAlertCancel = () => {
     setShowAlert(false);
   };
-
+  if (isLoading) {
+    return <p>Loading ...</p>;
+  }
   return (
     <div>
       <div className="flex gap-11 justify-between ">

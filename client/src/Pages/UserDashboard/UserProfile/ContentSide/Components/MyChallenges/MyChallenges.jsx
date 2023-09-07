@@ -17,6 +17,7 @@ const MyChallenges = () => {
                 key={challenge._id}
                 Challenges={data.challenges}
                 challenge={challenge}
+                type={"small"}
               />
             ))
           ) : (

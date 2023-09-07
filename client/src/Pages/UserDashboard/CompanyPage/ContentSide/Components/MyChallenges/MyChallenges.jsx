@@ -33,6 +33,7 @@ const MyCompanyChallenges = () => {
               key={challenge._id}
               companyChallenges={companyChallenges}
               challenge={challenge}
+              
             />
           ))
         ) : (

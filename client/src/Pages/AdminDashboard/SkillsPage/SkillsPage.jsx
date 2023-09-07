@@ -70,7 +70,7 @@ const SkillsPage = () => {
                       <button
                         type="submit"
                         className="bg-green-500 text-white px-4 py-2 rounded-md w-full"
-                        onSubmit={(e) => handleSubmit(e, badgeData._id)}
+                        onClick={(e) => handleSubmit(e, badgeData._id)}
                       >
                         Update
                       </button>
