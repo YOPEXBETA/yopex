@@ -111,7 +111,7 @@ const getUserPosts = async (req, res) => {
     const userId = req.params.userId;
     const user = await UserModel.findById(userId);
 
-    const company = await CompanyModel.findById(user.companies);
+    const company = await CompanyModel.findById(userId);
   
     // Find the owner of the posts by ID
     let owner;
@@ -124,17 +124,17 @@ const getUserPosts = async (req, res) => {
     }
 
     let posts;
-    let postCompany;
+
     if (isUser) {
       const sharedPostIds = owner.posts;
       posts = await Post.find({
         $or: [
           { userId: userId },
-          { userId: company._id },
+          { companyId: userId },
           { _id: { $in: sharedPostIds } },
         ],
       }); 
-      postCompany= await Post.find({userId:company._id});
+     
     } else {
       posts = await Post.find({ userId: userId });
     }
