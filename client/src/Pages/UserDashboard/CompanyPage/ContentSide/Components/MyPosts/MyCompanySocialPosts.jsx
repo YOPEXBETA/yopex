@@ -13,7 +13,13 @@ const MyCompanySocialPosts = () => {
         <p>Loading posts...</p>
       ) : (
         posts?.map((post) => (
-          <SocialPostCard key={post._id} post={post} companyId={companyId} />
+          <SocialPostCard
+            key={post._id}
+            post={post}
+            companyId={companyId}
+            height={"72"}
+            width={"screen"}
+          />
         ))
       )}
     </div>
