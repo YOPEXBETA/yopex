@@ -20,9 +20,6 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
     
     await deleteCompanyMutation(company._id);
 
-    
-    
-    
   };
 
   if (isSuccess) {

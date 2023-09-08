@@ -40,6 +40,6 @@ companyRouter.get(
   authenticateToken,
   getCompanyNotifications,
 );
-companyRouter.delete("/:id", deleteCompany);
+companyRouter.delete("/:id",authenticateToken,deleteCompany);
 
 module.exports = companyRouter;

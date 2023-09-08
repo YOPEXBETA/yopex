@@ -15,13 +15,27 @@ const ReviewModel = require("../models/Review.model");
 
 const editProfile = async (req, res) => {
   try {
-    console.log(req.body);
+    console.log("editProfile");
 
-    const updateFields = req.body;
+    const updateFields = pick(req.body, [
+      "companyName",
+      "companyDescription",
+      "email",
+      "password",
+      "picturePath",
+      "country",
+      "dateoffoundation",
+      "phoneNumber",
+    ]);
 
+    if (updateFields.password) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPass = await bcrypt.hash(updateFields.password, salt);
+      updateFields.password = hashedPass;
+    }
     const updatedCompany = await companySchema
-      .findOneAndUpdate(req.params.id, updateFields, { new: true })
-      ;
+      .findByIdAndUpdate(req.params.id, updateFields, { new: true })
+      .select("-password");
 
     res.status(200).json(updatedCompany);
   } catch (error) {
@@ -159,8 +173,9 @@ const getCompanyNotifications = async (req, res) => {
 
 const deleteCompany = async (req, res) => {
   try {
-
+    
     const company = await Company.findById(req.params.id);
+    
     const user = await userSchema.findById(req.userId);
     user.companies.pull(req.params.id);
     user.save();
@@ -168,9 +183,12 @@ const deleteCompany = async (req, res) => {
     res.status(200).send("Company has been deleted");
   
   } catch (err) {
+    
     res.status(500).json(err);
   }
 };
+
+
 module.exports = {
   editProfile,
   getCompany,
