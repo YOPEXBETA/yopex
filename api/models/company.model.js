@@ -65,7 +65,7 @@ companySchema.pre('findOneAndDelete', { document: false, query: true }, async fu
 
     SocialMediaPostModel.deleteMany({ userId: companyId }).exec();
 
-    jobModel.deleteMany({ companyId: companyId }).exec();
+    jobModel.deleteMany({ company: companyId }).exec();
 
     ChallengeModel.deleteMany({ company: companyId }).exec();
     
