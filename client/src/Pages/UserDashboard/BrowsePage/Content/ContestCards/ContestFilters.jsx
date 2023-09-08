@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import PaidIcon from "@mui/icons-material/Paid";
+import { FaMoney } from "react-icons/fa";
 
 const ContestsFilters = ({ setMinAmount, setMaxAmount }) => {
   const { register, watch } = useForm();
@@ -20,32 +20,26 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount }) => {
     <div className="bg-white rounded-lg border-b-2 p-4 border-green-500 shadow-md">
       <form className="space-y-4">
         <div className="space-y-2">
-          <label htmlFor="min-amount" className="font-bold text-base">
-            Contest Prize
+          <label htmlFor="min-amount" className="font-bold text-lg mb-4">
+            Filters
           </label>
 
-          <div className="flex items-center space-x-2">
-            <span className="flex-shrink-0">
-              <PaidIcon />
-            </span>
+          <div className="flex flex-col space-y-2">
             <input
               id="min-amount"
               type="number"
               className="border rounded-md p-2 w-full"
-              placeholder="Min Amount"
+              placeholder="Min Price Amount"
               {...register("minAmount")}
             />
           </div>
 
-          <div className="flex items-center space-x-2">
-            <span className="flex-shrink-0">
-              <PaidIcon />
-            </span>
+          <div className="flex flex-col space-y-2">
             <input
               id="max-amount"
               type="number"
               className="border rounded-md p-2 w-full"
-              placeholder="Max Amount"
+              placeholder="Max Price Amount"
               {...register("maxAmount")}
             />
           </div>

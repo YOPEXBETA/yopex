@@ -50,6 +50,22 @@ export const useCreateJob = (user) => {
   });
 };
 
+export const useDeleteJob = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (jobId) => {
+      await axios.delete(`${url}/job/${jobId}`, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['jobs'] });
+    },
+  });
+};
+
+
 export const useAppliers = (job) => {
   return useQuery({
     queryKey: ["appliers", job._id],

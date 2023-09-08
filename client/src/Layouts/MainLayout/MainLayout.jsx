@@ -16,10 +16,7 @@ const MainLayout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  
-
   useEffect(() => {
-    console.log("layout");
     if (!user) {
       dispatch(getCurrentUser()).then((response) => {
         // Check if fetching current user was successful
@@ -40,7 +37,7 @@ const MainLayout = () => {
 
   // Render the main layout once user data is available
   return (
-    <div className="">
+    <div>
       <CustomNavbar />
       <Outlet />
     </div>

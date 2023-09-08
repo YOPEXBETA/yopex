@@ -29,7 +29,7 @@ const CommentButton = ({ post, category, commentCount }) => {
   return (
     <>
       <div className="flex flex-row items-center gap-2">
-        <button className="rounded-full " onClick={handleButtonClick}>
+        <button className="rounded-full" onClick={handleButtonClick}>
           <FaRegComment className="text-gray-500 w-5 h-5" />
         </button>
         <p className="">{commentCount}</p>
