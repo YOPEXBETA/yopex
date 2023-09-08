@@ -12,7 +12,7 @@ const JobCard = ({ job }) => {
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const { user } = useSelector((state) => state.auth);
   const handleClose = () => setIsOpen(false);
-  
+
   console.log(job?.company);
 
   return (
@@ -44,22 +44,21 @@ const JobCard = ({ job }) => {
                   ? `${job?.description.substring(0, 150)} ....`
                   : job?.description}
               </p>
-            </div><div className="flex justify-between items-center">
+            </div>
+            <div className="flex justify-between items-center">
               {/* <p className="text-lg  text-left font-bold">Published</p> */}
               <p className="text-md  text-left font-normal text-green-500">
                 {formatDistance(new Date(job?.createdAt), new Date(), {
                   addSuffix: true,
                 })}
               </p>
-             
-              { user.companies.includes(job?.company._id) ?
-                <PostMenuIcon post={job}/>
-                :<p></p>}
-         
-              
-             
+
+              {user?.companies?.includes(job?.company._id) ? (
+                <PostMenuIcon post={job} />
+              ) : (
+                <p></p>
+              )}
             </div>
-            
           </div>
         </div>
       </div>

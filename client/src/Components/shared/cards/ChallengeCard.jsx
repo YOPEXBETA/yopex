@@ -4,8 +4,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { Rating } from "@mui/material";
 import getDeadlineDifference from "./../../getDeadlineDifference";
 
-const ChallengeCard = ({ challenge,type }) => {
-  
+const ChallengeCard = ({ challenge, type }) => {
   const isChallengeInProgress = (challenge) => {
     if (
       getDeadlineDifference(challenge?.deadline) === "0 Days 0 Hours 0 Minutes"
@@ -17,10 +16,12 @@ const ChallengeCard = ({ challenge,type }) => {
   return (
     <div>
       <Link to={`/browse/contestDetails/${challenge._id}`}>
-        <div className={`w-full h-full flex-col lg:h-40 border-b-2 gap-6 bg-white md:flex-row lg:pr-11 shadow-md border-green-500 md:rounded-lg flex hover:scale-105`}>
+        <div
+          className={`w-full h-full flex-col lg:h-40 border-b-2 gap-6 bg-white md:flex-row lg:pr-11 shadow-md border-green-500 md:rounded-lg flex`}
+        >
           <div className="w-full xl:w-[30%]">
             <img
-              className={`h-full w-screen md:rounded-l-lg object-cover md:hidden lg:block`}
+              className={`h-full xl:h-30 md:h-40 w-screen md:rounded-l-lg object-cover lg:block`}
               src={challenge.company?.companyLogo}
               alt="picture"
             />
