@@ -3,6 +3,7 @@ const submissionModel = require("./submission.model");
 
 const ChallengeSchema = new mongoose.Schema(
   {
+    nbruser:{ type: Number, default: 10 },
     company: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
@@ -30,6 +31,7 @@ const ChallengeSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    paid:{type: Boolean, default: false},
     users: [
       {
         user: {type: mongoose.Schema.Types.ObjectId,ref: "User",},

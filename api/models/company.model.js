@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const { boolean } = require("yup");
 const jobModel = require("./job.model");
 const ChallengeModel = require("./Challenge.model");
+const SocialMediaPostModel = require("./SocialMediaPost.model");
+const notificationModel = require("./notification.model");
+const ConversationModel = require("./Conversation.model");
 
 const companySchema = new mongoose.Schema(
   {
@@ -60,12 +63,15 @@ companySchema.pre('findOneAndDelete', { document: false, query: true }, async fu
     const query = this;
     const companyId = query._conditions._id;
 
-    SocialMediaPost.deleteMany({ userId: companyId }).exec();
+    SocialMediaPostModel.deleteMany({ userId: companyId }).exec();
 
     jobModel.deleteMany({ companyId: companyId }).exec();
 
     ChallengeModel.deleteMany({ company: companyId }).exec();
-
+    
+    ConversationModel.deleteMany({ company: companyId }).exec();
+    
+    
     next();
   } catch (error) {
     console.log("Middleware error");

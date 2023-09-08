@@ -6,8 +6,9 @@ const mongoose = require("mongoose");
 const CreateChallenge = async (req, res, next) => {
   try {
     
-    const { title, description, category, price, companyId, deadline,RecommendedSkills } =
+    const { title, description, category, price, companyId, deadline,RecommendedSkills,nbruser,paid } =
       req.body;
+    console.log(req.body);
     
     const userId = req.userId;
     const user = await UserModel.findById(userId);
@@ -30,8 +31,10 @@ const CreateChallenge = async (req, res, next) => {
       description,
       category,
       deadline,
-      price,
-      RecommendedSkills
+      price:paid==="true"?price:0,
+      RecommendedSkills,
+      nbruser,
+      paid:paid==="true"?true:false,
     });
 
     await challenge.save();

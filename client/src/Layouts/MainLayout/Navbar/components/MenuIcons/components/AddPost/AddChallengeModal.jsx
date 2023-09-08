@@ -15,6 +15,7 @@ import { useCategories } from "../../../../../../../hooks/react-query/useCategor
 
 export const AddChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOptionpaid, setSelectedOptionpaid] = useState("false");
   const { data:Skills } = useSkills();
   const itSkills = Skills?.map((skill) => skill.name);
   const {data:categorys} = useCategories();
@@ -137,13 +138,25 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                   {...register("description", { required: true })}
                   placeholder="challenge description"
                 />
+                <div className="flex gap-3 mb-2">
+                  <select
+                    id="selectFieldpaid"
+                    className="p-2 w-[20%] border rounded-md focus:ring focus:ring-blue-300"
+                    value={selectedOptionpaid}
+                    onChange={(e) => {setSelectedOptionpaid(e.target.value);setValue("paid", e.target.value)}}
+                  >
+                    <option value={"false"}>free</option>
+                    <option value={"true"}>paid</option>
+                  </select>
+                  <input
+                    className="py-2 w-[80%] px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500"
+                    type="number"
+                    placeholder="challenge prize"
+                    {...register("price", { required: true })}
+                    disabled={selectedOptionpaid === "false"}
+                  />
+                </div>
 
-                <input
-                  className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
-                  type="number"
-                  placeholder="challenge prize"
-                  {...register("price", { required: true })}
-                />
                 <div className="mb-2">
                   
                       {itCategory && (<Autocomplete
@@ -166,7 +179,12 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                       />)}
                     
                 </div>
-
+                <input
+                  className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                  type="number"
+                  placeholder="number of particiant"
+                  {...register("nbruser", { required: true })}
+                />
                 {isError && (
                   <AlertContainer error={error?.response?.data?.error?.msg} />
                 )}

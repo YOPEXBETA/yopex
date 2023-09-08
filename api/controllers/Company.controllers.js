@@ -173,10 +173,13 @@ const getCompanyNotifications = async (req, res) => {
 
 const deleteCompany = async (req, res) => {
   try {
+
     const company = await Company.findById(req.params.id);
-   
-      response = await Company.findOneAndDelete({_id:req.params.id});
-      res.status(200).send("Company has been deleted");
+    const user = await userSchema.findById(req.userId);
+    user.companies.pull(req.params.id);
+    user.save();
+    response = await Company.findOneAndDelete({_id:req.params.id});
+    res.status(200).send("Company has been deleted");
   
   } catch (err) {
     res.status(500).json(err);

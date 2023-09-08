@@ -15,14 +15,20 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   const { companyId } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { mutate, isLoadinge } = useFollowCompany(user._id, companyId);
-  const deleteCompanyMutation = useDeleteCompany();
+  const {mutate:deleteCompanyMutation,isSuccess} = useDeleteCompany();
   const handleDeleteCompany = async () => {
-    try {
-      await deleteCompanyMutation.mutateAsync(company._id);
-    } catch (error) {
-      console.error("Error deleting company:", error);
-    }
+    
+    await deleteCompanyMutation(company._id);
+
+    
+    
+    
   };
+
+  if (isSuccess) {
+    window.location="/feed";
+  }
+
   const { data: company, isLoading, isError } = useCompanyById(companyId);
 
   if (isLoading) {
@@ -106,14 +112,14 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 </button>
               </a>
               {company && company.user === user._id && (
-                <a href="/feed">
+                
                   <button
                     onClick={handleDeleteCompany}
                     className="cursor-pointer capitalize font-medium hover:scale-105  bg-red-500 p-4 rounded-full text-white"
                   >
                     <FaTrash className="w-6 h-6" />
                   </button>
-                </a>
+                
               )}
             </div>
           </div>
