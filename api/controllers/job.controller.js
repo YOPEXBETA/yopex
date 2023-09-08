@@ -53,7 +53,7 @@ const getAllJobs = async (req, res, next) => {
     const jobs = await Job.find().populate("company");
 
     if (jobs.length === 0) {
-      return res.status(404).json({ message: "No Jobs Found" });
+      return res.status(200).json(jobs);
     }
 
     return res.status(200).json(jobs);
@@ -109,20 +109,24 @@ const geJobById = async (req, res, next) => {
 };
 
 const deleteJob = async (req, res, next) => {
+  
   const id = req.params.id;
 
   let job;
   try {
-    job = await Job.findByIdAndRemove(id).populate("company");
-    await job.company.jobs.pull(job);
-    await job.company.save();
+    job = await Job.findById(id);
+    const company = await Company.findById(job.company);
+    await company.jobs.pull(job);
+    await company.save();
+    await Job.findByIdAndDelete(id);
+    return res.status(200).json({ message: "Successfully Delete" });
   } catch (err) {
     console.log(err);
-  }
-  if (!job) {
     return res.status(500).json({ message: "Unable To Delete" });
+
   }
-  return res.status(200).json({ message: "Successfully Delete" });
+  
+ 
 };
 //// get compnay jobs
 const getByUserId = async (req, res, next) => {

@@ -54,7 +54,9 @@ const JobCard = ({ job }) => {
               </p>
 
               {user?.companies?.includes(job?.company._id) ? (
-                <PostMenuIcon post={job} />
+                <div onClick={(e)=> e.stopPropagation()}>
+                <PostMenuIcon post={job}  />
+                </div>
               ) : (
                 <p></p>
               )}
