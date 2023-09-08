@@ -1,17 +1,4 @@
 import React, { useState } from "react";
-import {
-  Autocomplete,
-  Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  LinearProgress,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { MuiFileInput } from "mui-file-input";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import uploadFile from "../../../../../../../utils/uploadFile";
@@ -78,7 +65,6 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                   {...register("description", { required: true })}
                   placeholder="Company Description"
                 />
-                <Divider />
 
                 {uploadedFile && (
                   <div className="mb-4">
@@ -117,7 +103,6 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                     </div>
                   )}
                 />
-                <Divider />
                 {uploadedFiledoc && (
                   <div className="mb-4">
                     <p className="mb-1">
@@ -142,9 +127,9 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                         <span className="text-green-600">
                           {field.value && field.value.length > 0
                             ? // Display the file names when files are selected
-                              `Files selected: ${field.value.length}`
+                              `Documents selected: ${field.value.length}`
                             : // Display this when no file is chosen
-                              "Upload File"}
+                              "Upload Document"}
                         </span>
                         <input
                           type="file"

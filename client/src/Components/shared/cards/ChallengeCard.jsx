@@ -44,7 +44,7 @@ const ChallengeCard = ({ challenge, type }) => {
 
               <div className="flex items-center justify-start gap-2">
                 <div className="text-sm capitalize text-opacity-75 font-bold text-green-500">
-                  {challenge.price} XP
+                  {challenge.price} Points
                 </div>
               </div>
               <div className="flex items-center justify-start gap-2">
