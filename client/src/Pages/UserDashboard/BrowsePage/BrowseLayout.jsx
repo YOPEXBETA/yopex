@@ -28,7 +28,7 @@ const BrowseLayout = () => {
         />
       )}
 
-      <div className="xl:mt-1 xl:mx-40 mt-0 mx-0 ">
+      <div className="xl:mt-1 xl:mx-40 md:mx-4 lg:mx-8 mt-0 mx-0 ">
         <BrowseContentPage
           jobQuery={jobQuery}
           contestQuery={contestQuery}
