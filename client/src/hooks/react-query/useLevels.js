@@ -20,6 +20,27 @@ export const useCreateLevel = () => {
     });
   };
 
+  export const useUpdateLevel = () => {
+    const queryClient = useQueryClient();
+  
+    return useMutation({
+      mutationFn: async (level) => {
+      
+          const { data } = await axios.put(
+            `${url}/admin/updateLevel/${level._id}`,
+            { maxScore :level.maxScore },
+            { withCredentials: true }
+          );
+  
+          return data;
+       
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["levels"] });
+      },
+    });
+  }
+
   export const useGetLevels = () => {
     return useQuery({
       queryKey: ["Levels"],

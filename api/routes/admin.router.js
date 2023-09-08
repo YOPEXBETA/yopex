@@ -13,10 +13,11 @@ const {
   approveCompany,
   
 } = require("../controllers/admin.controllers");
-const {getLevels, deleteLevel,createLevel} = require ("../controllers/levels.controller");
+const {getLevels, deleteLevel,createLevel, editLevel} = require ("../controllers/levels.controller");
 
 adminRouter.post("/createLevel",createLevel);
-adminRouter.get("/allLevels" , getLevels)
+adminRouter.put("/updateLevel/:id" , editLevel);
+adminRouter.get("/allLevels" , getLevels);
 adminRouter.delete("/delLevel/:id",isAdmin, deleteLevel);
 adminRouter.get("/Users", isAdmin, getUsers);
 adminRouter.get("/Companies", isAdmin, getCompanies);

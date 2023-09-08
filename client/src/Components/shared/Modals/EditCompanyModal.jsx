@@ -1,6 +1,6 @@
 import { Button, LinearProgress, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateJob } from "../../../hooks/react-query/useJobs";
 import { useUserById } from "../../../hooks/react-query/useUsers";
@@ -16,40 +16,37 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
 
   const [uploadProgress, setUploadProgress] = useState(0);
   const { user } = useSelector((state) => state.auth);
+
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
     defaultValues: {
       companyName: company.companyName,
-      companyDescription: company.companyDescription,
+      companyDescription : company.companyDescription,
       files: [],
     },
   });
   const uploadedFile = watch("files");
+ 
 
   const onSubmit = async (data) => {
+    console.log(data);
     if (data.files.length > 0) {
       const companyLogo = [];
       for (let file of data.files) {
         companyLogo.push(await uploadFile(file, setUploadProgress));
       }
-      return mutate({
-        companyDescription: data.companyDescription,
+      return mutate({ 
         companyName: data.companyName,
-
-
-        companyLogo,
+        companyDescription: data.companyDescription,
+       companyLogo, 
       });
     }
 
+        mutate({ 
+      companyData : { 
+        companyName : data.companyName,
+        companyDescription : data.companyDescription,}
+        });
 
-    console.log(data);
-
-    mutate({ 
-      companyDescription: data.companyDescription,
-    companyName: data.companyName,
-    companyLogo: data.companyLogo,
-    
-
-   });
     setUploadProgress(0);
     handleClose();
     reset();

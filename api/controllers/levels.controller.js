@@ -22,6 +22,42 @@ const createLevel = async (req,res) => {
   }
 };
 
+const editLevel = async (req,res) => {
+
+  try {
+    const maxscore = req.body.maxScore;
+    const id = req.params.id;
+  
+    const currentLevel = await levels.findById(id);
+    if (!currentLevel) {
+      return res.status(404).json({ msg: "Level not found" });
+    }
+    const newMaxScore=currentLevel.maxScore+parseInt(maxscore);
+    const oldMaxScore = currentLevel.maxScore;
+    await levels.findByIdAndUpdate(
+      { _id: req.params.id },
+       { maxScore : newMaxScore } , // Use $set to update the maxScore field
+      { new: true } // Set { new: true } to get the updated document
+    );
+
+    const nextLevel = await levels.findOne({
+      minScore:  oldMaxScore ,
+    });
+    if (nextLevel) {
+      await levels.findByIdAndUpdate(
+        nextLevel._id,
+        {  minScore: newMaxScore  }, // You can adjust the logic as needed
+        { new: true }
+      );
+    }
+
+    res.json({ msg: "Updated a level" });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+
+}
+
 const getLevels = async (req, res) => {
     try {
       const level = await levels.find();
@@ -76,4 +112,5 @@ const getLevels = async (req, res) => {
     getLevels,
     deleteLevel,
     createLevel,
+    editLevel
   };

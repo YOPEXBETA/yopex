@@ -93,7 +93,8 @@ const getFeedPosts = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (post.userId.toString() === req.userId) {
+    const thisuser = await UserModel.findById(req.userId);
+    if (post.userId.toString() === req.userId || thisuser.companies.includes(post.userId) ) {
       response = await Post.findOneAndDelete({_id:req.params.id});
       res.status(200).send("Post has been deleted");
     } else {
@@ -109,7 +110,9 @@ const getUserPosts = async (req, res) => {
   try {
     const userId = req.params.userId;
     const user = await UserModel.findById(userId);
+
     const company = await CompanyModel.findById(userId);
+  
     // Find the owner of the posts by ID
     let owner;
     let isUser = true;
@@ -121,6 +124,7 @@ const getUserPosts = async (req, res) => {
     }
 
     let posts;
+
     if (isUser) {
       const sharedPostIds = owner.posts;
       posts = await Post.find({
@@ -129,12 +133,12 @@ const getUserPosts = async (req, res) => {
           { companyId: userId },
           { _id: { $in: sharedPostIds } },
         ],
-      });
+      }); 
+     
     } else {
       posts = await Post.find({ userId: userId });
     }
-
-    res.status(200).json(posts);
+     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

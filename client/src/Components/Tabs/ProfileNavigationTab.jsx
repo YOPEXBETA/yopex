@@ -61,7 +61,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           }`}
           onClick={() => changeValue(4)}
         >
-          {`Feedbacks (${reviews?.length || 0})`}
+          {`Reviews (${reviews?.length || 0})`}
         </button>
         {userId == user._id ? (
           <button
@@ -72,7 +72,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
             }`}
             onClick={() => changeValue(5)}
           >
-            {`Bookmarks (${userProfile?.bookmarks.length || 0})`}
+            {`Favorites (${userProfile?.bookmarks.length || 0})`}
           </button>
         ) : (
           ""

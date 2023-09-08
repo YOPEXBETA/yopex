@@ -45,11 +45,14 @@ const LevelPage = () => {
   const handleAlertCancel = () => {
     setShowAlert(false);
   };
+
   if (isLoading) {
     return <p>Loading ...</p>;
   }
+
   return (
     <div>
+
       <div className="flex gap-11 justify-between ">
         <input
           type="text"

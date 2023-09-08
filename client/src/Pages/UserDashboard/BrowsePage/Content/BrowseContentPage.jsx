@@ -12,7 +12,7 @@ const BrowseContentPage = ({ value, contestQuery, jobQuery }) => {
       <div spacing={2}>
         {value === 0 && (
           <div className="grid grid-cols-2 md:grid-cols-12 gap-2">
-            <div className="lg:col-span-3 md:col-span-3 sm:col-span-12 col-span-12 md:pr-4">
+            <div className="lg:col-span-3 md:col-span-3 sm:col-span-12 col-span-12 md:pr-8">
               <ContestsFilters
                 setMinAmount={setMinAmount}
                 setMaxAmount={setMaxAmount}
