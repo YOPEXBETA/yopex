@@ -3,7 +3,7 @@ import BrowseNavigationTab from "../Content/BrowseNavigationTabs/BrowseNavigatio
 import { useCategories } from "../../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../../hooks/react-query/useSkills";
 
-const BrowseJobsHeader = ({ changeValue, value, setJobQuery ,setCategoryQuery}) => {
+const BrowseJobsHeader = ({ changeValue, value, setJobQuery ,setCategoryQuery ,setSkillQuery}) => {
   const {data:categorys} = useCategories();
   const { data:Skills } = useSkills();
   const itCategory = categorys?.map((category) => category.name);
@@ -33,7 +33,8 @@ const BrowseJobsHeader = ({ changeValue, value, setJobQuery ,setCategoryQuery}) 
        </select>
        <select
         className="py-2 px-2 outline-none rounded border border-white text-white bg-black hover:border-green-500"
-        >
+        onChange={(e) => setSkillQuery(e.target.value)}
+       >
         <option value="">All Skills</option>
           {itSkills.map((skillName) => (
             <option key={skillName} value={skillName}>

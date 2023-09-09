@@ -7,6 +7,7 @@ const BrowseLayout = () => {
   const [contestQuery, setContestQuery] = useState("");
   const [jobQuery, setJobQuery] = useState("");
   const [selectedCategory, setCategoryQuery] = useState("");
+  const [selectedSkill, setSkillQuery] = useState("");
   const [value, setValue] = useState(0);
   const changeValue = (newValue) => {
     setValue(newValue);
@@ -25,6 +26,7 @@ const BrowseLayout = () => {
         <BrowseJobsHeader
           setJobQuery={setJobQuery}
           setCategoryQuery={setCategoryQuery}
+          setSkillQuery={setSkillQuery}
           value={value}
           changeValue={changeValue}
         />
@@ -34,6 +36,7 @@ const BrowseLayout = () => {
         <BrowseContentPage
           jobQuery={jobQuery}
           selectedCategory={selectedCategory}
+          selectedSkill={selectedSkill}
           contestQuery={contestQuery}
           value={value}
         />
