@@ -19,18 +19,22 @@ const Jobs = ({ jobQuery , selectedCategory ,selectedSkill }) => {
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 lg:grid-cols-3"
         onClick={handleClickOpenModalJob}
       >
-        {jobs?.map(
-          (job) =>
-            // job.company._id !== user._id &&
-           
+        {jobs?.filter((job) =>
+      job.title.toLowerCase().includes(jobQuery.toLowerCase()) &&
+      (selectedCategory === '' || job.category === selectedCategory) &&
+      (selectedSkill === '' || job.RecommendedSkills.includes(selectedSkill))
+        ).length > 0 ? (
+          jobs.map((job) =>
             job.title.toLowerCase().includes(jobQuery.toLowerCase()) &&
-             (selectedCategory === '' || job.category === selectedCategory) &&
-             ( selectedSkill ==='' || job.RecommendedSkills.includes(selectedSkill))  &&
-             (
+            (selectedCategory === '' || job.category === selectedCategory) &&
+            (selectedSkill === '' || job.RecommendedSkills.includes(selectedSkill)) ? (
               <div key={job._id}>
                 <JobCard job={job} />
               </div>
-            )
+            ) : null
+          )
+        ) : (
+          <p>No jobs found</p>
         )}
       </div>
     </div>
