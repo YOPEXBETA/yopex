@@ -15,6 +15,14 @@ const JobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+    },
+    RecommendedSkills: {
+      type: Array,
+      default: [],
+    },
     image: {
       type: String,
       required: false,
