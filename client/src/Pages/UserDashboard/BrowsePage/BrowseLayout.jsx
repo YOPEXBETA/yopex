@@ -13,7 +13,7 @@ const BrowseLayout = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="md:space-y-6 space-y-1">
       {value === 0 && (
         <BrowseContestsHeader
           setContestQuery={setContestQuery}
