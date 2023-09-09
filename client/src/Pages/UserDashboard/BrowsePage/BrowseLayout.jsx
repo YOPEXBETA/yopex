@@ -6,6 +6,7 @@ import BrowseJobsHeader from "./Header/BrowseJobsHeader";
 const BrowseLayout = () => {
   const [contestQuery, setContestQuery] = useState("");
   const [jobQuery, setJobQuery] = useState("");
+  const [selectedCategory, setCategoryQuery] = useState("");
   const [value, setValue] = useState(0);
   const changeValue = (newValue) => {
     setValue(newValue);
@@ -23,6 +24,7 @@ const BrowseLayout = () => {
       {value === 1 && (
         <BrowseJobsHeader
           setJobQuery={setJobQuery}
+          setCategoryQuery={setCategoryQuery}
           value={value}
           changeValue={changeValue}
         />
@@ -31,6 +33,7 @@ const BrowseLayout = () => {
       <div className="xl:mt-1 xl:mx-40 md:mx-4 lg:mx-8 mt-0 mx-0 ">
         <BrowseContentPage
           jobQuery={jobQuery}
+          selectedCategory={selectedCategory}
           contestQuery={contestQuery}
           value={value}
         />

@@ -3,7 +3,7 @@ import ContestsFilters from "./ContestCards/ContestFilters";
 import Jobs from "./JobCards/Jobs";
 import Challenges from "./ContestCards/Challenges";
 
-const BrowseContentPage = ({ value, contestQuery, jobQuery }) => {
+const BrowseContentPage = ({ value, contestQuery, jobQuery ,selectedCategory }) => {
   const [minAmount, setMinAmount] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
 
@@ -31,7 +31,7 @@ const BrowseContentPage = ({ value, contestQuery, jobQuery }) => {
 
         {value === 1 && (
           <div className="lg:col-span-12 md:col-span-12 sm:col-span-12 col-span-12">
-            <Jobs jobQuery={jobQuery} />
+            <Jobs jobQuery={jobQuery}  selectedCategory={selectedCategory}/>
           </div>
         )}
       </div>
