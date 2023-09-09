@@ -1,10 +1,5 @@
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-
-const tabStyles = { p: 3 };
 
 const NavbarTabTop = () => {
   const location = useLocation();
