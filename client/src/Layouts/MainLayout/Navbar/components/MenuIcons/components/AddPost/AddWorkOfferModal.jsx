@@ -1,23 +1,40 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm , Controller} from "react-hook-form";
 import { useCreateJob } from "../../../../../../../hooks/react-query/useJobs";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 import AlertContainer from "../../../../../../../Components/alerts";
 import AlertSuccess from "../../../../../../../Components/successalert";
+import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
+import { TextField, Autocomplete } from "@mui/material";
+import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
 
 export const AddWorkOfferModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
+
+  const { data:Skills } = useSkills();
+  const itSkills = Skills?.map((skill) => skill.name); 
+   const {data:categorys} = useCategories();
+  const itCategory = categorys?.map((category) => category.name);
+  const [category, setCategory] = useState("");
+  
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
   const {
-    register,
     handleSubmit,
+    register,
+    control,
     formState: { isSubmitting },
-  } = useForm();
+    setValue,
+  
+  } = useForm({
+    defaultValues: {
+      RecommendedSkills: [],
+    },
+  });
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
   const { data: userProfile, isLoading } = useUserById(userId);
@@ -84,6 +101,58 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                   {...register("description", { required: true })}
                   placeholder="job description"
                 />
+                <div className="mb-2">
+                 
+                </div>
+                <div className="mb-2">
+                  <Controller
+                    control={control}
+                    name="RecommendedSkills"
+                    defaultValue={"Any"}
+                    render={({ field }) => itSkills && (
+                      <Autocomplete
+                        multiple
+                        id="tags-outlined"
+                        options={itSkills}
+                        getOptionLabel={(option) => option}
+                        value={field.value}
+                        onBlur={field.onBlur}
+                        onChange={(e, value) =>
+                          setValue("RecommendedSkills", value)
+                        }
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            placeholder="Skills"
+                          />
+                        )}
+                      />
+                    )}
+                  />
+                </div>
+                <div className="mb-2">
+                  
+                  {itCategory && (<Autocomplete
+                    disablePortal
+                    id="tags-outlined"
+                    options={itCategory}
+                    value={category}
+                    onChange={(e,value) =>{
+                      console.log(value);
+                      setCategory(value);
+                      setValue("category", value);
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        variant="outlined"
+                        placeholder="Category"
+                      />
+                    )}
+                  />)}
+                </div>
+            
                 <input
                   className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-4 "
                   type="text"
