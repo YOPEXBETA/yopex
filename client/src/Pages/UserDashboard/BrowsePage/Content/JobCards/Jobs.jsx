@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useJobs } from "../../../../../hooks/react-query/useJobs";
 import JobCard from "../../../../../Components/shared/cards/JobCard";
 
-const Jobs = ({ jobQuery }) => {
+const Jobs = ({ jobQuery , selectedCategory }) => {
   // ==============================|| JOB CARD MODAL ||============================== //
   const [openJobModal, setOpenJobModal] = useState(false);
 
@@ -12,7 +12,7 @@ const Jobs = ({ jobQuery }) => {
 
   const { data: jobs } = useJobs();
   console.log("jobs", jobs);
-
+ console.log(selectedCategory);
   return (
     <div>
       <div
@@ -22,7 +22,10 @@ const Jobs = ({ jobQuery }) => {
         {jobs?.map(
           (job) =>
             // job.company._id !== user._id &&
-            job.title.toLowerCase().includes(jobQuery.toLowerCase()) && (
+           
+            job.title.toLowerCase().includes(jobQuery.toLowerCase()) &&
+             (selectedCategory === '' || job.category === selectedCategory) &&
+             (
               <div key={job._id}>
                 <JobCard job={job} />
               </div>
