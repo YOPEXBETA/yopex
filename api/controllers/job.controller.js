@@ -52,10 +52,6 @@ const getAllJobs = async (req, res, next) => {
   try {
     const jobs = await Job.find().populate("company");
 
-    if (jobs.length === 0) {
-      return res.status(404).json({ message: "No Jobs Found" });
-    }
-
     return res.status(200).json(jobs);
   } catch (error) {
     console.error(error);

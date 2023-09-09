@@ -11,6 +11,7 @@ const { updateUserChallengesBadges } = require("../utils/utilities");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
 const ReviewModel = require("../models/Review.model");
+const { response } = require("express");
 
 
 const editProfile = async (req, res) => {
@@ -161,13 +162,18 @@ const deleteCompany = async (req, res) => {
   try {
     const company = await Company.findById(req.params.id);
    
-      response = await Company.findOneAndRemove({_id : req.params.id});
+      
+    const user  = await userModel.findById(company.user);
+    user.companies = user.companies.filter((companyId) => companyId.toString() !== req.params.id);
+    await user.save();
+    await Company.findByIdAndRemove({_id : req.params.id});
       res.status(200).send("Company has been deleted");
   
   } catch (err) {
     res.status(500).json(err);
   }
 };
+
 module.exports = {
   editProfile,
   getCompany,

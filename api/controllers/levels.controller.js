@@ -15,8 +15,7 @@ const createLevel = async (req,res) => {
 
     const level = new levels({ name: `Level ${levelName}`, minScore: newMinScore, maxScore: newMaxScore });
     await level.save();
-    res.json({ level });
-    return `Level ${levelName}`;
+     res.status(201).json(level);
   } catch (error) {
     console.error(`Error creating level: ${error.message}`);
   }
@@ -61,7 +60,7 @@ const editLevel = async (req,res) => {
 const getLevels = async (req, res) => {
     try {
       const level = await levels.find();
-      return res.status(200).json(level);
+       res.json(level);
     } catch (error) {
       return res.status(500).json(error);
     }
@@ -73,7 +72,7 @@ const getLevels = async (req, res) => {
       const levelToDelete = await levels.findById(req.params.id);
   
       if (!levelToDelete) {
-        return res.status(404).send("Level not found");
+        return res.status(200).send(levelToDelete);
       }
   
       const deletedMaxScore = levelToDelete.maxScore;
@@ -101,7 +100,7 @@ const getLevels = async (req, res) => {
      
 
   
-      res.status(200).send("Level has been deleted !    ");
+      return res.status(201).send(levelsToDowngrade);
     } catch (err) {
       console.error(err);
       res.status(500).json(err);
