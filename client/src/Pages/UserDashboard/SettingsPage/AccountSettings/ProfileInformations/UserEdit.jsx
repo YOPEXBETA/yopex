@@ -15,6 +15,7 @@ import { green } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import { Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { FaCamera } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import countries from "world-countries";
@@ -96,33 +97,29 @@ const UserEdit = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 gap-3"
       >
-        <Grid item xs={12}>
-          <Badge
-            overlap="circular"
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            badgeContent={
-              <CustomIconButton
-                aria-label="upload picture"
-                component="label"
-                sx={{ bgcolor: green[500], borderRadius: "50px" }}
-              >
-                <input
-                  hidden
-                  accept="image/*"
-                  type="file"
-                  {...register("file")}
-                />
-                <PhotoCamera sx={{ fill: "white" }} />
-              </CustomIconButton>
-            }
-          >
+        <div className="relative">
+          <div className="relative w-24 h-24">
             <img
               className="rounded-full object-cover w-24 h-24"
-              src={user?.picturePath ? user.picturePath : ""}
+              src={user?.picturePath || ""}
+              alt=""
             />
-          </Badge>
-        </Grid>
-
+            <label
+              htmlFor="fileInput"
+              className="absolute bottom-0 right-0 p-2 bg-green-500 rounded-full text-white cursor-pointer"
+            >
+              <input
+                id="fileInput"
+                hidden
+                accept="image/*"
+                type="file"
+                {...register("file")}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+              <FaCamera className="w-4 h-4" />
+            </label>
+          </div>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="col-span-1">
             <label htmlFor="firstname" className="block text-gray-600">
@@ -149,67 +146,66 @@ const UserEdit = () => {
             />
           </div>
         </div>
-        <Grid item xs={12} sm={12}>
-          <label>Description</label>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <label>Description</label>
 
-          <textarea
-            placeholder="Description"
-            className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-            value={user.userDescription}
-            {...register("userDescription")}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <label>Email</label>
-
-          <input
-            placeholder="Email"
-            disabled
-            className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-200"
-            type="email"
-            value={user.email}
-          />
-        </Grid>
+            <textarea
+              placeholder="Description"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              value={user.userDescription}
+              {...register("userDescription")}
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <label>Email</label>
+            <input
+              placeholder="Email"
+              disabled
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-200"
+              type="email"
+              value={user.email}
+            />
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="col-span-1">
             <label>Country</label>
-            <Select
-              labelId="demo-multiple-name-label"
+            <select
               id="demo-multiple-name"
-              fullWidth
-              displayEmpty
-              MenuProps={MenuProps}
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
               defaultValue={
-                user.country?.charAt(0).toUpperCase() +
-                  user.country?.slice(1) || ""
+                user.country
+                  ? user.country.charAt(0).toUpperCase() + user.country.slice(1)
+                  : ""
               }
               {...register("country")}
             >
-              <MenuItem value="">Choose your country</MenuItem>
+              <option value="">Choose your country</option>
               {countryList.map((country) => (
-                <MenuItem key={country} value={country}>
+                <option key={country} value={country}>
                   {country}
-                </MenuItem>
+                </option>
               ))}
-            </Select>
+            </select>
           </div>
 
           <div className="col-span-1">
             <label>Gender</label>
-            <Select
-              labelId="gender-select-label"
+            <select
               id="gender-select"
-              fullWidth
-              displayEmpty
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
               defaultValue={user.gender}
               {...register("gender")}
             >
-              <MenuItem value="">Choose your gender</MenuItem>
-              <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="Female">Female</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </Select>
+              <option value="">Choose your gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
         </div>
 
@@ -231,7 +227,7 @@ const UserEdit = () => {
             <input
               id="phone"
               placeholder="+216"
-              className="w-full p-2 border bg-[#ffffff] rounded-lg focus:outline-none resize-none text-black"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               defaultValue={user.phoneNumber}
               {...register("phoneNumber")}
             />

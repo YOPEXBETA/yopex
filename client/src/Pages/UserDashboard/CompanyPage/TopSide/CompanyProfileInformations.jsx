@@ -15,15 +15,13 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   const { companyId } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { mutate, isLoadinge } = useFollowCompany(user._id, companyId);
-  const {mutate:deleteCompanyMutation,isSuccess} = useDeleteCompany();
+  const { mutate: deleteCompanyMutation, isSuccess } = useDeleteCompany();
   const handleDeleteCompany = async () => {
-    
     await deleteCompanyMutation(company._id);
-
   };
 
   if (isSuccess) {
-    window.location="/feed";
+    window.location = "/feed";
   }
 
   const { data: company, isLoading, isError } = useCompanyById(companyId);
@@ -41,11 +39,11 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
 
   return (
     <div>
-      <div className="pt-10 px-16 flex flex-col justify-end bg-white">
-        <div className="space-y-6">
-          <div className="flex flex-row items-center justify-between md:flex md:flex-row md:justify-between sm:flex-col sm:justify-stretch sm:gap-25">
-            <div className="flex lg:flex-row flex-col items-center gap-6">
-              <div className="w-40 h-40">
+      <div className="md:pt-10 pt-6 xl:px-16 lg:px-6 px-0 flex flex-col justify-end bg-white">
+        <div className="space-y-0 md:space-y-8">
+          <div className="flex flex-col xl:flex-row lg:flex-row md:flex-row xl:px-0 items-start md:items-center px-4 gap-0 pb-8 md:pb-0 md:gap-2 justify-between">
+            <div className="flex lg:flex-row flex-row items-center gap-4">
+              <div className="w-24 h-24 sm:w-40 sm:h-40">
                 <img
                   alt="Profile picture"
                   src={company.companyLogo}
@@ -53,9 +51,9 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 />
               </div>
 
-              <div className=" space-y-5">
-                <div className="flex items-center gap-3">
-                  <p className="text-xl font-semibold">{company.companyName}</p>
+              <div className="space-y-2 sm:space-y-5 xl:block md:flex lg:block  flex flex-col ">
+                <div className="flex items-center gap-2">
+                  <p className="text-lg font-semibold">{company.companyName}</p>
 
                   <button
                     className="flex items-center gap-1"
@@ -64,68 +62,121 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     <FaCheckCircle
                       className={`text-${
                         company.verified ? "green" : "gray"
-                      }-500 w-5 h-5 mb-[0.15rem] ${
+                      }-500 w-4 h-4 sm:w-5 sm:h-5 mb-[0.1rem] ${
                         !company.verified ? "opacity-50 cursor-not-allowed" : ""
                       }`}
                     />
                   </button>
                 </div>
-                <div className=" flex justify-between gap-4 w-72">
-                  <div className=" flex items-center gap-2 justify-between">
+                <div className="hidden xl:flex lg:flex md:flex flex-row sm:flex-row justify-between gap-2 sm:gap-4 w-full sm:w-72">
+                  <div className="flex items-center gap-1 sm:gap-2 justify-between">
+                    <p className="text-base font-bold">
+                      {company?.posts.length}
+                    </p>
                     <p className="text-zinc-500 text-md">Posts</p>
-                    <p className="text-lg font-bold">{company?.posts.length}</p>
                   </div>
-                  <div className=" flex items-center gap-2 justify-between">
-                    <p className="text-zinc-500 text-md">Challenges</p>
-                    <p className="text-lg font-bold">
+                  <div className="flex items-center gap-1 sm:gap-2 justify-between">
+                    <p className="text-base font-bold">
                       {company?.challenges.length}
                     </p>
+                    <p className="text-zinc-500 text-md">Challenges</p>
                   </div>
-                  <div className=" flex items-center gap-2 justify-between">
+                  <div className="flex items-center gap-1 sm:gap-2 justify-between">
+                    <p className="text-base font-bold">
+                      {company?.jobs.length}
+                    </p>
                     <p className="text-zinc-500 text-md">Jobs</p>
-                    <p className="text-lg font-bold">{company?.jobs.length}</p>
                   </div>
                 </div>
-                <p className="truncate w-[1000px]">
+                {/*mobile version*/}
+                <div className="flex gap-2">
+                  <a href="#" className="xl:block lg:block md:block">
+                    <button
+                      className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 p-2 sm:p-4 rounded-lg text-white"
+                      onClick={
+                        company && company.user === user._id
+                          ? toggleModal
+                          : mutate
+                      }
+                    >
+                      {company && company.user === user._id ? (
+                        <FaEdit className="w-4 h-4" />
+                      ) : user.followings.includes(company._id) ? (
+                        <FaUserMinus className="w-4 h-4" />
+                      ) : (
+                        <FaUserPlus className="w-4 h-4" />
+                      )}
+                    </button>
+                  </a>
+                  {company && company.user === user._id && (
+                    <button
+                      onClick={handleDeleteCompany}
+                      className="xl:block lg:block md:block cursor-pointer capitalize font-medium hover:scale-105 bg-red-500 p-2 sm:p-4 rounded-lg text-white"
+                    >
+                      <FaTrash className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+                {/*mobile version*/}
+                <p className="truncate w-full xl:w-[50rem]">
                   {company?.companyDescription}
                 </p>
               </div>
             </div>
-            <div className="flex gap-2">
-              <a href="#" className="block">
+            <div className="hidden md:flex gap-1 flex-wrap">
+              <a href="#" className="xl:block lg:block md:block">
                 <button
-                  className="cursor-pointer capitalize font-medium hover:scale-105  bg-green-500 p-4 rounded-full text-white"
+                  className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 p-2 sm:p-4 rounded-lg text-white"
                   onClick={
                     company && company.user === user._id ? toggleModal : mutate
                   }
                 >
                   {company && company.user === user._id ? (
-                    <FaEdit className="w-6 h-6" />
+                    <FaEdit className="w-4 h-4 sm:w-6 sm:h-6" />
                   ) : user.followings.includes(company._id) ? (
-                    <FaUserMinus className="w-6 h-6" />
+                    <FaUserMinus className="w-4 h-4 sm:w-6 sm:h-6" />
                   ) : (
-                    <FaUserPlus className="w-6 h-6" />
+                    <FaUserPlus className="w-4 h-4 sm:w-6 sm:h-6" />
                   )}
                 </button>
               </a>
               {company && company.user === user._id && (
-                
-                  <button
-                    onClick={handleDeleteCompany}
-                    className="cursor-pointer capitalize font-medium hover:scale-105  bg-red-500 p-4 rounded-full text-white"
-                  >
-                    <FaTrash className="w-6 h-6" />
-                  </button>
-                
+                <button
+                  onClick={handleDeleteCompany}
+                  className="xl:block lg:block md:block cursor-pointer capitalize font-medium hover:scale-105 bg-red-500 p-2 sm:p-4 rounded-lg text-white"
+                >
+                  <FaTrash className="w-4 h-4 sm:w-6 sm:h-6" />
+                </button>
               )}
             </div>
           </div>
+          {/*mobile version*/}
+          <div className="flex xl:hidden lg:hidden md:hidden flex-row sm:flex-row justify-between w-screen px-16 py-4 border-y-2 border-gray">
+            <div class="flex-col items-center">
+              <p className="text-base font-bold text-center">
+                {company?.posts.length}
+              </p>
+              <p className="text-zinc-500 text-md">Posts</p>
+            </div>
+            <div className="flex-col items-center">
+              <p className="text-base font-bold text-center">
+                {company?.challenges.length}
+              </p>
+              <p className="text-zinc-500 text-md">Challenges</p>
+            </div>
+            <div className="flex-col items-center">
+              <p className="text-base font-bold text-center">
+                {company?.jobs.length}
+              </p>
+              <p className="text-zinc-500 text-md">Jobs</p>
+            </div>
+          </div>
+          {/*mobile version*/}
           <EditCompanyModal
             open={openPostModal}
             handleClose={toggleModal}
             company={company}
           />
-
           <CompanyProfileNavigationTab
             changeValue={changeValue}
             value={value}
