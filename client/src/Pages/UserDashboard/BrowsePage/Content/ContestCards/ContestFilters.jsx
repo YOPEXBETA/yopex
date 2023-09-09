@@ -17,7 +17,7 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount }) => {
   }, [maxAmount, setMaxAmount]);
 
   return (
-    <div className="bg-white rounded-lg border-b-2 p-4 border-green-500 shadow-md">
+    <div className="bg-white md:rounded-lg border-b-2 p-4 md:border-green-500 border-zinc-200 md:shadow-md">
       <form className="space-y-4">
         <div className="space-y-2">
           <label htmlFor="min-amount" className="font-bold text-lg mb-4">
