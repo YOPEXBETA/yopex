@@ -177,8 +177,6 @@ const deleteCompany = async (req, res) => {
     
     const company = await Company.findById(req.params.id);
 
-   
-      
     const user  = await userModel.findById(company.user);
     user.companies = user.companies.filter((companyId) => companyId.toString() !== req.params.id);
     await user.save();

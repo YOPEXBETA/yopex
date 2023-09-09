@@ -9,13 +9,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useDeleteChallenge } from "../../../../../../../hooks/react-query/useChallenges";
 
 
 
 const ChallengeMenuIcon = ({ post }) => {
 
   const { user } = useSelector((state) => state.auth);
-
+  const {mutate : deleteChallenge} = useDeleteChallenge();
 
 
 
@@ -79,7 +80,7 @@ const ChallengeMenuIcon = ({ post }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem >
+        <MenuItem onClick={()=>deleteChallenge(post._id)} >
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
           </ListItemIcon>

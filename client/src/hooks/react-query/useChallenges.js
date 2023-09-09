@@ -195,3 +195,18 @@ const getChallenges = async (userId) => {
 export const useGetChallenges = (userId) => {
   return useQuery(["challenges", userId], () => getChallenges(userId));
 };
+
+export const useDeleteChallenge=()=>{
+      const queryClient = useQueryClient();
+
+      return useMutation({
+        mutationFn: async (challengeId) => {
+          await axios.delete(`${url}/challenge/${challengeId}`, {
+            withCredentials: true,
+          });
+        },
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['challenges'] });
+        },
+      });
+};
