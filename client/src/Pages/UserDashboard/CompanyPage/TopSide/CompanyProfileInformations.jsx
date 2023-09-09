@@ -89,10 +89,10 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                   </div>
                 </div>
                 {/*mobile version*/}
-                <div className="flex gap-2">
-                  <a href="#" className="xl:block lg:block md:block">
+                <div className="flex gap-2 xl:hidden lg:hidden md:hidden">
+                  <div>
                     <button
-                      className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 p-2 sm:p-4 rounded-lg text-white"
+                      className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-2 px-6 sm:p-4 rounded-lg text-white"
                       onClick={
                         company && company.user === user._id
                           ? toggleModal
@@ -100,29 +100,33 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                       }
                     >
                       {company && company.user === user._id ? (
-                        <FaEdit className="w-4 h-4" />
+                        <p>Edit Company</p>
                       ) : user.followings.includes(company._id) ? (
                         <FaUserMinus className="w-4 h-4" />
                       ) : (
                         <FaUserPlus className="w-4 h-4" />
                       )}
                     </button>
-                  </a>
+                  </div>
                   {company && company.user === user._id && (
                     <button
                       onClick={handleDeleteCompany}
-                      className="xl:block lg:block md:block cursor-pointer capitalize font-medium hover:scale-105 bg-red-500 p-2 sm:p-4 rounded-lg text-white"
+                      className="xl:block lg:block md:block cursor-pointer capitalize font-medium hover:scale-105 bg-red-500 py-2 px-6 rounded-lg text-white"
                     >
-                      <FaTrash className="w-4 h-4" />
+                      Delete
                     </button>
                   )}
                 </div>
                 {/*mobile version*/}
-                <p className="truncate w-full xl:w-[50rem]">
+                <p className="hidden md:block truncate w-full xl:w-[50rem]">
                   {company?.companyDescription}
                 </p>
               </div>
             </div>
+            {/*mobile version*/}
+            <p className="block md:hidden  truncate w-full xl:w-[50rem] pt-3">
+              {company?.companyDescription}
+            </p>
             <div className="hidden md:flex gap-1 flex-wrap">
               <a href="#" className="xl:block lg:block md:block">
                 <button
