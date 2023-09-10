@@ -3,9 +3,6 @@ import BrowseNavigationTab from "../Content/BrowseNavigationTabs/BrowseNavigatio
 import { useCategories } from "../../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../../hooks/react-query/useSkills";
 import { useForm, Controller } from "react-hook-form";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import { Chip, MenuItem, Select } from "@mui/material";
 
 const BrowseJobsHeader = ({
   changeValue,
