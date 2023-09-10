@@ -9,6 +9,7 @@ const Jobs = ({ jobQuery , selectedCategory ,selectedSkill }) => {
   const handleClickOpenModalJob = () => {
     setOpenJobModal(true);
   };
+  
 
   const { data: jobs } = useJobs();
   console.log("jobs", jobs);
@@ -19,15 +20,17 @@ const Jobs = ({ jobQuery , selectedCategory ,selectedSkill }) => {
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 lg:grid-cols-3"
         onClick={handleClickOpenModalJob}
       >
+      
         {jobs?.filter((job) =>
       job.title.toLowerCase().includes(jobQuery.toLowerCase()) &&
       (selectedCategory === '' || job.category === selectedCategory) &&
-      (selectedSkill === '' || job.RecommendedSkills.includes(selectedSkill))
+      (selectedSkill.length === 0 || selectedSkill.some((skill) => job.RecommendedSkills.includes(skill)))
         ).length > 0 ? (
           jobs.map((job) =>
             job.title.toLowerCase().includes(jobQuery.toLowerCase()) &&
+             
             (selectedCategory === '' || job.category === selectedCategory) &&
-            (selectedSkill === '' || job.RecommendedSkills.includes(selectedSkill)) ? (
+            (selectedSkill.length === 0 || selectedSkill.some((skill) => job.RecommendedSkills.includes(skill))) ? (
               <div key={job._id}>
                 <JobCard job={job} />
               </div>
