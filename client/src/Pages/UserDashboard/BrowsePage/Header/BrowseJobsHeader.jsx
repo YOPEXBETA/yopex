@@ -27,8 +27,6 @@ const BrowseJobsHeader = ({ changeValue, value, setJobQuery ,setCategoryQuery ,s
     setIsOpen(!isOpen);
   };
 
- 
-
   return (
     <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end  bg-black ">
       <div className="space-y-2 items-start">
