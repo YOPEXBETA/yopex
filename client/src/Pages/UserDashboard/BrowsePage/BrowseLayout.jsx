@@ -20,6 +20,8 @@ const BrowseLayout = () => {
           setContestQuery={setContestQuery}
           value={value}
           changeValue={changeValue}
+          selectedSkill={selectedSkill}
+          
         />
       )}
       {value === 1 && (
@@ -38,6 +40,8 @@ const BrowseLayout = () => {
           jobQuery={jobQuery}
           selectedCategory={selectedCategory}
           selectedSkill={selectedSkill}
+          setCategoryQuery={setCategoryQuery}
+          setSkillQuery={setSkillQuery}
           contestQuery={contestQuery}
           value={value}
         />

@@ -16,6 +16,8 @@ export const useChallengeById = (challengeId) => {
   });
 };
 
+
+
 export const useUserChallenges = (user) => {
   return useQuery({
     queryKey: ["user/challenges", user._id],
@@ -67,15 +69,19 @@ export const useUserSubmission = (challengeId, participant) => {
   });
 };
 
-export const useFindChallenges = (minAmount, maxAmount, searchQuery) => {
+export const useFindChallenges = (minAmount, maxAmount, searchQuery,skills) => {
+
   return useQuery({
-    queryKey: ["challenges", minAmount, maxAmount, searchQuery],
+    queryKey: ["challenges", minAmount, maxAmount, searchQuery,skills],
     queryFn: async () => {
       let query = "";
       if (minAmount) query += `&min=${minAmount}`;
       if (maxAmount) query += `&max=${maxAmount}`;
       if (searchQuery) query += `&search=${searchQuery}`;
-
+      
+      if (skills && skills.length > 0) {
+        query += skills.map(skill => `&skills=${skill}`).join(''); // Use "|" as OR operator
+      }
       const { data } = await axios.get(
         `${url}/challenge/challenges/all?${query}`,
         { withCredentials: true }

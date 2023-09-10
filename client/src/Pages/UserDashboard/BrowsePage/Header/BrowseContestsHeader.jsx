@@ -1,7 +1,7 @@
 import React from "react";
 import BrowseNavigationTab from "../Content/BrowseNavigationTabs/BrowseNavigationTab";
 
-const BrowseContestsHeader = ({ changeValue, value, setContestQuery }) => {
+const BrowseContestsHeader = ({ changeValue, value, setContestQuery  }) => {
   return (
     <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end bg-black ">
       <div className="space-y-2 items-start">
