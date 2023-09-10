@@ -29,7 +29,7 @@ const BrowseLayout = () => {
           setSkillQuery={setSkillQuery}
           value={value}
           changeValue={changeValue}
-          selectedSkill={selectedSkill} 
+          selectedSkill={selectedSkill}
         />
       )}
 

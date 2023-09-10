@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BrowseNavigationTab from "../Content/BrowseNavigationTabs/BrowseNavigationTab";
 import { useCategories } from "../../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../../hooks/react-query/useSkills";
@@ -23,11 +23,21 @@ const BrowseJobsHeader = ({
   } = useForm();
   const { data: categorys } = useCategories();
   const { data: Skills } = useSkills();
+
   const itCategory = categorys?.map((category) => category.name);
   const itSkills = Skills?.map((skill) => skill.name);
 
   const handleSkillsChange = (selectedSkills) => {
-    setSkillQuery(selectedSkills);
+    if (Array.isArray(selectedSkills)) {
+      setSkillQuery(selectedSkills);
+    } else {
+      setSkillQuery([selectedSkills]);
+    }
+  };
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -52,34 +62,38 @@ const BrowseJobsHeader = ({
               </option>
             ))}
           </select>
-          <Autocomplete
-            className=" border-white  "
-            multiple
-            id="skills-autocomplete"
-            options={itSkills}
-            value={selectedSkill}
-            onChange={(_, newValue) => handleSkillsChange(newValue)}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                placeholder={
-                  selectedSkill.length === 0 ? "Skills" : selectedSkill
-                }
-                InputProps={{
-                  ...params.InputProps,
-                  startAdornment: (
-                    <div style={{ display: "none" }}>
-                      {selectedSkill.map((option) => (
-                        <Chip key={option} label={option} onDelete={() => {}} />
-                      ))}
-                    </div>
-                  ),
-                  style: { color: "white" },
-                }}
-              />
+
+          <div className="relative inline-block text-left">
+            <div>
+              <button
+                onClick={toggleDropdown}
+                className="py-2 px-4 outline-none rounded border border-white text-white bg-black hover:border-green-500"
+              >
+                Skills
+              </button>
+            </div>
+            {isOpen && (
+              <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div className="py-1">
+                  {itSkills.map((skillName) => (
+                    <label
+                      key={skillName}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      <input
+                        type="checkbox"
+                        value={skillName}
+                        checked={selectedSkill.includes(skillName)}
+                        onChange={() => handleSkillsChange(skillName)}
+                        className="mr-2"
+                      />
+                      {skillName}
+                    </label>
+                  ))}
+                </div>
+              </div>
             )}
-          />
+          </div>
         </div>
         <BrowseNavigationTab value={value} changeValue={changeValue} />
       </div>
