@@ -12,6 +12,7 @@ import getDeadlineDifference from "../../../../utils/deadlineModif";
 import SubmitModal from "../../../../Components/shared/Modals/SubmitModal";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import ChallengeNavigationTab from "../../../../Components/Tabs/ChallengeNavigtionTab";
+import { useJoinContestConversation } from "../../../../hooks/react-query/useContestConversation";
 
 const Banner = ({ changeValue, value }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,6 +32,7 @@ const Banner = ({ changeValue, value }) => {
     challenge,
     user
   );
+  const {mutate:join} = useJoinContestConversation()
 
   useEffect(() => {
     const submitted = submissions?.find(
@@ -55,6 +57,13 @@ const Banner = ({ changeValue, value }) => {
     );
     setIsRegistered(registered ? true : false);
   }, [challenge, data]);
+
+  const handleregiser = () => {
+    
+    registerMutate();
+    join({contestId:challenge._id,userId:user._id})
+    
+  }
 
   return (
     <div className="pt-8 px-6 lg:px-8 xl:px-32 flex flex-col justify-end bg-black">
@@ -81,16 +90,17 @@ const Banner = ({ changeValue, value }) => {
                     {isloadingun ? <LoadingSpinner /> : "Unregister"}
                   </button>
                 ) : (
-                  <button
-                    onClick={registerMutate}
+                  <div>
+                  { (challenge.users.length < challenge.nbruser )? (<button
+                    onClick={handleregiser}
                     className={`px-5 py-3 rounded-full bg-green-500 text-white w-full animate-bounce ${
                       isLoading ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                     disabled={isLoading}
                   >
                     {isLoading ? <LoadingSpinner /> : "Register"}
-                  </button>
-                )}
+                  </button>):""}
+                </div>)}
                 <button
                   className={`px-5 py-3 rounded-full w-full ${
                     isRegistered
@@ -125,7 +135,7 @@ const Banner = ({ changeValue, value }) => {
           </div>
         </div>
         <div>
-          <ChallengeNavigationTab changeValue={changeValue} value={value} />
+          <ChallengeNavigationTab changeValue={changeValue} value={value} isRegistered={isRegistered} />
         </div>
 
         <SubmitModal

@@ -15,9 +15,11 @@ import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
+  
   const { userId } = useParams();
   const { data: levelsData , isloading } = useGetLevels();
  const { data: userProfile  } = useUserById(userId);
+ console.log(userProfile?.badgesEarned);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
   
@@ -89,7 +91,7 @@ const UserProfileCard = () => {
           <HighlightSection />
         </div>
         <hr className=" border-zinc-400 w-full h-2" />
-        {userProfile?.badges?.length === 0 && (
+        {userProfile?.badgesEarned?.length !== 0 && (
           <div className="w-full">
             <Badges userProfile={userProfile} />
           </div>

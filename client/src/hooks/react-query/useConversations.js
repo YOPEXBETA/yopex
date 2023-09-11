@@ -66,3 +66,16 @@ export const useCreateConversation = (userId) => {
       queryClient.invalidateQueries({ queryKey: ["conversations", userId] }),
   });
 };
+
+
+export const useContestMessages = (conversationId) => {
+  return useQuery({
+    queryKey: ["messages", conversationId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/messages/contest/${conversationId}`, {
+        withCredentials: true,
+      });
+      return data;
+    },
+  });
+};

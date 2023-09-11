@@ -5,6 +5,7 @@ const MessageRouter = express.Router();
 const {
   createMessage,
   getMessages,
+  getContestMessages,
 } = require("../controllers/messages.controllers");
 
 // Require authentication middleware
@@ -14,5 +15,5 @@ const {
 
 MessageRouter.post("/", authenticateToken, createMessage);
 MessageRouter.get("/:conversationId", authenticateToken, getMessages);
-
+MessageRouter.get("/contest/:conversationId", authenticateToken, getContestMessages);
 module.exports = MessageRouter;

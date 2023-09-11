@@ -5,6 +5,7 @@ import { useChallengeById } from "../../../../../../hooks/react-query/useChallen
 const TasksDescription = () => {
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
+  console.log(challenge.category);
 
   if (challenge)
     return (
@@ -21,7 +22,11 @@ const TasksDescription = () => {
         </div>
         <hr className="my-4 " />
         <div className="mb-4">
-          <p className="text-md ">{challenge.category}</p>
+        <div className="flex flex-row space-x-2 game-skill-icons">{challenge.category.map((cat,i)=>(
+            <span key={i} className="px-2 py-1  text-md">
+            {cat}
+          </span>
+          ))}</div>
         </div>
         <hr className="my-2" />
         <div className="mb-4 game-skills">

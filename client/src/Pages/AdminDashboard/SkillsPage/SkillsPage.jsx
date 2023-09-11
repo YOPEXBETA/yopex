@@ -13,11 +13,12 @@ const SkillsPage = () => {
   const { mutate } = useCreateSkill();
   const { mutate: deleteSkill } = useDeleteSkill();
   const { mutate: updateSkill } = useUpdateSkill();
+  const [name, setName] = React.useState("");
 
   const form = useForm();
   const onSubmit = (data) => mutate(data.name);
   const handleSubmit = (e, id) => {
-    const name = e.target["name"].value;
+    
     updateSkill({ name, id });
     e.preventDefault();
   };
@@ -62,20 +63,23 @@ const SkillsPage = () => {
                         type="text"
                         placeholder="Update"
                         name="name"
+                        
+                        onChange={(e) => setName(e.target.value)}
                         className=" w-full p-2 border rounded-full focus:outline-none focus:ring focus:border-blue-300 text-[#000000] bg-gray-100"
                       />
                     </form>
 
                     <div className="mt-2 flex gap-2">
                       <button
-                        type="submit"
+                        type="button"
                         className="bg-green-500 text-white px-4 py-2 rounded-md w-full"
                         onClick={(e) => handleSubmit(e, badgeData._id)}
                       >
                         Update
                       </button>
                       <button
-                        onClick={() => deleteSkill(badgeData.name)}
+                        type="button"
+                        onClick={() => {deleteSkill(badgeData.name)}}
                         className="bg-red-500 text-white px-4 py-2 rounded-md w-full"
                       >
                         Delete

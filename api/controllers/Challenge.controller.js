@@ -1,4 +1,5 @@
 const ChallengeModel = require("../models/Challenge.model");
+const ContestConversationModel = require("../models/ContestConversation.model");
 const CompanyModel = require("../models/company.model");
 const UserModel = require("../models/user.model");
 const mongoose = require("mongoose");
@@ -38,6 +39,12 @@ const CreateChallenge = async (req, res, next) => {
     });
 
     await challenge.save();
+
+    const newCoversation = new ContestConversationModel({
+      contestId: challenge._id,
+    });
+    await newCoversation.save();
+
 
     company.challenges.push(challenge._id);
     await company.save();

@@ -11,6 +11,7 @@ import { useCreateChallenge } from "../../../../../../../hooks/react-query/useCh
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
 import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
+import { useCreateContestConversation } from "../../../../../../../hooks/react-query/useContestConversation";
 
 
 export const AddChallengeModal = ({ open, handleClose }) => {
@@ -20,7 +21,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
   const itSkills = Skills?.map((skill) => skill.name);
   const {data:categorys} = useCategories();
   const itCategory = categorys?.map((category) => category.name);
-  const [category, setCategory] = useState("");
+
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -35,6 +36,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
   } = useForm({
     defaultValues: {
       RecommendedSkills: [],
+      category: [],
     },
   });
 
@@ -49,8 +51,9 @@ export const AddChallengeModal = ({ open, handleClose }) => {
 
   const onSubmit = (challengeData) => {
     const companyId = selectedOption;
-    
-    mutate({ companyId, challengeData });
+    console.log(selectedOptionpaid);
+    mutate({ companyId, challengeData,paid:selectedOptionpaid });
+
     
   };
 
@@ -143,7 +146,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     id="selectFieldpaid"
                     className="p-2 w-[20%] border rounded-md focus:ring focus:ring-blue-300"
                     value={selectedOptionpaid}
-                    onChange={(e) => {setSelectedOptionpaid(e.target.value);setValue("paid", e.target.value)}}
+                    onChange={(e,value) => {setSelectedOptionpaid(e.target.value)}}
                   >
                     <option value={"false"}>free</option>
                     <option value={"true"}>paid</option>
@@ -152,21 +155,26 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     className="py-2 w-[80%] px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500"
                     type="number"
                     placeholder="challenge prize"
-                    {...register("price", { required: true })}
+                    {...register("price", { required: false })}
                     disabled={selectedOptionpaid === "false"}
                   />
                 </div>
 
                 <div className="mb-2">
-                  
-                      {itCategory && (<Autocomplete
-                        disablePortal
+                <Controller
+                    control={control}
+                    name="category"
+                    defaultValue={""}
+                    render={({ field }) =>
+                      itCategory && (<Autocomplete
+                        multiple
                         id="tags-outlined"
+                        value={field.value}
                         options={itCategory}
-                        value={category}
+                        getOptionLabel={(option) => option}
+                        onBlur={field.onBlur}
                         onChange={(e,value) =>{
-                          console.log(value);
-                          setCategory(value);
+                          
                           setValue("category", value);
                         }}
                         renderInput={(params) => (
@@ -177,7 +185,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                           />
                         )}
                       />)}
-                    
+                    />
                 </div>
                 <input
                   className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"

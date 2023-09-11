@@ -20,13 +20,9 @@ const editProfile = async (req, res) => {
     const updateFields = pick(req.body, [
       "companyName",
       "companyDescription",
-      "email",
-      "password",
-      "picturePath",
-      "country",
-      "dateoffoundation",
-      "phoneNumber",
+      "companyLogo",
     ]);
+    console.log(updateFields);
 
     if (updateFields.password) {
       const salt = await bcrypt.genSalt(10);

@@ -56,7 +56,24 @@ const getMessages = async (req, res) => {
   }
 };
 
+const getContestMessages = async (req, res) => {
+  try {
+    const messages = await MessageModel.find({
+      conversationId: req.params.conversationId,
+    })
+      .populate("sender", "firstname picturePath") // join sender information
+      .exec();
+
+    // map messages to include sender and receiver information
+
+    res.status(200).json(messages);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 module.exports = {
   createMessage,
   getMessages,
+  getContestMessages
 };

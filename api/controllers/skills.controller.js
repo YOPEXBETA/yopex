@@ -28,16 +28,17 @@ const skillController = {
   deleteskill: async (req, res) => {
     try {
       const posts = await SocialMediaPost.findOne({
-        skill: req.params.name,
+        name: req.params.name,
       });
       if (posts)
         return res.status(400).json({
           msg: "Please delete all products with a relationship.",
-        });
+      });
 
-      await skills.findByIdAndDelete(req.params.id);
+      await skills.findOneAndDelete({name:req.params.name});
       res.json({ msg: "Deleted a skill" });
     } catch (err) {
+      
       return res.status(500).json({ msg: err.message });
     }
   },

@@ -96,7 +96,7 @@ const getUser = async (req, res) => {
     const { id } = req.params;
     const user = await userSchema
       .findById(id)
-      .populate({ path: "badgesEarned" })
+      .populate("badgesEarned" )
       .populate("jobs")
       .populate("challenges")
       .populate("companies");
@@ -357,8 +357,10 @@ const JoinChallenge = async (req, res) => {
   try {
     const user = await userSchema.findById(req.body.idUser).select("-password");
     const challenge = await challengeSchema.findById(req.body.idChallenge);
-    console.log(challenge.users);
-    console.log(user._id);
+    if (challenge.users.length > challenge.nbruser) {
+      return res.status(400).json({ message: "you cannot join this challenge" });
+
+    }
     if (challenge.users.includes(user._id)) {
       return res.status(400).json({ message: "User already joined challenge" });
     }
@@ -564,6 +566,7 @@ const getCurrentUser = async (req, res) => {
     const user = await userSchema
       .findById(req.userId)
       .select("-password")
+      
     return res.status(200).json(user);
   } catch (error) {
     console.error(error);
