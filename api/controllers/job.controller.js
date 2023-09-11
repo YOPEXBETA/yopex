@@ -12,7 +12,7 @@ const main = require("../server");
 
 const addJob = async (req, res, next) => {
   try {
-    const { title, description, companyId } = req.body;
+    const { title,category,RecommendedSkills, description, companyId } = req.body;
 
     const userId = req.userId;
     const user = await User.findById(userId);
@@ -31,6 +31,8 @@ const addJob = async (req, res, next) => {
       company: company._id,
       title,
       description,
+      category,
+      RecommendedSkills,
     });
 
     await jobOffer.save();
@@ -51,10 +53,6 @@ const addJob = async (req, res, next) => {
 const getAllJobs = async (req, res, next) => {
   try {
     const jobs = await Job.find().populate("company");
-
-    if (jobs.length === 0) {
-      return res.status(200).json(jobs);
-    }
 
     return res.status(200).json(jobs);
   } catch (error) {

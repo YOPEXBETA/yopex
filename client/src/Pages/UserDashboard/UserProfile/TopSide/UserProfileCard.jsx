@@ -26,7 +26,7 @@ const UserProfileCard = () => {
  
   const userLevel = levelsData ? levelsData.find((level) => level.minScore <= userProfile?.score && level.maxScore >= userProfile?.score) : null;
 
-
+  
 
   const rating = useMemo(() => {
     if (!reviews || reviews.length === 0) return 0;

@@ -37,8 +37,10 @@ const MainLayout = () => {
 
   // Render the main layout once user data is available
   return (
-    <div>
-      <CustomNavbar />
+    <div className="">
+      <div className="pb-20">
+        <CustomNavbar />
+      </div>
       <Outlet />
     </div>
   );

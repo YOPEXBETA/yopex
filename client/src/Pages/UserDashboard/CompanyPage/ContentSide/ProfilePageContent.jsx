@@ -8,7 +8,7 @@ const CompanyPageContent = ({ changeValue, value }) => {
     <div>
       {value === 0 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full xl:px-16 lg:px-6 px-0">
             <MyCompanySocialPosts />
           </div>
         </div>
@@ -16,14 +16,14 @@ const CompanyPageContent = ({ changeValue, value }) => {
 
       {value === 1 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full xl:px-16 lg:px-6 px-0">
             <MyCompanyJobs />
           </div>
         </div>
       )}
       {value === 2 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full xl:px-16 lg:px-6 px-0 pb-11">
             <MyCompanyChallenges />
           </div>
         </div>

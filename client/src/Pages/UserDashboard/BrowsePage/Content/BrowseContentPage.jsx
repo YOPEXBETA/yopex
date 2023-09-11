@@ -3,9 +3,10 @@ import ContestsFilters from "./ContestCards/ContestFilters";
 import Jobs from "./JobCards/Jobs";
 import Challenges from "./ContestCards/Challenges";
 
-const BrowseContentPage = ({ value, contestQuery, jobQuery }) => {
+const BrowseContentPage = ({ value, contestQuery, jobQuery ,setSkillQuery,selectedCategory ,selectedSkill }) => {
   const [minAmount, setMinAmount] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
+ 
 
   return (
     <div className=" space-y-6">
@@ -16,6 +17,9 @@ const BrowseContentPage = ({ value, contestQuery, jobQuery }) => {
               <ContestsFilters
                 setMinAmount={setMinAmount}
                 setMaxAmount={setMaxAmount}
+                selectedSkill={selectedSkill} 
+                setSkillQuery={setSkillQuery} 
+                
               />
             </div>
 
@@ -24,6 +28,7 @@ const BrowseContentPage = ({ value, contestQuery, jobQuery }) => {
                 minAmount={minAmount}
                 maxAmount={maxAmount}
                 searchQuery={contestQuery}
+                selectedSkill={selectedSkill}
               />
             </div>
           </div>
@@ -31,7 +36,8 @@ const BrowseContentPage = ({ value, contestQuery, jobQuery }) => {
 
         {value === 1 && (
           <div className="lg:col-span-12 md:col-span-12 sm:col-span-12 col-span-12">
-            <Jobs jobQuery={jobQuery} />
+            <Jobs 
+            jobQuery={jobQuery}  selectedCategory={selectedCategory} selectedSkill={selectedSkill}/>
           </div>
         )}
       </div>

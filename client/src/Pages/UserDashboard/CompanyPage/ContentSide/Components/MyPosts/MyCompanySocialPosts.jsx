@@ -8,11 +8,11 @@ const MyCompanySocialPosts = () => {
   console.log(companyId, posts);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-11 py-5">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4  py-5">
       {isLoading ? (
         <p>Loading posts...</p>
-      ) : (
-        posts?.map((post) => (
+      ) : posts?.length ? (
+        posts.map((post) => (
           <SocialPostCard
             key={post._id}
             post={post}
@@ -21,6 +21,8 @@ const MyCompanySocialPosts = () => {
             width={"screen"}
           />
         ))
+      ) : (
+        <p>No posts found.</p>
       )}
     </div>
   );

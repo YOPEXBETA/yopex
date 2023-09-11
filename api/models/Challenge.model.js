@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const submissionModel = require("./submission.model");
+const companyModel = require("./company.model");
 
 const ChallengeSchema = new mongoose.Schema(
   {
