@@ -18,7 +18,10 @@ const CommentModal = ({
           className="fixed inset-0 flex items-center justify-center z-50"
           onClick={handleDialogClose}
         >
-          <div className="bg-white p-4 shadow-md rounded-lg w-[40rem]" onClick={(e)=> e.stopPropagation()}>
+          <div
+            className="bg-white p-4 shadow-md rounded-lg w-[40rem]"
+            onClick={(e) => e.stopPropagation()}
+          >
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-row space-x-2">
                 <input
@@ -41,37 +44,46 @@ const CommentModal = ({
               <hr className="border-t border-gray-300" />
               {comments && comments.length > 0 ? (
                 <ul className="mt-4 space-y-4">
-                  {comments.map((comment) => comment.userId? (
-                    <li key={comment._id}>
-                      <div className="flex items-center">
-                        <img
-                          src={comment.userId.picturePath}
-                          alt="Avatar"
-                          className="w-10 h-10 rounded-full"
-                        />
-                        <div className="ml-2">
-                          <p className="text-md font-semibold">
-                            {`${comment.userId.firstname} ${comment.userId.lastname}`}{" "}
-                            |{" "}
-                            {formatDistance(
-                              new Date(comment.createdAt),
-                              new Date(),
-                              {
-                                addSuffix: true,
-                              }
-                            )}
-                          </p>
-                          <p className="text-md text-gray-700">
-                            {comment.desc}
-                          </p>
+                  {comments.map((comment) =>
+                    comment.userId ? (
+                      <li key={comment._id}>
+                        <div className="flex items-center">
+                          <img
+                            src={comment.userId.picturePath}
+                            alt="Avatar"
+                            className="w-10 h-10 rounded-full"
+                          />
+                          <div className="ml-2">
+                            <div className="flex gap-2">
+                              <p className="text-md font-semibold">
+                                {`${comment.userId.firstname} ${comment.userId.lastname}`}
+                              </p>
+                              <p className="text-md text-gray-400">
+                                {" "}
+                                |{" "}
+                                {formatDistance(
+                                  new Date(comment.createdAt),
+                                  new Date(),
+                                  {
+                                    addSuffix: true,
+                                  }
+                                )}
+                              </p>
+                            </div>
+                            <p className="text-md text-zinc-700 whitespace-nowrap max-w-[70px]">
+                              {comment.desc}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <hr className="border-t border-gray-300 mt-2" />
-                    </li>
-                  ) :(<p>Comment has been deleted</p>))}
+                        <hr className="border-t border-gray-300 mt-2" />
+                      </li>
+                    ) : (
+                      <p>Comment has been deleted</p>
+                    )
+                  )}
                 </ul>
               ) : (
-                <p className="mt-4 text-base text-gray-700">No comments yet.</p>
+                <p className="mt-4 text-md text-gray-700">No comments yet.</p>
               )}
             </div>
           </div>
