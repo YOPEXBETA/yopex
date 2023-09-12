@@ -55,10 +55,7 @@ const PORT = process.env.PORT || 5000;
 // addYearsRegisteredToUsers();
 
 const server = http.createServer(app);
-const sendNotification =  initializeSocketIO(server); // Pass the http server to the socket setup function
-
-
-
+const sendNotification = initializeSocketIO(server); // Pass the http server to the socket setup function
 
 server.listen(PORT, (error) => {
   if (error) throw console.error(error);
