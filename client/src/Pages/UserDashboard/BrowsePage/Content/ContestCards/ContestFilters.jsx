@@ -51,7 +51,6 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery,selectedCate
   }, [maxAmount, setMaxAmount]);
 
   return (
-    <div>
     <div className="bg-white md:rounded-lg border-b-2 p-4 md:border-green-500 border-zinc-200 md:shadow-md">
       <form className="space-y-4">
         <div className="space-y-2">
@@ -79,78 +78,72 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery,selectedCate
             />
           </div>
         </div>
-      
       </form>
-      <div className="flex justify-between ">
-      <div className="relative  mt-3">
-            <div>
-              <button
-                onClick={toggleDropdown}
-                className="py-2 px-4 outline-none rounded border  border-white text-white bg-black hover:border-green-500"
-              >
-                Skills
-              </button>
+      <div className="relative inline-block text-left w-full pt-2">
+        <div>
+          <button
+            onClick={toggleDropdown}
+            className="py-2 px-4 outline-none rounded border-[1px] border-gray-200 bg-white w-full"
+          >
+            Skills
+          </button>
+        </div>
+        {isOpen && (
+          <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+            <div className="py-1">
+              {itSkills.map((skillName) => (
+                <label
+                  key={skillName}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  <input
+                    type="checkbox"
+                    value={skillName}
+                    checked={selectedSkill.includes(skillName)}
+                    onChange={() => handleCheckboxChange(skillName)}
+                    className="mr-2"
+                  />
+                  {skillName}
+                </label>
+              ))}
             </div>
-            {isOpen && (
-              <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                <div className="py-1">
-                  {itSkills.map((skillName) => (
-                    <label
-                      key={skillName}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    >
-                      <input
-                        type="checkbox"
-                        value={skillName}
-                        checked={selectedSkill.includes(skillName)}
-                        onChange={() => handleCheckboxChange(skillName)}
-                        className="mr-2"
-                      />
-                      {skillName}
-                    </label>
-                  ))}
-                </div>
-              </div>
-            )}
-        </div>
-        <div className="relative inline-block text-left mt-3">
-                <div>
-                  <button
-                    onClick={toggleDropdownCategories}
-                    className="py-2 px-4 outline-none rounded border  border-white text-white bg-black hover:border-green-500"
-                  >
-                    Categories
-                  </button>
-                </div>
-                {isOpenCat && (
-                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                    <div className="py-1">
-                      {itCategory.map((CategoryName) => (
-                        <label
-                          key={CategoryName}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                        >
-                          <input
-                            type="checkbox"
-                            value={CategoryName}
-                            checked={selectedCategory?.includes(CategoryName)}
-                            onChange={() => handleCheckboxChangeCategory(CategoryName)}
-                            className="mr-2"
-                          />
-                          {CategoryName}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                )}
           </div>
-        </div>
+        )}
       </div>
-   
-   
+      <div className="relative inline-block text-left mt-3">
+        <div>
+          <button
+            onClick={toggleDropdownCategories}
+            className="py-2 px-4 outline-none rounded border border-white text-white bg-black hover:border-green-500"
+          >
+            Categories
+          </button>
+        </div>
+        {isOpenCat && (
+          <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+            <div className="py-1">
+              {itCategory.map((CategoryName) => (
+                <label
+                  key={CategoryName}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  <input
+                    type="checkbox"
+                    value={CategoryName}
+                    checked={selectedCategory?.includes(CategoryName)}
+                    onChange={() => handleCheckboxChangeCategory(CategoryName)}
+                    className="mr-2"
+                  />
+                  {CategoryName}
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-    
   );
 };
+
 
 export default ContestsFilters;

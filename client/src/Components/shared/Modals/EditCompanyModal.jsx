@@ -30,14 +30,14 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
   const onSubmit = async (data) => {
     console.log(data);
     if (data.files.length > 0) {
-      const companyLogo = [];
-      for (let file of data.files) {
-        companyLogo.push(await uploadFile(file, setUploadProgress));
-      }
+      
+      const file = data.files[0];
+      const companyLogo = await uploadFile(file, setUploadProgress);
+      
       return mutate({ 
         companyName: data.companyName,
         companyDescription: data.companyDescription,
-       companyLogo, 
+        companyLogo, 
       });
     }
 

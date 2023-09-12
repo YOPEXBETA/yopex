@@ -33,6 +33,8 @@ connectDB();
 
 //app routes
 const indexRouter = require("./routes/index.router"); //the routes of all the project
+const initializeSocketIO = require("./config/socket");
+const ContestConversationModel = require("./models/ContestConversation.model");
 app.use("/", indexRouter);
 
 const PORT = process.env.PORT || 5000;
@@ -53,54 +55,7 @@ const PORT = process.env.PORT || 5000;
 // addYearsRegisteredToUsers();
 
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
-
-let users = [];
-
-const addUser = (userId, socketId) => {
-  !users.some((user) => user.userId === userId) &&
-    users.push({ userId, socketId });
-  //console.log("Users array:", users);
-};
-
-const removeUser = (socketId) => {
-  users = users.filter((user) => user.socketId !== socketId);
-};
-
-const getUser = (userId) => {
-  const user = users.find((user) => user.userId === userId);
-  //console.log("getUser called with userId:", userId);
-  return user;
-};
-
-const sendNotification = (userId, notification) => {
-  io.to(userId).emit("notification", notification);
-};
-
-io.on("connection", (socket) => {
-  console.log("a user connected.");
-  socket.on("joinRoom", (data) => {
-    //console.log("joinRoom called with data:", data);
-    socket.join(data.roomid);
-  });
-  //when disconnect
-  socket.on("disconnect", () => {
-    //console.log("a user disconnected!");
-    removeUser(socket.id);
-  });
-
-  //send and get message
-  socket.on("sendMessage", (data) => {
-    //console.log(`sendMessage called with data: ${JSON.stringify(data)}`);
-    //console.log(`Message sent to user ${user.userId}`);
-    //io.emit("getMessage", data);
-    io.to(data.conversationId).emit("getMessage", data);
-  });
-});
+const sendNotification = initializeSocketIO(server); // Pass the http server to the socket setup function
 
 server.listen(PORT, (error) => {
   if (error) throw console.error(error);

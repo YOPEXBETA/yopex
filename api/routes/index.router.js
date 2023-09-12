@@ -17,6 +17,7 @@ const CategoryRouter = require("./Category.router");
 const CommentRouter = require("./comment.router");
 const payementRouter = require("./payment.router");
 const skillRouter = require("./skill.router");
+const contestConversationRouter = require("./contestConversation.router");
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -34,5 +35,6 @@ router.use("/category", CategoryRouter);
 router.use("/comment", CommentRouter);
 router.use("/api", payementRouter);
 router.use("/skill", skillRouter);
+router.use("/contestconversation", contestConversationRouter);
 
 module.exports = router;

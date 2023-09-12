@@ -38,7 +38,8 @@ const companyEditProfileValidator = yup.object().shape({
     ),
   country: yup.string(),
   dateoffoundation: yup.string(),
-  picturePath: yup.string(),
+  companyLogo: yup.string(),
+  companyDescription: yup.string(),
 });
 
 module.exports = {

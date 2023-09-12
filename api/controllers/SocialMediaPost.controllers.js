@@ -170,6 +170,7 @@ const likePost = async (req, res) => {
       main.sendNotification(post.userId, notification);
       const owner = await userModel.findById(post.userId);
       owner.notifications.push(notification._id);
+      owner.save();
     }
     const updatedPost = await Post.findByIdAndUpdate(
       id,

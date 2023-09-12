@@ -113,11 +113,11 @@ export const useCreateChallenge = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ companyId, challengeData }) => {
+    async ({ companyId, challengeData,paid }) => {
       console.log("called");
       await axios.post(
         `${url}/challenge/add`,
-        { companyId, ...challengeData },
+        { companyId, ...challengeData,paid },
         {
           withCredentials: true,
         }

@@ -29,6 +29,7 @@ const NotificationBell = () => {
   useEffect(() => {
     if (!socket) return;
     socket.on("notification", (notification) => {
+      
       setNotifications((prev) => [notification, ...prev]);
     });
     return () => socket.off("notification");

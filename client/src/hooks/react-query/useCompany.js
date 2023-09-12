@@ -50,7 +50,8 @@ export const useEditCompany = (companyId) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({companyData}) => {
+    mutationFn: async (companyData) => {
+
       await axios.put(`${url}/company/${companyId}`, companyData, {
         withCredentials: true,
       });

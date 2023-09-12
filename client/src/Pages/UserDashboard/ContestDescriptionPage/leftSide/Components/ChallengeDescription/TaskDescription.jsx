@@ -5,12 +5,13 @@ import { useChallengeById } from "../../../../../../hooks/react-query/useChallen
 const TasksDescription = () => {
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
+  console.log(challenge.category);
 
   if (challenge)
     return (
-      <div className="bg-white w-full mx-auto rounded-lg border-green-500 border-b-2 shadow-md p-4 h-96 game-container">
+      <div className="">
         <div className="mb-4 game-title">
-          <h4 className="text-xl font-semibold uppercase">Instructions</h4>
+          <h4 className="text-xl font-semibold uppercase">Description</h4>
         </div>
         <hr className="my-2 game-divider" />
         <div className="mb-4 game-description">
@@ -21,7 +22,16 @@ const TasksDescription = () => {
         </div>
         <hr className="my-4 " />
         <div className="mb-4">
-          <p className="text-md ">{challenge.category}</p>
+          <div className="flex flex-row space-x-2">
+            {challenge.category.map((cat, i) => (
+              <span
+                key={i}
+                className="px-2 py-1 font-bold  text-md border-2 border-gray-300 rounded-full"
+              >
+                {cat}
+              </span>
+            ))}
+          </div>
         </div>
         <hr className="my-2" />
         <div className="mb-4 game-skills">
@@ -30,9 +40,12 @@ const TasksDescription = () => {
           </h4>
         </div>
         <hr className="my-2" />
-        <div className="flex flex-row space-x-2 game-skill-icons">
+        <div className="flex flex-row space-x-2">
           {challenge.RecommendedSkills.map((skill, i) => (
-            <span key={i} className="px-2 py-1  text-md">
+            <span
+              key={i}
+              className="px-2 py-1 font-bold  text-md border-2 border-gray-300 rounded-full"
+            >
               {skill}
             </span>
           ))}

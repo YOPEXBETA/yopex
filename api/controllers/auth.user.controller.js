@@ -57,15 +57,6 @@ const signUp = async (req, res) => {
       // Save the new user to the userSchema collection
       const user = await newUser.save();
 
-      // Create a new badge for the user
-      const newBadge = new badgeSchema({
-        userId: req.userId,
-        badgeName: req.body.badgeName,
-        badgeDescription: req.body.badgeDescription,
-        badgeImg: req.body.badgeImg,
-        Etat: true,
-      });
-      await newBadge.save();
 
       // Return a success response with the new user data
       return res.status(200).json({ msg: "user successfully created", user });

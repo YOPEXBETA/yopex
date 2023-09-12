@@ -24,7 +24,7 @@ const ProfileMenu = () => {
 
   return (
     <div className="relative z-50">
-      <div className="relative z-10">
+      <div>
         <button
           onClick={handleClick}
           className="flex items-center justify-center w-10 h-10 text-gray-600 rounded-full"
@@ -36,7 +36,7 @@ const ProfileMenu = () => {
           />
         </button>
       </div>
-      <div className="relative">
+      <div className="relative -z-50">
         {open && (
           <div className="absolute right-0 mt-6 bg-white shadow-lg rounded-lg min-w-[320px] max-w-[380px] overflow-visible border border-gray-200">
             <a

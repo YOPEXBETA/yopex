@@ -4,7 +4,7 @@ import getDeadlineDifference from "../../utils/deadlineModif";
 import { useChallengeById } from "../../hooks/react-query/useChallenges";
 import { useSelector } from "react-redux";
 
-const ChallengeNavigationTab = ({ value, changeValue }) => {
+const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
   const { id: challengeId } = useParams();
 
   const { data: challenge } = useChallengeById(challengeId);
@@ -42,6 +42,14 @@ const ChallengeNavigationTab = ({ value, changeValue }) => {
           >
             Participants
           </li>
+          {isRegistered?(<li
+            className={`cursor-pointer px-4 py-2 ${
+              value === 3 ? "bg-green-500 text-white" : "text-green-500"
+            }`}
+            onClick={() => changeValue(3)}
+          >
+            Conversation
+          </li>):null}
           {isOwner && handleProgress(challenge) && !challenge?.winner && (
             <li
               className="cursor-pointer px-4 py-2 ml-auto font-semibold uppercase text-red-500 border border-red-500"
