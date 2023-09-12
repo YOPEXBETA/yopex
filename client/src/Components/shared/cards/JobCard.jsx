@@ -12,6 +12,7 @@ const JobCard = ({ job }) => {
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const { user } = useSelector((state) => state.auth);
   const handleClose = () => setIsOpen(false);
+
  
 
   console.log(job?.company);

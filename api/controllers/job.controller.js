@@ -65,21 +65,21 @@ const getAllJobs = async (req, res, next) => {
 };
 
 const updateJob = async (req, res, next) => {
-  const { title, description } = req.body;
+  const { title, description ,salary , category ,RecommendedSkills} = req.body;
   const jobId = req.params.id;
   let job;
   try {
     job = await Job.findByIdAndUpdate(jobId, {
       title,
       description,
+      salary,
+      category,
+      RecommendedSkills,
     });
+     res.status(200).json({ job });
   } catch (err) {
     return console.log(err);
   }
-  if (!job) {
-    return res.status(500).json({ message: "Unable To Update The Job" });
-  }
-  return res.status(200).json({ job });
 };
 //
 
