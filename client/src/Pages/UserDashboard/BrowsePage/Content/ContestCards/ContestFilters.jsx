@@ -63,38 +63,38 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery , selectedSk
         </div>
       </form>
       
-    </div>
-    <div className="relative inline-block text-left">
-            <div>
-              <button
-                onClick={toggleDropdown}
-                className="py-2 px-4 outline-none rounded border border-white text-white bg-black hover:border-green-500"
-              >
-                Skills
-              </button>
+      </div>
+      <div className="relative inline-block text-left">
+        <div>
+          <button
+            onClick={toggleDropdown}
+            className="py-2 px-4 outline-none rounded border border-white text-white bg-black hover:border-green-500"
+          >
+            Skills
+          </button>
+        </div>
+        {isOpen && (
+          <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+            <div className="py-1">
+              {itSkills.map((skillName) => (
+                <label
+                  key={skillName}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  <input
+                    type="checkbox"
+                    value={skillName}
+                    checked={selectedSkill.includes(skillName)}
+                    onChange={() => handleCheckboxChange(skillName)}
+                    className="mr-2"
+                  />
+                  {skillName}
+                </label>
+              ))}
             </div>
-            {isOpen && (
-              <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                <div className="py-1">
-                  {itSkills.map((skillName) => (
-                    <label
-                      key={skillName}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    >
-                      <input
-                        type="checkbox"
-                        value={skillName}
-                        checked={selectedSkill.includes(skillName)}
-                        onChange={() => handleCheckboxChange(skillName)}
-                        className="mr-2"
-                      />
-                      {skillName}
-                    </label>
-                  ))}
-                </div>
-              </div>
-            )}
-            </div>
+          </div>
+        )}
+      </div>
     </div>
     
   );
