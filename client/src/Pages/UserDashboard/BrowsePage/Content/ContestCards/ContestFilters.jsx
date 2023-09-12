@@ -89,7 +89,7 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery,selectedCate
           </button>
         </div>
         {isOpen && (
-          <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <div className="origin-top-right absolute right-0 z-50 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
             <div className="py-1">
               {itSkills.map((skillName) => (
                 <label
@@ -110,17 +110,17 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery,selectedCate
           </div>
         )}
       </div>
-      <div className="relative inline-block text-left mt-3">
+      <div className="relative inline-block text-left w-full mt-3">
         <div>
           <button
             onClick={toggleDropdownCategories}
-            className="py-2 px-4 outline-none rounded border border-white text-white bg-black hover:border-green-500"
+            className="py-2 px-4 outline-none rounded border-[1px] border-gray-200 bg-white w-full"
           >
             Categories
           </button>
         </div>
         {isOpenCat && (
-          <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <div className="origin-top-right absolute  right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
             <div className="py-1">
               {itCategory.map((CategoryName) => (
                 <label
