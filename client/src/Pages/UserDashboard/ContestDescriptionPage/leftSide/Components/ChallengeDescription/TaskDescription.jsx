@@ -22,7 +22,7 @@ const TasksDescription = () => {
         </div>
         <hr className="my-4 " />
         <div className="mb-4">
-          <div className="flex flex-row space-x-2 game-skill-icons">
+          <div className="flex flex-row space-x-2">
             {challenge.category.map((cat, i) => (
               <span
                 key={i}
@@ -40,9 +40,12 @@ const TasksDescription = () => {
           </h4>
         </div>
         <hr className="my-2" />
-        <div className="flex flex-row space-x-2 game-skill-icons">
+        <div className="flex flex-row space-x-2">
           {challenge.RecommendedSkills.map((skill, i) => (
-            <span key={i} className="px-2 py-1  text-md">
+            <span
+              key={i}
+              className="px-2 py-1 font-bold  text-md border-2 border-gray-300 rounded-full"
+            >
               {skill}
             </span>
           ))}
