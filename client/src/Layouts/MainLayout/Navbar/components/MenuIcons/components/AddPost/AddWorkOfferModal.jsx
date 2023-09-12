@@ -16,7 +16,6 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
   const itSkills = Skills?.map((skill) => skill.name); 
    const {data:categorys} = useCategories();
   const itCategory = categorys?.map((category) => category.name);
-  const [category, setCategory] = useState("");
   
 
   const handleSelectChange = (event) => {
@@ -32,6 +31,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
   
   } = useForm({
     defaultValues: {
+      category:[],
       RecommendedSkills: [],
     },
   });
@@ -46,8 +46,6 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
     mutate({ companyId, JobData });
     
   };
-
-  
 
   return (
     <div
@@ -133,24 +131,31 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                 </div>
                 <div className="mb-2">
                   
-                  {itCategory && (<Autocomplete
-                    disablePortal
-                    id="tags-outlined"
-                    options={itCategory}
-                    value={category}
-                    onChange={(e,value) =>{
-                      console.log(value);
-                      setCategory(value);
-                      setValue("category", value);
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        variant="outlined"
-                        placeholder="Category"
+                <Controller
+                    control={control}
+                    name="category"
+                    defaultValue={"Any"}
+                    render={({ field }) => itCategory && (
+                      <Autocomplete
+                        multiple
+                        id="tags-outlined"
+                        options={itCategory}
+                        getOptionLabel={(option) => option}
+                        value={field.value}
+                        onBlur={field.onBlur}
+                        onChange={(e, value) =>
+                          setValue("category", value)
+                        }
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            placeholder="Categories"
+                          />
+                        )}
                       />
                     )}
-                  />)}
+                  />
                 </div>
             
                 <input
@@ -159,7 +164,6 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                   placeholder="salary"
                   {...register("salary", { required: true })}
                 />
-
                 <div className="flex justify-between">
                   <button
                     className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500"

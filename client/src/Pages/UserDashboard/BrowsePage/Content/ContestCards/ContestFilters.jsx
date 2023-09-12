@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaMoney } from "react-icons/fa";
 import { useSkills } from "../../../../../hooks/react-query/useSkills";
+import { useCategories } from "../../../../../hooks/react-query/useCategories";
 
-const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery , selectedSkill }) => {
+const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery,selectedCategory , selectedSkill,setCategoryQuery }) => {
   const { register, watch } = useForm();
 
   const minAmount = watch("minAmount");
   const maxAmount = watch("maxAmount");
   const { data:Skills } = useSkills();
+  const {data:categorys} = useCategories();
+  const itCategory = categorys?.map((category) => category.name);
   const itSkills = Skills?.map((skill) => skill.name);
+
   const handleCheckboxChange = (skillName) => {
     const updatedSkill = selectedSkill.includes(skillName)
       ? selectedSkill.filter((selected) => selected !== skillName)
@@ -17,12 +21,26 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery , selectedSk
 
     setSkillQuery(updatedSkill);
   };
+  const handleCheckboxChangeCategory = (CategoryName) => {
+    const updatedCategory = selectedCategory.includes(CategoryName)
+      ? selectedCategory.filter((selected) => selected !== CategoryName)
+      : [...selectedCategory, CategoryName];
+
+    setCategoryQuery(updatedCategory);
+   
+  };
+ 
+ 
+
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenCat, setIsOpenCat] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
+  const toggleDropdownCategories = () => {
+    setIsOpenCat(!isOpenCat);
+  };
 
   useEffect(() => {
     setMinAmount(minAmount);
@@ -61,14 +79,14 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery , selectedSk
             />
           </div>
         </div>
-      </form>
       
-    </div>
-    <div className="relative inline-block text-left">
+      </form>
+      <div className="flex justify-between ">
+      <div className="relative  mt-3">
             <div>
               <button
                 onClick={toggleDropdown}
-                className="py-2 px-4 outline-none rounded border border-white text-white bg-black hover:border-green-500"
+                className="py-2 px-4 outline-none rounded border  border-white text-white bg-black hover:border-green-500"
               >
                 Skills
               </button>
@@ -94,7 +112,42 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery , selectedSk
                 </div>
               </div>
             )}
-            </div>
+        </div>
+        <div className="relative inline-block text-left mt-3">
+                <div>
+                  <button
+                    onClick={toggleDropdownCategories}
+                    className="py-2 px-4 outline-none rounded border  border-white text-white bg-black hover:border-green-500"
+                  >
+                    Categories
+                  </button>
+                </div>
+                {isOpenCat && (
+                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div className="py-1">
+                      {itCategory.map((CategoryName) => (
+                        <label
+                          key={CategoryName}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        >
+                          <input
+                            type="checkbox"
+                            value={CategoryName}
+                            checked={selectedCategory?.includes(CategoryName)}
+                            onChange={() => handleCheckboxChangeCategory(CategoryName)}
+                            className="mr-2"
+                          />
+                          {CategoryName}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
+          </div>
+        </div>
+      </div>
+   
+   
     </div>
     
   );

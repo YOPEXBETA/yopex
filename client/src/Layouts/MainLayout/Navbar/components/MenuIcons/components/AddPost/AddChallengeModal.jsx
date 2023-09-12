@@ -20,7 +20,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
   const itSkills = Skills?.map((skill) => skill.name);
   const {data:categorys} = useCategories();
   const itCategory = categorys?.map((category) => category.name);
-  const [category, setCategory] = useState("");
+ 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -34,6 +34,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
     setValue,
   } = useForm({
     defaultValues: {
+      category:[],
       RecommendedSkills: [],
     },
   });
@@ -159,25 +160,32 @@ export const AddChallengeModal = ({ open, handleClose }) => {
 
                 <div className="mb-2">
                   
-                      {itCategory && (<Autocomplete
-                        disablePortal
+                <Controller
+                    control={control}
+                    name="category"
+                    defaultValue={"Any"}
+                    render={({ field }) => itCategory && (
+                      <Autocomplete
+                        multiple
                         id="tags-outlined"
                         options={itCategory}
-                        value={category}
-                        onChange={(e,value) =>{
-                          console.log(value);
-                          setCategory(value);
-                          setValue("category", value);
-                        }}
+                        getOptionLabel={(option) => option}
+                        value={field.value}
+                        onBlur={field.onBlur}
+                        onChange={(e, value) =>
+                          setValue("category", value)
+                        }
                         renderInput={(params) => (
                           <TextField
                             {...params}
                             variant="outlined"
-                            placeholder="Category"
+                            placeholder="Categories"
                           />
                         )}
-                      />)}
-                    
+                      />
+                    )}
+                  />
+                     
                 </div>
                 <input
                   className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"

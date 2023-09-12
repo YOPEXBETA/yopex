@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDeleteJob } from "../../../../../../../hooks/react-query/useJobs";
+import { EditJobModal } from "../../../../../../../Components/shared/Modals/EditJobModal";
 
 
 const PostMenuIcon = ({ post }) => {
@@ -20,6 +21,13 @@ const PostMenuIcon = ({ post }) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const [anchorE2, setAnchorE2] = useState(null);
+  const openEdit = Boolean(anchorE2);
+  const handleClickEdit = (event) => {
+    setAnchorE2(openEdit ? null : event.currentTarget);
+  };
+  const handleCloseEdit = () => setAnchorE2(null);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -85,13 +93,14 @@ const PostMenuIcon = ({ post }) => {
           Delete Job
         </MenuItem>
 
-        <MenuItem onClick={toggleOpen}>
+        <MenuItem onClick={handleClickEdit}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
           Edit Job
         </MenuItem>
       </Menu>
+      <EditJobModal open={openEdit} handleClose={handleCloseEdit} job={post}  />
 
      
     </React.Fragment>

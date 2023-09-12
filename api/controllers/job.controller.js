@@ -12,7 +12,7 @@ const main = require("../server");
 
 const addJob = async (req, res, next) => {
   try {
-    const { title,category,RecommendedSkills, description, companyId } = req.body;
+    const { title,category,RecommendedSkills, description, companyId , salary} = req.body;
 
     const userId = req.userId;
     const user = await User.findById(userId);
@@ -33,6 +33,7 @@ const addJob = async (req, res, next) => {
       description,
       category,
       RecommendedSkills,
+      salary,
     });
 
     await jobOffer.save();

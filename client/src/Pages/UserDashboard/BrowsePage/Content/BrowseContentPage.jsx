@@ -3,9 +3,10 @@ import ContestsFilters from "./ContestCards/ContestFilters";
 import Jobs from "./JobCards/Jobs";
 import Challenges from "./ContestCards/Challenges";
 
-const BrowseContentPage = ({ value, contestQuery, jobQuery ,setSkillQuery,selectedCategory ,selectedSkill }) => {
+const BrowseContentPage = ({ value, contestQuery, jobQuery, setCategoryQuery ,setSkillQuery,selectedCategory ,selectedSkill }) => {
   const [minAmount, setMinAmount] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
+  console.log(selectedCategory);
  
 
   return (
@@ -18,8 +19,10 @@ const BrowseContentPage = ({ value, contestQuery, jobQuery ,setSkillQuery,select
                 setMinAmount={setMinAmount}
                 setMaxAmount={setMaxAmount}
                 selectedSkill={selectedSkill} 
+                selectedCategory={selectedCategory} 
                 setSkillQuery={setSkillQuery} 
-                
+                 
+                setCategoryQuery={setCategoryQuery} 
               />
             </div>
 
@@ -29,6 +32,7 @@ const BrowseContentPage = ({ value, contestQuery, jobQuery ,setSkillQuery,select
                 maxAmount={maxAmount}
                 searchQuery={contestQuery}
                 selectedSkill={selectedSkill}
+                selectedCategory={selectedCategory}
               />
             </div>
           </div>

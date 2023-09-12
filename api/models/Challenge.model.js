@@ -14,8 +14,8 @@ const ChallengeSchema = new mongoose.Schema(
     totalStars: { type: Number, default: 0 },
     starNumber: { type: Number, default: 0 },
     category: {
-      type: String,
-      required: true,
+      type: Array,
+      default: [],
     },
     RecommendedSkills: {
       type: Array,

@@ -5,13 +5,14 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import JobOfferModal from "../Modals/JobOfferModal";
 import PostMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyJobs/Components/JobMenuIcon";
-import { useCompanyById } from "../../../hooks/react-query/useCompany";
+import {EditJobModal} from '../../shared/Modals/EditJobModal'
 
 const JobCard = ({ job }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const { user } = useSelector((state) => state.auth);
   const handleClose = () => setIsOpen(false);
+ 
 
   console.log(job?.company);
 
@@ -55,7 +56,7 @@ const JobCard = ({ job }) => {
 
               {user?.companies?.includes(job?.company._id) ? (
               <div onClick={(e)=> e.stopPropagation()}>
-              <PostMenuIcon post={job}  />
+              <PostMenuIcon post={job}/>
               </div>
               ) : (
                 <p></p>
