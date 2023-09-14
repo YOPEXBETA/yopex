@@ -12,7 +12,7 @@ const main = require("../server");
 
 const addJob = async (req, res, next) => {
   try {
-    const { title,category,RecommendedSkills, description, companyId } = req.body;
+    const { title,category,RecommendedSkills, description, companyId , salary} = req.body;
 
     const userId = req.userId;
     const user = await User.findById(userId);
@@ -33,6 +33,7 @@ const addJob = async (req, res, next) => {
       description,
       category,
       RecommendedSkills,
+      salary,
     });
 
     await jobOffer.save();
@@ -64,21 +65,21 @@ const getAllJobs = async (req, res, next) => {
 };
 
 const updateJob = async (req, res, next) => {
-  const { title, description } = req.body;
+  const { title, description ,salary , category ,RecommendedSkills} = req.body;
   const jobId = req.params.id;
   let job;
   try {
     job = await Job.findByIdAndUpdate(jobId, {
       title,
       description,
+      salary,
+      category,
+      RecommendedSkills,
     });
+     res.status(200).json({ job });
   } catch (err) {
     return console.log(err);
   }
-  if (!job) {
-    return res.status(500).json({ message: "Unable To Update The Job" });
-  }
-  return res.status(200).json({ job });
 };
 //
 

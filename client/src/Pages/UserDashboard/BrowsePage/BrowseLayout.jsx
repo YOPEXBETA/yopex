@@ -6,7 +6,7 @@ import BrowseJobsHeader from "./Header/BrowseJobsHeader";
 const BrowseLayout = () => {
   const [contestQuery, setContestQuery] = useState("");
   const [jobQuery, setJobQuery] = useState("");
-  const [selectedCategory, setCategoryQuery] = useState("");
+  const [selectedCategory, setCategoryQuery] = useState([]);
   const [selectedSkill, setSkillQuery] = useState([]);
   const [value, setValue] = useState(0);
   const changeValue = (newValue) => {
@@ -21,7 +21,7 @@ const BrowseLayout = () => {
           value={value}
           changeValue={changeValue}
           selectedSkill={selectedSkill}
-          
+          selectedCategory={selectedCategory}
         />
       )}
       {value === 1 && (
@@ -32,6 +32,7 @@ const BrowseLayout = () => {
           value={value}
           changeValue={changeValue}
           selectedSkill={selectedSkill}
+          selectedCategory={selectedCategory}
         />
       )}
 

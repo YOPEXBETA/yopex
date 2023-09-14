@@ -5,8 +5,7 @@ const UserModel = require("../models/user.model");
 
 const createConversation = async (req, res) => {
   try {
-    const { contestId} = req.body;
-
+    const { contestId } = req.body;
 
     const newCoversation = new ContestConversationModel({
       contestId,
@@ -24,11 +23,13 @@ const joinConversation = async (req, res) => {
   try {
     const { contestId, userId } = req.body;
     console.log(contestId, userId);
-    const conversation = await ContestConversationModel.findOne({ contestId: contestId});
+    const conversation = await ContestConversationModel.findOne({
+      contestId: contestId,
+    });
     if (conversation) {
-        if (conversation.members.includes(userId)){
-          return res.status(400).json({ message: "User already joined" });
-        }
+      if (conversation.members.includes(userId)) {
+        return res.status(400).json({ message: "User already joined" });
+      }
       conversation.members.push(userId);
       await conversation.save();
       res.status(200).json(conversation);
@@ -44,17 +45,18 @@ const joinConversation = async (req, res) => {
 const getConversation = async (req, res) => {
   try {
     const { contestId } = req.params;
-    const conversations = await ContestConversationModel.findOne({ contestId: contestId });
-    res.status(200).json({id:conversations._id});
+    const conversations = await ContestConversationModel.findOne({
+      contestId: contestId,
+    });
+    res.status(200).json({ id: conversations?._id });
   } catch (error) {
     console.log(error, "Error");
     res.status(400).send(error.message);
   }
-}
-
+};
 
 module.exports = {
   createConversation,
   joinConversation,
-  getConversation
+  getConversation,
 };

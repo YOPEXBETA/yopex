@@ -123,7 +123,7 @@ const getCompanyChallenges = async (req, res) => {
 
 const getAllChallenges = async (req, res) => {
   const q = req.query;
-  
+  console.log(q.categories);
   const filters = {
     ...(q.userId && { userId: q.userId }),
     ...(q.category && { category: q.category }),
@@ -135,6 +135,7 @@ const getAllChallenges = async (req, res) => {
     }),
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
     ...(q.skills && { RecommendedSkills: { $in: q.skills } }),
+    ...(q.categories && { category: { $in: q.categories } }),
   };
 
   try {

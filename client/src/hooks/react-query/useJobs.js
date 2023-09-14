@@ -10,7 +10,6 @@ export const useJobs = () => {
     queryKey: ["jobs"],
     queryFn: async () => {
       const { data } = await axios.get(`${url}/job/all`);
-      console.log("fff", data);
       return data;
     },
   });
@@ -138,3 +137,21 @@ export const useUnapplyJob = (job, userId) => {
     },
   });
 };
+
+
+export const useEditJob = (jobId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (JobData) => {
+
+      await axios.put(`${url}/job/update/${jobId}`, JobData, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["jobs"]);
+    },
+  });
+}
+

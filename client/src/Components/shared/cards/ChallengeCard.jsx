@@ -7,7 +7,6 @@ import ChallengeMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentS
 import { useSelector } from "react-redux";
 
 const ChallengeCard = ({ challenge, type }) => {
-
   const { user } = useSelector((state) => state.auth);
 
   const isChallengeInProgress = (challenge) => {
@@ -34,24 +33,18 @@ const ChallengeCard = ({ challenge, type }) => {
           </div>
           <div className="flex w-full flex-col justify-between xl:w-[70%] lg:px-0 px-4">
             <div className="py-4 pb-4 flex justify-between items-center">
-
               <h5 className="text-lg font-semibold">{challenge.title}</h5>
-          
-                {user?.companies?.includes(challenge?.company._id) ? (
-               
-                <div onClick={(e)=> e.preventDefault()}>
-                <ChallengeMenuIcon post={challenge} />
+
+              {user?.companies?.includes(challenge?.company._id) ? (
+                <div onClick={(e) => e.preventDefault()}>
+                  <ChallengeMenuIcon post={challenge} />
                 </div>
               ) : (
                 <p></p>
               )}
             </div>
 
-           
-               
-          
-                <p></p>
-          
+            <p></p>
 
             <div className="flex items-center justify-between gap-2 pb-4">
               <p className="truncate w-96">{challenge.description}</p>
