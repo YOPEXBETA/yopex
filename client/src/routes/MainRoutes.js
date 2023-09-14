@@ -1,6 +1,8 @@
 import React, { lazy } from "react";
 import Loadable from "../Components/PageLoading/Loadable";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
+import PaymentFail from "../Pages/UserDashboard/SettingsPage/AccountSettings/PaymentFail";
+import Store from "../Pages/UserDashboard/StorePage/Store";
 
 // ==============================|| USER PAGES ||============================== //
 //HomePage
@@ -61,6 +63,12 @@ const PaymentSuccess = Loadable(
   )
 );
 
+const paymentFail = Loadable(
+  lazy(() =>
+    import("../Pages/UserDashboard/SettingsPage/AccountSettings/PaymentFail")
+  )
+);
+
 // ==============================|| MAIN USER ROUTING ||============================== //
 
 const MainRoutes = {
@@ -88,6 +96,10 @@ const MainRoutes = {
     {
       path: "/settings",
       element: <SettingsLayout />,
+    },
+    {
+      path: "/store",
+      element: <Store />,
     },
     {
       path: "/chat",
@@ -123,6 +135,10 @@ const MainRoutes = {
     {
       path: "/paymentSuccess",
       element: <PaymentSuccess />,
+    },
+    {
+      path: "/paymentFail",
+      element: <PaymentFail />,
     },
 
     {

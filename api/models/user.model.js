@@ -37,6 +37,10 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    historyPayment: {
+      type: Array,
+      default: [],
+    },
     viewedProfile: { type: Number },
     impressions: { type: Number },
     //role to switch between company and user
