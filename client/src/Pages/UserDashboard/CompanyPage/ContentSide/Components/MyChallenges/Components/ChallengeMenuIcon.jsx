@@ -9,16 +9,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { IoEllipsisHorizontalOutline } from "react-icons/io5";
 import { useDeleteChallenge } from "../../../../../../../hooks/react-query/useChallenges";
 
-
-
 const ChallengeMenuIcon = ({ post }) => {
-
   const { user } = useSelector((state) => state.auth);
-  const {mutate : deleteChallenge} = useDeleteChallenge();
-
-
+  const { mutate: deleteChallenge } = useDeleteChallenge();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -41,7 +37,7 @@ const ChallengeMenuIcon = ({ post }) => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <MoreVert />
+            <IoEllipsisHorizontalOutline size={20} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -80,7 +76,7 @@ const ChallengeMenuIcon = ({ post }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={()=>deleteChallenge(post._id)} >
+        <MenuItem onClick={() => deleteChallenge(post._id)}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
           </ListItemIcon>
@@ -94,8 +90,6 @@ const ChallengeMenuIcon = ({ post }) => {
           Edit Challenge
         </MenuItem>
       </Menu>
-
-     
     </React.Fragment>
   );
 };
