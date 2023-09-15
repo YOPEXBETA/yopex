@@ -5,6 +5,8 @@ import { HiDotsVertical } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { EditPostModal } from "../../shared/Modals/EditPostModal";
 import { useDeleteComment } from "../../../hooks/react-query/useComments";
+import { EditCommentModal } from "../Modals/EditCommentModal";
+
 
 
 const CommentMenuIcon = ({ post }) => {
@@ -68,10 +70,10 @@ const CommentMenuIcon = ({ post }) => {
       )}
 
       {isEditModalOpen && (
-        <EditPostModal
+        <EditCommentModal
           open={isEditModalOpen}
           handleClose={() => setIsEditModalOpen(false)}
-          post={post}
+          comment={post}
         />
       )}
     </div>

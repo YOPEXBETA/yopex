@@ -45,6 +45,20 @@ const deleteComment = async (req, res, next) => {
       res.status(200).json("The comment has been deleted.");
  
 };
+const updateComment = async (req, res, next) => {
+  const { desc } = req.body;
+  const CommentId = req.params.id;
+  let comment;
+  try {
+    comment = await Comment.findByIdAndUpdate(CommentId, {
+      desc,
+      
+    });
+     res.status(200).json({ comment });
+  } catch (err) {
+    return console.log(err);
+  }
+};
 
 const getComments = async (req, res, next) => {
   try {
@@ -64,4 +78,5 @@ module.exports = {
   addComment,
   getComments,
   deleteComment,
+  updateComment,
 };

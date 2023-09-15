@@ -51,3 +51,20 @@ export const useDeleteComment = (postId) => {
     },
   });
 };
+
+export const useEditComment = (commentId) => {
+ 
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (CommentData) => {
+
+      await axios.put(`${url}/comment/update/${commentId}`, CommentData, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["comments"]);
+    },
+  });
+}
