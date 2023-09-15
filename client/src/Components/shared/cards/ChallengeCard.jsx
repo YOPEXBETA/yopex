@@ -16,7 +16,6 @@ const ChallengeCard = ({ challenge, type }) => {
       return false;
     return true;
   };
-  console.log(challenge.company);
 
   return (
     <div>
@@ -37,7 +36,7 @@ const ChallengeCard = ({ challenge, type }) => {
 
               {user?.companies?.includes(challenge?.company._id) ? (
                 <div onClick={(e) => e.preventDefault()}>
-                  <ChallengeMenuIcon post={challenge} />
+                  <ChallengeMenuIcon challenge={challenge} />
                 </div>
               ) : (
                 <p></p>

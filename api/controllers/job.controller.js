@@ -81,7 +81,7 @@ const updateJob = async (req, res, next) => {
     return console.log(err);
   }
 };
-//
+
 
 const geJobById = async (req, res, next) => {
   try {

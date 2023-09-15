@@ -31,18 +31,19 @@ const addComment = async (req, res, next) => {
 };
 
 const deleteComment = async (req, res, next) => {
-  try {
-    const comment = await Comment.findById(res.params.id);
-    const post = await SocialPost.findById(res.params.id);
-    if (req.userId === comment.userId || req.userId === post.userId) {
+  console.log(req.params);
+  console.log(req.body);
+
+   
       await Comment.findByIdAndDelete(req.params.id);
+      await SocialPost.findByIdAndUpdate( req.body.postId,
+        { $pull: { comments: req.params.id } });
+        await SocialPost.findByIdAndUpdate(
+          req.body.postId,
+          { $inc: { commentCount: -1 } }
+        );  
       res.status(200).json("The comment has been deleted.");
-    } else {
-      return next(createError(403, "You can delete ony your comment!"));
-    }
-  } catch (err) {
-    next(err);
-  }
+ 
 };
 
 const getComments = async (req, res, next) => {

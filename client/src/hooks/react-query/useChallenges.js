@@ -16,6 +16,21 @@ export const useChallengeById = (challengeId) => {
   });
 };
 
+export const useEditChallenge = (challengeId) => {
+  console.log(challengeId);
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (ChallengeData) => {
+      
+      await axios.put(`${url}/challenge/update/${challengeId}`, ChallengeData, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["challenges"]);
+    },
+  });
+}
 
 
 export const useUserChallenges = (user) => {
@@ -70,7 +85,6 @@ export const useUserSubmission = (challengeId, participant) => {
 };
 
 export const useFindChallenges = (minAmount, maxAmount, searchQuery,skills ,categories) => {
-console.log(categories);
   return useQuery({
     queryKey: ["challenges", minAmount, maxAmount, searchQuery,skills,categories],
     queryFn: async () => {

@@ -4,6 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Autocomplete, TextField } from "@mui/material";
 import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../hooks/react-query/useSkills";
+
   
   export const EditJobModal = ({ open, handleClose,job }) => {
     const { mutate } = useEditJob(job._id);
@@ -24,6 +25,7 @@ import { useSkills } from "../../../hooks/react-query/useSkills";
     });
   
     const onSubmit = async (data) => {
+      console.log(data)
       mutate({ 
         title: data.title, 
         description: data.description ,

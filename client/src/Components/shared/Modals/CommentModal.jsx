@@ -1,6 +1,6 @@
 import React from "react";
-import { FaRegComment } from "react-icons/fa";
-
+import { useSelector } from "react-redux";
+import CommentMenuIcon from "../MenuIcons/CommentMenuIcon";
 const CommentModal = ({
   isOpen,
   handleSubmit,
@@ -11,6 +11,8 @@ const CommentModal = ({
   register,
   formatDistance,
 }) => {
+  const { user } = useSelector((state) => state.auth);
+  console.log(comments);
   return (
     <>
       {isOpen && (
@@ -53,11 +55,13 @@ const CommentModal = ({
                             alt="Avatar"
                             className="w-10 h-10 rounded-full"
                           />
-                          <div className="ml-2">
+                          <div className="ml-2  ">
                             <div className="flex gap-2">
                               <p className="text-md font-semibold">
                                 {`${comment.userId.firstname} ${comment.userId.lastname}`}
                               </p>
+                           
+                           
                               <p className="text-md text-gray-400">
                                 {" "}
                                 |{" "}
@@ -67,12 +71,16 @@ const CommentModal = ({
                                   {
                                     addSuffix: true,
                                   }
-                                )}
+                                )}   {comment.userId._id === user._id && (
+                                  <CommentMenuIcon className="text-black ml-72" post={comment} />
+                          )}
                               </p>
                             </div>
+                            
                             <p className="text-md text-zinc-700 whitespace-nowrap max-w-[70px]">
                               {comment.desc}
                             </p>
+                           
                           </div>
                         </div>
                         <hr className="border-t border-gray-300 mt-2" />

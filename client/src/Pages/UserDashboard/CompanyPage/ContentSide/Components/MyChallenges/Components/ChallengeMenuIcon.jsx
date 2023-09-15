@@ -10,10 +10,11 @@ import Tooltip from "@mui/material/Tooltip";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDeleteChallenge } from "../../../../../../../hooks/react-query/useChallenges";
+import { EditChallengeModal } from "../../../../../../../Components/shared/Modals/EditChallengeModal";
 
 
 
-const ChallengeMenuIcon = ({ post }) => {
+const ChallengeMenuIcon = ({ challenge }) => {
 
   const { user } = useSelector((state) => state.auth);
   const {mutate : deleteChallenge} = useDeleteChallenge();
@@ -21,7 +22,15 @@ const ChallengeMenuIcon = ({ post }) => {
 
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+   const open = Boolean(anchorEl);
+  const [anchorE2, setAnchorE2] = useState(null);
+ const openEdit = Boolean(anchorE2);
+  
+ const handleClickEdit = (event) => {
+    setAnchorE2(openEdit ? null : event.currentTarget);
+  };
+ 
+  const handleCloseEdit = () => setAnchorE2(null);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -80,20 +89,21 @@ const ChallengeMenuIcon = ({ post }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={()=>deleteChallenge(post._id)} >
+        <MenuItem onClick={()=>deleteChallenge(challenge._id)} >
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
           </ListItemIcon>
           Delete Challenge
         </MenuItem>
 
-        <MenuItem onClick={toggleOpen}>
+        <MenuItem onClick={handleClickEdit}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
           Edit Challenge
         </MenuItem>
       </Menu>
+      <EditChallengeModal open={openEdit} handleClose={handleCloseEdit} challenge={challenge}/>
 
      
     </React.Fragment>
