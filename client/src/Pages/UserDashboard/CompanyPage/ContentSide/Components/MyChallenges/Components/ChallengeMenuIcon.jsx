@@ -9,17 +9,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { IoEllipsisHorizontalOutline } from "react-icons/io5";
 import { useDeleteChallenge } from "../../../../../../../hooks/react-query/useChallenges";
 import { EditChallengeModal } from "../../../../../../../Components/shared/Modals/EditChallengeModal";
-
-
 
 const ChallengeMenuIcon = ({ challenge }) => {
 
   const { user } = useSelector((state) => state.auth);
-  const {mutate : deleteChallenge} = useDeleteChallenge();
-
-
+  const { mutate: deleteChallenge } = useDeleteChallenge();
 
   const [anchorEl, setAnchorEl] = useState(null);
    const open = Boolean(anchorEl);
@@ -50,7 +47,7 @@ const ChallengeMenuIcon = ({ challenge }) => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <MoreVert />
+            <IoEllipsisHorizontalOutline size={20} />
           </IconButton>
         </Tooltip>
       </Box>

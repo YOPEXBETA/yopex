@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import StarIcon from "@mui/icons-material/Star";
-import { Rating } from "@mui/material";
 import getDeadlineDifference from "./../../getDeadlineDifference";
 import ChallengeMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyChallenges/Components/ChallengeMenuIcon";
 import { useSelector } from "react-redux";
@@ -46,7 +44,7 @@ const ChallengeCard = ({ challenge, type }) => {
             <p></p>
 
             <div className="flex items-center justify-between gap-2 pb-4">
-              <p className="truncate w-96">{challenge.description}</p>
+              <p className="truncate w-[35rem]">{challenge.description}</p>
             </div>
 
             <div className="flex flex-wrap justify-between pb-8">

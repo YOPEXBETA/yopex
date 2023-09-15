@@ -24,7 +24,7 @@ export default function App() {
 
   const onSubmit = (data) => {
     mutate(data.amount);
-    console.log(data);
+
   };
 
   return (
@@ -44,20 +44,6 @@ export default function App() {
             <Typography color={"warning.main"} variant="h3">
               Balance {userProfile?.balance || 0 + " $"}
             </Typography>
-            <form
-              // action="http://localhost:8000/stripe/create-checkout-session"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <Button
-                type="submit"
-                variant="contained"
-                size="medium"
-                startIcon={<AccountBalanceWalletIcon />}
-                sx={{ backgroundColor: "purple" }}
-              >
-                Stripe
-              </Button>
-            </form>
           </Stack>
         </CardContent>
         <CardContent as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -70,7 +56,7 @@ export default function App() {
             <Button
               disabled={isLoading}
               type="submit"
-              variant="contained"
+              
               sx={{ backgroundColor: "orange" }}
               startIcon={<AccountBalanceWalletIcon />}
             >
