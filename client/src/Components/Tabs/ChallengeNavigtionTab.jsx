@@ -42,7 +42,7 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
           >
             Participants
           </li>
-          {isRegistered?(<li
+          {isRegistered || isOwner?(<li
             className={`cursor-pointer px-4 py-2 ${
               value === 3 ? "bg-green-500 text-white" : "text-green-500"
             }`}

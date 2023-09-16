@@ -1,6 +1,7 @@
 const ChallengeModel = require("../models/Challenge.model");
 const ContestConversationModel = require("../models/ContestConversation.model");
 const CompanyModel = require("../models/company.model");
+const submissionModel = require("../models/submission.model");
 const UserModel = require("../models/user.model");
 const mongoose = require("mongoose");
 
@@ -167,16 +168,10 @@ const getChallengeUserSubmit = async (req, res) => {
     const challengeId = req.query.challengeId; // Get idChallenge from the query parameter
     const userId = req.query.userId; // Get idUser from the query parameter
     
-    
+    const submit = await submissionModel.findOne({challengeId:challengeId,userId:userId});
 
-    const Challenge = await ChallengeModel.findById(challengeId).populate({
-      path: "submissions",
-    });
-    const ChallengeUserSubmit = Challenge.submissions.filter(
-      (submission) => submission.userId == userId,
-    );
 
-    res.status(200).json(ChallengeUserSubmit);
+    res.status(200).json(submit);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

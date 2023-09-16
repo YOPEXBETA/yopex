@@ -33,9 +33,7 @@ const Banner = ({ changeValue, value }) => {
   const { mutate: join } = useJoinContestConversation();
 
   useEffect(() => {
-    const submitted = submissions?.find(
-      (item) => item.challengeId === challenge._id
-    );
+    const submitted = submissions
 
     if (submitted) setIsSubmitted(true);
   }, [challenge._id, submissions]);

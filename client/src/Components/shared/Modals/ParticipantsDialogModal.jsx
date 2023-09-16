@@ -9,10 +9,12 @@ const ParticipantsDialogModal = ({
   participant,
   togglereview,
   isOwner,
+  canedit,
+  toggleedit
 }) => {
   const { id: challengeId } = useParams();
   const { data: submissions } = useUserSubmission(challengeId, participant);
-
+  
   return (
     <div
       id="defaultModal"
@@ -51,7 +53,7 @@ const ParticipantsDialogModal = ({
           </div>
 
           <div className="p-6 space-y-6">
-            {submissions && submissions.length > 0 ? (
+            {submissions ? (
               <>
                 <h4>
                   User:{" "}
@@ -61,18 +63,18 @@ const ParticipantsDialogModal = ({
                       participant.user.lastname}
                   </Link>
                 </h4>
-                <h4>Title : {submissions[0].title}</h4>
+                <h4>Title : {submissions.title}</h4>
                 <h4>Description :</h4>
                 <p className=" text-gray-500 dark:text-gray-400">
-                  {submissions[0].description}
+                  {submissions.description}
                 </p>
 
-                {submissions[0].filesPaths &&
-                  submissions[0].filesPaths.length > 0 && (
+                {submissions.filesPaths &&
+                  submissions.filesPaths.length > 0 && (
                     <>
                       <h4>Files Attached :</h4>
 
-                      {submissions[0].filesPaths.map((file, i) => (
+                      {submissions.filesPaths.map((file, i) => (
                         <a
                           key={i}
                           href={file}
@@ -85,10 +87,10 @@ const ParticipantsDialogModal = ({
                       ))}
                     </>
                   )}
-                {submissions[0].links && submissions[0].links.length > 0 && (
+                {submissions.links && submissions.links.length > 0 && (
                   <>
                     <h4>Links Attached :</h4>
-                    {submissions[0].links.map((item, i) => (
+                    {submissions.links.map((item, i) => (
                       <a
                         key={i}
                         href={item.link}
@@ -101,8 +103,20 @@ const ParticipantsDialogModal = ({
                     ))}
                   </>
                 )}
+                <div className="flex items-center pt-3 border-t border-gray-200 rounded-b dark:border-gray-600">
+                {canedit && (<button
+                      type="button"
+                      onClick={() => {
+                        handleClose();
+                        toggleedit();
+                      }}
+                      className="text-white bg-green-400 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                    >
+                      edit
+                  </button>
+                )}
                 {isOwner && (
-                  <div className="flex items-center pt-3 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  
                     <button
                       type="button"
                       onClick={() => {
@@ -113,8 +127,9 @@ const ParticipantsDialogModal = ({
                     >
                       review
                     </button>
-                  </div>
+                  
                 )}
+                </div>
               </>
             ) : (
               <h4>No submission yet</h4>

@@ -48,6 +48,24 @@ const CreateSubmission = async (req, res, next) => {
   }
 };
 
+
+const editsubmission = async (req, res) => {
+  const { challengeId, userId, title, description, filesPaths, links } = req.body;
+  try {
+    const submission = await Submission.findOneAndUpdate(
+      { challengeId, userId },
+      { title, description, filesPaths, links }
+    );
+    res.status(201).json(submission);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+
 module.exports = {
   CreateSubmission,
+  editsubmission,
 };

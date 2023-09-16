@@ -10,8 +10,8 @@ const Payment = async (req, res) => {
     amount: req.body.amount*1000,
     accept_card: "true",
     session_timeout_secs: 1200,
-    success_link: "http://localhost:3000/paymentSuccess",
-    fail_link: "http://localhost:3000/paymentFail",
+    success_link: "http://localhost:3000/store",
+    fail_link: "http://localhost:3000/store",
     developer_tracking_id: "3d6c3855-88b9-481f-9c00-43c8b8745f80",
   };
 
@@ -57,8 +57,6 @@ const Verify = async (req, res) => {
         user.historyPayment.splice(index, 1);
         user.historyPayment.push({payment_id:id_payment, balanace: req.body.amount, state: "success"});
         
-      }else{
-        return res.status(500).send("An error occurred"); 
       }
       
     }else{
@@ -72,7 +70,7 @@ const Verify = async (req, res) => {
     
     res.json(result.data);
   } catch (err) {
-    
+    console.log(err);
     res.status(500).send("An error occurred");
   }
 };
