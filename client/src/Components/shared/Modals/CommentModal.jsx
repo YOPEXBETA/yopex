@@ -1,6 +1,6 @@
 import React from "react";
-import { FaRegComment } from "react-icons/fa";
-
+import { useSelector } from "react-redux";
+import CommentMenuIcon from "../MenuIcons/CommentMenuIcon";
 const CommentModal = ({
   isOpen,
   handleSubmit,
@@ -11,6 +11,8 @@ const CommentModal = ({
   register,
   formatDistance,
 }) => {
+  const { user } = useSelector((state) => state.auth);
+  console.log(comments);
   return (
     <>
       {isOpen && (
@@ -53,12 +55,14 @@ const CommentModal = ({
                             alt="Avatar"
                             className="w-10 h-10 rounded-full"
                           />
-                          <div className="ml-2">
-                            <div className="flex gap-2">
+                          <div className="ml-2 w-full">
+                            <div className="flex gap-2  items-start">
                               <p className="text-md font-semibold">
                                 {`${comment.userId.firstname} ${comment.userId.lastname}`}
                               </p>
-                              <p className="text-md text-gray-400">
+                           
+                           <div className="flex justify-between w-96 items-start ">
+                             <p className="text-md text-gray-400 ">
                                 {" "}
                                 |{" "}
                                 {formatDistance(
@@ -67,12 +71,18 @@ const CommentModal = ({
                                   {
                                     addSuffix: true,
                                   }
-                                )}
-                              </p>
+                                )} 
+                              </p>  
+                              {comment.userId._id === user._id && (
+                                  <CommentMenuIcon className="text-black  " post={comment} />
+                          )}
+                          </div>
                             </div>
+                            
                             <p className="text-md text-zinc-700 whitespace-nowrap max-w-[70px]">
                               {comment.desc}
                             </p>
+                           
                           </div>
                         </div>
                         <hr className="border-t border-gray-300 mt-2" />

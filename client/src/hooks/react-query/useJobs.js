@@ -65,12 +65,17 @@ export const useDeleteJob = () => {
 };
 
 
-export const useAppliers = (job) => {
+export const useAppliers = (jobIds) => {
   return useQuery({
-    queryKey: ["appliers", job._id],
+    queryKey: ["appliers", jobIds],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/job/jobs/${job._id}/appliers`);
-      return data;
+      const appliersPromises = jobIds?.map(async (jobId) => {
+        const { data } = await axios.get(`${url}/job/jobs/${jobId}/appliers`);
+        return data;
+      });
+      const appliersData = await Promise.all(appliersPromises);
+
+      return appliersData;
     },
   });
 };
@@ -140,6 +145,7 @@ export const useUnapplyJob = (job, userId) => {
 
 
 export const useEditJob = (jobId) => {
+ 
   const queryClient = useQueryClient();
 
   return useMutation({

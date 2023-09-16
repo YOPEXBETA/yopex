@@ -1,4 +1,5 @@
 import React from "react";
+import { FaGamepad } from "react-icons/fa";
 import { useUserById } from "../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 
@@ -13,7 +14,7 @@ const MoneyBalance = () => {
           <h4 className="text-xl font-medium">Balance</h4>
           <h4 className="text-lg text-primary font-bold text-green-500">
             {" "}
-            {userProfile?.balance || 0} $
+            {userProfile?.balance || 0} points
           </h4>
         </div>
       </div>

@@ -3,7 +3,6 @@ const ContestConversationModel = require("../models/ContestConversation.model");
 const CompanyModel = require("../models/company.model");
 const submissionModel = require("../models/submission.model");
 const UserModel = require("../models/user.model");
-const mongoose = require("mongoose");
 
 const CreateChallenge = async (req, res, next) => {
   try {
@@ -177,6 +176,22 @@ const getChallengeUserSubmit = async (req, res) => {
   }
 };
 
+const updateChallenge= async (req, res, next) => {
+  const { title, description , price,category,RecommendedSkills} = req.body;
+  const challengeId = req.params.id;
+  let job;
+  try {
+    job = await ChallengeModel.findByIdAndUpdate(challengeId, {
+      title,
+      description,
+      price,category,RecommendedSkills,
+    }); 
+     res.status(200).json({ job });
+  } catch (err) {
+    return console.log(err);
+  }
+};
+
 module.exports = {
   CreateChallenge,
   deleteChallenge,
@@ -185,4 +200,5 @@ module.exports = {
   getAllChallenges,
   getChallengeUsers,
   getChallengeUserSubmit,
+  updateChallenge,
 };

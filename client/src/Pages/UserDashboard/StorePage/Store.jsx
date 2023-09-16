@@ -32,109 +32,31 @@ const Store = () => {
         }
     }, [paymentId,data]);
 
+  const pointItems = [
+    { points: 50, amount: 50 },
+    { points: 100, amount: 100 },
+    { points: 200, amount: 200 },
+    { points: 350, amount: 350 },
+    { points: 500, amount: 500 },
+    { points: 1000, amount: 1000 },
+  ];
 
+  if (user?.companies?.length === 0) {
+    return <h1>Unauthorized</h1>;
+  }
 
-    if (user?.companies?.length === 0) {
-        return (<h1>Unauthorized</h1>)}
-    
-    return (
-        <div class="grid grid-cols-3 gap-[20px] m-16">
-            {error!==null && success===true && <AlertSuccess message={error}/>}
-            {error!==null && success===false && <AlertContainer error={error}/>}
-            <div class="max-w-sm p-6 grid grid-cols-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">50 Points</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">50 TND</p>
-                </div>
-                <Button
-                    type="button"
-                    sx={{ backgroundColor: "orange" }}
-                    startIcon={<AccountBalanceWalletIcon />}
-                    onClick={() =>{mutate(50)}}
-                >
-                    Flouci
-                </Button>
-            </div>
-
-            <div class="max-w-sm p-6 grid grid-cols-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">100 Points</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">100 TND</p>
-                </div>
-                <Button
-                    type="submit"
-                    sx={{ backgroundColor: "orange" }}
-                    startIcon={<AccountBalanceWalletIcon />}
-                    onClick={() =>{mutate(100)}}
-                >
-                    Flouci
-                </Button>
-            </div>
-
-            <div class="max-w-sm p-6 grid grid-cols-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">200 Points</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">200 TND</p>
-                </div>
-                <Button
-                    type="submit"
-                    sx={{ backgroundColor: "orange" }}
-                    startIcon={<AccountBalanceWalletIcon />}
-                    onClick={() =>{mutate(200)}}
-                >
-                    Flouci
-                </Button>
-            </div>
-
-            <div class="max-w-sm p-6 grid grid-cols-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">350 Points</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">350 TND</p>
-                </div>
-                <Button
-                    type="submit"
-                    sx={{ backgroundColor: "orange" }}
-                    startIcon={<AccountBalanceWalletIcon />}
-                    onClick={() =>{mutate(350)}}
-                >
-                    Flouci
-                </Button>
-            </div>
-
-            <div class="max-w-sm p-6 grid grid-cols-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">500 Points</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">500 TND</p>
-                </div>
-                <Button
-                    type="submit"
-                    sx={{ backgroundColor: "orange" }}
-                    startIcon={<AccountBalanceWalletIcon />}
-                    onClick={() =>{mutate(500)}}
-                >
-                    Flouci
-                </Button>
-            </div>
-
-            <div class="max-w-sm p-6 grid grid-cols-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">1000 Points</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">1000 TND</p>
-                </div>
-                <Button
-                    type="submit"
-                    sx={{ backgroundColor: "orange" }}
-                    startIcon={<AccountBalanceWalletIcon />}
-                    onClick={() =>{mutate(1000)}}
-                >
-                    Flouci
-                </Button>
-            </div>
-
-            
-            
-        </div>
-    )
-}
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-0 lg:mx-16 md:mx-6 mt-0 md:mt-8 gap-5 ">
+      {pointItems.map((item, index) => (
+        <StorePointCard
+          key={index}
+          points={item.points}
+          amount={item.amount}
+          onClick={() => mutate(item.points)}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default Store;

@@ -35,3 +35,36 @@ export const useAddComment = (postId, category, userId) => {
     },
   });
 };
+
+export const useDeleteComment = (postId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ CommentId, postId }) => {
+      await axios.delete(`${url}/comment/${CommentId}`, {
+        data: { postId }, 
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comments'] });
+    },
+  });
+};
+
+export const useEditComment = (commentId) => {
+ 
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (CommentData) => {
+
+      await axios.put(`${url}/comment/update/${commentId}`, CommentData, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["comments"]);
+    },
+  });
+}

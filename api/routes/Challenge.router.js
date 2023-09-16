@@ -10,6 +10,7 @@ const {
   getAllChallenges,
   getChallengeUsers,
   getChallengeUserSubmit,
+  updateChallenge,
 } = require("../controllers/Challenge.controller");
 const { CreateSubmission, editsubmission } = require("../controllers/submission.controllers");
 
@@ -50,6 +51,7 @@ ChallengeRouter.delete(
   authenticateToken,
   deleteChallenge
 );
+ChallengeRouter.put("/update/:challengeId",updateChallenge);
 
 ChallengeRouter.post("/submission", authenticateToken, CreateSubmission);
 ChallengeRouter.delete("/:id", authenticateToken, deleteChallenge);

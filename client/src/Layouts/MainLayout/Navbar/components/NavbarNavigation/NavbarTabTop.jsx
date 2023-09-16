@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 const NavbarTabTop = () => {
   const location = useLocation();
   const [value, setValue] = useState(null);
-  const {user} = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -19,6 +19,8 @@ const NavbarTabTop = () => {
       setValue(1);
     } else if (path === "/leaderboard") {
       setValue(2);
+    } else if (path === "/store") {
+      setValue(3);
     } else {
       setValue("");
     }
@@ -57,7 +59,7 @@ const NavbarTabTop = () => {
         {user?.companies?.length > 0 && (
           <Link
             to="/store"
-            onClick={() => handleChange(2)}
+            onClick={() => handleChange(3)}
             className={`block px-4 py-2  xl:text-sm lg:text-sm md:text-sm font-medium ${
               value === 3 ? "text-green-500" : "text-gray-500"
             } hover:text-green-500 focus:outline-none`}

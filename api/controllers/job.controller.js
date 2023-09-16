@@ -81,7 +81,7 @@ const updateJob = async (req, res, next) => {
     return console.log(err);
   }
 };
-//
+
 
 const geJobById = async (req, res, next) => {
   try {
@@ -145,6 +145,7 @@ const getByUserId = async (req, res, next) => {
 const applyJob = async (req, res) => {
   try {
     const job = await Job.findById(req.params.jobId).exec();
+    
     if (!job) return res.status(400).json("Job not found");
 
     const user = await User.findById(req.params.userId).exec();
@@ -161,7 +162,9 @@ const applyJob = async (req, res) => {
         .json("You have already been accepted for this job");
 
     job.appliers.push(req.params.userId);
+    user.jobs.push (job);
     await job.save();
+    await user.save();
 
     // add notification to company
     const company = await Company.findById(job.company).exec();
@@ -215,7 +218,7 @@ const unapplyJob = async (req, res) => {
 const getAppliers = async (req, res) => {
   try {
     const job = await Job.findById(req.params.jobId)
-      .populate({ path: "appliers", select: "firstname lastname email" })
+      .populate({ path: "appliers", select: "firstname lastname email picturePath jobs" })
       .select({ appliers: 1 })
       .lean()
       .exec();
