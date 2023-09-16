@@ -34,6 +34,16 @@ export const CompanyProfileNavigationTab = ({ changeValue, value }) => {
         >
           My Challenges
         </button>
+        <button
+          className={`w-1/2 sm:w-auto py-2 px-4  ${
+            value === 3
+              ? "bg-green-500 text-white border-green-500"
+              : "text-gray-500 border-gray-300"
+          }`}
+          onClick={() => changeValue(3)}
+        >
+          My Appliers
+        </button>
       </div>
     </div>
   );
