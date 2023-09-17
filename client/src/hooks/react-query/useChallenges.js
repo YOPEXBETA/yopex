@@ -233,3 +233,18 @@ export const useDeleteChallenge=()=>{
         },
       });
 };
+
+
+export const useEditSubmission = (challengeId, participant) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (submission) => {
+      await axios.post(`${url}/challenge/editSubmission`, submission, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["submissions", participant._id, challengeId]);
+    },
+  });
+}
