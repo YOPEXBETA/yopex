@@ -112,7 +112,7 @@ export const useAcceptApplier = (job) => {
       await axios.put(`${url}/job/jobs/${job._id}/appliers/${userId}/accept`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["accepted/appliers", job._id]);
+      queryClient.invalidateQueries(["jobs", job._id]);
     },
   });
 };

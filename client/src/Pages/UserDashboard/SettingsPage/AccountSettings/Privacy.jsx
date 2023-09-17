@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import AlertSuccess from "../../../../Components/successalert";
@@ -13,11 +13,22 @@ export default function Privacy() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const { isSuccess } = useSelector((state) => state.auth);
+  const [resultMessage, setResultMessage] = useState(null);
   const onSubmit = (data) => {
-    if (data.password !== data.password2) return;
-    dispatch(edit({ password: data.password }));
-    return dispatch(reset());
+    if (data.password !== data.password2  ) return;
+    const response =  dispatch(edit({ 
+      password: data.password,
+      oldPassword : data.oldPassword,
+     }));
+     console.log(response);
+     if (response.error) {
+      setResultMessage(response.error);
+    } else {
+      setResultMessage("Password changed successfully!");
+      dispatch(reset());
+    }
   };
+ 
 
   return (
     <React.Fragment>
@@ -25,6 +36,7 @@ export default function Privacy() {
         <Typography variant="h5" gutterBottom>
           Privacy Informations
         </Typography>
+        {resultMessage && <div>{resultMessage}</div>}
         <Divider />
 
         <Divider />
@@ -39,6 +51,18 @@ export default function Privacy() {
           component="form"
           onSubmit={handleSubmit(onSubmit)}
         >
+           <Grid item xs={12}>
+          <InputLabel shrink={true}>Old Password</InputLabel>
+          <TextField
+            required
+            type="password"
+            placeholder="Enter old password"
+            fullWidth
+            autoComplete="oldPassword"
+            {...register("oldPassword", { required: true })}
+          />
+        </Grid>
+
           <Grid item xs={12}>
             <InputLabel shrink={true}>New Password</InputLabel>
             <TextField

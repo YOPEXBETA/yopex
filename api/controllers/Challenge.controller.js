@@ -189,7 +189,9 @@ const updateChallenge= async (req, res, next) => {
     job = await ChallengeModel.findByIdAndUpdate(challengeId, {
       title,
       description,
-      price,category,RecommendedSkills,
+      price,
+      category,
+      RecommendedSkills,
     }); 
      res.status(200).json({ job });
   } catch (err) {

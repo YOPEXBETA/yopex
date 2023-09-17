@@ -43,7 +43,6 @@ const {
 
 userRouter.put(
   "/users/edit/",
-  validate(userEditProfileValidator),
   authenticateToken,
   editProfile,
 );

@@ -24,7 +24,7 @@ export const EditChallengeModal = ({ open, handleClose,challenge }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data)
+
     mutate({ 
       title: data.title, 
       description: data.description ,
@@ -32,8 +32,7 @@ export const EditChallengeModal = ({ open, handleClose,challenge }) => {
       category:data.category,
       RecommendedSkills:data.RecommendedSkills,
     });
-    handleClose();
-    
+    handleClose();  
   };
   
   return (

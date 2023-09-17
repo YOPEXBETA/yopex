@@ -21,8 +21,9 @@ export const login = createAsyncThunk("auth/login", async (data) => {
 });
 
 export const edit = createAsyncThunk("auth/edit", async (data) => {
+
   try {
-    console.log(data);
+ 
     const response = await authService.edit(data);
 
     return response;
