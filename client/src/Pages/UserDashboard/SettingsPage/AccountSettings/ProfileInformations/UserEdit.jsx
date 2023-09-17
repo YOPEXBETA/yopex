@@ -78,7 +78,6 @@ const UserEdit = () => {
   const countryList = countries.map((country) => country.name.common);
 
   const onSubmit = async (data) => {
-    console.log(data.values);
     const { file, ...values } = data;
     if (data.file.length > 0) {
       const url = await uploadFile(

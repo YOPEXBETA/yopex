@@ -6,6 +6,7 @@ import { usePayment, useVerifyPayment } from '../../../hooks/react-query/useUser
 import { useLocation } from 'react-router-dom';
 import AlertContainer from '../../../Components/alerts';
 import AlertSuccess from '../../../Components/successalert';
+import StorePointCard from '../../../Components/shared/cards/StorePointCard';
 
 
 const Store = () => {

@@ -28,7 +28,7 @@ export const edit = createAsyncThunk("auth/edit", async (data) => {
 
     return response;
   } catch (error) {
-    throw new Error(error?.response?.data?.error?.msg);
+    throw new Error(error?.response?.data?.error);
   }
 });
 
