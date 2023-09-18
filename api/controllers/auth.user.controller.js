@@ -194,7 +194,7 @@ const forgetpassword = async (req, res) => {
     const email = req.body.email;
     const user = await userSchema.findOne({ email: email });
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(400).json({ error: "User not found" });
     }
     const resetToken = jwt.sign(
       { userId: user._id },

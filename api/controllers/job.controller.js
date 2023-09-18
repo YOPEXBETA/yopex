@@ -269,7 +269,7 @@ const acceptApplier = async (req, res) => {
     });
     notification.save();
     user.notifications.push(notification._id);
-    sendEmail(user.email, "You have been accepted for a Job: ");
+    sendEmail(user.email, "You have been accepted for a Job: "+job.title );
     await user.save();
     await job.save();
 
