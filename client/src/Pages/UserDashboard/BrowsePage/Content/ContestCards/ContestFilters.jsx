@@ -89,16 +89,20 @@ const ContestsFilters = ({
             {itSkills?.map((skillName) => (
               <label
                 key={skillName}
-                className="block py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                className="block text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               >
-                <input
-                  type="checkbox"
-                  value={skillName}
-                  checked={selectedSkill.includes(skillName)}
-                  onChange={() => handleCheckboxChange(skillName)}
-                  className="mr-2"
-                />
-                {skillName}
+                <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                  <input
+                    type="checkbox"
+                    value={skillName}
+                    checked={selectedSkill.includes(skillName)}
+                    onChange={() => handleCheckboxChange(skillName)}
+                    className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
+                  <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                    {skillName}
+                  </label>
+                </div>
               </label>
             ))}
           </div>
@@ -110,16 +114,20 @@ const ContestsFilters = ({
           {itCategory?.map((CategoryName) => (
             <label
               key={CategoryName}
-              className="block py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="block text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
-              <input
-                type="checkbox"
-                value={CategoryName}
-                checked={selectedCategory?.includes(CategoryName)}
-                onChange={() => handleCheckboxChangeCategory(CategoryName)}
-                className="mr-2 text-green-500"
-              />
-              {CategoryName}
+              <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                <input
+                  type="checkbox"
+                  value={CategoryName}
+                  checked={selectedCategory?.includes(CategoryName)}
+                  onChange={() => handleCheckboxChangeCategory(CategoryName)}
+                  className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                />
+                <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                  {CategoryName}
+                </label>
+              </div>
             </label>
           ))}
         </div>
