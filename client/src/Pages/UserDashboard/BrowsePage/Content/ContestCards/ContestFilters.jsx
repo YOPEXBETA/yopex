@@ -35,16 +35,6 @@ const ContestsFilters = ({
     setCategoryQuery(updatedCategory);
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenCat, setIsOpenCat] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-  const toggleDropdownCategories = () => {
-    setIsOpenCat(!isOpenCat);
-  };
-
   useEffect(() => {
     setMinAmount(minAmount);
   }, [minAmount, setMinAmount]);
