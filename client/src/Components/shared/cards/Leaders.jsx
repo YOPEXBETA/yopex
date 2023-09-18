@@ -29,7 +29,7 @@ const Leaders = () => {
                 <img
                   src={leader.picturePath}
                   alt={`${leader.firstname}'s Avatar`}
-                  className="w-11 h-11 border-2 border-primary-light rounded-full object-cover bg-green-500"
+                  className="w-11 h-11  border-primary-light rounded-full object-cover border-2"
                 />
                 <div className="ml-3">
                   <h6 className="text-md font-medium">{leader.firstname}</h6>

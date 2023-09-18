@@ -12,8 +12,8 @@ const UserProgressCard = () => {
           <div className="flex items-center gap-4">
             <img
               src={user.picturePath}
-              alt=""
-              className="w-20 h-20 rounded-full object-cover bg-green-500"
+              alt="photo"
+              className="w-20 h-20 rounded-full object-cover border-2"
             />
             <div className=" space-y-1">
               <p className="text-lg font-md">
