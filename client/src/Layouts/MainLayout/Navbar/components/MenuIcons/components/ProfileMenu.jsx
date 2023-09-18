@@ -23,7 +23,7 @@ const ProfileMenu = () => {
   };
 
   return (
-    <div className="relative z-50">
+    <div className="relative z-40">
       <div>
         <button
           onClick={handleClick}
