@@ -23,7 +23,7 @@ const Leaders = () => {
           .map((leader) => (
             <div
               key={leader._id}
-              className="flex justify-between items-center mb-4"
+              className="flex justify-between items-center mb-4 transition-transform transform hover:scale-105"
             >
               <div className="flex items-center">
                 <img
@@ -36,12 +36,16 @@ const Leaders = () => {
                   <p className="text-sm text-gray-500">{leader.country}</p>
                 </div>
               </div>
-              <p className="font-bold text-primary text-green-500 text-[1rem]">
-                {leader.score} XP
-              </p>
+              <div className="flex items-center gap-2">
+                <h4 className="text-lg text-primary font-bold text-green-500">
+                  {leader.score}
+                </h4>
+                <p className="text-lg text-green-500 italic font-bold">XP</p>
+              </div>
             </div>
           ))}
       </div>
     );
 };
+
 export default Leaders;

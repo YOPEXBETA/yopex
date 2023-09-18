@@ -1,6 +1,7 @@
 import React from "react";
 import { useUserById } from "../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
+import { GiFireGem } from "react-icons/gi";
 
 const MoneyBalance = () => {
   const { user } = useSelector((state) => state.auth);
@@ -15,7 +16,7 @@ const MoneyBalance = () => {
             <h4 className="text-lg text-primary font-bold text-green-500">
               {userProfile?.balance || 0}
             </h4>
-            <p className="text-lg text-green-500 italic font-bold">XP</p>
+            <GiFireGem className="w-6 h-6 text-green-500" />
           </div>
         </div>
       </div>
