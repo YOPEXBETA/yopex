@@ -5,6 +5,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const moment = require("moment");
+const Token = require("../models/tokens.model");
+const crypto =  require('crypto');
+const { sendEmail } = require("../middlewares/mail.middleware");
 
 // ==============================|| Register ||============================== //
 
@@ -44,6 +47,19 @@ const signUp = async (req, res) => {
         ...req.body,
         password: hashedPass,
       });
+
+      const token = new Token (
+        {
+          userId : newUser._id,
+          token : crypto.randomBytes(16).toString('hex')
+        }
+      );
+      await token.save();
+      console.log(token);
+
+      const link = `http://localhost:3000/emailverification/${token.token}`;
+      await sendEmail (newUser.email , link);
+      
 
       // Check if the user is a first-time user and add the "Account Creation" badge
       const badge = await badgeSchema.findOne({
@@ -110,8 +126,11 @@ const signIn = async (req, res) => {
     const user = await userSchema.findOne({ email: req.body.email });
     const company = await companySchema.findOne({ email: req.body.email });
 
-    if (!user && !company)
+    if (!user)
       return res.status(400).json({ error: "Email does not exist!" });
+
+    if (user.isVerified == false)
+      return res.status(400).json({ error: "Please verify your account !" });
 
     //check user status
     if (user.isActive) {
@@ -277,6 +296,32 @@ const signInWithGoogle = async (req, res) => {
   res.redirect("http://localhost:3000/feed");
 };
 
+const emailconfirmation = async (req, res) => {
+  try{
+      const token = await Token.findOne(
+        {
+          token : req.params.token,
+        }
+      );
+      console.log(token)
+      await userSchema.updateOne(
+        {
+          "_id" : token.userId
+        },
+        {
+          $set:{isVerified:true}
+        }
+      );
+      await Token.findByIdAndRemove(token._id);
+      res.status(200).json({ message: "Account activated !" });
+  }catch(err)
+  {
+    res.status(400).json({ message: err });
+  }
+};
+
+
+
 module.exports = {
   signUp,
   signIn,
@@ -284,4 +329,5 @@ module.exports = {
   forgetpassword,
   resetpassword,
   signInWithGoogle,
+  emailconfirmation,
 };

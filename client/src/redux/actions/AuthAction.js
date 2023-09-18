@@ -97,7 +97,6 @@ export const forgetPassword = (myData) => async (dispatch) => {
 
 export const resetPassword = (myData) => async (dispatch) => {
   try {
-    console.log("reset password data:", myData);
 
     const { data } = await axios.post(
       "http://localhost:8000/auth/resetpassword",
@@ -121,6 +120,33 @@ export const resetPassword = (myData) => async (dispatch) => {
     });
   }
 };
+
+export const emailVerification = (token) => async (dispatch) => {
+  try {
+
+    const { data } = await axios.post(
+      `http://localhost:8000/auth/emailverification/${token}`
+    );
+
+    console.log("Email verification :", data);
+
+    dispatch({
+      type: "reset_password_success",
+      payload: data,
+    });
+
+    return data;
+  } catch (error) {
+    console.log("reset password error:", error.response.data);
+
+    dispatch({
+      type: "reset_password_error",
+      payload: error.response.data,
+    });
+  }
+};
+
+
 
 export const logout = () => async (dispatch) => {
   try {
