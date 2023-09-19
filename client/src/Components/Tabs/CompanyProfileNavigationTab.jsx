@@ -1,6 +1,8 @@
 import React from "react";
 
-export const CompanyProfileNavigationTab = ({ changeValue, value }) => {
+
+export const CompanyProfileNavigationTab = ({ changeValue, value ,companyId ,userPassed }) => {
+
   return (
     <div>
       <div className="flex flex-wrap bg-white border-b-[1px] border-zinc-200">
@@ -34,6 +36,7 @@ export const CompanyProfileNavigationTab = ({ changeValue, value }) => {
         >
           My Challenges
         </button>
+          { userPassed.companies.includes(companyId) && (
         <button
           className={`w-1/2 sm:w-auto py-2 px-4  ${
             value === 3
@@ -43,7 +46,8 @@ export const CompanyProfileNavigationTab = ({ changeValue, value }) => {
           onClick={() => changeValue(3)}
         >
           My Appliers
-        </button>
+        </button>)}
+       
       </div>
     </div>
   );
