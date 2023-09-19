@@ -3,6 +3,7 @@ import axios from "axios";
 const url = "http://localhost:8000";
 
 const register = async (data) => {
+  console.log(data);
   const user = await axios.post(`${url}/auth/register`, data);
   return user.data;
 };

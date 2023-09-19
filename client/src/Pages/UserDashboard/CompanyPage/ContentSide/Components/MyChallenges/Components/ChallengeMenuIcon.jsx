@@ -47,13 +47,13 @@ const ChallengeMenuIcon = ({ challenge }) => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <IoEllipsisHorizontalOutline size={20} />
+             <MoreVert />
           </IconButton>
         </Tooltip>
       </Box>
       <Menu
         anchorEl={anchorEl}
-        id="post-menu"
+        id="challenge-menu"
         open={open}
         onClose={handleClose}
         onClick={handleClose}

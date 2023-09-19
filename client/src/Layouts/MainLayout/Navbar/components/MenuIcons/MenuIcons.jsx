@@ -15,7 +15,7 @@ const MenuIcons = () => {
           <Chat />
           <NotificationBell />
         </div>
-        <ProfileMenu />
+        <ProfileMenu  className=" -z-50"/>
       </div>
     </div>
   );

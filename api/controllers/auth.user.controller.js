@@ -12,6 +12,7 @@ const { sendEmail } = require("../middlewares/mail.middleware");
 // ==============================|| Register ||============================== //
 
 const signUp = async (req, res) => {
+
   try {
     // Generate a salt for password hashing
     const salt = await bcrypt.genSalt(10);
@@ -30,6 +31,9 @@ const signUp = async (req, res) => {
     const userExist = await userSchema.findOne({ email: req.body.email });
     if (userExist) {
       return res.status(400).send({ error: { msg: "User already exists" } });
+    }
+    if (req.body.password != req.body.repeatPassword) {
+      return res.status(400).send({ error: { msg: "Passwords do not match !" } });
     }
 
     // Check if the user already exists in the companySchema collection

@@ -47,7 +47,7 @@ const Store = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-0 lg:mx-16 md:mx-6 mt-0 md:mt-8 gap-5 ">
+    <div className="grid z-0 grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-0 lg:mx-16 md:mx-6 mt-0 md:mt-8 gap-5 ">
       {pointItems.map((item, index) => (
         <StorePointCard
           key={index}

@@ -94,10 +94,10 @@ export const useSortAppliers = (job) => {
 
 export const useAcceptedAppliers = (job) => {
   return useQuery({
-    queryKey: ["accepted/appliers", job._id],
+    queryKey: ["accepted/appliers", job],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${url}/job/jobs/${job._id}/accepted-appliers`
+        `${url}/job/jobs/${job}/accepted-appliers`
       );
       return data;
     },

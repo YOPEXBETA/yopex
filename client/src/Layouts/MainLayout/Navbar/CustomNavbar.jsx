@@ -45,7 +45,7 @@ const CustomNavbar = () => {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row-reverse md:col-span-3">
+        <div className="flex flex-col z-50 md:flex-row-reverse md:col-span-3">
           <div className="hidden lg:block md:hidden">
             <MenuIcons />
           </div>

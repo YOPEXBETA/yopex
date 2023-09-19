@@ -4,8 +4,12 @@ import ApplierMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentSid
 
 
 const ApplierCard = ({ Applier,jobId }) => {
-console.log(jobId);
-const userIsInAcceptedApplier = jobId.acceptedAppliers.includes(Applier._id );
+
+
+const Applierids = jobId.acceptedAppliers?.map((Applier) => Applier.user) ;
+const userIsInAcceptedApplier = Applierids.includes(Applier._id );
+
+
   return (
     <div>
       <Link  to={`/profile/${Applier._id}`}>

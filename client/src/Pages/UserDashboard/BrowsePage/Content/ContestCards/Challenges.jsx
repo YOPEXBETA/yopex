@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFindChallenges } from "../../../../../hooks/react-query/useChallenges";
-import ChallengeCard from "../../../../../Components/shared/cards/ChallengeCard";
+import ChallengeCard  from "../../../../../Components/shared/cards/ChallengeCard";
 
 const Challenges = ({ minAmount, maxAmount, searchQuery  ,selectedSkill,selectedCategory}) => {
   // Data fetching | react-query
