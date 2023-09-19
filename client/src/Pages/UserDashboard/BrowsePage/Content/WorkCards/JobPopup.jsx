@@ -51,7 +51,7 @@ const JobPopup = ({
   const handleApply = async (userId) => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/job/jobs/${jobId}/apply/${userId}`
+        `http://199.247.3.38:8000/job/jobs/${jobId}/apply/${userId}`
       );
       setSnackbarMessage(response.data);
       setSnackbarSeverity("success");
@@ -66,7 +66,7 @@ const JobPopup = ({
   const handleUnapply = async (userId) => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/job/jobs/${jobId}/unapply/${userId}`
+        `http://199.247.3.38:8000/job/jobs/${jobId}/unapply/${userId}`
       );
       setSnackbarMessage(response.data);
       setSnackbarSeverity("success");

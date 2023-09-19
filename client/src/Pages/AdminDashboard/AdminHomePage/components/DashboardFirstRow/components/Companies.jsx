@@ -8,7 +8,7 @@ const Companies = () => {
     queryKey: ["companies"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/admin/Companies",
+        "http://199.247.3.38:8000/admin/Companies",
         {
           withCredentials: true,
         }

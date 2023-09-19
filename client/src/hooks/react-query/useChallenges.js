@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "http://199.247.3.38:8000";
 
 export const useChallengeById = (challengeId) => {
   return useQuery({
@@ -21,7 +21,6 @@ export const useEditChallenge = (challengeId) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (ChallengeData) => {
-      
       await axios.put(`${url}/challenge/update/${challengeId}`, ChallengeData, {
         withCredentials: true,
       });
@@ -30,8 +29,7 @@ export const useEditChallenge = (challengeId) => {
       queryClient.invalidateQueries(["challenges"]);
     },
   });
-}
-
+};
 
 export const useUserChallenges = (user) => {
   return useQuery({
@@ -84,20 +82,35 @@ export const useUserSubmission = (challengeId, participant) => {
   });
 };
 
-export const useFindChallenges = (minAmount, maxAmount, searchQuery,skills ,categories) => {
+export const useFindChallenges = (
+  minAmount,
+  maxAmount,
+  searchQuery,
+  skills,
+  categories
+) => {
   return useQuery({
-    queryKey: ["challenges", minAmount, maxAmount, searchQuery,skills,categories],
+    queryKey: [
+      "challenges",
+      minAmount,
+      maxAmount,
+      searchQuery,
+      skills,
+      categories,
+    ],
     queryFn: async () => {
       let query = "";
       if (minAmount) query += `&min=${minAmount}`;
       if (maxAmount) query += `&max=${maxAmount}`;
       if (searchQuery) query += `&search=${searchQuery}`;
-      
+
       if (skills && skills.length > 0) {
-        query += skills.map(skill => `&skills=${skill}`).join(''); // Use "|" as OR operator
+        query += skills.map((skill) => `&skills=${skill}`).join(""); // Use "|" as OR operator
       }
       if (categories && categories.length > 0) {
-        query += categories.map(category => `&categories=${category}`).join(''); // Use "|" as OR operator
+        query += categories
+          .map((category) => `&categories=${category}`)
+          .join(""); // Use "|" as OR operator
       }
       const { data } = await axios.get(
         `${url}/challenge/challenges/all?${query}`,
@@ -127,11 +140,11 @@ export const useCreateChallenge = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ companyId, challengeData,paid }) => {
+    async ({ companyId, challengeData, paid }) => {
       console.log("called");
       await axios.post(
         `${url}/challenge/add`,
-        { companyId, ...challengeData,paid },
+        { companyId, ...challengeData, paid },
         {
           withCredentials: true,
         }
@@ -219,21 +232,20 @@ export const useGetChallenges = (userId) => {
   return useQuery(["challenges", userId], () => getChallenges(userId));
 };
 
-export const useDeleteChallenge=()=>{
-      const queryClient = useQueryClient();
+export const useDeleteChallenge = () => {
+  const queryClient = useQueryClient();
 
-      return useMutation({
-        mutationFn: async (challengeId) => {
-          await axios.delete(`${url}/challenge/${challengeId}`, {
-            withCredentials: true,
-          });
-        },
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['challenges'] });
-        },
+  return useMutation({
+    mutationFn: async (challengeId) => {
+      await axios.delete(`${url}/challenge/${challengeId}`, {
+        withCredentials: true,
       });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["challenges"] });
+    },
+  });
 };
-
 
 export const useEditSubmission = (challengeId, participant) => {
   const queryClient = useQueryClient();
@@ -244,7 +256,11 @@ export const useEditSubmission = (challengeId, participant) => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["submissions", participant._id, challengeId]);
+      queryClient.invalidateQueries([
+        "submissions",
+        participant._id,
+        challengeId,
+      ]);
     },
   });
-}
+};

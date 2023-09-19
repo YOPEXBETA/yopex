@@ -3,7 +3,7 @@ import FireBaseSocialIcons from "./components/FirebaseSocialIcons";
 
 function GoogleSignIn({ mode }) {
   const handleSignIn = () => {
-    window.open("http://localhost:8000/auth/google", "_self");
+    window.open("http://199.247.3.38:8000/auth/google", "_self");
   };
 
   return (

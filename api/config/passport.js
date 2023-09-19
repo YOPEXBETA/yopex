@@ -12,33 +12,29 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:8000/auth/google/callback",
+      callbackURL: "http://199.247.3.38:8000/auth/google/callback",
     },
-    async (accessToken,refreshToken, profile, cb) => {
+    async (accessToken, refreshToken, profile, cb) => {
       // Check if the user already exists in the userSchema collection
-      const userExist = await userSchema.findOne({ email: profile?._json?.email })
+      const userExist = await userSchema.findOne({
+        email: profile?._json?.email,
+      });
       if (userExist) {
-        // LoggedIn user here 
-        googleAuthSignIn(userExist, accessToken, refreshToken, profile, cb)
-      }else{
+        // LoggedIn user here
+        googleAuthSignIn(userExist, accessToken, refreshToken, profile, cb);
+      } else {
         //register user here
-        googleAuthSignup(accessToken, refreshToken, profile, cb)
-      } 
-
+        googleAuthSignup(accessToken, refreshToken, profile, cb);
+      }
     }
   )
 );
 
-const googleAuthSignup = async (
-  accessToken,
-  refreshToken,
-  profile,
-  cb
-) => {
+const googleAuthSignup = async (accessToken, refreshToken, profile, cb) => {
   // Create a new user with the hashed password
   const newUser = new userSchema({
     firstname: profile.name.givenName,
-    lastname:  profile.name.familyName,
+    lastname: profile.name.familyName,
     email: profile?._json?.email,
     picturePath: profile?._json?.picture,
   });
@@ -62,7 +58,7 @@ const googleAuthSignup = async (
   // });
   // await newBadge.save();
   return cb(null, user);
-}
+};
 
 const googleAuthSignIn = async (
   user,
@@ -71,13 +67,13 @@ const googleAuthSignIn = async (
   profile,
   cb
 ) => {
-  //check user status  
-  if(user.isActive){
-    return cb(null, user)
-  }else{
-    return cb(null,{ error: "Your account is banned" });
+  //check user status
+  if (user.isActive) {
+    return cb(null, user);
+  } else {
+    return cb(null, { error: "Your account is banned" });
   }
-}
+};
 
 passport.serializeUser((user, done) => {
   done(null, user);

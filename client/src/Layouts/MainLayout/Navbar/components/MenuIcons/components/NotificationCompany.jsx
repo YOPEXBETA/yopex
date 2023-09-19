@@ -24,9 +24,12 @@ const NotificationBell = () => {
     const userId = JSON.parse(localStorage.getItem("user"))._id;
     if (userId) {
       axios
-        .get(`http://localhost:8000/company/company/${userId}/notifications`, {
-          withCredentials: true,
-        })
+        .get(
+          `http://199.247.3.38:8000/company/company/${userId}/notifications`,
+          {
+            withCredentials: true,
+          }
+        )
         .then((response) => {
           setNotifications(response.data);
         })

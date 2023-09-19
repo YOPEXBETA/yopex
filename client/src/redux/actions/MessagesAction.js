@@ -3,7 +3,7 @@ import axios from "axios";
 export const getMessages = (conversationId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/messages/${conversationId}`,
+      `http://199.247.3.38:8000/messages/${conversationId}`,
       {
         withCredentials: true,
       }
@@ -23,7 +23,7 @@ export const CreateMessage =
   (conversationId, message, sender) => async (dispatch) => {
     try {
       const response = await axios.post(
-        `http://localhost:8000/messages/`,
+        `http://199.247.3.38:8000/messages/`,
         { conversationId, message, sender },
         {
           withCredentials: true,
