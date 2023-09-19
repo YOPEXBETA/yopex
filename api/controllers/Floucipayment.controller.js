@@ -1,6 +1,7 @@
 const { log } = require("@tensorflow/tfjs");
 const axios = require("axios");
 const userModel = require("../models/user.model");
+const paymentModel = require("../models/payment.model");
 
 const Payment = async (req, res) => {
   const url = "https://developers.flouci.com/api/generate_payment";
@@ -18,8 +19,15 @@ const Payment = async (req, res) => {
   try {
     const result = await axios.post(url, payload);
     console.log("flouci",req.userId);
-    await userModel.findByIdAndUpdate(req.userId, {
-          $push: { historyPayment: {payment_id:result.data.result.payment_id, balanace: req.body.amount, state: "in progress"} },
+    const payment = new paymentModel({
+      user: req.userId,
+      balanace: req.body.amount,
+      payment_id: result.data.result.payment_id,
+      state: "in progress",
+    });
+    await  payment.save();
+    await  userModel.findByIdAndUpdate(req.userId, {
+          $push: { historyPayment: payment._id },
     });
 
     res.send(result.data);
@@ -43,26 +51,24 @@ const Verify = async (req, res) => {
     );
 
     const user = await userModel.findById(req.userId);
-      
-    const index = user.historyPayment.findIndex(
-      (payment) => payment.payment_id === id_payment && payment.state === "in progress"
-    );
+    const payment = await paymentModel.findOne({user:req.userId,payment_id:id_payment});
     
     if (result.data.result.status === "SUCCESS") {
       
       
-      if (index !== -1) {
+      if (payment && payment.state==="in progress") {
         
-        user.balance += user.historyPayment[index].balanace;
-        user.historyPayment.splice(index, 1);
-        user.historyPayment.push({payment_id:id_payment, balanace: req.body.amount, state: "success"});
+        user.balance += payment.balanace;
+        payment.state = "success";
+        await payment.save();
         
       }
       
     }else{
-      if (index !== -1) {
-        user.historyPayment[index].state = "fail";
-        
+      if (payment) {
+        payment.state = "fail";
+        await payment.save();
+         
       }
     }
     await user.save();

@@ -1,36 +1,22 @@
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import {
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
-import {
-  useGetPaymentByUser,
-  usePayment,
-  useUserById,
-} from "../../../../hooks/react-query/useUsers";
-import { useForm } from "react-hook-form";
+import React from 'react'
+import { useGetPayments } from '../../../hooks/react-query/useUsers';
+import { useSelector } from 'react-redux';
+import { Card, CardContent, Divider, Stack, Typography } from '@mui/material';
 
-export default function App() {
-  const { register, handleSubmit } = useForm();
-  const { user } = useSelector((state) => state.auth);
-  const { data: userProfile } = useUserById(user._id);
-  const { data: payment } = useGetPaymentByUser(user._id);
-  function formatDate(dateString) {
-    const options = {
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  }
+const PaymentsPage = () => {
+    const {user} = useSelector((state) => state.auth);
+    const {data:payments} = useGetPayments();
+
+
+    function formatDate(dateString) {
+        const options = {
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+      }
 
 
   return (
@@ -47,7 +33,7 @@ export default function App() {
               Current Balance
             </Typography>
             <Typography variant="h4" gutterBottom>
-              {userProfile?.balance} Points
+              {user?.balance} Points
             </Typography>
           </Stack>
           <br />
@@ -56,18 +42,28 @@ export default function App() {
               <thead className="text-black">
                 <tr className="bg-white h-11">
                   <th className="py-2 px-4 text-left">Payment Id</th>
+                  <th className="py-2 px-4 text-left">User</th>
                   <th className="py-2 px-4 text-left">Amount</th>
                   <th className="py-2 px-4 text-left">State</th>
                   <th className="py-2 px-4 text-right">Payment Date</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {payment?.map((payment, index) => {
+                {payments?.map((payment, index) => {
                   return (
                     <tr key={payment._id} className="hover:bg-gray-50 bg-white">
                       <td className=" py-4 px-4 font-bold text-md">
-                        {index + 1}{" "}
+                        {payment?.payment_id}{" "}
                       </td>
+                      <td className="py-4 px-4">
+                        <div className="flex items-center">
+                            <div className="flex items-center gap-1">
+                                <span className="text-sm">{payment?.user?.firstname}</span>
+                                <span className="text-sm">{payment?.user?.lastname}</span>
+                            </div>
+                        </div>
+                      </td>
+
                       <td className="py-4 px-4">
                         <div className="flex items-center">
                           <div className="flex items-center gap-1">
@@ -92,5 +88,7 @@ export default function App() {
           </CardContent>
       </Card>
     </Stack>
-  );
+  )
 }
+
+export default PaymentsPage;

@@ -16,6 +16,7 @@ import {
 
 import LevelPage from "../Pages/AdminDashboard/LevelPage/LevelPage";
 import SkillsPage from "../Pages/AdminDashboard/SkillsPage/SkillsPage";
+import PaymentsPage from "../Pages/AdminDashboard/PaymentsPage/PaymentsPage";
 
 // render -
 
@@ -83,6 +84,12 @@ const AdminRoutes = {
       path: "Evaluation",
       element: <EvaluationPage />,
     },
+    {
+      icon: <MdAssessment className="h-6 w-6" />,
+      path: "Payments",
+      element: <PaymentsPage />,
+
+    }
   ],
 };
 

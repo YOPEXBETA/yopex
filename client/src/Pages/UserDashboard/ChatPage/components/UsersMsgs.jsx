@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useConversations } from "../../../../hooks/react-query/useConversations";
 import CreateConversationDrawer from "./CreateConversationDrawer";
+import SearchUsers from "./SearchUsers";
 
 const UsersMsgs = ({ onConversationSelect }) => {
   const { user } = useSelector((state) => state.auth);
@@ -12,7 +13,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
     <div className="w-full overflow-auto h-[88vh] bg-white sticky">
       <div className="flex justify-between items-center px-4 py-2">
         <p className="text-lg font-bold">Chats</p>
-        <CreateConversationDrawer />
+        <SearchUsers />
       </div>
       <div className="w-full my-0.5 border-l border-gray-200 border-b-2" />
 

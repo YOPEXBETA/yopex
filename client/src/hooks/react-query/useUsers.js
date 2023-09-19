@@ -269,3 +269,29 @@ export const useUserNotifications = (userId) => {
     },
   });
 };
+
+
+export const useGetPaymentByUser = (userId) => {
+  return useQuery({
+    queryKey: ["payment", userId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/api/payment/user/${userId}`, {
+        withCredentials: true,
+      });
+      return data;
+    },
+  });
+};
+
+
+export const useGetPayments = () => {
+  return useQuery({
+    queryKey: ["payments"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/api/allpayments`, {
+        withCredentials: true,
+      });
+      return data;
+    },
+  });
+}

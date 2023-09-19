@@ -6,6 +6,7 @@ import { usePayment, useVerifyPayment } from '../../../hooks/react-query/useUser
 import { useLocation } from 'react-router-dom';
 import AlertContainer from '../../../Components/alerts';
 import AlertSuccess from '../../../Components/successalert';
+import StorePointCard from '../../../Components/shared/cards/StorePointCard';
 
 
 const Store = () => {
@@ -21,16 +22,19 @@ const Store = () => {
     useEffect(() => {
         if(!paymentId) return;
         verify(paymentId);
-        if (data){
-            if (data.result.status === "SUCCESS"){
-                setSuccess(true);
-                setError("Payment Successfull!");
-            }else{
-                setSuccess(false);
-                setError("Payment Fail!");
-            }
-        }
-    }, [paymentId,data]);
+    }, [paymentId]);
+
+    useEffect(() => {
+        if(!data) return;
+        if (data.result.status === "SUCCESS"){
+          setSuccess(true);
+          setError("Payment Successfull!");
+      }else{
+          setSuccess(false);
+          setError("Payment Fail!");
+      }
+    }, [data]);
+
 
   const pointItems = [
     { points: 50, amount: 50 },
@@ -47,12 +51,14 @@ const Store = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-0 lg:mx-16 md:mx-6 mt-0 md:mt-8 gap-5 ">
+      {error && !success && <AlertContainer error={error} />}
+      {success && <AlertSuccess message={error} />}
       {pointItems.map((item, index) => (
         <StorePointCard
           key={index}
           points={item.points}
           amount={item.amount}
-          onClick={() => mutate(item.points)}
+          onClick={() => {mutate(item.points)}}
         />
       ))}
     </div>

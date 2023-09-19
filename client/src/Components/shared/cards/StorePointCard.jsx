@@ -12,7 +12,7 @@ const StorePointCard = ({ points, amount, onClick }) => {
         <button
           type="button"
           className="bg-green-500 text-gray-900 font-semibold py-3 px-4 mt-4 rounded-full hover:bg-purple-500 focus:outline-none hover:text-white"
-          onClick={onClick}
+          onClick={()=>{onClick()}}
         >
           Buy with Flouci
         </button>

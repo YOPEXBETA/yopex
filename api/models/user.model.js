@@ -39,7 +39,10 @@ const UserSchema = new mongoose.Schema(
     },
     historyPayment: {
       type: Array,
-      default: [],
+      default: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Payment",
+      }],
     },
     viewedProfile: { type: Number },
     impressions: { type: Number },

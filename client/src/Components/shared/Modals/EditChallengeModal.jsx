@@ -35,6 +35,8 @@ export const EditChallengeModal = ({ open, handleClose,challenge }) => {
     handleClose();
     
   };
+
+
   
   return (
     <div
@@ -151,12 +153,15 @@ export const EditChallengeModal = ({ open, handleClose,challenge }) => {
                 <button
                   className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500 hover:bg-gray-200"
                   onClick={handleClose}
+                  type="button"
                 >
                   Cancel
                 </button>
                 <button
                   className=" px-6 py-2 text-white rounded-md border-2 bg-green-500 hover:bg-green-600"
                   type="submit"
+                  onClick={()=>{console.log();}}
+                  
                 >
                   Edit your job
                 </button>
