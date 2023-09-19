@@ -38,7 +38,7 @@ const MainLayout = () => {
   // Render the main layout once user data is available
   return (
     <div className="">
-      <div className="pb-20">
+      <div className=" pb-[4.6rem]">
         <CustomNavbar />
       </div>
       <Outlet />

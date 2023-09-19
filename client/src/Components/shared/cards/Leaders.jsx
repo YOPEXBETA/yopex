@@ -23,7 +23,7 @@ const Leaders = () => {
           .map((leader) => (
             <div
               key={leader._id}
-              className="flex justify-between items-center mb-4 transition-transform transform hover:scale-105"
+              className="flex justify-between items-center mb-4"
             >
               <div className="flex items-center">
                 <img

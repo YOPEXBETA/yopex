@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatIcon from "@mui/icons-material/Chat";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { formatDistance, isValid } from "date-fns";
-import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { useConversations } from "../../../../../../hooks/react-query/useConversations";
 
@@ -15,13 +13,43 @@ const Chat = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const menuRef = useRef(null);
+
   const handleClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleCloseMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Use a ref to detect clicks outside of the menu
+  const outsideClickRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        outsideClickRef.current &&
+        !outsideClickRef.current.contains(event.target)
+      ) {
+        handleCloseMenu();
+      }
+    }
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   if (!isLoading)
     return (
-      <div className="relative">
+      <div className="relative" ref={outsideClickRef}>
         <div className="relative">
           <div className="absolute top-0 right-0">
             <button
@@ -39,7 +67,10 @@ const Chat = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="absolute z-10 right-0 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible">
+          <div
+            ref={menuRef}
+            className="absolute z-10 right-0 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible"
+          >
             <ul>
               <li>
                 <div className="p-4">
@@ -77,7 +108,7 @@ const Chat = () => {
                               {otherUser.latestMessage}
                             </div>
                             <span>.</span>
-                            <span>
+                            <span className="truncate max-w-[50px]">
                               {formatDistance(createdAt, new Date(), {
                                 addSuffix: true,
                               })}
