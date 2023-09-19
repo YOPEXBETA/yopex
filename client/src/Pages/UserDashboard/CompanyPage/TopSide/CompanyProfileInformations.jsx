@@ -199,6 +199,8 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           <CompanyProfileNavigationTab
             changeValue={changeValue}
             value={value}
+            companyId = {companyId}
+            userPassed = {user}
           />
         </div>
       </div>

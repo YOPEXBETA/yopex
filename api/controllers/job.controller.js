@@ -198,7 +198,7 @@ const unapplyJob = async (req, res) => {
       return res.status(400).json("You have not applied for this job");
 
     // Remove user from appliers array
-    job.appliers.splice(applierIndex, 1);
+   job.appliers.splice(applierIndex, 1);
 
     // Remove user from acceptedAppliers array if they were accepted
     const acceptedApplierIndex = job.acceptedAppliers.indexOf(
