@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import React, { useEffect } from "react";
 import CustomNavbar from "./Navbar/CustomNavbar";
 
@@ -6,7 +5,6 @@ import CustomNavbar from "./Navbar/CustomNavbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/auth/authSlice";
-import useSocket from "../../hooks/useSocket";
 import Loader from "../../Components/PageLoading/Loader";
 
 // ==============================|| MAIN LAYOUT ||============================== //
