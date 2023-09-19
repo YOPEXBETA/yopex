@@ -3,7 +3,7 @@ import axios from "axios";
 export const getBadgeType = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "http://199.247.3.38:8000/badgeType/badgeTypes",
+      "http://localhost:8000/badgeType/badgeTypes",
       {
         withCredentials: true,
       }
@@ -21,7 +21,7 @@ export const getBadgeType = () => async (dispatch) => {
 export const addBadge = (badgeData) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://199.247.3.38:8000/badgeType/add",
+      "http://localhost:8000/badgeType/add",
       badgeData,
       {
         withCredentials: true,

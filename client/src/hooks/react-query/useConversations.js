@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://199.247.3.38:8000";
+const url = process.env.URL || "http://localhost:8000";
 
 export const useConversations = (userId) => {
   return useQuery({
@@ -28,7 +28,7 @@ export const useMessages = (conversationId) => {
 };
 
 // const response = await axios.post(
-//   `http://199.247.3.38:8000/messages/`,
+//   `http://localhost:8000/messages/`,
 //   { conversationId, message, sender },
 //   {
 //     withCredentials: true,

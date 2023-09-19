@@ -5,7 +5,7 @@ export const getUsers = () => async (dispatch, getState) => {
     const token = getState().Auth.token;
     console.log(token);
 
-    const { data } = await axios.get("http://199.247.3.38:8000/admin/Users", {
+    const { data } = await axios.get("http://localhost:8000/admin/Users", {
       withCredentials: true,
     });
     console.log("data:", data);
@@ -32,7 +32,7 @@ export const getCompanies = () => async (dispatch, getState) => {
     console.log(token);
 
     const { data } = await axios.get(
-      "http://199.247.3.38:8000/admin/Companies",
+      "http://localhost:8000/admin/Companies",
       {
         withCredentials: true,
       }
@@ -66,7 +66,7 @@ export const addUser = (userData) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      "http://199.247.3.38:8000/users",
+      "http://localhost:8000/users",
       userData,
       config
     );
@@ -91,7 +91,7 @@ export const approveCompany = (companyId) => async (dispatch, getState) => {
     console.log(companyId);
 
     const { data } = await axios.post(
-      "http://199.247.3.38:8000/admin/appCompany",
+      "http://localhost:8000/admin/appCompany",
       { companyId },
       {
         withCredentials: true,
@@ -124,7 +124,7 @@ export const deleteUser = (userId) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      `http://199.247.3.38:8000/admin/delUsers/${userId}`,
+      `http://localhost:8000/admin/delUsers/${userId}`,
       config
     );
 

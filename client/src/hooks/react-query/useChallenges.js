@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://199.247.3.38:8000";
+const url = process.env.URL || "http://localhost:8000";
 
 export const useChallengeById = (challengeId) => {
   return useQuery({

@@ -20,7 +20,7 @@ const AllJobs = () => {
 
   const sendRequest = async () => {
     const res = await axios
-      .get("http://199.247.3.38:8000/job")
+      .get("http://localhost:8000/job")
       .catch((err) => console.log(err));
     const data = await res.data;
     return data;

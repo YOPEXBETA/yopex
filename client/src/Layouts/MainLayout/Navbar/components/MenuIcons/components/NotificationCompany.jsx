@@ -25,7 +25,7 @@ const NotificationBell = () => {
     if (userId) {
       axios
         .get(
-          `http://199.247.3.38:8000/company/company/${userId}/notifications`,
+          `http://localhost:8000/company/company/${userId}/notifications`,
           {
             withCredentials: true,
           }

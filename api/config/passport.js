@@ -12,7 +12,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://199.247.3.38:8000/auth/google/callback",
+      callbackURL: "http://localhost:8000/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, cb) => {
       // Check if the user already exists in the userSchema collection

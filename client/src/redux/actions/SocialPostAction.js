@@ -4,7 +4,7 @@ import axios from "axios";
 export const createPost = (myData) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://199.247.3.38:8000/post/",
+      "http://localhost:8000/post/",
       myData,
       {
         withCredentials: true,
@@ -29,7 +29,7 @@ export const getFeedPosts =
     try {
       const token = getState().Auth.token;
       console.log(token);
-      let url = "http://199.247.3.38:8000/post/posts";
+      let url = "http://localhost:8000/post/posts";
       if (categories !== "") {
         url += `?categories=${categories}`;
       }
@@ -50,7 +50,7 @@ export const getFeedPosts =
 export const getUserPosts = (userId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://199.247.3.38:8000/post/${userId}`,
+      `http://localhost:8000/post/${userId}`,
       {
         withCredentials: true,
       }
@@ -76,7 +76,7 @@ export const deletePost = (postId) => async (dispatch) => {
       throw new Error("Post ID is missing");
     }
     const response = await axios.delete(
-      `http://199.247.3.38:8000/post/${postId}`,
+      `http://localhost:8000/post/${postId}`,
       {
         headers: {
           userId: userId,
@@ -102,7 +102,7 @@ export const likePost = (postId) => async (dispatch) => {
     const userId = user._id;
 
     const response = await axios.patch(
-      `http://199.247.3.38:8000/post/${postId}/like`,
+      `http://localhost:8000/post/${postId}/like`,
       {
         userId,
       },
@@ -124,7 +124,7 @@ export const likePost = (postId) => async (dispatch) => {
 export const EditPost = (postId, updates) => async (dispatch) => {
   try {
     const response = await axios.put(
-      `http://199.247.3.38:8000/post/${postId}`,
+      `http://localhost:8000/post/${postId}`,
       updates,
       {
         withCredentials: true,

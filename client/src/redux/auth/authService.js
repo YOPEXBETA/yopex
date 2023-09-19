@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://199.247.3.38:8000";
+const url = "http://localhost:8000";
 
 const register = async (data) => {
   console.log(data);
@@ -16,7 +16,7 @@ const login = async (data) => {
 };
 
 const edit = async (data) => {
-  const user = await axios.put(` http://199.247.3.38:8000/users/edit`, data, {
+  const user = await axios.put(` http://localhost:8000/users/edit`, data, {
     withCredentials: true,
   });
 
@@ -24,7 +24,7 @@ const edit = async (data) => {
 };
 
 const getcurrentuser = async () => {
-  const user = await axios.get("http://199.247.3.38:8000/me", {
+  const user = await axios.get("http://localhost:8000/me", {
     withCredentials: true,
   });
   return user.data;

@@ -21,7 +21,7 @@ const ContestConversation = ({ conversationId, id }) => {
 
   if (chatContainerRef.current !== null)
     chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-  const url = process.env.URL || "http://199.247.3.38:8000";
+  const url = process.env.URL || "http://localhost:8000";
   useEffect(() => {
     const newSocket = io(`${url}`);
     setSocket(newSocket);

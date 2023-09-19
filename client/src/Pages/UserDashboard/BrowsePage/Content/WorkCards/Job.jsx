@@ -58,7 +58,7 @@ const Job = ({
 
   const deleteRequest = async () => {
     const res = await axios
-      .delete(`http://199.247.3.38:8000/job/${id}`)
+      .delete(`http://localhost:8000/job/${id}`)
       .catch((err) => console.log(err));
     const data = await res.data;
     return data;

@@ -3,7 +3,7 @@ import axios from "axios";
 export const SearchUsers = (searchKeyword) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://199.247.3.38:8000/users?search=${searchKeyword}`,
+      `http://localhost:8000/users?search=${searchKeyword}`,
       {
         withCredentials: true,
       }
@@ -22,7 +22,7 @@ export const getAllUsers = (myData) => async (dispatch, getState) => {
   try {
     const token = getState().Auth.token;
     console.log(token);
-    const { data } = await axios.get("http://199.247.3.38:8000/allusers", {
+    const { data } = await axios.get("http://localhost:8000/allusers", {
       withCredentials: true,
     });
     console.log("data:", data);
@@ -38,7 +38,7 @@ export const getAllUsers = (myData) => async (dispatch, getState) => {
 export const getUserFriends = (userId) => async (dispatch, getState) => {
   try {
     const response = await axios.get(
-      `http://199.247.3.38:8000/find/friends/${userId}`,
+      `http://localhost:8000/find/friends/${userId}`,
       {
         withCredentials: true,
       }
@@ -60,7 +60,7 @@ export const getUserFriends = (userId) => async (dispatch, getState) => {
 export const getUserFollowings = (userId) => async (dispatch, getState) => {
   try {
     const response = await axios.get(
-      `http://199.247.3.38:8000/find/followings/${userId}`,
+      `http://localhost:8000/find/followings/${userId}`,
       {
         withCredentials: true,
       }
@@ -84,7 +84,7 @@ export const getsuggestedUsers = (myData) => async (dispatch, getState) => {
     const token = getState().Auth.token;
     console.log(token);
     const { data } = await axios.get(
-      "http://199.247.3.38:8000/find/suggestedUsers",
+      "http://localhost:8000/find/suggestedUsers",
       {
         withCredentials: true,
       }
@@ -100,7 +100,7 @@ export const getsuggestedUsers = (myData) => async (dispatch, getState) => {
 
 export const getUserById = (id) => async (dispatch, getState) => {
   try {
-    const response = await axios.get(`http://199.247.3.38:8000/${id}`, {
+    const response = await axios.get(`http://localhost:8000/${id}`, {
       withCredentials: true,
     });
 
@@ -119,7 +119,7 @@ export const followUser = (otheruserId) => async (dispatch, getState) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user._id;
     const response = await axios.put(
-      `http://199.247.3.38:8000/toggleFollow/${otheruserId}`,
+      `http://localhost:8000/toggleFollow/${otheruserId}`,
       {
         userId,
       },
@@ -141,7 +141,7 @@ export const followUser = (otheruserId) => async (dispatch, getState) => {
 export const getBadgesEarnedByUser = (userId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://199.247.3.38:8000/${userId}/badges`,
+      `http://localhost:8000/${userId}/badges`,
       {
         withCredentials: true,
       }
@@ -161,7 +161,7 @@ export const getUserStats = (myData) => async (dispatch, getState) => {
   try {
     const token = getState().Auth.token;
     console.log(token);
-    const { data } = await axios.get("http://199.247.3.38:8000/users/stats", {
+    const { data } = await axios.get("http://localhost:8000/users/stats", {
       withCredentials: true,
     });
     console.log("data:", data);

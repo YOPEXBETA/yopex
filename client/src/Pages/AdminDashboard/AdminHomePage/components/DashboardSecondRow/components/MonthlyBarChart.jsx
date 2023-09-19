@@ -58,7 +58,7 @@ const MonthlyBarChart = () => {
     queryKey: ["challenges"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "http://199.247.3.38:8000/challenge/challenges",
+        "http://localhost:8000/challenge/challenges",
         { withCredentials: true }
       );
       return data;

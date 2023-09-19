@@ -38,7 +38,7 @@ const Appliers = ({ toggleOpen, job, open }) => {
   //   const fetchAppliers = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `http://199.247.3.38:8000/job/jobs/${job._id}/appliers`
+  //         `http://localhost:8000/job/jobs/${job._id}/appliers`
   //       );
   //       setAppliers(response.data);
   //     } catch (err) {
@@ -53,7 +53,7 @@ const Appliers = ({ toggleOpen, job, open }) => {
   //   const loadAcceptedAppliers = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `http://199.247.3.38:8000/job/jobs/${jobId}/accepted-appliers`
+  //         `http://localhost:8000/job/jobs/${jobId}/accepted-appliers`
   //       );
   //       setAcceptedAppliers(response.data);
   //     } catch (err) {
@@ -66,7 +66,7 @@ const Appliers = ({ toggleOpen, job, open }) => {
   // const acceptApplier = async (userId) => {
   //   try {
   //     const response = await axios.put(
-  //       `http://199.247.3.38:8000/job/jobs/${jobId}/appliers/${userId}/accept`
+  //       `http://localhost:8000/job/jobs/${jobId}/appliers/${userId}/accept`
   //     );
   //     console.log(response.data.message);
   //     setAcceptedAppliers([...acceptedAppliers, userId]);
