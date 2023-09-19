@@ -216,13 +216,21 @@ const unapplyJob = async (req, res) => {
 };
 
 const getAppliers = async (req, res) => {
+  const currentTime = new Date();
+  currentTime.setHours(currentTime.getHours() + 1);
+
+  const twentyFourHoursAgo = new Date();
+  twentyFourHoursAgo.setHours(currentTime.getHours() - 24);
+
   try {
     const job = await Job.findById(req.params.jobId)
       .populate({ path: "appliers", select: "firstname lastname email picturePath jobs" })
       .select({ appliers: 1 })
       .lean()
       .exec();
-    if (job.appliers.length === 0) return res.status(204).json(job.appliers);
+
+    if (job.appliers.length === 0  )
+     return res.status(204).json(job.appliers);
     return res.status(200).json(job.appliers);
   } catch (err) {
     return res.status(500).json({ error: err.message });
@@ -261,7 +269,10 @@ const acceptApplier = async (req, res) => {
     }
 
     // Add the user to the acceptedAppliers array of the job
-    job.acceptedAppliers.push(user._id);
+    const dateAccepted = new Date();
+    dateAccepted.setHours(dateAccepted.getHours() + 1);
+
+    job.acceptedAppliers.push({ user: user._id, dateAccepted});
     notification = new notificationModel({
       type: "accepted for a job",
       message: `You have been accepted for the job of : ${job.title}`,
@@ -269,7 +280,10 @@ const acceptApplier = async (req, res) => {
     });
     notification.save();
     user.notifications.push(notification._id);
-    sendEmail(user.email, "You have been accepted for a Job: ");
+    sendEmail(user.email, "You have been accepted for a Job: "+job.title );
+
+
+
     await user.save();
     await job.save();
 

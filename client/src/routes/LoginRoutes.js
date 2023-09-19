@@ -21,6 +21,10 @@ const ResetPassword = Loadable(
   lazy(() => import("../Pages/Authentification/ResetPassword"))
 );
 
+const EmailVerification = Loadable(
+  lazy(() => import("../Pages/Authentification/EmailVerification"))
+);
+
 const LandingPage = Loadable(
   lazy(() => import("../Pages/LandingPage/LandingPage"))
 );
@@ -42,6 +46,10 @@ const LoginRoutes = {
     {
       path: "reset-password/:resetToken",
       element: <ResetPassword />,
+    },
+    {
+      path: "emailverification/:token",
+      element: <EmailVerification />,
     },
     {
       path: "register",

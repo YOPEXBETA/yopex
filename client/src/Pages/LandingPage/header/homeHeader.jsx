@@ -48,7 +48,7 @@ const HomeHeader = () => {
         <div className="hidden md:flex gap-4 items-center">
           {user && (
             <p className="hover:scale-105 flex items-center "> 
-            <p className=" px-3 cursor-pointer capitalize font-medium text-gray-500  duration-200">Welcome, {user.firstname}</p>
+            <p className=" px-3 z-50 cursor-pointer capitalize font-medium text-gray-500  duration-200">Welcome, {user.firstname}</p>
               <ProfileMenu  />
           </p>
           )}

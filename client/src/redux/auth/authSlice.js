@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 
 export const register = createAsyncThunk("auth/register", async (data) => {
   try {
+    
     const response = await authService.register(data);
     return response;
   } catch (error) {
@@ -21,13 +22,14 @@ export const login = createAsyncThunk("auth/login", async (data) => {
 });
 
 export const edit = createAsyncThunk("auth/edit", async (data) => {
+
   try {
-    console.log(data);
+ 
     const response = await authService.edit(data);
 
     return response;
   } catch (error) {
-    throw new Error(error?.response?.data?.error?.msg);
+    throw new Error(error?.response?.data?.error);
   }
 });
 

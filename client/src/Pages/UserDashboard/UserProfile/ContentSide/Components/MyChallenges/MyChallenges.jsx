@@ -10,7 +10,7 @@ const MyChallenges = () => {
   if (data)
     return (
       <div>
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-4  py-5">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 py-2">
           {data.challenges.length > 0 ? (
             data.challenges?.map((challenge) => (
               <ChallengeCard
@@ -21,7 +21,7 @@ const MyChallenges = () => {
               />
             ))
           ) : (
-            <p>No challenge found.</p>
+            <p>No Challenge Found.</p>
           )}
         </div>
       </div>

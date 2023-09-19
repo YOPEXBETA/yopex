@@ -6,6 +6,7 @@ import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../hooks/react-query/useSkills";
 
 export const EditChallengeModal = ({ open, handleClose,challenge }) => {
+
   const { mutate } = useEditChallenge(challenge._id);
 
   const { data:Skills } = useSkills();
@@ -18,13 +19,14 @@ export const EditChallengeModal = ({ open, handleClose,challenge }) => {
       title: challenge.title,
       description: challenge.description,
       price: challenge.price,
+      nbruser : challenge.nbruser,
       category:challenge.category,
       RecommendedSkills:challenge.RecommendedSkills,
     },
-  });
 
+  });
   const onSubmit = async (data) => {
-    console.log(data)
+
     mutate({ 
       title: data.title, 
       description: data.description ,
@@ -32,8 +34,8 @@ export const EditChallengeModal = ({ open, handleClose,challenge }) => {
       category:data.category,
       RecommendedSkills:data.RecommendedSkills,
     });
-    handleClose();
-    
+    handleClose();  
+    reset();
   };
 
 
@@ -62,7 +64,9 @@ export const EditChallengeModal = ({ open, handleClose,challenge }) => {
             Edit "{challenge.title}"
           </h2>
           <div className="mt-2">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+            id="form1"
+            onSubmit={handleSubmit(onSubmit)}>
               <input
                 className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                 type="text"
@@ -95,6 +99,18 @@ export const EditChallengeModal = ({ open, handleClose,challenge }) => {
                 fullWidth
                 id="salary"
                 label="salary"
+                multiline
+                rows={4}
+              />
+                <input
+                className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                type="text"
+                placeholder={challenge.nbruser}
+                {...register("nbruser")}
+                margin="normal"
+                variant="outlined"
+                required
+                fullWidth
                 multiline
                 rows={4}
               />
@@ -158,12 +174,11 @@ export const EditChallengeModal = ({ open, handleClose,challenge }) => {
                   Cancel
                 </button>
                 <button
+                id="btn1"
                   className=" px-6 py-2 text-white rounded-md border-2 bg-green-500 hover:bg-green-600"
-                  type="submit"
-                  onClick={()=>{console.log();}}
-                  
+                 type="submit"
                 >
-                  Edit your job
+                  Edit your Challenge
                 </button>
               </div>
             </form>

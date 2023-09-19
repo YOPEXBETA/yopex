@@ -177,16 +177,14 @@ const getChallengeUserSubmit = async (req, res) => {
 };
 
 const updateChallenge= async (req, res, next) => {
-  const { title, description , price,category,RecommendedSkills} = req.body;
-  const challengeId = req.params.id;
-  let job;
+  const challengeId = req.params.challengeId;
+  let Challenge;
   try {
-    job = await ChallengeModel.findByIdAndUpdate(challengeId, {
-      title,
-      description,
-      price,category,RecommendedSkills,
+    Challenge = await ChallengeModel.findByIdAndUpdate(challengeId, {
+      "title" :req.body.title, 
+      "description" :req.body.description, 
     }); 
-     res.status(200).json({ job });
+     res.status(200).json({ Challenge });
   } catch (err) {
     return console.log(err);
   }

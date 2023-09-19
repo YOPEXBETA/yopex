@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "http://199.247.3.38:8000";
 
 export const useConversations = (userId) => {
   return useQuery({
@@ -28,7 +28,7 @@ export const useMessages = (conversationId) => {
 };
 
 // const response = await axios.post(
-//   `http://localhost:8000/messages/`,
+//   `http://199.247.3.38:8000/messages/`,
 //   { conversationId, message, sender },
 //   {
 //     withCredentials: true,
@@ -67,14 +67,16 @@ export const useCreateConversation = (userId) => {
   });
 };
 
-
 export const useContestMessages = (conversationId) => {
   return useQuery({
     queryKey: ["messages", conversationId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/messages/contest/${conversationId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(
+        `${url}/messages/contest/${conversationId}`,
+        {
+          withCredentials: true,
+        }
+      );
       return data;
     },
   });

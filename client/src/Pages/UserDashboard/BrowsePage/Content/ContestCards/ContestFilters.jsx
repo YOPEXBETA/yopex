@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaMoney } from "react-icons/fa";
 import { useSkills } from "../../../../../hooks/react-query/useSkills";
 import { useCategories } from "../../../../../hooks/react-query/useCategories";
 
-const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery,selectedCategory , selectedSkill,setCategoryQuery }) => {
+const ContestsFilters = ({
+  setMinAmount,
+  setMaxAmount,
+  setSkillQuery,
+  selectedCategory,
+  selectedSkill,
+  setCategoryQuery,
+}) => {
   const { register, watch } = useForm();
 
   const minAmount = watch("minAmount");
   const maxAmount = watch("maxAmount");
-  const { data:Skills } = useSkills();
-  const {data:categorys} = useCategories();
+  const { data: Skills } = useSkills();
+  const { data: categorys } = useCategories();
   const itCategory = categorys?.map((category) => category.name);
   const itSkills = Skills?.map((skill) => skill.name);
 
@@ -27,19 +33,6 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery,selectedCate
       : [...selectedCategory, CategoryName];
 
     setCategoryQuery(updatedCategory);
-   
-  };
- 
- 
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenCat, setIsOpenCat] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-  const toggleDropdownCategories = () => {
-    setIsOpenCat(!isOpenCat);
   };
 
   useEffect(() => {
@@ -81,69 +74,56 @@ const ContestsFilters = ({ setMinAmount, setMaxAmount,setSkillQuery,selectedCate
       </form>
       <div className="relative inline-block text-left w-full pt-2">
         <div>
-          <button
-            onClick={toggleDropdown}
-            className="py-2 px-4 outline-none rounded border-[1px] border-gray-200 bg-white w-full"
-          >
-            Skills
-          </button>
-        </div>
-        {isOpen && (
-          <div className="origin-top-right absolute right-0 z-50 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-            <div className="py-1">
-              {itSkills.map((skillName) => (
-                <label
-                  key={skillName}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                >
+          <label className="font-bold text-md mb-4">Skills</label>
+          <div className="py-2 max-h-40 overflow-y-auto">
+            {itSkills?.map((skillName) => (
+              <label
+                key={skillName}
+                className="block text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              >
+                <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                   <input
                     type="checkbox"
                     value={skillName}
                     checked={selectedSkill.includes(skillName)}
                     onChange={() => handleCheckboxChange(skillName)}
-                    className="mr-2"
+                    className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
-                  {skillName}
-                </label>
-              ))}
-            </div>
+                  <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                    {skillName}
+                  </label>
+                </div>
+              </label>
+            ))}
           </div>
-        )}
-      </div>
-      <div className="relative inline-block text-left w-full mt-3">
-        <div>
-          <button
-            onClick={toggleDropdownCategories}
-            className="py-2 px-4 outline-none rounded border-[1px] border-gray-200 bg-white w-full"
-          >
-            Categories
-          </button>
         </div>
-        {isOpenCat && (
-          <div className="origin-top-right absolute  right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-            <div className="py-1">
-              {itCategory.map((CategoryName) => (
-                <label
-                  key={CategoryName}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                >
-                  <input
-                    type="checkbox"
-                    value={CategoryName}
-                    checked={selectedCategory?.includes(CategoryName)}
-                    onChange={() => handleCheckboxChangeCategory(CategoryName)}
-                    className="mr-2"
-                  />
+      </div>
+      <div>
+        <label className="font-bold text-md mb-4">Categories</label>
+        <div className="py-2 max-h-40 overflow-y-auto">
+          {itCategory?.map((CategoryName) => (
+            <label
+              key={CategoryName}
+              className="block text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            >
+              <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                <input
+                  type="checkbox"
+                  value={CategoryName}
+                  checked={selectedCategory?.includes(CategoryName)}
+                  onChange={() => handleCheckboxChangeCategory(CategoryName)}
+                  className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                />
+                <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
                   {CategoryName}
                 </label>
-              ))}
-            </div>
-          </div>
-        )}
+              </div>
+            </label>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
-
 
 export default ContestsFilters;

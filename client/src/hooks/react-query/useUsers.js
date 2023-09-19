@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "http://199.247.3.38:8000";
 
 export const useUsers = () => {
   return useQuery("users", async () => {
@@ -62,7 +62,6 @@ export const usePayment = () => {
 
   return useMutation({
     mutationFn: async (amount) => {
-      
       const { data } = await axios.post(
         `${url}/api/payment`,
         { amount: amount },
@@ -81,7 +80,6 @@ export const usePayment = () => {
 export const useVerifyPayment = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    
     mutationFn: async (id) => {
       const { data } = await axios.post(
         `${url}/api/payment/${id}`,
@@ -91,13 +89,10 @@ export const useVerifyPayment = () => {
       return data;
     },
     onSuccess: (data) => {
-      
       console.log(data);
-      
     },
   });
 };
-
 
 export const useFollowUser = (currentUserId, userId) => {
   const queryClient = useQueryClient();

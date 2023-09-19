@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import * as z from "zod";
 import AlertContainer from "../../../Components/alerts";
 import Copyright from "../../../Components/shared/Copyright";
-import {FaToggleOff,FaToggleOn} from 'react-icons/fa';
+import {FaEyeSlash,FaEye} from 'react-icons/fa';
 import {
   getCurrentUser,
   login,
@@ -118,9 +118,9 @@ const Login = () => {
           className="absolute inset-y-0 right-0 flex items-center pr-2"
         >
           {showPassword ? (
-           <FaToggleOn/>
+           <FaEye/>
           ) : (
-            <FaToggleOff/>
+            <FaEyeSlash/>
           )}
         </button>
             </div>

@@ -19,7 +19,7 @@ const BlogDetail = () => {
   };
   const fetchDetails = async () => {
     const res = await axios
-      .get(`http://localhost:8000/job/${id}`)
+      .get(`http://199.247.3.38:8000/job/${id}`)
       .catch((err) => console.log(err));
     const data = await res.data;
     return data;
@@ -35,7 +35,7 @@ const BlogDetail = () => {
   }, [id]);
   const sendRequest = async () => {
     const res = await axios
-      .put(`http://localhost:8000/job/update/${id}`, {
+      .put(`http://199.247.3.38:8000/job/update/${id}`, {
         title: inputs.title,
         description: inputs.description,
       })

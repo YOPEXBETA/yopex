@@ -7,7 +7,7 @@ const UsersHistoryChart = () => {
   const { data } = useQuery({
     queryKey: ["stats"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:8000/users/stats", {
+      const { data } = await axios.get("http://199.247.3.38:8000/users/stats", {
         withCredentials: true,
       });
       return data;

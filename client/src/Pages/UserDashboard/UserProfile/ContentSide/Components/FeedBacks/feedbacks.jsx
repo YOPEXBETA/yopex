@@ -15,7 +15,7 @@ const FeedbacksPage = () => {
   const toggleOpen = () => setIsOpen((prev) => !prev);
   console.log(reviews);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
       {userId !== user._id &&
         user.role === "company" &&
         userProfile.role !== "company" && (
@@ -26,11 +26,15 @@ const FeedbacksPage = () => {
             Add Review
           </button>
         )}
-      {reviews?.map((review) => (
-        <div key={review._id} className="h-72">
-          <FeedbacksCard review={review} />
-        </div>
-      ))}
+      {reviews && reviews?.length > 0 ? (
+        reviews?.map((review) => (
+          <div key={review._id} className="h-72">
+            <FeedbacksCard review={review} />
+          </div>
+        ))
+      ) : (
+        <div>No Reviews Found.</div>
+      )}
       <AddReviewModal open={isOpen} onClose={toggleOpen} />
     </div>
   );

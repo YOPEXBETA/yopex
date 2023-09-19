@@ -12,6 +12,7 @@ const {
   forgetpassword,
   resetpassword,
   signInWithGoogle,
+  emailconfirmation,
 } = require("../controllers/auth.user.controller");
 
 //imported schema validator
@@ -50,6 +51,8 @@ authRouter.post(
   },
   signUp,
 );
+
+authRouter.post("/emailverification/:token", emailconfirmation);
 authRouter.post("/login", validate(loginValidator), signIn);
 authRouter.post("/logout", logout);
 authRouter.post("/forgetpassword", forgetpassword);

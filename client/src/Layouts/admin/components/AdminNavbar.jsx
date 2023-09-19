@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FiAlignJustify } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import Logout from "@mui/icons-material/Logout";
-import Settings from "@mui/icons-material/Settings";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser, logout } from "../../../redux/auth/authSlice";
+import { FaCog, FaSignOutAlt } from "react-icons/fa";
 
 const AdminNavbar = (props) => {
   const { onOpenSidenav, brandText } = props;
@@ -19,7 +18,6 @@ const AdminNavbar = (props) => {
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-
 
   const handleLogout = () => {
     dispatch(logout());
@@ -137,7 +135,7 @@ const AdminNavbar = (props) => {
                   href="/settings"
                   className="px-3 py-2 hover:bg-gray-100 space-x-2 flex items-center"
                 >
-                  <Settings className="w-6 h-6 text-gray-600" />
+                  <FaCog className="w-6 h-6 text-gray-600" />
                   <span className="text-gray-600">Settings</span>
                 </a>
                 <a
@@ -145,7 +143,7 @@ const AdminNavbar = (props) => {
                   onClick={handleLogout}
                   className="px-3 py-2 hover:bg-gray-100 space-x-2 flex items-center cursor-pointer"
                 >
-                  <Logout className="w-6 h-6 text-gray-600" />
+                  <FaSignOutAlt className="w-6 h-6 text-gray-600" />
                   <span className="text-gray-600">Logout</span>
                 </a>
               </div>

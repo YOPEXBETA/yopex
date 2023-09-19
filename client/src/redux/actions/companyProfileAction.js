@@ -6,7 +6,7 @@ export const companyEditProfile = (formData, myData) => async (dispatch) => {
     console.log("edit profile data:", formData);
 
     const { data } = await axios.put(
-      ` http://localhost:8000/company/${myData._id}`,
+      ` http://199.247.3.38:8000/company/${myData._id}`,
       formData,
       {
         withCredentials: true,
@@ -37,7 +37,7 @@ export const companyEditProfile = (formData, myData) => async (dispatch) => {
 export const getCompanyById = (id) => async (dispatch, getState) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/company/get/${id}`,
+      `http://199.247.3.38:8000/company/get/${id}`,
       {
         withCredentials: true,
       }

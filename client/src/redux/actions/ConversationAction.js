@@ -6,7 +6,7 @@ export const getConversations = (userId) => async (dispatch) => {
     const userId = user._id;
 
     const response = await axios.get(
-      `http://localhost:8000/conversation/${userId}`,
+      `http://199.247.3.38:8000/conversation/${userId}`,
       {
         withCredentials: true,
       }
@@ -25,7 +25,7 @@ export const CreateConversation = (data) => async (dispatch, getState) => {
     const token = getState().Auth.token;
     console.log(token);
     const response = await axios.post(
-      `http://localhost:8000/conversation/`,
+      `http://199.247.3.38:8000/conversation/`,
       {
         senderId: data.senderId,
         receiverId: data.receiverId,

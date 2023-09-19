@@ -6,7 +6,7 @@ export const register = (myData) => async (dispatch) => {
     console.log("register data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/auth/register",
+      "http://199.247.3.38:8000/auth/register",
       myData
     );
 
@@ -34,7 +34,7 @@ export const login = (myData) => async (dispatch) => {
     console.log("login data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/auth/login",
+      "http://199.247.3.38:8000/auth/login",
       myData,
       {
         withCredentials: true,
@@ -73,7 +73,7 @@ export const forgetPassword = (myData) => async (dispatch) => {
     console.log("forget password data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/auth/forgetpassword",
+      "http://199.247.3.38:8000/auth/forgetpassword",
       myData
     );
 
@@ -97,14 +97,36 @@ export const forgetPassword = (myData) => async (dispatch) => {
 
 export const resetPassword = (myData) => async (dispatch) => {
   try {
-    console.log("reset password data:", myData);
-
     const { data } = await axios.post(
-      "http://localhost:8000/auth/resetpassword",
+      "http://199.247.3.38:8000/auth/resetpassword",
       myData
     );
 
     console.log("reset password response:", data);
+
+    dispatch({
+      type: "reset_password_success",
+      payload: data,
+    });
+
+    return data;
+  } catch (error) {
+    console.log("reset password error:", error.response.data);
+
+    dispatch({
+      type: "reset_password_error",
+      payload: error.response.data,
+    });
+  }
+};
+
+export const emailVerification = (token) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(
+      `http://199.247.3.38:8000/auth/emailverification/${token}`
+    );
+
+    console.log("Email verification :", data);
 
     dispatch({
       type: "reset_password_success",
@@ -148,7 +170,7 @@ export const verifyface = (myData) => async (dispatch) => {
     console.log("login data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/facerecog/verifyface",
+      "http://199.247.3.38:8000/facerecog/verifyface",
       myData,
       {
         withCredentials: true,
@@ -186,7 +208,7 @@ export const addface = (myData) => async (dispatch, getState) => {
     const token = getState().Auth.token;
 
     const { data } = await axios.post(
-      "http://localhost:8000/facerecog/addface",
+      "http://199.247.3.38:8000/facerecog/addface",
       myData,
       {
         withCredentials: true,
