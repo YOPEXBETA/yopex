@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "http://199.247.3.38:8000";
 
 export const useCommentsByPosts = (postId) => {
   return useQuery({
@@ -42,23 +42,21 @@ export const useDeleteComment = (postId) => {
   return useMutation({
     mutationFn: async ({ CommentId, postId }) => {
       await axios.delete(`${url}/comment/${CommentId}`, {
-        data: { postId }, 
+        data: { postId },
         withCredentials: true,
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['comments'] });
+      queryClient.invalidateQueries({ queryKey: ["comments"] });
     },
   });
 };
 
 export const useEditComment = (commentId) => {
- 
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (CommentData) => {
-
       await axios.put(`${url}/comment/update/${commentId}`, CommentData, {
         withCredentials: true,
       });
@@ -67,4 +65,4 @@ export const useEditComment = (commentId) => {
       queryClient.invalidateQueries(["comments"]);
     },
   });
-}
+};

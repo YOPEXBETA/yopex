@@ -18,7 +18,7 @@ export const getChallenges =
       }
 
       const { data } = await axios.get(
-        `http://localhost:8000/challenge/challenges?${query}`,
+        `http://199.247.3.38:8000/challenge/challenges?${query}`,
         {
           withCredentials: true,
         }
@@ -45,7 +45,7 @@ export const getCompanyChallenges =
   (companyId) => async (dispatch, getState) => {
     try {
       const { data } = await axios.get(
-        ` http://localhost:8000/company/get/${companyId}`,
+        ` http://199.247.3.38:8000/company/get/${companyId}`,
         {
           withCredentials: true,
         }
@@ -74,7 +74,7 @@ export const addChallenge = (challengeData) => async (dispatch, getState) => {
     console.log("testtttt", challengeData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/challenge",
+      "http://199.247.3.38:8000/challenge",
       challengeData,
       {
         withCredentials: true,
@@ -102,7 +102,7 @@ export const deleteChallenge = (challengeId) => async (dispatch, getState) => {
   try {
     console.log({ challengeId });
     const { data } = await axios.delete(
-      `http://localhost:8000/challenge/deleteChallenge/${challengeId}`,
+      `http://199.247.3.38:8000/challenge/deleteChallenge/${challengeId}`,
       {
         withCredentials: true,
       }
@@ -134,7 +134,7 @@ export const joinChallenge = (challengeId) => async (dispatch, getState) => {
     console.log(challengeData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/join",
+      "http://199.247.3.38:8000/join",
       challengeData,
       {
         withCredentials: true,
@@ -167,7 +167,7 @@ export const UnjoinChallenge = (challengeId) => async (dispatch, getState) => {
     console.log(challengeData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/unjoin",
+      "http://199.247.3.38:8000/unjoin",
       challengeData,
       {
         withCredentials: true,
@@ -201,7 +201,7 @@ export const getChallengeUsers =
       console.log(challengeData);
 
       const { data } = await axios.get(
-        "http://localhost:8000/challenge/getChallengeUsers",
+        "http://199.247.3.38:8000/challenge/getChallengeUsers",
         {
           params: {
             idChallenge: challengeId,
@@ -234,7 +234,7 @@ export const submitChallenge =
       console.log(challengeData);
 
       const { data } = await axios.post(
-        "http://localhost:8000/challenge/submission",
+        "http://199.247.3.38:8000/challenge/submission",
         challengeData,
         {
           withCredentials: true,
@@ -262,7 +262,7 @@ export const getUserSubmitChallenge =
   (challengeId, userId) => async (dispatch, getState) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8000/challenge/getChallengeUserSubmit",
+        "http://199.247.3.38:8000/challenge/getChallengeUserSubmit",
         {
           params: {
             challengeId: challengeId,
@@ -292,12 +292,15 @@ export const getUserSubmitChallenge =
 export const getUserChallenges = (userId) => async (dispatch, getState) => {
   try {
     console.log(userId);
-    const { data } = await axios.get("http://localhost:8000/user/challenges", {
-      params: {
-        userId: userId,
-      },
-      withCredentials: true,
-    });
+    const { data } = await axios.get(
+      "http://199.247.3.38:8000/user/challenges",
+      {
+        params: {
+          userId: userId,
+        },
+        withCredentials: true,
+      }
+    );
     console.log("data:", data);
 
     dispatch({
@@ -323,7 +326,7 @@ export const chooseWinner = (challengeData) => async (dispatch, getState) => {
     console.log(challengeData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/company/challengeWinner",
+      "http://199.247.3.38:8000/company/challengeWinner",
       challengeData,
       {
         withCredentials: true,

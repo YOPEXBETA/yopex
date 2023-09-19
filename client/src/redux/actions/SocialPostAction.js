@@ -3,9 +3,13 @@ import axios from "axios";
 // Create Post Action Creator
 export const createPost = (myData) => async (dispatch) => {
   try {
-    const { data } = await axios.post("http://localhost:8000/post/", myData, {
-      withCredentials: true,
-    });
+    const { data } = await axios.post(
+      "http://199.247.3.38:8000/post/",
+      myData,
+      {
+        withCredentials: true,
+      }
+    );
 
     console.log(data);
     dispatch({
@@ -25,7 +29,7 @@ export const getFeedPosts =
     try {
       const token = getState().Auth.token;
       console.log(token);
-      let url = "http://localhost:8000/post/posts";
+      let url = "http://199.247.3.38:8000/post/posts";
       if (categories !== "") {
         url += `?categories=${categories}`;
       }
@@ -45,9 +49,12 @@ export const getFeedPosts =
 // getUserPosts Action Creator
 export const getUserPosts = (userId) => async (dispatch) => {
   try {
-    const response = await axios.get(`http://localhost:8000/post/${userId}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      `http://199.247.3.38:8000/post/${userId}`,
+      {
+        withCredentials: true,
+      }
+    );
 
     dispatch({
       type: "getUserPosts",
@@ -69,7 +76,7 @@ export const deletePost = (postId) => async (dispatch) => {
       throw new Error("Post ID is missing");
     }
     const response = await axios.delete(
-      `http://localhost:8000/post/${postId}`,
+      `http://199.247.3.38:8000/post/${postId}`,
       {
         headers: {
           userId: userId,
@@ -95,7 +102,7 @@ export const likePost = (postId) => async (dispatch) => {
     const userId = user._id;
 
     const response = await axios.patch(
-      `http://localhost:8000/post/${postId}/like`,
+      `http://199.247.3.38:8000/post/${postId}/like`,
       {
         userId,
       },
@@ -117,7 +124,7 @@ export const likePost = (postId) => async (dispatch) => {
 export const EditPost = (postId, updates) => async (dispatch) => {
   try {
     const response = await axios.put(
-      `http://localhost:8000/post/${postId}`,
+      `http://199.247.3.38:8000/post/${postId}`,
       updates,
       {
         withCredentials: true,

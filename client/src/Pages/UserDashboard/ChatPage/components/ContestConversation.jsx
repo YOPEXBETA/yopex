@@ -8,9 +8,7 @@ import {
 } from "../../../../hooks/react-query/useConversations";
 import { io } from "socket.io-client";
 
-
-const ContestConversation = ({ conversationId,id}) => {
-  
+const ContestConversation = ({ conversationId, id }) => {
   const chatContainerRef = useRef(null);
 
   const { user } = useSelector((state) => state.auth);
@@ -21,23 +19,20 @@ const ContestConversation = ({ conversationId,id}) => {
   const [arrivalMessage, setArrivalMessage] = useState([]);
   const [socket, setSocket] = useState(null);
 
-  if (chatContainerRef.current!==null) chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-  const url = process.env.URL || "http://localhost:8000";
+  if (chatContainerRef.current !== null)
+    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+  const url = process.env.URL || "http://199.247.3.38:8000";
   useEffect(() => {
     const newSocket = io(`${url}`);
     setSocket(newSocket);
     newSocket.emit("joinRoom", { id: user._id, roomid: conversationId });
     return () => newSocket.close();
   }, [user]);
-  
+
   useEffect(() => {
     setArrivalMessage(messages);
-    
-    
   }, [messages]);
-  
 
-  
   useEffect(() => {
     if (!socket) return;
     socket.on("getMessageinContest", (data) => {
@@ -51,7 +46,6 @@ const ContestConversation = ({ conversationId,id}) => {
 
   const handleCreateMessage = async (event) => {
     event.preventDefault();
-
 
     socket.emit("sendMessageinContest", {
       sender: {
@@ -69,15 +63,21 @@ const ContestConversation = ({ conversationId,id}) => {
   };
 
   return (
-    <div >
+    <div>
       {arrivalMessage?.length === 0 ? (
-        <div ref={chatContainerRef} style={{ textAlign: "center", padding: "40vh 0vh" }} >
+        <div
+          ref={chatContainerRef}
+          style={{ textAlign: "center", padding: "40vh 0vh" }}
+        >
           <p className="opacity-50 text-xl">
             Open a conversation to start a chat
           </p>
         </div>
       ) : (
-        <div className="fixed h-[47vh] xl:w-[75%] w-full  overflow-auto pb-8" ref={chatContainerRef}>
+        <div
+          className="fixed h-[47vh] xl:w-[75%] w-full  overflow-auto pb-8"
+          ref={chatContainerRef}
+        >
           {arrivalMessage?.map((message, index) => {
             return (
               <div key={index} className="px-11 py-6">
@@ -106,7 +106,9 @@ const ContestConversation = ({ conversationId,id}) => {
                               src={
                                 message.sender.companyLogo
                                   ? message.sender.companyLogo
-                                  : message.sender.picturePath? message.sender.picturePath : ""
+                                  : message.sender.picturePath
+                                  ? message.sender.picturePath
+                                  : ""
                               }
                             />
                           )}

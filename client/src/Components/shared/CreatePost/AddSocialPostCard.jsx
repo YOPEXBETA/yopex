@@ -12,7 +12,7 @@ const AddSocialPostCard = () => {
       <div className="p-4">
         <div className="flex items-center space-x-2">
           <img
-            className="w-10 h-10 rounded-full object-cover cursor-pointer bg-green-500"
+            className="w-10 h-10 rounded-full object-cover cursor-pointer border-2"
             src={user.picturePath}
             alt="photo"
           />

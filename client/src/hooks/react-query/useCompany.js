@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "http://199.247.3.38:8000";
 
 export const useAdminCompanies = () => {
   return useQuery({
@@ -51,7 +51,6 @@ export const useEditCompany = (companyId) => {
 
   return useMutation({
     mutationFn: async (companyData) => {
-
       await axios.put(`${url}/company/${companyId}`, companyData, {
         withCredentials: true,
       });
@@ -60,13 +59,13 @@ export const useEditCompany = (companyId) => {
       queryClient.invalidateQueries(["company", companyId]);
     },
   });
-}
+};
 
 export const useCompanies = () => {
   return useQuery({
     queryKey: ["companies"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:8000/company/all");
+      const { data } = await axios.get("http://199.247.3.38:8000/company/all");
 
       return data;
     },

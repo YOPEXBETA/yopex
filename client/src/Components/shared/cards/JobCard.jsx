@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import JobOfferModal from "../Modals/JobOfferModal";
 import PostMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyJobs/Components/JobMenuIcon";
-import {EditJobModal} from '../../shared/Modals/EditJobModal'
+import { EditJobModal } from "../../shared/Modals/EditJobModal";
 
 const JobCard = ({ job }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,15 +13,13 @@ const JobCard = ({ job }) => {
   const { user } = useSelector((state) => state.auth);
   const handleClose = () => setIsOpen(false);
 
- 
-
   console.log(job?.company);
 
   return (
     <div>
       <div
         onClick={toggleOpen}
-        className="shadow-md border-green-500 border-b-2 rounded-lg bg-white hover:scale-102 duration-500 hover:shadow-green-500"
+        className="shadow-md border-green-500 border-b-2 h-48 rounded-lg bg-white hover:scale-102 duration-500 hover:shadow-green-500"
       >
         <div className="flex flex-col">
           <div className="bg- rounded-md p-4 h-full">
@@ -56,9 +54,9 @@ const JobCard = ({ job }) => {
               </p>
 
               {user?.companies?.includes(job?.company._id) ? (
-              <div onClick={(e)=> e.stopPropagation()}>
-              <PostMenuIcon post={job}/>
-              </div>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <PostMenuIcon post={job} />
+                </div>
               ) : (
                 <p></p>
               )}

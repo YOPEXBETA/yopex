@@ -1,16 +1,18 @@
 import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router-dom";
-import {  useUserChallenges } from "../../../../../../hooks/react-query/useChallenges";
-import ChallengeCard from "../../../../../../Components/shared/cards/ChallengeCard";
-import { useAppliers, useJobById, useJobs } from "../../../../../../hooks/react-query/useJobs";
+
+import {
+  useAppliers,
+  useJobById,
+} from "../../../../../../hooks/react-query/useJobs";
 import ApplierCard from "../../../../../../Components/shared/cards/ApplierCard";
 import { useAcceptedAppliers } from "../../../../../../hooks/react-query/useJobs";
 
 const MyAppliersJob = () => {
-    const { companyId } = useParams();
+  const { companyId } = useParams();
   const { data: jobData, isLoading: jobsLoading } = useJobById(companyId);
-  const jobIds = jobData?.map((job) => job._id) ;
+  const jobIds = jobData?.map((job) => job?._id);
   console.log(jobIds);
   const { data: appliersChallenges, isLoading: appliersLoading } = useAppliers(jobIds);
   const { data: AcceptedAppliers, isLoading: AcceptedApplierLoading } = useAcceptedAppliers(jobIds);
@@ -30,10 +32,10 @@ const MyAppliersJob = () => {
     return (
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100vh',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
         }}
       >
         <CircularProgress />
@@ -44,6 +46,7 @@ const MyAppliersJob = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4  py-5">
+
       {appliersChallenges?.length > 0 ? (
   jobData.map((job) => (
     appliersChallenges
@@ -70,6 +73,7 @@ const MyAppliersJob = () => {
 ) : (
   <p>No Appliers found.</p>
 )}
+
       </div>
     </div>
   );

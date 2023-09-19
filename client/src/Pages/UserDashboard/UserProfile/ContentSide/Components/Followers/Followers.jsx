@@ -8,13 +8,15 @@ const Followers = () => {
   const { data: followers, isLoading } = useUserFollowers(userId);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 gap-0">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 py-2">
       {isLoading ? (
-        <p>Loading posts...</p>
-      ) : (
-        followers?.map((follower) => (
+        <p>Loading followers...</p>
+      ) : followers?.length > 0 ? (
+        followers.map((follower) => (
           <FollowersCard key={follower._id} follower={follower} />
         ))
+      ) : (
+        <p>No Followers.</p>
       )}
     </div>
   );

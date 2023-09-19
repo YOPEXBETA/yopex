@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useSelector } from "react-redux";
 import { useUserNotifications } from "../../../../../../../hooks/react-query/useUsers";
@@ -13,8 +13,8 @@ const NotificationBell = () => {
   const [notifications, setNotifications] = useState([]);
   const [socket, setSocket] = useState(null);
 
-  const url = process.env.URL || "http://localhost:8000";
-  
+  const url = process.env.URL || "http://199.247.3.38:8000";
+
   useEffect(() => {
     const newSocket = io(`${url}`);
     setSocket(newSocket);
@@ -29,22 +29,51 @@ const NotificationBell = () => {
   useEffect(() => {
     if (!socket) return;
     socket.on("notification", (notification) => {
-      
       setNotifications((prev) => [notification, ...prev]);
     });
     return () => socket.off("notification");
   }, [socket]);
 
+  const menuRef = useRef(null);
+
   const handleClick = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleCloseMenu = () => {
+    setIsMenuOpen(false);
   };
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
 
+  // Use a ref to detect clicks outside of the menu
+  const outsideClickRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        outsideClickRef.current &&
+        !outsideClickRef.current.contains(event.target)
+      ) {
+        handleCloseMenu();
+      }
+    }
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
     <div>
-      <div className="relative">
+      <div className="relative" ref={outsideClickRef}>
         <div className="absolute top-0 right-0">
           <button
             onClick={handleClick}
@@ -61,6 +90,7 @@ const NotificationBell = () => {
       </div>
       {isMenuOpen && (
         <div
+          ref={menuRef}
           className={`absolute z-10 right-28 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible filter drop-shadow(0px 2px 8px rgba(0,0,0,0.32)) `}
         >
           <ul>
