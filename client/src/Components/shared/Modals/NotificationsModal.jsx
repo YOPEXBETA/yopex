@@ -34,7 +34,7 @@ export const NotificationsModal = ({ open, handleClose }) => {
             </div>
             <hr className="border-gray-300" />
             <div className="mt-4 space-y-4">
-              {notifications?.map((notification) => (
+              {notifications?.notification?.map((notification) => (
                 <div
                   key={notification?._id}
                   className="flex items-start space-x-2"

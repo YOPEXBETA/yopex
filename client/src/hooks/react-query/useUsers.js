@@ -290,3 +290,20 @@ export const useGetPayments = () => {
     },
   });
 }
+
+export const useSeeNotification = (userId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async () => {
+      await axios.put(
+        `${url}/notifications/seen`,
+        {},
+        { withCredentials: true }
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["notifications", userId]);
+    },
+  });
+}
