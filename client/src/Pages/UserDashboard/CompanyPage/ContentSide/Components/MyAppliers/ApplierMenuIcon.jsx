@@ -16,7 +16,7 @@ const ApplierMenuIcon = ({ Applier, job }) => {
 
   return (
     <React.Fragment>
-      <div className="relative inline-block text-center z-20">
+      <div className="relative inline-block text-center z-20 bg-green-500">
         <button
           onClick={handleClick}
           className="hover:bg-gray-100 px-2 py-2 rounded-full"
