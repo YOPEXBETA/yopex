@@ -9,10 +9,15 @@ const register = async (data) => {
 };
 
 const login = async (data) => {
-  const user = await axios.post(`${url}/auth/signin`, data, {
+  
+  const user = await axios.post(`https://yopex-api.tabaani.co/auth/signin`, data, {
     withCredentials: true,
+  }).then((res) => {
+    console.log(res);
+    return user.data;
+  }).catch((err) => {
+    console.log(err);
   });
-  return user.data;
 };
 
 const edit = async (data) => {
