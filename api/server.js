@@ -22,15 +22,15 @@ const passport = require("passport");
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
-// const corsOpts = {
-//   origin: "*",
+const corsOpts = {
+  origin: "*",
 
-//   methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "PATCH"],
+  methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "PATCH"],
 
-//   allowedHeaders: ["Content-Type"],
-// };
+  allowedHeaders: ["Content-Type"],
+};
 
-// app.use(cors(corsOpts));
+app.use(cors(corsOpts));
 
 connectDB();
 
@@ -39,7 +39,13 @@ const indexRouter = require("./routes/index.router"); //the routes of all the pr
 const initializeSocketIO = require("./config/socket");
 const ContestConversationModel = require("./models/ContestConversation.model");
 app.use("/", indexRouter);
-
+app.options('/auth/login', (req, res) => {
+  // Set CORS headers to allow requests from specific origins
+  res.header('Access-Control-Allow-Origin', 'https://yopex.tabaani.co'); // Replace with your frontend origin
+  res.header('Access-Control-Allow-Methods', 'POST');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Add any additional headers you need to allow
+  res.status(200).end();
+});
 const PORT = process.env.PORT || 5000;
 
 const server = http.createServer(app);
