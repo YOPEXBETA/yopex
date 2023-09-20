@@ -12,8 +12,10 @@ const login = async (data) => {
   const user = await axios.post(`https://yopex-api.tabaani.co/auth/login`, data);
      console.log("login response:", user.data);
     // get accessToken from headers
-    const accessToken = user.headers["accessToken"];
-    console.log({accessToken})
+    // const accessToken = user.headers;
+    console.log("----------")
+    console.log(user.headers)
+    console.log("----------")
     // set accessToken to localStorage
     localStorage.setItem("accessToken", accessToken);
     // set accessToken to axios default header
