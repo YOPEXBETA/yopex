@@ -12,7 +12,7 @@ export const register = createAsyncThunk("auth/register", async (data) => {
   }
 });
 
-export const login = createAsyncThunk("auth/login", async (data) => {
+export const login = createAsyncThunk("auth/signin", async (data) => {
   try {
     const response = await authService.login(data);
     return response;
