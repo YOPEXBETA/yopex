@@ -42,12 +42,12 @@ const edit = async (data) => {
 
 const getcurrentuser = async () => {
   const accessToken = localStorage.getItem("accessToken");
-  axios
-    .get("https://yopex-api.tabaani.co/me", {
-      headers: {
-        Authorization: `token ${accessToken}`,
-      },
-    })
+  console.log({accessToken})
+
+
+  if(accessToken == undefined || accessToken == null || accessToken == "" || accessToken == "null" || accessToken == "undefined"){
+    axios
+    .get("https://yopex-api.tabaani.co/me")
     .then((res) => {
       console.log(res.data);
       return res.data;
@@ -55,6 +55,26 @@ const getcurrentuser = async () => {
     .catch((error) => {
       console.error(error);
     });
+
+  }else{
+   const axiosInstance = axios.create({
+      baseURL: "https://yopex-api.tabaani.co",
+    });
+    // axiosInstance.defaults.headers.common["auth"] = `token ${accessToken}`;
+    const user = await axiosInstance.get("/me");
+    console.log({user})
+    
+    // axios
+    // .get("https://yopex-api.tabaani.co/me")
+    // .then((res) => {
+    //   console.log(res.data);
+    //   return res.data;
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    // });
+  }
+  
 
   //
 };
