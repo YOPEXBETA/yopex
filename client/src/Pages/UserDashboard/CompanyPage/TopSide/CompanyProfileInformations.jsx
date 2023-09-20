@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -23,6 +23,21 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   if (isSuccess) {
     window.location = "/feed";
   }
+
+  const [isfollow, setIsFollow] = useState(false);
+
+  useEffect(() => {
+    if (user.followings.includes(companyId)) {
+      setIsFollow(true);
+    } else {
+      setIsFollow(false);
+    }
+  }, [user.followings]);
+
+  const followCompany= async () => {
+    mutate();
+    setIsFollow((prev) => !prev);
+  };
 
   const { data: company, isLoading, isError } = useCompanyById(companyId);
 
@@ -96,12 +111,12 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                       onClick={
                         company && company.user === user._id
                           ? toggleModal
-                          : mutate
+                          : followCompany
                       }
                     >
                       {company && company.user === user._id ? (
                         <p>Edit Company</p>
-                      ) : user.followings.includes(company._id) ? (
+                      ) : isfollow ? (
                         <FaUserMinus className="w-4 h-4" />
                       ) : (
                         <FaUserPlus className="w-4 h-4" />
@@ -132,12 +147,12 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 <button
                   className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 p-2 sm:p-4 rounded-lg text-white"
                   onClick={
-                    company && company.user === user._id ? toggleModal : mutate
+                    company && company.user === user._id ? toggleModal : followCompany
                   }
                 >
                   {company && company.user === user._id ? (
                     <FaEdit className="w-4 h-4 sm:w-6 sm:h-6" />
-                  ) : user.followings.includes(company._id) ? (
+                  ) : isfollow ? (
                     <FaUserMinus className="w-4 h-4 sm:w-6 sm:h-6" />
                   ) : (
                     <FaUserPlus className="w-4 h-4 sm:w-6 sm:h-6" />
@@ -184,6 +199,8 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           <CompanyProfileNavigationTab
             changeValue={changeValue}
             value={value}
+            companyId = {companyId}
+            userPassed = {user}
           />
         </div>
       </div>

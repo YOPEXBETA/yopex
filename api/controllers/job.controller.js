@@ -117,7 +117,7 @@ const deleteJob = async (req, res, next) => {
     const company = await Company.findById(job.company);
     await company.jobs.pull(job);
     await company.save();
-    await Job.findByIdAndDelete(id);
+    await Job.findByIdAndDelete({_id:id});
     return res.status(200).json({ message: "Successfully Delete" });
   } catch (err) {
     console.log(err);
@@ -198,7 +198,7 @@ const unapplyJob = async (req, res) => {
       return res.status(400).json("You have not applied for this job");
 
     // Remove user from appliers array
-    job.appliers.splice(applierIndex, 1);
+   job.appliers.splice(applierIndex, 1);
 
     // Remove user from acceptedAppliers array if they were accepted
     const acceptedApplierIndex = job.acceptedAppliers.indexOf(

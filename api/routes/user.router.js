@@ -21,7 +21,8 @@ const {
   CreateCompany,
   getCurrentUser,
   followUnfollowCompany,
-  getUserFollowingsCompanies
+  getUserFollowingsCompanies,
+  seeNotification
 } = require("../controllers/user.controller");
 
 const validate = require("../middlewares/SchemaValidation.middleware");
@@ -94,5 +95,6 @@ userRouter.get(
 );
 userRouter.get("/user/ban/:id", authenticateToken, banUser);
 userRouter.post("/create", authenticateToken, CreateCompany);
+userRouter.put("/notifications/seen", authenticateToken, seeNotification);
 
 module.exports = userRouter;

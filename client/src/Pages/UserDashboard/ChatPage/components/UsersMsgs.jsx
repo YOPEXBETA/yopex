@@ -13,7 +13,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
     <div className="w-full overflow-auto h-[88vh] bg-white sticky">
       <div className="flex justify-between items-center px-4 py-2">
         <p className="text-lg font-bold">Chats</p>
-        <SearchUsers />
+        <CreateConversationDrawer />
       </div>
       <div className="w-full my-0.5 border-l border-gray-200 border-b-2" />
 
