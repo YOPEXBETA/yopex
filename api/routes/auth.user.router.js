@@ -52,8 +52,8 @@ authRouter.post(
   signUp
 );
 
-authRouter.post("/emailverification/:token", emailconfirmation);
 authRouter.post("/login", validate(loginValidator), signIn);
+authRouter.post("/emailverification/:token", emailconfirmation);
 authRouter.post("/login1", validate(loginValidator), signIn);
 authRouter.post("/logout", logout);
 authRouter.post("/forgetpassword", forgetpassword);

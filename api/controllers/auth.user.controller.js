@@ -5,9 +5,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const moment = require("moment");
-const Token = require("../models/tokens.model");
-const crypto = require("crypto");
-const { sendEmail } = require("../middlewares/mail.middleware");
 
 // ==============================|| Register ||============================== //
 
@@ -15,6 +12,10 @@ const signUp = async (req, res) => {
   try {
     // Generate a salt for password hashing
     const salt = await bcrypt.genSalt(10);
+
+    // Log the request body and password for debugging purposes
+    // console.log(req.body);
+    // console.log(typeof req.body.password, req.body.password);
 
     // Hash the password using the generated salt
     const hashedPass = await bcrypt.hash(req.body.password, salt);
@@ -26,11 +27,6 @@ const signUp = async (req, res) => {
     const userExist = await userSchema.findOne({ email: req.body.email });
     if (userExist) {
       return res.status(400).send({ error: { msg: "User already exists" } });
-    }
-    if (req.body.password != req.body.repeatPassword) {
-      return res
-        .status(400)
-        .send({ error: { msg: "Passwords do not match !" } });
     }
 
     // Check if the user already exists in the companySchema collection
@@ -49,15 +45,6 @@ const signUp = async (req, res) => {
         password: hashedPass,
       });
 
-      const token = new Token({
-        userId: newUser._id,
-        token: crypto.randomBytes(16).toString("hex"),
-      });
-      await token.save();
-
-      const link = `https://yopex-api.tabaani.co/emailverification/${token.token}`;
-      await sendEmail(newUser.email, link);
-
       // Check if the user is a first-time user and add the "Account Creation" badge
       const badge = await badgeSchema.findOne({
         badgeName: "Account Creation",
@@ -69,6 +56,16 @@ const signUp = async (req, res) => {
 
       // Save the new user to the userSchema collection
       const user = await newUser.save();
+
+      // Create a new badge for the user
+      const newBadge = new badgeSchema({
+        userId: req.userId,
+        badgeName: req.body.badgeName,
+        badgeDescription: req.body.badgeDescription,
+        badgeImg: req.body.badgeImg,
+        Etat: true,
+      });
+      await newBadge.save();
 
       // Return a success response with the new user data
       return res.status(200).json({ msg: "user successfully created", user });
@@ -122,10 +119,8 @@ const signIn = async (req, res) => {
     const user = await userSchema.findOne({ email: req.body.email });
     const company = await companySchema.findOne({ email: req.body.email });
 
-    if (!user) return res.status(400).json({ error: "Email does not exist!" });
-
-    if (user.isVerified == false)
-      return res.status(400).json({ error: "Please verify your account !" });
+    if (!user && !company)
+      return res.status(400).json({ error: "Email does not exist!" });
 
     //check user status
     if (user.isActive) {
@@ -168,7 +163,7 @@ const signIn = async (req, res) => {
       if (req.body.rememberMe) {
         cookiesOptions.expires = moment().add("15", "days").toDate();
       }
-      return res.status(200).json(info);
+      return res.cookie("accessToken", token, cookiesOptions).status(200).send(info);
     } else {
       return res.status(403).json({ error: "Your account is banned" });
     }
@@ -187,10 +182,13 @@ const logout = async (req, res) => {
       blacklistedToken,
       process.env.passwordToken
     );
+    console.log(decodedToken);
     //get only the user id
     const userId = decodedToken.id;
+    console.log(userId);
     // Fetch the user from the database
     const user = await userSchema.findById(userId);
+    console.log(user);
     return res
       .status(200)
       .send({ msg: "Logout successfully", blacklistedToken, user });
@@ -205,7 +203,7 @@ const forgetpassword = async (req, res) => {
     const email = req.body.email;
     const user = await userSchema.findOne({ email: email });
     if (!user) {
-      return res.status(400).json({ error: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
     const resetToken = jwt.sign(
       { userId: user._id },
@@ -229,7 +227,7 @@ const forgetpassword = async (req, res) => {
       from: process.env.EMAIL_ADDRESS,
       to: email,
       subject: "Password Reset",
-      html: `<p>Please click the following link to reset your password:</p><a href="https://yopex-api.tabaani.co/reset-password/${resetToken}">https://yopex-api.tabaani.co/reset-password/${resetToken}</a>`,
+      html: `<p>Please click the following link to reset your password:</p><a href="http://localhost:3000/reset-password/${resetToken}">http://localhost:3000/reset-password/${resetToken}</a>`,
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -270,51 +268,10 @@ const resetpassword = async (req, res) => {
 };
 // ==============================|| signInWithGoogle ||============================== //
 
-const signInWithGoogle = async (req, res) => {
-  const user = req.user;
-  const cookiesOptions = {
-    expires: moment().add("15", "days").toDate(),
-  };
-  const token = jwt.sign(
-    {
-      id: user._id,
-      role: user.role,
-      email: user.email,
-    },
-    process.env.passwordToken
-  );
-  res.cookie("accessToken", token, cookiesOptions);
-
-  res.redirect("https://yopex-api.tabaani.co/feed");
-};
-
-const emailconfirmation = async (req, res) => {
-  try {
-    const token = await Token.findOne({
-      token: req.params.token,
-    });
-    console.log(token);
-    await userSchema.updateOne(
-      {
-        _id: token.userId,
-      },
-      {
-        $set: { isVerified: true },
-      }
-    );
-    await Token.findByIdAndRemove(token._id);
-    res.status(200).json({ message: "Account activated !" });
-  } catch (err) {
-    res.status(400).json({ message: err });
-  }
-};
-
 module.exports = {
   signUp,
   signIn,
   logout,
   forgetpassword,
   resetpassword,
-  signInWithGoogle,
-  emailconfirmation,
 };
