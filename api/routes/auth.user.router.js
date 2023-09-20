@@ -2,7 +2,7 @@ const express = require("express");
 const authRouter = express.Router();
 const passport = require("passport");
 
-const CLIENT_URL = "https://yopex.tabaani.co/";
+const CLIENT_URL = "http://localhost:3000/";
 
 //imported controllers
 const {
@@ -11,8 +11,6 @@ const {
   logout,
   forgetpassword,
   resetpassword,
-  signInWithGoogle,
-  emailconfirmation,
 } = require("../controllers/auth.user.controller");
 
 //imported schema validator
@@ -49,12 +47,9 @@ authRouter.post(
       return validate(companyRegisterValidator)(req, res, next);
     }
   },
-  signUp
+  signUp,
 );
-
 authRouter.post("/login", validate(loginValidator), signIn);
-authRouter.post("/emailverification/:token", emailconfirmation);
-authRouter.post("/login1", validate(loginValidator), signIn);
 authRouter.post("/logout", logout);
 authRouter.post("/forgetpassword", forgetpassword);
 authRouter.post("/resetpassword", resetpassword);
@@ -75,15 +70,14 @@ authRouter.get("/login/failed", (req, res) => {
 
 authRouter.get(
   "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("google", { scope: ["profile", "email"] }),
 );
 
 authRouter.get(
   "/google/callback",
   passport.authenticate("google", {
+    successRedirect: CLIENT_URL + "feed",
     failureRedirect: "/login/failed",
   }),
-  signInWithGoogle
 );
-
 module.exports = authRouter;
