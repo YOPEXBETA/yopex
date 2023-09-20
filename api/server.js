@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://yopex-api.tabaani.co/",
+    origin: "https://yopex.tabaani.co/",
     credentials: true,
   })
 );
