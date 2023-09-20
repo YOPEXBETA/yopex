@@ -55,13 +55,13 @@ authRouter.post("/forgetpassword", forgetpassword);
 authRouter.post("/resetpassword", resetpassword);
 
 //Google Authentication Success
-authRouter.get("/login/success", (req, res) => {
+authRouter.get("/logind/success", (req, res) => {
   if (req.user) {
     return res.cookie("accessToken", "test").res.status(200).json(req.user);
   }
 });
 
-authRouter.get("/login/failed", (req, res) => {
+authRouter.get("/logind/failed", (req, res) => {
   res.status(401).json({
     success: false,
     message: "failure",
@@ -77,7 +77,7 @@ authRouter.get(
   "/google/callback",
   passport.authenticate("google", {
     successRedirect: CLIENT_URL + "feed",
-    failureRedirect: "/login/failed",
+    failureRedirect: "/logind/failed",
   }),
 );
 module.exports = authRouter;
