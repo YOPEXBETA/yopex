@@ -168,7 +168,7 @@ const signIn = async (req, res) => {
       if (req.body.rememberMe) {
         cookiesOptions.expires = moment().add("15", "days").toDate();
       }
-      return res.cookie("accessToken", token, cookiesOptions).status(200).send(info);
+      return res.status(200).json(info);
     } else {
       return res.status(403).json({ error: "Your account is banned" });
     }
