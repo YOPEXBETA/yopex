@@ -22,12 +22,16 @@ const passport = require("passport");
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: "https://yopex.tabaani.co/",
-    credentials: true,
-  })
-);
+const corsOpts = {
+  origin: "*",
+
+  methods: ["GET", "POST", "PUT", "DELETE"],
+
+  allowedHeaders: ["Content-Type"],
+};
+
+app.use(cors(corsOpts));
+
 connectDB();
 
 //app routes
