@@ -2,7 +2,7 @@ const express = require("express");
 const authRouter = express.Router();
 const passport = require("passport");
 
-const CLIENT_URL = "http://localhost:3000/";
+const CLIENT_URL = "https://yopex.tabaani.co/";
 
 //imported controllers
 const {

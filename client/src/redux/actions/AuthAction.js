@@ -146,11 +146,7 @@ export const emailVerification = (token) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    console.log("logout action");
-
-    // clear token and user from local storage
-    localStorage.removeItem("user");
-    Cookies.remove("accessToken");
+    localStorage.removeItem("accessToken");
 
     dispatch({
       type: "logout_success",
