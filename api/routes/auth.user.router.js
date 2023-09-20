@@ -60,6 +60,13 @@ authRouter.get("/login/success", (req, res) => {
     return res.cookie("accessToken", "test").res.status(200).json(req.user);
   }
 });
+authRouter.options('/login', (req, res) => {
+  // Set CORS headers to allow requests from specific origins
+  res.header('Access-Control-Allow-Origin', 'https://yopex.tabaani.co'); // Replace with your frontend origin
+  res.header('Access-Control-Allow-Methods', 'POST');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Add any additional headers you need to allow
+  res.status(200).end();
+});
 
 authRouter.get("/login/failed", (req, res) => {
   res.status(401).json({
