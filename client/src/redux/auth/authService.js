@@ -9,26 +9,22 @@ const register = async (data) => {
 };
 
 const login = async (data) => {
-  const user = await axios.post(`https://yopex-api.tabaani.co/auth/login`, data);
-     console.log("login response:", user.data);
-    // get accessToken from headers
-    // const accessToken = user.headers;
-    console.log("----------")
-    console.log(user.headers)
-    console.log("----------")
-    // set accessToken to localStorage
-    // localStorage.setItem("accessToken", accessToken);
-    // set accessToken to axios default header
-    // dispatch({
-    //   type: "login_success",
-    //   payload: {
-    //     user: user.data,
-    //     token: data.token,
-    //     role: data.role,
-    //   },
-    // });
+  const user = await axios.post(
+    `https://yopex-api.tabaani.co/auth/login`,
+    data
+  );
+  console.log("login response:", user.data);
+  localStorage.setItem("accessToken", user.data.token);
+  // set accessToken to axios default header
+  // dispatch({
+  //   type: "login_success",
+  //   payload: {
+  //     user: user.data,
+  //     token: data.token,
+  //     role: data.role,
+  //   },
+  // });
 
-    localStorage.setItem("user", JSON.stringify(user.data));
   return user.data;
 };
 
@@ -45,11 +41,22 @@ const edit = async (data) => {
 };
 
 const getcurrentuser = async () => {
-  const user = await axios.get("https://yopex-api.tabaani.co/me", {
-    withCredentials: true,
-  });
-  // 
-  return user.data;
+  const accessToken = localStorage.getItem("accessToken");
+  axios
+    .get("https://yopex-api.tabaani.co/me", {
+      headers: {
+        Authorization: `token ${accessToken}`,
+      },
+    })
+    .then((res) => {
+      console.log(res.data);
+      return res.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  //
 };
 
 export const authService = { register, login, edit, getcurrentuser };
