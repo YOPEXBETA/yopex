@@ -13,7 +13,7 @@ const notificationModel = require("../models/notification.model");
 
 // Add middleware to parse incoming request bodies
 
-const YOUR_DOMAIN = "http://localhost:3000/settings";
+const YOUR_DOMAIN = "https://yopex-api.tabaani.co/settings";
 
 const stripePayment = async (req, res) => {
   const userId = req.userId;

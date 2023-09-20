@@ -2,7 +2,7 @@ const express = require("express");
 const authRouter = express.Router();
 const passport = require("passport");
 
-const CLIENT_URL = "http://localhost:3000/";
+const CLIENT_URL = "https://yopex-api.tabaani.co/";
 
 //imported controllers
 const {
@@ -49,7 +49,7 @@ authRouter.post(
       return validate(companyRegisterValidator)(req, res, next);
     }
   },
-  signUp,
+  signUp
 );
 
 authRouter.post("/emailverification/:token", emailconfirmation);
@@ -74,14 +74,15 @@ authRouter.get("/login/failed", (req, res) => {
 
 authRouter.get(
   "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] }),
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 authRouter.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/login/failed",
-  }),signInWithGoogle
+  }),
+  signInWithGoogle
 );
 
 module.exports = authRouter;

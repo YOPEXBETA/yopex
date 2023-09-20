@@ -55,7 +55,7 @@ const signUp = async (req, res) => {
       });
       await token.save();
 
-      const link = `http://localhost:3000/emailverification/${token.token}`;
+      const link = `https://yopex-api.tabaani.co/emailverification/${token.token}`;
       await sendEmail(newUser.email, link);
 
       // Check if the user is a first-time user and add the "Account Creation" badge
@@ -229,7 +229,7 @@ const forgetpassword = async (req, res) => {
       from: process.env.EMAIL_ADDRESS,
       to: email,
       subject: "Password Reset",
-      html: `<p>Please click the following link to reset your password:</p><a href="http://localhost:3000/reset-password/${resetToken}">http://localhost:3000/reset-password/${resetToken}</a>`,
+      html: `<p>Please click the following link to reset your password:</p><a href="https://yopex-api.tabaani.co/reset-password/${resetToken}">https://yopex-api.tabaani.co/reset-password/${resetToken}</a>`,
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -285,7 +285,7 @@ const signInWithGoogle = async (req, res) => {
   );
   res.cookie("accessToken", token, cookiesOptions);
 
-  res.redirect("http://localhost:3000/feed");
+  res.redirect("https://yopex-api.tabaani.co/feed");
 };
 
 const emailconfirmation = async (req, res) => {

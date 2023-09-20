@@ -9,7 +9,7 @@ const options = {
       version: "1.0.0",
       description: "express library API for the skillrise project",
     },
-    servers: [{ url: "http://localhost:3000" }],
+    servers: [{ url: "https://yopex-api.tabaani.co" }],
     //find the api in the route folder
   },
   apis: [path.join(__dirname, "../routes/*.js")],
