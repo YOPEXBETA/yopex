@@ -171,7 +171,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           </div>
           {/*mobile version*/}
           <div className="flex xl:hidden lg:hidden md:hidden flex-row sm:flex-row justify-between w-screen px-16 py-4 border-y-2 border-gray">
-            <div class="flex-col items-center">
+            <div className="flex-col items-center">
               <p className="text-base font-bold text-center">
                 {company?.posts.length}
               </p>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import {axios} from "../../axios";
 
 const url = "https://yopex-api.tabaani.co";
 
@@ -42,39 +42,30 @@ const edit = async (data) => {
 
 const getcurrentuser = async () => {
   const accessToken = localStorage.getItem("accessToken");
-  console.log({accessToken})
-
-
-  if(accessToken == undefined || accessToken == null || accessToken == "" || accessToken == "null" || accessToken == "undefined"){
-    axios
-    .get("https://yopex-api.tabaani.co/me")
-    .then((res) => {
-      console.log(res.data);
-      return res.data;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-  }else{
-   const axiosInstance = axios.create({
-      baseURL: "https://yopex-api.tabaani.co",
-    });
-    // axiosInstance.defaults.headers.common["auth"] = `token ${accessToken}`;
-    const user = await axiosInstance.get("/me");
-    console.log({user})
-    
-    // axios
-    // .get("https://yopex-api.tabaani.co/me")
-    // .then((res) => {
-    //   console.log(res.data);
-    //   return res.data;
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
+  if(!accessToken) {
+    return undefined;
   }
-  
+  if (
+    accessToken == undefined ||
+    accessToken == null ||
+    accessToken == "" ||
+    accessToken == "null" ||
+    accessToken == "undefined"
+  ) {
+    axios
+      .get("https://yopex-api.tabaani.co/me")
+      .then((res) => {
+        console.log(res.data);
+        return undefined;
+      })
+      .catch((error) => {
+        return undefined;
+      });
+  } else {
+
+    const user = await axios.get("https://yopex-api.tabaani.co/me");
+    return user.data;
+  }
 
   //
 };

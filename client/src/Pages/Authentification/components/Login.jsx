@@ -62,13 +62,13 @@ const Login = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full lg:w-4/6">
       <div>
         {error && <AlertContainer error={error} />}
-        <div class="grid grid-cols-1">
+        <div className="grid grid-cols-1">
           <div className="flex justify-center">
             <p className=" text-green-500 font-bold text-4xl">LOGIN TO YOPEX</p>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <label
               for="input-group-1"
               className="block  text-sm font-medium text-gray-400 mb-2"
@@ -97,7 +97,7 @@ const Login = () => {
               />
             </div>
           </div>
-          <div class="col-span-12">
+          <div className="col-span-12">
             <label
               for="input-group-1"
               className="block  text-sm font-medium text-gray-400 mb-2"
@@ -123,8 +123,8 @@ const Login = () => {
           </div>
         </div>
 
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <div className="flex items-center mb-4 justify-between">
               <div className="flex items-center">
                 <input
@@ -149,8 +149,8 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <button
               className="w-full bg-green-500 py-3 rounded-md text-md font-medium text-white"
               disabled={isSubmitting}
@@ -159,8 +159,8 @@ const Login = () => {
             </button>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <div className="flex justify-center gap-1">
               <p className="text-gray-400">Are you new here?</p>
               <a
@@ -172,8 +172,8 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <div className="flex items-center">
               <hr className="flex-grow border-t border-gray-300" />
               <p className="text-sm mx-4 text-gray-400">Login with</p>
@@ -181,8 +181,8 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-4 mb-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-4 mb-6">
+          <div className="col-span-12">
             <GoogleSignIn mode="login" />
           </div>
         </div>
