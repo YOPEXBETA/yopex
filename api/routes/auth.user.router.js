@@ -49,7 +49,19 @@ authRouter.post(
   },
   signUp,
 );
-authRouter.post("/login",  signIn);
+
+authRouter.post(
+  "/login",
+  (req, res, next) => {
+    if (req.body.role === "user") {
+      return validate(userRegisterValidator)(req, res, next);
+    } else if (req.body.role === "company") {
+      return validate(companyRegisterValidator)(req, res, next);
+    }
+  },
+  signUp,
+);
+// authRouter.post("/login/",  signIn);
 authRouter.post("/logout", logout);
 authRouter.post("/forgetpassword", forgetpassword);
 authRouter.post("/resetpassword", resetpassword);
