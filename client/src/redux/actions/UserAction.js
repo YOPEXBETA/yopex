@@ -115,7 +115,7 @@ export const followUser = (otheruserId) => async (dispatch, getState) => {
       {
         userId,
       },
-      { withCredentials: true }
+      
     );
     console.log(response);
     console.log("ddddd", otheruserId);
