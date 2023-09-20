@@ -34,7 +34,7 @@ export const login = (myData) => async (dispatch) => {
     console.log("login data:", myData);
 
     const { data } = await axios.post(
-      "https://yopex-api.tabaani.co/auth/signin",
+      "https://yopex-api.tabaani.co/auth/login",
       myData,
       
     );
