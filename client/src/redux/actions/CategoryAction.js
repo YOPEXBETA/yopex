@@ -3,7 +3,7 @@ import axios from "axios";
 export const getCategories = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "http://yopex-api.tabaani.co/category/getCategories",
+      "https://yopex-api.tabaani.co/category/getCategories",
       {
         withCredentials: true,
       }

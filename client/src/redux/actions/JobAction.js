@@ -4,7 +4,7 @@ export const getFeedPosts = async (dispatch, getState) => {
   try {
     const token = getState().Auth.token;
     console.log(token);
-    let url = "http://yopex-api.tabaani.co/post/posts";
+    let url = "https://yopex-api.tabaani.co/post/posts";
 
     const { data } = await axios.get(url, {
       withCredentials: true,

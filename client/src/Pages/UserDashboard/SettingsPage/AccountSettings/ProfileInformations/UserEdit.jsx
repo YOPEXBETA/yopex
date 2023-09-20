@@ -18,7 +18,7 @@ import React, { useEffect, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import countries from "world-countries";
+import countries from "../../../../../countries.json";
 import { edit, reset } from "../../../../../redux/auth/authSlice";
 import uploadFile from "../../../../../utils/uploadFile";
 import AlertContainer from "../../../../../Components/alerts";

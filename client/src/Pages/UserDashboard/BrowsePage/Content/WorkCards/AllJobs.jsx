@@ -20,7 +20,7 @@ const AllJobs = () => {
 
   const sendRequest = async () => {
     const res = await axios
-      .get("http://yopex-api.tabaani.co/job")
+      .get("https://yopex-api.tabaani.co/job")
       .catch((err) => console.log(err));
     const data = await res.data;
     return data;

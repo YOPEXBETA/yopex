@@ -13,7 +13,7 @@ const UserTableMenuItem = ({ userId, accountStatus }) => {
   const { mutate: onDelete } = useMutation({
     mutationFn: async () => {
       await axios.delete(
-        `http://yopex-api.tabaani.co/admin/delUsers/${userId}`,
+        `https://yopex-api.tabaani.co/admin/delUsers/${userId}`,
         {
           withCredentials: true,
         }
@@ -26,7 +26,7 @@ const UserTableMenuItem = ({ userId, accountStatus }) => {
 
   const { mutate: onBan } = useMutation({
     mutationFn: async () => {
-      await axios.get(`http://yopex-api.tabaani.co/user/ban/${userId}`, {
+      await axios.get(`https://yopex-api.tabaani.co/user/ban/${userId}`, {
         withCredentials: true,
       });
     },

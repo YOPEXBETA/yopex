@@ -3,7 +3,7 @@ import FireBaseSocialIcons from "./components/FirebaseSocialIcons";
 
 function GoogleSignIn({ mode }) {
   const handleSignIn = () => {
-    window.open("http://yopex-api.tabaani.co/auth/google", "_self");
+    window.open("https://yopex-api.tabaani.co/auth/google", "_self");
   };
 
   return (

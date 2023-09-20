@@ -30,7 +30,7 @@ const JobPopup = ({
   const handleApply = async (userId) => {
     try {
       const response = await axios.put(
-        `http://yopex-api.tabaani.co/job/jobs/${jobId}/apply/${userId}`
+        `https://yopex-api.tabaani.co/job/jobs/${jobId}/apply/${userId}`
       );
       setSnackbarMessage(response.data);
       setSnackbarSeverity("success");
@@ -45,7 +45,7 @@ const JobPopup = ({
   const handleUnapply = async (userId) => {
     try {
       const response = await axios.put(
-        `http://yopex-api.tabaani.co/job/jobs/${jobId}/unapply/${userId}`
+        `https://yopex-api.tabaani.co/job/jobs/${jobId}/unapply/${userId}`
       );
       setSnackbarMessage(response.data);
       setSnackbarSeverity("success");

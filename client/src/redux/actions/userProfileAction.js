@@ -6,7 +6,7 @@ export const userEditProfile = (formData, myData) => async (dispatch) => {
     console.log("edit profile data:", formData);
 
     const { data } = await axios.put(
-      ` http://yopex-api.tabaani.co/users/${myData._id}`,
+      ` https://yopex-api.tabaani.co/users/${myData._id}`,
       formData,
       {
         withCredentials: true,

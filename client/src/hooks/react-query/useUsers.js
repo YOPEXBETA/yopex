@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://yopex-api.tabaani.co";
+const url = process.env.URL || "https://yopex-api.tabaani.co";
 
 export const useUsers = () => {
   return useQuery("users", async () => {

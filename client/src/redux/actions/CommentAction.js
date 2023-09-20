@@ -3,7 +3,7 @@ import axios from "axios";
 export const addComment = (myData) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://yopex-api.tabaani.co/comment/",
+      "https://yopex-api.tabaani.co/comment/",
       myData,
       {
         withCredentials: true,
@@ -24,7 +24,7 @@ export const addComment = (myData) => async (dispatch) => {
 export const getComments = (postId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://yopex-api.tabaani.co/comment/${postId}`,
+      `https://yopex-api.tabaani.co/comment/${postId}`,
       {
         withCredentials: true,
       }

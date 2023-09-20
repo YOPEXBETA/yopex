@@ -30,7 +30,7 @@ const Participants = ({ handleClose, jobId, open }) => {
     const fetchAppliers = async () => {
       try {
         const response = await axios.get(
-          `http://yopex-api.tabaani.co/job/jobs/${jobId}/appliers`
+          `https://yopex-api.tabaani.co/job/jobs/${jobId}/appliers`
         );
         setAppliers(response.data);
       } catch (err) {
@@ -45,7 +45,7 @@ const Participants = ({ handleClose, jobId, open }) => {
     const loadAcceptedAppliers = async () => {
       try {
         const response = await axios.get(
-          `http://yopex-api.tabaani.co/job/jobs/${jobId}/accepted-appliers`
+          `https://yopex-api.tabaani.co/job/jobs/${jobId}/accepted-appliers`
         );
         setAcceptedAppliers(response.data);
       } catch (err) {
@@ -58,7 +58,7 @@ const Participants = ({ handleClose, jobId, open }) => {
   const acceptApplier = async (userId) => {
     try {
       const response = await axios.put(
-        `http://yopex-api.tabaani.co/job/jobs/${jobId}/appliers/${userId}/accept`
+        `https://yopex-api.tabaani.co/job/jobs/${jobId}/appliers/${userId}/accept`
       );
       console.log(response.data.message);
       setAcceptedAppliers([...acceptedAppliers, userId]);
@@ -75,7 +75,7 @@ const Participants = ({ handleClose, jobId, open }) => {
     setSort(true);
     try {
       const response = await axios.get(
-        `http://yopex-api.tabaani.co/job/jobs/${jobId}/sortedappliers`
+        `https://yopex-api.tabaani.co/job/jobs/${jobId}/sortedappliers`
       );
       setAppliers(response.data);
     } catch (err) {

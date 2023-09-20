@@ -4,14 +4,13 @@ import ScrollTop from "./Components/ScrollTop";
 import Routes from "./routes/index";
 import ThemeCustomization from "./themes";
 
-
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <ThemeCustomization>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={true} />
+        {/* <ReactQueryDevtools initialIsOpen={true} /> */}
         <ScrollTop>
           <Routes />
         </ScrollTop>

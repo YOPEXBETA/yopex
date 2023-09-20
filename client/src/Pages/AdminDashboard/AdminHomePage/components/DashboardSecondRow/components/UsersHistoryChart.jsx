@@ -8,7 +8,7 @@ const UsersHistoryChart = () => {
     queryKey: ["stats"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "http://yopex-api.tabaani.co/users/stats",
+        "https://yopex-api.tabaani.co/users/stats",
         {
           withCredentials: true,
         }

@@ -21,7 +21,7 @@ const ContestConversation = ({ conversationId, id }) => {
 
   if (chatContainerRef.current !== null)
     chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-  const url = process.env.URL || "http://yopex-api.tabaani.co";
+  const url = process.env.URL || "https://yopex-api.tabaani.co";
   useEffect(() => {
     const newSocket = io(`${url}`);
     setSocket(newSocket);

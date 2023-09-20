@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://yopex-api.tabaani.co";
+const url = process.env.URL || "https://yopex-api.tabaani.co";
 
 export const useAdminCompanies = () => {
   return useQuery({
@@ -66,7 +66,7 @@ export const useCompanies = () => {
     queryKey: ["companies"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "http://yopex-api.tabaani.co/company/all"
+        "https://yopex-api.tabaani.co/company/all"
       );
 
       return data;

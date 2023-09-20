@@ -3,7 +3,7 @@ import axios from "axios";
 export const SearchUsers = (searchKeyword) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://yopex-api.tabaani.co/users?search=${searchKeyword}`,
+      `https://yopex-api.tabaani.co/users?search=${searchKeyword}`,
       {
         withCredentials: true,
       }
@@ -22,7 +22,7 @@ export const getAllUsers = (myData) => async (dispatch, getState) => {
   try {
     const token = getState().Auth.token;
     console.log(token);
-    const { data } = await axios.get("http://yopex-api.tabaani.co/allusers", {
+    const { data } = await axios.get("https://yopex-api.tabaani.co/allusers", {
       withCredentials: true,
     });
     console.log("data:", data);
@@ -38,7 +38,7 @@ export const getAllUsers = (myData) => async (dispatch, getState) => {
 export const getUserFriends = (userId) => async (dispatch, getState) => {
   try {
     const response = await axios.get(
-      `http://yopex-api.tabaani.co/find/friends/${userId}`,
+      `https://yopex-api.tabaani.co/find/friends/${userId}`,
       {
         withCredentials: true,
       }
@@ -60,7 +60,7 @@ export const getUserFriends = (userId) => async (dispatch, getState) => {
 export const getUserFollowings = (userId) => async (dispatch, getState) => {
   try {
     const response = await axios.get(
-      `http://yopex-api.tabaani.co/find/followings/${userId}`,
+      `https://yopex-api.tabaani.co/find/followings/${userId}`,
       {
         withCredentials: true,
       }
@@ -84,7 +84,7 @@ export const getsuggestedUsers = (myData) => async (dispatch, getState) => {
     const token = getState().Auth.token;
     console.log(token);
     const { data } = await axios.get(
-      "http://yopex-api.tabaani.co/find/suggestedUsers",
+      "https://yopex-api.tabaani.co/find/suggestedUsers",
       {
         withCredentials: true,
       }
@@ -100,7 +100,7 @@ export const getsuggestedUsers = (myData) => async (dispatch, getState) => {
 
 export const getUserById = (id) => async (dispatch, getState) => {
   try {
-    const response = await axios.get(`http://yopex-api.tabaani.co/${id}`, {
+    const response = await axios.get(`https://yopex-api.tabaani.co/${id}`, {
       withCredentials: true,
     });
 
@@ -119,7 +119,7 @@ export const followUser = (otheruserId) => async (dispatch, getState) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user._id;
     const response = await axios.put(
-      `http://yopex-api.tabaani.co/toggleFollow/${otheruserId}`,
+      `https://yopex-api.tabaani.co/toggleFollow/${otheruserId}`,
       {
         userId,
       },
@@ -141,7 +141,7 @@ export const followUser = (otheruserId) => async (dispatch, getState) => {
 export const getBadgesEarnedByUser = (userId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://yopex-api.tabaani.co/${userId}/badges`,
+      `https://yopex-api.tabaani.co/${userId}/badges`,
       {
         withCredentials: true,
       }
@@ -162,7 +162,7 @@ export const getUserStats = (myData) => async (dispatch, getState) => {
     const token = getState().Auth.token;
     console.log(token);
     const { data } = await axios.get(
-      "http://yopex-api.tabaani.co/users/stats",
+      "https://yopex-api.tabaani.co/users/stats",
       {
         withCredentials: true,
       }

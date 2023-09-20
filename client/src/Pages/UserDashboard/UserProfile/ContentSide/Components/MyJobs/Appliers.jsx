@@ -38,7 +38,7 @@ const Appliers = ({ toggleOpen, job, open }) => {
   //   const fetchAppliers = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `http://yopex-api.tabaani.co/job/jobs/${job._id}/appliers`
+  //         `https://yopex-api.tabaani.co/job/jobs/${job._id}/appliers`
   //       );
   //       setAppliers(response.data);
   //     } catch (err) {
@@ -53,7 +53,7 @@ const Appliers = ({ toggleOpen, job, open }) => {
   //   const loadAcceptedAppliers = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `http://yopex-api.tabaani.co/job/jobs/${jobId}/accepted-appliers`
+  //         `https://yopex-api.tabaani.co/job/jobs/${jobId}/accepted-appliers`
   //       );
   //       setAcceptedAppliers(response.data);
   //     } catch (err) {
@@ -66,7 +66,7 @@ const Appliers = ({ toggleOpen, job, open }) => {
   // const acceptApplier = async (userId) => {
   //   try {
   //     const response = await axios.put(
-  //       `http://yopex-api.tabaani.co/job/jobs/${jobId}/appliers/${userId}/accept`
+  //       `https://yopex-api.tabaani.co/job/jobs/${jobId}/appliers/${userId}/accept`
   //     );
   //     console.log(response.data.message);
   //     setAcceptedAppliers([...acceptedAppliers, userId]);

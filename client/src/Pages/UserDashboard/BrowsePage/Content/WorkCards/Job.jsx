@@ -58,7 +58,7 @@ const Job = ({
 
   const deleteRequest = async () => {
     const res = await axios
-      .delete(`http://yopex-api.tabaani.co/job/${id}`)
+      .delete(`https://yopex-api.tabaani.co/job/${id}`)
       .catch((err) => console.log(err));
     const data = await res.data;
     return data;
