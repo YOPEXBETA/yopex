@@ -49,7 +49,7 @@ authRouter.post(
   },
   signUp,
 );
-authRouter.post("/login", validate(loginValidator), signIn);
+authRouter.post("/login",  signIn);
 authRouter.post("/logout", logout);
 authRouter.post("/forgetpassword", forgetpassword);
 authRouter.post("/resetpassword", resetpassword);
