@@ -10,7 +10,7 @@ const register = async (data) => {
 
 const login = async (data) => {
   
-  const user = await axios.post(`https://yopex-api.tabaani.co/job/all`, data).then((res) => {
+  const user = await axios.post(`https://yopex-api.tabaani.co/auth/signin`, data).then((res) => {
     console.log(res);
     return user.data;
   }).catch((err) => {
