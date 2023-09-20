@@ -24,7 +24,7 @@ export const CreateMessage =
         `https://yopex-api.tabaani.co/messages/`,
         { conversationId, message, sender },
         {
-          withCredentials: true,
+          
         }
       );
       dispatch({

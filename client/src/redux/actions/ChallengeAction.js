@@ -20,7 +20,7 @@ export const getChallenges =
       const { data } = await axios.get(
         `https://yopex-api.tabaani.co/challenge/challenges?${query}`,
         {
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -47,7 +47,7 @@ export const getCompanyChallenges =
       const { data } = await axios.get(
         ` https://yopex-api.tabaani.co/company/get/${companyId}`,
         {
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -198,7 +198,7 @@ export const getChallengeUsers =
           params: {
             idChallenge: challengeId,
           },
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -229,7 +229,7 @@ export const submitChallenge =
         "https://yopex-api.tabaani.co/challenge/submission",
         challengeData,
         {
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -260,7 +260,7 @@ export const getUserSubmitChallenge =
             challengeId: challengeId,
             userId: userId,
           },
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -290,7 +290,7 @@ export const getUserChallenges = (userId) => async (dispatch, getState) => {
         params: {
           userId: userId,
         },
-        withCredentials: true,
+        
       }
     );
     console.log("data:", data);

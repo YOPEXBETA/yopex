@@ -37,7 +37,7 @@ export const useCreateJob = (user) => {
         `${url}/job/add`,
         { companyId, ...JobData },
         {
-          withCredentials: true,
+          
         }
       );
     },

@@ -70,7 +70,7 @@ export const useDeletePost = (userId, category = "") => {
     mutationFn: async (postId) => {
       await axios.delete(`${url}/post/${postId}`, {
         headers: { userId: userId },
-        withCredentials: true,
+        
       });
     },
     onSuccess: () => {
@@ -103,7 +103,6 @@ export const useLikePost = (userId, ownerId, category = "") => {
       await axios.patch(
         `${url}/post/${postId}/like`,
         { userId },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {
@@ -126,7 +125,6 @@ export const useSharePost = (userId, ownerId, category = "") => {
       await axios.patch(
         `${url}/post/share`,
         { postId, userId },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {
@@ -148,7 +146,6 @@ export const useBookmarkPost = (userId, postId, category = "") => {
       await axios.patch(
         `${url}/post/${userId}/bookmark/${postId}`,
         { userId },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {

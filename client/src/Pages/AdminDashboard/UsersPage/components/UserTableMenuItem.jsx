@@ -15,7 +15,7 @@ const UserTableMenuItem = ({ userId, accountStatus }) => {
       await axios.delete(
         `https://yopex-api.tabaani.co/admin/delUsers/${userId}`,
         {
-          withCredentials: true,
+          
         }
       );
     },

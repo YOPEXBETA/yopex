@@ -75,7 +75,7 @@ export const deletePost = (postId) => async (dispatch) => {
         headers: {
           userId: userId,
         },
-        withCredentials: true,
+        
       }
     );
     console.log("response", response);

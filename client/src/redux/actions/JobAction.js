@@ -7,7 +7,7 @@ export const getFeedPosts = async (dispatch, getState) => {
     let url = "https://yopex-api.tabaani.co/post/posts";
 
     const { data } = await axios.get(url, {
-      withCredentials: true,
+      
     });
     console.log("data:", data);
     dispatch({

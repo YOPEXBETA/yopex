@@ -21,7 +21,7 @@ export const getAllUsers = (myData) => async (dispatch, getState) => {
     const token = getState().Auth.token;
     console.log(token);
     const { data } = await axios.get("https://yopex-api.tabaani.co/allusers", {
-      withCredentials: true,
+      
     });
     console.log("data:", data);
     dispatch({
@@ -93,7 +93,7 @@ export const getsuggestedUsers = (myData) => async (dispatch, getState) => {
 export const getUserById = (id) => async (dispatch, getState) => {
   try {
     const response = await axios.get(`https://yopex-api.tabaani.co/${id}`, {
-      withCredentials: true,
+      
     });
 
     dispatch({

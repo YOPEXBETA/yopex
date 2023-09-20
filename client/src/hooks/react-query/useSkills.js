@@ -20,7 +20,6 @@ export const useCreateSkill = () => {
       const { data } = await axios.post(
         `${url}/skill/addskill`,
         { name },
-        { withCredentials: true }
       );
       return data;
     },
@@ -50,7 +49,6 @@ export const useUpdateSkill = () => {
       await axios.put(
         `${url}/skill/updateskill/${data.id}`,
         { name: data.name },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {

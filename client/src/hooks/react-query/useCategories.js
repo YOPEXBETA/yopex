@@ -20,7 +20,6 @@ export const useCreateCategory = () => {
       const { data } = await axios.post(
         `${url}/category/addCategory`,
         { name },
-        { withCredentials: true }
       );
       return data;
     },
@@ -49,7 +48,6 @@ export const useUpdateCategory = () => {
       await axios.put(
         `${url}/category/updateCategory/${data.id}`,
         { name: data.name },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {
@@ -78,7 +76,6 @@ export const useLikePost = (currentPost, posts, userId, category) => {
       await axios.patch(
         `${url}/post/${currentPost._id}/like`,
         { userId },
-        { withCredentials: true }
       );
     },
     onMutate: async (status) => {
@@ -144,7 +141,6 @@ export const useSharePost = (currentPost, userId, category) => {
       await axios.patch(
         `${url}/post/share`,
         { postId: currentPost._id, userId },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {

@@ -30,7 +30,7 @@ export const useGetContestConversation = (contestId) => {
       const { data } = await axios.get(
         `${url}/contestconversation/${contestId}`,
         {
-          withCredentials: true,
+          
         }
       );
       return data;

@@ -9,7 +9,6 @@ export const useChallengeById = (challengeId) => {
     queryFn: async () => {
       const { data } = await axios.get(
         `${url}/challenge/single/${challengeId}`,
-        { withCredentials: true }
       );
       return data;
     },
@@ -35,7 +34,7 @@ export const useUserChallenges = (user) => {
     queryFn: async () => {
       const { data } = await axios.get(`${url}/user/challenges`, {
         params: { userId: user._id },
-        withCredentials: true,
+        
       });
       return data;
     },
@@ -48,7 +47,6 @@ export const useChallengesById = (companyId) => {
     async () => {
       const { data } = await axios.get(
         `${url}/challenge/company/${companyId}`,
-        { withCredentials: true }
       );
       return data;
     },
@@ -72,7 +70,7 @@ export const useUserSubmission = (challengeId, participant) => {
             userId: participantId,
             challengeId: challengeId,
           },
-          withCredentials: true,
+          
         }
       );
       return data;
@@ -112,7 +110,6 @@ export const useFindChallenges = (
       }
       const { data } = await axios.get(
         `${url}/challenge/challenges/all?${query}`,
-        { withCredentials: true }
       );
 
       return data;
@@ -142,7 +139,7 @@ export const useCreateChallenge = () => {
         `${url}/challenge/add`,
         { companyId, ...challengeData, paid },
         {
-          withCredentials: true,
+          
         }
       );
     },
@@ -200,7 +197,7 @@ export const useChooseWinner = () => {
         `${url}/company/challengeWinner`,
         challengeData,
         {
-          withCredentials: true,
+          
         }
       );
       console.log(data);
@@ -215,7 +212,7 @@ const getChallenges = async (userId) => {
     params: {
       userId: userId,
     },
-    withCredentials: true,
+    
   });
   return data;
 };

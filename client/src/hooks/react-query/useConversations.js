@@ -27,7 +27,7 @@ export const useMessages = (conversationId) => {
 //   `https://yopex-api.tabaani.co/messages/`,
 //   { conversationId, message, sender },
 //   {
-//     withCredentials: true,
+//     
 //   }
 // );
 
@@ -40,7 +40,7 @@ export const useCreateMessage = (conversationId) => {
         `${url}/messages/`,
         { conversationId, ...data },
         {
-          withCredentials: true,
+          
         }
       );
     },
@@ -68,7 +68,7 @@ export const useContestMessages = (conversationId) => {
       const { data } = await axios.get(
         `${url}/messages/contest/${conversationId}`,
         {
-          withCredentials: true,
+          
         }
       );
       return data;

@@ -39,7 +39,7 @@ export const useDeleteComment = (postId) => {
     mutationFn: async ({ CommentId, postId }) => {
       await axios.delete(`${url}/comment/${CommentId}`, {
         data: { postId },
-        withCredentials: true,
+        
       });
     },
     onSuccess: () => {

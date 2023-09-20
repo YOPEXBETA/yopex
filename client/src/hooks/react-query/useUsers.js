@@ -7,7 +7,7 @@ const url = process.env.URL || "https://yopex-api.tabaani.co";
 export const useUsers = () => {
   return useQuery("users", async () => {
     const { data } = await axios.get(`${url}/allusers`, {
-      withCredentials: true,
+      
     });
     return data;
   });
@@ -59,7 +59,6 @@ export const usePayment = () => {
       const { data } = await axios.post(
         `${url}/api/payment`,
         { amount: amount },
-        { withCredentials: true }
       );
       return data;
     },
@@ -78,7 +77,6 @@ export const useVerifyPayment = () => {
       const { data } = await axios.post(
         `${url}/api/payment/${id}`,
         { amount: 0 },
-        { withCredentials: true }
       );
       return data;
     },
@@ -96,7 +94,6 @@ export const useFollowUser = (currentUserId, userId) => {
       await axios.put(
         `${url}/toggleFollow/${userId}`,
         { userId: currentUserId },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {
@@ -116,7 +113,6 @@ export const useFollowCompany = (currentUserId, companyId) => {
       await axios.put(
         `${url}/toggleFollowCompany/${companyId}`,
         { userId: currentUserId },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {
@@ -195,7 +191,7 @@ export const useUserChallenges = (userId) => {
         params: {
           userId: userId,
         },
-        withCredentials: true,
+        
       });
       return data;
     },
@@ -271,7 +267,6 @@ export const useSeeNotification = (userId) => {
       await axios.put(
         `${url}/notifications/seen`,
         {},
-        { withCredentials: true }
       );
     },
     onSuccess: () => {

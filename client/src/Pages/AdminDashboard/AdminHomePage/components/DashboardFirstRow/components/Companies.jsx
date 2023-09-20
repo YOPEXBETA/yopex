@@ -10,7 +10,7 @@ const Companies = () => {
       const { data } = await axios.get(
         "https://yopex-api.tabaani.co/admin/Companies",
         {
-          withCredentials: true,
+          
         }
       );
       return data;

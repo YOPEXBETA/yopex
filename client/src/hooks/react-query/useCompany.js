@@ -20,7 +20,6 @@ export const useApproveCompany = () => {
       await axios.post(
         `${url}/admin/appCompany`,
         { companyId },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {

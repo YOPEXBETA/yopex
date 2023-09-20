@@ -11,7 +11,6 @@ export const useCreateLevel = () => {
       await axios.post(
         `${url}/admin/createLevel`,
         { adminDefinedPoints },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {
@@ -28,7 +27,6 @@ export const useUpdateLevel = () => {
       const { data } = await axios.put(
         `${url}/admin/updateLevel/${level._id}`,
         { maxScore: level.maxScore },
-        { withCredentials: true }
       );
 
       return data;

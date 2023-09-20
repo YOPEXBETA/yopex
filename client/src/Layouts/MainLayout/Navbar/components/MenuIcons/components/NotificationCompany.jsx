@@ -27,7 +27,7 @@ const NotificationBell = () => {
         .get(
           `https://yopex-api.tabaani.co/company/company/${userId}/notifications`,
           {
-            withCredentials: true,
+            
           }
         )
         .then((response) => {

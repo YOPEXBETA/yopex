@@ -10,7 +10,7 @@ const UsersHistoryChart = () => {
       const { data } = await axios.get(
         "https://yopex-api.tabaani.co/users/stats",
         {
-          withCredentials: true,
+          
         }
       );
       return data;

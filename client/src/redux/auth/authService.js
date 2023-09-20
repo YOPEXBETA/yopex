@@ -30,7 +30,7 @@ const edit = async (data) => {
     ` https://yopex-api.tabaani.co/users/edit`,
     data,
     {
-      withCredentials: true,
+      
     }
   );
 
@@ -39,7 +39,7 @@ const edit = async (data) => {
 
 const getcurrentuser = async () => {
   const user = await axios.get("https://yopex-api.tabaani.co/me", {
-    withCredentials: true,
+    
   });
   return user.data;
 };
