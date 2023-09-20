@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:8000";
+const url = "http://yopex-api.tabaani.co";
 
 const getBadgeType = async () => {
   const { data } = await axios.get(`${url}/badgeType/badgeTypes`, {

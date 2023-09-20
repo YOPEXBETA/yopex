@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-//const url = "http://localhost:8000/job";
+//const url = "http://yopex-api.tabaani.co/job";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "http://yopex-api.tabaani.co";
 
 export const useJobs = () => {
   return useQuery({

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8000";
+const url = "http://yopex-api.tabaani.co";
 
 const searchUsers = async (searchKeyword) => {
   const { data } = await axios.get(`${url}/users`, {
@@ -41,7 +41,7 @@ const getSuggestedUsers = async (myData) => {
 };
 
 const getUserById = async (id) => {
-  const { data } = await axios.get(`http://localhost:8000/${id}`, {
+  const { data } = await axios.get(`http://yopex-api.tabaani.co/${id}`, {
     withCredentials: true,
   });
   return data;
@@ -58,7 +58,7 @@ const followUser = async (otheruserId, userId) => {
 
 const getBadgesEarnedByUser = async (userId) => {
   const { data } = await axios.get(
-    `http://localhost:8000/${userId}/badges`,
+    `http://yopex-api.tabaani.co/${userId}/badges`,
     {
       withCredentials: true,
     }
@@ -67,7 +67,7 @@ const getBadgesEarnedByUser = async (userId) => {
 };
 
 const getUserStats = async (myData) => {
-  const { data } = await axios.get("http://localhost:8000/users/stats", {
+  const { data } = await axios.get("http://yopex-api.tabaani.co/users/stats", {
     withCredentials: true,
   });
   return data;

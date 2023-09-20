@@ -25,7 +25,7 @@ const NotificationBell = () => {
     if (userId) {
       axios
         .get(
-          `http://localhost:8000/company/company/${userId}/notifications`,
+          `http://yopex-api.tabaani.co/company/company/${userId}/notifications`,
           {
             withCredentials: true,
           }

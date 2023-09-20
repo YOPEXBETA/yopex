@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8000";
+const url = "http://yopex-api.tabaani.co";
 
 const register = async (data) => {
   console.log(data);
@@ -16,15 +16,19 @@ const login = async (data) => {
 };
 
 const edit = async (data) => {
-  const user = await axios.put(` http://localhost:8000/users/edit`, data, {
-    withCredentials: true,
-  });
+  const user = await axios.put(
+    ` http://yopex-api.tabaani.co/users/edit`,
+    data,
+    {
+      withCredentials: true,
+    }
+  );
 
   return user.data;
 };
 
 const getcurrentuser = async () => {
-  const user = await axios.get("http://localhost:8000/me", {
+  const user = await axios.get("http://yopex-api.tabaani.co/me", {
     withCredentials: true,
   });
   return user.data;

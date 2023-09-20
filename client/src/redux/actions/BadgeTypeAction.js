@@ -3,7 +3,7 @@ import axios from "axios";
 export const getBadgeType = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "http://localhost:8000/badgeType/badgeTypes",
+      "http://yopex-api.tabaani.co/badgeType/badgeTypes",
       {
         withCredentials: true,
       }
@@ -21,7 +21,7 @@ export const getBadgeType = () => async (dispatch) => {
 export const addBadge = (badgeData) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/badgeType/add",
+      "http://yopex-api.tabaani.co/badgeType/add",
       badgeData,
       {
         withCredentials: true,

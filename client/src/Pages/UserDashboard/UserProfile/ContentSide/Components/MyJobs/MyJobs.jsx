@@ -19,7 +19,7 @@ const MyJobs = () => {
   // const { data, isLoading } = useUserJobs(user._id);
   // const sendRequest = async () => {
   //   const res = await axios
-  //     .get(`http://localhost:8000/job/user/${id}`)
+  //     .get(`http://yopex-api.tabaani.co/job/user/${id}`)
   //     .catch((err) => console.log(err));
   //   const data = await res.data;
   //   return data;

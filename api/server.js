@@ -7,7 +7,6 @@ const { Server } = require("socket.io");
 const app = express();
 const dotenv = require("dotenv");
 const connectDB = require("./config/connectDB"); //connect to the database
-const createAdminUser = require("./config/adminUser"); //create the admin user
 app.use(
   session({
     secret: "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", // set your secret key
@@ -38,21 +37,6 @@ const ContestConversationModel = require("./models/ContestConversation.model");
 app.use("/", indexRouter);
 
 const PORT = process.env.PORT || 5000;
-
-//createAdminUser();
-
-// async function addYearsRegisteredToUsers() {
-//   const users = await User.find({});
-//   for (const user of users) {
-//     user.yearsRegistered = user.yearsRegistered || 0;
-//     console.log(user.yearsRegistered);
-//     await user.save();
-//   }
-//   console.log("Years registered added to all users.");
-//   process.exit();
-// }
-
-// addYearsRegisteredToUsers();
 
 const server = http.createServer(app);
 const sendNotification = initializeSocketIO(server); // Pass the http server to the socket setup function

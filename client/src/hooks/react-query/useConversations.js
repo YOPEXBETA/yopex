@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "http://yopex-api.tabaani.co";
 
 export const useConversations = (userId) => {
   return useQuery({
@@ -28,7 +28,7 @@ export const useMessages = (conversationId) => {
 };
 
 // const response = await axios.post(
-//   `http://localhost:8000/messages/`,
+//   `http://yopex-api.tabaani.co/messages/`,
 //   { conversationId, message, sender },
 //   {
 //     withCredentials: true,

@@ -13,7 +13,7 @@ const NotificationBell = () => {
   const [notifications, setNotifications] = useState([]);
   const [socket, setSocket] = useState(null);
 
-  const url = process.env.URL || "http://localhost:8000";
+  const url = process.env.URL || "http://yopex-api.tabaani.co";
 
   useEffect(() => {
     const newSocket = io(`${url}`);

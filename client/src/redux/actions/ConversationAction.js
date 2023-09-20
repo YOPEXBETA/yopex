@@ -6,7 +6,7 @@ export const getConversations = (userId) => async (dispatch) => {
     const userId = user._id;
 
     const response = await axios.get(
-      `http://localhost:8000/conversation/${userId}`,
+      `http://yopex-api.tabaani.co/conversation/${userId}`,
       {
         withCredentials: true,
       }
@@ -25,7 +25,7 @@ export const CreateConversation = (data) => async (dispatch, getState) => {
     const token = getState().Auth.token;
     console.log(token);
     const response = await axios.post(
-      `http://localhost:8000/conversation/`,
+      `http://yopex-api.tabaani.co/conversation/`,
       {
         senderId: data.senderId,
         receiverId: data.receiverId,

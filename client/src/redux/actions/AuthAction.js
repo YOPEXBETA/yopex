@@ -6,7 +6,7 @@ export const register = (myData) => async (dispatch) => {
     console.log("register data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/auth/register",
+      "http://yopex-api.tabaani.co/auth/register",
       myData
     );
 
@@ -34,7 +34,7 @@ export const login = (myData) => async (dispatch) => {
     console.log("login data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/auth/login",
+      "http://yopex-api.tabaani.co/auth/login",
       myData,
       {
         withCredentials: true,
@@ -73,7 +73,7 @@ export const forgetPassword = (myData) => async (dispatch) => {
     console.log("forget password data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/auth/forgetpassword",
+      "http://yopex-api.tabaani.co/auth/forgetpassword",
       myData
     );
 
@@ -98,7 +98,7 @@ export const forgetPassword = (myData) => async (dispatch) => {
 export const resetPassword = (myData) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/auth/resetpassword",
+      "http://yopex-api.tabaani.co/auth/resetpassword",
       myData
     );
 
@@ -123,7 +123,7 @@ export const resetPassword = (myData) => async (dispatch) => {
 export const emailVerification = (token) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/auth/emailverification/${token}`
+      `http://yopex-api.tabaani.co/auth/emailverification/${token}`
     );
 
     console.log("Email verification :", data);
@@ -170,7 +170,7 @@ export const verifyface = (myData) => async (dispatch) => {
     console.log("login data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/facerecog/verifyface",
+      "http://yopex-api.tabaani.co/facerecog/verifyface",
       myData,
       {
         withCredentials: true,
@@ -208,7 +208,7 @@ export const addface = (myData) => async (dispatch, getState) => {
     const token = getState().Auth.token;
 
     const { data } = await axios.post(
-      "http://localhost:8000/facerecog/addface",
+      "http://yopex-api.tabaani.co/facerecog/addface",
       myData,
       {
         withCredentials: true,

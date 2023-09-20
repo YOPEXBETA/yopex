@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "http://yopex-api.tabaani.co";
 
 export const useCreateLevel = () => {
   const queryClient = useQueryClient();

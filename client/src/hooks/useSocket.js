@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "http://yopex-api.tabaani.co";
 
 const useSocket = () => {
   const socket = io.connect(`${url}`);

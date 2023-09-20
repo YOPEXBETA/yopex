@@ -5,9 +5,12 @@ export const getUsers = () => async (dispatch, getState) => {
     const token = getState().Auth.token;
     console.log(token);
 
-    const { data } = await axios.get("http://localhost:8000/admin/Users", {
-      withCredentials: true,
-    });
+    const { data } = await axios.get(
+      "http://yopex-api.tabaani.co/admin/Users",
+      {
+        withCredentials: true,
+      }
+    );
     console.log("data:", data);
     dispatch({
       type: "get_users_success",
@@ -32,7 +35,7 @@ export const getCompanies = () => async (dispatch, getState) => {
     console.log(token);
 
     const { data } = await axios.get(
-      "http://localhost:8000/admin/Companies",
+      "http://yopex-api.tabaani.co/admin/Companies",
       {
         withCredentials: true,
       }
@@ -66,7 +69,7 @@ export const addUser = (userData) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:8000/users",
+      "http://yopex-api.tabaani.co/users",
       userData,
       config
     );
@@ -91,7 +94,7 @@ export const approveCompany = (companyId) => async (dispatch, getState) => {
     console.log(companyId);
 
     const { data } = await axios.post(
-      "http://localhost:8000/admin/appCompany",
+      "http://yopex-api.tabaani.co/admin/appCompany",
       { companyId },
       {
         withCredentials: true,
@@ -124,7 +127,7 @@ export const deleteUser = (userId) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      `http://localhost:8000/admin/delUsers/${userId}`,
+      `http://yopex-api.tabaani.co/admin/delUsers/${userId}`,
       config
     );
 

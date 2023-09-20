@@ -8,7 +8,7 @@ const Companies = () => {
     queryKey: ["companies"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/admin/Companies",
+        "http://yopex-api.tabaani.co/admin/Companies",
         {
           withCredentials: true,
         }

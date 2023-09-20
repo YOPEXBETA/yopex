@@ -3,7 +3,7 @@ import axios from "axios";
 export const getMessages = (conversationId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/messages/${conversationId}`,
+      `http://yopex-api.tabaani.co/messages/${conversationId}`,
       {
         withCredentials: true,
       }
@@ -23,7 +23,7 @@ export const CreateMessage =
   (conversationId, message, sender) => async (dispatch) => {
     try {
       const response = await axios.post(
-        `http://localhost:8000/messages/`,
+        `http://yopex-api.tabaani.co/messages/`,
         { conversationId, message, sender },
         {
           withCredentials: true,

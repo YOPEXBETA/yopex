@@ -4,7 +4,7 @@ export const getReviews = (userId) => async (dispatch) => {
   try {
     console.log(userId);
     const response = await axios.get(
-      `http://localhost:8000/reviews/${userId}`,
+      `http://yopex-api.tabaani.co/reviews/${userId}`,
       {
         withCredentials: true,
       }
@@ -26,7 +26,7 @@ export const getReviews = (userId) => async (dispatch) => {
 export const addReview = (review) => async (dispatch) => {
   try {
     const response = await axios.post(
-      `http://localhost:8000/review/create`,
+      `http://yopex-api.tabaani.co/review/create`,
       review,
       {
         withCredentials: true,
