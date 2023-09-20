@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
 import { useCreateConversation } from "../../../../hooks/react-query/useConversations";
-import { useSuggestedUsers, useUserById } from "../../../../hooks/react-query/useUsers";
+import { useSearchUsers, useSetquery, useSuggestedUsers, useUserById } from "../../../../hooks/react-query/useUsers";
 import { ListItem } from "@mui/material";
 
 export default function CreateConversationDrawer() {
@@ -13,10 +13,12 @@ export default function CreateConversationDrawer() {
 
   const { user } = useSelector((state) => state.auth);
   const { mutate } = useCreateConversation(user._id);
-  let { data: users } = useSuggestedUsers();
+  let { data: users } = useSearchUsers();
   const { data: userProfile} = useUserById(user._id);
   const [selectedOption, setSelectedOption] = useState(user._id);
   const [filteredUsers, setFilteredUsers] = useState(users);
+  const [query, setQuery] = useState("");
+  const { mutate:search, isSuccess } = useSetquery();
 
   const [state, setState] = useState({
     top: false,
@@ -24,6 +26,12 @@ export default function CreateConversationDrawer() {
     bottom: false,
     right: false,
   });
+
+  const handleSearchUsers = (event) => {
+    setQuery(event.target.value);
+    search(event.target.value);
+  };
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -40,14 +48,17 @@ export default function CreateConversationDrawer() {
   const handleTextFieldClick = (event) => {
     event.stopPropagation();
     event.preventDefault();
+
   };
   useEffect(() => {
+    
     if (selectedOption !== user._id && users) {
       const filtered = users?.filter((user) => user.role === "user");
       setFilteredUsers(filtered);
     } else {
       setFilteredUsers(users);
     }
+    
   }, [selectedOption, users]);
   
 
@@ -74,7 +85,10 @@ export default function CreateConversationDrawer() {
     >
       <ul>
         <ListItem>
-          <TextField fullWidth onClick={handleTextFieldClick} />
+          <TextField fullWidth onClick={()=>{
+            handleTextFieldClick();
+          }}
+          onChange={handleSearchUsers} />
         </ListItem>
         {userProfile?.companies.length!==0 && <select
           id="selectField"
@@ -90,7 +104,7 @@ export default function CreateConversationDrawer() {
             ))}
         </select>}
 
-        {users?.map((user) => (
+        {filteredUsers?.map((user) => (
           <li key={user._id} className="px-8 py-4 hover:bg-gray-100">
             <button
               className="flex items-center w-full"
