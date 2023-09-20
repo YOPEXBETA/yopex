@@ -26,9 +26,7 @@ const UserTableMenuItem = ({ userId, accountStatus }) => {
 
   const { mutate: onBan } = useMutation({
     mutationFn: async () => {
-      await axios.get(`https://yopex-api.tabaani.co/user/ban/${userId}`, {
-        withCredentials: true,
-      });
+      await axios.get(`https://yopex-api.tabaani.co/user/ban/${userId}`, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });

@@ -5,9 +5,7 @@ export const addComment = (myData) => async (dispatch) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/comment/",
       myData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log(data);
@@ -25,9 +23,7 @@ export const getComments = (postId) => async (dispatch) => {
   try {
     const response = await axios.get(
       `https://yopex-api.tabaani.co/comment/${postId}`,
-      {
-        withCredentials: true,
-      }
+      
     );
     const comments = response.data;
 

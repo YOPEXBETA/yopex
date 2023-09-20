@@ -7,9 +7,7 @@ export const useCategories = () => {
   return useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/category/getCategories`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/category/getCategories`, );
       return data;
     },
   });
@@ -36,9 +34,7 @@ export const useDeleteCategory = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id) => {
-      await axios.delete(`${url}/category/deleteCategory/${id}`, {
-        withCredentials: true,
-      });
+      await axios.delete(`${url}/category/deleteCategory/${id}`, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
@@ -68,9 +64,7 @@ export const usePostsByCategory = (category) => {
     queryFn: async () => {
       let url = `${url}/post/posts`;
       if (category !== "") url += `?categories=${category}`;
-      const { data } = await axios.get(url, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(url, );
       return data;
     },
   });

@@ -36,9 +36,7 @@ export const login = (myData) => async (dispatch) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/auth/signin",
       myData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log("login response:", data);
@@ -172,9 +170,7 @@ export const verifyface = (myData) => async (dispatch) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/facerecog/verifyface",
       myData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log("login response:", data);
@@ -210,9 +206,7 @@ export const addface = (myData) => async (dispatch, getState) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/facerecog/addface",
       myData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log("login response:", data);

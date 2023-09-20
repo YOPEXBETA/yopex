@@ -76,9 +76,7 @@ export const addChallenge = (challengeData) => async (dispatch, getState) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/challenge",
       challengeData,
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log("data", data);
 
@@ -103,9 +101,7 @@ export const deleteChallenge = (challengeId) => async (dispatch, getState) => {
     console.log({ challengeId });
     const { data } = await axios.delete(
       `https://yopex-api.tabaani.co/challenge/deleteChallenge/${challengeId}`,
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log(data);
 
@@ -136,9 +132,7 @@ export const joinChallenge = (challengeId) => async (dispatch, getState) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/join",
       challengeData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log(data);
@@ -169,9 +163,7 @@ export const UnjoinChallenge = (challengeId) => async (dispatch, getState) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/unjoin",
       challengeData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log(data);
@@ -328,9 +320,7 @@ export const chooseWinner = (challengeData) => async (dispatch, getState) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/company/challengeWinner",
       challengeData,
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log("data:", data);
     dispatch({

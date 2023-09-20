@@ -7,9 +7,7 @@ export const getConversations = (userId) => async (dispatch) => {
 
     const response = await axios.get(
       `https://yopex-api.tabaani.co/conversation/${userId}`,
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log("getMessages", response.data);
     dispatch({
@@ -30,9 +28,7 @@ export const CreateConversation = (data) => async (dispatch, getState) => {
         senderId: data.senderId,
         receiverId: data.receiverId,
       },
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log("gf", response);
     dispatch({

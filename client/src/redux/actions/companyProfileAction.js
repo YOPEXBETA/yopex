@@ -8,9 +8,7 @@ export const companyEditProfile = (formData, myData) => async (dispatch) => {
     const { data } = await axios.put(
       ` https://yopex-api.tabaani.co/company/${myData._id}`,
       formData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log("edit profile response:", JSON.stringify(data));
@@ -38,9 +36,7 @@ export const getCompanyById = (id) => async (dispatch, getState) => {
   try {
     const response = await axios.get(
       `https://yopex-api.tabaani.co/company/get/${id}`,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     dispatch({

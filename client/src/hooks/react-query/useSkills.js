@@ -7,9 +7,7 @@ export const useSkills = () => {
   return useQuery({
     queryKey: ["skills"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/skill/getskills`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/skill/getskills`, );
       return data;
     },
   });
@@ -37,9 +35,7 @@ export const useDeleteSkill = () => {
   return useMutation({
     mutationFn: async (name) => {
       console.log(name);
-      await axios.delete(`${url}/skill/deleteskill/${name}`, {
-        withCredentials: true,
-      });
+      await axios.delete(`${url}/skill/deleteskill/${name}`, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["skills"] });

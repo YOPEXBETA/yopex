@@ -8,9 +8,7 @@ export const usePosts = () => {
   return useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/post/posts`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/post/posts`, );
       return data;
     },
   });
@@ -23,9 +21,7 @@ export const usePostsByCategory = (category) => {
     queryFn: async () => {
       let apiUrl = `${url}/post/posts`;
       if (category !== "") apiUrl += `?categories=${category}`;
-      const { data } = await axios.get(apiUrl, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(apiUrl, );
       return data;
     },
   });
@@ -36,9 +32,7 @@ export const useUserPosts = (userId) => {
   return useQuery({
     queryKey: ["posts", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/post/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/post/${userId}`, );
       return data;
     },
   });
@@ -49,9 +43,7 @@ export const useBookmarkedPosts = (userId) => {
   return useQuery({
     queryKey: ["posts", userId, "bookmarked"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/post/bookmarks/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/post/bookmarks/${userId}`, );
       return data;
     },
   });
@@ -63,9 +55,7 @@ export const useCreatePost = (category) => {
 
   return useMutation({
     mutationFn: async (postData) => {
-      await axios.post(`${url}/post/`, postData, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/post/`, postData, );
     },
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["posts", category] }),
@@ -96,9 +86,7 @@ export const useEditPost = (postId, userId, category = "") => {
 
   return useMutation({
     mutationFn: async (postData) => {
-      await axios.put(`${url}/post/${postId}`, postData, {
-        withCredentials: true,
-      });
+      await axios.put(`${url}/post/${postId}`, postData, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts", category] });

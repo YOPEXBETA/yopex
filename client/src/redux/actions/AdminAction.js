@@ -7,9 +7,7 @@ export const getUsers = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(
       "https://yopex-api.tabaani.co/admin/Users",
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log("data:", data);
     dispatch({
@@ -36,9 +34,7 @@ export const getCompanies = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(
       "https://yopex-api.tabaani.co/admin/Companies",
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log("data:", data);
     dispatch({
@@ -96,9 +92,7 @@ export const approveCompany = (companyId) => async (dispatch, getState) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/admin/appCompany",
       { companyId },
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log("data:", data);

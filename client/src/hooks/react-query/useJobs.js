@@ -19,9 +19,7 @@ export const useJobById = (companyId) => {
   return useQuery(
     ["jobs", companyId],
     async () => {
-      const { data } = await axios.get(`${url}/job/${companyId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/job/${companyId}`, );
       return data;
     },
     {
@@ -54,9 +52,7 @@ export const useDeleteJob = () => {
 
   return useMutation({
     mutationFn: async (jobId) => {
-      await axios.delete(`${url}/job/${jobId}`, {
-        withCredentials: true,
-      });
+      await axios.delete(`${url}/job/${jobId}`, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
@@ -147,9 +143,7 @@ export const useEditJob = (jobId) => {
 
   return useMutation({
     mutationFn: async (JobData) => {
-      await axios.put(`${url}/job/update/${jobId}`, JobData, {
-        withCredentials: true,
-      });
+      await axios.put(`${url}/job/update/${jobId}`, JobData, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["jobs"]);

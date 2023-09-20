@@ -6,9 +6,7 @@ export const createPost = (myData) => async (dispatch) => {
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/post/",
       myData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log(data);
@@ -33,9 +31,7 @@ export const getFeedPosts =
       if (categories !== "") {
         url += `?categories=${categories}`;
       }
-      const { data } = await axios.get(url, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(url, );
       console.log("data:", data);
       dispatch({
         type: "getFeedPosts",
@@ -51,9 +47,7 @@ export const getUserPosts = (userId) => async (dispatch) => {
   try {
     const response = await axios.get(
       `https://yopex-api.tabaani.co/post/${userId}`,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     dispatch({
@@ -106,9 +100,7 @@ export const likePost = (postId) => async (dispatch) => {
       {
         userId,
       },
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log(response);
     console.log(postId);
@@ -126,9 +118,7 @@ export const EditPost = (postId, updates) => async (dispatch) => {
     const response = await axios.put(
       `https://yopex-api.tabaani.co/post/${postId}`,
       updates,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     dispatch({

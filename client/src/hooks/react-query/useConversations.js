@@ -7,9 +7,7 @@ export const useConversations = (userId) => {
   return useQuery({
     queryKey: ["conversations", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/conversation/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/conversation/${userId}`, );
       return data;
     },
   });
@@ -19,9 +17,7 @@ export const useMessages = (conversationId) => {
   return useQuery({
     queryKey: ["messages", conversationId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/messages/${conversationId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/messages/${conversationId}`, );
       return data;
     },
   });
@@ -58,9 +54,7 @@ export const useCreateConversation = (userId) => {
 
   return useMutation({
     mutationFn: async (data) => {
-      await axios.post(`${url}/conversation/`, data, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/conversation/`, data, );
     },
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["conversations", userId] }),

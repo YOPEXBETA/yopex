@@ -17,9 +17,7 @@ export const useAdminUsers = () => {
   return useQuery({
     queryKey: ["admin/users"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/admin/Users`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/admin/Users`, );
       return data;
     },
   });
@@ -29,9 +27,7 @@ export const useUserById = (userId) => {
   return useQuery(
     ["user", userId],
     async () => {
-      const { data } = await axios.get(`${url}/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/${userId}`, );
       return data;
     },
     {
@@ -45,9 +41,7 @@ export const useSearchUser = () => {
 
   return useMutation({
     mutationFn: async (searchQuery) => {
-      await axios.get(`${url}/users?search=${searchQuery}`, {
-        withCredentials: true,
-      });
+      await axios.get(`${url}/users?search=${searchQuery}`, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries("users");
@@ -136,9 +130,7 @@ export const useUserFollowers = (userId) => {
   return useQuery(
     ["followers", userId],
     async () => {
-      const { data } = await axios.get(`${url}/find/friends/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/find/friends/${userId}`, );
       return data;
     },
     {
@@ -151,9 +143,7 @@ export const useUserFollowings = (userId) => {
   return useQuery(
     ["followings", userId],
     async () => {
-      const { data } = await axios.get(`${url}/find/followings/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/find/followings/${userId}`, );
       return data;
     },
     {
@@ -181,9 +171,7 @@ export const useSearchUsers = () => {
   return useQuery({
     queryKey: ["searchUsers"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/users?search=${query}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/users?search=${query}`, );
       return data;
     },
   });
@@ -193,9 +181,7 @@ export const useSuggestedUsers = () => {
   return useQuery({
     queryKey: ["suggestedUsers"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/find/suggestedUsers`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/find/suggestedUsers`, );
       return data;
     },
   });
@@ -220,9 +206,7 @@ export const useUserBadges = (userId) => {
   return useQuery({
     queryKey: ["badges", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/${userId}/badges`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/${userId}/badges`, );
       return data;
     },
   });
@@ -232,9 +216,7 @@ export const useUserJobs = (userId) => {
   return useQuery({
     queryKey: ["jobs", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/job/user/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/job/user/${userId}`, );
       return data;
     },
   });
@@ -244,9 +226,7 @@ export const useUserFeedbacks = (userId) => {
   return useQuery({
     queryKey: ["reviews", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/reviews/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/reviews/${userId}`, );
       return data;
     },
   });
@@ -256,9 +236,7 @@ export const useUserNotifications = (userId) => {
   return useQuery({
     queryKey: ["notifications", userId],
     queryFn: async () => {
-      const response = await axios.get(`${url}/user/${userId}/notifications`, {
-        withCredentials: true,
-      });
+      const response = await axios.get(`${url}/user/${userId}/notifications`, );
       console.log(response.data);
       return response.data;
     },
@@ -269,9 +247,7 @@ export const useGetPaymentByUser = (userId) => {
   return useQuery({
     queryKey: ["payment", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/api/payment/user/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/api/payment/user/${userId}`, );
       return data;
     },
   });
@@ -281,9 +257,7 @@ export const useGetPayments = () => {
   return useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/api/allpayments`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/api/allpayments`, );
       return data;
     },
   });

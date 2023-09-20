@@ -8,9 +8,7 @@ export const useCreateContestConversation = () => {
 
   return useMutation({
     mutationFn: async (data) => {
-      await axios.post(`${url}/contestconversation/`, data, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/contestconversation/`, data, );
     },
   });
 };
@@ -20,9 +18,7 @@ export const useJoinContestConversation = () => {
 
   return useMutation({
     mutationFn: async (data) => {
-      await axios.post(`${url}/contestconversation/join`, data, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/contestconversation/join`, data, );
     },
   });
 };

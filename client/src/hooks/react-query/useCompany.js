@@ -7,9 +7,7 @@ export const useAdminCompanies = () => {
   return useQuery({
     queryKey: ["companies"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/admin/Companies`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/admin/Companies`, );
       return data;
     },
   });
@@ -38,9 +36,7 @@ export const useCreateCompany = () => {
 
   return useMutation({
     mutationFn: async (companyData) => {
-      await axios.post(`${url}/create/`, companyData, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/create/`, companyData, );
     },
     onSuccess: () => queryClient.invalidateQueries("companies"),
   });
@@ -51,9 +47,7 @@ export const useEditCompany = (companyId) => {
 
   return useMutation({
     mutationFn: async (companyData) => {
-      await axios.put(`${url}/company/${companyId}`, companyData, {
-        withCredentials: true,
-      });
+      await axios.put(`${url}/company/${companyId}`, companyData, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["company", companyId]);
@@ -79,9 +73,7 @@ export const useDeleteCompany = (companyId) => {
 
   return useMutation({
     mutationFn: async (companyId) => {
-      await axios.delete(`${url}/company/${companyId}`, {
-        withCredentials: true,
-      });
+      await axios.delete(`${url}/company/${companyId}`, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["companies"]);
@@ -93,9 +85,7 @@ export const useCompanyById = (companyId) => {
   return useQuery(
     ["company", companyId],
     async () => {
-      const { data } = await axios.get(`${url}/${companyId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/${companyId}`, );
       return data;
     },
     {

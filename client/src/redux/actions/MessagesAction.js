@@ -4,9 +4,7 @@ export const getMessages = (conversationId) => async (dispatch) => {
   try {
     const response = await axios.get(
       `https://yopex-api.tabaani.co/messages/${conversationId}`,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     dispatch({

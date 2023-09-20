@@ -43,9 +43,7 @@ export const useGetLevels = () => {
   return useQuery({
     queryKey: ["Levels"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/admin/allLevels`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/admin/allLevels`, );
       return data;
     },
   });
@@ -56,9 +54,7 @@ export const useDeleteLevel = () => {
 
   return useMutation({
     mutationFn: async (LevelId) => {
-      await axios.delete(`${url}/admin/delLevel/${LevelId}`, {
-        withCredentials: true,
-      });
+      await axios.delete(`${url}/admin/delLevel/${LevelId}`, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["levels"] });
