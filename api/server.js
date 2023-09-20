@@ -25,8 +25,9 @@ app.use(cookieParser());
 const corsOpts = {
   origin: "*",
 
-  methods: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE","HEAD","PATCH"],
 
+  allowedHeaders: ["Content-Type"],
 };
 
 app.use(cors(corsOpts));
