@@ -17,7 +17,7 @@ const login = async (data) => {
     console.log(user.headers)
     console.log("----------")
     // set accessToken to localStorage
-    localStorage.setItem("accessToken", accessToken);
+    // localStorage.setItem("accessToken", accessToken);
     // set accessToken to axios default header
     // dispatch({
     //   type: "login_success",
