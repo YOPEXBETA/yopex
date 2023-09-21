@@ -8,6 +8,9 @@ const JobOfferModal = ({ open, handleClose, job }) => {
   // Global states |  @redux/toolkit
   const { user } = useSelector((state) => state.auth);
   const applyJobMutation = useApplyJob(job, user?._id);
+
+  console.log(user);
+  console.log(job);
   // Data fetching | react-query
 
   // React-hook-form
@@ -61,7 +64,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
               >
                 Cancel
               </button>
-              {user && (
+              {user && !user.companies.includes(job.company._id) &&(
                 <button
                   className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded"
                   onClick={onclick}

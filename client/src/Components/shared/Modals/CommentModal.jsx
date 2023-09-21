@@ -61,7 +61,7 @@ const CommentModal = ({
                                 {`${comment.userId.firstname} ${comment.userId.lastname}`}
                               </p>
                            
-                           <div className="flex justify-between w-96 items-start ">
+                           <div className="flex justify-between items-start ">
                              <p className="text-md text-gray-400 ">
                                 {" "}
                                 |{" "}
@@ -74,7 +74,7 @@ const CommentModal = ({
                                 )} 
                               </p>  
                               {comment.userId._id === user._id && (
-                                  <CommentMenuIcon className="text-black  " post={comment} />
+                                  <CommentMenuIcon className="text-black text-md  " post={comment} />
                           )}
                           </div>
                             </div>

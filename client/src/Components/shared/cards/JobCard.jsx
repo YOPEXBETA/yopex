@@ -24,7 +24,7 @@ const JobCard = ({ job }) => {
         <div className="flex flex-col">
           <div className="bg- rounded-md p-4 h-full">
             <div className="flex justify-between flex-row-reverse mb-4">
-              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
+              <div className=" w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
                 <img
                   src={job?.company?.companyLogo}
                   alt="Icon"

@@ -53,7 +53,7 @@ const SocialPostCard = ({
   };
 
   return (
-    <div className="bg-white w-full mx-auto h-full rounded-lg border-green-500 border-b-2 shadow-md">
+    <div className="bg-white w-full mx-auto h-full  rounded-lg border-green-500 border-b-2 shadow-md">
       <div className=" flex justify-between items-start">
         <div className=" flex items-center gap-3 py-6 px-4">
           <img
@@ -91,13 +91,13 @@ const SocialPostCard = ({
         )}
       </div>
 
-      <div className="relative">
-        <div className="overflow-x-auto">
-          <div className="flex relative">
+      <div className="mx-auto ">
+        <div className=" overflow-x-auto object-cover">
+          <div className="flex relative object-cover  ">
             <button
               onClick={handlePrevious}
               disabled={currentPage === 0}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-zinc-200 rounded-full hover:scale-110 hover:bg-green-500"
+              className=" absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-zinc-200 rounded-full hover:scale-110 hover:bg-green-500"
             >
               <FaChevronLeft className=" text-white  w-8 h-8 p-2" />
             </button>

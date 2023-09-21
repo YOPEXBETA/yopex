@@ -14,6 +14,7 @@ const HomeLayout = () => {
       <div className="col-span-12 md:col-span-12 xl:col-span-3 lg:col-span-4 space-y-4">
         <UserProgressCard />
         <UserHighlights />
+       <div className="xl:hidden"> <MoneyBalance/></div>
       </div>
 
       <div className="col-span-12 md:col-span-12 xl:col-span-6 lg:col-span-8 space-y-4 lg:px-8 px-0 mb-20">
@@ -23,7 +24,7 @@ const HomeLayout = () => {
       </div>
 
       <div className="hidden col-span-12 md:col-span-12 xl:block xl:col-span-3 lg:col-span-4 space-y-4">
-        <MoneyBalance />
+         <MoneyBalance />
         <Leaders />
         <MyContestLists />
       </div>

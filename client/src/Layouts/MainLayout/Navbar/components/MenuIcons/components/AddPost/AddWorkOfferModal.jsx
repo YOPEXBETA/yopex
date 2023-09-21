@@ -49,7 +49,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
 
   return (
     <div
-      className={`fixed z-10 inset-0 overflow-y-auto  ${
+      className={`fixed z-50  inset-0   ${
         open ? "block" : "hidden"
       }`}
     >
