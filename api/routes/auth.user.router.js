@@ -84,9 +84,6 @@ authRouter.get(
 
 authRouter.get(
   "/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/login/failed",
-  }),
   signInWithGoogle
 );
 module.exports = authRouter;
