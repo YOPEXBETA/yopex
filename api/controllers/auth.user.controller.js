@@ -283,7 +283,7 @@ const signInWithGoogle = async (req, res) => {
   const { ...info } = user ? user._doc : company._doc;
 
   info.token = token;
-
+    console.log({info})
   return res.status(200).send(info);
 };
 module.exports = {
