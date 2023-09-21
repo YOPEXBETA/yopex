@@ -74,16 +74,19 @@ authRouter.get(
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
+authRouter.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: CLIENT_URL + "feed",
+    failureRedirect: "/login/failed",
+  }),
+);
+
 // authRouter.get(
 //   "/google/callback",
 //   passport.authenticate("google", {
-//     successRedirect: CLIENT_URL + "feed",
 //     failureRedirect: "/login/failed",
 //   }),
+//   signInWithGoogle
 // );
-
-authRouter.get(
-  "/google/callback",
-  signInWithGoogle
-);
 module.exports = authRouter;
