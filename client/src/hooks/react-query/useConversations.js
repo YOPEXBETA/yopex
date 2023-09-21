@@ -1,15 +1,13 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "https://yopex-api.tabaani.co";
 
 export const useConversations = (userId) => {
   return useQuery({
     queryKey: ["conversations", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/conversation/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/conversation/${userId}`, );
       return data;
     },
   });
@@ -19,19 +17,17 @@ export const useMessages = (conversationId) => {
   return useQuery({
     queryKey: ["messages", conversationId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/messages/${conversationId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/messages/${conversationId}`, );
       return data;
     },
   });
 };
 
 // const response = await axios.post(
-//   `http://localhost:8000/messages/`,
+//   `https://yopex-api.tabaani.co/messages/`,
 //   { conversationId, message, sender },
 //   {
-//     withCredentials: true,
+//     
 //   }
 // );
 
@@ -44,7 +40,7 @@ export const useCreateMessage = (conversationId) => {
         `${url}/messages/`,
         { conversationId, ...data },
         {
-          withCredentials: true,
+          
         }
       );
     },
@@ -58,9 +54,7 @@ export const useCreateConversation = (userId) => {
 
   return useMutation({
     mutationFn: async (data) => {
-      await axios.post(`${url}/conversation/`, data, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/conversation/`, data, );
     },
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["conversations", userId] }),
@@ -74,7 +68,7 @@ export const useContestMessages = (conversationId) => {
       const { data } = await axios.get(
         `${url}/messages/contest/${conversationId}`,
         {
-          withCredentials: true,
+          
         }
       );
       return data;

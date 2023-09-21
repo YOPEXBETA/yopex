@@ -3,10 +3,8 @@ import axios from "axios";
 export const SearchUsers = (searchKeyword) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/users?search=${searchKeyword}`,
-      {
-        withCredentials: true,
-      }
+      `https://yopex-api.tabaani.co/users?search=${searchKeyword}`,
+      
     );
 
     dispatch({
@@ -22,8 +20,8 @@ export const getAllUsers = (myData) => async (dispatch, getState) => {
   try {
     const token = getState().Auth.token;
     console.log(token);
-    const { data } = await axios.get("http://localhost:8000/allusers", {
-      withCredentials: true,
+    const { data } = await axios.get("https://yopex-api.tabaani.co/allusers", {
+      
     });
     console.log("data:", data);
     dispatch({
@@ -38,10 +36,8 @@ export const getAllUsers = (myData) => async (dispatch, getState) => {
 export const getUserFriends = (userId) => async (dispatch, getState) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/find/friends/${userId}`,
-      {
-        withCredentials: true,
-      }
+      `https://yopex-api.tabaani.co/find/friends/${userId}`,
+      
     );
     const friends = response.data.filter(
       (friend) => friend !== null && friend !== undefined
@@ -60,10 +56,8 @@ export const getUserFriends = (userId) => async (dispatch, getState) => {
 export const getUserFollowings = (userId) => async (dispatch, getState) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/find/followings/${userId}`,
-      {
-        withCredentials: true,
-      }
+      `https://yopex-api.tabaani.co/find/followings/${userId}`,
+      
     );
     const followings = response.data.filter(
       (following) => following !== null && following !== undefined
@@ -84,10 +78,8 @@ export const getsuggestedUsers = (myData) => async (dispatch, getState) => {
     const token = getState().Auth.token;
     console.log(token);
     const { data } = await axios.get(
-      "http://localhost:8000/find/suggestedUsers",
-      {
-        withCredentials: true,
-      }
+      "https://yopex-api.tabaani.co/find/suggestedUsers",
+      
     );
     dispatch({
       type: "getsuggestedUsers",
@@ -100,8 +92,8 @@ export const getsuggestedUsers = (myData) => async (dispatch, getState) => {
 
 export const getUserById = (id) => async (dispatch, getState) => {
   try {
-    const response = await axios.get(`http://localhost:8000/${id}`, {
-      withCredentials: true,
+    const response = await axios.get(`https://yopex-api.tabaani.co/${id}`, {
+      
     });
 
     dispatch({
@@ -119,11 +111,11 @@ export const followUser = (otheruserId) => async (dispatch, getState) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user._id;
     const response = await axios.put(
-      `http://localhost:8000/toggleFollow/${otheruserId}`,
+      `https://yopex-api.tabaani.co/toggleFollow/${otheruserId}`,
       {
         userId,
       },
-      { withCredentials: true }
+      
     );
     console.log(response);
     console.log("ddddd", otheruserId);
@@ -141,10 +133,8 @@ export const followUser = (otheruserId) => async (dispatch, getState) => {
 export const getBadgesEarnedByUser = (userId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/${userId}/badges`,
-      {
-        withCredentials: true,
-      }
+      `https://yopex-api.tabaani.co/${userId}/badges`,
+      
     );
 
     dispatch({
@@ -161,9 +151,10 @@ export const getUserStats = (myData) => async (dispatch, getState) => {
   try {
     const token = getState().Auth.token;
     console.log(token);
-    const { data } = await axios.get("http://localhost:8000/users/stats", {
-      withCredentials: true,
-    });
+    const { data } = await axios.get(
+      "https://yopex-api.tabaani.co/users/stats",
+      
+    );
     console.log("data:", data);
     dispatch({
       type: "getUserStats",

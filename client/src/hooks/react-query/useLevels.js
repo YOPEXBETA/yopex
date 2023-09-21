@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "https://yopex-api.tabaani.co";
 
 export const useCreateLevel = () => {
   const queryClient = useQueryClient();
@@ -11,7 +11,6 @@ export const useCreateLevel = () => {
       await axios.post(
         `${url}/admin/createLevel`,
         { adminDefinedPoints },
-        { withCredentials: true }
       );
     },
     onSuccess: () => {
@@ -28,7 +27,6 @@ export const useUpdateLevel = () => {
       const { data } = await axios.put(
         `${url}/admin/updateLevel/${level._id}`,
         { maxScore: level.maxScore },
-        { withCredentials: true }
       );
 
       return data;
@@ -43,9 +41,7 @@ export const useGetLevels = () => {
   return useQuery({
     queryKey: ["Levels"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/admin/allLevels`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/admin/allLevels`, );
       return data;
     },
   });
@@ -56,9 +52,7 @@ export const useDeleteLevel = () => {
 
   return useMutation({
     mutationFn: async (LevelId) => {
-      await axios.delete(`${url}/admin/delLevel/${LevelId}`, {
-        withCredentials: true,
-      });
+      await axios.delete(`${url}/admin/delLevel/${LevelId}`, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["levels"] });

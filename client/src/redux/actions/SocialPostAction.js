@@ -4,11 +4,9 @@ import axios from "axios";
 export const createPost = (myData) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/post/",
+      "https://yopex-api.tabaani.co/post/",
       myData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log(data);
@@ -29,13 +27,11 @@ export const getFeedPosts =
     try {
       const token = getState().Auth.token;
       console.log(token);
-      let url = "http://localhost:8000/post/posts";
+      let url = "https://yopex-api.tabaani.co/post/posts";
       if (categories !== "") {
         url += `?categories=${categories}`;
       }
-      const { data } = await axios.get(url, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(url, );
       console.log("data:", data);
       dispatch({
         type: "getFeedPosts",
@@ -50,10 +46,8 @@ export const getFeedPosts =
 export const getUserPosts = (userId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/post/${userId}`,
-      {
-        withCredentials: true,
-      }
+      `https://yopex-api.tabaani.co/post/${userId}`,
+      
     );
 
     dispatch({
@@ -76,12 +70,12 @@ export const deletePost = (postId) => async (dispatch) => {
       throw new Error("Post ID is missing");
     }
     const response = await axios.delete(
-      `http://localhost:8000/post/${postId}`,
+      `https://yopex-api.tabaani.co/post/${postId}`,
       {
         headers: {
           userId: userId,
         },
-        withCredentials: true,
+        
       }
     );
     console.log("response", response);
@@ -102,13 +96,11 @@ export const likePost = (postId) => async (dispatch) => {
     const userId = user._id;
 
     const response = await axios.patch(
-      `http://localhost:8000/post/${postId}/like`,
+      `https://yopex-api.tabaani.co/post/${postId}/like`,
       {
         userId,
       },
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log(response);
     console.log(postId);
@@ -124,11 +116,9 @@ export const likePost = (postId) => async (dispatch) => {
 export const EditPost = (postId, updates) => async (dispatch) => {
   try {
     const response = await axios.put(
-      `http://localhost:8000/post/${postId}`,
+      `https://yopex-api.tabaani.co/post/${postId}`,
       updates,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     dispatch({

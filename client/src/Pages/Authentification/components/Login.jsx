@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import * as z from "zod";
 import AlertContainer from "../../../Components/alerts";
 import Copyright from "../../../Components/shared/Copyright";
-import {FaEyeSlash,FaEye} from 'react-icons/fa';
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import {
   getCurrentUser,
   login,
@@ -62,13 +62,13 @@ const Login = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full lg:w-4/6">
       <div>
         {error && <AlertContainer error={error} />}
-        <div class="grid grid-cols-1">
+        <div className="grid grid-cols-1">
           <div className="flex justify-center">
             <p className=" text-green-500 font-bold text-4xl">LOGIN TO YOPEX</p>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <label
               for="input-group-1"
               className="block  text-sm font-medium text-gray-400 mb-2"
@@ -97,7 +97,7 @@ const Login = () => {
               />
             </div>
           </div>
-          <div class="col-span-12">
+          <div className="col-span-12">
             <label
               for="input-group-1"
               className="block  text-sm font-medium text-gray-400 mb-2"
@@ -106,29 +106,25 @@ const Login = () => {
             </label>
             <div className="relative">
               <input
-                 type={showPassword ? "text" : "password"}
+                type={showPassword ? "text" : "password"}
                 id="input-group-2"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="password"
                 {...register("password", { required: true })}
               />
               <button
-          type="button"
-          onClick={togglePasswordVisibility}
-          className="absolute inset-y-0 right-0 flex items-center pr-2"
-        >
-          {showPassword ? (
-           <FaEye/>
-          ) : (
-            <FaEyeSlash/>
-          )}
-        </button>
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute inset-y-0 right-0 flex items-center pr-2"
+              >
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </button>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <div className="flex items-center mb-4 justify-between">
               <div className="flex items-center">
                 <input
@@ -153,8 +149,8 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <button
               className="w-full bg-green-500 py-3 rounded-md text-md font-medium text-white"
               disabled={isSubmitting}
@@ -163,8 +159,8 @@ const Login = () => {
             </button>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <div className="flex justify-center gap-1">
               <p className="text-gray-400">Are you new here?</p>
               <a
@@ -176,8 +172,8 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-6">
+          <div className="col-span-12">
             <div className="flex items-center">
               <hr className="flex-grow border-t border-gray-300" />
               <p className="text-sm mx-4 text-gray-400">Login with</p>
@@ -185,8 +181,8 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-12 w-full mt-4 mb-6">
-          <div class="col-span-12">
+        <div className="grid grid-cols-12 w-full mt-4 mb-6">
+          <div className="col-span-12">
             <GoogleSignIn mode="login" />
           </div>
         </div>
@@ -197,7 +193,3 @@ const Login = () => {
 };
 
 export default Login;
-
-/* {isActionCompleted && <AlertContainer error={Error} />} */
-/* {!myData && isSuccesss && <AlertSuccess message={"logged out"} />} */
-/* {myData && isSuccesss && <AlertSuccess message={"logged in"} />} */

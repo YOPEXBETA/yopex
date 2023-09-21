@@ -62,7 +62,7 @@ const authSlice = createSlice({
       state.success = false;
     },
     logout: (state, action) => {
-      Cookies.remove("accessToken");
+      localStorage.removeItem("accessToken");
       state.user = null;
       state.loading = false;
       state.error = null;

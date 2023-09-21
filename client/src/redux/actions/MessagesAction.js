@@ -3,10 +3,8 @@ import axios from "axios";
 export const getMessages = (conversationId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/messages/${conversationId}`,
-      {
-        withCredentials: true,
-      }
+      `https://yopex-api.tabaani.co/messages/${conversationId}`,
+      
     );
 
     dispatch({
@@ -23,10 +21,10 @@ export const CreateMessage =
   (conversationId, message, sender) => async (dispatch) => {
     try {
       const response = await axios.post(
-        `http://localhost:8000/messages/`,
+        `https://yopex-api.tabaani.co/messages/`,
         { conversationId, message, sender },
         {
-          withCredentials: true,
+          
         }
       );
       dispatch({

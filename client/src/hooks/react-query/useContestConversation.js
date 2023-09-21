@@ -1,16 +1,14 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "https://yopex-api.tabaani.co";
 
 export const useCreateContestConversation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data) => {
-      await axios.post(`${url}/contestconversation/`, data, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/contestconversation/`, data, );
     },
   });
 };
@@ -20,9 +18,7 @@ export const useJoinContestConversation = () => {
 
   return useMutation({
     mutationFn: async (data) => {
-      await axios.post(`${url}/contestconversation/join`, data, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/contestconversation/join`, data, );
     },
   });
 };
@@ -34,7 +30,7 @@ export const useGetContestConversation = (contestId) => {
       const { data } = await axios.get(
         `${url}/contestconversation/${contestId}`,
         {
-          withCredentials: true,
+          
         }
       );
       return data;

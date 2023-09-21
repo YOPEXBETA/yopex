@@ -1,48 +1,48 @@
 import axios from "axios";
 
-const url = "http://localhost:8000";
+const url = "https://yopex-api.tabaani.co";
 
 const searchUsers = async (searchKeyword) => {
   const { data } = await axios.get(`${url}/users`, {
     params: {
       search: searchKeyword,
     },
-    withCredentials: true,
+    
   });
   return data;
 };
 
 const getAllUsers = async () => {
   const { data } = await axios.get(`${url}/allusers`, {
-    withCredentials: true,
+    
   });
   return data;
 };
 
 const getUserFriends = async (userId) => {
   const { data } = await axios.get(`${url}/find/friends/${userId}`, {
-    withCredentials: true,
+    
   });
   return data;
 };
 
 const getUserFollowings = async (userId) => {
   const { data } = await axios.get(`${url}/find/followings/${userId}`, {
-    withCredentials: true,
+    
   });
   return data;
 };
 
 const getSuggestedUsers = async (myData) => {
   const { data } = await axios.get(`${url}/find/suggestedUsers`, {
-    withCredentials: true,
+    
   });
   return data;
 };
 
 const getUserById = async (id) => {
-  const { data } = await axios.get(`http://localhost:8000/${id}`, {
-    withCredentials: true,
+  const { data } = await axios.get(`https://yopex-api.tabaani.co/${id}`, {
+    
   });
   return data;
 };
@@ -51,24 +51,24 @@ const followUser = async (otheruserId, userId) => {
   const { data } = await axios.put(
     `${url}/toggleFollow/${otheruserId}`,
     { userId },
-    { withCredentials: true }
+    
   );
   return data;
 };
 
 const getBadgesEarnedByUser = async (userId) => {
   const { data } = await axios.get(
-    `http://localhost:8000/${userId}/badges`,
+    `https://yopex-api.tabaani.co/${userId}/badges`,
     {
-      withCredentials: true,
+      
     }
   );
   return data;
 };
 
 const getUserStats = async (myData) => {
-  const { data } = await axios.get("http://localhost:8000/users/stats", {
-    withCredentials: true,
+  const { data } = await axios.get("https://yopex-api.tabaani.co/users/stats", {
+    
   });
   return data;
 };

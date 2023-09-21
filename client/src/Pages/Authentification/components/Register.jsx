@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import countries from "world-countries";
+import countries from "../../../countries.json";
 import AlertContainer from "../../../Components/alerts";
 import Copyright from "../../../Components/shared/Copyright";
 import GoogleSignIn from "../Google";
@@ -29,7 +29,6 @@ const Register = () => {
   const role = watch("role");
 
   const onSubmit = (data) => {
-    
     dispatch(registerUser(data));
   };
 
@@ -147,23 +146,19 @@ const Register = () => {
               </label>
               <div className="relative">
                 <input
-                 type={showPassword ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   id="input-group-2"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="password"
                   {...register("password", { required: true })}
                 />
                 <button
-          type="button"
-          onClick={togglePasswordVisibility}
-          className="absolute inset-y-0 right-0 flex items-center pr-2"
-        >
-          {showPassword ? (
-           <FaEye/>
-          ) : (
-            <FaEyeSlash/>
-          )}
-        </button>
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-0 flex items-center pr-2"
+                >
+                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                </button>
               </div>
             </div>
             <div className="col-span-12 mt-5">
@@ -175,24 +170,19 @@ const Register = () => {
               </label>
               <div className="relative">
                 <input
-                type={showPassword ? "text" : "password"}
-
+                  type={showPassword ? "text" : "password"}
                   id="input-group-2"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Repeat password"
                   {...register("repeatPassword", { required: true })}
                 />
                 <button
-          type="button"
-          onClick={togglePasswordVisibility}
-          className="absolute inset-y-0 right-0 flex items-center pr-2"
-        >
-          {showPassword ? (
-           <FaEye/>
-          ) : (
-            <FaEyeSlash/>
-          )}
-        </button>
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-0 flex items-center pr-2"
+                >
+                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                </button>
               </div>
             </div>
           </div>

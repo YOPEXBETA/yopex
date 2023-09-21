@@ -117,7 +117,7 @@ const deleteJob = async (req, res, next) => {
     const company = await Company.findById(job.company);
     await company.jobs.pull(job);
     await company.save();
-    await Job.findByIdAndDelete(id);
+    await Job.findByIdAndDelete({_id:id});
     return res.status(200).json({ message: "Successfully Delete" });
   } catch (err) {
     console.log(err);

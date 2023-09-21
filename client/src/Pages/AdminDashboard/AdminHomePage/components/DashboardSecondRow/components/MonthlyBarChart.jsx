@@ -58,8 +58,7 @@ const MonthlyBarChart = () => {
     queryKey: ["challenges"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/challenge/challenges",
-        { withCredentials: true }
+        "https://yopex-api.tabaani.co/challenge/challenges",
       );
       return data;
     },

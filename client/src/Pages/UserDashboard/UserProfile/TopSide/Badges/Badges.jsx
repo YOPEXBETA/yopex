@@ -8,40 +8,18 @@ import {
 } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import Badge from "./Badge";
 
-const useStyles = makeStyles((theme) => ({
-  badges: {
-    width: 30,
-    height: 30,
-    border: `1px solid ${theme.palette.secondary.light}`,
-  },
-  badgesModal: {
-    width: 60,
-    height: 60,
-  },
-}));
-
 const Badges = ({ userProfile }) => {
-  const classes = useStyles();
   const [openModal, setOpenModal] = useState(false);
   const toggleModal = () => setOpenModal((prev) => !prev);
-
-  // const { userId } = useParams();
-  // const { data: badges } = useUserBadges(userId);
-  // console.log(userProfile?.badgesEarned);
 
   return (
     <div>
       <Stack direction="row" spacing={2} alignItems={"flex-end"}>
         {userProfile?.badgesEarned?.map((badge) => (
-          <Avatar
-            key={badge._id}
-            className={classes.badges}
-            src={badge.badgeImg}
-          />
+          <Avatar key={badge._id} src={badge.badgeImg} />
         ))}
 
         <Typography variant="h6" color={"gray"} onClick={toggleModal}>

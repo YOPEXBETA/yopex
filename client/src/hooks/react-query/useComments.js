@@ -1,15 +1,13 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.URL || "https://yopex-api.tabaani.co";
 
 export const useCommentsByPosts = (postId) => {
   return useQuery({
     queryKey: ["comments", postId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/comment/${postId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/comment/${postId}`, );
       return data;
     },
   });
@@ -20,9 +18,7 @@ export const useAddComment = (postId, category, userId) => {
 
   return useMutation({
     mutationFn: async (comment) => {
-      const { data } = await axios.post(`${url}/comment/`, comment, {
-        withCredentials: true,
-      });
+      const { data } = await axios.post(`${url}/comment/`, comment, );
 
       return data;
     },
@@ -43,7 +39,7 @@ export const useDeleteComment = (postId) => {
     mutationFn: async ({ CommentId, postId }) => {
       await axios.delete(`${url}/comment/${CommentId}`, {
         data: { postId },
-        withCredentials: true,
+        
       });
     },
     onSuccess: () => {
@@ -57,9 +53,7 @@ export const useEditComment = (commentId) => {
 
   return useMutation({
     mutationFn: async (CommentData) => {
-      await axios.put(`${url}/comment/update/${commentId}`, CommentData, {
-        withCredentials: true,
-      });
+      await axios.put(`${url}/comment/update/${commentId}`, CommentData, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["comments"]);

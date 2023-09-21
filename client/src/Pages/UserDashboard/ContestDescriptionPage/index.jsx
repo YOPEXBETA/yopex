@@ -1,6 +1,3 @@
-import { Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useChallengeById } from "../../../hooks/react-query/useChallenges";

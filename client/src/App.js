@@ -3,15 +3,27 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import ScrollTop from "./Components/ScrollTop";
 import Routes from "./routes/index";
 import ThemeCustomization from "./themes";
-
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
 const App = () => {
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+  if (queryParams.has("token")) {
+    // Extract the access code from the URL
+    const accessToken = queryParams.get("token");
+    localStorage.setItem("accessToken", accessToken);
+    // Remove the access code from the URL
+    window.history.replaceState({}, document.title, "/");
+    
+  
+  }
+  }, []);
   return (
     <ThemeCustomization>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={true} />
+        {/* <ReactQueryDevtools initialIsOpen={true} /> */}
         <ScrollTop>
           <Routes />
         </ScrollTop>

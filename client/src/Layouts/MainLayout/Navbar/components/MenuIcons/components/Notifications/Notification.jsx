@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useSelector } from "react-redux";
-import { useUserNotifications } from "../../../../../../../hooks/react-query/useUsers";
+import {
+  useSeeNotification,
+  useUserNotifications,
+} from "../../../../../../../hooks/react-query/useUsers";
 import { timeSince } from "../../../../../../../utils";
 import { io } from "socket.io-client";
 import { NotificationsModal } from "../../../../../../../Components/shared/Modals/NotificationsModal";
@@ -12,8 +15,10 @@ const NotificationBell = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [socket, setSocket] = useState(null);
+  const { mutate } = useSeeNotification(user?._id);
+  const [nbrNotifications, setNbrNotifications] = useState(0);
 
-  const url = process.env.URL || "http://localhost:8000";
+  const url = process.env.URL || "https://yopex-api.tabaani.co";
 
   useEffect(() => {
     const newSocket = io(`${url}`);
@@ -23,13 +28,16 @@ const NotificationBell = () => {
   }, [user]);
 
   useEffect(() => {
-    setNotifications(notification);
+    if (!notification) return;
+    setNotifications(notification.notification);
+    setNbrNotifications(notification.nbr);
   }, [notification]);
 
   useEffect(() => {
     if (!socket) return;
     socket.on("notification", (notification) => {
       setNotifications((prev) => [notification, ...prev]);
+      setNbrNotifications((prev) => prev + 1);
     });
     return () => socket.off("notification");
   }, [socket]);
@@ -76,7 +84,11 @@ const NotificationBell = () => {
       <div className="relative" ref={outsideClickRef}>
         <div className="absolute top-0 right-0">
           <button
-            onClick={handleClick}
+            onClick={() => {
+              handleClick();
+              mutate();
+              console.log("click");
+            }}
             className="flex items-center justify-center rounded-full  w-8 h-8 text-gray-600"
           >
             <NotificationsIcon />
@@ -84,7 +96,7 @@ const NotificationBell = () => {
         </div>
         <div className="w-8 h-8">
           <div className="absolute -top-1 -right-1 bg-green-500 rounded-full w-4 h-4 text-white text-[10px] flex items-center justify-center">
-            {notifications?.length}
+            {nbrNotifications ? nbrNotifications : 0}
           </div>
         </div>
       </div>
@@ -103,7 +115,10 @@ const NotificationBell = () => {
             {notifications?.slice(0, 4).map((notification) => (
               <div key={notification?._id}>
                 <li>
-                  <button className="flex items-center p-4 space-x-4 hover:bg-gray-100 w-full text-left">
+                  <button
+                    className="flex items-center p-4 space-x-4 hover:bg-gray-100 w-full text-left"
+                    onClick={() => mutate(notification?._id)}
+                  >
                     <img
                       src={
                         notification?.user
