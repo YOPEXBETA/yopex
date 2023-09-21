@@ -71,9 +71,7 @@ authRouter.get("/login/failed", (req, res) => {
 
 authRouter.get(
   "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] }).then((response) => {
-    console.log(response);
-  }),
+  passport.authenticate("google", { scope: ["profile", "email"] }),
 );
 
 authRouter.get(
