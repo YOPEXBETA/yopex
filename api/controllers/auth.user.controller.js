@@ -284,7 +284,8 @@ const signInWithGoogle = async (req, res) => {
 
   info.token = token;
     console.log({info})
-  return res.status(200).send(info);
+    res.redirect("https://yopex.tabaani.co?token="+token);
+  // return res.status(200).send(info);
 };
 module.exports = {
   signUp,
