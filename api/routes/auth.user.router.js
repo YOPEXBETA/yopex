@@ -7,6 +7,7 @@ const CLIENT_URL = "https://yopex.tabaani.co/";
 //imported controllers
 const {
   signIn,
+  signInWithGoogle,
   signUp,
   logout,
   forgetpassword,
@@ -47,7 +48,7 @@ authRouter.post(
       return validate(companyRegisterValidator)(req, res, next);
     }
   },
-  signUp,
+  signUp
 );
 authRouter.post("/login", validate(loginValidator), signIn);
 authRouter.post("/logout", logout);
@@ -61,7 +62,6 @@ authRouter.get("/login/success", (req, res) => {
   }
 });
 
-
 authRouter.get("/login/failed", (req, res) => {
   res.status(401).json({
     success: false,
@@ -71,14 +71,22 @@ authRouter.get("/login/failed", (req, res) => {
 
 authRouter.get(
   "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] }),
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
+
+// authRouter.get(
+//   "/google/callback",
+//   passport.authenticate("google", {
+//     successRedirect: CLIENT_URL + "feed",
+//     failureRedirect: "/login/failed",
+//   }),
+// );
 
 authRouter.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: CLIENT_URL + "feed",
     failureRedirect: "/login/failed",
   }),
+  signInWithGoogle
 );
 module.exports = authRouter;

@@ -12,7 +12,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://yopex-api.tabaani.co/auth/google/callback",
+      callbackURL: "https://yopex.tabaani.co/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, cb) => {
       // Check if the user already exists in the userSchema collection
@@ -69,10 +69,7 @@ const googleAuthSignIn = async (
 ) => {
   //check user status
   if (user.isActive) {
-    // return access token
-    console.log({accessToken})
-    return accessToken;
-    // return cb(null, user);
+    return cb(null, user);
   } else {
     return cb(null, { error: "Your account is banned" });
   }

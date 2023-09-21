@@ -270,10 +270,27 @@ const resetpassword = async (req, res) => {
 };
 // ==============================|| signInWithGoogle ||============================== //
 
+const signInWithGoogle = async (req, res) => {
+  const user = req.user;
+  const token = jwt.sign(
+    {
+      id: user._id,
+      role: user.role,
+      email: user.email,
+    },
+    process.env.passwordToken
+  );
+  const { ...info } = user ? user._doc : company._doc;
+
+  info.token = token;
+
+  return res.status(200).send(info);
+};
 module.exports = {
   signUp,
   signIn,
   logout,
+  signInWithGoogle,
   forgetpassword,
   resetpassword,
 };
