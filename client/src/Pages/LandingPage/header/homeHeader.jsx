@@ -109,14 +109,8 @@ const HomeHeader = () => {
             </li>
             {user && (
               <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
-                <Link
-                  onClick={() => setNav(!nav)}
-                  to="feed"
-                  smooth
-                  duration={500}
-                >
-                  Feed
-                </Link>
+               <a href="/feed">feed
+             </a>
               </li>
             )}
             {!user && (
