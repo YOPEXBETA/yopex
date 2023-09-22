@@ -228,7 +228,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-4">Confirm Deletion</h2>
             <p className="text-gray-700 mb-4">
-              Are you sure you want to delete this job?
+              Are you sure you want to delete this Company?
             </p>
             <div className="flex justify-end">
               <button
