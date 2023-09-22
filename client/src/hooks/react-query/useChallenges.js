@@ -21,7 +21,7 @@ export const useEditChallenge = (challengeId) => {
   return useMutation({
     mutationFn: async (ChallengeData) => {
       console.log(ChallengeData);
-      await axios.put(`${url}/challenge/update/${challengeId}`, ChallengeData, );
+      await axios.put(`${url}/challenge/update/${challengeId}`, ChallengeData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["challenges"]);

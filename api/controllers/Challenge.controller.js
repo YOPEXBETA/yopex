@@ -181,6 +181,7 @@ const getChallengeUserSubmit = async (req, res) => {
 const updateChallenge= async (req, res, next) => {
   
   const {description ,title  ,nbruser ,price ,   category ,RecommendedSkills} = req.body;
+  console.log(description ,title  ,nbruser ,price ,   category ,RecommendedSkills);
   const challengeId = req.params.challengeId;
 
   let Challenge;

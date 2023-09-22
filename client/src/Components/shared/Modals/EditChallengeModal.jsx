@@ -52,7 +52,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
       price: formData.price,
       nbruser:formData.nbruser,
       category: formData.category,
-      RecommendedSkills: formData.RecommendedSkills,
+      RecommendedSkills: formData.RecommendedSkills
     });
     handleClose();
   };
