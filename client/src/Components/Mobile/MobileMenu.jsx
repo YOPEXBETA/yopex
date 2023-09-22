@@ -15,7 +15,7 @@ const MobileMenu = ({ userImage, user }) => {
         </Link>
         <FaBell className="text-2xl text-gray-600 mr-4" />
         <FaPlus className="text-2xl text-gray-600 mr-4" />
-        <FaComments className="text-2xl text-gray-600" />
+        <Link to={`/chat`}> <FaComments className="text-2xl text-gray-600" /> </Link>
       </div>
     </div>
   );

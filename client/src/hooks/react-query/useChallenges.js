@@ -20,6 +20,7 @@ export const useEditChallenge = (challengeId) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (ChallengeData) => {
+      console.log(ChallengeData);
       await axios.put(`${url}/challenge/update/${challengeId}`, ChallengeData, );
     },
     onSuccess: () => {

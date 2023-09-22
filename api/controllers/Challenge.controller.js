@@ -179,12 +179,19 @@ const getChallengeUserSubmit = async (req, res) => {
 };
 
 const updateChallenge= async (req, res, next) => {
+  
+  const {description ,title  ,nbruser ,price ,   category ,RecommendedSkills} = req.body;
   const challengeId = req.params.challengeId;
+
   let Challenge;
   try {
     Challenge = await ChallengeModel.findByIdAndUpdate(challengeId, {
-      "title" :req.body.title, 
-      "description" :req.body.description, 
+      title, 
+      description , 
+      nbruser , 
+      price , 
+      category ,
+      RecommendedSkills
     }); 
      res.status(200).json({ Challenge });
   } catch (err) {
