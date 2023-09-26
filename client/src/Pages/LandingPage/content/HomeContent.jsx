@@ -9,7 +9,7 @@ const HomeContent = () => {
   return (
     <div>
       <HomeSection />
-      {/*<HighlightSection />*/}
+      <HighlightSection />
       <Features />
       <Companies />
       <RecentJobs />

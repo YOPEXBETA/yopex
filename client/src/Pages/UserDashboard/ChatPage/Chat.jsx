@@ -29,7 +29,6 @@ const Chat = () => {
           setOtherUser(conn.members[0]);
         }
       }
-      console.log(otherUser);
     }
   }, [selectedConversationId, conversations]);
   const socket = useSocket();
@@ -37,14 +36,14 @@ const Chat = () => {
   socket.emit("joinRoom", { id: user._id, roomid: selectedConversationId });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 ">
-      <div className="col-span-1 border-r border-gray-300">
+    <div className="lg:grid lg:grid-cols-4 sm:grid sm:grid-cols-1">
+      <div className="lg:col-span-1 sm:col-span-1 border-r border-gray-300">
         <div className="mb-4">
           <UsersMsgs />
         </div>
       </div>
 
-      <div className="col-span-1 md:col-span-3">
+      <div className="lg:col-span-3">
         <Conversation
           conversationId={selectedConversationId}
           socket={socket}

@@ -8,7 +8,6 @@ import SearchUsers from "./SearchUsers";
 const UsersMsgs = ({ onConversationSelect }) => {
   const { user } = useSelector((state) => state.auth);
   const { data: conversations } = useConversations(user._id);
-  console.log(conversations);
   return (
     <div className="w-full overflow-auto h-[88vh] bg-white sticky">
       <div className="flex justify-between items-center px-4 py-2">
@@ -26,8 +25,10 @@ const UsersMsgs = ({ onConversationSelect }) => {
             <div key={conversation.conversationId}>
               <Link
                 to={`/chat/${conversation.conversationId}`}
-                className="block hover:bg-gray-100 p-4"
+                className=" hover:bg-gray-100 p-4
+                sm :p-2 flex flex-col gap-2 w-full"
               >
+                
                 <div className="flex gap-4 items-center">
                   <img
                     alt="image"

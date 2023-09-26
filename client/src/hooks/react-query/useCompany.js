@@ -7,7 +7,7 @@ export const useAdminCompanies = () => {
   return useQuery({
     queryKey: ["companies"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/admin/Companies`, );
+      const { data } = await axios.get(`https://yopex-api.tabaani.co/admin/Companies`, );
       return data;
     },
   });

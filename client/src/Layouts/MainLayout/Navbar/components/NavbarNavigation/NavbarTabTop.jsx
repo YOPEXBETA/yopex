@@ -27,7 +27,7 @@ const NavbarTabTop = () => {
   }, [location]);
 
   return (
-    <div className="w-full md:flex md:items-center py-4">
+    <div className=" w-full md:flex md:items-center py-4">
       <nav className="w-full md:flex md:flex-row md:justify-center">
         <Link
           to="/feed"

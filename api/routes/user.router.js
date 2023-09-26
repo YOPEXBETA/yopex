@@ -49,7 +49,7 @@ userRouter.put(
 );
 userRouter.get("/me", authenticateToken, getCurrentUser); //seach users
 userRouter.get("/users", authenticateToken, SearchUsers); //seach users
-userRouter.get("/allusers", authenticateToken, getUsers); //seach users
+userRouter.get("/allusers", getUsers); //seach users
 userRouter.get("/:id", authenticateToken, getUser);
 userRouter.get("/find/friends/:userId", authenticateToken, getUserFriends);
 userRouter.get(
