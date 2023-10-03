@@ -16,7 +16,7 @@ const Followers = () => {
           <FollowersCard key={follower._id} follower={follower} />
         ))
       ) : (
-        <p>No Followers.</p>
+        <p>No Followers Found.</p>
       )}
     </div>
   );

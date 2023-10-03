@@ -32,7 +32,6 @@ const corsOpts = {
   credentials: true,
   preflightContinue: false,
   optionsSuccessStatus: 204,
-
 };
 
 app.use(cors(corsOpts));
