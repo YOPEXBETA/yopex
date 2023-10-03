@@ -30,12 +30,15 @@ const CustomNavbar = () => {
               </Link>
               <NavbarSearchDropDown />
             </div>
-            <button
+            {/*<button
               onClick={toggleMobileMenu}
               className="block lg:hidden md:block p-2 text-gray-400 hover:text-black focus:outline-none"
             >
               <FiMoreVertical className="h-6 w-6" />
-            </button>
+            </button>*/}
+            <div className="block xl:hidden">
+              <MenuIcons />
+            </div>
           </div>
         </div>
 
@@ -45,8 +48,8 @@ const CustomNavbar = () => {
           </div>
         </div>
 
-        <div className="flex flex-col z-50 md:flex-row-reverse md:col-span-3">
-          <div className="hidden lg:block md:hidden">
+        <div className="flex flex-col md:flex-row-reverse md:col-span-3">
+          <div className="hidden lg:block">
             <MenuIcons />
           </div>
         </div>
@@ -55,12 +58,13 @@ const CustomNavbar = () => {
         <MobileMenu userImage={user?.picturePath} user={user} />
       </div>
 
-      {/* Mobile menu content */}
+      {/* Mobile menu content 
       {showMobileMenu && (
         <div className="lg:hidden  bg-white h-full border-b-2 border-gray-200">
           <NavbarTabTop />
         </div>
       )}
+      */}
     </div>
   );
 };
