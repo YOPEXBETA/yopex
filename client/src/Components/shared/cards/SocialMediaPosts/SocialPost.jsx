@@ -75,7 +75,7 @@ const SocialPostCard = ({
           <img
             alt="post"
             src={post.userPicturePath}
-            className=" w-11 h-11 rounded-full object-cover bg-white"
+            className=" w-11 h-11 rounded-full object-cover bg-white border-2"
           />
           <div>
             <Link
@@ -87,7 +87,7 @@ const SocialPostCard = ({
               }
               style={{ textDecoration: "none", color: "#000000" }}
             >
-              <p className="text-md font-medium ">
+              <p className="text-md font-medium truncate w-52">
                 {post.companyName !== undefined
                   ? `${post?.companyName}`
                   : `${post?.firstname} ${post?.lastname}`}
@@ -108,30 +108,28 @@ const SocialPostCard = ({
       </div>
 
       <div className="mx-auto ">
-      <div className="flex  items-center">
-        <div className="  object-cover static ">
-          <div className="flex  items-center object-cover  ">
-          
-            {post.postPicturePath
-              .slice(currentPage, currentPage + 1)
-              .map((item, index) => (
-               
-                <SocialPostImage
-                  key={index}
-                  item={item}
-                  height={height}
-                  width={width}
-                  openModal={openModal}
-                />
-              
-              ))}  
+        <div className="flex  items-center">
+          <div className="  object-cover static ">
+            <div className="flex  items-center object-cover  ">
+              {post.postPicturePath
+                .slice(currentPage, currentPage + 1)
+                .map((item, index) => (
+                  <SocialPostImage
+                    key={index}
+                    item={item}
+                    height={height}
+                    width={width}
+                    openModal={openModal}
+                  />
+                ))}
+            </div>
           </div>
         </div>
       </div>
-    </div><div className="flex justify-center mt-3    ">
+      <div className="flex justify-center mt-3    ">
         {renderPaginationDots()}
       </div>
- 
+
       <div className=" flex items-center gap-6 px-4">
         <div className="flex items-center gap-2">
           <button

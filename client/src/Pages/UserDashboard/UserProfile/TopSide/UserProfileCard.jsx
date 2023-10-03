@@ -55,8 +55,8 @@ const UserProfileCard = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <p className="text-xl font-md">
+        <div className="flex items-center justify-center gap-2 truncate w-80">
+          <p className="text-xl font-md truncate">
             {`${userProfile.firstname} ${userProfile.lastname}`}
           </p>
 
