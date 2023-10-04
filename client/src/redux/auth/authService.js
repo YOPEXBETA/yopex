@@ -1,19 +1,14 @@
-import {axios} from "../../axios";
+import { axios } from "../../axios";
 
-const url = "https://yopex-api.tabaani.co";
+const url = process.env.REACT_APP_API_ENDPOINT;
 
 const register = async (data) => {
-  console.log(data);
   const user = await axios.post(`${url}/auth/register`, data);
   return user.data;
 };
 
 const login = async (data) => {
-  const user = await axios.post(
-    `https://yopex-api.tabaani.co/auth/login`,
-    data
-  );
-  console.log("login response:", user.data);
+  const user = await axios.post(`${url}/auth/login`, data);
   localStorage.setItem("accessToken", user.data.token);
   // set accessToken to axios default header
   // dispatch({
@@ -29,31 +24,27 @@ const login = async (data) => {
 };
 
 const edit = async (data) => {
-  const user = await axios.put(
-    ` https://yopex-api.tabaani.co/users/edit`,
-    data,
-    {
-      withCredentials: true,
-    }
-  );
+  const user = await axios.put(`http://localhost:3001/users/edit`, data, {
+    withCredentials: false,
+  });
 
   return user.data;
 };
 
 const getcurrentuser = async () => {
   const accessToken = localStorage.getItem("accessToken");
-  if(!accessToken) {
+  if (!accessToken) {
     return undefined;
   }
   if (
-    accessToken == undefined ||
-    accessToken == null ||
-    accessToken == "" ||
-    accessToken == "null" ||
-    accessToken == "undefined"
+    accessToken === undefined ||
+    accessToken === null ||
+    accessToken === "" ||
+    accessToken === "null" ||
+    accessToken === "undefined"
   ) {
     axios
-      .get("https://yopex-api.tabaani.co/me")
+      .get(`${url}/me`)
       .then((res) => {
         console.log(res.data);
         return undefined;
@@ -62,8 +53,7 @@ const getcurrentuser = async () => {
         return undefined;
       });
   } else {
-
-    const user = await axios.get("https://yopex-api.tabaani.co/me");
+    const user = await axios.get(`${url}/me`);
     return user.data;
   }
 

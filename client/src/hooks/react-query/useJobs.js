@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 //const url = "https://yopex-api.tabaani.co/job";
 
-const url = process.env.URL || "https://yopex-api.tabaani.co";
+const url = process.env.REACT_APP_API_ENDPOINT;
 
 export const useJobs = () => {
   return useQuery({
@@ -19,7 +19,7 @@ export const useJobById = (companyId) => {
   return useQuery(
     ["jobs", companyId],
     async () => {
-      const { data } = await axios.get(`${url}/job/${companyId}`, );
+      const { data } = await axios.get(`${url}/job/${companyId}`);
       return data;
     },
     {
@@ -33,13 +33,7 @@ export const useCreateJob = (user) => {
 
   return useMutation({
     mutationFn: async ({ companyId, JobData }) => {
-      await axios.post(
-        `${url}/job/add`,
-        { companyId, ...JobData },
-        {
-          
-        }
-      );
+      await axios.post(`${url}/job/add`, { companyId, ...JobData }, {});
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
@@ -52,7 +46,7 @@ export const useDeleteJob = () => {
 
   return useMutation({
     mutationFn: async (jobId) => {
-      await axios.delete(`${url}/job/${jobId}`, );
+      await axios.delete(`${url}/job/${jobId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
@@ -143,7 +137,7 @@ export const useEditJob = (jobId) => {
 
   return useMutation({
     mutationFn: async (JobData) => {
-      await axios.put(`${url}/job/update/${jobId}`, JobData, );
+      await axios.put(`${url}/job/update/${jobId}`, JobData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["jobs"]);
