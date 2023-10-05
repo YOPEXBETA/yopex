@@ -6,7 +6,7 @@ export const register = (myData) => async (dispatch) => {
     console.log("register data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/auth/register",
+      "https://yopex-api.tabaani.co/auth/register",
       myData
     );
 
@@ -34,10 +34,10 @@ export const login = (myData) => async (dispatch) => {
     console.log("login data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/auth/login",
+      "https://yopex-api.tabaani.co/auth/login",
       myData,
       {
-        withCredentials: true,
+        
       }
     );
 
@@ -73,7 +73,7 @@ export const forgetPassword = (myData) => async (dispatch) => {
     console.log("forget password data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/auth/forgetpassword",
+      "https://yopex-api.tabaani.co/auth/forgetpassword",
       myData
     );
 
@@ -97,10 +97,8 @@ export const forgetPassword = (myData) => async (dispatch) => {
 
 export const resetPassword = (myData) => async (dispatch) => {
   try {
-    console.log("reset password data:", myData);
-
     const { data } = await axios.post(
-      "http://localhost:8000/auth/resetpassword",
+      "https://yopex-api.tabaani.co/auth/resetpassword",
       myData
     );
 
@@ -122,13 +120,33 @@ export const resetPassword = (myData) => async (dispatch) => {
   }
 };
 
+export const emailVerification = (token) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(
+      `https://yopex-api.tabaani.co/auth/emailverification/${token}`
+    );
+
+    console.log("Email verification :", data);
+
+    dispatch({
+      type: "reset_password_success",
+      payload: data,
+    });
+
+    return data;
+  } catch (error) {
+    console.log("reset password error:", error.response.data);
+
+    dispatch({
+      type: "reset_password_error",
+      payload: error.response.data,
+    });
+  }
+};
+
 export const logout = () => async (dispatch) => {
   try {
-    console.log("logout action");
-
-    // clear token and user from local storage
-    localStorage.removeItem("user");
-    Cookies.remove("accessToken");
+    localStorage.removeItem("accessToken");
 
     dispatch({
       type: "logout_success",
@@ -148,10 +166,10 @@ export const verifyface = (myData) => async (dispatch) => {
     console.log("login data:", myData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/facerecog/verifyface",
+      "https://yopex-api.tabaani.co/facerecog/verifyface",
       myData,
       {
-        withCredentials: true,
+        
       }
     );
 
@@ -186,10 +204,10 @@ export const addface = (myData) => async (dispatch, getState) => {
     const token = getState().Auth.token;
 
     const { data } = await axios.post(
-      "http://localhost:8000/facerecog/addface",
+      "https://yopex-api.tabaani.co/facerecog/addface",
       myData,
       {
-        withCredentials: true,
+        
       }
     );
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Logout from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
@@ -10,8 +10,12 @@ import { logout } from "../../../../../../redux/auth/authSlice";
 
 const ProfileMenu = () => {
   const [open, setOpen] = useState(false);
-  const handleClick = (event) => setOpen(!open);
+  const menuRef = useRef(null);
 
+  const handleClick = (event) => setOpen(!open);
+  const handleCloseMenu = () => {
+    setOpen(false);
+  };
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
 
@@ -22,9 +26,33 @@ const ProfileMenu = () => {
     navigate("/");
   };
 
+  // Use a ref to detect clicks outside of the menu
+  const outsideClickRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        outsideClickRef.current &&
+        !outsideClickRef.current.contains(event.target)
+      ) {
+        handleCloseMenu();
+      }
+    }
+
+    if (setOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setOpen]);
+
   return (
-    <div className="relative z-50">
-      <div className="relative z-10">
+    <div className="relative z-40" ref={outsideClickRef}>
+      <div>
         <button
           onClick={handleClick}
           className="flex items-center justify-center w-10 h-10 text-gray-600 rounded-full"
@@ -36,9 +64,12 @@ const ProfileMenu = () => {
           />
         </button>
       </div>
-      <div className="relative">
+      <div>
         {open && (
-          <div className="absolute right-0 mt-6 bg-white shadow-lg rounded-lg min-w-[320px] max-w-[380px] overflow-visible border border-gray-200">
+          <div
+            ref={menuRef}
+            className="absolute right-0 mt-6 bg-white shadow-lg rounded-lg min-w-[320px] max-w-[380px] overflow-visible border border-gray-200"
+          >
             <a
               href={`/profile/${user._id}`}
               className="p-3 hover:bg-gray-100 space-x-2 flex items-center"

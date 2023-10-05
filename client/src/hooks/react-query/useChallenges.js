@@ -1,7 +1,7 @@
-import axios from "axios";
+import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.REACT_APP_API_ENDPOINT;
 
 export const useChallengeById = (challengeId) => {
   return useQuery({
@@ -9,14 +9,25 @@ export const useChallengeById = (challengeId) => {
     queryFn: async () => {
       const { data } = await axios.get(
         `${url}/challenge/single/${challengeId}`,
-        { withCredentials: true }
       );
       return data;
     },
   });
 };
 
-
+export const useEditChallenge = (challengeId) => {
+  console.log(challengeId);
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (ChallengeData) => {
+      console.log(ChallengeData);
+      await axios.put(`${url}/challenge/update/${challengeId}`, ChallengeData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["challenges"]);
+    },
+  });
+};
 
 export const useUserChallenges = (user) => {
   return useQuery({
@@ -24,7 +35,7 @@ export const useUserChallenges = (user) => {
     queryFn: async () => {
       const { data } = await axios.get(`${url}/user/challenges`, {
         params: { userId: user._id },
-        withCredentials: true,
+        
       });
       return data;
     },
@@ -37,7 +48,6 @@ export const useChallengesById = (companyId) => {
     async () => {
       const { data } = await axios.get(
         `${url}/challenge/company/${companyId}`,
-        { withCredentials: true }
       );
       return data;
     },
@@ -61,7 +71,7 @@ export const useUserSubmission = (challengeId, participant) => {
             userId: participantId,
             challengeId: challengeId,
           },
-          withCredentials: true,
+          
         }
       );
       return data;
@@ -69,22 +79,38 @@ export const useUserSubmission = (challengeId, participant) => {
   });
 };
 
-export const useFindChallenges = (minAmount, maxAmount, searchQuery,skills) => {
-
+export const useFindChallenges = (
+  minAmount,
+  maxAmount,
+  searchQuery,
+  skills,
+  categories
+) => {
   return useQuery({
-    queryKey: ["challenges", minAmount, maxAmount, searchQuery,skills],
+    queryKey: [
+      "challenges",
+      minAmount,
+      maxAmount,
+      searchQuery,
+      skills,
+      categories,
+    ],
     queryFn: async () => {
       let query = "";
       if (minAmount) query += `&min=${minAmount}`;
       if (maxAmount) query += `&max=${maxAmount}`;
       if (searchQuery) query += `&search=${searchQuery}`;
-      
+
       if (skills && skills.length > 0) {
-        query += skills.map(skill => `&skills=${skill}`).join(''); // Use "|" as OR operator
+        query += skills.map((skill) => `&skills=${skill}`).join(""); // Use "|" as OR operator
+      }
+      if (categories && categories.length > 0) {
+        query += categories
+          .map((category) => `&categories=${category}`)
+          .join(""); // Use "|" as OR operator
       }
       const { data } = await axios.get(
         `${url}/challenge/challenges/all?${query}`,
-        { withCredentials: true }
       );
 
       return data;
@@ -96,9 +122,7 @@ export const useSubmitToChallenge = ({ challengeId }) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (submission) => {
-      await axios.post(`${url}/challenge/submission`, submission, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/challenge/submission`, submission, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["challenges", challengeId]);
@@ -110,13 +134,13 @@ export const useCreateChallenge = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ companyId, challengeData,paid }) => {
+    async ({ companyId, challengeData, paid }) => {
       console.log("called");
       await axios.post(
         `${url}/challenge/add`,
-        { companyId, ...challengeData,paid },
+        { companyId, ...challengeData, paid },
         {
-          withCredentials: true,
+          
         }
       );
     },
@@ -133,9 +157,7 @@ export const useUnregisterChallenge = (challenge, user) => {
   return useMutation({
     mutationFn: async () => {
       const challengeData = { idChallenge: challenge._id, idUser: user._id };
-      await axios.post(`${url}/unjoin`, challengeData, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/unjoin`, challengeData, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -153,9 +175,7 @@ export const useRegisterChallenge = (challenge, user) => {
   return useMutation({
     mutationFn: async () => {
       const challengeData = { idChallenge: challenge._id, idUser: user._id };
-      await axios.post(`${url}/join`, challengeData, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/join`, challengeData, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["challenges", user._id] });
@@ -178,7 +198,7 @@ export const useChooseWinner = () => {
         `${url}/company/challengeWinner`,
         challengeData,
         {
-          withCredentials: true,
+          
         }
       );
       console.log(data);
@@ -193,7 +213,7 @@ const getChallenges = async (userId) => {
     params: {
       userId: userId,
     },
-    withCredentials: true,
+    
   });
   return data;
 };
@@ -202,17 +222,31 @@ export const useGetChallenges = (userId) => {
   return useQuery(["challenges", userId], () => getChallenges(userId));
 };
 
-export const useDeleteChallenge=()=>{
-      const queryClient = useQueryClient();
+export const useDeleteChallenge = () => {
+  const queryClient = useQueryClient();
 
-      return useMutation({
-        mutationFn: async (challengeId) => {
-          await axios.delete(`${url}/challenge/${challengeId}`, {
-            withCredentials: true,
-          });
-        },
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['challenges'] });
-        },
-      });
+  return useMutation({
+    mutationFn: async (challengeId) => {
+      await axios.delete(`${url}/challenge/${challengeId}`, );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["challenges"] });
+    },
+  });
+};
+
+export const useEditSubmission = (challengeId, participant) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (submission) => {
+      await axios.post(`${url}/challenge/editSubmission`, submission, );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        "submissions",
+        participant._id,
+        challengeId,
+      ]);
+    },
+  });
 };

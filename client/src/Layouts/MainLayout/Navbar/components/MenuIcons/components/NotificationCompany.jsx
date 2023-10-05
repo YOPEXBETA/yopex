@@ -24,9 +24,12 @@ const NotificationBell = () => {
     const userId = JSON.parse(localStorage.getItem("user"))._id;
     if (userId) {
       axios
-        .get(`http://localhost:8000/company/company/${userId}/notifications`, {
-          withCredentials: true,
-        })
+        .get(
+          `https://yopex-api.tabaani.co/company/company/${userId}/notifications`,
+          {
+            
+          }
+        )
         .then((response) => {
           setNotifications(response.data);
         })

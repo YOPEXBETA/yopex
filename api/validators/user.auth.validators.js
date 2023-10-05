@@ -2,6 +2,7 @@
 const yup = require("yup");
 
 const userRegisterValidator = yup.object().shape({
+
   firstname: yup
     .string()
     .required("First name is required")
@@ -11,6 +12,14 @@ const userRegisterValidator = yup.object().shape({
     .required("Last name is required")
     .matches(/^[a-zA-Z]+$/, "Last name must only contain letters"),
   password: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters long")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/,
+      "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+    ),
+  repeatPassword: yup
     .string()
     .required("Password is required")
     .min(8, "Password must be at least 8 characters long")

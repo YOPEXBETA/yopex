@@ -1,16 +1,15 @@
-import axios from "axios";
+import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-//const url = "http://localhost:8000/job";
+//const url = "https://yopex-api.tabaani.co/job";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.REACT_APP_API_ENDPOINT;
 
 export const useJobs = () => {
   return useQuery({
     queryKey: ["jobs"],
     queryFn: async () => {
       const { data } = await axios.get(`${url}/job/all`);
-      console.log("fff", data);
       return data;
     },
   });
@@ -20,9 +19,7 @@ export const useJobById = (companyId) => {
   return useQuery(
     ["jobs", companyId],
     async () => {
-      const { data } = await axios.get(`${url}/job/${companyId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/job/${companyId}`);
       return data;
     },
     {
@@ -36,13 +33,7 @@ export const useCreateJob = (user) => {
 
   return useMutation({
     mutationFn: async ({ companyId, JobData }) => {
-      await axios.post(
-        `${url}/job/add`,
-        { companyId, ...JobData },
-        {
-          withCredentials: true,
-        }
-      );
+      await axios.post(`${url}/job/add`, { companyId, ...JobData }, {});
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
@@ -55,23 +46,25 @@ export const useDeleteJob = () => {
 
   return useMutation({
     mutationFn: async (jobId) => {
-      await axios.delete(`${url}/job/${jobId}`, {
-        withCredentials: true,
-      });
+      await axios.delete(`${url}/job/${jobId}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['jobs'] });
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
     },
   });
 };
 
-
-export const useAppliers = (job) => {
+export const useAppliers = (jobIds) => {
   return useQuery({
-    queryKey: ["appliers", job._id],
+    queryKey: ["appliers", jobIds],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/job/jobs/${job._id}/appliers`);
-      return data;
+      const appliersPromises = jobIds?.map(async (jobId) => {
+        const { data } = await axios.get(`${url}/job/jobs/${jobId}/appliers`);
+        return data;
+      });
+      const appliersData = await Promise.all(appliersPromises);
+
+      return appliersData;
     },
   });
 };
@@ -90,10 +83,10 @@ export const useSortAppliers = (job) => {
 
 export const useAcceptedAppliers = (job) => {
   return useQuery({
-    queryKey: ["accepted/appliers", job._id],
+    queryKey: ["accepted/appliers", job],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${url}/job/jobs/${job._id}/accepted-appliers`
+        `${url}/job/jobs/${job}/accepted-appliers`
       );
       return data;
     },
@@ -108,7 +101,7 @@ export const useAcceptApplier = (job) => {
       await axios.put(`${url}/job/jobs/${job._id}/appliers/${userId}/accept`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["accepted/appliers", job._id]);
+      queryClient.invalidateQueries(["jobs", job._id]);
     },
   });
 };
@@ -135,6 +128,19 @@ export const useUnapplyJob = (job, userId) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+    },
+  });
+};
+
+export const useEditJob = (jobId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (JobData) => {
+      await axios.put(`${url}/job/update/${jobId}`, JobData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["jobs"]);
     },
   });
 };

@@ -5,8 +5,6 @@ const Company = require("../models/company.model");
 const companySchema = require("../models/company.model");
 const Level = require("../models/Level.model");
 
-
-
 const getUsers = async (req, res) => {
   try {
     const users = await User.find({
@@ -118,7 +116,6 @@ const BanAccount = async (req, res) => {
 
 const approveCompany = async (req, res) => {
   try {
-    console.log("zzz  ", req.body.companyId);
     const updatedCompany = await companySchema.findByIdAndUpdate(
       req.body.companyId,
       {
@@ -142,5 +139,4 @@ module.exports = {
   BanAccount,
   approveCompany,
   getCompanies,
- 
 };

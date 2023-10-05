@@ -12,7 +12,7 @@ const main = require("../server");
 
 const addJob = async (req, res, next) => {
   try {
-    const { title,category,RecommendedSkills, description, companyId } = req.body;
+    const { title,category,RecommendedSkills, description, companyId , salary} = req.body;
 
     const userId = req.userId;
     const user = await User.findById(userId);
@@ -33,6 +33,7 @@ const addJob = async (req, res, next) => {
       description,
       category,
       RecommendedSkills,
+      salary,
     });
 
     await jobOffer.save();
@@ -64,23 +65,23 @@ const getAllJobs = async (req, res, next) => {
 };
 
 const updateJob = async (req, res, next) => {
-  const { title, description } = req.body;
+  const { title, description ,salary , category ,RecommendedSkills} = req.body;
   const jobId = req.params.id;
   let job;
   try {
     job = await Job.findByIdAndUpdate(jobId, {
       title,
       description,
+      salary,
+      category,
+      RecommendedSkills,
     });
+     res.status(200).json({ job });
   } catch (err) {
     return console.log(err);
   }
-  if (!job) {
-    return res.status(500).json({ message: "Unable To Update The Job" });
-  }
-  return res.status(200).json({ job });
 };
-//
+
 
 const geJobById = async (req, res, next) => {
   try {
@@ -116,7 +117,7 @@ const deleteJob = async (req, res, next) => {
     const company = await Company.findById(job.company);
     await company.jobs.pull(job);
     await company.save();
-    await Job.findByIdAndDelete(id);
+    await Job.findByIdAndDelete({_id:id});
     return res.status(200).json({ message: "Successfully Delete" });
   } catch (err) {
     console.log(err);
@@ -144,6 +145,7 @@ const getByUserId = async (req, res, next) => {
 const applyJob = async (req, res) => {
   try {
     const job = await Job.findById(req.params.jobId).exec();
+    
     if (!job) return res.status(400).json("Job not found");
 
     const user = await User.findById(req.params.userId).exec();
@@ -160,7 +162,9 @@ const applyJob = async (req, res) => {
         .json("You have already been accepted for this job");
 
     job.appliers.push(req.params.userId);
+    user.jobs.push (job);
     await job.save();
+    await user.save();
 
     // add notification to company
     const company = await Company.findById(job.company).exec();
@@ -194,7 +198,7 @@ const unapplyJob = async (req, res) => {
       return res.status(400).json("You have not applied for this job");
 
     // Remove user from appliers array
-    job.appliers.splice(applierIndex, 1);
+   job.appliers.splice(applierIndex, 1);
 
     // Remove user from acceptedAppliers array if they were accepted
     const acceptedApplierIndex = job.acceptedAppliers.indexOf(
@@ -212,13 +216,21 @@ const unapplyJob = async (req, res) => {
 };
 
 const getAppliers = async (req, res) => {
+  const currentTime = new Date();
+  currentTime.setHours(currentTime.getHours() + 1);
+
+  const twentyFourHoursAgo = new Date();
+  twentyFourHoursAgo.setHours(currentTime.getHours() - 24);
+
   try {
     const job = await Job.findById(req.params.jobId)
-      .populate({ path: "appliers", select: "firstname lastname email" })
+      .populate({ path: "appliers", select: "firstname lastname email picturePath jobs" })
       .select({ appliers: 1 })
       .lean()
       .exec();
-    if (job.appliers.length === 0) return res.status(204).json(job.appliers);
+
+    if (job.appliers.length === 0  )
+     return res.status(204).json(job.appliers);
     return res.status(200).json(job.appliers);
   } catch (err) {
     return res.status(500).json({ error: err.message });
@@ -257,7 +269,10 @@ const acceptApplier = async (req, res) => {
     }
 
     // Add the user to the acceptedAppliers array of the job
-    job.acceptedAppliers.push(user._id);
+    const dateAccepted = new Date();
+    dateAccepted.setHours(dateAccepted.getHours() + 1);
+
+    job.acceptedAppliers.push({ user: user._id, dateAccepted});
     notification = new notificationModel({
       type: "accepted for a job",
       message: `You have been accepted for the job of : ${job.title}`,
@@ -265,7 +280,10 @@ const acceptApplier = async (req, res) => {
     });
     notification.save();
     user.notifications.push(notification._id);
-    sendEmail(user.email, "You have been accepted for a Job: ");
+    sendEmail(user.email, "You have been accepted for a Job: "+job.title );
+
+
+
     await user.save();
     await job.save();
 

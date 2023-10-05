@@ -18,6 +18,8 @@ export default function NavbarSearchDropDown() {
     mutate(event.target.value);
   };
 
+  const displayedUsers = suggestedUsers?.slice(0, 5);
+
   return (
     <div className="relative xl:w-72 w-full">
       <input
@@ -30,7 +32,7 @@ export default function NavbarSearchDropDown() {
 
       {query && isSuccess && open && (
         <ul className="absolute z-10 mt-2 xl:w-72 w-full bg-white border rounded-md shadow-lg">
-          {suggestedUsers.map((option, index) => {
+          {displayedUsers.map((option, index) => {
             return (
               <li
                 key={option._id || index}

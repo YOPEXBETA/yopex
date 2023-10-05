@@ -14,7 +14,7 @@ const FollowersCard = ({ follower }) => {
           <img
             alt="yourphoto"
             src={follower.picturePath}
-            className="w-28 h-28 rounded-full items-center mx-auto object-cover"
+            className="w-28 h-28 rounded-full items-center mx-auto object-cover  border-2"
           />
 
           <div className="flex items-center mt-2 gap-1">

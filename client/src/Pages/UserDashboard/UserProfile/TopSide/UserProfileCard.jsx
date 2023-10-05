@@ -15,18 +15,21 @@ import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
-  
+
   const { userId } = useParams();
-  const { data: levelsData , isloading } = useGetLevels();
- const { data: userProfile  } = useUserById(userId);
- console.log(userProfile?.badgesEarned);
+  const { data: levelsData, isloading } = useGetLevels();
+  const { data: userProfile } = useUserById(userId);
+  console.log(userProfile?.badgesEarned);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
-  
- 
-  const userLevel = levelsData ? levelsData.find((level) => level.minScore <= userProfile?.score && level.maxScore >= userProfile?.score) : null;
 
-  
+  const userLevel = levelsData
+    ? levelsData.find(
+        (level) =>
+          level.minScore <= userProfile?.score &&
+          level.maxScore >= userProfile?.score
+      )
+    : null;
 
   const rating = useMemo(() => {
     if (!reviews || reviews.length === 0) return 0;
@@ -38,23 +41,22 @@ const UserProfileCard = () => {
     return (
       <div className="bg-white p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 xl:shadow-md lg:shadow-md md:shadow-md md:border-green-500 border-b-2 mr-0">
         <div className="relative">
-          <div className="w-36 h-36">
+          <div>
             <img
               alt="Profile picture"
               src={userProfile.picturePath}
-              className="object-cover w-full h-full rounded-full bg-green-500"
+              className="object-cover rounded-full border-2 border-gray-200 w-36 h-36"
             />
           </div>
           <div className="absolute bottom-0 right-0">
             <div className="flex items-center justify-center rounded-full bg-green-500 w-11 h-11 text-white">
-        { "LV "+parseInt(userLevel?.name.replace("Level ",""))}
-       
+              {"LV " + parseInt(userLevel?.name.replace("Level ", ""))}
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <p className="text-xl font-md">
+        <div className="flex items-center justify-center gap-2 truncate w-80">
+          <p className="text-xl font-md truncate">
             {`${userProfile.firstname} ${userProfile.lastname}`}
           </p>
 

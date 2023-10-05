@@ -5,9 +5,11 @@ const bcrypt = require("bcryptjs");
 const Job = require("../models/job.model");
 const { pick } = require("lodash");
 const ChallengeModel = require("../models/Challenge.model");
+const notificationModel = require("../models/notification.model");
 
 // ==============================|| EditProfile ||============================== //
 const editProfile = async (req, res) => {
+  
   try {
     const updateFields = pick(req.body, [
       "firstname",
@@ -21,9 +23,13 @@ const editProfile = async (req, res) => {
       "birthDate",
       "userDescription"
     ]);
-    console.log(req.body);
 
     if (updateFields.password) {
+      const user = await userSchema.findById(req.userId);
+      const isOldPasswordValid = await bcrypt.compare(req.body.oldPassword, user.password);
+      if (!isOldPasswordValid) {
+       return  res.status(400).json({ error: "Please verify your old password !" });
+      }
       const salt = await bcrypt.genSalt(10);
       const hashedPass = await bcrypt.hash(updateFields.password, salt);
       updateFields.password = hashedPass;
@@ -487,7 +493,7 @@ const getUserNotifications = async (req, res) => {
     // );
     
     const companies = user.companies;
-    notifications = user.notifications;
+    let notifications = user.notifications;
     for (const companyId of companies) {
       const company = await companySchema
         .findById(companyId)
@@ -504,7 +510,8 @@ const getUserNotifications = async (req, res) => {
         notifications = notifications.concat(company.notificationsCompany);
     }
     notifications.sort((a, b) => b.createdAt - a.createdAt);
-    res.status(200).json(notifications);
+    notseen = notifications.filter((notification) => notification.seen === false);
+    res.status(200).json({notification:notifications,nbr:notseen.length});
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Server Error" });
@@ -574,6 +581,25 @@ const getCurrentUser = async (req, res) => {
   }
 }
 
+
+const seeNotification = async (req, res) => {
+  try {
+    userId = req.userId
+    const user = await userSchema.findById(userId).select("notifications");
+    const unseenNotifications = await notificationModel.find({ seen: false,_id:{$in:user.notifications} });
+
+    // Update each notification to set seen=true
+    for (const notification of unseenNotifications) {
+      notification.seen = true;
+      await notification.save();
+    }
+    res.status(200).json({ message: "Notification seen" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 module.exports = {
   editProfile,
   SearchUsers,
@@ -593,5 +619,6 @@ module.exports = {
   CreateCompany,
   getCurrentUser,
   followUnfollowCompany,
-  getUserFollowingsCompanies
+  getUserFollowingsCompanies,
+  seeNotification
 };

@@ -21,7 +21,8 @@ const {
   CreateCompany,
   getCurrentUser,
   followUnfollowCompany,
-  getUserFollowingsCompanies
+  getUserFollowingsCompanies,
+  seeNotification
 } = require("../controllers/user.controller");
 
 const validate = require("../middlewares/SchemaValidation.middleware");
@@ -43,13 +44,12 @@ const {
 
 userRouter.put(
   "/users/edit/",
-  validate(userEditProfileValidator),
   authenticateToken,
   editProfile,
 );
 userRouter.get("/me", authenticateToken, getCurrentUser); //seach users
 userRouter.get("/users", authenticateToken, SearchUsers); //seach users
-userRouter.get("/allusers", authenticateToken, getUsers); //seach users
+userRouter.get("/allusers", getUsers); //seach users
 userRouter.get("/:id", authenticateToken, getUser);
 userRouter.get("/find/friends/:userId", authenticateToken, getUserFriends);
 userRouter.get(
@@ -95,5 +95,6 @@ userRouter.get(
 );
 userRouter.get("/user/ban/:id", authenticateToken, banUser);
 userRouter.post("/create", authenticateToken, CreateCompany);
+userRouter.put("/notifications/seen", authenticateToken, seeNotification);
 
 module.exports = userRouter;

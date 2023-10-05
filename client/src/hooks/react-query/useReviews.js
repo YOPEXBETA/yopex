@@ -1,15 +1,13 @@
-import axios from "axios";
+import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "http://localhost:8000";
+const url = process.env.REACT_APP_API_ENDPOINT;
 
 export const useUserReviews = (userId) => {
   return useQuery({
     queryKey: ["reviews", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/reviews/${userId}`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(`${url}/reviews/${userId}`, );
       return data;
     },
   });
@@ -19,9 +17,7 @@ export const useAddReviews = (userId) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (review) => {
-      await axios.post(`${url}/review/create`, review, {
-        withCredentials: true,
-      });
+      await axios.post(`${url}/review/create`, review, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews", userId]);

@@ -27,8 +27,6 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
     
   }, [messages]);
   
-
-  
   useEffect(() => {
     socket.on("getMessage", (data) => {
       console.log(data);
@@ -66,17 +64,17 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
   return (
     <div >
       {arrivalMessage?.length === 0 ? (
-        <div ref={chatContainerRef} style={{ textAlign: "center", padding: "40vh 0vh" }}>
+        <div className="lg:block hidden"  ref={chatContainerRef} style={{ textAlign: "center", padding: "40vh 0vh" }}>
           <p className="opacity-50 text-xl">
             Open a conversation to start a chat
           </p>
         </div>
       ) : (
-        <div className="fixed h-[82vh] xl:w-[75%]  overflow-auto pb-8" ref={chatContainerRef}>
+        <div className="hidden  lg:block lg:fixed lg:h-[82vh] xl:w-[75%] lg:overflow-auto lg:pb-8" ref={chatContainerRef}>
           {arrivalMessage?.map((message, index) => {
             return (
               <div key={index} className="px-11 py-6">
-                <div className="grid">
+                <div className="grid ">
                   <div className="col-span-12">
                     {message.sender._id === user._id ? (
                       <div className="text-right">

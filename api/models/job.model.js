@@ -16,8 +16,8 @@ const JobSchema = new mongoose.Schema(
       required: true,
     },
     category: {
-      type: String,
-      required: true,
+      type: Array,
+      default: [],
     },
     RecommendedSkills: {
       type: Array,
@@ -35,9 +35,16 @@ const JobSchema = new mongoose.Schema(
       required: true,
     },
     appliers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    acceptedAppliers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    acceptedAppliers: [
+     { user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      dateAccepted: { type: Date, default: null },
+    }
+    ],
   },
   { timestamps: true },
 );
+
+
+
 
 module.exports = mongoose.model("Job", JobSchema);

@@ -3,23 +3,32 @@ import ContestsFilters from "./ContestCards/ContestFilters";
 import Jobs from "./JobCards/Jobs";
 import Challenges from "./ContestCards/Challenges";
 
-const BrowseContentPage = ({ value, contestQuery, jobQuery ,setSkillQuery,selectedCategory ,selectedSkill }) => {
+const BrowseContentPage = ({
+  value,
+  contestQuery,
+  jobQuery,
+  setCategoryQuery,
+  setSkillQuery,
+  selectedCategory,
+  selectedSkill,
+}) => {
   const [minAmount, setMinAmount] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
- 
+  console.log(selectedCategory);
 
   return (
     <div className=" space-y-6">
       <div spacing={2}>
         {value === 0 && (
           <div className="grid grid-cols-2 md:grid-cols-12 gap-2">
-            <div className="lg:col-span-3 md:col-span-3 sm:col-span-12 col-span-12 md:pr-8">
+            <div className="lg:col-span-3 md:col-span-3 sm:col-span-12 col-span-12 md:pr-8 pb-4">
               <ContestsFilters
                 setMinAmount={setMinAmount}
                 setMaxAmount={setMaxAmount}
-                selectedSkill={selectedSkill} 
-                setSkillQuery={setSkillQuery} 
-                
+                selectedSkill={selectedSkill}
+                selectedCategory={selectedCategory}
+                setSkillQuery={setSkillQuery}
+                setCategoryQuery={setCategoryQuery}
               />
             </div>
 
@@ -29,6 +38,7 @@ const BrowseContentPage = ({ value, contestQuery, jobQuery ,setSkillQuery,select
                 maxAmount={maxAmount}
                 searchQuery={contestQuery}
                 selectedSkill={selectedSkill}
+                selectedCategory={selectedCategory}
               />
             </div>
           </div>
@@ -36,8 +46,11 @@ const BrowseContentPage = ({ value, contestQuery, jobQuery ,setSkillQuery,select
 
         {value === 1 && (
           <div className="lg:col-span-12 md:col-span-12 sm:col-span-12 col-span-12">
-            <Jobs 
-            jobQuery={jobQuery}  selectedCategory={selectedCategory} selectedSkill={selectedSkill}/>
+            <Jobs
+              jobQuery={jobQuery}
+              selectedCategory={selectedCategory}
+              selectedSkill={selectedSkill}
+            />
           </div>
         )}
       </div>

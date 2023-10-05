@@ -54,7 +54,7 @@ const Features = () => {
             className={`relative bg-green-500 border-solid border-gray-300 border rounded-md shadow-md hover:scale-105 duration-500 hover:shadow-green-500`}
           >
             <div className="bg-white rounded-t-md p-4 h-72 flex flex-col items-center gap-5">
-              <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center">
+              <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center">
                 <div className="text-4xl text-white">{icon}</div>
               </div>
               <div>

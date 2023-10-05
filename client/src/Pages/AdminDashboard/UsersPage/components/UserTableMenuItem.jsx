@@ -12,9 +12,12 @@ const UserTableMenuItem = ({ userId, accountStatus }) => {
 
   const { mutate: onDelete } = useMutation({
     mutationFn: async () => {
-      await axios.delete(`http://localhost:8000/admin/delUsers/${userId}`, {
-        withCredentials: true,
-      });
+      await axios.delete(
+        `https://yopex-api.tabaani.co/admin/delUsers/${userId}`,
+        {
+          
+        }
+      );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
@@ -23,9 +26,7 @@ const UserTableMenuItem = ({ userId, accountStatus }) => {
 
   const { mutate: onBan } = useMutation({
     mutationFn: async () => {
-      await axios.get(`http://localhost:8000/user/ban/${userId}`, {
-        withCredentials: true,
-      });
+      await axios.get(`https://yopex-api.tabaani.co/user/ban/${userId}`, );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });

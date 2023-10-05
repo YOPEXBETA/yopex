@@ -1,6 +1,3 @@
-import { Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useChallengeById } from "../../../hooks/react-query/useChallenges";
@@ -17,10 +14,10 @@ const ContestDetails = () => {
 
   if (challenge) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 bg-white h-screen">
         <Banner value={value} changeValue={changeValue} />
         <div className="grid grid-cols-12 gap-4 px-6 lg:px-8 xl:px-32">
-          <div className="col-span-12">
+          <div className="col-span-12 ">
             <ContentSide value={value} />
           </div>
         </div>

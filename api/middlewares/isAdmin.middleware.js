@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
 const isAdmin = async (req, res, next) => {
-  const token = req.cookies.accessToken;
+  const token = req.header("Authorization").split(" ")[1];
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }

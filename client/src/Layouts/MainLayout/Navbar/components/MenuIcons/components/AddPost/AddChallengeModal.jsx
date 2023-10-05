@@ -35,6 +35,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
     setValue,
   } = useForm({
     defaultValues: {
+      category:[],
       RecommendedSkills: [],
       category: [],
     },
@@ -161,31 +162,40 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                 </div>
 
                 <div className="mb-2">
+
+                  
                 <Controller
                     control={control}
                     name="category"
-                    defaultValue={""}
-                    render={({ field }) =>
-                      itCategory && (<Autocomplete
+                    defaultValue={"Any"}
+                    render={({ field }) => itCategory && (
+                      <Autocomplete
+
                         multiple
                         id="tags-outlined"
                         value={field.value}
                         options={itCategory}
                         getOptionLabel={(option) => option}
+
+                        
                         onBlur={field.onBlur}
-                        onChange={(e,value) =>{
-                          
-                          setValue("category", value);
-                        }}
+                        onChange={(e, value) =>
+                          setValue("category", value)
+                        }
+
                         renderInput={(params) => (
                           <TextField
                             {...params}
                             variant="outlined"
-                            placeholder="Category"
+                            placeholder="Categories"
                           />
                         )}
-                      />)}
-                    />
+
+                      />
+                    )}
+                  />
+                     
+
                 </div>
                 <input
                   className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"

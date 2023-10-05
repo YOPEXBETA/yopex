@@ -5,34 +5,14 @@ import {
   Modal,
   Fade,
   CardHeader,
-  Avatar,
   Button,
   CardContent,
-  Chip,
   Divider,
 } from "@mui/material";
 import { useState } from "react";
 
-import { makeStyles } from "@mui/styles";
 import { Stack } from "@mui/system";
 import { Snackbar } from "@mui/material";
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    width: "80%",
-    maxWidth: "800px",
-    maxHeight: "800px",
-    overflow: "scroll",
-  },
-}));
 
 const JobPopup = ({
   open,
@@ -43,7 +23,6 @@ const JobPopup = ({
   jobId,
   userId,
 }) => {
-  const classes = useStyles();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("");
@@ -51,7 +30,7 @@ const JobPopup = ({
   const handleApply = async (userId) => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/job/jobs/${jobId}/apply/${userId}`
+        `https://yopex-api.tabaani.co/job/jobs/${jobId}/apply/${userId}`
       );
       setSnackbarMessage(response.data);
       setSnackbarSeverity("success");
@@ -66,7 +45,7 @@ const JobPopup = ({
   const handleUnapply = async (userId) => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/job/jobs/${jobId}/unapply/${userId}`
+        `https://yopex-api.tabaani.co/job/jobs/${jobId}/unapply/${userId}`
       );
       setSnackbarMessage(response.data);
       setSnackbarSeverity("success");
@@ -86,9 +65,9 @@ const JobPopup = ({
 
   return (
     <>
-      <Modal className={classes.modal} open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleClose}>
         <Fade in={open}>
-          <div className={classes.paper}>
+          <div>
             <CardHeader
               title={<Typography variant="h4">{username}</Typography>}
               action={

@@ -37,6 +37,13 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    historyPayment: {
+      type: Array,
+      default: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Payment",
+      }],
+    },
     viewedProfile: { type: Number },
     impressions: { type: Number },
     //role to switch between company and user
@@ -45,6 +52,7 @@ const UserSchema = new mongoose.Schema(
     resetToken: { type: String, default: undefined }, //need it for forget password(verification)
     isFaceRecognition: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
+    isVerified: { type: Boolean, default: false },
 
     posts: {
       type: [

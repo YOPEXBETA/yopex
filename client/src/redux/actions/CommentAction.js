@@ -3,11 +3,9 @@ import axios from "axios";
 export const addComment = (myData) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/comment/",
+      "https://yopex-api.tabaani.co/comment/",
       myData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log(data);
@@ -24,10 +22,8 @@ export const addComment = (myData) => async (dispatch) => {
 export const getComments = (postId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/comment/${postId}`,
-      {
-        withCredentials: true,
-      }
+      `https://yopex-api.tabaani.co/comment/${postId}`,
+      
     );
     const comments = response.data;
 

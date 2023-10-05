@@ -52,14 +52,30 @@ const SocialPostCard = ({
     setCurrentPage(Math.min(currentPage + 1, pageCount - 1));
   };
 
+  const renderPaginationDots = () => {
+    const dots = [];
+    for (let i = 0; i < pageCount; i++) {
+      dots.push(
+        <button
+          key={i}
+          onClick={() => setCurrentPage(i)}
+          className={`w-3 h-3 rounded-full ${
+            i === currentPage ? "bg-green-500" : "bg-gray-300"
+          } mx-1 focus:outline-none`}
+        ></button>
+      );
+    }
+    return dots;
+  };
+
   return (
-    <div className="bg-white w-full mx-auto h-full rounded-lg border-green-500 border-b-2 shadow-md">
+    <div className="bg-white w-full mx-auto h-full  rounded-lg border-green-500 border-b-2 shadow-md">
       <div className=" flex justify-between items-start">
         <div className=" flex items-center gap-3 py-6 px-4">
           <img
             alt="post"
             src={post.userPicturePath}
-            className=" w-11 h-11 rounded-full object-cover bg-white"
+            className=" w-11 h-11 rounded-full object-cover bg-white border-2"
           />
           <div>
             <Link
@@ -71,7 +87,7 @@ const SocialPostCard = ({
               }
               style={{ textDecoration: "none", color: "#000000" }}
             >
-              <p className="text-md font-medium ">
+              <p className="text-md font-medium truncate w-52">
                 {post.companyName !== undefined
                   ? `${post?.companyName}`
                   : `${post?.firstname} ${post?.lastname}`}
@@ -91,37 +107,27 @@ const SocialPostCard = ({
         )}
       </div>
 
-      <div className="relative">
-        <div className="overflow-x-auto">
-          <div className="flex relative">
-            <button
-              onClick={handlePrevious}
-              disabled={currentPage === 0}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-zinc-200 rounded-full hover:scale-110 hover:bg-green-500"
-            >
-              <FaChevronLeft className=" text-white  w-8 h-8 p-2" />
-            </button>
-
-            {post.postPicturePath
-              .slice(currentPage, currentPage + 1)
-              .map((item, index) => (
-                <SocialPostImage
-                  item={item}
-                  height={height}
-                  width={width}
-                  openModal={openModal}
-                />
-              ))}
-
-            <button
-              onClick={handleNext}
-              disabled={currentPage === pageCount - 1}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-zinc-200 rounded-full hover:scale-110 hover:bg-green-500"
-            >
-              <FaChevronRight className=" text-white  w-8 h-8 p-2" />
-            </button>
+      <div className="mx-auto ">
+        <div className="flex  items-center">
+          <div className="  object-cover static ">
+            <div className="flex  items-center object-cover  ">
+              {post.postPicturePath
+                .slice(currentPage, currentPage + 1)
+                .map((item, index) => (
+                  <SocialPostImage
+                    key={index}
+                    item={item}
+                    height={height}
+                    width={width}
+                    openModal={openModal}
+                  />
+                ))}
+            </div>
           </div>
         </div>
+      </div>
+      <div className="flex justify-center mt-3    ">
+        {renderPaginationDots()}
       </div>
 
       <div className=" flex items-center gap-6 px-4">

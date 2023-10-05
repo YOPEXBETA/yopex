@@ -1,21 +1,18 @@
 const { Server } = require("socket.io");
 const { sendNotification } = require("../server");
 
-
 const initializeSocketIO = (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: "https://yopex.tabaani.co",
     },
   });
 
   let users = [];
 
-
   const removeUser = (socketId) => {
     users = users.filter((user) => user.socketId !== socketId);
   };
-
 
   const sendNotification = (userId, notification) => {
     io.to(userId).emit("notification", notification);
@@ -42,6 +39,5 @@ const initializeSocketIO = (httpServer) => {
   });
   return sendNotification;
 };
-
 
 module.exports = initializeSocketIO;

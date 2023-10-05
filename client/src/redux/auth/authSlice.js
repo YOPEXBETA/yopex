@@ -22,12 +22,10 @@ export const login = createAsyncThunk("auth/login", async (data) => {
 
 export const edit = createAsyncThunk("auth/edit", async (data) => {
   try {
-    console.log(data);
     const response = await authService.edit(data);
-
     return response;
   } catch (error) {
-    throw new Error(error?.response?.data?.error?.msg);
+    throw new Error(error?.response?.data?.error);
   }
 });
 
@@ -40,11 +38,8 @@ export const getCurrentUser = createAsyncThunk("auth/current", async () => {
   }
 });
 
-
-
-
 const initialState = {
-  user:null,
+  user: null,
   loading: false,
   error: null,
   success: false,
@@ -60,7 +55,7 @@ const authSlice = createSlice({
       state.success = false;
     },
     logout: (state, action) => {
-      Cookies.remove("accessToken");
+      localStorage.removeItem("accessToken");
       state.user = null;
       state.loading = false;
       state.error = null;
@@ -93,7 +88,7 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-         state.error = action.error.message;
+        state.error = action.error.message;
       });
     builder
       .addCase(edit.pending, (state, action) => {

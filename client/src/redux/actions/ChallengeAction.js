@@ -18,9 +18,9 @@ export const getChallenges =
       }
 
       const { data } = await axios.get(
-        `http://localhost:8000/challenge/challenges?${query}`,
+        `https://yopex-api.tabaani.co/challenge/challenges?${query}`,
         {
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -45,9 +45,9 @@ export const getCompanyChallenges =
   (companyId) => async (dispatch, getState) => {
     try {
       const { data } = await axios.get(
-        ` http://localhost:8000/company/get/${companyId}`,
+        ` https://yopex-api.tabaani.co/company/get/${companyId}`,
         {
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -74,11 +74,9 @@ export const addChallenge = (challengeData) => async (dispatch, getState) => {
     console.log("testtttt", challengeData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/challenge",
+      "https://yopex-api.tabaani.co/challenge",
       challengeData,
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log("data", data);
 
@@ -102,10 +100,8 @@ export const deleteChallenge = (challengeId) => async (dispatch, getState) => {
   try {
     console.log({ challengeId });
     const { data } = await axios.delete(
-      `http://localhost:8000/challenge/deleteChallenge/${challengeId}`,
-      {
-        withCredentials: true,
-      }
+      `https://yopex-api.tabaani.co/challenge/deleteChallenge/${challengeId}`,
+      
     );
     console.log(data);
 
@@ -134,11 +130,9 @@ export const joinChallenge = (challengeId) => async (dispatch, getState) => {
     console.log(challengeData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/join",
+      "https://yopex-api.tabaani.co/join",
       challengeData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log(data);
@@ -167,11 +161,9 @@ export const UnjoinChallenge = (challengeId) => async (dispatch, getState) => {
     console.log(challengeData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/unjoin",
+      "https://yopex-api.tabaani.co/unjoin",
       challengeData,
-      {
-        withCredentials: true,
-      }
+      
     );
 
     console.log(data);
@@ -201,12 +193,12 @@ export const getChallengeUsers =
       console.log(challengeData);
 
       const { data } = await axios.get(
-        "http://localhost:8000/challenge/getChallengeUsers",
+        "https://yopex-api.tabaani.co/challenge/getChallengeUsers",
         {
           params: {
             idChallenge: challengeId,
           },
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -234,10 +226,10 @@ export const submitChallenge =
       console.log(challengeData);
 
       const { data } = await axios.post(
-        "http://localhost:8000/challenge/submission",
+        "https://yopex-api.tabaani.co/challenge/submission",
         challengeData,
         {
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -262,13 +254,13 @@ export const getUserSubmitChallenge =
   (challengeId, userId) => async (dispatch, getState) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8000/challenge/getChallengeUserSubmit",
+        "https://yopex-api.tabaani.co/challenge/getChallengeUserSubmit",
         {
           params: {
             challengeId: challengeId,
             userId: userId,
           },
-          withCredentials: true,
+          
         }
       );
       console.log("data:", data);
@@ -292,12 +284,15 @@ export const getUserSubmitChallenge =
 export const getUserChallenges = (userId) => async (dispatch, getState) => {
   try {
     console.log(userId);
-    const { data } = await axios.get("http://localhost:8000/user/challenges", {
-      params: {
-        userId: userId,
-      },
-      withCredentials: true,
-    });
+    const { data } = await axios.get(
+      "https://yopex-api.tabaani.co/user/challenges",
+      {
+        params: {
+          userId: userId,
+        },
+        
+      }
+    );
     console.log("data:", data);
 
     dispatch({
@@ -323,11 +318,9 @@ export const chooseWinner = (challengeData) => async (dispatch, getState) => {
     console.log(challengeData);
 
     const { data } = await axios.post(
-      "http://localhost:8000/company/challengeWinner",
+      "https://yopex-api.tabaani.co/company/challengeWinner",
       challengeData,
-      {
-        withCredentials: true,
-      }
+      
     );
     console.log("data:", data);
     dispatch({

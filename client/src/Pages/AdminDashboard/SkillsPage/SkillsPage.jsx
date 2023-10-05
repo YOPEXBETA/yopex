@@ -7,6 +7,7 @@ import {
   useUpdateSkill,
 } from "../../../hooks/react-query/useSkills";
 import { MdCode } from "react-icons/md";
+import { useGetPayments } from "../../../hooks/react-query/useUsers";
 
 const SkillsPage = () => {
   const { data } = useSkills();
@@ -14,6 +15,7 @@ const SkillsPage = () => {
   const { mutate: deleteSkill } = useDeleteSkill();
   const { mutate: updateSkill } = useUpdateSkill();
   const [name, setName] = React.useState("");
+  
 
   const form = useForm();
   const onSubmit = (data) => mutate(data.name);

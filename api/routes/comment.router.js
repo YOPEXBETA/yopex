@@ -5,6 +5,7 @@ const {
   addComment,
   getComments,
   deleteComment,
+  updateComment
 } = require("../controllers/Comment.controllers");
 // Require authentication middleware
 const {
@@ -13,6 +14,7 @@ const {
 
 CommentRouter.post("/", authenticateToken, addComment);
 CommentRouter.get("/:postId", authenticateToken, getComments);
+CommentRouter.put("/update/:id", authenticateToken, updateComment);
 CommentRouter.delete("/:id", authenticateToken, deleteComment);
 
 module.exports = CommentRouter;

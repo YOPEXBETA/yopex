@@ -34,11 +34,11 @@ const MySocialPosts = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
         {isLoading ? (
           <p>Loading posts...</p>
-        ) : (
-          posts?.map((post, index) => (
+        ) : posts?.length > 0 ? (
+          posts.map((post, index) => (
             <SocialPostCard
               key={post._id}
               post={post}
@@ -49,8 +49,11 @@ const MySocialPosts = () => {
               openModal={() => openModal(post)}
             />
           ))
+        ) : (
+          <p>No Posts Found.</p>
         )}
       </div>
+
       {/* Render the SocialPostModal conditionally */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">

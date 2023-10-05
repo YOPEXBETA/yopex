@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import LeaderBoardTable from "./LeaderBoardTable/LeaderBoardTable";
-import { useUsers } from "../../../../hooks/react-query/useUsers";
+import { useAdminUsers, useUsers } from "../../../../hooks/react-query/useUsers";
 import SearchbarFilter from "./SearchbarFilter";
 
 const ContentSide = () => {
   const [query, setQuery] = useState("");
   const { data } = useUsers();
+  console.log(data);
 
   useEffect(() => {
     console.log(query);

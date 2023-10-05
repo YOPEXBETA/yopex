@@ -1,8 +1,8 @@
 const ChallengeModel = require("../models/Challenge.model");
 const ContestConversationModel = require("../models/ContestConversation.model");
 const CompanyModel = require("../models/company.model");
+const submissionModel = require("../models/submission.model");
 const UserModel = require("../models/user.model");
-const mongoose = require("mongoose");
 
 const CreateChallenge = async (req, res, next) => {
   try {
@@ -88,9 +88,11 @@ const getChallengeById = async (req, res) => {
 
 const deleteChallenge = async (req, res) => {
   try {
-    console.log(req.params.id);
+    
     const challenge = await ChallengeModel.findOneAndDelete({_id:req.params.id});
-
+    const company = await CompanyModel.findOne({ _id: challenge.company });
+    await company.challenges.pull(challenge._id);
+    await company.save();
     const message = "challenge has been deleted";
 
     res.status(200).send({ challenge, message });
@@ -123,7 +125,7 @@ const getCompanyChallenges = async (req, res) => {
 
 const getAllChallenges = async (req, res) => {
   const q = req.query;
-  
+  console.log(q.categories);
   const filters = {
     ...(q.userId && { userId: q.userId }),
     ...(q.category && { category: q.category }),
@@ -135,6 +137,7 @@ const getAllChallenges = async (req, res) => {
     }),
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
     ...(q.skills && { RecommendedSkills: { $in: q.skills } }),
+    ...(q.categories && { category: { $in: q.categories } }),
   };
 
   try {
@@ -166,18 +169,34 @@ const getChallengeUserSubmit = async (req, res) => {
     const challengeId = req.query.challengeId; // Get idChallenge from the query parameter
     const userId = req.query.userId; // Get idUser from the query parameter
     
-    
+    const submit = await submissionModel.findOne({challengeId:challengeId,userId:userId});
 
-    const Challenge = await ChallengeModel.findById(challengeId).populate({
-      path: "submissions",
-    });
-    const ChallengeUserSubmit = Challenge.submissions.filter(
-      (submission) => submission.userId == userId,
-    );
 
-    res.status(200).json(ChallengeUserSubmit);
+    res.status(200).json(submit);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+
+const updateChallenge= async (req, res, next) => {
+  
+  const {description ,title  ,nbruser ,price ,   category ,RecommendedSkills} = req.body;
+  console.log(description ,title  ,nbruser ,price ,   category ,RecommendedSkills);
+  const challengeId = req.params.challengeId;
+
+  let Challenge;
+  try {
+    Challenge = await ChallengeModel.findByIdAndUpdate(challengeId, {
+      title, 
+      description , 
+      nbruser , 
+      price , 
+      category ,
+      RecommendedSkills
+    }); 
+     res.status(200).json({ Challenge });
+  } catch (err) {
+    return console.log(err);
   }
 };
 
@@ -189,4 +208,5 @@ module.exports = {
   getAllChallenges,
   getChallengeUsers,
   getChallengeUserSubmit,
+  updateChallenge,
 };

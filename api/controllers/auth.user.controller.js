@@ -57,6 +57,15 @@ const signUp = async (req, res) => {
       // Save the new user to the userSchema collection
       const user = await newUser.save();
 
+      // Create a new badge for the user
+      const newBadge = new badgeSchema({
+        userId: req.userId,
+        badgeName: req.body.badgeName,
+        badgeDescription: req.body.badgeDescription,
+        badgeImg: req.body.badgeImg,
+        Etat: true,
+      });
+      await newBadge.save();
 
       // Return a success response with the new user data
       return res.status(200).json({ msg: "user successfully created", user });
@@ -154,6 +163,8 @@ const signIn = async (req, res) => {
       if (req.body.rememberMe) {
         cookiesOptions.expires = moment().add("15", "days").toDate();
       }
+      // add token to info object
+      info.token = token;
       res.cookie("accessToken", token, cookiesOptions).status(200).send(info);
     } else {
       return res.status(403).json({ error: "Your account is banned" });
@@ -218,7 +229,7 @@ const forgetpassword = async (req, res) => {
       from: process.env.EMAIL_ADDRESS,
       to: email,
       subject: "Password Reset",
-      html: `<p>Please click the following link to reset your password:</p><a href="http://localhost:3000/reset-password/${resetToken}">http://localhost:3000/reset-password/${resetToken}</a>`,
+      html: `<p>Please click the following link to reset your password:</p><a href="https://yopex.tabaani.co//reset-password/${resetToken}">https://yopex.tabaani.co//reset-password/${resetToken}</a>`,
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -261,9 +272,6 @@ const resetpassword = async (req, res) => {
 
 const signInWithGoogle = async (req, res) => {
   const user = req.user;
-  const cookiesOptions = {
-    expires: moment().add("15", "days").toDate(),
-  };
   const token = jwt.sign(
     {
       id: user._id,
@@ -272,16 +280,18 @@ const signInWithGoogle = async (req, res) => {
     },
     process.env.passwordToken
   );
-  res.cookie("accessToken", token, cookiesOptions);
+  const { ...info } = user ? user._doc : company._doc;
 
-  res.redirect("http://localhost:3000/feed");
+  info.token = token;
+    console.log({info})
+    res.redirect("https://yopex.tabaani.co/google_success?token="+token);
+  // return res.status(200).send(info);
 };
-
 module.exports = {
   signUp,
   signIn,
   logout,
+  signInWithGoogle,
   forgetpassword,
   resetpassword,
-  signInWithGoogle,
 };

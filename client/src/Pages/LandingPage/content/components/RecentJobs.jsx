@@ -30,6 +30,7 @@ const RecentJobs = () => {
             className="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1"
           >
             <JobCard job={job} />
+            <JobCard job={job} />
           </div>
         ))}
       </div>
