@@ -91,7 +91,7 @@ const UserEdit = () => {
   };
 
   return (
-    <div className="mb-8">
+    <div className="mb-24 md:mb-8">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 gap-3"
