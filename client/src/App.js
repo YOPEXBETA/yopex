@@ -8,6 +8,7 @@ import { useEffect } from "react";
 const queryClient = new QueryClient();
 
 const App = () => {
+  console.log(".env ",process.env.REACT_APP_API_ENDPOINT);
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
   if (queryParams.has("token")) {

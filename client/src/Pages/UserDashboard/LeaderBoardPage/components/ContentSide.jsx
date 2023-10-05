@@ -5,7 +5,7 @@ import SearchbarFilter from "./SearchbarFilter";
 
 const ContentSide = () => {
   const [query, setQuery] = useState("");
-  const { data } = useAdminUsers();
+  const { data } = useUsers();
   console.log(data);
 
   useEffect(() => {

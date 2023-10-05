@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 //const url = "https://yopex-api.tabaani.co/job";

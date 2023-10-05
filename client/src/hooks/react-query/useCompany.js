@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const url = process.env.REACT_APP_API_ENDPOINT;

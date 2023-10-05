@@ -1,8 +1,8 @@
-import axios from "axios";
+import { axios } from "../../axios";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const url = process.env.URL || "https://yopex-api.tabaani.co";
+const url = process.env.REACT_APP_API_ENDPOINT;
 
 export const useUsers = () => {
   return useQuery("users", async () => {

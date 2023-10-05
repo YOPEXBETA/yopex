@@ -3,6 +3,8 @@ const axios = require("axios");
 const userModel = require("../models/user.model");
 const paymentModel = require("../models/payment.model");
 
+
+
 const Payment = async (req, res) => {
   const url = "https://developers.flouci.com/api/generate_payment";
   const payload = {
@@ -11,8 +13,8 @@ const Payment = async (req, res) => {
     amount: req.body.amount * 1000,
     accept_card: "true",
     session_timeout_secs: 1200,
-    success_link: "https://yopex-api.tabaani.co/store",
-    fail_link: "https://yopex-api.tabaani.co/store",
+    success_link: process.env.CLIENT8SERVER+"/store",
+    fail_link: process.env.CLIENT8SERVER+"/store",
     developer_tracking_id: "3d6c3855-88b9-481f-9c00-43c8b8745f80",
   };
 

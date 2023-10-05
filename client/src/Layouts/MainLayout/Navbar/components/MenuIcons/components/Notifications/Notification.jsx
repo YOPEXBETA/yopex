@@ -18,7 +18,7 @@ const NotificationBell = () => {
   const { mutate } = useSeeNotification(user?._id);
   const [nbrNotifications, setNbrNotifications] = useState(0);
 
-  const url = process.env.URL || "https://yopex-api.tabaani.co";
+  const url = process.env.REACT_APP_API_ENDPOINT;
 
   useEffect(() => {
     const newSocket = io(`${url}`);
