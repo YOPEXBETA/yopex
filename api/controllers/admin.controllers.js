@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const Company = require("../models/company.model");
 const companySchema = require("../models/company.model");
+const userSchema = require("../models/user.model");
 const Level = require("../models/Level.model");
 
 const getUsers = async (req, res) => {
@@ -72,45 +73,49 @@ const delUser = async (req, res) => {
   }
 };
 
-// ==============================|| disableUser ||============================== //
-
-const disableUser = async (req, res) => {
-  const { id, action } = req.params;
+// ==============================|| USER STATUS CHANGE ||============================== //
+const activateUser = async (req, res) => {
+  const { id } = req.params;
   try {
-    let status;
-    if (action === "active") {
-      status = "active";
-    } else if (action === "disabled") {
-      status = "disabled";
-    } else {
-      return res.status(400).json({ message: "Invalid action" });
+    const user = await userSchema.findById(id);
+    if (!user) {
+      return res.status(404).json({ eror: "User not found!" });
     }
-
-    const updatedUser = await userSchema.findByIdAndUpdate(
-      id,
-      { status },
-      { new: true }
-    );
-
-    res.status(200).json(updatedUser);
+    user.status = "active";
+    user.save();
+    res.status(200).json(user);
   } catch (error) {
-    console.log(error);
     return res.status(500).json(error);
   }
 };
-// if user role is admin he can ban or unban an account
-const BanAccount = async (req, res) => {
+
+const disableUser = async (req, res) => {
+  const { id } = req.params;
   try {
-    const user = await userSchema.findById(req.params.id);
+    const user = await userSchema.findById(id);
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ eror: "User not found!" });
     }
-    user.isBanned = !user.isBanned; // toggle the user's banned status
-    await user.save();
-    res.json({ msg: "User successfully Banned", user });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server error" });
+    user.status = "disabled";
+    user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+const banUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await userSchema.findById(id);
+    if (!user) {
+      return res.status(404).json({ eror: "User not found!" });
+    }
+    user.status = "banned";
+    user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json(error);
   }
 };
 
@@ -136,7 +141,8 @@ module.exports = {
   updUser,
   delUser,
   disableUser,
-  BanAccount,
+  activateUser,
+  banUser,
   approveCompany,
   getCompanies,
 };

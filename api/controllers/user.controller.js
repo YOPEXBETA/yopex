@@ -9,7 +9,6 @@ const notificationModel = require("../models/notification.model");
 
 // ==============================|| EditProfile ||============================== //
 const editProfile = async (req, res) => {
-  
   try {
     const updateFields = pick(req.body, [
       "firstname",
@@ -21,14 +20,19 @@ const editProfile = async (req, res) => {
       "gender",
       "phoneNumber",
       "birthDate",
-      "userDescription"
+      "userDescription",
     ]);
 
     if (updateFields.password) {
       const user = await userSchema.findById(req.userId);
-      const isOldPasswordValid = await bcrypt.compare(req.body.oldPassword, user.password);
+      const isOldPasswordValid = await bcrypt.compare(
+        req.body.oldPassword,
+        user.password
+      );
       if (!isOldPasswordValid) {
-       return  res.status(400).json({ error: "Please verify your old password !" });
+        return res
+          .status(400)
+          .json({ error: "Please verify your old password !" });
       }
       const salt = await bcrypt.genSalt(10);
       const hashedPass = await bcrypt.hash(updateFields.password, salt);
@@ -85,10 +89,7 @@ const SearchUsers = async (req, res) => {
     const users = await userSchema.find(userQuery).select("-password");
     const companies = await companySchema.find(companyQuery);
 
-    const results = [
-      ...users,
-      ...companies
-    ];
+    const results = [...users, ...companies];
 
     res.status(200).json(results);
   } catch (err) {
@@ -102,7 +103,7 @@ const getUser = async (req, res) => {
     const { id } = req.params;
     const user = await userSchema
       .findById(id)
-      .populate("badgesEarned" )
+      .populate("badgesEarned")
       .populate("jobs")
       .populate("challenges")
       .populate("companies");
@@ -160,26 +161,26 @@ const getUserFollowings = async (req, res) => {
     const id = req.params.userId;
     const user = await userSchema.findById(id).select("-password");
 
+    if (user) {
+      const userFollowingss = [];
+      const companyFollowings = [];
 
-    if (user){   
-       const userFollowingss = []; 
-       const companyFollowings = [];
-
-     const userFollowings = await Promise.all(
-      user.followings.map(async (friendId) => {
-        const friend = await userSchema.findById(friendId).select("-password");
-        if (friend) {
-          userFollowingss.push(friend);
-        }else{
-          const company = await companySchema.findById(friendId);
-        companyFollowings.push( company);
-
-        }
-      })
-    );
- const followings = userFollowings.filter((friend) => friend !== null);
- return res.status(200).json({ userFollowingss, companyFollowings });
-    }else{
+      const userFollowings = await Promise.all(
+        user.followings.map(async (friendId) => {
+          const friend = await userSchema
+            .findById(friendId)
+            .select("-password");
+          if (friend) {
+            userFollowingss.push(friend);
+          } else {
+            const company = await companySchema.findById(friendId);
+            companyFollowings.push(company);
+          }
+        })
+      );
+      const followings = userFollowings.filter((friend) => friend !== null);
+      return res.status(200).json({ userFollowingss, companyFollowings });
+    } else {
       const company = await companySchema.findById(id);
       if (company) {
         // Fetch company followings
@@ -192,15 +193,17 @@ const getUserFollowings = async (req, res) => {
           })
         );
 
-        const followings = companyFollowings.filter((company) => company !== null);
+        const followings = companyFollowings.filter(
+          (company) => company !== null
+        );
 
-        return res.status(200).json({ userFollowings: [], companyFollowings: followings });
+        return res
+          .status(200)
+          .json({ userFollowings: [], companyFollowings: followings });
       } else {
         return res.status(404).json({ message: "ID not found" });
       }
     }
-
-
   } catch (error) {
     return res.status(500).json(error.message);
   }
@@ -208,7 +211,6 @@ const getUserFollowings = async (req, res) => {
 
 const getUserFollowingsCompanies = async (req, res) => {
   try {
-   
     const [currentUser] = await Promise.all([
       userSchema.findById(req.params.userId).select("-password"),
     ]);
@@ -228,8 +230,7 @@ const getUserFollowingsCompanies = async (req, res) => {
   } catch (error) {
     return res.status(500).json(error.message);
   }
-
-}
+};
 
 const followUnfollowUser = async (req, res) => {
   try {
@@ -274,32 +275,29 @@ const followUnfollowUser = async (req, res) => {
 };
 
 const followUnfollowCompany = async (req, res) => {
-
-  try{
+  try {
     const currentUserId = req.userId;
     const companyId = req.params.companyId;
     const currentUser = await userSchema.findById(currentUserId);
 
-    if (!currentUser.followings.includes(companyId)){
+    if (!currentUser.followings.includes(companyId)) {
       currentUser.followings.push(companyId);
       await currentUser.save();
       return res
-      .status(200)
-      .json({ msg: "You have successfully followed the company!" });
-    }else{
+        .status(200)
+        .json({ msg: "You have successfully followed the company!" });
+    } else {
       currentUser.followings = currentUser.followings.filter(
         (id) => id !== companyId
       );
       await currentUser.save();
       return res
-      .status(200)
-      .json({ msg: "You have successfully unfollowed the company!" });
+        .status(200)
+        .json({ msg: "You have successfully unfollowed the company!" });
     }
-
   } catch (error) {
     return res.status(500).json(error.message);
   }
-
 };
 
 const getsuggestedUsers = async (req, res) => {
@@ -364,8 +362,9 @@ const JoinChallenge = async (req, res) => {
     const user = await userSchema.findById(req.body.idUser).select("-password");
     const challenge = await challengeSchema.findById(req.body.idChallenge);
     if (challenge.users.length > challenge.nbruser) {
-      return res.status(400).json({ message: "you cannot join this challenge" });
-
+      return res
+        .status(400)
+        .json({ message: "you cannot join this challenge" });
     }
     if (challenge.users.includes(user._id)) {
       return res.status(400).json({ message: "User already joined challenge" });
@@ -376,7 +375,7 @@ const JoinChallenge = async (req, res) => {
     await user.save();
     // Add user to challenge's users array
     challenge.users.push({
-      user:user._id,
+      user: user._id,
       registrationDate: Date.now(),
     });
     await challenge.save();
@@ -400,7 +399,7 @@ const unjoinChallenge = async (req, res) => {
     await user.save();
 
     // Remove user from challenge's users array
-    
+
     challenge.users = challenge.users.filter(
       (part) => part.user.toString() !== user._id.toString()
     );
@@ -433,7 +432,8 @@ const getUserChallenges = async (req, res) => {
 };
 const getUserNotifications = async (req, res) => {
   try {
-    const user = await userSchema.findById(req.params.userId)
+    const user = await userSchema
+      .findById(req.params.userId)
       .populate("notifications")
       .populate({
         path: "notifications",
@@ -455,7 +455,7 @@ const getUserNotifications = async (req, res) => {
           },
         },
       });
-      if (!user) throw new Error("User not found");
+    if (!user) throw new Error("User not found");
     //const processedJobs = new Set();
     // const notifications = await Promise.all(
     //   user.notifications.map(async (notification) => {
@@ -491,7 +491,7 @@ const getUserNotifications = async (req, res) => {
     //     }
     //   })
     // );
-    
+
     const companies = user.companies;
     let notifications = user.notifications;
     for (const companyId of companies) {
@@ -507,30 +507,16 @@ const getUserNotifications = async (req, res) => {
           },
         });
 
-        notifications = notifications.concat(company.notificationsCompany);
+      notifications = notifications.concat(company.notificationsCompany);
     }
     notifications.sort((a, b) => b.createdAt - a.createdAt);
-    notseen = notifications.filter((notification) => notification.seen === false);
-    res.status(200).json({notification:notifications,nbr:notseen.length});
+    notseen = notifications.filter(
+      (notification) => notification.seen === false
+    );
+    res.status(200).json({ notification: notifications, nbr: notseen.length });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Server Error" });
-  }
-};
-
-const banUser = async (req, res) => {
-  try {
-    const updatedUser = await userSchema
-      .findOneAndUpdate(
-        { _id: req.params.id },
-        [{ $set: { isActive: { $eq: [false, "$isActive"] } } }],
-        { new: true }
-      )
-      .select("-password");
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json(error);
   }
 };
 
@@ -538,8 +524,9 @@ const banUser = async (req, res) => {
 
 const CreateCompany = async (req, res) => {
   try {
-    const { companyName, companyDescription, companyLogo,companyDocument } = req.body;
-    
+    const { companyName, companyDescription, companyLogo, companyDocument } =
+      req.body;
+
     const userId = req.userId;
 
     const user = await userSchema.findById(userId);
@@ -570,23 +557,23 @@ const CreateCompany = async (req, res) => {
 
 const getCurrentUser = async (req, res) => {
   try {
-    const user = await userSchema
-      .findById(req.userId)
-      .select("-password")
-      
+    const user = await userSchema.findById(req.userId).select("-password");
+
     return res.status(200).json(user);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
-}
-
+};
 
 const seeNotification = async (req, res) => {
   try {
-    userId = req.userId
+    userId = req.userId;
     const user = await userSchema.findById(userId).select("notifications");
-    const unseenNotifications = await notificationModel.find({ seen: false,_id:{$in:user.notifications} });
+    const unseenNotifications = await notificationModel.find({
+      seen: false,
+      _id: { $in: user.notifications },
+    });
 
     // Update each notification to set seen=true
     for (const notification of unseenNotifications) {
@@ -598,7 +585,7 @@ const seeNotification = async (req, res) => {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
 module.exports = {
   editProfile,
@@ -615,10 +602,9 @@ module.exports = {
   getUserChallenges,
   getUserStats,
   getUserNotifications,
-  banUser,
   CreateCompany,
   getCurrentUser,
   followUnfollowCompany,
   getUserFollowingsCompanies,
-  seeNotification
+  seeNotification,
 };

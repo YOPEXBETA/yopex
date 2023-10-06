@@ -8,24 +8,33 @@ const {
   updUser,
   delUser,
   disableUser,
-  BanAccount,
+  activateUser,
+  banUser,
   getCompanies,
   approveCompany,
-  
 } = require("../controllers/admin.controllers");
-const {getLevels, deleteLevel,createLevel, editLevel} = require ("../controllers/levels.controller");
+const {
+  getLevels,
+  deleteLevel,
+  createLevel,
+  editLevel,
+} = require("../controllers/levels.controller");
 
-adminRouter.post("/createLevel",createLevel);
-adminRouter.put("/updateLevel/:id" , editLevel);
-adminRouter.get("/allLevels" , getLevels);
-adminRouter.delete("/delLevel/:id",isAdmin, deleteLevel);
-adminRouter.get("/Users", isAdmin,  getUsers);
+adminRouter.post("/createLevel", createLevel);
+adminRouter.put("/updateLevel/:id", editLevel);
+adminRouter.get("/allLevels", getLevels);
+adminRouter.delete("/delLevel/:id", isAdmin, deleteLevel);
+adminRouter.get("/Users", isAdmin, getUsers);
 adminRouter.get("/Companies", getCompanies);
 adminRouter.post("/addUser", addUser);
-adminRouter.put("/updUsers/:id",isAdmin, updUser);
-adminRouter.delete("/delUsers/:id",isAdmin, delUser);
-adminRouter.put("/users/:id/ban", isAdmin, BanAccount);
+adminRouter.put("/updUsers/:id", isAdmin, updUser);
+adminRouter.delete("/delUsers/:id", isAdmin, delUser);
+
+adminRouter.put("/users/:id/activate", isAdmin, activateUser);
+adminRouter.put("/users/:id/disable", isAdmin, disableUser);
+adminRouter.put("/users/:id/ban", isAdmin, banUser);
+
 adminRouter.put("/users/:id/:action", isAdmin, disableUser);
-adminRouter.post("/appCompany",isAdmin, approveCompany);
+adminRouter.post("/appCompany", isAdmin, approveCompany);
 
 module.exports = adminRouter;
