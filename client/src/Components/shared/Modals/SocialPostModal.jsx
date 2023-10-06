@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { formatDistance } from "date-fns";
+import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
 
 const SocialPostModal = ({ closeModal, post }) => {
   return (
@@ -19,11 +20,19 @@ const SocialPostModal = ({ closeModal, post }) => {
           <div className="col-span-1 md:col-span-1 p-8">
             <div className="flex items-start justify-between  mb-8">
               <div className="flex items-center gap-3">
-                <img
-                  alt="post"
-                  src={post.userPicturePath}
-                  className=" w-11 h-11 rounded-full object-cover bg-white"
-                />
+                {post.userPicturePath ? (
+                  <img
+                    alt="post"
+                    src={post.userPicturePath}
+                    className="w-11 h-11 rounded-full object-cover bg-white border-2"
+                  />
+                ) : (
+                  <img
+                    alt="default"
+                    src={AvatarProfile}
+                    className="w-11 h-11 rounded-full object-cover bg-white border-2"
+                  />
+                )}
                 <div>
                   <Link
                     key={post.userId}

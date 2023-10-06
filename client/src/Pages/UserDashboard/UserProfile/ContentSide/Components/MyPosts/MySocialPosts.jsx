@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   useUserPosts,
@@ -6,7 +7,6 @@ import {
 import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 import { useSelector } from "react-redux";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
-import { useState } from "react";
 
 const MySocialPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

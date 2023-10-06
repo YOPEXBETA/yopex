@@ -9,7 +9,7 @@ import {
 } from "../../../../hooks/react-query/useUsers";
 import Badges from "./Badges/Badges";
 import HighlightSection from "./HighlightSection/HighlightSection";
-
+import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import { useUserReviews } from "../../../../hooks/react-query/useReviews";
 import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 
@@ -42,11 +42,19 @@ const UserProfileCard = () => {
       <div className="bg-white p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 xl:shadow-md lg:shadow-md md:shadow-md md:border-green-500 border-b-2 mr-0">
         <div className="relative">
           <div>
-            <img
-              alt="Profile picture"
-              src={userProfile.picturePath}
-              className="object-cover rounded-full border-2 border-gray-200 w-36 h-36"
-            />
+            {userProfile.picturePath ? (
+              <img
+                alt="picture"
+                src={userProfile.picturePath}
+                className="object-cover rounded-full border-2 border-gray-200 w-36 h-36"
+              />
+            ) : (
+              <img
+                alt="default"
+                src={AvatarProfile}
+                className="object-cover rounded-full border-2 border-gray-200 w-36 h-36"
+              />
+            )}
           </div>
           <div className="absolute bottom-0 right-0">
             <div className="flex items-center justify-center rounded-full bg-green-500 w-11 h-11 text-white">

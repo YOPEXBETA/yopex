@@ -46,14 +46,6 @@ const SocialPostCard = ({
   const [currentPage, setCurrentPage] = useState(0);
   const pageCount = post.postPicturePath.length;
 
-  const handlePrevious = () => {
-    setCurrentPage(Math.max(currentPage - 1, 0));
-  };
-
-  const handleNext = () => {
-    setCurrentPage(Math.min(currentPage + 1, pageCount - 1));
-  };
-
   const renderPaginationDots = () => {
     const dots = [];
     for (let i = 0; i < pageCount; i++) {
