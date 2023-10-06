@@ -32,7 +32,7 @@ const getSuggestedUsers = async (myData) => {
 };
 
 const getUserById = async (id) => {
-  const { data } = await axios.get(`https://yopex-api.tabaani.co/${id}`, {});
+  const { data } = await axios.get(`${url}/${id}`, {});
   return data;
 };
 
@@ -44,18 +44,12 @@ const followUser = async (otheruserId, userId) => {
 };
 
 const getBadgesEarnedByUser = async (userId) => {
-  const { data } = await axios.get(
-    `https://yopex-api.tabaani.co/${userId}/badges`,
-    {}
-  );
+  const { data } = await axios.get(`${url}/${userId}/badges`, {});
   return data;
 };
 
 const getUserStats = async (myData) => {
-  const { data } = await axios.get(
-    "https://yopex-api.tabaani.co/users/stats",
-    {}
-  );
+  const { data } = await axios.get(`${url}/users/stats`, {});
   return data;
 };
 

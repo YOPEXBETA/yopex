@@ -4,7 +4,7 @@ import Register from "./components/Register";
 const RegisterPage = () => {
   return (
     <div className="grid gap-6 md:grid-cols-2 bg-white">
-      <div className="col-span-6 md:col-span-1 h-full">
+      <div className="hidden lg:block md:block col-span-6 md:col-span-1 h-screen sm:hidden">
         <img
           src="https://source.unsplash.com/4wOkqiXNP7M"
           className=" h-full object-cover"

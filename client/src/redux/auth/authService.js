@@ -24,7 +24,7 @@ const login = async (data) => {
 };
 
 const edit = async (data) => {
-  const user = await axios.put(`http://localhost:3001/users/edit`, data, {
+  const user = await axios.put(`${url}/users/edit`, data, {
     withCredentials: false,
   });
 

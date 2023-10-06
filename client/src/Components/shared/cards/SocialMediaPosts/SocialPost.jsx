@@ -21,6 +21,7 @@ const SocialPostCard = ({
   companyId,
   height,
   width,
+  type = "profile",
   openModal,
 }) => {
   const { user } = useSelector((state) => state.auth);
@@ -71,7 +72,7 @@ const SocialPostCard = ({
   return (
     <div className="bg-white w-full mx-auto h-full  rounded-lg border-green-500 border-b-2 shadow-md">
       <div className=" flex justify-between items-start">
-        <div className=" flex items-center gap-3 py-6 px-4">
+        <div className=" flex items-center py-6 pl-2 gap-2">
           <img
             alt="post"
             src={post.userPicturePath}
@@ -101,16 +102,16 @@ const SocialPostCard = ({
           </div>
         </div>
         {(post.userId === user._id || user.companies.includes(post.userId)) && (
-          <button className="py-6 px-2 rounded-full">
+          <button className="py-6 pr-2 rounded-full">
             <PostMenuIcon className="text-black" post={post} />
           </button>
         )}
       </div>
 
-      <div className="mx-auto ">
-        <div className="flex  items-center">
-          <div className="  object-cover static ">
-            <div className="flex  items-center object-cover  ">
+      <div className="mx-auto relative">
+        <div className="flex items-center">
+          <div className="object-cover static">
+            <div className="flex items-center object-cover">
               {post.postPicturePath
                 .slice(currentPage, currentPage + 1)
                 .map((item, index) => (
@@ -118,6 +119,7 @@ const SocialPostCard = ({
                     key={index}
                     item={item}
                     height={height}
+                    type={type}
                     width={width}
                     openModal={openModal}
                   />
@@ -125,9 +127,9 @@ const SocialPostCard = ({
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex justify-center mt-3    ">
-        {renderPaginationDots()}
+        <div className="flex justify-center mt-3 absolute bottom-4 left-0 w-full z-10">
+          {renderPaginationDots()}
+        </div>
       </div>
 
       <div className=" flex items-center gap-6 px-4">
