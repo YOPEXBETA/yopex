@@ -43,7 +43,9 @@ const MainLayout = () => {
       <div className="">
         <Outlet />
       </div>
-      <FloatingButton />
+      <div className="block md:hidden">
+        <FloatingButton />
+      </div>
     </div>
   );
 };

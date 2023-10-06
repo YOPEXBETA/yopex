@@ -35,7 +35,7 @@ const CustomNavbar = () => {
             >
               <FiMoreVertical className="h-6 w-6" />
             </button>*/}
-            <div className="block xl:hidden">
+            <div className="block xl:hidden lg:hidden">
               <MenuIcons />
             </div>
           </div>

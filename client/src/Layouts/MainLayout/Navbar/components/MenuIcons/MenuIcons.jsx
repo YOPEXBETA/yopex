@@ -8,14 +8,16 @@ const MenuIcons = () => {
   return (
     <div>
       <div className="flex gap-3 items-center">
-        <AddPostMenuList />
+        <div className="hidden md:block">
+          <AddPostMenuList />
+        </div>
         <div className="h-6 my-0.5 border-l border-gray-300" />
 
-        <div className="flex">
+        <div className="hidden md:flex">
           <Chat />
           <NotificationBell />
         </div>
-        <ProfileMenu  className=" -z-50"/>
+        <ProfileMenu className=" -z-50" />
       </div>
     </div>
   );

@@ -80,26 +80,26 @@ const FloatingButton = () => {
           >
             <button
               onClick={handleClickOpenModalWork}
-              className="block px-4 py-2 text-left text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
+              className="block p-4 text-center   text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
             >
               <FaSuitcase className="mr-2 inline-block" />
             </button>
             <button
               onClick={handleClickOpenModalChallenge}
-              className="block px-4 py-2 text-left text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
+              className="block p-4 text-center  text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
             >
               <FaFire className="mr-2 inline-block" />
             </button>
 
             <button
               onClick={handleClickOpenModalCompany}
-              className="block px-4 py-2 text-left text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
+              className="block p-4 text-center   text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
             >
               <FaBuilding className="mr-2 inline-block" />
             </button>
             <button
               onClick={handleClickOpenModalPost}
-              className="block px-4 py-2 text-left text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
+              className="block p-4 text-center   text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
             >
               <FaPen className="mr-2 inline-block" />
             </button>

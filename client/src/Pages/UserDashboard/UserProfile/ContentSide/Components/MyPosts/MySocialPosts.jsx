@@ -34,7 +34,7 @@ const MySocialPosts = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 py-2 mb-12">
         {isLoading ? (
           <p>Loading posts...</p>
         ) : posts?.length > 0 ? (

@@ -9,6 +9,10 @@ import Store from "../Pages/UserDashboard/StorePage/Store";
 const HomeLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/HomePage/index"))
 );
+//HomePage
+const MobileNotifications = Loadable(
+  lazy(() => import("../Components/Mobile/MobileNotifications"))
+);
 
 //CompanyPage
 const Company = Loadable(
@@ -144,6 +148,10 @@ const MainRoutes = {
     {
       path: "*",
       element: <NotFoundPage />,
+    },
+    {
+      path: "/Notifications",
+      element: <MobileNotifications />,
     },
   ],
 };
