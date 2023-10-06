@@ -13,13 +13,12 @@ import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
 import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
 import { useCreateContestConversation } from "../../../../../../../hooks/react-query/useContestConversation";
 
-
 export const AddChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedOptionpaid, setSelectedOptionpaid] = useState("false");
-  const { data:Skills } = useSkills();
+  const { data: Skills } = useSkills();
   const itSkills = Skills?.map((skill) => skill.name);
-  const {data:categorys} = useCategories();
+  const { data: categorys } = useCategories();
   const itCategory = categorys?.map((category) => category.name);
 
   const handleSelectChange = (event) => {
@@ -35,7 +34,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
     setValue,
   } = useForm({
     defaultValues: {
-      category:[],
+      category: [],
       RecommendedSkills: [],
       category: [],
     },
@@ -53,31 +52,27 @@ export const AddChallengeModal = ({ open, handleClose }) => {
   const onSubmit = (challengeData) => {
     const companyId = selectedOption;
     console.log(selectedOptionpaid);
-    mutate({ companyId, challengeData,paid:selectedOptionpaid });
-
-    
+    mutate({ companyId, challengeData, paid: selectedOptionpaid });
   };
 
   const now = new Date().toISOString().slice(0, -8);
 
   return (
     <div
-      className={`fixed z-10 inset-0 overflow-y-auto  ${
-        open ? "block" : "hidden"
-      }`}
+      className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}
     >
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
-        <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-          <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-        </div>
-
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
           aria-hidden="true"
         >
           &#8203;
         </span>
-        <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-96 sm:p-6 lg:w-[40rem]">
+        <div
+          className={`${
+            open ? "w-full sm:w-[40rem]" : "hidden"
+          } inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
+        >
           <div>
             <h2 className="text-lg leading-6 text-gray-900 mb-4 font-bold">
               Create a Challenge
@@ -114,26 +109,28 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     control={control}
                     name="RecommendedSkills"
                     defaultValue={"Any"}
-                    render={({ field }) => itSkills && (
-                      <Autocomplete
-                        multiple
-                        id="tags-outlined"
-                        options={itSkills}
-                        getOptionLabel={(option) => option}
-                        value={field.value}
-                        onBlur={field.onBlur}
-                        onChange={(e, value) =>
-                          setValue("RecommendedSkills", value)
-                        }
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            variant="outlined"
-                            placeholder="Skills"
-                          />
-                        )}
-                      />
-                    )}
+                    render={({ field }) =>
+                      itSkills && (
+                        <Autocomplete
+                          multiple
+                          id="tags-outlined"
+                          options={itSkills}
+                          getOptionLabel={(option) => option}
+                          value={field.value}
+                          onBlur={field.onBlur}
+                          onChange={(e, value) =>
+                            setValue("RecommendedSkills", value)
+                          }
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              variant="outlined"
+                              placeholder="Skills"
+                            />
+                          )}
+                        />
+                      )
+                    }
                   />
                 </div>
 
@@ -147,7 +144,9 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     id="selectFieldpaid"
                     className="p-2 w-[20%] border rounded-md focus:ring focus:ring-blue-300"
                     value={selectedOptionpaid}
-                    onChange={(e,value) => {setSelectedOptionpaid(e.target.value)}}
+                    onChange={(e, value) => {
+                      setSelectedOptionpaid(e.target.value);
+                    }}
                   >
                     <option value={"false"}>free</option>
                     <option value={"true"}>paid</option>
@@ -162,40 +161,31 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                 </div>
 
                 <div className="mb-2">
-
-                  
-                <Controller
+                  <Controller
                     control={control}
                     name="category"
                     defaultValue={"Any"}
-                    render={({ field }) => itCategory && (
-                      <Autocomplete
-
-                        multiple
-                        id="tags-outlined"
-                        value={field.value}
-                        options={itCategory}
-                        getOptionLabel={(option) => option}
-
-                        
-                        onBlur={field.onBlur}
-                        onChange={(e, value) =>
-                          setValue("category", value)
-                        }
-
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            variant="outlined"
-                            placeholder="Categories"
-                          />
-                        )}
-
-                      />
-                    )}
+                    render={({ field }) =>
+                      itCategory && (
+                        <Autocomplete
+                          multiple
+                          id="tags-outlined"
+                          value={field.value}
+                          options={itCategory}
+                          getOptionLabel={(option) => option}
+                          onBlur={field.onBlur}
+                          onChange={(e, value) => setValue("category", value)}
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              variant="outlined"
+                              placeholder="Categories"
+                            />
+                          )}
+                        />
+                      )
+                    }
                   />
-                     
-
                 </div>
                 <input
                   className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
@@ -254,12 +244,10 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     className="bg-green-500 px-6 py-2 text-white rounded-md"
                     type="submit"
                     disabled={isSubmitting}
-                    
                   >
                     Add Challenge
                   </button>
                 </div>
-              
               </form>
             </div>
           </div>
@@ -268,4 +256,3 @@ export const AddChallengeModal = ({ open, handleClose }) => {
     </div>
   );
 };
-
