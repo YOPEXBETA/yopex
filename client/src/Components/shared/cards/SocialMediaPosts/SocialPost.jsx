@@ -14,6 +14,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 import SocialPostImage from "../../PostImage/SocialPostImage";
+import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 
 const SocialPostCard = ({
   post,
@@ -73,11 +74,19 @@ const SocialPostCard = ({
     <div className="bg-white w-full mx-auto h-full  rounded-lg border-green-500 border-b-2 shadow-md">
       <div className=" flex justify-between items-start">
         <div className=" flex items-center py-6 pl-2 gap-2">
-          <img
-            alt="post"
-            src={post.userPicturePath}
-            className=" w-11 h-11 rounded-full object-cover bg-white border-2"
-          />
+          {post.userPicturePath ? (
+            <img
+              alt="post"
+              src={post.userPicturePath}
+              className="w-11 h-11 rounded-full object-cover bg-white border-2"
+            />
+          ) : (
+            <img
+              alt="default"
+              src={AvatarProfile}
+              className="w-11 h-11 rounded-full object-cover bg-white border-2"
+            />
+          )}
           <div>
             <Link
               key={post.userId}

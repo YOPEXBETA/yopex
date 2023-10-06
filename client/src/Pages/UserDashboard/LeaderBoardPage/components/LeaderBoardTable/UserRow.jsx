@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 
 const UserRow = ({ user }) => {
   return (
@@ -12,11 +13,19 @@ const UserRow = ({ user }) => {
             className="flex items-center gap-4"
           >
             <div className="">
-              <img
-                alt={`${user?.firstname} ${user?.lastname}`}
-                src={user?.picturePath}
-                className="w-10 h-10 rounded-full object-cover bg-green-500"
-              />
+              {user.picturePath ? (
+                <img
+                  alt="picture"
+                  src={user.picturePath}
+                  className="w-10 h-10 rounded-full object-cover border-2"
+                />
+              ) : (
+                <img
+                  alt="default"
+                  src={AvatarProfile}
+                  className="w-10 h-10 rounded-full object-cover border-2"
+                />
+              )}
             </div>
             <div className="flex items-center gap-1">
               <span className="text-sm">{user?.firstname}</span>

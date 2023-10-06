@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import YopexLogo from "../../../images/LogoYopex.png";
 import { Link } from "react-router-dom";
-import { FiMoreVertical } from "react-icons/fi";
 import MenuIcons from "./components/MenuIcons/MenuIcons";
 import NavbarTabTop from "./components/NavbarNavigation/NavbarTabTop";
 import NavbarSearchDropDown from "./components/NavbarSearch/NavbarSearchDropDown";

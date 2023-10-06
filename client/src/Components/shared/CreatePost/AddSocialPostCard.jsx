@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
 import { AddSocialPostModal } from "./AddSocialPostModal";
 
 const AddSocialPostCard = () => {
@@ -11,11 +12,19 @@ const AddSocialPostCard = () => {
     <div className="shadow-md bg-white w-full mx-auto rounded-lg border-green-500 border-b-2">
       <div className="p-4">
         <div className="flex items-center space-x-2">
-          <img
-            className="w-10 h-10 rounded-full object-cover cursor-pointer border-2"
-            src={user.picturePath}
-            alt="photo"
-          />
+          {user.picturePath ? (
+            <img
+              alt="picture"
+              src={user.picturePath}
+              className="w-10 h-10 rounded-full object-cover cursor-pointer border-2"
+            />
+          ) : (
+            <img
+              alt="default"
+              src={AvatarProfile}
+              className="w-10 h-10 rounded-full object-cover cursor-pointer border-2"
+            />
+          )}
           <input
             type="text"
             className="flex-1 px-3  focus:outline-none rounded-full h-10 bg-gray-100"

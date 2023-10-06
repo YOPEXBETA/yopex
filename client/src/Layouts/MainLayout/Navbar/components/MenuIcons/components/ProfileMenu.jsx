@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Logout from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
+import AvatarProfile from "../../../../../../assets/images/AvatarProfile.jpg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../../../../redux/auth/authSlice";
@@ -57,11 +58,19 @@ const ProfileMenu = () => {
           onClick={handleClick}
           className="flex items-center justify-center w-10 h-10 text-gray-600 rounded-full"
         >
-          <img
-            alt="picture"
-            src={user.picturePath}
-            className="rounded-full  object-cover w-10 h-10 border-2 border-gray-200"
-          />
+          {user.picturePath ? (
+            <img
+              alt="picture"
+              src={user.picturePath}
+              className="rounded-full  object-cover w-10 h-10 border-2 border-gray-200"
+            />
+          ) : (
+            <img
+              alt="default"
+              src={AvatarProfile}
+              className="rounded-full object-cover w-10 h-10 border-2 border-gray-200"
+            />
+          )}
         </button>
       </div>
       <div>
@@ -74,11 +83,19 @@ const ProfileMenu = () => {
               href={`/profile/${user._id}`}
               className="p-3 hover:bg-gray-100 space-x-2 flex items-center"
             >
-              <img
-                src={user.picturePath}
-                alt="User Avatar"
-                className="w-12 h-12 rounded-full  border-2 border-gray-200"
-              />
+              {user.picturePath ? (
+                <img
+                  alt="picture"
+                  src={user.picturePath}
+                  className="w-12 h-12 rounded-full  border-2 border-gray-200"
+                />
+              ) : (
+                <img
+                  alt="default"
+                  src={AvatarProfile}
+                  className="w-12 h-12 rounded-full  border-2 border-gray-200"
+                />
+              )}
               <div className="flex-grow">
                 {user.role === "user" || user.role === "admin" ? (
                   <div>

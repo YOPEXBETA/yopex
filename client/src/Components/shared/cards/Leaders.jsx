@@ -1,4 +1,5 @@
 import React from "react";
+import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
 import { useUsers } from "../../../hooks/react-query/useUsers";
 
 const Leaders = () => {
@@ -26,11 +27,19 @@ const Leaders = () => {
               className="flex justify-between items-center mb-4"
             >
               <div className="flex items-center">
-                <img
-                  src={leader.picturePath}
-                  alt={`${leader.firstname}'s Avatar`}
-                  className="w-11 h-11  border-primary-light rounded-full object-cover border-2"
-                />
+                {leader.picturePath ? (
+                  <img
+                    alt="picture"
+                    src={leader.picturePath}
+                    className="w-11 h-11  border-primary-light rounded-full object-cover border-2"
+                  />
+                ) : (
+                  <img
+                    alt="default"
+                    src={AvatarProfile}
+                    className="w-11 h-11  border-primary-light rounded-full object-cover border-2"
+                  />
+                )}
                 <div className="ml-3">
                   <h6 className="text-md font-medium">{leader.firstname}</h6>
                   <p className="text-sm text-gray-500">{leader.country}</p>
