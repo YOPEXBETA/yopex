@@ -6,6 +6,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/auth/authSlice";
 import Loader from "../../Components/PageLoading/Loader";
+import FloatingButton from "../../Components/shared/Buttons/FloatingButton";
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -39,7 +40,10 @@ const MainLayout = () => {
       <div className=" pb-[4.6rem]">
         <CustomNavbar />
       </div>
-      <Outlet />
+      <div className="">
+        <Outlet />
+      </div>
+      <FloatingButton />
     </div>
   );
 };
