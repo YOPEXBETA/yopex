@@ -39,21 +39,20 @@ const UserSchema = new mongoose.Schema(
     },
     historyPayment: {
       type: Array,
-      default: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Payment",
-      }],
+      default: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Payment",
+        },
+      ],
     },
     viewedProfile: { type: Number },
     impressions: { type: Number },
-    //role to switch between company and user
     role: { type: String, enum: ["user", "admin", "company"], default: "user" },
-
     resetToken: { type: String, default: undefined }, //need it for forget password(verification)
     isFaceRecognition: { type: Boolean, default: false },
-    isActive: { type: Boolean, default: true },
     isVerified: { type: Boolean, default: false },
-
+    status: { type: String, default: "disabled" },
     posts: {
       type: [
         {
@@ -63,7 +62,6 @@ const UserSchema = new mongoose.Schema(
       ],
       default: [],
     },
-
     bookmarks: {
       type: [
         {
@@ -139,31 +137,30 @@ UserSchema.virtual("yearsRegisteredCalcu").get(function () {
   return this.yearsRegistered;
 });
 
+UserSchema.pre(
+  "findOneAndDelete",
+  { document: false, query: true },
+  async function (next) {
+    try {
+      console.log("Middleware executed");
 
-UserSchema.pre('findOneAndDelete', { document: false, query: true }, async function (next) {
-  try {
-    console.log("Middleware executed");
-    
-    const query = this;
-    const userId = query._conditions._id;
+      const query = this;
+      const userId = query._conditions._id;
 
-    SocialMediaPost.deleteMany({ userId: userId }).exec();
+      SocialMediaPost.deleteMany({ userId: userId }).exec();
 
-    Company.deleteMany({ user: userId }).exec(); 
+      Company.deleteMany({ user: userId }).exec();
 
-    submissionModel.deleteMany({ userId: userId }).exec();
+      submissionModel.deleteMany({ userId: userId }).exec();
 
-    notificationModel.deleteMany({ user: userId }).exec();
+      notificationModel.deleteMany({ user: userId }).exec();
 
-    next();
-  } catch (error) {
-    console.log("Middleware error");
-    next(error);
+      next();
+    } catch (error) {
+      console.log("Middleware error");
+      next(error);
+    }
   }
-});
-
+);
 
 module.exports = mongoose.model("User", UserSchema);
-
-
-

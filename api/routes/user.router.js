@@ -1,6 +1,9 @@
 const express = require("express");
 const userRouter = express.Router();
 
+// Only enable if special route is enabled
+const userSchema = require("../models/user.model");
+
 //imported controllers
 const {
   editProfile,
@@ -17,12 +20,11 @@ const {
   getUserChallenges,
   getUserStats,
   getUserNotifications,
-  banUser,
   CreateCompany,
   getCurrentUser,
   followUnfollowCompany,
   getUserFollowingsCompanies,
-  seeNotification
+  seeNotification,
 } = require("../controllers/user.controller");
 
 const validate = require("../middlewares/SchemaValidation.middleware");
@@ -42,11 +44,7 @@ const {
   authenticateToken,
 } = require("../middlewares/authenticateToken.middleware");
 
-userRouter.put(
-  "/users/edit/",
-  authenticateToken,
-  editProfile,
-);
+userRouter.put("/users/edit/", authenticateToken, editProfile);
 userRouter.get("/me", authenticateToken, getCurrentUser); //seach users
 userRouter.get("/users", authenticateToken, SearchUsers); //seach users
 userRouter.get("/allusers", getUsers); //seach users
@@ -55,25 +53,25 @@ userRouter.get("/find/friends/:userId", authenticateToken, getUserFriends);
 userRouter.get(
   "/find/followings/:userId",
   authenticateToken,
-  getUserFollowings,
+  getUserFollowings
 );
 
 userRouter.get(
   "/find/followingsCompanies/:userId",
   authenticateToken,
-  getUserFollowingsCompanies,
+  getUserFollowingsCompanies
 );
 
 userRouter.put(
   "/toggleFollow/:otherUserId",
   authenticateToken,
-  followUnfollowUser,
+  followUnfollowUser
 );
 
 userRouter.put(
   "/toggleFollowCompany/:companyId",
   authenticateToken,
-  followUnfollowCompany,
+  followUnfollowCompany
 );
 userRouter.get("/find/suggestedUsers", authenticateToken, getsuggestedUsers);
 userRouter.get("/:userId/badges", authenticateToken, getBadgesEarnedByUser);
@@ -83,7 +81,7 @@ userRouter.get("/user/challenges", authenticateToken, getUserChallenges);
 userRouter.get(
   "/user/:userId/notifications",
   authenticateToken,
-  getUserNotifications,
+  getUserNotifications
 );
 userRouter.get("/users/stats", authenticateToken, getUserStats);
 userRouter.post("/review/create", authenticateToken, createReview);
@@ -91,10 +89,15 @@ userRouter.get("/reviews/:id", authenticateToken, getReviews);
 userRouter.get(
   "/review/challenge/:id",
   authenticateToken,
-  getReviewsByChallengeUser,
+  getReviewsByChallengeUser
 );
-userRouter.get("/user/ban/:id", authenticateToken, banUser);
 userRouter.post("/create", authenticateToken, CreateCompany);
 userRouter.put("/notifications/seen", authenticateToken, seeNotification);
+
+// Special Route: Add missing fields to all users at once. Only use in development
+userRouter.patch("/special", async (req, res) => {
+  const users = await userSchema.updateMany({}, { status: "active" });
+  return res.status(200).json(users);
+});
 
 module.exports = userRouter;

@@ -1,6 +1,7 @@
 import React from "react";
 import UserTableMenuItem from "./components/UserTableMenuItem";
 import { Link } from "react-router-dom";
+import { cn } from "../../../utils/utils";
 
 const UserRow2 = ({ user }) => {
   return (
@@ -23,24 +24,18 @@ const UserRow2 = ({ user }) => {
       <td className="text-sm text-left">{user.email}</td>
 
       <td
-        className={`font-bold text-white text-xs mt-5 py-2 px-3 rounded-full inline-block ${
-          user?.status === "active"
-            ? "bg-green-500"
-            : user?.status === "disabled"
-            ? "bg-gray-500"
-            : user?.isActive
-            ? "bg-green-500"
-            : "bg-red-500"
-        }`}
+        className={cn(
+          "font-bold text-white text-xs mt-5 py-2 px-3 rounded-full inline-block",
+          user.status === "active" && "bg-green-500",
+          user.status === "disabled" && "bg-gray-500",
+          user.status === "banned" && "bg-red-500"
+        )}
       >
-        {user.status ? user.status : user.isActive ? "active" : "disabled"}
+        {user.status}
       </td>
 
       <td className="py-4 px-4 text-right">
-        <UserTableMenuItem
-          userId={user._id}
-          accountStatus={user.status ? user.status : user.isActive}
-        />
+        <UserTableMenuItem userId={user._id} accountStatus={user.status} />
       </td>
     </tr>
   );
