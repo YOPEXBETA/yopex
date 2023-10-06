@@ -11,30 +11,48 @@ const CategoriesModal = ({
     showIconModal && (
       <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
         <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-          <h2 className="text-2xl font-semibold text-black mb-4">
-            Choose a Category
-          </h2>
+          <div className="flex justify-between items-start">
+            <h2 className="text-lg font-semibold text-black mb-4">
+              Choose a Category
+            </h2>
+            <button
+              type="button"
+              onClick={toggleIconModal}
+              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              data-modal-hide="defaultModal"
+            >
+              <svg
+                className="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+            </button>
+          </div>
           <div className="grid grid-cols-2 gap-4">
             {categories.map((tab) => (
               <button
                 key={tab._id}
                 onClick={() => handleCategoryClick(tab.name)}
-                className={`bg-white bg-opacity-10 px-4 py-2 text-lg font-medium text-zinc-300 hover:bg-opacity-20 focus:outline-none rounded-md transition duration-300 transform hover:scale-105 ${
+                className={`bg-white bg-opacity-10 py-2 text-lg border-2 font-medium text-green-500 hover:bg-opacity-20 focus:outline-none rounded-md transition duration-300 transform hover:scale-105 ${
                   selectedCategory === tab.name
                     ? "text-green-500 border-2 border-green-500"
-                    : ""
+                    : "text-zinc-300"
                 }`}
               >
                 {tab.name}
               </button>
             ))}
           </div>
-          <button
-            onClick={toggleIconModal}
-            className="block w-full mt-6 px-4 py-2 text-lg font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none rounded-md transition duration-300 transform hover:scale-105"
-          >
-            Close
-          </button>
         </div>
       </div>
     )

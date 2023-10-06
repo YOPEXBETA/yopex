@@ -62,7 +62,9 @@ export default function ScrollableTabs() {
                 ))}
                 <button
                   onClick={toggleIconModal}
-                  className="px-4 py-2 text-sm font-medium text-gray-500 border-b-2 focus:outline-none"
+                  className={`px-4 py-2 text-sm font-medium text-gray-500 border-b-2 focus:outline-none ${
+                    "md:grid-cols-2 xl:grid-cols-4" // Responsive classes
+                  }`}
                 >
                   <BsThreeDots />
                 </button>
