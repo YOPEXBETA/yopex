@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
 // ==============================|| MODALS||============================== //
@@ -10,10 +10,15 @@ import { AddPostModal } from "./AddPostsModal";
 // ==============================|| CODE ||============================== //
 
 const AddPostMenuList = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
-  const handleClick = () => {
-    setIsOpen(!isOpen);
+  const [Open, setOpen] = useState(false);
+
+  const handleClick = (event) => setOpen(!Open);
+
+  const handleCloseMenu = () => {
+    setOpen(false);
   };
 
   // ==============================|| ADD WORK OFFER CODE ||============================== //
@@ -58,8 +63,32 @@ const AddPostMenuList = () => {
     setOpenCompanyModal(false);
   };
 
+  // Use a ref to detect clicks outside of the menu
+  const outsideClickRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        outsideClickRef.current &&
+        !outsideClickRef.current.contains(event.target)
+      ) {
+        handleCloseMenu();
+      }
+    }
+
+    if (setOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setOpen]);
+
   return (
-    <div className="relative z-50">
+    <div className="relative z-50" ref={outsideClickRef}>
       <div className="relative">
         <button
           onClick={handleClick}
@@ -81,8 +110,11 @@ const AddPostMenuList = () => {
           </svg>
         </button>
       </div>
-      {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+      {Open && (
+        <div
+          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          ref={menuRef}
+        >
           <div className="py-1" role="none">
             <button
               onClick={handleClickOpenModalWork}

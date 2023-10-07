@@ -1,12 +1,18 @@
 import React from "react";
-import { FiHome, FiCompass, FiAward } from "react-icons/fi";
+import {
+  FiHome,
+  FiCompass,
+  FiAward,
+  FiBell,
+  FiMessageSquare,
+} from "react-icons/fi";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 
 import { Link } from "react-router-dom";
 
 const MobileMenu = ({ userImage, user }) => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white z-50 px-8 py-4 flex justify-between items-center border-t-2 border-gray-200">
+    <div className="fixed bottom-0 left-0 right-0 bg-white z-50 px-4 py-4 flex justify-between items-center border-t-2 border-gray-200">
       <div className="flex justify-between items-center flex-1">
         <Link to={`/profile/${user._id}`}>
           {userImage ? (
@@ -31,6 +37,12 @@ const MobileMenu = ({ userImage, user }) => {
         </Link>
         <Link to={`/leaderboard`}>
           <FiAward className="text-2xl text-gray-600 mr-4" />
+        </Link>
+        <Link to={`/Notifications`}>
+          <FiBell className="text-2xl text-gray-600 mr-4" />
+        </Link>
+        <Link to={`/chat`}>
+          <FiMessageSquare className="text-2xl text-gray-600 mr-4" />
         </Link>
       </div>
     </div>
