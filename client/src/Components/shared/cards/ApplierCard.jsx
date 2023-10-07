@@ -2,15 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ApplierMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyAppliers/ApplierMenuIcon";
 
-
-
-const ApplierCard = ({ Applier,jobId }) => {
-
-
-const Applierids = jobId.acceptedAppliers?.map((Applier) => Applier.user) ;
-const userIsInAcceptedApplier = Applierids.includes(Applier._id );
-
-
+const ApplierCard = ({ Applier, jobId }) => {
+  const Applierids = jobId.acceptedAppliers?.map((Applier) => Applier.user);
+  const userIsInAcceptedApplier = Applierids.includes(Applier._id);
 
   return (
     <div>

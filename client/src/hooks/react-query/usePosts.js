@@ -8,7 +8,7 @@ export const usePosts = () => {
   return useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/post/posts`, );
+      const { data } = await axios.get(`${url}/post/posts`);
       return data;
     },
   });
@@ -21,7 +21,7 @@ export const usePostsByCategory = (category) => {
     queryFn: async () => {
       let apiUrl = `${url}/post/posts`;
       if (category !== "") apiUrl += `?categories=${category}`;
-      const { data } = await axios.get(apiUrl, );
+      const { data } = await axios.get(apiUrl);
       return data;
     },
   });
@@ -32,7 +32,7 @@ export const useUserPosts = (userId) => {
   return useQuery({
     queryKey: ["posts", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/post/${userId}`, );
+      const { data } = await axios.get(`${url}/post/${userId}`);
       return data;
     },
   });
@@ -43,22 +43,25 @@ export const useBookmarkedPosts = (userId) => {
   return useQuery({
     queryKey: ["posts", userId, "bookmarked"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/post/bookmarks/${userId}`, );
+      const { data } = await axios.get(`${url}/post/bookmarks/${userId}`);
       return data;
     },
   });
 };
 
 // create a new post
-export const useCreatePost = (category) => {
+export const useCreatePost = (category, userId) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (postData) => {
-      await axios.post(`${url}/post/`, postData, );
+      await axios.post(`${url}/post/`, postData);
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["posts", category] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["posts", category] });
+      queryClient.invalidateQueries({ queryKey: ["posts", userId] });
+    },
   });
 };
 
@@ -70,7 +73,6 @@ export const useDeletePost = (userId, category = "") => {
     mutationFn: async (postId) => {
       await axios.delete(`${url}/post/${postId}`, {
         headers: { userId: userId },
-        
       });
     },
     onSuccess: () => {
@@ -86,7 +88,7 @@ export const useEditPost = (postId, userId, category = "") => {
 
   return useMutation({
     mutationFn: async (postData) => {
-      await axios.put(`${url}/post/${postId}`, postData, );
+      await axios.put(`${url}/post/${postId}`, postData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts", category] });
@@ -100,10 +102,7 @@ export const useLikePost = (userId, ownerId, category = "") => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (postId) => {
-      await axios.patch(
-        `${url}/post/${postId}/like`,
-        { userId },
-      );
+      await axios.patch(`${url}/post/${postId}/like`, { userId });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -122,10 +121,7 @@ export const useSharePost = (userId, ownerId, category = "") => {
 
   return useMutation({
     mutationFn: async (postId) => {
-      await axios.patch(
-        `${url}/post/share`,
-        { postId, userId },
-      );
+      await axios.patch(`${url}/post/share`, { postId, userId });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -143,10 +139,7 @@ export const useBookmarkPost = (userId, postId, category = "") => {
 
   return useMutation({
     mutationFn: async () => {
-      await axios.patch(
-        `${url}/post/${userId}/bookmark/${postId}`,
-        { userId },
-      );
+      await axios.patch(`${url}/post/${userId}/bookmark/${postId}`, { userId });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

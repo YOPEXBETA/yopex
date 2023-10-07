@@ -2,12 +2,14 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import React, { useState } from "react";
 import { IoEllipsisHorizontalOutline } from "react-icons/io5";
-import { useAcceptApplier , useUnapplyJob} from "../../../../../../hooks/react-query/useJobs";
-
+import {
+  useAcceptApplier,
+  useUnapplyJob,
+} from "../../../../../../hooks/react-query/useJobs";
 
 const ApplierMenuIcon = ({ Applier, job }) => {
-  const { mutate :accepteMutate } = useAcceptApplier(job);
-  const { mutate :deleteMutate } = useUnapplyJob(job , Applier._id);
+  const { mutate: accepteMutate } = useAcceptApplier(job);
+  const { mutate: deleteMutate } = useUnapplyJob(job, Applier._id);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -39,9 +41,10 @@ const ApplierMenuIcon = ({ Applier, job }) => {
                 </button>
               </li>
               <li>
-                <button 
-                onClick={() => deleteMutate()}
-                className="flex items-center px-4 py-2 hover:bg-gray-100 w-full">
+                <button
+                  onClick={() => deleteMutate()}
+                  className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
+                >
                   <DoNotDisturbOnIcon className="text-gray-500 mr-2" />
                   Delete Applier
                 </button>
