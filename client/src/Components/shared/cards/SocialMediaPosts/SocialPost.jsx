@@ -24,6 +24,8 @@ const SocialPostCard = ({
   openModal,
 }) => {
   const { user } = useSelector((state) => state.auth);
+  const [isliked, setIsLiked] = useState(user._id in post.likes);
+  
 
   const { category } = useSelector((state) => state.global);
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
@@ -134,10 +136,10 @@ const SocialPostCard = ({
         <div className="flex items-center gap-2">
           <button
             aria-label="add to favorites"
-            onClick={() => likePost(post._id)}
+            onClick={() => {likePost(post._id);setIsLiked(!isliked)}}
             className="focus:outline-none"
           >
-            {user._id in post.likes ? (
+            {isliked ? (
               <AiFillHeart className="text-red-500 w-6 h-6" />
             ) : (
               <AiOutlineHeart className="text-gray-500 w-6 h-6" />
