@@ -6,6 +6,7 @@ import { addBadge } from "../../../redux/actions/BadgeTypeAction";
 //firebase
 import storage from "../../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { useCreateBadge } from "../../../hooks/react-query/useBadges";
 
 const AddBadgeModal = ({ open, handleClose }) => {
   const myData = JSON.parse(localStorage.getItem("user")) ?? {};
@@ -15,7 +16,7 @@ const AddBadgeModal = ({ open, handleClose }) => {
   const [badgeImgUrl, setBadgeImgUrl] = useState(null);
   const [badgeImgName, setBadgeImgName] = useState("");
 
-  const dispatch = useDispatch();
+  const { mutate } = useCreateBadge();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,23 +26,17 @@ const AddBadgeModal = ({ open, handleClose }) => {
         const url = await handleImageUpload();
         setBadgeImgUrl(url);
         console.log(url);
-        dispatch(
-          addBadge({
-            badgeName,
-            badgeDescription,
-            badgeImg: url,
-          })
-        );
-        window.location.reload();
+        mutate({
+          badgeName,
+          badgeDescription,
+          badgeImg: url,
+        });
         alert("Image uploaded successfully!");
       } else {
-        dispatch(
-          addBadge({
-            badgeName,
-            badgeDescription,
-          })
-        );
-        window.location.reload();
+        mutate({
+          badgeName,
+          badgeDescription,
+        });
       }
     } catch (error) {
       console.log(error);

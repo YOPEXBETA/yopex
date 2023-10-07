@@ -7,7 +7,7 @@ export const useBadges = () => {
   return useQuery({
     queryKey: ["badges"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/badgeType/badgeTypes`, );
+      const { data } = await axios.get(`${url}/badgeType/badgeTypes`);
       return data;
     },
   });
@@ -17,7 +17,23 @@ export const useDeleteBadge = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.delete(`${url}/badgeType/${id}`, );
+      const { data } = await axios.delete(`${url}/badgeType/${id}`);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["badges"] });
+    },
+  });
+};
+
+export const useCreateBadge = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (badgeData) => {
+      const { data } = await axios.post(
+        "https://yopex-api.tabaani.co/badgeType/add",
+        badgeData
+      );
       return data;
     },
     onSuccess: () => {
