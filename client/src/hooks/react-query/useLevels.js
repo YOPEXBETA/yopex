@@ -8,10 +8,7 @@ export const useCreateLevel = () => {
 
   return useMutation({
     mutationFn: async (adminDefinedPoints) => {
-      await axios.post(
-        `${url}/admin/createLevel`,
-        { adminDefinedPoints },
-      );
+      await axios.post(`${url}/admin/createLevel`, { adminDefinedPoints });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["levels"] });
@@ -26,7 +23,7 @@ export const useUpdateLevel = () => {
     mutationFn: async (level) => {
       const { data } = await axios.put(
         `${url}/admin/updateLevel/${level._id}`,
-        { maxScore: level.maxScore },
+        { maxScore: level.maxScore }
       );
 
       return data;
@@ -39,9 +36,9 @@ export const useUpdateLevel = () => {
 
 export const useGetLevels = () => {
   return useQuery({
-    queryKey: ["Levels"],
+    queryKey: ["levels"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/admin/allLevels`, );
+      const { data } = await axios.get(`${url}/admin/allLevels`);
       return data;
     },
   });
@@ -52,7 +49,7 @@ export const useDeleteLevel = () => {
 
   return useMutation({
     mutationFn: async (LevelId) => {
-      await axios.delete(`${url}/admin/delLevel/${LevelId}`, );
+      await axios.delete(`${url}/admin/delLevel/${LevelId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["levels"] });
