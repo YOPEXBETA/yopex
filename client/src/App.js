@@ -4,6 +4,7 @@ import ScrollTop from "./Components/ScrollTop";
 import Routes from "./routes/index";
 import ThemeCustomization from "./themes";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => {
   return (
     <ThemeCustomization>
       <QueryClientProvider client={queryClient}>
+        <Toaster />
         <ReactQueryDevtools />
         <ScrollTop>
           <Routes />
