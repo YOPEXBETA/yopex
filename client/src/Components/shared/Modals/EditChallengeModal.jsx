@@ -29,7 +29,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
 
   const handleInputChange = (e, fieldName) => {
     const { value } = e.target;
-    
+
     // Update the corresponding field in formData based on fieldName
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -45,14 +45,13 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
   };
 
   const handleEdit = () => {
-
     mutate({
       title: formData.title,
       description: formData.description,
       price: formData.price,
-      nbruser:formData.nbruser,
+      nbruser: formData.nbruser,
       category: formData.category,
-      RecommendedSkills: formData.RecommendedSkills
+      RecommendedSkills: formData.RecommendedSkills,
     });
     handleClose();
   };
@@ -81,81 +80,100 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
               Edit "{challenge.title}"
             </h2>
             <div className="mt-2">
-            <input
-            className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
-            type="text"
-            placeholder={formData.title}
-            name="title"
-            value={formData.title}
-            onChange={(e) => handleInputChange(e, 'title')}
-            required
-          />
-          <textarea
-            className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
-            name="description"
-            value={formData.description}
-            onChange={(e) => handleInputChange(e, 'description')}
-          />
-          <input
-            className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
-            type="text"
-            placeholder={formData.price}
-            name="price"
-            value={formData.price}
-            onChange={(e) => handleInputChange(e, 'price')}
-            required
-          />
-          <input
-            className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
-            type="text"
-            placeholder={formData.nbruser}
-            name="nbruser"
-            value={formData.nbruser}
-            onChange={(e) => handleInputChange(e, 'nbruser')}
-          />
-              {itCategory &&(
-              <Autocomplete
-                multiple
-                id="tags-outlined"
-                options={itCategory }
-                getOptionLabel={(option) => option}
-                value={formData.category}
-                onChange={(_, value) => handleCategoryChange(_, value)}
-                filterOptions={(options, state) =>
-                  options.filter((option) =>
-                    option.toLowerCase().includes(state.inputValue.toLowerCase())
-                  )
-                }
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    placeholder="Update Categories"
+              <label>Challenge Name</label>
+              <input
+                className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                type="text"
+                placeholder="Challenge name"
+                name="title"
+                value={formData.title}
+                onChange={(e) => handleInputChange(e, "title")}
+                required
+              />
+
+              <label>Challenge Description</label>
+              <textarea
+                className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
+                name="description"
+                value="Challenge description"
+                onChange={(e) => handleInputChange(e, "description")}
+              />
+
+              <label>Challenge Prize</label>
+              <input
+                className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                type="text"
+                placeholder="Challenge Prize"
+                name="price"
+                value={formData.price}
+                onChange={(e) => handleInputChange(e, "price")}
+                required
+              />
+
+              <label>Max Challenger</label>
+              <input
+                className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                type="text"
+                placeholder="Max Challenger"
+                name="nbruser"
+                value={formData.nbruser}
+                onChange={(e) => handleInputChange(e, "nbruser")}
+              />
+              {itCategory && (
+                <>
+                  <label>Categories</label>
+                  <Autocomplete
+                    multiple
+                    id="tags-outlined"
+                    options={itCategory}
+                    getOptionLabel={(option) => option}
+                    value={formData.category}
+                    onChange={(_, value) => handleCategoryChange(_, value)}
+                    filterOptions={(options, state) =>
+                      options.filter((option) =>
+                        option
+                          .toLowerCase()
+                          .includes(state.inputValue.toLowerCase())
+                      )
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        variant="outlined"
+                        placeholder="Update Categories"
+                      />
+                    )}
                   />
-                )}
-              />)}
-              { itSkills && (
-              <Autocomplete
-                className="mt-2"
-                multiple
-                id="tags-outlined"
-                options={itSkills }
-                getOptionLabel={(option) => option}
-                value={formData.RecommendedSkills}
-                onChange={(_, value) => handleSkillsChange(_, value)}
-                filterOptions={(options, state) =>
-                  options.filter((option) =>
-                    option.toLowerCase().includes(state.inputValue.toLowerCase())
-                  )
-                }
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    placeholder="Update Recommended Skills"
+                </>
+              )}
+              {itSkills && (
+                <>
+                  <label>Recommended Skills</label>
+                  <Autocomplete
+                    className="mt-2"
+                    multiple
+                    id="tags-outlined"
+                    options={itSkills}
+                    getOptionLabel={(option) => option}
+                    value={formData.RecommendedSkills}
+                    onChange={(_, value) => handleSkillsChange(_, value)}
+                    filterOptions={(options, state) =>
+                      options.filter((option) =>
+                        option
+                          .toLowerCase()
+                          .includes(state.inputValue.toLowerCase())
+                      )
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        variant="outlined"
+                        placeholder="Update Recommended Skills"
+                      />
+                    )}
                   />
-                )}
-              />)}
+                </>
+              )}
               <div className="flex justify-between mt-4">
                 <button
                   className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500 hover:bg-gray-200"
