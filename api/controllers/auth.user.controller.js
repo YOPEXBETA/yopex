@@ -113,6 +113,8 @@ const signUp = async (req, res) => {
 
 // ==============================|| Login ||============================== //
 
+// ==============================|| Login ||============================== //
+
 const signIn = async (req, res) => {
   try {
     //check if the email exist
@@ -283,8 +285,8 @@ const signInWithGoogle = async (req, res) => {
   const { ...info } = user ? user._doc : company._doc;
 
   info.token = token;
-    console.log({info})
-    res.redirect("https://yopex.tabaani.co/google_success?token="+token);
+  console.log({ info });
+  res.redirect("https://yopex.tabaani.co/google_success?token=" + token);
   // return res.status(200).send(info);
 };
 module.exports = {
