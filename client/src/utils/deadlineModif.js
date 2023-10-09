@@ -3,12 +3,12 @@ import moment from "moment";
 function getDeadlineDifference(deadline) {
   const now = moment();
   const diff = moment(deadline).diff(now);
-
+  
   const duration = moment.duration(diff);
   const days = duration.days();
   const hours = duration.hours();
   const minutes = duration.minutes();
-
+  
   return (
     <div>
       {diff < 0 ? (

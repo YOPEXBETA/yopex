@@ -15,7 +15,7 @@ export const AddPostModal = ({ open, handleClose }) => {
 
   // Data fetching | react-query
   const { data: categories } = useCategories();
-  const { mutate } = useCreatePost(category);
+  const { mutate } = useCreatePost(category, user._id);
 
   // Form handling | react-hook-form
   const { register, handleSubmit, watch, control, setValue, reset } = useForm({

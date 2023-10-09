@@ -56,14 +56,13 @@ export const useDeleteJob = () => {
 
 export const useAppliers = (jobIds) => {
   return useQuery({
-    queryKey: ["appliers", jobIds],
+    queryKey: ["appliers"],
     queryFn: async () => {
       const appliersPromises = jobIds?.map(async (jobId) => {
         const { data } = await axios.get(`${url}/job/jobs/${jobId}/appliers`);
         return data;
       });
       const appliersData = await Promise.all(appliersPromises);
-
       return appliersData;
     },
   });
@@ -83,7 +82,7 @@ export const useSortAppliers = (job) => {
 
 export const useAcceptedAppliers = (job) => {
   return useQuery({
-    queryKey: ["accepted/appliers", job],
+    queryKey: ["accepted/appliers"],
     queryFn: async () => {
       const { data } = await axios.get(
         `${url}/job/jobs/${job}/accepted-appliers`
@@ -101,7 +100,11 @@ export const useAcceptApplier = (job) => {
       await axios.put(`${url}/job/jobs/${job._id}/appliers/${userId}/accept`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["jobs", job._id]);
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries(["appliers"]);
+      queryClient.invalidateQueries({
+        queryKey: ["accepted/appliers"],
+      });
     },
   });
 };
@@ -128,6 +131,7 @@ export const useUnapplyJob = (job, userId) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["appliers"] });
     },
   });
 };

@@ -22,7 +22,7 @@ const App = () => {
   return (
     <ThemeCustomization>
       <QueryClientProvider client={queryClient}>
-        {/* <ReactQueryDevtools initialIsOpen={true} /> */}
+        <ReactQueryDevtools />
         <ScrollTop>
           <Routes />
         </ScrollTop>

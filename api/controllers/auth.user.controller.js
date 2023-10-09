@@ -125,7 +125,7 @@ const signIn = async (req, res) => {
       return res.status(400).json({ error: "Email does not exist!" });
 
     //check user status
-    if (user.isActive) {
+    if (user.status !== "banned") {
       //check if the password is valid
       if (user) {
         const validated = await bcrypt.compareSync(

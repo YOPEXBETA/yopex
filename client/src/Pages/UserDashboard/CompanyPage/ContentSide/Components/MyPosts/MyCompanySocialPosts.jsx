@@ -6,9 +6,7 @@ import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPo
 
 const MyCompanySocialPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [selectedImage, setSelectedImage] = useState(null);
-
   const [selectedPost, setSelectedPost] = useState(null);
 
   const openModal = (post) => {
@@ -22,7 +20,7 @@ const MyCompanySocialPosts = () => {
   };
   const { companyId } = useParams();
   const { data: posts, isLoading } = useUserPosts(companyId);
-  console.log(companyId, posts);
+  // console.log(companyId, posts);
 
   return (
     <div>
