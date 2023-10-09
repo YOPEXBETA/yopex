@@ -16,7 +16,7 @@ const PostMenuIcon = ({ post }) => {
 
   const handleConfirmDelete = () => {
     // Perform the delete action
-      handleDeleteCompany();
+    handleDeleteCompany();
 
     // Close the confirmation dialog
     setConfirmationDialogOpen(false);
@@ -25,7 +25,7 @@ const PostMenuIcon = ({ post }) => {
     // Close the confirmation dialog without deleting
     setConfirmationDialogOpen(false);
     handleClose();
-  }; 
+  };
   const { user } = useSelector((state) => state.auth);
   const { mutate } = useDeletePost(user._id);
 

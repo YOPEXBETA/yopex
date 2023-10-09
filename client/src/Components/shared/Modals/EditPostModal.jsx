@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Button,
   Dialog,
   DialogContent,
@@ -16,15 +17,19 @@ import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useEditPost } from "../../../hooks/react-query/usePosts";
 import uploadFile from "../../../utils/uploadFile";
+import { useCategories } from "../../../hooks/react-query/useCategories";
 
 export const EditPostModal = ({ open, handleClose, post }) => {
   const { category } = useSelector((state) => state.global);
   const [uploadProgress, setUploadProgress] = useState(0);
   const { mutate } = useEditPost(post._id, post.userId, category);
 
+  const { data: categories } = useCategories();
+
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
     defaultValues: {
       description: post.description,
+      categories: [],
       files: [],
     },
   });
@@ -40,7 +45,7 @@ export const EditPostModal = ({ open, handleClose, post }) => {
       return mutate({ description: data.description, postPicturePath });
     }
 
-    mutate({ description: data.description });
+    mutate({ description: data.description, categories: data.categories });
     setUploadProgress(0);
     handleClose();
     reset();
@@ -64,6 +69,28 @@ export const EditPostModal = ({ open, handleClose, post }) => {
                 label="Description"
                 multiline
                 rows={4}
+              />
+
+              <Controller
+                name="categories"
+                control={control}
+                render={() => (
+                  <Autocomplete
+                    multiple
+                    limitTags={2}
+                    id="multiple-limit-tags"
+                    options={categories ? categories : []}
+                    onChange={(e, values) => setValue("categories", values)}
+                    getOptionLabel={(option) => option.name}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="categories"
+                        placeholder="categories"
+                      />
+                    )}
+                  />
+                )}
               />
 
               {uploadedFile && (
@@ -100,8 +127,7 @@ export const EditPostModal = ({ open, handleClose, post }) => {
                 <Button variant="outlined" onClick={handleClose}>
                   Cancel
                 </Button>
-
-                <Button variant="contained" type="submit">
+                <Button variant="outlined" type="submit">
                   Edit Post
                 </Button>
               </Stack>

@@ -12,7 +12,7 @@ const SocialPostModal = ({ closeModal, post }) => {
           <div className="col-span-1 md:col-span-1">
             <img
               src={post.postPicturePath}
-              alt="Your Image"
+              alt="Profile"
               className="w-full h-[35rem] shadow-lg object-cover"
             />
           </div>
