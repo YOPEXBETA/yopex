@@ -18,15 +18,13 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
   const [message, setMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState([]);
 
-  if (chatContainerRef.current!==null) chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+  if (chatContainerRef.current !== null)
+    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
 
-  
   useEffect(() => {
     setArrivalMessage(messages);
-    
-    
   }, [messages]);
-  
+
   useEffect(() => {
     socket.on("getMessage", (data) => {
       console.log(data);
@@ -62,15 +60,22 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
   };
 
   return (
-    <div >
+    <div>
       {arrivalMessage?.length === 0 ? (
-        <div className="lg:block hidden"  ref={chatContainerRef} style={{ textAlign: "center", padding: "40vh 0vh" }}>
+        <div
+          className="lg:block hidden"
+          ref={chatContainerRef}
+          style={{ textAlign: "center", padding: "40vh 0vh" }}
+        >
           <p className="opacity-50 text-xl">
             Open a conversation to start a chat
           </p>
         </div>
       ) : (
-        <div className="hidden  lg:block lg:fixed lg:h-[82vh] xl:w-[75%] lg:overflow-auto lg:pb-8" ref={chatContainerRef}>
+        <div
+          className="lg:block lg:fixed lg:h-[82vh] xl:w-[75%] lg:overflow-auto lg:pb-8"
+          ref={chatContainerRef}
+        >
           {arrivalMessage?.map((message, index) => {
             return (
               <div key={index} className="px-11 py-6">

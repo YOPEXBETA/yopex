@@ -6,6 +6,9 @@ import { useConversations } from "../../../hooks/react-query/useConversations";
 import Conversation from "./components/Conversation";
 import UsersMsgs from "./components/UsersMsgs";
 import useSocket from "../../../hooks/useSocket";
+import UserMsgsSideBar from "../../../Components/Mobile/UserMsgsSideBar";
+import { FaBars, FaTimes } from "react-icons/fa"; // Import the icons
+import UsersConversation from "./components/UsersConversation";
 
 const Chat = () => {
   const { user } = useSelector((state) => state.auth);
@@ -13,6 +16,7 @@ const Chat = () => {
   const { selectedConversationId } = useParams();
   const [otherUser, setOtherUser] = useState({});
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!conversations) return;
@@ -35,20 +39,38 @@ const Chat = () => {
 
   socket.emit("joinRoom", { id: user._id, roomid: selectedConversationId });
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="lg:grid lg:grid-cols-4 sm:grid sm:grid-cols-1">
-      <div className="lg:col-span-1 sm:col-span-1 border-r border-gray-300">
+      <div className="hidden col-span-1 sm:col-span-1 border-r border-gray-300 lg:block">
         <div className="mb-4">
           <UsersMsgs />
         </div>
       </div>
+      <div className="bg-white w-full relative border-b-2 py-4 mt-4">
+        <div className="border-gray-300  lg:hidden md:hidden pl-6">
+          <button onClick={toggleSidebar} className="text-2xl">
+            {isSidebarOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
+      </div>
 
-      <div className="lg:col-span-3">
-        <Conversation
+      {/* Sidebar */}
+      <UserMsgsSideBar isOpen={isSidebarOpen} />
+      <div className="block lg:col-span-3  mb-8">
+        <UsersConversation
           conversationId={selectedConversationId}
           socket={socket}
           otherUser={otherUser}
         />
+        {/*<Conversation
+          conversationId={selectedConversationId}
+          socket={socket}
+          otherUser={otherUser}
+  />*/}
       </div>
     </div>
   );

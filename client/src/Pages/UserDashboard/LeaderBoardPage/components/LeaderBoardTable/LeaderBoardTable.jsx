@@ -33,27 +33,29 @@ const LeaderbordTable = ({ data, query }) => {
   return (
     <div>
       <div className="border border-gray-300 rounded-md overflow-hidden bg-white">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="text-black">
-            <tr className="bg-white h-11">
-              <th className="py-2 px-4 text-left">RANK</th>
-              <th className="py-2 px-4 text-left">USER</th>
-              <th className="py-2 px-4 text-left">COUNTRY</th>
-              <th className="py-2 px-4 text-right">POINTS</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {rankedUsers
-              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(
-                (user) =>
-                  (user.firstname.includes(query) ||
-                    user.lastname.includes(query)) && (
-                    <UserRow user={user} key={user._id} />
-                  )
-              )}
-          </tbody>
-        </table>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="text-black">
+              <tr className="bg-white h-11">
+                <th className="py-2 px-4 text-left">RANK</th>
+                <th className="py-2 px-4 text-left">USER</th>
+                <th className="py-2 px-4 text-left">COUNTRY</th>
+                <th className="py-2 px-4 text-right">POINTS</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {rankedUsers
+                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map(
+                  (user) =>
+                    (user.firstname.includes(query) ||
+                      user.lastname.includes(query)) && (
+                      <UserRow user={user} key={user._id} />
+                    )
+                )}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className="flex items-center justify-between py-2 px-4 text-black bg-white border-2">
         <div className="flex items-center gap-3">

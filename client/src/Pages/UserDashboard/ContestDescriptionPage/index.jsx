@@ -14,10 +14,10 @@ const ContestDetails = () => {
 
   if (challenge) {
     return (
-      <div className="space-y-6 bg-white h-screen">
+      <div className="space-y-6 bg-white">
         <Banner value={value} changeValue={changeValue} />
         <div className="grid grid-cols-12 gap-4 px-6 lg:px-8 xl:px-32">
-          <div className="col-span-12 ">
+          <div className="col-span-12 mb-2">
             <ContentSide value={value} />
           </div>
         </div>

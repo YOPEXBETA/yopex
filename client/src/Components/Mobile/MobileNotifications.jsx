@@ -9,7 +9,7 @@ const MobileNotifications = () => {
   const { data: notifications } = useUserNotifications(user?._id);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center pt-20">
+    <div className="fixed inset-0 flex items-center justify-center pt-20 mb-8">
       <div className="bg-white w-full h-full overflow-y-auto shadow-xl">
         <div className="p-4">
           <div className="flex flex-row items-center justify-between mb-2">

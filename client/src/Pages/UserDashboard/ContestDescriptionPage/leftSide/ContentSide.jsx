@@ -3,10 +3,10 @@ import MTable from "./Components/ParticipantsTableSection/ParticipantsTable";
 import ChooseWinner from "./Components/Winner/winner";
 import CompanyCard from "./Components/ChallengeDescription/Client";
 import TasksDescription from "./Components/ChallengeDescription/TaskDescription";
-import ContestConversation from "../../ChatPage/components/ContestConversation";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetContestConversation } from "../../../../hooks/react-query/useContestConversation";
+import ChallengeConversation from "./Components/ChallengeConversation";
 
 const ContentSide = ({ value, changeValue }) => {
   const { id: challengeId } = useParams();
@@ -39,7 +39,7 @@ const ContentSide = ({ value, changeValue }) => {
           )}
           {value === 3 && (
             <div className="lg:col-span-12 md:col-span-12">
-              <ContestConversation
+              <ChallengeConversation
                 conversationId={challengeId}
                 id={conversation.id}
               />

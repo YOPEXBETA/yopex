@@ -9,7 +9,6 @@ import {
   useUserSubmission,
 } from "../../../../hooks/react-query/useChallenges";
 import getDeadlineDifference from "../../../../utils/deadlineModif";
-import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import ChallengeNavigationTab from "../../../../Components/Tabs/ChallengeNavigtionTab";
 import { useJoinContestConversation } from "../../../../hooks/react-query/useContestConversation";
 
