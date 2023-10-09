@@ -50,8 +50,8 @@ const Chat = () => {
           <UsersMsgs />
         </div>
       </div>
-      <div className="bg-white w-full relative border-b-2 py-4 mt-4">
-        <div className="border-gray-300  lg:hidden md:hidden pl-6">
+      <div className="bg-white w-full relative lg:hidden md:hidden border-b-2 py-4">
+        <div className="border-gray-300  lg:hidden md:hidden pl-6 l">
           <button onClick={toggleSidebar} className="text-2xl">
             {isSidebarOpen ? <FaTimes /> : <FaBars />}
           </button>

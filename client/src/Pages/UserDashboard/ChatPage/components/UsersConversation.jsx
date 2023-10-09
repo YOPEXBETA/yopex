@@ -8,7 +8,6 @@ import {
 } from "../../../../hooks/react-query/useConversations";
 
 const UsersConversation = ({ conversationId, socket, otherUser }) => {
-  console.log(otherUser, "xpl");
   const chatContainerRef = useRef(null);
 
   const { user } = useSelector((state) => state.auth);
@@ -36,14 +35,6 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
     };
   }, [socket]);
 
-  useEffect(() => {
-    // Scroll to the bottom whenever arrivalMessage changes
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
-    }
-  }, [arrivalMessage]);
-
   const handleCreateMessage = async (event) => {
     event.preventDefault();
 
@@ -64,11 +55,6 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
     });
 
     mutate({ message, sender: user._id });
-    // Update arrivalMessage directly to trigger scrolling
-    setArrivalMessage((prev) => [
-      ...prev,
-      { sender: user, message, createdAt: new Date() },
-    ]);
     setMessage("");
   };
   return (
