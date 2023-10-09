@@ -155,7 +155,7 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
         )}
       </div>
 
-      <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
+      <div className="border-t-2 border-gray-200 px-4 pt-4 mb-10 sm:mb-0">
         <form className="relative flex" onSubmit={handleCreateMessage}>
           <input
             type="text"
