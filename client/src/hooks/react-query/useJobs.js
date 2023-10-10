@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -118,6 +119,7 @@ export const useApplyJob = (job, userId) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      toast.success("You applied for the job!");
     },
   });
 };

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import BrowseNavigationTab from "../Content/BrowseNavigationTabs/BrowseNavigationTab";
 import { useCategories } from "../../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../../hooks/react-query/useSkills";
-import { useForm, Controller } from "react-hook-form";
+import BrowseNavigationTab from "../Content/BrowseNavigationTabs/BrowseNavigationTab";
 
 const BrowseJobsHeader = ({
   changeValue,
@@ -13,18 +12,10 @@ const BrowseJobsHeader = ({
   selectedCategory,
   selectedSkill,
 }) => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm();
   const { data: categorys } = useCategories();
   const { data: Skills } = useSkills();
   const itCategory = categorys?.map((category) => category.name);
   const itSkills = Skills?.map((skill) => skill.name);
-
-  console.log(selectedSkill);
 
   const handleCheckboxChange = (skillName) => {
     const updatedSkill = selectedSkill.includes(skillName)

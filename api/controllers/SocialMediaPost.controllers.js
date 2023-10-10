@@ -94,8 +94,11 @@ const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     const thisuser = await UserModel.findById(req.userId);
-    if (post.userId.toString() === req.userId || thisuser.companies.includes(post.userId) ) {
-      response = await Post.findOneAndDelete({_id:req.params.id});
+    if (
+      post.userId.toString() === req.userId ||
+      thisuser.companies.includes(post.userId)
+    ) {
+      response = await Post.findOneAndDelete({ _id: req.params.id });
       res.status(200).send("Post has been deleted");
     } else {
       res.status(403).send("You are not authorized to delete this post");
@@ -112,7 +115,7 @@ const getUserPosts = async (req, res) => {
     const user = await UserModel.findById(userId);
 
     const company = await CompanyModel.findById(userId);
-  
+
     // Find the owner of the posts by ID
     let owner;
     let isUser = true;
@@ -133,12 +136,11 @@ const getUserPosts = async (req, res) => {
           { companyId: userId },
           { _id: { $in: sharedPostIds } },
         ],
-      }); 
-     
+      });
     } else {
       posts = await Post.find({ userId: userId });
     }
-     res.status(200).json(posts);
+    res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

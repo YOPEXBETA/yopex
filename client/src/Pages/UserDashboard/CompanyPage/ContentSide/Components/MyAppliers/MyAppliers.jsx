@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router-dom";
 
@@ -10,15 +10,15 @@ import ApplierCard from "../../../../../../Components/shared/cards/ApplierCard";
 import { useAcceptedAppliers } from "../../../../../../hooks/react-query/useJobs";
 
 const MyAppliersJob = () => {
+  const [searchAppliers, setSearchAppliers] = useState("");
+
   const { companyId } = useParams();
   const { data: jobData, isLoading: jobsLoading } = useJobById(companyId);
   const jobIds = jobData?.map((job) => job?._id);
   console.log(jobIds);
   const { data: appliersChallenges, isLoading: appliersLoading } =
     useAppliers(jobIds);
-  const { data: AcceptedAppliers, isLoading: AcceptedApplierLoading } =
-    useAcceptedAppliers(jobIds);
-  // const Accepted = AcceptedAppliers?.map((Accepted)=> Accepted.user)
+  const { data: AcceptedAppliers } = useAcceptedAppliers(jobIds);
   // console.log(Accepted);
 
   const currentTime = new Date();
@@ -44,6 +44,11 @@ const MyAppliersJob = () => {
 
   return (
     <div>
+      <input
+        type="text"
+        placeholder="Find applier"
+        onChange={(e) => setSearchAppliers(e.currentTarget.value)}
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4  py-5">
         {appliersChallenges?.length > 0 ? (
           jobData.map((job) =>
@@ -67,6 +72,11 @@ const MyAppliersJob = () => {
               .filter(
                 (applier) =>
                   Array.isArray(applier.jobs) && applier.jobs.includes(job._id)
+              )
+              .filter(
+                (applier) =>
+                  applier.firstname.toLowerCase().includes(searchAppliers) ||
+                  applier.lastname.toLowerCase().includes(searchAppliers)
               )
               .map((applier) => (
                 <ApplierCard key={applier._id} Applier={applier} jobId={job} />

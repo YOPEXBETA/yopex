@@ -11,13 +11,19 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDeleteJob } from "../../../../../../../hooks/react-query/useJobs";
 import { EditJobModal } from "../../../../../../../Components/shared/Modals/EditJobModal";
-import { DialogActions, DialogContentText, DialogTitle , Dialog , DialogContent , Button } from "@mui/material";
-
+import {
+  DialogActions,
+  DialogContentText,
+  DialogTitle,
+  Dialog,
+  DialogContent,
+  Button,
+} from "@mui/material";
 
 const PostMenuIcon = ({ post }) => {
-  const { user } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
 
-  const {mutate : deleteJob} = useDeleteJob();
+  const { mutate: deleteJob } = useDeleteJob();
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
 
   const handleDeleteClick = () => {
@@ -36,7 +42,7 @@ const PostMenuIcon = ({ post }) => {
   const handleCancelDelete = () => {
     // Close the confirmation dialog without deleting
     setConfirmationDialogOpen(false);
-  };  
+  };
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -105,7 +111,7 @@ const PostMenuIcon = ({ post }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleDeleteClick} >
+        <MenuItem onClick={handleDeleteClick}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
           </ListItemIcon>
@@ -119,7 +125,7 @@ const PostMenuIcon = ({ post }) => {
           Edit Job
         </MenuItem>
       </Menu>
-      <EditJobModal open={openEdit} handleClose={handleCloseEdit} job={post}  />
+      <EditJobModal open={openEdit} handleClose={handleCloseEdit} job={post} />
       {/* Confirmation Dialog */}
       {confirmationDialogOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -145,8 +151,6 @@ const PostMenuIcon = ({ post }) => {
           </div>
         </div>
       )}
-
-     
     </React.Fragment>
   );
 };

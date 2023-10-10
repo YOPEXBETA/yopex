@@ -1,21 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
 //import { useUserById } from "../../../hooks/react-query/useUsers";
-import { useApplyJob } from "../../../hooks/react-query/useJobs";
 import { formatDistance } from "date-fns";
+import { useApplyJob } from "../../../hooks/react-query/useJobs";
 
 const JobOfferModal = ({ open, handleClose, job }) => {
   // Global states |  @redux/toolkit
   const { user } = useSelector((state) => state.auth);
-  const applyJobMutation = useApplyJob(job, user?._id);
-
-  console.log(user);
-  console.log(job);
-  // Data fetching | react-query
+  const { mutate: applyToJob } = useApplyJob(job, user?._id);
 
   // React-hook-form
   const onclick = () => {
-    applyJobMutation.mutate();
+    applyToJob();
     handleClose();
   };
 
@@ -64,7 +60,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
               >
                 Cancel
               </button>
-              {user && !user.companies.includes(job.company._id) &&(
+              {user && !user.companies.includes(job.company._id) && (
                 <button
                   className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded"
                   onClick={onclick}

@@ -71,25 +71,24 @@ const SocialMediaPostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+SocialMediaPostSchema.pre(
+  "findOneAndDelete",
+  { document: false, query: true },
+  async function (next) {
+    try {
+      console.log("Middleware executed");
 
-SocialMediaPostSchema.pre('findOneAndDelete', { document: false, query: true }, async function (next) {
-  try {
-    console.log("Middleware executed");
-    
-    const query = this;
-    const postId = query._conditions._id;
+      const query = this;
+      const postId = query._conditions._id;
 
-    CommentModel.deleteMany({ postId: postId }).exec();
+      CommentModel.deleteMany({ postId: postId }).exec();
 
-  
-    next();
-  } catch (error) {
-    console.log("Middleware error");
-    next(error);
+      next();
+    } catch (error) {
+      console.log("Middleware error");
+      next(error);
+    }
   }
-});
+);
 
-module.exports = mongoose.model(
-  "SocialMediaPost",
-  SocialMediaPostSchema
-);;
+module.exports = mongoose.model("SocialMediaPost", SocialMediaPostSchema);
