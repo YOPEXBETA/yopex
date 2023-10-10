@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Logout from "@mui/icons-material/Logout";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import Settings from "@mui/icons-material/Settings";
 import AvatarProfile from "../../../../../../assets/images/AvatarProfile.jpg";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +27,8 @@ const ProfileMenu = () => {
     dispatch(logout());
     navigate("/");
   };
+
+
 
   // Use a ref to detect clicks outside of the menu
   const outsideClickRef = useRef(null);
@@ -126,6 +129,13 @@ const ProfileMenu = () => {
               <Settings className="w-6 h-6 text-gray-600" />
               <span className="text-gray-600">Settings</span>
             </a>
+           
+           <a 
+            className="px-3 py-2 hover:bg-gray-100 space-x-2 flex items-center cursor-pointer"
+           >
+             <DarkModeIcon className="w-6 h-6 text-gray-600" />
+            <span className="text-gray-600">Dark Mode</span>
+            </a> 
             <a
               href="/"
               onClick={handleLogout}
