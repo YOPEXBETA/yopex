@@ -123,7 +123,7 @@ const signIn = async (req, res) => {
       return res.status(400).json({ error: "Email does not exist!" });
 
     //check user status
-    if (user.status === "active") {
+    if (user.status !== "banned") {
       //check if the password is valid
       if (user) {
         const validated = await bcrypt.compareSync(
@@ -283,8 +283,8 @@ const signInWithGoogle = async (req, res) => {
   const { ...info } = user ? user._doc : company._doc;
 
   info.token = token;
-    console.log({info})
-    res.redirect("http://localhost:3000/feed/?token="+token);
+  console.log({ info });
+  res.redirect("http://localhost:3000/feed/?token=" + token);
   // return res.status(200).send(info);
 };
 module.exports = {

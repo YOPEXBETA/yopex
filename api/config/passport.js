@@ -6,7 +6,7 @@ const badgeSchema = require("../models/BadgeType.model");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 require("dotenv").config();
- 
+
 passport.use(
   new GoogleStrategy(
     {
@@ -14,9 +14,9 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "http://localhost:8000/auth/google/callback",
     },
-    
+
     async (accessToken, refreshToken, profile, cb) => {
-      console.log("hello")
+      console.log("hello");
       // Check if the user already exists in the userSchema collection
       const userExist = await userSchema.findOne({
         email: profile?._json?.email,
@@ -70,7 +70,7 @@ const googleAuthSignIn = async (
   cb
 ) => {
   //check user status
-  if (user.status === "active") {
+  if (user.status !== "banned") {
     return cb(null, user);
   } else {
     return cb(null, { error: "Your account is banned" });
