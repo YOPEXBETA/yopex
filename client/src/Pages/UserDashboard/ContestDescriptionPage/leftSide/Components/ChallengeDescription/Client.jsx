@@ -96,52 +96,54 @@ const ClientCard = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2">
-        {user.role === "user" &&
-        deadline !== "0 Days 0 Hours 0 Minutes" &&
-        !isSubmitted ? (
-          <div className="space-x-1 flex flex-col gap-4">
-            {isRegistered ? (
+      {new Date() < new Date(challenge.deadline) && (
+        <div className="flex flex-col gap-2">
+          {user.role === "user" &&
+          deadline !== "0 Days 0 Hours 0 Minutes" &&
+          !isSubmitted ? (
+            <div className="space-x-1 flex flex-col gap-4">
+              {isRegistered ? (
+                <button
+                  className={`px-5 py-3 text-white w-full bg-purple-500 h-16 hover:bg-green-600 rounded-full animate-pulse ${
+                    isloadingun ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={unRegisterMutate}
+                  disabled={isloadingun}
+                >
+                  {isloadingun ? <LoadingSpinner /> : "Unregister"}
+                </button>
+              ) : (
+                <div>
+                  {challenge.users.length < challenge.nbruser ? (
+                    <button
+                      onClick={handleregiser}
+                      className={`px-5 py-3 rounded-full bg-green-500 h-16 text-white w-full  ${
+                        isLoading ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? <LoadingSpinner /> : "Register"}
+                    </button>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
               <button
-                className={`px-5 py-3 text-white w-full bg-purple-500 h-16 hover:bg-green-600 rounded-full animate-pulse ${
-                  isloadingun ? "opacity-50 cursor-not-allowed" : ""
+                className={`px-5 py-3 rounded-full w-full h-16 ${
+                  isRegistered
+                    ? "bg-green-500 text-white"
+                    : "bg-gray-300 cursor-not-allowed pointer-events-none text-white truncate w-8"
                 }`}
-                onClick={unRegisterMutate}
-                disabled={isloadingun}
+                disabled={!isRegistered}
+                onClick={toggleModal}
               >
-                {isloadingun ? <LoadingSpinner /> : "Unregister"}
+                {isRegistered ? "Submit" : "Not Registered"}
               </button>
-            ) : (
-              <div>
-                {challenge.users.length < challenge.nbruser ? (
-                  <button
-                    onClick={handleregiser}
-                    className={`px-5 py-3 rounded-full bg-green-500 h-16 text-white w-full  ${
-                      isLoading ? "opacity-50 cursor-not-allowed" : ""
-                    }`}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? <LoadingSpinner /> : "Register"}
-                  </button>
-                ) : (
-                  ""
-                )}
-              </div>
-            )}
-            <button
-              className={`px-5 py-3 rounded-full w-full h-16 ${
-                isRegistered
-                  ? "bg-green-500 text-white"
-                  : "bg-gray-300 cursor-not-allowed pointer-events-none text-white truncate w-8"
-              }`}
-              disabled={!isRegistered}
-              onClick={toggleModal}
-            >
-              {isRegistered ? "Submit" : "Not Registered"}
-            </button>
-          </div>
-        ) : null}
-      </div>
+            </div>
+          ) : null}
+        </div>
+      )}
 
       <SubmitModal
         open={modalOpen}
