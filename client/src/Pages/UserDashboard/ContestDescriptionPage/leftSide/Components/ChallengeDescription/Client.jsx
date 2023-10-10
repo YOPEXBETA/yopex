@@ -97,8 +97,9 @@ const ClientCard = () => {
       </div>
 
       <div className="flex flex-col gap-2">
+        {/* {console.log("DATE", )} */}
         {user.role === "user" &&
-        new Date() < new Date(challenge.deadline) &&
+        deadline !== "0 Days 0 Hours 0 Minutes" &&
         !isSubmitted ? (
           <div className="space-x-1 flex flex-col gap-4">
             {isRegistered ? (
