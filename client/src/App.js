@@ -23,7 +23,7 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <Toaster />
-        <ReactQueryDevtools />
+        {/*<ReactQueryDevtools />*/}
         <ScrollTop>
           <Routes />
         </ScrollTop>
