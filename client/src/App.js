@@ -21,16 +21,8 @@ const App = () => {
   }, []);
   return (
     <>
-      <ThemeCustomization>
-        <QueryClientProvider client={queryClient}>
-          <Toaster />
-          <ReactQueryDevtools />
-          <ScrollTop>
-            <Routes />
-          </ScrollTop>
-        </QueryClientProvider>
-      </ThemeCustomization>
       <QueryClientProvider client={queryClient}>
+        <Toaster />
         <ReactQueryDevtools />
         <ScrollTop>
           <Routes />
