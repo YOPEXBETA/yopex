@@ -2,7 +2,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ScrollTop from "./Components/ScrollTop";
 import Routes from "./routes/index";
-import ThemeCustomization from "./themes";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 
@@ -21,15 +20,23 @@ const App = () => {
     }
   }, []);
   return (
-    <ThemeCustomization>
+    <>
+      <ThemeCustomization>
+        <QueryClientProvider client={queryClient}>
+          <Toaster />
+          <ReactQueryDevtools />
+          <ScrollTop>
+            <Routes />
+          </ScrollTop>
+        </QueryClientProvider>
+      </ThemeCustomization>
       <QueryClientProvider client={queryClient}>
-        <Toaster />
         <ReactQueryDevtools />
         <ScrollTop>
           <Routes />
         </ScrollTop>
       </QueryClientProvider>
-    </ThemeCustomization>
+    </>
   );
 };
 

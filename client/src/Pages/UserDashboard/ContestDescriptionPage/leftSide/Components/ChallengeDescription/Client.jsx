@@ -116,7 +116,7 @@ const ClientCard = () => {
                 {challenge.users.length < challenge.nbruser ? (
                   <button
                     onClick={handleregiser}
-                    className={`px-5 py-3 rounded-full bg-green-500 h-16 text-white w-full animate-bounce ${
+                    className={`px-5 py-3 rounded-full bg-green-500 h-16 text-white w-full  ${
                       isLoading ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                     disabled={isLoading}
@@ -131,7 +131,7 @@ const ClientCard = () => {
             <button
               className={`px-5 py-3 rounded-full w-full h-16 ${
                 isRegistered
-                  ? "bg-green-500 text-white animate-bounce"
+                  ? "bg-green-500 text-white"
                   : "bg-gray-300 cursor-not-allowed pointer-events-none text-white truncate w-8"
               }`}
               disabled={!isRegistered}

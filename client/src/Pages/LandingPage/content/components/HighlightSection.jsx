@@ -1,16 +1,14 @@
 import React from "react";
-import { getAllUsers } from "../../../../redux/actions/UserAction";
 import { useUsers } from "../../../../hooks/react-query/useUsers";
-import { useCompanies } from "../../../../hooks/react-query/useCompany";
+import { useAdminCompanies } from "../../../../hooks/react-query/useCompany";
+import { useJobs } from "../../../../hooks/react-query/useJobs";
+import { useFindChallenges } from "../../../../hooks/react-query/useChallenges";
 
 const HighlightSection = () => {
-  
-const { data} = useUsers();
-const { dataCompanies} = useCompanies();
-console.log(dataCompanies);
-const filteredUsers = data?.filter(
-  (user) => user.email !== "admin@admin.com"
-);
+  const { data: users } = useUsers();
+  const { data: jobs } = useJobs();
+  const { data: companies } = useAdminCompanies();
+  const { data : challenges} = useFindChallenges();
  
   return (
     <div>
@@ -20,7 +18,7 @@ const filteredUsers = data?.filter(
             <div className="p-4 flex flex-col items-center gap-2">
               <div>
                 <h4 className=" text-5xl font-semibold mb-1 text-green-500">
-                  {filteredUsers?.length}
+                  {users?.length}
                 </h4>
                 <p className="text-2xl font-medium">users</p>
               </div>
@@ -28,25 +26,27 @@ const filteredUsers = data?.filter(
             <div className="p-4 flex flex-col items-center gap-2">
               <div>
                 <h4 className="text-5xl font-semibold mb-1 text-green-500">
-                  50M
+                  {" "}
+                  {companies?.length}
                 </h4>
                 <p className="text-2xl font-medium">Companies</p>
               </div>
             </div>
+
             <div className="p-4 flex flex-col items-center gap-2">
               <div>
-                <h4 className="text-5xl font-semibold mb-1 text-green-500">
-                  60k
+                <h4 className="text-5xl font-semibold mb-1 text-green-500 ">
+                  {jobs?.length}
                 </h4>
-                <p className="text-2xl font-medium">Challenges</p>
+                <p className="text-2xl font-medium">Jobs</p>
               </div>
             </div>
             <div className="p-4 flex flex-col items-center gap-2">
               <div>
                 <h4 className="text-5xl font-semibold mb-1 text-green-500 ">
-                  60k
+                  {challenges?.length}
                 </h4>
-                <p className="text-2xl font-medium">Jobs</p>
+                <p className="text-2xl font-medium">Challenges</p>
               </div>
             </div>
           </div>

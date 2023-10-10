@@ -31,7 +31,7 @@ const ParticipantRow = ({ user, index, challenge }) => {
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
-  const canedit = user.user._id===currentUser._id;
+  const canedit = user.user._id === currentUser._id;
   return (
     <tr key={user._id} className="hover:bg-gray-50 bg-white">
       <td className=" py-4 px-4 font-bold text-md">{index + 1} </td>
@@ -45,7 +45,7 @@ const ParticipantRow = ({ user, index, challenge }) => {
               <img
                 alt={`${user?.user?.firstname} ${user?.user?.lastname}`}
                 src={user?.user?.picturePath}
-                className="w-10 h-10 rounded-full "
+                className="w-10 h-10 rounded-full"
               />
             </div>
             <div className="flex items-center gap-1">
@@ -60,7 +60,11 @@ const ParticipantRow = ({ user, index, challenge }) => {
         {formatDate(user?.registrationDate)}
       </td>
       <td className="text-sm text-right py-4 px-4">
-        <div onClick={isOwner || user.user._id===currentUser._id ? toggleOpen : null}>
+        <div
+          onClick={
+            isOwner || user.user._id === currentUser._id ? toggleOpen : null
+          }
+        >
           {formatDate(user?.submissionDate)}
         </div>
       </td>
@@ -85,7 +89,6 @@ const ParticipantRow = ({ user, index, challenge }) => {
             open={editisOpen}
             handleClose={toggleedit}
             participant={user}
-
           />
         </>
       )}

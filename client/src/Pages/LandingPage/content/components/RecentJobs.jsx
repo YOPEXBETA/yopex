@@ -23,17 +23,15 @@ const RecentJobs = () => {
       <div className="pb-8">
         <p className="text-4xl font-bold text-center text-black">Recent Jobs</p>
       </div>
-      <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 px-12 sm:px-0 pb-16">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {jobsToShow?.map((job) => (
-          <div
-            key={job._id}
-            className="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1"
-          >
-            <JobCard job={job} />
+          <div key={job._id}>
             <JobCard job={job} />
           </div>
         ))}
       </div>
+
       <div className="mt-4 flex justify-center overflow-x-auto">
         {Array?.from(
           { length: Math.ceil(jobs?.length / jobsPerPage) },

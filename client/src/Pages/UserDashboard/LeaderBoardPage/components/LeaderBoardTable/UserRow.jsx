@@ -17,13 +17,13 @@ const UserRow = ({ user }) => {
                 <img
                   alt="picture"
                   src={user.picturePath}
-                  className="w-10 h-10 rounded-full object-cover border-2"
+                  className="hidden lg:block md:block w-10 h-10 rounded-full object-cover border-2"
                 />
               ) : (
                 <img
                   alt="default"
                   src={AvatarProfile}
-                  className="w-10 h-10 rounded-full object-cover border-2"
+                  className="hidden lg:block md:block w-10 h-10 rounded-full object-cover border-2"
                 />
               )}
             </div>

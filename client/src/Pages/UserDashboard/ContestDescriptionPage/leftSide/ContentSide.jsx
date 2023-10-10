@@ -3,12 +3,10 @@ import MTable from "./Components/ParticipantsTableSection/ParticipantsTable";
 import ChooseWinner from "./Components/Winner/winner";
 import CompanyCard from "./Components/ChallengeDescription/Client";
 import TasksDescription from "./Components/ChallengeDescription/TaskDescription";
-import Conversation from "../../ChatPage/components/Conversation";
-import ContestConversation from "../../ChatPage/components/ContestConversation";
 import { useParams } from "react-router-dom";
-import useSocket from "../../../../hooks/useSocket";
 import { useSelector } from "react-redux";
 import { useGetContestConversation } from "../../../../hooks/react-query/useContestConversation";
+import ChallengeConversation from "./Components/ChallengeConversation";
 
 const ContentSide = ({ value, changeValue }) => {
   const { id: challengeId } = useParams();
@@ -24,7 +22,7 @@ const ContentSide = ({ value, changeValue }) => {
               <div className="lg:col-span-8 md:col-span-8 sm:col-span-12 col-span-12 lg:pr-6">
                 <TasksDescription />
               </div>
-              <div className="hidden lg:block md:block lg:col-span-4 md:col-span-4 sm:col-span-12 col-span-12 xl:pl-16">
+              <div className="lg:block md:block lg:col-span-4 md:col-span-4 sm:col-span-12 col-span-12 xl:pl-16 mb-20">
                 <CompanyCard />
               </div>
             </div>
@@ -41,7 +39,7 @@ const ContentSide = ({ value, changeValue }) => {
           )}
           {value === 3 && (
             <div className="lg:col-span-12 md:col-span-12">
-              <ContestConversation
+              <ChallengeConversation
                 conversationId={challengeId}
                 id={conversation.id}
               />

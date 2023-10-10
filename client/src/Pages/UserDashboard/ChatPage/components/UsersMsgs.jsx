@@ -28,7 +28,6 @@ const UsersMsgs = ({ onConversationSelect }) => {
                 className=" hover:bg-gray-100 p-4
                 sm :p-2 flex flex-col gap-2 w-full"
               >
-                
                 <div className="flex gap-4 items-center">
                   <img
                     alt="image"

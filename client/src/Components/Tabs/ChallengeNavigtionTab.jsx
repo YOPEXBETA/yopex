@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import getDeadlineDifference from "../../utils/deadlineModif";
 import { useChallengeById } from "../../hooks/react-query/useChallenges";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
   const { id: challengeId } = useParams();
@@ -16,12 +16,19 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
     ? true
     : false;
 
+  const getDeadlineDifference = (deadline) => {
+      const now = moment();
+      const diff = moment(deadline).diff(now);
+      
+      if (diff < 0) return "0 Days 0 Hours 0 Minutes";
+  };
   const handleProgress = (card) => {
+    console.log(getDeadlineDifference(card?.deadline));
     if (getDeadlineDifference(card?.deadline) === "0 Days 0 Hours 0 Minutes")
       return true;
     return false;
   };
-
+  
   return (
     <div className="w-full">
       <div className="border-b border-divider">

@@ -9,7 +9,6 @@ import {
   useUserSubmission,
 } from "../../../../hooks/react-query/useChallenges";
 import getDeadlineDifference from "../../../../utils/deadlineModif";
-import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import ChallengeNavigationTab from "../../../../Components/Tabs/ChallengeNavigtionTab";
 import { useJoinContestConversation } from "../../../../hooks/react-query/useContestConversation";
 
@@ -33,7 +32,7 @@ const Banner = ({ changeValue, value }) => {
   const { mutate: join } = useJoinContestConversation();
 
   useEffect(() => {
-    const submitted = submissions
+    const submitted = submissions;
 
     if (submitted) setIsSubmitted(true);
   }, [challenge._id, submissions]);
@@ -58,11 +57,14 @@ const Banner = ({ changeValue, value }) => {
   };
 
   return (
-    <div className="pt-8 px-6 lg:px-8 xl:px-32 flex flex-col justify-end bg-black">
-      <div className="space-y-8 items-start" key={challenge._id}>
-        <div className="grid grid-cols-12 mb-11">
-          <div className="lg:col-span-8 md:col-span-8 sm:col-span-8 col-span-12">
-            <h3 className="text-2xl text-white truncate w-96">
+    <div className="pt-8 px-4 sm:px-6 lg:px-8 xl:px-32 flex flex-col justify-end bg-black">
+      <div
+        className="space-y-4 sm:space-y-6 lg:space-y-8 items-start"
+        key={challenge._id}
+      >
+        <div className="grid grid-cols-12 mb-4 sm:mb-6 lg:mb-11">
+          <div className="lg:col-span-8 md:col-span-8 sm:col-span-12 col-span-12">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl text-white truncate">
               {challenge.title}
             </h3>
           </div>
