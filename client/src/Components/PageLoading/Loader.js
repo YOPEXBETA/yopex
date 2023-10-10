@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import yopexLogo from "./../../../src/images/LogoYopex.png";
 import LoadingProgress from "./LoadingProgress";
+import { useRedirect } from "../../utils/useRedirect";
 
 const Loader = ({ backgroundColor, delay }) => {
   const [loadingProgress, setLoadingProgress] = useState(0);
+  useRedirect();
 
   useEffect(() => {
     const interval = setInterval(() => {

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 // project import
 import Loader from "./Loader";
+import { useRedirect } from "../../utils/useRedirect";
 
 // ==============================|| LOADABLE - LAZY LOADING ||============================== //
 
