@@ -113,8 +113,6 @@ const signUp = async (req, res) => {
 
 // ==============================|| Login ||============================== //
 
-// ==============================|| Login ||============================== //
-
 const signIn = async (req, res) => {
   try {
     //check if the email exist
@@ -125,7 +123,7 @@ const signIn = async (req, res) => {
       return res.status(400).json({ error: "Email does not exist!" });
 
     //check user status
-    if (user.status !== "banned") {
+    if (user.status === "active") {
       //check if the password is valid
       if (user) {
         const validated = await bcrypt.compareSync(

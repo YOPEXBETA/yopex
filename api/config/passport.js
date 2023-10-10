@@ -70,7 +70,7 @@ const googleAuthSignIn = async (
   cb
 ) => {
   //check user status
-  if (user.isActive) {
+  if (user.status === "active") {
     return cb(null, user);
   } else {
     return cb(null, { error: "Your account is banned" });
