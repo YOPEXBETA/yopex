@@ -98,7 +98,7 @@ const ClientCard = () => {
 
       <div className="flex flex-col gap-2">
         {user.role === "user" &&
-        deadline !== "0 Days 0 Hours 0 Minutes" &&
+        new Date() < new Date(challenge.deadline) &&
         !isSubmitted ? (
           <div className="space-x-1 flex flex-col gap-4">
             {isRegistered ? (
@@ -128,17 +128,6 @@ const ClientCard = () => {
                 )}
               </div>
             )}
-            <button
-              className={`px-5 py-3 rounded-full w-full h-16 ${
-                isRegistered
-                  ? "bg-green-500 text-white"
-                  : "bg-gray-300 cursor-not-allowed pointer-events-none text-white truncate w-8"
-              }`}
-              disabled={!isRegistered}
-              onClick={toggleModal}
-            >
-              {isRegistered ? "Submit" : "Not Registered"}
-            </button>
           </div>
         ) : null}
       </div>
