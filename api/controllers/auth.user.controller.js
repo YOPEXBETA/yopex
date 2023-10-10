@@ -283,8 +283,14 @@ const signInWithGoogle = async (req, res) => {
   const { ...info } = user ? user._doc : company._doc;
 
   info.token = token;
-  console.log({ info });
-  res.redirect("https://yopex.tabaani.co/feed/?token=" + token);
+  // console.log({ info });
+
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/feed/?token="
+      : "https://yopex.tabaani.co/feed/?token=";
+
+  res.redirect(url + token);
   // return res.status(200).send(info);
 };
 module.exports = {
