@@ -12,7 +12,6 @@ import uploadFile from "../../../utils/uploadFile";
 
 export const EditCompanyModal = ({ open, handleClose, company }) => {
   const { mutate } = useEditCompany(company._id);
-  console.log(company);
 
   const [uploadProgress, setUploadProgress] = useState(0);
   const { user } = useSelector((state) => state.auth);
@@ -20,32 +19,30 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
     defaultValues: {
       companyName: company.companyName,
-      companyDescription : company.companyDescription,
+      companyDescription: company.companyDescription,
       files: [],
     },
   });
   const uploadedFile = watch("files");
- 
 
   const onSubmit = async (data) => {
-    console.log(data);
     if (data.files.length > 0) {
-      
       const file = data.files[0];
       const companyLogo = await uploadFile(file, setUploadProgress);
-      
-      return mutate({ 
+
+      return mutate({
         companyName: data.companyName,
         companyDescription: data.companyDescription,
-        companyLogo, 
+        companyLogo,
       });
     }
 
-        mutate({ 
-      companyData : { 
-        companyName : data.companyName,
-        companyDescription : data.companyDescription,}
-        });
+    mutate({
+      companyData: {
+        companyName: data.companyName,
+        companyDescription: data.companyDescription,
+      },
+    });
 
     setUploadProgress(0);
     handleClose();

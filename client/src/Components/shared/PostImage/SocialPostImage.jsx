@@ -8,7 +8,7 @@ const SocialPostImage = ({ item, height, width, openModal, type }) => {
           <img
             alt="photo"
             src={item}
-            className="w-screen xl:w-[60rem] h-auto max-h-[456px] object-cover"
+            className="w-screen xl:w-[60rem] h-auto object-cover"
           />
         ) : (
           <img

@@ -13,8 +13,6 @@ const JobCard = ({ job }) => {
   const { user } = useSelector((state) => state.auth);
   const handleClose = () => setIsOpen(false);
 
-  console.log(job?.company);
-
   return (
     <div>
       <div
