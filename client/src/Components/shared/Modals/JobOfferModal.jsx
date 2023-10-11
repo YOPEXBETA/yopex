@@ -22,7 +22,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
     >
       <div className="flex justify-center items-center min-h-screen">
         <div className="bg-transparent absolute inset-0 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-sm">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-lg">
             <div className="p-8">
               <div className="flex items-center gap-4">
                 <img
