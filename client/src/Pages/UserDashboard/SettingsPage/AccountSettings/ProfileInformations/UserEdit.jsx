@@ -1,19 +1,3 @@
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import {
-  Avatar,
-  Button,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextareaAutosize,
-} from "@mui/material";
-import Badge from "@mui/material/Badge";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import { green } from "@mui/material/colors";
-import { styled } from "@mui/material/styles";
-import { Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -23,27 +7,7 @@ import { edit, reset } from "../../../../../redux/auth/authSlice";
 import uploadFile from "../../../../../utils/uploadFile";
 import AlertContainer from "../../../../../Components/alerts";
 import AlertSuccess from "../../../../../Components/successalert";
-
-const CustomIconButton = styled(IconButton)(({ theme }) => ({
-  width: 30,
-  height: 30,
-}));
-const CustomAvatar = styled(Avatar)(({ theme }) => ({
-  width: 80,
-  height: 80,
-  border: `2px solid ${theme.palette.background.paper}`,
-}));
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 
 const formatDate = (date) => {
   const currentDate = new Date(date);
@@ -98,11 +62,19 @@ const UserEdit = () => {
       >
         <div className="relative">
           <div className="relative w-24 h-24">
-            <img
-              className="rounded-full object-cover w-24 h-24"
-              src={user?.picturePath || ""}
-              alt=""
-            />
+            {user?.picturePath ? (
+              <img
+                alt="picture"
+                src={user?.picturePath}
+                className="rounded-full object-cover w-24 h-24 border-2"
+              />
+            ) : (
+              <img
+                alt="default"
+                src={AvatarProfile}
+                className="rounded-full object-cover w-24 h-24 border-2"
+              />
+            )}
             <label
               htmlFor="fileInput"
               className="absolute bottom-0 right-0 p-2 bg-green-500 rounded-full text-white cursor-pointer"
@@ -113,7 +85,7 @@ const UserEdit = () => {
                 accept="image/*"
                 type="file"
                 {...register("file")}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-2"
               />
               <FaCamera className="w-4 h-4" />
             </label>

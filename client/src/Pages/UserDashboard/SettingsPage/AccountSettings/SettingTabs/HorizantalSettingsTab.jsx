@@ -34,7 +34,7 @@ TabPanel.propTypes = {
 const HorizantalSettingsTab = ({ changeValue, value }) => {
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider", color: "green" }}>
         <Tabs
           value={value}
           onChange={changeValue}

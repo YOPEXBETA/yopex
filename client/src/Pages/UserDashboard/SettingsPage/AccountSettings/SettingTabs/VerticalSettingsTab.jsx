@@ -40,7 +40,7 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
         sx={{
           borderRight: 1,
           borderColor: "divider",
-          height: "91vh",
+          height: "100vh",
           paddingTop: "2rem",
         }}
       >
