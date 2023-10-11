@@ -5,8 +5,6 @@ import { useCategories } from "../../hooks/react-query/useCategories";
 import { BsThreeDots } from "react-icons/bs"; // Import the 3 dots icon
 import CategoriesModal from "../shared/Modals/CategoriesModal";
 
-const categoriesToShow = 4; // Number of categories to show initially
-
 export default function ScrollableTabs() {
   const { category: selectedCategory } = useSelector((state) => state.global);
   const dispatch = useDispatch();
@@ -47,11 +45,11 @@ export default function ScrollableTabs() {
                 >
                   All
                 </button>
-                {categories.slice(0, categoriesToShow).map((tab) => (
+                {categories.slice(0, 3).map((tab) => (
                   <button
                     key={tab._id}
                     onClick={() => handleCategoryClick(tab.name)}
-                    className={`px-4 py-2 text-sm font-medium ${
+                    className={`px-4 py-2 text-sm font-medium truncate w-48 ${
                       selectedCategory === tab.name
                         ? "text-green-600 border-green-500"
                         : "text-gray-500"
