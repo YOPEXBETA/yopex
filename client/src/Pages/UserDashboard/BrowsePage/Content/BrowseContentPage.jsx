@@ -14,7 +14,6 @@ const BrowseContentPage = ({
 }) => {
   const [minAmount, setMinAmount] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
-  console.log(selectedCategory);
 
   return (
     <div className=" space-y-6">

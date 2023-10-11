@@ -9,11 +9,6 @@ import SearchbarFilter from "./SearchbarFilter";
 const ContentSide = () => {
   const [query, setQuery] = useState("");
   const { data } = useUsers();
-  console.log(data);
-
-  useEffect(() => {
-    console.log(query);
-  }, [query]);
 
   return (
     <div>

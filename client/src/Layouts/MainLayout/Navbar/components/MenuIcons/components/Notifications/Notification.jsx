@@ -87,7 +87,6 @@ const NotificationBell = () => {
             onClick={() => {
               handleClick();
               mutate();
-              console.log("click");
             }}
             className="flex items-center justify-center rounded-full  w-8 h-8 text-gray-600"
           >

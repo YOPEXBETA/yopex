@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
-import { useEditSubmission, useSubmitToChallenge, useUserSubmission } from "../../../hooks/react-query/useChallenges";
+import {
+  useEditSubmission,
+  useSubmitToChallenge,
+  useUserSubmission,
+} from "../../../hooks/react-query/useChallenges";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../../../config/firebase";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
-const EditSubmitModal = ({ open, handleClose,participant }) => {
+const EditSubmitModal = ({ open, handleClose, participant }) => {
   const [filesSelected, setFilesSelected] = useState([]);
   const [SubmissionTitle, setSubmissionTitle] = useState("");
   const [SubmissionDescription, setSubmissionDescription] = useState("");
@@ -18,28 +22,23 @@ const EditSubmitModal = ({ open, handleClose,participant }) => {
   const [links, setLinks] = useState([]);
   const { id } = useParams();
   const { data: submissions } = useUserSubmission(id, participant);
-  console.log(submissions);
 
   useEffect(() => {
     if (submissions) {
-        setSubmissionTitle(submissions.title);
-        setSubmissionDescription(submissions.description);
-        setFilesPaths(submissions.filesPaths);
-        setLinks(submissions.links);
-        setFilesSelected(submissions.filesPaths);
-        setPlatform(submissions.links.platform);
+      setSubmissionTitle(submissions.title);
+      setSubmissionDescription(submissions.description);
+      setFilesPaths(submissions.filesPaths);
+      setLinks(submissions.links);
+      setFilesSelected(submissions.filesPaths);
+      setPlatform(submissions.links.platform);
     }
-    }, [submissions]);
-
-
+  }, [submissions]);
 
   const handleAddLink = () => {
     setLinks([...links, { platform, link }]);
     setPlatform("");
     setLink("");
   };
-
-  
 
   const { user } = useSelector((state) => state.auth);
   const { mutate, isSuccess, isLoading } = useEditSubmission(id, participant);
@@ -72,7 +71,6 @@ const EditSubmitModal = ({ open, handleClose,participant }) => {
     });
 
     if (isSuccess) {
-      
       handleClose();
     }
   };
@@ -93,9 +91,7 @@ const EditSubmitModal = ({ open, handleClose,participant }) => {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
-      if (
-        file.size <= maxSize
-      ) {
+      if (file.size <= maxSize) {
         validFiles.push(file);
         setFilesSelected([...filesSelected, file]);
       } else {
@@ -193,16 +189,12 @@ const EditSubmitModal = ({ open, handleClose,participant }) => {
                 );
               })}
             {filesSelected.length > 0 &&
-              filesSelected.map((file,index) => {
+              filesSelected.map((file, index) => {
                 return (
                   <p key={index}>
                     {" "}
-                    <a
-                      href={file}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {"file "+index}
+                    <a href={file} target="_blank" rel="noopener noreferrer">
+                      {"file " + index}
                     </a>
                   </p>
                 );
@@ -219,7 +211,6 @@ const EditSubmitModal = ({ open, handleClose,participant }) => {
                 type="submit"
                 className="px-4 py-2  text-white rounded-md bg-black"
                 onClick={handleSubmit}
-                
               >
                 Edit Submission
               </button>

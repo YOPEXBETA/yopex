@@ -7,7 +7,7 @@ const LeaderbordTable = ({ data, query }) => {
   const [rowsPerPage, setRowsPerPage] = useState(8);
 
   const [rankedUsers, setRankedUsers] = useState([]);
-  console.log("rankedUsers", rankedUsers);
+  //
 
   useEffect(() => {
     if (!data) return;
@@ -18,7 +18,6 @@ const LeaderbordTable = ({ data, query }) => {
         rank: index + 1,
       }));
     setRankedUsers(res);
-    console.log(res);
   }, [data]);
 
   const handleChangePage = (newPage) => {

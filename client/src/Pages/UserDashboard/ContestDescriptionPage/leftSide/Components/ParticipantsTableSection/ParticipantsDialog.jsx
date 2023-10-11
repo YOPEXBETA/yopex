@@ -18,9 +18,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const ParticipantsDialog = ({ open, toggleOpen, participant }) => {
   const { id: challengeId } = useParams();
-  console.log("participant", participant);
   const { data: submissions } = useUserSubmission(challengeId, participant);
-  console.log("submissions", submissions);
   return (
     <div>
       <Dialog
@@ -53,7 +51,9 @@ const ParticipantsDialog = ({ open, toggleOpen, participant }) => {
                   <Typography component="div" variant="h4">
                     User :{" "}
                     <Link to={`/profile/${participant.user._id}`}>
-                      {participant.user.firstname +" "+ participant.user.lastname}
+                      {participant.user.firstname +
+                        " " +
+                        participant.user.lastname}
                     </Link>
                   </Typography>
                 }
@@ -119,36 +119,34 @@ const ParticipantsDialog = ({ open, toggleOpen, participant }) => {
                     </CardContent>
                   </>
                 )}
-                {submissions[0].links &&
-                submissions[0].links.length > 0 && (
-                  <>
-                    <Divider />
-                    <CardHeader
-                      title={
-                        <Typography component="div" variant="h4">
-                          Links Attached
+              {submissions[0].links && submissions[0].links.length > 0 && (
+                <>
+                  <Divider />
+                  <CardHeader
+                    title={
+                      <Typography component="div" variant="h4">
+                        Links Attached
+                      </Typography>
+                    }
+                  />
+                  <Divider />
+                  <CardContent>
+                    <Stack spacing={2}>
+                      {submissions[0].links.map((item, i) => (
+                        <Typography key={i} variant="body1">
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {item.platform + " link"}
+                          </a>
                         </Typography>
-                      }
-                    />
-                    <Divider />
-                    <CardContent>
-                      <Stack spacing={2}>
-                        {submissions[0].links.map((item, i) => (
-                          <Typography key={i} variant="body1">
-                            
-                            <a
-                              href={item.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {item.platform+" link"}
-                            </a>
-                          </Typography>
-                        ))}
-                      </Stack>
-                    </CardContent>
-                  </>
-                )}
+                      ))}
+                    </Stack>
+                  </CardContent>
+                </>
+              )}
             </Card>
           )}
         </List>

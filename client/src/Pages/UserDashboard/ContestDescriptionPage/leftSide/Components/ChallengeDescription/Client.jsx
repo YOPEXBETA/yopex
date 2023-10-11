@@ -49,7 +49,6 @@ const ClientCard = () => {
 
   useEffect(() => {
     if (!data) return;
-    console.log("data", data.challenges);
     const registered = data.challenges.find(
       (item) => item._id === challenge._id
     );

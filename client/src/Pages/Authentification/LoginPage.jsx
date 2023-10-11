@@ -7,7 +7,7 @@ const LoginPage = () => {
       <div className="hidden lg:block md:block col-span-6 md:col-span-1 h-screen sm:hidden">
         <img
           src="https://source.unsplash.com/4wOkqiXNP7M"
-          className=" h-screen object-cover"
+          className=" h-[100vh] object-cover"
           alt="image"
         />
       </div>

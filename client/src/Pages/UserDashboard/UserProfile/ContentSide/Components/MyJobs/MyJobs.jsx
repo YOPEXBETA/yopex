@@ -12,24 +12,7 @@ const MyJobs = () => {
   // const { user } = useSelector((state) => state.auth);
   const { userId } = useParams();
   const { data: userProfile, isLoading } = useUserById(userId);
-  // const [open, setOpen] = useState(false);
 
-  // const toggleOpen = () => setOpen((prev) => !prev);
-
-  // const { data, isLoading } = useUserJobs(user._id);
-  // const sendRequest = async () => {
-  //   const res = await axios
-  //     .get(`https://yopex-api.tabaani.co/job/user/${id}`)
-  //     .catch((err) => console.log(err));
-  //   const data = await res.data;
-  //   return data;
-  // };
-
-  // useEffect(() => {
-  //   sendRequest()
-  //     .then((data) => setCompany(data.company))
-  //     .finally(() => setIsLoading(false));
-  // }, []);
   const noJobsMessageStyle = {
     display: "flex",
     alignItems: "center",

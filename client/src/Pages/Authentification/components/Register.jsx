@@ -41,7 +41,10 @@ const Register = () => {
 
   return (
     <div>
-      <form className="w-[35rem] h-full" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="md:w-[35rem] w-96 h-full"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         {error && <AlertContainer error={error} />}
 
         <div className="grid grid-cols-1 mb-4">

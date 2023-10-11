@@ -39,11 +39,9 @@ export default function NavbarSearchDropDown() {
                 className="p-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-100"
                 onClick={() => {
                   if (option.firstname && option.lastname) {
-                    console.log("Navigating to user profile:", option);
                     navigate(`/profile/${option._id}`);
                     setOpen(false);
                   } else {
-                    console.log("Navigating to company profile:", option);
                     navigate(`/company/${option._id}`);
                     setOpen(false);
                   }

@@ -7,7 +7,7 @@ const RegisterPage = () => {
       <div className="hidden lg:block md:block col-span-6 md:col-span-1 h-screen sm:hidden">
         <img
           src="https://source.unsplash.com/4wOkqiXNP7M"
-          className=" h-full object-cover"
+          className=" h-screen object-cover"
         />
       </div>
 
