@@ -1,36 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { formatDistance } from "date-fns";
 import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
 
 const SocialPostModal = ({ closeModal, post }) => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageCount = post.postPicturePath.length;
+
+  const renderPaginationDots = () => {
+    const dots = [];
+    for (let i = 0; i < pageCount; i++) {
+      dots.push(
+        <button
+          key={i}
+          onClick={() => setCurrentPage(i)}
+          className={`w-3 h-3 rounded-full ${
+            i === currentPage ? "bg-green-500" : "bg-gray-300"
+          } mx-1 focus:outline-none`}
+        ></button>
+      );
+    }
+    return dots;
+  };
+
   return (
     <div className="min-h-screen flex z-50 justify-center items-center bg-black bg-opacity-25 w-full">
-      <div className="max-w-5xl w-full bg-white rounded-lg shadow-lg h-[35rem]">
+      <div className="max-w-full md:max-w-5xl w-full bg-white rounded-lg shadow-lg md:h-[35rem]">
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Image */}
           <div className="col-span-1 md:col-span-1">
-            <img
-              src={post.postPicturePath}
-              alt="Profile"
-              className="w-full h-[35rem] shadow-lg object-cover"
-            />
+            <div className="mx-auto relative">
+              <img
+                src={post.postPicturePath[currentPage]}
+                alt="Profile"
+                className="w-full h-[35rem] md:h-[35rem] shadow-lg object-cover"
+              />
+              <div className="flex justify-center mt-3 absolute bottom-4 left-0 w-full z-10">
+                {renderPaginationDots()}
+              </div>
+            </div>
           </div>
           {/* Description */}
-          <div className="col-span-1 md:col-span-1 p-8">
-            <div className="flex items-start justify-between  mb-8">
+          <div className="col-span-1 md:col-span-1 p-4 md:p-8">
+            <div className="flex flex-col md:flex-row items-start justify-between mb-4 md:mb-8">
               <div className="flex items-center gap-3">
                 {post.userPicturePath ? (
                   <img
                     alt="post"
                     src={post.userPicturePath}
-                    className="w-11 h-11 rounded-full object-cover bg-white border-2"
+                    className="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover bg-white border-2"
                   />
                 ) : (
                   <img
                     alt="default"
                     src={AvatarProfile}
-                    className="w-11 h-11 rounded-full object-cover bg-white border-2"
+                    className="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover bg-white border-2"
                   />
                 )}
                 <div>
@@ -43,13 +67,13 @@ const SocialPostModal = ({ closeModal, post }) => {
                     }
                     style={{ textDecoration: "none", color: "#000000" }}
                   >
-                    <p className="text-md font-medium ">
+                    <p className="text-sm md:text-md font-medium">
                       {post.companyName !== undefined
                         ? `${post?.companyName}`
                         : `${post?.firstname} ${post?.lastname}`}
                     </p>
                   </Link>
-                  <p className=" text-[14px]  text-gray-500">
+                  <p className="text-[12px] md:text-[14px] text-gray-500">
                     {formatDistance(new Date(post.createdAt), new Date(), {
                       addSuffix: true,
                     })}
@@ -59,7 +83,7 @@ const SocialPostModal = ({ closeModal, post }) => {
               <button
                 type="button"
                 onClick={closeModal}
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-hide="defaultModal"
               >
                 <svg
@@ -79,7 +103,9 @@ const SocialPostModal = ({ closeModal, post }) => {
                 </svg>
               </button>
             </div>
-            <p className="text-gray-700 text-md">{post.description}</p>
+            <p className="text-gray-700 text-sm md:text-md">
+              {post.description}
+            </p>
           </div>
         </div>
       </div>
