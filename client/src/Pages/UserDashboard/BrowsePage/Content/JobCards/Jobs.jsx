@@ -12,13 +12,17 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
 
   const { data: jobs } = useJobs();
 
+  const sortedJobs = jobs
+    ? jobs.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    : [];
+
   return (
     <div>
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 lg:grid-cols-3"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 lg:grid-cols-3 mb-20"
         onClick={handleClickOpenModalJob}
       >
-        {jobs?.filter(
+        {sortedJobs?.filter(
           (job) =>
             job.title.toLowerCase().includes(jobQuery.toLowerCase()) &&
             (selectedCategory?.length === 0 ||
@@ -30,7 +34,7 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
                 job.RecommendedSkills.includes(skill)
               ))
         ).length > 0 ? (
-          jobs.map((job) =>
+          sortedJobs.map((job) =>
             job.title.toLowerCase().includes(jobQuery.toLowerCase()) &&
             (selectedCategory?.length === 0 ||
               selectedCategory?.some((Category) =>

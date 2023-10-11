@@ -4,6 +4,7 @@ import HomeSection from "./components/HomeSection";
 import Features from "./components/Features";
 import RecentJobs from "./components/RecentJobs";
 import Companies from "./components/Companies";
+import Contact from "./components/Contact";
 
 const HomeContent = () => {
   return (
@@ -13,6 +14,7 @@ const HomeContent = () => {
       <Features />
       <Companies />
       <RecentJobs />
+      <Contact />
     </div>
   );
 };

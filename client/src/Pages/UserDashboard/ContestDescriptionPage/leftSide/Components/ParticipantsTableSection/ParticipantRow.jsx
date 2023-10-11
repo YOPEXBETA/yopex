@@ -4,6 +4,7 @@ import ParticipantsDialogModal from "../../../../../../Components/shared/Modals/
 import { Link } from "react-router-dom";
 import ReviewModel from "../../../../../../Components/shared/Modals/ReviewModel";
 import EditSubmitModal from "../../../../../../Components/shared/Modals/EditSubmit";
+import AvatarProfile from "../../../../../../assets/images/AvatarProfile.jpg";
 
 const ParticipantRow = ({ user, index, challenge }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,11 @@ const ParticipantRow = ({ user, index, challenge }) => {
   }
   const canedit = user.user._id === currentUser._id;
   return (
-    <tr key={user._id} className="hover:bg-gray-50 bg-white">
+    <tr
+      key={user._id}
+      className="hover:bg-gray-50 bg-white"
+      onClick={isOwner || user.user._id === currentUser._id ? toggleOpen : null}
+    >
       <td className=" py-4 px-4 font-bold text-md">{index + 1} </td>
       <td className="py-4 px-4">
         <div className="flex items-center">
@@ -42,12 +47,21 @@ const ParticipantRow = ({ user, index, challenge }) => {
             className="flex items-center gap-4"
           >
             <div className="">
-              <img
-                alt={`${user?.user?.firstname} ${user?.user?.lastname}`}
-                src={user?.user?.picturePath}
-                className="w-10 h-10 rounded-full"
-              />
+              {user?.user?.picturePath ? (
+                <img
+                  alt="picture"
+                  src={user?.user?.picturePath}
+                  className="w-10 h-10 rounded-full"
+                />
+              ) : (
+                <img
+                  alt="default"
+                  src={AvatarProfile}
+                  className="rounded-full object-cover w-10 h-10 border-2 border-gray-200"
+                />
+              )}
             </div>
+
             <div className="flex items-center gap-1">
               <span className="text-sm">{user?.user?.firstname}</span>
               <span className="text-sm">{user?.user?.lastname}</span>
@@ -60,13 +74,7 @@ const ParticipantRow = ({ user, index, challenge }) => {
         {formatDate(user?.registrationDate)}
       </td>
       <td className="text-sm text-right py-4 px-4">
-        <div
-          onClick={
-            isOwner || user.user._id === currentUser._id ? toggleOpen : null
-          }
-        >
-          {formatDate(user?.submissionDate)}
-        </div>
+        <div>{formatDate(user?.submissionDate)}</div>
       </td>
       {user && (
         <>

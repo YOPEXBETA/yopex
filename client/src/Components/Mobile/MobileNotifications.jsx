@@ -9,7 +9,7 @@ const MobileNotifications = () => {
   const { data: notifications } = useUserNotifications(user?._id);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center pt-20 mb-8">
+    <div className="fixed inset-0 flex items-center justify-center pt-20 mb-16">
       <div className="bg-white w-full h-full overflow-y-auto shadow-xl">
         <div className="p-4">
           <div className="flex flex-row items-center justify-between mb-2">
@@ -23,17 +23,41 @@ const MobileNotifications = () => {
                 className="flex items-start space-x-2"
               >
                 <div className="w-10 h-10">
-                  <img
-                    src={
-                      notification?.user
-                        ? notification?.user?.picturePath
-                        : notification?.job
-                        ? notification?.job?.company?.picturePath
-                        : user?.picturePath || AvatarProfile
-                    }
-                    alt="Avatar"
-                    className="w-full h-full rounded-full"
-                  />
+                  {notification?.user ? (
+                    notification.user.picturePath ? (
+                      <img
+                        src={notification.user.picturePath}
+                        alt="Avatar"
+                        className="w-full h-full rounded-full"
+                      />
+                    ) : (
+                      <img
+                        src={AvatarProfile}
+                        alt="default"
+                        className="rounded-full object-cover w-10 h-10 border-2 border-gray-200"
+                      />
+                    )
+                  ) : notification?.job ? (
+                    notification.job.company?.picturePath ? (
+                      <img
+                        src={notification.job.company.picturePath}
+                        alt="Avatar"
+                        className="w-full h-full rounded-full"
+                      />
+                    ) : (
+                      <img
+                        src={AvatarProfile}
+                        alt="default"
+                        className="rounded-full object-cover w-10 h-10 border-2 border-gray-200"
+                      />
+                    )
+                  ) : (
+                    <img
+                      src={user?.picturePath || AvatarProfile}
+                      alt="default"
+                      className="rounded-full object-cover w-10 h-10 border-2 border-gray-200"
+                    />
+                  )}
                 </div>
                 <div className="flex-1">
                   <div className="text-md font-bold">

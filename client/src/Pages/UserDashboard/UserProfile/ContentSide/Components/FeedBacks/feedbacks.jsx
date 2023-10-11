@@ -13,7 +13,6 @@ const FeedbacksPage = () => {
   const { user } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
-  console.log(reviews);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
       {userId !== user._id &&

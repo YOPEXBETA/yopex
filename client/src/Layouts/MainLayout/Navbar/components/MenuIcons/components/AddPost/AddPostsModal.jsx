@@ -32,7 +32,6 @@ export const AddPostModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState();
 
   const handleSelectChange = (e) => {
-    console.log(e.target.value);
     setSelectedOption(e.target.value);
   };
 

@@ -6,7 +6,6 @@ import FollowingsCompaniesCard from "../../../../../../Components/shared/cards/F
 const Followings = () => {
   const { userId } = useParams();
   const { data: followings, isLoading } = useUserFollowings(userId);
-  console.log(followings);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 gap-0 py-2">

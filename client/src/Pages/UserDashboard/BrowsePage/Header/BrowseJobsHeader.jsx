@@ -62,7 +62,7 @@ const BrowseJobsHeader = ({
               </button>
             </div>
             {isOpenCat && (
-              <div className="origin-top-right absolute right-60 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div className="origin-top-right absolute right-32 lg:right-50 xl:right-60 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div className="py-1">
                   {itCategory.map((Category) => (
                     <label
@@ -93,7 +93,7 @@ const BrowseJobsHeader = ({
               </button>
             </div>
             {isOpen && (
-              <div className="origin-top-right absolute right-40 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div className="origin-top-right absolute right-[2rem] lg:right-[2rem] md:right-[2rem]  xl:right-[10rem]  mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div className="py-1">
                   {itSkills.map((skillName) => (
                     <label

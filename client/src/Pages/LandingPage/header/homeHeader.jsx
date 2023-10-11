@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../../redux/auth/authSlice";
 import ProfileMenu from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/ProfileMenu";
 
-
 const HomeHeader = () => {
   const [nav, setNav] = useState(false);
   const { user, error } = useSelector((state) => state.auth); // Assuming you have an error state in your Redux slice
@@ -20,7 +19,6 @@ const HomeHeader = () => {
     }
   }, [dispatch, user]);
 
-  
   return (
     <div>
       <div className="flex justify-between items-center w-full h-20 px-4 text-white bg-white fixed z-10 border-b-2">
@@ -47,10 +45,12 @@ const HomeHeader = () => {
 
         <div className="hidden md:flex gap-4 items-center">
           {user && (
-            <p className="hover:scale-105 flex items-center "> 
-            <p className=" px-3 z-50 cursor-pointer capitalize font-medium text-gray-500  duration-200">Welcome, {user.firstname}</p>
-              <ProfileMenu  />
-          </p>
+            <p className="hover:scale-105 flex items-center ">
+              <p className=" px-3 z-50 cursor-pointer capitalize font-medium text-gray-500  duration-200">
+                Welcome, {user.firstname}
+              </p>
+              <ProfileMenu />
+            </p>
           )}
           {!user && (
             <a href="/login" className="block">
@@ -109,11 +109,10 @@ const HomeHeader = () => {
             </li>
             {user && (
               <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
-               <a href="/feed">feed
-             </a>
+                <a href="/feed">feed</a>
               </li>
             )}
-            
+
             {!user && (
               <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
                 <a

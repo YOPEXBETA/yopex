@@ -9,7 +9,6 @@ import {
   useBookmarkPost,
 } from "../../../../hooks/react-query/usePosts";
 import PostMenuIcon from "../../MenuIcons/PostMenuIcon";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
@@ -27,7 +26,6 @@ const SocialPostCard = ({
 }) => {
   const { user } = useSelector((state) => state.auth);
   const [isliked, setIsLiked] = useState(user._id in post.likes);
-  
 
   const { category } = useSelector((state) => state.global);
   const { mutate: likePost } = useLikePost(user._id, post.userId, category);
@@ -139,7 +137,10 @@ const SocialPostCard = ({
         <div className="flex items-center gap-2">
           <button
             aria-label="add to favorites"
-            onClick={() => {likePost(post._id);setIsLiked(!isliked)}}
+            onClick={() => {
+              likePost(post._id);
+              setIsLiked(!isliked);
+            }}
             className="focus:outline-none"
           >
             {isliked ? (

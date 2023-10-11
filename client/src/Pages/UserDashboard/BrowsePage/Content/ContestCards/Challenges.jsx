@@ -18,12 +18,19 @@ const Challenges = ({
     selectedCategory
   );
 
+  // Sort challenges by the newest ones first
+  const sortedChallenges = challenges
+    ? challenges
+        .slice()
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    : [];
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-1 gap-2 xl:grid-cols-1 mb-16 xl:mb-4">
       {isLoading ? (
         <p>Loading...</p>
-      ) : challenges?.length > 0 ? (
-        challenges.map((item) => (
+      ) : sortedChallenges.length > 0 ? (
+        sortedChallenges.map((item) => (
           <ChallengeCard key={item._id} challenge={item} />
         ))
       ) : (

@@ -10,11 +10,11 @@ const ParticipantsDialogModal = ({
   togglereview,
   isOwner,
   canedit,
-  toggleedit
+  toggleedit,
 }) => {
   const { id: challengeId } = useParams();
   const { data: submissions } = useUserSubmission(challengeId, participant);
-  
+
   return (
     <div
       id="defaultModal"
@@ -28,7 +28,8 @@ const ParticipantsDialogModal = ({
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
               PARTICIPANT SUBMISSION
             </h3>
-            <button
+
+            {/*<button
               type="button"
               onClick={handleClose}
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -49,14 +50,14 @@ const ParticipantsDialogModal = ({
                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                 />
               </svg>
-            </button>
+    </button>*/}
           </div>
 
           <div className="p-6 space-y-6">
             {submissions ? (
               <>
                 <h4>
-                  User:{" "}
+                  Participant:{" "}
                   <Link to={`/profile/${participant.user._id}`}>
                     {participant.user.firstname +
                       " " +
@@ -64,10 +65,7 @@ const ParticipantsDialogModal = ({
                   </Link>
                 </h4>
                 <h4>Title : {submissions.title}</h4>
-                <h4>Description :</h4>
-                <p className=" text-gray-500 dark:text-gray-400">
-                  {submissions.description}
-                </p>
+                <h4>Description : {submissions.description}</h4>
 
                 {submissions.filesPaths &&
                   submissions.filesPaths.length > 0 && (
@@ -104,19 +102,19 @@ const ParticipantsDialogModal = ({
                   </>
                 )}
                 <div className="flex items-center pt-3 border-t border-gray-200 rounded-b dark:border-gray-600">
-                {canedit && (<button
+                  {canedit && (
+                    <button
                       type="button"
                       onClick={() => {
                         handleClose();
                         toggleedit();
                       }}
-                      className="text-white bg-green-400 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                      className="text-white bg-green-400 hover:bg-green-600 focus:ring-4 w-full focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                     >
                       edit
-                  </button>
-                )}
-                {isOwner && (
-                  
+                    </button>
+                  )}
+                  {isOwner && (
                     <button
                       type="button"
                       onClick={() => {
@@ -127,8 +125,7 @@ const ParticipantsDialogModal = ({
                     >
                       review
                     </button>
-                  
-                )}
+                  )}
                 </div>
               </>
             ) : (

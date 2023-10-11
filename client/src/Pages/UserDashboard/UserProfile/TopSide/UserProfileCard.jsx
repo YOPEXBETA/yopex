@@ -19,7 +19,6 @@ const UserProfileCard = () => {
   const { userId } = useParams();
   const { data: levelsData, isloading } = useGetLevels();
   const { data: userProfile } = useUserById(userId);
-  console.log(userProfile?.badgesEarned);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
 

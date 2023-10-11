@@ -12,7 +12,6 @@ const CommentModal = ({
   formatDistance,
 }) => {
   const { user } = useSelector((state) => state.auth);
-  console.log(comments);
   return (
     <>
       {isOpen && (
@@ -60,29 +59,31 @@ const CommentModal = ({
                               <p className="text-md font-semibold">
                                 {`${comment.userId.firstname} ${comment.userId.lastname}`}
                               </p>
-                           
-                           <div className="flex justify-between items-start ">
-                             <p className="text-md text-gray-400 ">
-                                {" "}
-                                |{" "}
-                                {formatDistance(
-                                  new Date(comment.createdAt),
-                                  new Date(),
-                                  {
-                                    addSuffix: true,
-                                  }
-                                )} 
-                              </p>  
-                              {comment.userId._id === user._id && (
-                                  <CommentMenuIcon className="text-black text-md  " post={comment} />
-                          )}
-                          </div>
+
+                              <div className="flex justify-between items-start ">
+                                <p className="text-md text-gray-400 ">
+                                  {" "}
+                                  |{" "}
+                                  {formatDistance(
+                                    new Date(comment.createdAt),
+                                    new Date(),
+                                    {
+                                      addSuffix: true,
+                                    }
+                                  )}
+                                </p>
+                                {comment.userId._id === user._id && (
+                                  <CommentMenuIcon
+                                    className="text-black text-md  "
+                                    post={comment}
+                                  />
+                                )}
+                              </div>
                             </div>
-                            
+
                             <p className="text-md text-zinc-700 whitespace-nowrap max-w-[70px]">
                               {comment.desc}
                             </p>
-                           
                           </div>
                         </div>
                         <hr className="border-t border-gray-300 mt-2" />

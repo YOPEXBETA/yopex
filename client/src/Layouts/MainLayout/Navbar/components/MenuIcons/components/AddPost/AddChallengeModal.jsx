@@ -45,13 +45,11 @@ export const AddChallengeModal = ({ open, handleClose }) => {
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
   const { data: userProfile, isLoading } = useUserById(userId);
-  console.log(userProfile, "userProfile");
 
   const { mutate, error, isError, isSuccess } = useCreateChallenge(user);
 
   const onSubmit = (challengeData) => {
     const companyId = selectedOption;
-    console.log(selectedOptionpaid);
     mutate({ companyId, challengeData, paid: selectedOptionpaid });
   };
 
@@ -210,7 +208,6 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                         type="datetime-local"
                         {...field}
                         onChange={(e) => {
-                          console.log(e.currentTarget.value);
                           const now = moment();
                           const diff = moment(deadline).diff(now);
 

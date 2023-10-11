@@ -17,11 +17,9 @@ export const useChallengeById = (challengeId) => {
 };
 
 export const useEditChallenge = (challengeId) => {
-  console.log(challengeId);
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (ChallengeData) => {
-      console.log(ChallengeData);
       await axios.put(`${url}/challenge/update/${challengeId}`, ChallengeData);
     },
     onSuccess: () => {
@@ -133,7 +131,6 @@ export const useCreateChallenge = () => {
 
   return useMutation(
     async ({ companyId, challengeData, paid }) => {
-      console.log("called");
       await axios.post(
         `${url}/challenge/add`,
         { companyId, ...challengeData, paid },
@@ -189,13 +186,11 @@ export const useChooseWinner = () => {
   //const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (challengeData) => {
-      console.log("winner");
       const { data } = await axios.post(
         `${url}/company/challengeWinner`,
         challengeData,
         {}
       );
-      console.log(data);
       return data;
     },
     onSuccess: () => {},
