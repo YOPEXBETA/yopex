@@ -20,8 +20,8 @@ const HomeHeader = () => {
   }, [dispatch, user]);
 
   return (
-    <div>
-      <div className="flex justify-between items-center w-full h-20 px-4 text-white bg-white fixed z-10 border-b-2">
+    <div className="container">
+      <div className="flex justify-between items-center w-full h-20 px-6 text-white bg-white fixed z-10 border-b-2">
         <div className="flex items-center gap-8">
           <img src={YopexLogo} width={35} alt="Yopex Logo" />
           <ul className="hidden md:flex">
