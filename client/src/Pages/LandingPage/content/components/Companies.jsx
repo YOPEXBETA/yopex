@@ -21,13 +21,17 @@ const Companies = () => {
   }, []);
 
   return (
-    <div
-      className="mx-auto py-10 lg:px-24 md:px-11 bg-white text-black border-b-[1px] border-gray-500"
-      id="about"
-    >
-      <div className="pb-8">
-        <p className="text-4xl font-bold text-center">Companies</p>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
+      <div class="mb-12 space-y-2 text-center">
+        <h2 class="text-3xl font-bold text-gray-800 md:text-4xl dark:text-white">
+          Recent Companies
+        </h2>
+        <p class="lg:mx-auto lg:w-6/12 text-gray-600 dark:text-gray-300">
+          Welcome to the Hub of Fresh Talent: Discover our Newly Registered
+          Companies
+        </p>
       </div>
+
       <div className="flex flex-wrap justify-center">
         {companies && Array.isArray(companies) ? (
           companies

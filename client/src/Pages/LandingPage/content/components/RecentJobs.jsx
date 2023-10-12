@@ -17,11 +17,17 @@ const RecentJobs = () => {
 
   return (
     <div
-      className="mx-auto py-10 lg:px-24 md:px-11 bg-white border-b-[1px] border-gray-500"
+      className="mx-auto py-10 lg:px-24 md:px-11 bg-white  border-gray-500"
       id="about"
     >
-      <div className="pb-8">
-        <p className="text-4xl font-bold text-center text-black">Recent Jobs</p>
+      <div class="mb-12 space-y-2 text-center">
+        <h2 class="text-3xl font-bold text-gray-800 md:text-4xl dark:text-white">
+          Recent Job Opportunities
+        </h2>
+        <p class="lg:mx-auto lg:w-6/12 text-gray-600 dark:text-gray-300">
+          Embark on Your Next Adventure: Explore Yopex's Latest Job
+          Opportunities!
+        </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">

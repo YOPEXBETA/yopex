@@ -21,21 +21,21 @@ const HomeHeader = () => {
 
   return (
     <div className="container">
-      <div className="flex justify-between items-center w-full h-20 px-6 text-white bg-white fixed z-10 border-b-2">
+      <div className="flex justify-between items-center w-full h-20 px-24 text-white bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700">
         <div className="flex items-center gap-8">
           <img src={YopexLogo} width={35} alt="Yopex Logo" />
           <ul className="hidden md:flex">
-            <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+            <li className="px-4 cursor-pointer capitalize text-gray-500 hover:scale-105 duration-200">
               <Link to="home" smooth duration={500}>
                 Home
               </Link>
             </li>
-            <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+            <li className="px-4 cursor-pointer capitalize  text-gray-500 hover:scale-105 duration-200">
               <Link to="about" smooth duration={500}>
                 About
               </Link>
             </li>
-            <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+            <li className="px-4 cursor-pointer capitalize  text-gray-500 hover:scale-105 duration-200">
               <Link to="contact" smooth duration={500}>
                 Contact
               </Link>
