@@ -36,36 +36,40 @@ const Features = () => {
   ];
 
   return (
-    <div
-      name="about"
-      className="w-full bg-white lg:px-24 md:px-11 py-10 border-b-[1px] border-gray-500 dark:bg-zinc-800"
-    >
-      <div className="pb-11">
-        <p className="text-4xl font-extrabold text-center text-white">
-          Features
-        </p>
-      </div>
+    <div>
+      <div
+        name="about"
+        className="w-full bg-white lg:px-24 md:px-11 py-10 border-b-[1px] border-gray-500"
+      >
+        <div className="pb-11">
+          <p className="text-4xl font-extrabold text-center text-black">
+            Features
+          </p>
+        </div>
 
-      {/* Add padding to create space at the bottom of the card container */}
-      <div className="grid sm:grid-cols-2 md:grid-cols-2 gap-8 px-12 sm:px-0 pb-16 lg:grid-cols-4 cursor-pointer">
-        {features.map(({ id, icon, title, description }) => (
-          <div
-            key={id}
-            className={`relative bg-green-500 border-solid border-gray-300 border rounded-md shadow-md hover:scale-105 duration-500 hover:shadow-green-500`}
-          >
-            <div className="bg-white dark:bg-zinc-700 rounded-t-md p-4 h-72 flex flex-col items-center gap-5">
-              <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center">
-                <div className="text-4xl text-white">{icon}</div>
-              </div>
-              <div>
-                <p className="text-xl text-black dark:text-white font-semibold text-center">
-                  {title}
-                </p>
-                <p className="text-gray-600 dark:text-white mt-2 text-center">{description}</p>
+        {/* Add padding to create space at the bottom of the card container */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-2 gap-8 px-12 sm:px-0 pb-16 lg:grid-cols-4">
+          {features.map(({ id, icon, title, description }) => (
+            <div
+              key={id}
+              className={`relative bg-green-500 border-solid border-gray-300 border rounded-md shadow-md hover:scale-105 duration-500 hover:shadow-green-500`}
+            >
+              <div className="bg-white rounded-t-md p-4 h-72 flex flex-col items-center gap-5">
+                <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center">
+                  <div className="text-4xl text-white">{icon}</div>
+                </div>
+                <div>
+                  <p className="text-xl text-black font-semibold text-center">
+                    {title}
+                  </p>
+                  <p className="text-gray-600 mt-2 text-center">
+                    {description}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

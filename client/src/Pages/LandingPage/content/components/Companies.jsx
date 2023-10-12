@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import { useCompanies } from "../../../../hooks/react-query/useCompany";
 
-
 const Companies = () => {
   const [currPage, setCurrPage] = useState(0);
-  const{data:companies} = useCompanies();
-  
+  const { data: companies } = useCompanies();
+
   const itemsPerPage = 3;
-  
-  const totalPages = Math.ceil(3/ itemsPerPage);
-  
+
+  const totalPages = Math.ceil(3 / itemsPerPage);
+
   const goToNextPage = () => {
     setCurrPage((prevPage) => (prevPage + 1) % totalPages);
   };
@@ -30,30 +29,31 @@ const Companies = () => {
         <p className="text-4xl font-bold text-center dark:text-white">Companies</p>
       </div>
       <div className="flex flex-wrap justify-center">
-      {companies && Array.isArray(companies) ? (
-    companies.slice(
-      currPage * itemsPerPage,
-      (currPage + 1) * itemsPerPage
-    ).map((company) => (
-      <div key={company.id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
-        <div>
-          <div className="flex gap-3 items-center mb-4 flex-col">
-          <img
-                  src={company.companyLogo}
-                  alt="Icon"
-                  className="w-20 h-20 rounded-lg object-cover"
-                />
-                 <div>
-              <h2 className="text-2xl font-medium dark:text-white">{company.companyName}</h2>
-            </div>
-          </div>
-          </div>
+        {companies && Array.isArray(companies) ? (
+          companies
+            .slice(currPage * itemsPerPage, (currPage + 1) * itemsPerPage)
+            .map((company) => (
+              <div key={company.id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
+                <div>
+                  <div className="flex gap-3 items-center mb-4 flex-col">
+                    <img
+                      src={company.companyLogo}
+                      alt="Icon"
+                      className="w-20 h-20 rounded-lg object-cover"
+                    />
+                    <div>
+                      <h2 className="text-2xl font-medium">
+                        {company.companyName}
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+        ) : (
+          <p>No companies available.</p>
+        )}
       </div>
-      ))
-      ) : (
-        <p className="dark:text-white">No companies available.</p>
-      )}
-    </div>
     </div>
   );
 };
