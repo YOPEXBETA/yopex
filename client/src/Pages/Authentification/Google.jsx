@@ -9,7 +9,7 @@ function GoogleSignIn({ mode }) {
   return (
     <div>
       {/* {isActionCompleted && <AlertContainer />} */}
-      <FireBaseSocialIcons handleSignIn={handleSignIn} />
+      <FireBaseSocialIcons  handleSignIn={handleSignIn} />
     </div>
   );
 }

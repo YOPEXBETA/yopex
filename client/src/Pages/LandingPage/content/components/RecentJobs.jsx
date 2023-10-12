@@ -17,11 +17,11 @@ const RecentJobs = () => {
 
   return (
     <div
-      className="mx-auto py-10 lg:px-24 md:px-11 bg-white border-b-[1px] border-gray-500"
+      className="mx-auto py-10 lg:px-24 md:px-11 bg-white dark:bg-zinc-800 border-b-[1px] border-gray-500"
       id="about"
     >
       <div className="pb-8">
-        <p className="text-4xl font-bold text-center text-black">Recent Jobs</p>
+        <p className="text-4xl font-bold text-center text-black dark:text-white">Recent Jobs</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">

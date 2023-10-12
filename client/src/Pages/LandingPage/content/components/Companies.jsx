@@ -23,11 +23,11 @@ const Companies = () => {
 
   return (
     <div
-      className="mx-auto py-10 lg:px-24 md:px-11 bg-white text-black border-b-[1px] border-gray-500"
+      className="mx-auto py-10 lg:px-24 md:px-11 bg-white dark:bg-zinc-800 text-black border-b-[1px] border-gray-500"
       id="about"
     >
       <div className="pb-8">
-        <p className="text-4xl font-bold text-center">Companies</p>
+        <p className="text-4xl font-bold text-center dark:text-white">Companies</p>
       </div>
       <div className="flex flex-wrap justify-center">
       {companies && Array.isArray(companies) ? (
@@ -44,14 +44,14 @@ const Companies = () => {
                   className="w-20 h-20 rounded-lg object-cover"
                 />
                  <div>
-              <h2 className="text-2xl font-medium">{company.companyName}</h2>
+              <h2 className="text-2xl font-medium dark:text-white">{company.companyName}</h2>
             </div>
           </div>
           </div>
       </div>
       ))
       ) : (
-        <p>No companies available.</p>
+        <p className="dark:text-white">No companies available.</p>
       )}
     </div>
     </div>

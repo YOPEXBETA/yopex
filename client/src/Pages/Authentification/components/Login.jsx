@@ -71,14 +71,14 @@ const Login = () => {
           <div className="col-span-12">
             <label
               for="input-group-1"
-              className="block  text-sm font-medium text-gray-400 mb-2"
+              className="block  text-sm font-medium text-gray-400 dark:text-white mb-2"
             >
               Email
             </label>
             <div className="relative mb-6">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                 <svg
-                  className="w-4 h-4 text-gray-400 dark:text-gray-400"
+                  className="w-4 h-4 text-gray-400 dark:text-zinc-800"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -91,8 +91,8 @@ const Login = () => {
               <input
                 type="text"
                 id="input-group-1"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="name@flowbite.com"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5   dark:placeholder-zinc-800 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="email@email.com"
                 {...register("email", { required: true })}
               />
             </div>
@@ -100,7 +100,7 @@ const Login = () => {
           <div className="col-span-12">
             <label
               for="input-group-1"
-              className="block  text-sm font-medium text-gray-400 mb-2"
+              className="block  text-sm font-medium dark:text-white text-gray-400 mb-2"
             >
               Password
             </label>
@@ -108,14 +108,14 @@ const Login = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 id="input-group-2"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5   dark:placeholder-zinc-800 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="password"
                 {...register("password", { required: true })}
               />
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 flex items-center pr-2"
+                className="absolute inset-y-0 right-0 flex items-center pr-2 dark:text-zinc-800"
               >
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
@@ -134,13 +134,13 @@ const Login = () => {
                     setRememberMe(e.target.checked);
                   }}
                 />
-                <label className="ml-2 text-sm font-mediu dark:text-gray-300 text-gray-400">
+                <label className="ml-2 text-sm font-mediu dark:text-white text-gray-400">
                   Remember me
                 </label>
               </div>
               <div>
                 <a
-                  className="no-underline hover:underline text-sm fontmedium text-gray-400"
+                  className="no-underline hover:underline text-sm fontmedium dark:text-white  text-gray-400"
                   href="/forgetpassword"
                 >
                   Forgot Password?
@@ -162,7 +162,7 @@ const Login = () => {
         <div className="grid grid-cols-12 w-full mt-6">
           <div className="col-span-12">
             <div className="flex justify-center gap-1">
-              <p className="text-gray-400">Are you new here?</p>
+              <p className="text-gray-400 dark:text-white">Are you new here?</p>
               <a
                 className="no-underline hover:underline text-sm fontmedium text-green-500"
                 href="/register"
@@ -176,7 +176,7 @@ const Login = () => {
           <div className="col-span-12">
             <div className="flex items-center">
               <hr className="flex-grow border-t border-gray-300" />
-              <p className="text-sm mx-4 text-gray-400">Login with</p>
+              <p className="text-sm mx-4 text-gray-400 dark:text-white">Login with</p>
               <hr className="flex-grow border-t border-gray-300" />
             </div>
           </div>
