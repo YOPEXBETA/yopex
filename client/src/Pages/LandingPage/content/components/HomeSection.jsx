@@ -3,8 +3,8 @@ import React from "react";
 const HomeSection = () => {
   return (
     <div id="home">
-      <div className="flex items-center justify-center bg-white border-gray-500 border-b-[1px] relative overflow-hidden">
-        <div className="flex my-48 mx-4">
+      <div className="flex items-center justify-center bg-white border-gray-500 relative overflow-hidden">
+        <div className="flex mt-48 mx-4 mb-24">
           <div className="space-y-8 flex flex-col items-center">
             <div className="space-y-2 flex flex-col items-center">
               <h2 className="text-black text-[2.5rem] font-bold mb-1">

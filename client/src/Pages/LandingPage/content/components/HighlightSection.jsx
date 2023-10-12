@@ -8,8 +8,8 @@ const HighlightSection = () => {
   const { data: users } = useUsers();
   const { data: jobs } = useJobs();
   const { data: companies } = useAdminCompanies();
-  const { data : challenges} = useFindChallenges();
- 
+  const { data: challenges } = useFindChallenges();
+
   return (
     <div>
       <div className="mx-auto py-4 lg:px-24 md:px-11 bg-cover border-b-[1px] bg-white border-gray-500">
