@@ -42,7 +42,7 @@ const Companies = () => {
                       className="w-20 h-20 rounded-lg object-cover"
                     />
                     <div>
-                      <h2 className="text-2xl font-medium">
+                      <h2 className="text-2xl font-medium dark:text-white">
                         {company.companyName}
                       </h2>
                     </div>
