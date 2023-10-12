@@ -93,11 +93,11 @@ const ProfileMenu = () => {
         {open && (
           <div
             ref={menuRef}
-            className="absolute right-0 mt-6 bg-white dark:bg-zinc-800 shadow-lg rounded-lg min-w-[320px] max-w-[380px] overflow-visible border border-gray-200"
+            className="absolute right-0 mt-6 bg-white  dark:bg-zinc-800 shadow-lg rounded-lg min-w-[320px] max-w-[380px] overflow-visible border border-gray-200"
           >
             <a
               href={`/profile/${user._id}`}
-              className="p-3 hover:bg-gray-100 dark:hover:bg-green-600 space-x-2 flex items-center"
+              className="p-3 hover:bg-gray-100 dark:hover:bg-green-600  space-x-2 flex items-center"
             >
               {user.picturePath ? (
                 <img
