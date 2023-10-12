@@ -29,7 +29,7 @@ const App = () => {
           <title>YOPEX</title>
           <meta
             name="description"
-            content="yopex is a social media platform for startups where freelancers and startups can connect"
+            content="yopex is a social media platform for startups where freelancers and startups can connect, yopex is also the hub for job opportunities"
           />
           <meta
             name="keywords"
