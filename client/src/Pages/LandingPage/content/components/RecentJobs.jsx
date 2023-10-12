@@ -41,7 +41,7 @@ const RecentJobs = () => {
               onClick={() => handlePageChange(i)}
               className={`${
                 i === currentPage
-                  ? "bg-gray-800"
+                  ? "bg-gray-800 dark:bg-green-500"
                   : "bg-gray-300 hover:bg-gray-400"
               } w-3 h-3 rounded-full mx-2 cursor-pointer`}
             />
