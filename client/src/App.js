@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet";
 const queryClient = new QueryClient();
 
 const App = () => {
-  console.log("Process", process.env.REACT_APP_API_ENDPOINT);
+  //console.log("Process", process.env.REACT_APP_API_ENDPOINT);
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     if (queryParams.has("token")) {
