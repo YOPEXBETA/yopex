@@ -37,21 +37,21 @@ const HomeHeader = () => {
 
   return (
     <div className="container">
-      <div className="flex justify-between items-center w-full h-20 px-6 text-white dark:bg-zinc-800 bg-white fixed z-10 border-b-2">
+      <div className="flex justify-between items-center w-full h-20 px-4 lg:px-24 md:px-24 text-white  absolute z-10 ">
         <div className="flex items-center gap-8">
           <img src={YopexLogo} width={35} alt="Yopex Logo" />
           <ul className="hidden md:flex">
-            <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 dark:hover:text-green-500 dark:text-white hover:scale-105 duration-200">
+            <li className="px-4 cursor-pointer capitalize text-gray-500 hover:scale-105 duration-200">
               <Link to="home" smooth duration={500}>
                 Home
               </Link>
             </li>
-            <li className="px-4 cursor-pointer capitalize font-medium dark:text-white dark:hover:text-green-500 text-gray-500 hover:scale-105 duration-200">
+            <li className="px-4 cursor-pointer capitalize  text-gray-500 hover:scale-105 duration-200">
               <Link to="about" smooth duration={500}>
                 About
               </Link>
             </li>
-            <li className="px-4 cursor-pointer capitalize font-medium dark:text-white  dark:hover:text-green-500 text-gray-500 hover:scale-105 duration-200">
+            <li className="px-4 cursor-pointer capitalize  text-gray-500 hover:scale-105 duration-200">
               <Link to="contact" smooth duration={500}>
                 Contact
               </Link>

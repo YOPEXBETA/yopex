@@ -11,45 +11,31 @@ const HighlightSection = () => {
   const { data: challenges } = useFindChallenges();
 
   return (
-    <div>
-      <div className="mx-auto py-4 lg:px-24 md:px-11 bg-cover border-b-[1px] bg-white dark:bg-zinc-800 border-gray-500">
-        <div className="text-center text-black flex flex-col items-center gap-16">
-          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 items-center lg:gap-48 gap-10 md:gap-32">
-            <div className="p-4 flex flex-col items-center gap-2">
-              <div>
-                <h4 className=" text-5xl font-semibold mb-1 text-green-500">
-                  {users?.length}
-                </h4>
-                <p className="text-2xl font-medium dark:text-white">users</p>
-              </div>
-            </div>
-            <div className="p-4 flex flex-col items-center gap-2">
-              <div>
-                <h4 className="text-5xl font-semibold mb-1 text-green-500">
-                  {" "}
-                  {companies?.length}
-                </h4>
-                <p className="text-2xl font-medium dark:text-white">Companies</p>
-              </div>
-            </div>
-
-            <div className="p-4 flex flex-col items-center gap-2">
-              <div>
-                <h4 className="text-5xl font-semibold mb-1 text-green-500 ">
-                  {jobs?.length}
-                </h4>
-                <p className="text-2xl font-medium dark:text-white">Jobs</p>
-              </div>
-            </div>
-            <div className="p-4 flex flex-col items-center gap-2">
-              <div>
-                <h4 className="text-5xl font-semibold mb-1 text-green-500 ">
-                  {challenges?.length}
-                </h4>
-                <p className="text-2xl font-medium dark:text-white">Challenges</p>
-              </div>
-            </div>
-          </div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
+      <div class="py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between flex-wrap">
+        <div class="text-left w-full sm:w-1/2 md:w-1/4">
+          <h6 class="text-2xl font-semibold text-gray-700 dark:text-white">
+            {users?.length}
+          </h6>
+          <p class="mt-2 text-gray-500">Registered users</p>
+        </div>
+        <div class="text-left w-full sm:w-1/2 md:w-1/4">
+          <h6 class="text-2xl font-semibold text-gray-700 dark:text-white">
+            {companies?.length}
+          </h6>
+          <p class="mt-2 text-gray-500">Registered companies</p>
+        </div>
+        <div class="text-left w-full sm:w-1/2 md:w-1/4">
+          <h6 class="text-2xl font-semibold text-gray-700 dark:text-white">
+            {jobs?.length}
+          </h6>
+          <p class="mt-2 text-gray-500">Posted Jobs</p>
+        </div>
+        <div class="text-left w-full sm:w-1/2 md:w-1/4">
+          <h6 class="text-2xl font-semibold text-gray-700 dark:text-white">
+            {challenges?.length}
+          </h6>
+          <p class="mt-2 text-gray-500">Posted Challenges</p>
         </div>
       </div>
     </div>
