@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import YopexLogo from "../../../../src/images/LogoYopex.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-scroll";
@@ -11,11 +11,15 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 
 const HomeHeader = () => {
+ 
   const [nav, setNav] = useState(false);
   const { user, error } = useSelector((state) => state.auth); // Assuming you have an error state in your Redux slice
   const navigate = useNavigate();
   const dispatch = useDispatch();
+ 
   const [ isDark , toggleDark] = useState(false);
+
+
 
   const toggleTheme = () => {
     if (document.documentElement.classList.contains("dark")) {
@@ -61,23 +65,25 @@ const HomeHeader = () => {
         </div>
 
         <div className="hidden md:flex gap-4 items-center">
-          
+        {!user && (
         <a  
           onClick={toggleTheme}
             className="px-3 py-2  space-x-2   flex items-center cursor-pointer"
            >
-            
+         
             {
-              isDark ? (
+            document.documentElement.classList.contains("dark") || isDark ? 
+               (
             <LightModeIcon className="w-6 h-6 dark:hover:text-green-500 text-gray-600 dark:text-white" />
               
             ) : (
               <DarkModeIcon className="w-6 h-6 text-gray-600 hover:text-green-500 dark:text-white" />
             )
-               
-            }
           
-            </a> 
+            } 
+          
+            </a>  )}  
+        
           {user && (
             <p className="hover:scale-105 flex items-center ">
               <p className=" px-3 z-50 cursor-pointer capitalize dark:text-white font-medium text-gray-500  duration-200">

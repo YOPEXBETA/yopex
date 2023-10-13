@@ -13,18 +13,26 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 // ==============================|| CODE ||============================== //
 
 const ProfileMenu = () => {
+  const [ isDark , toggleDark] = useState(false);
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
   const handleClick = (event) => setOpen(!open);
 
+
   const toggleTheme = () => {
     if (document.documentElement.classList.contains("dark")) {
       document.documentElement.classList.remove("dark");
-      localStorage.theme = "light";
+    
+      localStorage.theme = "light";  
+      toggleDark(false)
+      handleCloseMenu();
     } else {
       document.documentElement.classList.add("dark");
-      localStorage.theme = "dark";
+    
+      localStorage.theme = "dark"; 
+       toggleDark(true)
+      handleCloseMenu();
     }
   };
 
@@ -148,7 +156,7 @@ const ProfileMenu = () => {
            >
             
             {
-              document.documentElement.classList.contains("dark") ?
+             document.documentElement.classList.contains("dark") || isDark  ?
             (
             <LightModeIcon className="w-6 h-6 text-gray-600 dark:text-white" />
               
