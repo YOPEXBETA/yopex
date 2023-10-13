@@ -38,7 +38,7 @@ const UserProfileCard = () => {
 
   if (userProfile)
     return (
-      <div className="bg-white p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 xl:shadow-md lg:shadow-md h-[100vh] md:shadow-md md:border-green-500 border-b-2 mr-0">
+      <div className="bg-white p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 md:shadow-md md:border-green-500 border-b-2 mr-0">
         <div className="relative">
           <div>
             {userProfile.picturePath ? (
@@ -63,7 +63,7 @@ const UserProfileCard = () => {
         </div>
 
         <div className="flex items-center justify-center gap-2 truncate w-80">
-          <p className="text-xl font-md truncate">
+          <p className="text-xl font-semibold truncate">
             {`${userProfile.firstname} ${userProfile.lastname}`}
           </p>
 
@@ -99,26 +99,30 @@ const UserProfileCard = () => {
         <div className="w-full">
           <HighlightSection />
         </div>
-        <hr className=" border-zinc-400 w-full h-2" />
+        <hr className=" border-zinc-400 w-full" />
+
         {userProfile?.badgesEarned?.length !== 0 && (
           <div className="w-full">
+            <p className="mb-2 text-left text-gray-500">Badges</p>
             <Badges userProfile={userProfile} />
           </div>
         )}
-        <div className="w-full ">
-          <p className="mb-2 text-left text-gray-500">Companies</p>
-          <ul className="flex justify-start gap-2">
-            {userProfile.companies.map((company, index) => (
-              <Link key={index} to={`/company/${company._id}`}>
-                <img
-                  src={company.companyLogo}
-                  alt={`Company ${index + 1}`}
-                  className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
-                />
-              </Link>
-            ))}
-          </ul>
-        </div>
+        {userProfile?.companies?.length !== 0 && (
+          <div className="w-full ">
+            <p className="mb-2 text-left text-gray-500">Companies</p>
+            <ul className="flex justify-start gap-2">
+              {userProfile.companies.map((company, index) => (
+                <Link key={index} to={`/company/${company._id}`}>
+                  <img
+                    src={company.companyLogo}
+                    alt={`Company ${index + 1}`}
+                    className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
+                  />
+                </Link>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     );
 };
