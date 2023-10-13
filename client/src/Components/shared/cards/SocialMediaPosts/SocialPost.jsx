@@ -139,11 +139,11 @@ const SocialPostCard = ({
             aria-label="add to favorites"
             onClick={() => {
               likePost(post._id);
-              setIsLiked(!isliked);
+              //setIsLiked(!isliked);
             }}
             className="focus:outline-none"
           >
-            {isliked ? (
+            {/*isliked*/ user._id in post.likes ? (
               <AiFillHeart className="text-red-500 w-6 h-6" />
             ) : (
               <AiOutlineHeart className="text-gray-500 w-6 h-6" />
