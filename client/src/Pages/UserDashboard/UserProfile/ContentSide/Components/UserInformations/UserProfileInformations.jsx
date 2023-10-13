@@ -8,8 +8,6 @@ import {
 } from "../../../../../../hooks/react-query/useUsers";
 
 const UserProfileInformations = () => {
-  const { user } = useSelector((state) => state.auth);
-
   const { userId } = useParams();
   const { data: userProfile } = useUserById(userId);
   console.log(userProfile);
@@ -42,7 +40,7 @@ const UserProfileInformations = () => {
             <label class="text-gray-600">Birth Date:</label>
             <p class="font-semibold">
               {userProfile?.birthDate
-                ? new Date(userProfile.birthDate).toLocaleDateString()
+                ? new Date(userProfile?.birthDate).toLocaleDateString()
                 : "N/A"}
             </p>
           </div>
