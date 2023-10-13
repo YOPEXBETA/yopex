@@ -13,11 +13,11 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 const HomeHeader = () => {
  
   const [nav, setNav] = useState(false);
-  const { user, error } = useSelector((state) => state.auth); // Assuming you have an error state in your Redux slice
+  const { user, error } = useSelector((state) => state.auth); 
   const navigate = useNavigate();
   const dispatch = useDispatch();
  
-  const [ isDark , toggleDark] = useState(false);
+  const [ isDark , toggleDark] = useState(document.documentElement.classList.contains("dark"));
 
 
 
@@ -72,7 +72,7 @@ const HomeHeader = () => {
            >
          
             {
-            document.documentElement.classList.contains("dark") || isDark ? 
+            isDark ? 
                (
             <LightModeIcon className="w-6 h-6 dark:hover:text-green-500 text-gray-600 dark:text-white" />
               
