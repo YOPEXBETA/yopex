@@ -88,7 +88,7 @@ const NotificationBell = () => {
               handleClick();
               mutate();
             }}
-            className="flex items-center justify-center rounded-full  w-8 h-8 text-gray-600"
+            className="flex items-center justify-center rounded-full dark:text-gray-100 dark:hover:text-green-600  w-8 h-8 text-gray-600"
           >
             <NotificationsIcon />
           </button>

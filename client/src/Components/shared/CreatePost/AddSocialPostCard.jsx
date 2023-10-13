@@ -9,7 +9,7 @@ const AddSocialPostCard = () => {
   const toggleModal = () => setOpenPostModal((prev) => !prev);
 
   return (
-    <div className="shadow-md bg-white w-full mx-auto rounded-lg border-green-500 border-b-2">
+    <div className="shadow-md bg-white w-full mx-auto rounded-lg dark:bg-zinc-800 dark:shadow-green-600 dark:shadow-sm  border-green-500 border-b-2">
       <div className="p-4">
         <div className="flex items-center space-x-2">
           {user.picturePath ? (
@@ -27,7 +27,7 @@ const AddSocialPostCard = () => {
           )}
           <input
             type="text"
-            className="flex-1 px-3  focus:outline-none rounded-full h-10 bg-gray-100"
+            className="flex-1 px-3  focus:outline-none rounded-full h-10 dark:bg-zinc-700 dark:placeholder-gray-200 bg-gray-100"
             placeholder="Share your work..."
             onClick={toggleModal}
           />

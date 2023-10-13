@@ -92,7 +92,7 @@ const AddPostMenuList = () => {
       <div className="relative">
         <button
           onClick={handleClick}
-          className="ml-2 p-1 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
+          className="ml-2 p-1 text-gray-600 dark:text-gray-100 dark:hover:text-green-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -112,31 +112,31 @@ const AddPostMenuList = () => {
       </div>
       {Open && (
         <div
-          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-zinc-700 ring-1 ring-black ring-opacity-5"
           ref={menuRef}
         >
           <div className="py-1" role="none">
             <button
               onClick={handleClickOpenModalWork}
-              className="block px-4 py-2 text-left text-sm w-full text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
               <FaSuitcase className="mr-2 inline-block" /> Add work offer
             </button>
             <button
               onClick={handleClickOpenModalChallenge}
-              className="block px-4 py-2 text-sm text-left text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-sm text-left dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
             >
               <FaFire className="mr-2 inline-block" /> Add a challenge
             </button>
             <button
               onClick={handleClickOpenModalPost}
-              className="block px-4 py-2 text-left text-sm text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-left text-sm text-gray-700 w-full dark:text-gray-100 dark:hover:bg-green-600 hover:bg-gray-100 hover:text-gray-900"
             >
               <FaPen className="mr-2 inline-block" /> Add a post
             </button>
             <button
               onClick={handleClickOpenModalCompany}
-              className="block px-4 py-2 text-left text-sm text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-left text-sm text-gray-700 w-full dark:text-gray-100 dark:hover:bg-green-600 hover:bg-gray-100 hover:text-gray-900"
             >
               <FaBuilding className="mr-2 inline-block" /> Add a company
             </button>

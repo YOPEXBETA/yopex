@@ -63,7 +63,7 @@ const SocialPostCard = ({
   };
 
   return (
-    <div className="bg-white w-full mx-auto h-full  rounded-lg border-green-500 border-b-2 shadow-md">
+    <div className="bg-white w-full mx-auto h-full  rounded-lg dark:bg-zinc-800 dark:shadow-green-600 dark:shadow-md border-green-500 border-b-2 shadow-md">
       <div className=" flex justify-between items-start">
         <div className=" flex items-center py-6 pl-2 gap-2">
           {post.userPicturePath ? (
@@ -89,13 +89,13 @@ const SocialPostCard = ({
               }
               style={{ textDecoration: "none", color: "#000000" }}
             >
-              <p className="text-md font-medium truncate w-52">
+              <p className="text-md font-medium dark:text-gray-300 truncate w-52">
                 {post.companyName !== undefined
                   ? `${post?.companyName}`
                   : `${post?.firstname} ${post?.lastname}`}
               </p>
             </Link>
-            <p className=" text-[14px]  text-gray-500">
+            <p className=" text-[14px] dark:text-gray-400  text-gray-500">
               {formatDistance(new Date(post.createdAt), new Date(), {
                 addSuffix: true,
               })}
@@ -146,15 +146,16 @@ const SocialPostCard = ({
             {isliked ? (
               <AiFillHeart className="text-red-500 w-6 h-6" />
             ) : (
-              <AiOutlineHeart className="text-gray-500 w-6 h-6" />
+              <AiOutlineHeart className="text-gray-500 dark:text-gray-300 w-6 h-6" />
             )}
           </button>
-          <p className="">{post.likesCount}</p>
+          <p className="dark:text-gray-300 ">{post.likesCount}</p>
         </div>
 
         {/* Comment button */}
-        <div className=" flex items-center p-2">
+        <div className=" flex items-center p-2 dark:text-gray-300 ">
           <CommentButton
+          
             post={post}
             category={category}
             commentCount={post.commentCount}
@@ -173,7 +174,7 @@ const SocialPostCard = ({
               {bookmarks.includes(post._id) ? (
                 <BsBookmarkFill className="text-green-500 w-5 h-5" />
               ) : (
-                <BsBookmark className="text-gray-500 w-5 h-5" />
+                <BsBookmark className="text-gray-500 w-5 h-5 dark:text-gray-300 " />
               )}
             </button>
           </div>

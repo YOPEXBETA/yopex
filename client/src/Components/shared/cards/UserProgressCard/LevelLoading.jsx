@@ -19,11 +19,11 @@ function LinearProgressWithLabel(props) {
               ></div>
             </div>
           </div>
-          <div className=" flex justify-between">
+          <div className=" flex justify-between dark:text-gray-100" >
             <p>PROGRESS</p>
             <div className="text-xs text-center p-0.5 leading-none rounded-full">
-              <span className="text-black font-medium">{props.value}</span>/
-              <span className="text-black font-medium">{props.difference}</span>
+              <span className="text-black font-medium dark:text-gray-100">{props.value}</span>/
+              <span className="text-black font-medium dark:text-gray-100">{props.difference}</span>
             </div>
           </div>
         </div>
