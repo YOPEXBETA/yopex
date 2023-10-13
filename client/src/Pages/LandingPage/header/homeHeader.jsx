@@ -36,7 +36,7 @@ const HomeHeader = () => {
   }, [dispatch, user]);
 
   return (
-    <div className="container  ">
+    <div className="container  dark:bg-zinc-800 ">
       
       <div className="flex justify-between dark:bg-zinc-800   items-center w-full h-20 px-4 lg:px-24 md:px-24 text-white  absolute z-10 ">
         <div className="flex items-center gap-8">

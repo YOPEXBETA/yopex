@@ -22,7 +22,7 @@ const Features = () => {
             </p>
           </div>
           <div className=" cursor-pointer mt-16 grid divide-x divide-y divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-3xl border border-gray-100 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
-            <div className="group relative bg-white dark:bg-green-600 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+            <div className="group relative bg-white dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
               <div className="relative space-y-8 py-12 p-8">
                 <FaBriefcase className="w-10 h-10 dark:text-white" />
 
@@ -54,7 +54,7 @@ const Features = () => {
                 </a>
               </div>
             </div>
-            <div className="group relative bg-white dark:bg-green-600 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+            <div className="group relative bg-white dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
               <div className="relative space-y-8 py-12 p-8">
                 <RiLightbulbLine className="w-10 h-10 dark:text-white" />
 
@@ -88,7 +88,7 @@ const Features = () => {
                 </a>
               </div>
             </div>
-            <div className="group relative bg-white dark:bg-green-600 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+            <div className="group relative bg-white dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
               <div className="relative space-y-8 py-12 p-8">
                 <AiOutlineFileText className="w-10 h-10 dark:text-white" />
 
@@ -122,8 +122,8 @@ const Features = () => {
                 </a>
               </div>
             </div>
-            <div className="group relative bg-gray-50 dark:bg-green-600 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-              <div className="relative space-y-8 py-12 p-8 transition duration-300 group-hover:bg-white dark:group-hover:bg-green-700">
+            <div className="group relative bg-gray-50 dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+              <div className="relative space-y-8 py-12 p-8 transition duration-300 group-hover:bg-white dark:group-hover:bg-green-600">
                 <FiUsers className="w-10 h-10 dark:text-white" />
 
                 <div className="space-y-2">
