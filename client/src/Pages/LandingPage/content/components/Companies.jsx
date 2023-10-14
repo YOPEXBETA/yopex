@@ -5,7 +5,7 @@ import LoadingSpinner from "../../../../Components/LoadingSpinner";
 const Companies = () => {
   const { data: companies, isLoading } = useCompanies();
 
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
 
   const sortedCompanies = companies?.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
