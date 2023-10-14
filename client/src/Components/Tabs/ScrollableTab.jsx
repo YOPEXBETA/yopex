@@ -31,7 +31,7 @@ export default function ScrollableTabs() {
   if (categories)
     return (
       <div className="w-full">
-        <div className="bg-white shadow-md p-4 rounded-lg dark:bg-zinc-800 dark:shadow-green-600 dark:shadow-sm border-green-500 border-b-2">
+        <div className="p-4 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
           <div className="border-b border-gray-200 mb-4">
             <div>
               <nav className="flex">

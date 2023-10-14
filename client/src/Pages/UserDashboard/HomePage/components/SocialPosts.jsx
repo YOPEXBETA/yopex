@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 //card
 import SocialPostCard from "../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const SocialPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,7 +40,7 @@ const SocialPosts = () => {
     <div>
       <div className="space-y-2 ">
         {isLoading ? (
-          <p>Loading posts...</p>
+          <LoadingSpinner />
         ) : (
           posts?.map((post, index) => (
             <SocialPostCard

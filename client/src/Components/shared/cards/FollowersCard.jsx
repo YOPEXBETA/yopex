@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const FollowersCard = ({ follower }) => {
   return (
-    <div className="shadow-md border-green-500 border-b-2 bg-white dark:bg-zinc-800 dark:shadow-sm dark:shadow-green-600 rounded-lg p-4 flex items-center justify-center">
+    <div className="divide-gray-100 p-4 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
       <Link
         to={`/profile/${follower._id}`}
         key={follower._id}

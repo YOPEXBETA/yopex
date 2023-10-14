@@ -8,7 +8,7 @@ const UserProgressCard = () => {
 
   return (
     <div>
-      <div className="rounded-lg px-6 py-[1.15rem] bg-white dark:bg-zinc-800 dark:shadow-sm dark:shadow-green-600 border-green-500 border-b-2 h-full shadow-md">
+      <div className="px-4 py-2 mt-2 lg:mt-0 md:mt-0 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border md:border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
         <div className="flex flex-col space-y-5">
           <div className="flex items-center gap-4">
             {user.picturePath ? (

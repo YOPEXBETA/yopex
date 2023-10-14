@@ -4,9 +4,7 @@ import { getUserLevelData } from "../../../../utils";
 import { useUserById } from "../../../../hooks/react-query/useUsers";
 import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 
-
 function LinearProgressWithLabel(props) {
- 
   return (
     <div>
       <div spacing={1}>
@@ -19,11 +17,11 @@ function LinearProgressWithLabel(props) {
               ></div>
             </div>
           </div>
-          <div className=" flex justify-between dark:text-gray-100" >
-            <p>PROGRESS</p>
+          <div className=" flex justify-between items-center">
+            <p className="font-medium">Progress</p>
             <div className="text-xs text-center p-0.5 leading-none rounded-full">
-              <span className="text-black font-medium dark:text-gray-100">{props.value}</span>/
-              <span className="text-black font-medium dark:text-gray-100">{props.difference}</span>
+              <span className="font-medium">{props.value}</span>/
+              <span className="font-medium">{props.difference}</span>
             </div>
           </div>
         </div>
@@ -35,8 +33,14 @@ function LinearProgressWithLabel(props) {
 const LevelLoading = () => {
   const { user } = useSelector((state) => state.auth);
   const { data: userProfile } = useUserById(user._id);
-  const { data: levelsData , isloading } = useGetLevels();
-  const userLevel = levelsData ? levelsData.find((level) => level.minScore <= userProfile?.score && level.maxScore >= userProfile?.score) : null;
+  const { data: levelsData, isloading } = useGetLevels();
+  const userLevel = levelsData
+    ? levelsData.find(
+        (level) =>
+          level.minScore <= userProfile?.score &&
+          level.maxScore >= userProfile?.score
+      )
+    : null;
 
   return (
     <div>

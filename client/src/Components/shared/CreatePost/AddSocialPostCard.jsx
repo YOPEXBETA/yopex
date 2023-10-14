@@ -9,7 +9,7 @@ const AddSocialPostCard = () => {
   const toggleModal = () => setOpenPostModal((prev) => !prev);
 
   return (
-    <div className="shadow-md bg-white w-full mx-auto rounded-lg dark:bg-zinc-800 dark:shadow-green-600 dark:shadow-sm  border-green-500 border-b-2">
+    <div className=" divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
       <div className="p-4">
         <div className="flex items-center space-x-2">
           {user.picturePath ? (

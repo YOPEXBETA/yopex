@@ -63,7 +63,7 @@ const SocialPostCard = ({
   };
 
   return (
-    <div className="bg-white w-full mx-auto h-full  rounded-lg dark:bg-zinc-800 dark:shadow-green-600 dark:shadow-md border-green-500 border-b-2 shadow-md">
+    <div className=" divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
       <div className=" flex justify-between items-start">
         <div className=" flex items-center py-4 pl-2 gap-2">
           {post.userPicturePath ? (
@@ -116,7 +116,7 @@ const SocialPostCard = ({
               {post.postPicturePath
                 .slice(currentPage, currentPage + 1)
                 .map((item, index) => (
-                  <div className="group relative" key={index}>
+                  <div className="group relative " key={index}>
                     <SocialPostImage
                       item={item}
                       height={height}
@@ -161,16 +161,18 @@ const SocialPostCard = ({
                 )
               }
             </button>
-            <p className="text-gray-500 dark:text-gray-300">{post.likesCount}</p>
-            <p className="text-gray-500 dark:text-gray-300">like</p>
+            <>
+              <p className="text-gray-500">{post.likesCount}</p>
+              {type !== "profile" && <p className="text-gray-500">like</p>}
+            </>
           </div>
 
-          {/* Comment button */}
-          <div className=" flex items-center p-2">
+          <div className="flex items-center p-2">
             <CommentButton
               post={post}
               category={category}
               commentCount={post.commentCount}
+              type={type}
             />
           </div>
         </div>

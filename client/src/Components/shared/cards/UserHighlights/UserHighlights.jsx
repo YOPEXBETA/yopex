@@ -5,8 +5,8 @@ import CompletedChallenges from "./components/CompletedChallenges";
 
 const UserHighlights = () => {
   return (
-    <div className="bg-white dark:bg-zinc-800 dark:shadow-green-600 dark:shadow-sm shadow-md p-6 border-b-2 border-b-green-500 rounded-lg">
-      <h2 className="text-xl font-medium mb-4 dark:text-gray-200">Highlights</h2>
+    <div className="p-6 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <h2 className="text-xl font-medium mb-4">Highlights</h2>
       <div className="space-y-4">
         <FollowersHighlights />
         <FollowingsHighlights />
