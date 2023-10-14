@@ -1,13 +1,4 @@
 import TokenIcon from "@mui/icons-material/Token";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  Typography,
-} from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
 import React, { useState } from "react";
 import Badge from "./Badge";
 
@@ -17,34 +8,32 @@ const Badges = ({ userProfile }) => {
 
   return (
     <div>
-      <Stack direction="row" spacing={2} alignItems={"flex-end"}>
+      <div className="flex flex-row space-x-2 items-end">
         {userProfile?.badgesEarned?.map((badge) => (
-          <Avatar key={badge._id} src={badge.badgeImg} />
+          <img
+            key={badge._id}
+            src={badge.badgeImg}
+            className="w-10 h-10"
+            alt="Badge"
+          />
         ))}
 
-        <Typography variant="h6" color={"gray"} onClick={toggleModal}>
-          All Badges
-        </Typography>
-
-        <Dialog open={openModal} onClose={toggleModal} fullWidth={true}>
-          <DialogTitle variant="h5">
-            <Stack flexDirection={"row"} columnGap={1} alignItems={"center"}>
+        <div className={`fixed ${openModal ? "block" : "hidden"}`}>
+          <div className="bg-white p-4 w-full">
+            <div className="flex flex-row items-center space-x-1">
               <TokenIcon />
-              <Typography variant="h5">All Badges</Typography>
-            </Stack>
-          </DialogTitle>
-          <Divider />
-          <DialogContent>
-            <Stack spacing={2}>
-              <Stack spacing={2}>
+            </div>
+            <hr className="my-4" />
+            <div className="space-y-2">
+              <div className="space-y-2">
                 {userProfile?.badgesEarned?.map((badge) => (
                   <Badge key={badge._id} badge={badge} />
                 ))}
-              </Stack>
-            </Stack>
-          </DialogContent>
-        </Dialog>
-      </Stack>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

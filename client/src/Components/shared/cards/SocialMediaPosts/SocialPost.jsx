@@ -65,7 +65,7 @@ const SocialPostCard = ({
   return (
     <div className="bg-white w-full mx-auto h-full  rounded-lg dark:bg-zinc-800 dark:shadow-green-600 dark:shadow-md border-green-500 border-b-2 shadow-md">
       <div className=" flex justify-between items-start">
-        <div className=" flex items-center py-6 pl-2 gap-2">
+        <div className=" flex items-center py-4 pl-2 gap-2">
           {post.userPicturePath ? (
             <img
               alt="post"
@@ -116,14 +116,23 @@ const SocialPostCard = ({
               {post.postPicturePath
                 .slice(currentPage, currentPage + 1)
                 .map((item, index) => (
-                  <SocialPostImage
-                    key={index}
-                    item={item}
-                    height={height}
-                    type={type}
-                    width={width}
-                    openModal={openModal}
-                  />
+                  <div className="group relative" key={index}>
+                    <SocialPostImage
+                      item={item}
+                      height={height}
+                      type={type}
+                      width={width}
+                      openModal={openModal}
+                    />
+                    <div className="invisible group-hover:visible absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                      <p
+                        className="text-white cursor-pointer"
+                        onClick={() => openModal()}
+                      >
+                        Click to view
+                      </p>
+                    </div>
+                  </div>
                 ))}
             </div>
           </div>
@@ -133,52 +142,57 @@ const SocialPostCard = ({
         </div>
       </div>
 
-      <div className=" flex items-center gap-6 px-4">
-        <div className="flex items-center gap-2">
-          <button
-            aria-label="add to favorites"
-            onClick={() => {
-              likePost(post._id);
-              setIsLiked(!isliked);
-            }}
-            className="focus:outline-none"
-          >
-            {isliked ? (
-              <AiFillHeart className="text-red-500 w-6 h-6" />
-            ) : (
-              <AiOutlineHeart className="text-gray-500 dark:text-gray-300 w-6 h-6" />
-            )}
-          </button>
-          <p className="dark:text-gray-300 ">{post.likesCount}</p>
-        </div>
-
-        {/* Comment button */}
-        <div className=" flex items-center p-2 dark:text-gray-300 ">
-          <CommentButton
-          
-            post={post}
-            category={category}
-            commentCount={post.commentCount}
-          />
-        </div>
-
-        {ownerId == post.userId ? (
-          ""
-        ) : (
-          <div className="flex items-center gap-1">
+      <div className="flex items-center justify-between px-4">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
             <button
-              aria-label="bookmark"
-              onClick={() => bookmark(post._id)}
+              aria-label="add to favorites"
+              onClick={() => {
+                likePost(post._id);
+                //setIsLiked(!isliked);
+              }}
               className="focus:outline-none"
             >
-              {bookmarks.includes(post._id) ? (
-                <BsBookmarkFill className="text-green-500 w-5 h-5" />
-              ) : (
-                <BsBookmark className="text-gray-500 w-5 h-5 dark:text-gray-300 " />
-              )}
+              {
+                /*isliked*/ user._id in post.likes ? (
+                  <AiFillHeart className="text-red-500 w-6 h-6" />
+                ) : (
+                  <AiOutlineHeart className="text-gray-500 w-6 h-6" />
+                )
+              }
             </button>
+            <p className="">{post.likesCount}</p>
           </div>
-        )}
+
+          {/* Comment button */}
+          <div className=" flex items-center p-2">
+            <CommentButton
+              post={post}
+              category={category}
+              commentCount={post.commentCount}
+            />
+          </div>
+        </div>
+        <div>
+          {ownerId == post.userId ? (
+            ""
+          ) : (
+            <div className="flex items-center gap-1">
+              <button
+                aria-label="bookmark"
+                onClick={() => bookmark(post._id)}
+                className="focus:outline-none"
+              >
+                {bookmarks.includes(post._id) ? (
+                  <BsBookmarkFill className="text-green-500 w-5 h-5" />
+                ) : (
+                  <BsBookmark className="text-gray-500 w-5 h-5" />
+                )}
+              </button>
+              <p className="">{post.BookMarks.length}</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

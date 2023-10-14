@@ -24,11 +24,13 @@ export const AddCompanyModal = ({ open, handleClose }) => {
       setUploadProgress,
       "companyLogo"
     );
-    const documentPath = await uploadFile(
+    let documentPath ="";
+    if (data.document != undefined){
+    documentPath = await uploadFile(
       data.document[0],
       setUploadProgressdoc,
       "companyDocument"
-    );
+    );}
     mutate({
       companyName: data.name,
       companyDescription: data.description,
@@ -91,7 +93,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                             ? // Display the file names when files are selected
                               `Files selected: ${field.value.length}`
                             : // Display this when no file is chosen
-                              "Upload File"}
+                              "Upload Image"}
                         </span>
                         <input
                           type="file"
@@ -119,7 +121,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                 <Controller
                   name="document"
                   control={control}
-                  rules={{ required: true }}
+                  rules={{ required: false }}
                   onChange={(value) => setValue("document", value)}
                   render={({ field }) => (
                     <div className="mt-4">

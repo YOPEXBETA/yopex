@@ -55,7 +55,6 @@ const SocialPosts = () => {
           ))
         )}
       </div>
-      {/* Render the SocialPostModal conditionally 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <SocialPostModal
@@ -64,7 +63,7 @@ const SocialPosts = () => {
             post={selectedPost}
           />
         </div>
-      )}*/}
+      )}
     </div>
   );
 };
