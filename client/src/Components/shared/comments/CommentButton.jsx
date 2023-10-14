@@ -8,7 +8,7 @@ import {
 import { useForm } from "react-hook-form";
 import CommentModal from "../Modals/CommentModal";
 
-const CommentButton = ({ post, category, commentCount }) => {
+const CommentButton = ({ post, category, commentCount, type }) => {
   const { data: comments } = useCommentsByPosts(post._id);
   const { register, handleSubmit, reset } = useForm();
   const { mutate, isLoading } = useAddComment(post._id, category, post.userId);
@@ -33,7 +33,7 @@ const CommentButton = ({ post, category, commentCount }) => {
           <FaRegComment className="text-gray-500 w-5 h-5" />
         </button>
         <p className="text-gray-500">{commentCount}</p>
-        <p className="text-gray-500">Comment</p>
+        {type !== "profile" && <p className="text-gray-500">Comment</p>}
       </div>
 
       <CommentModal

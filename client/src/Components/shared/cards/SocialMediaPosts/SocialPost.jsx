@@ -161,16 +161,18 @@ const SocialPostCard = ({
                 )
               }
             </button>
-            <p className="text-gray-500">{post.likesCount}</p>
-            <p className="text-gray-500">like</p>
+            <>
+              <p className="text-gray-500">{post.likesCount}</p>
+              {type !== "profile" && <p className="text-gray-500">like</p>}
+            </>
           </div>
 
-          {/* Comment button */}
-          <div className=" flex items-center p-2">
+          <div className="flex items-center p-2">
             <CommentButton
               post={post}
               category={category}
               commentCount={post.commentCount}
+              type={type}
             />
           </div>
         </div>

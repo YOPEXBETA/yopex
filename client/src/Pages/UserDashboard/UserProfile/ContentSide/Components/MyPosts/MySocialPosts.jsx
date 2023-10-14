@@ -47,6 +47,7 @@ const MySocialPosts = () => {
               height={"48"}
               width={"96"}
               openModal={() => openModal(post)}
+              type="profile"
             />
           ))
         ) : (
