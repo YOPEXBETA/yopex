@@ -7,6 +7,7 @@ import {
 } from "../../../../../../../hooks/react-query/useUsers";
 import { timeSince } from "../../../../../../../utils";
 import { io } from "socket.io-client";
+import AvatarProfile from "../../../../../../../assets/images/AvatarProfile.jpg";
 import { NotificationsModal } from "../../../../../../../Components/shared/Modals/NotificationsModal";
 
 const NotificationBell = () => {
@@ -36,7 +37,6 @@ const NotificationBell = () => {
   useEffect(() => {
     if (!socket) return;
     socket.on("notification", (notification) => {
-      
       setNotifications((prev) => [notification, ...prev]);
       setNbrNotifications((prev) => prev + 1);
     });
@@ -119,32 +119,45 @@ const NotificationBell = () => {
                     className="flex items-center p-4 space-x-4 hover:bg-gray-100 w-full text-left"
                     onClick={() => mutate(notification?._id)}
                   >
-                    <img
-                      src={
-                        notification?.user
-                          ? notification?.user?.picturePath
-                          : notification?.job
-                          ? notification?.job.company?.picturePath
-                          : user?.picturePath
-                      }
-                      className="w-10 h-10 rounded-full"
-                    />
+                    {notification?.user?.picturePath ||
+                    (notification?.job
+                      ? notification?.job?.company?.picturePath
+                      : user?.picturePath) ? (
+                      <img
+                        src={
+                          notification?.user
+                            ? notification?.user?.picturePath
+                            : notification?.job
+                            ? notification?.job.company?.picturePath
+                            : user?.picturePath
+                        }
+                        className="w-10 h-10 rounded-full"
+                      />
+                    ) : (
+                      <img
+                        alt="default"
+                        src={AvatarProfile}
+                        className="w-10 h-10 rounded-full"
+                      />
+                    )}
                     <div className="flex-grow">
-                      <h5 className="text-md font-bold">
-                        {notification?.user
-                          ? notification?.user?.firstname +
-                            " " +
-                            notification?.user?.lastname
-                          : notification?.job
-                          ? notification?.job.company?.companyName
-                          : user.firstname}
-                      </h5>
-                      <p className="text-sm text-gray-500">
-                        {notification?.message}
-                        <span className="font-bold">
-                          {notification?.job ? notification?.job?.title : ""}
-                        </span>
-                      </p>
+                      <div className="flex items-center gap-1">
+                        <h5 className="text-sm text-gray-500">
+                          {notification?.user
+                            ? notification?.user?.firstname +
+                              " " +
+                              notification?.user?.lastname
+                            : notification?.job
+                            ? notification?.job.company?.companyName
+                            : user.firstname}
+                        </h5>
+                        <p className="text-sm text-gray-500 truncate w-60">
+                          {notification?.message}
+                          <span className="font-bold">
+                            {notification?.job ? notification?.job?.title : ""}
+                          </span>
+                        </p>
+                      </div>
                       <p className="text-xs text-gray-500">
                         sent {timeSince(notification?.createdAt)} ago
                       </p>
