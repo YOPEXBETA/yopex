@@ -25,7 +25,7 @@ const SocialPostModal = ({ closeModal, post }) => {
 
   return (
     <div className="min-h-screen flex z-50 justify-center items-center bg-white w-full">
-      <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center overflow-y-auto">
+      <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center overflow-y-auto mb-8">
         <div className="max-w-full md:max-w-5xl w-full bg-white rounded-lg h-full p-4">
           {/* Image */}
           <div className="flex  md:flex-row items-start justify-between">
@@ -100,7 +100,7 @@ const SocialPostModal = ({ closeModal, post }) => {
               <img
                 src={post.postPicturePath[currentPage]}
                 alt="Profile"
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover rounded-lg max-h-[40rem]"
               />
               <div className="flex justify-center mt-3 absolute bottom-4 left-0 w-full z-10">
                 {renderPaginationDots()}
