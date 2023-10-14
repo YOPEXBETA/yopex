@@ -19,7 +19,7 @@ const ChallengeCard = ({ challenge, type }) => {
     <div>
       <Link to={`/browse/contestDetails/${challenge._id}`}>
         <div
-          className={`w-full h-full flex-col lg:h-40 border-b-2 gap-6 bg-white md:flex-row lg:pr-11 shadow-md border-green-500 md:rounded-lg flex`}
+          className={`w-full h-full flex-col lg:h-40 border-b-2 gap-6 bg-white md:flex-row lg:pr-11 rounded-2xl border border-gray-300 divide-gray-100 dark:divide-gray-700 md:rounded-lg flex`}
         >
           <div className="w-full xl:w-[30%]">
             <img

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useBookmarkedPosts } from "../../../../../../hooks/react-query/usePosts";
 import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
+import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 
 const Bookmarks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +31,7 @@ const Bookmarks = () => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
         {isLoading ? (
-          <p>Loading posts...</p>
+          <LoadingSpinner />
         ) : bookmarksId.length === 0 ? (
           <p>No Favorites found.</p>
         ) : (

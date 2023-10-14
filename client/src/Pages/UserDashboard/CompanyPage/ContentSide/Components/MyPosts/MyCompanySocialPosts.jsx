@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useUserPosts } from "../../../../../../hooks/react-query/usePosts";
 import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
+import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 
 const MyCompanySocialPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,9 +25,9 @@ const MyCompanySocialPosts = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4  py-5">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 py-5">
         {isLoading ? (
-          <p>Loading posts...</p>
+          <LoadingSpinner />
         ) : posts?.length ? (
           posts.map((post) => (
             <SocialPostCard
