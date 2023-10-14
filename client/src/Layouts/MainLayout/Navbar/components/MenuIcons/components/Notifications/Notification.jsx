@@ -149,7 +149,7 @@ const NotificationBell = () => {
                               notification?.user?.lastname
                             : notification?.job
                             ? notification?.job.company?.companyName
-                            : user.firstname}
+                            : ""}
                         </h5>
                         <p className="text-sm text-gray-500 truncate w-60">
                           {notification?.message}
