@@ -157,12 +157,12 @@ const SocialPostCard = ({
                 /*isliked*/ user._id in post.likes ? (
                   <AiFillHeart className="text-red-500 w-6 h-6" />
                 ) : (
-                  <AiOutlineHeart className="text-gray-500 w-6 h-6" />
+                  <AiOutlineHeart className="text-gray-500 w-6 h-6 dark:text-gray-300" />
                 )
               }
             </button>
-            <p className="text-gray-500">{post.likesCount}</p>
-            <p className="text-gray-500">like</p>
+            <p className="text-gray-500 dark:text-gray-300">{post.likesCount}</p>
+            <p className="text-gray-500 dark:text-gray-300">like</p>
           </div>
 
           {/* Comment button */}

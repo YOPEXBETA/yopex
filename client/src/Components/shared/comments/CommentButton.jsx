@@ -32,8 +32,8 @@ const CommentButton = ({ post, category, commentCount }) => {
         <button className="rounded-full" onClick={handleButtonClick}>
           <FaRegComment className="text-gray-500 w-5 h-5 dark:text-gray-300 " />
         </button>
-        <p className="text-gray-500">{commentCount}</p>
-        <p className="text-gray-500">Comment</p>
+        <p className="text-gray-500 dark:text-gray-300">{commentCount}</p>
+        <p className="text-gray-500 dark:text-gray-300">Comment</p>
       </div>
 
       <CommentModal
