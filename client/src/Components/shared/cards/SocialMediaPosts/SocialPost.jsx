@@ -161,7 +161,8 @@ const SocialPostCard = ({
                 )
               }
             </button>
-            <p className="">{post.likesCount}</p>
+            <p className="text-gray-500">{post.likesCount}</p>
+            <p className="text-gray-500">like</p>
           </div>
 
           {/* Comment button */}
