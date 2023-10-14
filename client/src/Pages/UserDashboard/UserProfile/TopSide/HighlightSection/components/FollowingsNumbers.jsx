@@ -9,8 +9,8 @@ const FollowingsNumbers = () => {
 
   return (
     <div className=" flex items-center gap-2 justify-between">
-      <p className="text-zinc-500"> Followings</p>
-      <p className="text-lg">{ followings?.userFollowingss.length +followings?.companyFollowings.length }</p>
+      <p className="text-zinc-500 dark:text-gray-200"> Followings</p>
+      <p className="text-lg dark:text-gray-200">{ followings?.userFollowingss.length +followings?.companyFollowings.length }</p>
     </div>
   );
 };

@@ -21,7 +21,7 @@ const MyChallenges = () => {
               />
             ))
           ) : (
-            <p>No Challenge Found.</p>
+            <p className="dark:text-gray-200 text-md "> No Challenge Found.</p>
           )}
         </div>
       </div>

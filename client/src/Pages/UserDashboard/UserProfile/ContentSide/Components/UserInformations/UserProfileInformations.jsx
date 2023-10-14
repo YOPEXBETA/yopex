@@ -13,32 +13,32 @@ const UserProfileInformations = () => {
   console.log(userProfile);
 
   return (
-    <div class="bg-white rounded-lg shadow-md p-6 mx-auto  w-full">
-      <h2 class="text-2xl font-semibold mb-4">About</h2>
+    <div class="bg-white dark:bg-zinc-800 dark:shadow-sm dark:shadow-green-600 rounded-lg shadow-md p-6 mx-auto  w-full">
+      <h2 class="text-2xl font-semibold mb-4 dark:text-gray-200">About</h2>
 
       <div class="space-y-4">
         {userProfile?.email?.length !== 0 && (
           <div>
-            <label class="text-gray-600">Email:</label>
-            <p class="font-semibold">{userProfile?.email}</p>
+            <label class="text-gray-600 dark:text-gray-300">Email:</label>
+            <p class="font-semibold dark:text-gray-200">{userProfile?.email}</p>
           </div>
         )}
         {userProfile?.phoneNumber?.length !== 0 && (
           <div>
-            <label class="text-gray-600">Phone:</label>
-            <p class="font-semibold">{userProfile?.phoneNumber}</p>
+            <label class="text-gray-600 dark:text-gray-300">Phone:</label>
+            <p class="font-semibold dark:text-gray-200">{userProfile?.phoneNumber}</p>
           </div>
         )}
         {userProfile?.gender?.length !== 0 && (
           <div>
-            <label class="text-gray-600">Gender:</label>
-            <p class="font-semibold">{userProfile?.gender}</p>
+            <label class="text-gray-600 dark:text-gray-300">Gender:</label>
+            <p class="font-semibold dark:text-gray-200">{userProfile?.gender}</p>
           </div>
         )}
         {userProfile?.birthDate?.length !== 0 && (
           <div>
-            <label class="text-gray-600">Birth Date:</label>
-            <p class="font-semibold">
+            <label class="text-gray-600 dark:text-gray-300">Birth Date:</label>
+            <p class="font-semibold dark:text-gray-200">
               {userProfile?.birthDate
                 ? new Date(userProfile?.birthDate).toLocaleDateString()
                 : "N/A"}

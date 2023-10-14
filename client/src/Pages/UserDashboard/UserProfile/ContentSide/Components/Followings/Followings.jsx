@@ -15,7 +15,7 @@ const Followings = () => {
         <>
           {followings?.userFollowingss?.length === 0 &&
           followings?.companyFollowings?.length === 0 ? (
-            <p>No Followings Found.</p>
+            <p className="dark:text-gray-200 text-md">No Followings Found.</p>
           ) : (
             <>
               {followings.userFollowingss.map((following) => (

@@ -36,7 +36,7 @@ const MySocialPosts = () => {
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 py-2 mb-12">
         {isLoading ? (
-          <p>Loading posts...</p>
+          <p className="dark:text-gray-200 text-md">Loading posts...</p>
         ) : posts?.length > 0 ? (
           posts.map((post, index) => (
             <SocialPostCard
@@ -50,7 +50,7 @@ const MySocialPosts = () => {
             />
           ))
         ) : (
-          <p>No Posts Found.</p>
+          <p className="dark:text-gray-200 text-md">No Posts Found.</p>
         )}
       </div>
 
