@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useCreatePost } from "../../../hooks/react-query/usePosts";
 import uploadFile from "../../../utils/uploadFile";
+import { FaImage } from "react-icons/fa";
+import Select from "react-select";
 
 export const AddSocialPostModal = ({ open, handleClose }) => {
   // Global states |  @redux/toolkit
@@ -33,10 +35,14 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
       postPicturePath.push(await uploadFile(file, setUploadProgress));
     }
 
+    const selectedCategories = data.categories.map(
+      (category) => category.value
+    );
+
     mutate({
       userId: user._id,
       description: data.description,
-      categories: data.categories,
+      categories: selectedCategories,
       postPicturePath: postPicturePath,
     });
 
@@ -64,26 +70,28 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                     {...register("description", { required: true })}
                     placeholder="What's on your mind?"
                   />
-
                   <Controller
                     name="categories"
                     control={control}
-                    render={() => (
-                      <Autocomplete
-                        multiple
-                        limitTags={2}
-                        id="multiple-limit-tags"
-                        options={categories ? categories : []}
-                        onChange={(e, values) => setValue("categories", values)}
-                        getOptionLabel={(option) => option.name}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            label="categories"
-                            placeholder="categories"
-                          />
-                        )}
-                      />
+                    render={({ field: { onChange, value } }) => (
+                      <div className="w-full">
+                        <Select
+                          isMulti
+                          options={
+                            categories
+                              ? categories.map((category) => ({
+                                  label: category.name,
+                                  value: category,
+                                }))
+                              : []
+                          }
+                          onChange={(selectedOptions) =>
+                            onChange(selectedOptions)
+                          }
+                          value={value}
+                          className="w-full border-gray-300 rounded focus:outline-none focus:border-green-500"
+                        />
+                      </div>
                     )}
                   />
 
@@ -98,21 +106,22 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                       </div>
                     </div>
                   )}
-
                   <Controller
                     name="files"
                     control={control}
                     rules={{ required: true }}
                     render={({ field }) => (
                       <div className="mt-4">
-                        <label className="block w-full p-2 hover:bg-green-700 border rounded-md shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer">
-                          <span className="text-green-600">
-                            {field.value && field.value.length > 0
-                              ? // Display the file names when files are selected
-                                `Files selected: ${field.value.length}`
-                              : // Display this when no file is chosen
-                                "Upload File"}
-                          </span>
+                        <label className="w-12 h-12 p-2 flex items-center justify-center hover:bg-green-700 border rounded-full shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer">
+                          {field.value && field.value.length > 0 ? (
+                            <span className="text-green-600">
+                              <FaImage />
+                            </span>
+                          ) : (
+                            <span className="text-green-600">
+                              <FaImage />
+                            </span>
+                          )}
                           <input
                             type="file"
                             multiple
@@ -120,6 +129,11 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                             className="hidden"
                           />
                         </label>
+                        {field.value && field.value.length > 0 && (
+                          <div className="text-green-600 mt-2">
+                            Files selected: {field.value.length}
+                          </div>
+                        )}
                       </div>
                     )}
                   />
