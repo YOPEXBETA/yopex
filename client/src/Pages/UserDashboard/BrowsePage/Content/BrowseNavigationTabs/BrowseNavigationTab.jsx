@@ -7,7 +7,7 @@ const BrowseNavigationTab = ({ value, changeValue }) => {
         className={`py-2 px-4 border-b-2 ${
           value === 0
             ? "border-green-500 text-green-500"
-            : "text-zinc-500 border-zinc-500"
+            : "text-zinc-500 border-zinc-500 dark:text-gray-200"
         }`}
         onClick={() => changeValue(0)}
       >
@@ -17,7 +17,7 @@ const BrowseNavigationTab = ({ value, changeValue }) => {
         className={`py-2 px-4 border-b-2 ${
           value === 1
             ? "border-green-500 text-green-500"
-            : "text-zinc-500 border-gray-500"
+            : "text-zinc-500 border-gray-500 dark:text-gray-200"
         }`}
         onClick={() => changeValue(1)}
       >

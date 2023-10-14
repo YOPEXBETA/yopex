@@ -16,7 +16,7 @@ const BrowseContentPage = ({
   const [maxAmount, setMaxAmount] = useState(null);
 
   return (
-    <div className=" space-y-6">
+    <div className=" space-y-6 ">
       <div spacing={2}>
         {value === 0 && (
           <div className="grid grid-cols-2 md:grid-cols-12 gap-2">

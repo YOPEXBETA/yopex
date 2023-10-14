@@ -33,7 +33,7 @@ const Bookmarks = () => {
         {isLoading ? (
           <LoadingSpinner />
         ) : bookmarksId.length === 0 ? (
-          <p>No Favorites found.</p>
+          <p className="dark:text-gray-200">No Favorites found.</p>
         ) : (
           posts?.map((post) => (
             <SocialPostCard

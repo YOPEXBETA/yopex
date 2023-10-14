@@ -24,7 +24,7 @@ export default function Privacy() {
  
   return (
     <React.Fragment>
-      <Stack>
+      <Stack >
         <Typography 
         className="dark:text-gray-200"
         variant="h5" gutterBottom>
@@ -53,7 +53,7 @@ export default function Privacy() {
             <input
             type="password"
               placeholder="Enter old password"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-800 dark:text-gray-200 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               {...register("oldPassword")}
             />
           </div>
@@ -63,7 +63,7 @@ export default function Privacy() {
             <label className="dark:text-gray-200 text-gray-600">New Password</label>
             <input
               placeholder="New Password"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border border-gray-300 dark:bg-zinc-800 dark:text-gray-200 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               type="password"
               {...register("password")}
             />
@@ -76,7 +76,7 @@ export default function Privacy() {
             <input
               type="password"
               placeholder="ReType Password"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border border-gray-300 dark:bg-zinc-800 dark:text-gray-200 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               {...register("password2")}
             />
           </div>

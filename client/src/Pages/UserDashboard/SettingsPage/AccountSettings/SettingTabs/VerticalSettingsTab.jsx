@@ -34,7 +34,7 @@ TabPanel.propTypes = {
 
 const VerticalSettingsTab = ({ changeValue, value }) => {
   return (
-    <div className="flex flex-col bg-white mt-8 dark:bg-zinc-800  h-screen">
+    <div className="flex  md:h-max flex-col bg-white mt-8 dark:bg-zinc-800  ">
       <button
         className={`w-full py-3 px-4 focus:outline-none ${
           value === 0

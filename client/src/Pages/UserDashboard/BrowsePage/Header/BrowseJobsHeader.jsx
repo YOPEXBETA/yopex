@@ -42,21 +42,21 @@ const BrowseJobsHeader = ({
   };
 
   return (
-    <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end  bg-black ">
+    <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end dark:bg-zinc-700  bg-black ">
       <div className="space-y-2 items-start">
         <h1 className="text-white text-2xl font-bold">Browse Jobs</h1>
         <div className="flex space-x-2 ">
           <input
             type="text"
             placeholder="Search for Jobs"
-            className=" w-full py-2 px-3 outline-none rounded border border-white text-white bg-black hover:border-green-500"
+            className=" w-full py-2 px-3 outline-none rounded border dark:bg-zinc-700 border-white text-white bg-black hover:border-green-500"
             onChange={(e) => setJobQuery(e.target.value)}
           />
           <div>
             <div>
               <button
                 onClick={toggleDropdownCatgory}
-                className="py-2 px-4 outline-none rounded border border-white text-white bg-black hover:border-green-500"
+                className="py-2 px-4 outline-none rounded border border-white text-white dark:bg-zinc-700 bg-black hover:border-green-500"
               >
                 Categories
               </button>
@@ -87,7 +87,7 @@ const BrowseJobsHeader = ({
             <div>
               <button
                 onClick={toggleDropdown}
-                className="py-2 px-4 outline-none rounded border border-white text-white bg-black hover:border-green-500"
+                className="py-2 px-4 outline-none rounded border border-white dark:bg-zinc-700 text-white bg-black hover:border-green-500"
               >
                 Skills
               </button>

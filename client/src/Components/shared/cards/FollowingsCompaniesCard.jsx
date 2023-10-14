@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const FollowingsCompaniesCard = ({ following }) => {
   return (
-    <div className="shadow-md border-green-500 border-b-2 rounded-lg dark:shadow-sm dark:shadow-green-600 p-4 flex items-center justify-center">
+    <div className="p-4 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
       <Link
         to={`/company/${following._id}`}
         key={following._id}
