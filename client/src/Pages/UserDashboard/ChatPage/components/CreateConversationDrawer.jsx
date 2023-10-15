@@ -142,7 +142,7 @@ export default function CreateConversationDrawer() {
         onClick={toggleDrawer("left", true)}
         style={{ pointerEvents: state.left ? "none" : "auto" }}
       >
-        <AddIcon label="Open Left Sidebar" variant="outlined" />
+        <AddIcon label="Open Left Sidebar" className="dark:text-gray-200" variant="outlined" />
       </button>
 
       <SwipeableDrawer

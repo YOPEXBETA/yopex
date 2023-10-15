@@ -6,10 +6,10 @@ import MyAppliersJob from "./Components/MyAppliers/MyAppliers";
 
 const CompanyPageContent = ({ changeValue, value }) => {
   return (
-    <div>
+    <div className="dark:bg-zinc-800 min-h-screen">
       {value === 0 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full xl:px-16 lg:px-6 px-0">
+          <div className="w-full  lg:w-12/12 md:w-12/12 xs:w-full xl:px-16 lg:px-6 px-0">
             <MyCompanySocialPosts />
           </div>
         </div>

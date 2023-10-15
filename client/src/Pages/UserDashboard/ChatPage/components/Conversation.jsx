@@ -73,7 +73,7 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
         </div>
       ) : (
         <div
-          className="lg:block lg:fixed lg:h-[82vh] xl:w-[75%] lg:overflow-auto lg:pb-8"
+          className="lg:block lg:fixed  lg:h-[82vh] xl:w-[75%] lg:overflow-auto lg:pb-8"
           ref={chatContainerRef}
         >
           {arrivalMessage?.map((message, index) => {
@@ -125,12 +125,12 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
                 </div>
               </div>
             );
-          })}
+          })} 
         </div>
       )}
 
       <form onSubmit={handleCreateMessage}>
-        <div className="fixed bottom-0 xl:w-3/4 w-full p-4 flex items-center bg-white border-t-2 border-gray-200">
+        <div className="fixed bottom-0 xl:w-3/4 w-full p-4 flex items-center dark:bg-zinc-800 bg-white border-t-2 border-gray-200">
           <div className="w-11/12">
             <input
               type="text"

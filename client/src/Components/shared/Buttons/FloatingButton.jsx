@@ -80,28 +80,28 @@ const FloatingButton = () => {
           >
             <button
               onClick={handleClickOpenModalWork}
-              className="block p-4 text-center   text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
+              className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
             >
-              <FaSuitcase className="mr-2 inline-block" />
+              <FaSuitcase className="mr-2 inline-block dark:text-gray-200" />
             </button>
             <button
               onClick={handleClickOpenModalChallenge}
-              className="block p-4 text-center  text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
+              className="block p-4 text-center  text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
             >
-              <FaFire className="mr-2 inline-block" />
+              <FaFire className="mr-2 inline-block dark:text-gray-200" />
             </button>
 
             <button
               onClick={handleClickOpenModalCompany}
-              className="block p-4 text-center   text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
+              className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
             >
-              <FaBuilding className="mr-2 inline-block" />
+              <FaBuilding className="mr-2 inline-block dark:text-gray-200" />
             </button>
             <button
               onClick={handleClickOpenModalPost}
-              className="block p-4 text-center   text-sm w-full text-gray-700 bg-white shadow-lg rounded-full"
+              className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
             >
-              <FaPen className="mr-2 inline-block" />
+              <FaPen className="mr-2 inline-block dark:text-gray-200" />
             </button>
           </div>
         )}

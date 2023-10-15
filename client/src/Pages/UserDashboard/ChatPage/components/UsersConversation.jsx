@@ -58,7 +58,8 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
     setMessage("");
   };
   return (
-    <div className="flex-1 pt-4  justify-between flex flex-col h-[80vh] lg:h-full">
+    <div className="dark:bg-zinc-800 lg:max-h-screen">
+    <div className="flex-1 pt-4  min-h-[80vh] justify-between flex flex-col ">
       <div className="flex sm:items-center justify-between pb-3 border-b-2 border-gray-200 px-4">
         <div className="relative flex items-center justify-between space-x-4">
           <img
@@ -66,7 +67,7 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
             alt=""
             className="w-10 sm:w-12 h-10 sm:h-12 rounded-full"
           />
-          <div className="text-lg mt-1 flex items-center font-bold">
+          <div className="text-lg mt-1  dark:text-gray-200 flex items-center font-bold">
             <span className="mr-3">
               {otherUser.firstname} {otherUser.lastname}
             </span>
@@ -77,11 +78,11 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
       <div
         id="messages"
         ref={chatContainerRef}
-        className="flex flex-col space-y-4 lg:p-3 p-0 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch h-80  w-full px-4 overflow-auto lg:overflow-auto"
+        className="flex flex-col  space-y-4 lg:p-3 p-0 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch h-80  w-full px-4 overflow-auto lg:overflow-auto"
       >
         {arrivalMessage?.length === 0 ? (
           <div>
-            <p className="opacity-50 text-xl">
+            <p className="opacity-70 text-xl dark:text-gray-200">
               Open a conversation to start a chat
             </p>
           </div>
@@ -94,7 +95,7 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
                     <div className="col-span-12">
                       {message.sender._id === user._id ? (
                         <div className="text-right">
-                          <p>{message.message}</p>
+                          <p className="dark:text-gray-200 text-md">{message.message}</p>
                           <p className="text-gray-500 text-[0.75rem]">
                             {formatDistance(
                               new Date(message.createdAt),
@@ -120,8 +121,8 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
                               />
                             )}
                             <div>
-                              <p>{message.message}</p>
-                              <p className="text-gray-500 text-[0.75rem]">
+                              <p className="dark:text-gray-200 text-md">{message.message}</p>
+                              <p className="text-gray-500 dark:text-gray-400 text-[0.75rem]">
                                 {formatDistance(
                                   new Date(message.createdAt),
                                   new Date(),
@@ -141,14 +142,14 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
         )}
       </div>
 
-      <div className="border-t-2 border-gray-200 px-4 pt-4 mb-10 sm:mb-0">
+      <div className="border-t-2 mt-5  border-gray-200 px-4 pt-4 mb-10 sm:mb-0">
         <form className="relative flex" onSubmit={handleCreateMessage}>
           <input
             type="text"
             value={message}
             onChange={(event) => setMessage(event.target.value)}
             placeholder="Write your message!"
-            className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-4 bg-gray-200 rounded-md py-3"
+            className="w-full focus:outline-none dark:bg-zinc-700 dark:placeholder-gray-200 dark:text-gray-200 focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-4 bg-gray-200 rounded-md py-3"
           />
           <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
             <button
@@ -169,6 +170,7 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };
