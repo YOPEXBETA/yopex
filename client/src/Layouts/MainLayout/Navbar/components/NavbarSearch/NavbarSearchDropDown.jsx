@@ -65,7 +65,7 @@ export default function NavbarSearchDropDown() {
                       alt={option.companyName}
                       className="w-8 h-8 rounded-full"
                     />
-                    <span className="text-[#000000]">{option.companyName}</span>
+                    <span className="text-[#000000] dark:text-gray-100">{option.companyName}</span>
                   </div>
                 )}
               </li>
