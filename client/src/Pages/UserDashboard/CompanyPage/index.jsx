@@ -9,7 +9,7 @@ const Company = () => {
   };
 
   return (
-    <div>
+    <div className="dark:bg-zinc-800">
       <CompanyProfileInformations changeValue={changeValue} value={value} />
       <CompanyPageContent value={value} changeValue={changeValue} />
     </div>

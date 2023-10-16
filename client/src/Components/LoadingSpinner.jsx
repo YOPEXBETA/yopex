@@ -2,7 +2,7 @@ import React from "react";
 
 const LoadingSpinner = () => (
   <svg
-    className="animate-spin h-5 w-5 mr-3"
+    className="animate-spin h-5 w-5 mr-3 dark:text-green-500  "
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
@@ -12,7 +12,7 @@ const LoadingSpinner = () => (
       cx="12"
       cy="12"
       r="10"
-      stroke="currentColor"
+      stroke="currentColor "
       strokeWidth="4"
     ></circle>
     <path

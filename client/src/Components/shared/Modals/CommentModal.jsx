@@ -20,14 +20,14 @@ const CommentModal = ({
           onClick={handleDialogClose}
         >
           <div
-            className="bg-white p-4 shadow-md rounded-lg w-[40rem]"
+            className="bg-white dark:bg-zinc-700 p-4 shadow-md rounded-lg w-[40rem]"
             onClick={(e) => e.stopPropagation()}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-row space-x-2">
                 <input
                   id="comment-textfield"
-                  className="flex-grow outline-none border border-gray-300 rounded-md p-2"
+                  className="flex-grow outline-none border dark:bg-zinc-600 dark:placeholder-gray-300 dark:text-gray-200 border-gray-300 rounded-md p-2"
                   type="text"
                   placeholder="Enter your comment"
                   {...register("desc")}
@@ -56,12 +56,12 @@ const CommentModal = ({
                           />
                           <div className="ml-2 w-full">
                             <div className="flex gap-2  items-start">
-                              <p className="text-md font-semibold">
+                              <p className="text-md font-semibold dark:text-gray-200">
                                 {`${comment.userId.firstname} ${comment.userId.lastname}`}
                               </p>
 
                               <div className="flex justify-between items-start ">
-                                <p className="text-md text-gray-400 ">
+                                <p className="text-md text-gray-400 dark:text-gray-400 ">
                                   {" "}
                                   |{" "}
                                   {formatDistance(
@@ -74,14 +74,14 @@ const CommentModal = ({
                                 </p>
                                 {comment.userId._id === user._id && (
                                   <CommentMenuIcon
-                                    className="text-black text-md  "
+                                    className="text-black text-md   "
                                     post={comment}
                                   />
                                 )}
                               </div>
                             </div>
 
-                            <p className="text-md text-zinc-700 whitespace-nowrap max-w-[70px]">
+                            <p className="text-md dark:text-gray-200 text-zinc-700 whitespace-nowrap max-w-[70px]">
                               {comment.desc}
                             </p>
                           </div>

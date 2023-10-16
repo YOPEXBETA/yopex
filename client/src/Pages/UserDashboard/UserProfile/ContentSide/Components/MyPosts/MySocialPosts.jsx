@@ -52,7 +52,7 @@ const MySocialPosts = () => {
             />
           ))
         ) : (
-          <p>No Posts Found.</p>
+          <p className="dark:text-gray-200 text-md">No Posts Found.</p>
         )}
       </div>
 

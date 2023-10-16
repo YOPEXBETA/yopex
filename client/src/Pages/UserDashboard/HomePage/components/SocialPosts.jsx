@@ -38,7 +38,7 @@ const SocialPosts = () => {
 
   return (
     <div>
-      <div className="space-y-2">
+      <div className="space-y-2 ">
         {isLoading ? (
           <LoadingSpinner />
         ) : (

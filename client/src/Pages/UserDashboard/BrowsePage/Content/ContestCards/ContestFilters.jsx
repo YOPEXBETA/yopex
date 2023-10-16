@@ -44,10 +44,10 @@ const ContestsFilters = ({
   }, [maxAmount, setMaxAmount]);
 
   return (
-    <div className="bg-white md:rounded-lg border-b-2 p-4 md:border-green-500 border-zinc-200 md:shadow-md">
+    <div className="bg-white md:rounded-lg border-b-2 p-4 dark:bg-zinc-700   md:border-green-500 border-zinc-200 md:shadow-md">
       <form className="space-y-4">
         <div className="space-y-2">
-          <label htmlFor="min-amount" className="font-bold text-lg mb-4">
+          <label htmlFor="min-amount" className="font-bold text-lg mb-4 dark:text-gray-200">
             Filters
           </label>
 
@@ -55,7 +55,8 @@ const ContestsFilters = ({
             <input
               id="min-amount"
               type="number"
-              className="border rounded-md p-2 w-full"
+
+              className="border rounded-md dark:bg-zinc-700 p-2 w-full"
               placeholder="Min Price Amount"
               {...register("minAmount")}
             />
@@ -65,7 +66,7 @@ const ContestsFilters = ({
             <input
               id="max-amount"
               type="number"
-              className="border rounded-md p-2 w-full"
+              className="border rounded-md dark:bg-zinc-700 p-2 w-full"
               placeholder="Max Price Amount"
               {...register("maxAmount")}
             />
@@ -74,7 +75,7 @@ const ContestsFilters = ({
       </form>
       <div className="relative inline-block text-left w-full pt-2">
         <div>
-          <label className="font-bold text-md mb-4">Skills</label>
+          <label className="font-bold text-md mb-4 dark:text-gray-200">Skills</label>
           <div className="py-2 max-h-40 overflow-y-auto">
             {itSkills?.map((skillName) => (
               <label
@@ -99,7 +100,7 @@ const ContestsFilters = ({
         </div>
       </div>
       <div>
-        <label className="font-bold text-md mb-4">Categories</label>
+        <label className="font-bold text-md mb-4 dark:text-gray-200">Categories</label>
         <div className="py-2 max-h-40 overflow-y-auto">
           {itCategory?.map((CategoryName) => (
             <label

@@ -27,7 +27,7 @@ const AddSocialPostCard = () => {
           )}
           <input
             type="text"
-            className="flex-1 px-3  focus:outline-none rounded-full h-10 bg-gray-100"
+            className="flex-1 px-3  focus:outline-none rounded-full h-10 dark:bg-zinc-700 dark:placeholder-gray-200 bg-gray-100"
             placeholder="Share your work..."
             onClick={toggleModal}
           />

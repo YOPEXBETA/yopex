@@ -34,7 +34,7 @@ const Challenges = ({
           <ChallengeCard key={item._id} challenge={item} />
         ))
       ) : (
-        <p>No Challenges found</p>
+        <p className="dark:text-gray-200 text-lg">No Challenges found</p>
       )}
     </div>
   );

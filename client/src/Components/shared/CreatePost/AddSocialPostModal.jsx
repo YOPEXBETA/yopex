@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -6,7 +6,8 @@ import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useCreatePost } from "../../../hooks/react-query/usePosts";
 import uploadFile from "../../../utils/uploadFile";
 import { FaImage } from "react-icons/fa";
-import Select from "react-select";
+
+
 
 export const AddSocialPostModal = ({ open, handleClose }) => {
   // Global states |  @redux/toolkit

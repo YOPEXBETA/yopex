@@ -20,9 +20,9 @@ const JobOfferModal = ({ open, handleClose, job }) => {
       className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}
       onClick={handleClose}
     >
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-transparent absolute inset-0 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-lg">
+      <div className="flex justify-center  items-center min-h-screen">
+        <div className="bg-transparent  absolute inset-0 flex justify-center items-center">
+          <div className="bg-white dark:bg-zinc-800  rounded-lg shadow-xl w-full max-w-lg">
             <div className="p-8">
               <div className="flex items-center gap-4">
                 <img
@@ -31,19 +31,19 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   className="w-16 h-16 rounded-lg object-cover"
                 />
                 <div>
-                  <p className="text-lg font-bold">{job.title}</p>
-                  <p>By {job?.company?.companyName}</p>
+                  <p className="text-lg font-bold dark:text-gray-200">{job.title}</p>
+                  <p className="dark:text-gray-200">By {job?.company?.companyName}</p>
                 </div>
               </div>
 
               <hr className="my-4 border-t" />
 
-              <p className="mb-4">{job?.description}</p>
+              <p className="mb-4 dark:text-gray-200">{job?.description}</p>
 
               <hr className="my-4 border-t" />
 
               <div className="flex justify-between">
-                <p className="text-md font-semibold">Posted from</p>
+                <p className="text-md font-semibold dark:text-gray-200">Posted from</p>
                 <p className="text-md font-normal text-green-500">
                   {formatDistance(new Date(job?.createdAt), new Date(), {
                     addSuffix: true,
@@ -53,9 +53,9 @@ const JobOfferModal = ({ open, handleClose, job }) => {
             </div>
             <hr className="my-2" />
 
-            <div className="flex justify-between px-4 py-2 bg-white">
+            <div className="flex dark:bg-zinc-800 justify-between px-4 py-2 bg-white">
               <button
-                className="border-2 border-green-500 hover:bg-gray-200 text-green-500 px-4 py-2 rounded"
+                className="border-2 border-green-500 dark:hover:bg-green-500 dark:text-gray-200 hover:bg-gray-200 text-green-500 px-4 py-2 rounded"
                 onClick={handleClose}
               >
                 Cancel

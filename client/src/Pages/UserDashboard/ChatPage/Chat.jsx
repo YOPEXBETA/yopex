@@ -50,17 +50,17 @@ const Chat = () => {
           <UsersMsgs />
         </div>
       </div>
-      <div className="bg-white w-full relative lg:hidden md:hidden border-b-2 py-4">
+      <div className="bg-white dark:bg-zinc-800  w-full relative lg:hidden md:hidden border-b-2 py-4">
         <div className="border-gray-300  lg:hidden md:hidden pl-6 l">
           <button onClick={toggleSidebar} className="text-2xl">
-            {isSidebarOpen ? <FaTimes /> : <FaBars />}
+            {isSidebarOpen ? <FaTimes className="dark:text-gray-200"  /> : <FaBars className="dark:text-gray-200"/>}
           </button>
         </div>
       </div>
 
       {/* Sidebar */}
       <UserMsgsSideBar isOpen={isSidebarOpen} />
-      <div className="block lg:col-span-3  mb-8">
+      <div className="block dark:bg-zinc-800 lg:h-full  lg:col-span-3  mb-8">
         <UsersConversation
           conversationId={selectedConversationId}
           socket={socket}

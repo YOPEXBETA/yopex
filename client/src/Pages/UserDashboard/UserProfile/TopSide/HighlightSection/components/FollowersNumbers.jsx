@@ -7,9 +7,9 @@ const FollowersNumbers = () => {
   const { data: followers } = useUserFollowers(userId);
 
   return (
-    <div className=" flex items-center gap-2 justify-between">
-      <p className="text-zinc-500">Followers</p>
-      <p className="text-lg">{followers?.length}</p>
+    <div className=" flex items-center gap-2  justify-between">
+      <p className="text-zinc-500 dark:text-gray-200 ">Followers</p>
+      <p className="text-lg dark:text-gray-200">{followers?.length}</p>
     </div>
   );
 };

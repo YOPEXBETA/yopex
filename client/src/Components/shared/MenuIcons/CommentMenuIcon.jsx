@@ -59,29 +59,29 @@ const CommentMenuIcon = ({ post }) => {
     <div className="relative inline-block text-center z-20">
       <button
         onClick={handleClick}
-        className="hover:bg-gray-100 px-2 py-2 rounded-full"
+        className="hover:bg-gray-100 dark:hover:bg-transparent px-2 py-2 rounded-full"
       >
-        <HiDotsVertical className="text-gray-600 text-lg" />
+        <HiDotsVertical className="text-gray-600 dark:hover:text-green-700 dark:text-gray-200 text-lg" />
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-lg">
+        <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-700 border border-gray-200 shadow-lg rounded-lg">
           <ul>
             <li>
               <button
                 onClick={handleDeleteClickModal}
-                className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
+                className="flex items-center px-4 py-2 dark:text-gray-200 hover:bg-gray-100 w-full"
               >
-                <FaTrash className="text-gray-500 mr-2" />
+                <FaTrash className="text-gray-500 mr-2 dark:text-gray-200" />
                 Delete Comment
               </button>
             </li>
             <li>
               <button
                 onClick={handleEditClick}
-                className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
+                className="flex items-center px-4 py-2 dark:text-gray-200 hover:bg-gray-100 w-full"
               >
-                <FaEdit className="text-gray-500 mr-2" />
+                <FaEdit className="text-gray-500 mr-2 dark:text-gray-200" />
                 Edit Comment
               </button>
             </li>

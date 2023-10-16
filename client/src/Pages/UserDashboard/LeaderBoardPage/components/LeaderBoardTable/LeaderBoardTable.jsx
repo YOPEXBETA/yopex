@@ -8,7 +8,8 @@ const LeaderbordTable = ({ data, query }) => {
 
   const [rankedUsers, setRankedUsers] = useState([]);
   //
-
+  const searchQ = query.toLowerCase();
+  
   useEffect(() => {
     if (!data) return;
     const res = data
@@ -31,24 +32,25 @@ const LeaderbordTable = ({ data, query }) => {
   };
   return (
     <div>
-      <div className="border border-gray-300 rounded-md overflow-hidden bg-white">
+      <div className="  overflow-hidden  bg-white">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
+          <table className="min-w-full divide-y  divide-gray-200">
             <thead className="text-black">
-              <tr className="bg-white h-11">
-                <th className="py-2 px-4 text-left">RANK</th>
-                <th className="py-2 px-4 text-left">USER</th>
-                <th className="py-2 px-4 text-left">COUNTRY</th>
-                <th className="py-2 px-4 text-right">POINTS</th>
+              <tr className="bg-white dark:bg-zinc-700  h-11">
+                <th className="py-2 px-4 text-left dark:text-gray-200">RANK</th>
+                <th className="py-2 px-4 text-left dark:text-gray-200">USER</th>
+                <th className="py-2 px-4 text-left dark:text-gray-200">COUNTRY</th>
+                <th className="py-2 px-4 text-right dark:text-gray-200">POINTS</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y  divide-gray-200">
               {rankedUsers
                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(
                   (user) =>
-                    (user.firstname.includes(query) ||
-                      user.lastname.includes(query)) && (
+                    (  user.firstname.toLowerCase().includes(searchQ) ||
+                      user.lastname.toLowerCase().includes(searchQ) 
+                    ) && (
                       <UserRow user={user} key={user._id} />
                     )
                 )}
@@ -56,9 +58,9 @@ const LeaderbordTable = ({ data, query }) => {
           </table>
         </div>
       </div>
-      <div className="flex items-center justify-between py-2 px-4 text-black bg-white border-2">
+      <div className="flex items-center justify-between dark:bg-zinc-700 py-2 px-4 text-black dark:border-transparent rounded-md bg-white border-2">
         <div className="flex items-center gap-3">
-          <span className="text-sm">Rows per page:</span>
+          <span className="text-sm dark:text-gray-200">Rows per page:</span>
           <select
             className="mx-2 px-2 py-1 border rounded-md text-black "
             value={rowsPerPage}
@@ -70,22 +72,22 @@ const LeaderbordTable = ({ data, query }) => {
           </select>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-sm">
+          <span className="text-sm dark:text-gray-200">
             {page * rowsPerPage + 1} -{" "}
             {Math.min((page + 1) * rowsPerPage, data?.length || 0)} of{" "}
             {data?.length || 0}
           </span>
           <button
-            className="px-2 py-1 rounded-full hover:bg-gray-700 transition-colors duration-200"
+            className="px-2 py-1 rounded-full hover:bg-gray-700 dark:hover:bg-green-500 transition-colors duration-200"
             onClick={() => handleChangePage(page - 1)}
           >
-            <FaChevronLeft />
+            <FaChevronLeft className="dark:text-gray-200 " />
           </button>
           <button
-            className="px-2 py-1 rounded-full hover:bg-gray-700 transition-colors duration-200"
+            className="px-2 py-1 rounded-full hover:bg-gray-700 dark:hover:bg-green-500 transition-colors duration-200"
             onClick={() => handleChangePage(page + 1)}
           >
-            <FaChevronRight />
+            <FaChevronRight className="dark:text-gray-200" />
           </button>
         </div>
       </div>

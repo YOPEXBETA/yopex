@@ -17,7 +17,7 @@ const RecentJobs = () => {
 
   return (
     <div
-      className="mx-auto py-10 lg:px-24 md:px-11 bg-white  border-gray-500"
+      className="mx-auto py-10 lg:px-24 md:px-11 dark:bg-zinc-800 bg-white  border-gray-500"
       id="about"
     >
       <div class="mb-12 space-y-2 text-center">
@@ -47,7 +47,7 @@ const RecentJobs = () => {
               onClick={() => handlePageChange(i)}
               className={`${
                 i === currentPage
-                  ? "bg-gray-800"
+                  ? "bg-gray-800 dark:bg-green-500"
                   : "bg-gray-300 hover:bg-gray-400"
               } w-3 h-3 rounded-full mx-2 cursor-pointer`}
             />

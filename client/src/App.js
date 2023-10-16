@@ -2,13 +2,24 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ScrollTop from "./Components/ScrollTop";
 import Routes from "./routes/index";
-import { useEffect } from "react";
+import { useEffect , useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { Helmet } from "react-helmet";
 
 const queryClient = new QueryClient();
 
 const App = () => {
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.theme === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.theme = isDarkMode ? 'dark' : 'light';
+  }, [isDarkMode]);
   //console.log("Process", process.env.REACT_APP_API_ENDPOINT);
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);

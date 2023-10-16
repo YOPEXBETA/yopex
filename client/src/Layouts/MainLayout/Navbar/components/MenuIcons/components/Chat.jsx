@@ -54,7 +54,7 @@ const Chat = () => {
           <div className="absolute top-0 right-0">
             <button
               onClick={handleClick}
-              className="flex items-center justify-center rounded-full  w-8 h-8 text-gray-600"
+              className="flex items-center justify-center rounded-full  w-8 h-8 dark:text-gray-100 dark:hover:text-green-600 text-gray-600"
             >
               <ChatIcon />
             </button>
@@ -69,14 +69,14 @@ const Chat = () => {
         {isMenuOpen && (
           <div
             ref={menuRef}
-            className="absolute z-10 right-0 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible"
+            className="absolute z-10 right-0 mt-2 dark:bg-zinc-700 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible"
           >
             <ul>
               <li>
                 <div className="p-4">
-                  <h4 className="text-xl font-bold">Chats</h4>
+                  <h4 className="text-xl font-bold dark:text-gray-200">Chats</h4>
                 </div>
-                <hr className="border-t border-gray-200" />
+                <hr className="border-t dark:border-gray-200 border-gray-200" />
               </li>
               {conversations?.slice(0, 5).map((conversation) => {
                 const otherUser = conversation.members.find(
@@ -92,7 +92,7 @@ const Chat = () => {
                     <li>
                       <Link
                         to={`/chat/${conversation.conversationId}`}
-                        className="flex items-center p-4 space-x-4 hover:bg-gray-100"
+                        className="flex items-center p-4 space-x-4 hover:bg-gray-200 dark:hover:bg-green-600"
                       >
                         <img
                           src={otherUser.picturePath}
@@ -100,10 +100,10 @@ const Chat = () => {
                         />
 
                         <div className="flex-grow">
-                          <h6 className="text-md font-semibold">
+                          <h6 className="text-md font-semibold dark:text-gray-200">
                             {otherUser.firstname} {otherUser.lastname}
                           </h6>
-                          <div className="flex items-center space-x-1 text-sm text-gray-500">
+                          <div className="flex items-center space-x-1 dark:text-gray-200 text-sm text-gray-500">
                             <div className="truncate max-w-[190px]">
                               {otherUser.latestMessage}
                             </div>
@@ -121,10 +121,10 @@ const Chat = () => {
                   </div>
                 );
               })}
-              <li>
+              <li className="hover:bg-gray-100 rounded-lg ">
                 <Link
                   to="/chat"
-                  className="block p-4 text-center hover:bg-gray-100"
+                  className="block p-4 text-center   "
                 >
                   <p className="text-green-500">View all in Chat</p>
                 </Link>

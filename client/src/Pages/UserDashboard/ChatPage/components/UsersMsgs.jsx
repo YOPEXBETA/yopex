@@ -9,9 +9,10 @@ const UsersMsgs = ({ onConversationSelect }) => {
   const { user } = useSelector((state) => state.auth);
   const { data: conversations } = useConversations(user._id);
   return (
-    <div className="w-full overflow-auto h-[88vh] bg-white sticky">
+    <div className="dark:bg-zinc-800 bg-white h-screen lg:h-auto">
+    <div className="w-full overflow-auto h-[88vh]   sticky">
       <div className="flex justify-between items-center px-4 py-2">
-        <p className="text-lg font-bold">Chats</p>
+        <p className="text-lg font-bold dark:text-gray-200">Chats</p>
         <CreateConversationDrawer />
       </div>
       <div className="w-full my-0.5 border-l border-gray-200 border-b-2" />
@@ -25,7 +26,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
             <div key={conversation.conversationId}>
               <Link
                 to={`/chat/${conversation.conversationId}`}
-                className=" hover:bg-gray-100 p-4
+                className=" hover:bg-gray-100 dark:hover:bg-green-600 p-4
                 sm :p-2 flex flex-col gap-2 w-full"
               >
                 <div className="flex gap-4 items-center">
@@ -37,8 +38,8 @@ const UsersMsgs = ({ onConversationSelect }) => {
                   <div>
                     <div>
                       <div className=" flex flex-row gap-1">
-                        <p className="font-semibold">{otherUser.firstname}</p>
-                        <p className="font-semibold">
+                        <p className="font-semibold dark:text-gray-200">{otherUser.firstname}</p>
+                        <p className="font-semibold dark:text-gray-200">
                           {otherUser.lastname}
                           {otherUser.companyName
                             ? `(${otherUser.companyName})`
@@ -47,7 +48,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
                       </div>
                     </div>
                     <div>
-                      <p className="text-[0.8rem] truncate max-w-[250px] text-gray-500">
+                      <p className="text-[0.8rem] dark:text-gray-200 truncate max-w-[250px] text-gray-500">
                         {otherUser.latestMessage}
                       </p>
                     </div>
@@ -59,6 +60,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
           );
         } else return null;
       })}
+    </div>
     </div>
   );
 };

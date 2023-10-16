@@ -27,16 +27,16 @@ export default function NavbarSearchDropDown() {
         value={query}
         onChange={handleSearchUsers}
         placeholder="Search for users"
-        className=" w-full p-3 border rounded-full focus:outline-none focus:ring focus:border-blue-300 text-[#000000] bg-gray-100"
+        className=" w-full p-3 border rounded-full focus:outline-none dark:placeholder-gray-100  dark:bg-zinc-700 dark:border-zinc-800 dark:text-gray-100 dark:focus:border-green-600 focus:border-green-300 text-[#000000] bg-gray-100"
       />
 
       {query && isSuccess && open && (
-        <ul className="absolute z-10 mt-2 xl:w-72 w-full bg-white border rounded-md shadow-lg">
+        <ul className="absolute z-10 mt-2 xl:w-72 w-full bg-white dark:bg-zinc-700 border dark:border-green-600  rounded-md shadow-lg">
           {displayedUsers.map((option, index) => {
             return (
               <li
                 key={option._id || index}
-                className="p-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-100"
+                className="p-2 flex items-center space-x-2 cursor-pointer dark:hover:bg-green-600 hover:bg-gray-100"
                 onClick={() => {
                   if (option.firstname && option.lastname) {
                     navigate(`/profile/${option._id}`);
@@ -54,7 +54,7 @@ export default function NavbarSearchDropDown() {
                       alt={`${option.firstname} ${option.lastname}`}
                       className="w-8 h-8 rounded-full"
                     />
-                    <span className="text-[#000000]">
+                    <span className="text-[#000000] dark:text-gray-100">
                       {option.firstname} {option.lastname}
                     </span>
                   </div>
@@ -65,7 +65,7 @@ export default function NavbarSearchDropDown() {
                       alt={option.companyName}
                       className="w-8 h-8 rounded-full"
                     />
-                    <span className="text-[#000000]">{option.companyName}</span>
+                    <span className="text-[#000000] dark:text-gray-100">{option.companyName}</span>
                   </div>
                 )}
               </li>

@@ -89,7 +89,7 @@ const NotificationBell = () => {
               handleClick();
               mutate();
             }}
-            className="flex items-center justify-center rounded-full  w-8 h-8 text-gray-600"
+            className="flex items-center justify-center rounded-full dark:text-gray-100 dark:hover:text-green-600  w-8 h-8 text-gray-600"
           >
             <NotificationsIcon />
           </button>
@@ -103,12 +103,12 @@ const NotificationBell = () => {
       {isMenuOpen && (
         <div
           ref={menuRef}
-          className={`absolute z-10 right-28 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible filter drop-shadow(0px 2px 8px rgba(0,0,0,0.32)) `}
+          className={`absolute z-10 right-28 mt-2 dark:bg-zinc-700 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible filter drop-shadow(0px 2px 8px rgba(0,0,0,0.32)) `}
         >
           <ul>
             <li>
               <div className="p-4">
-                <h4 className="text-xl font-bold">Notifications</h4>
+                <h4 className="text-xl font-bold dark:text-gray-200">Notifications</h4>
               </div>
               <hr className="border-t border-gray-200" />
             </li>
@@ -116,7 +116,7 @@ const NotificationBell = () => {
               <div key={notification?._id}>
                 <li>
                   <button
-                    className="flex items-center p-4 space-x-4 hover:bg-gray-100 w-full text-left"
+                    className="flex items-center p-4 space-x-4 hover:bg-green-600 hover:bg-gray-100 w-full text-left"
                     onClick={() => mutate(notification?._id)}
                   >
                     {notification?.user?.picturePath ||
@@ -142,23 +142,23 @@ const NotificationBell = () => {
                     )}
                     <div className="flex-grow">
                       <div className="flex items-center gap-1">
-                        <h5 className="text-sm text-gray-500">
+                        <h5 className="text-sm dark:text-gray-200 text-gray-500">
                           {notification?.user
                             ? notification?.user?.firstname +
                               " " +
                               notification?.user?.lastname
                             : notification?.job
                             ? notification?.job.company?.companyName
-                            : user.firstname}
+                            : ""}
                         </h5>
-                        <p className="text-sm text-gray-500 truncate w-60">
+                        <p className="text-sm text-gray-500 dark:text-gray-200 truncate w-60">
                           {notification?.message}
                           <span className="font-bold">
                             {notification?.job ? notification?.job?.title : ""}
                           </span>
                         </p>
                       </div>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs dark:text-gray-200 text-gray-500">
                         sent {timeSince(notification?.createdAt)} ago
                       </p>
                     </div>

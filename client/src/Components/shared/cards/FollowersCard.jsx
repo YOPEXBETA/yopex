@@ -14,12 +14,12 @@ const FollowersCard = ({ follower }) => {
           <img
             alt="yourphoto"
             src={follower.picturePath}
-            className="w-28 h-28 rounded-full items-center mx-auto object-cover  border-2"
+            className="w-28 h-28 rounded-full items-center dark:border-0 mx-auto object-cover  border-2"
           />
 
           <div className="flex items-center mt-2 gap-1">
-            <p className="text-lg font-md">{follower.firstname}</p>
-            <p className="text-lg font-md">{follower.lastname}</p>
+            <p className="text-lg font-md dark:text-gray-200">{follower.firstname}</p>
+            <p className="text-lg font-md dark:text-gray-200">{follower.lastname}</p>
           </div>
         </div>
       </Link>

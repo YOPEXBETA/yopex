@@ -35,18 +35,26 @@ export default function App() {
 
   return (
     <Stack>
-      <Typography variant="h5" gutterBottom>
+      <Typography 
+      className="dark:text-gray-200"
+      variant="h5" gutterBottom>
         Billing Informations
       </Typography>
-      <Divider />
+      <Divider className="dark:bg-gray-200"/>
       <br />
-      <Card>
+      <Card
+      className="dark:bg-zinc-700"
+      >
         <CardContent>
           <Stack spacing={2}>
-            <Typography variant="h6" gutterBottom>
+            <Typography 
+            className="dark:text-gray-200"
+            variant="h6" gutterBottom>
               Current Balance
             </Typography>
-            <Typography variant="h4" gutterBottom>
+            <Typography 
+            className="dark:text-gray-200"
+            variant="h4" gutterBottom>
               {userProfile?.balance} Points
             </Typography>
           </Stack>

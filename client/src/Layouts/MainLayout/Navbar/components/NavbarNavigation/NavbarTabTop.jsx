@@ -33,7 +33,7 @@ const NavbarTabTop = () => {
           to="/feed"
           onClick={() => handleChange(0)}
           className={`block px-4 py-2  xl:text-sm lg:text-sm  md:text-sm font-medium ${
-            value === 0 ? "text-green-500" : "text-gray-500"
+            value === 0 ? "text-green-500" : "text-gray-500 dark:text-gray-100 dark:hover:text-green-600"
           } hover:text-green-500 focus:outline-none`}
         >
           Home
@@ -42,7 +42,7 @@ const NavbarTabTop = () => {
           to="/browse"
           onClick={() => handleChange(1)}
           className={`block px-4 py-2  xl:text-sm lg:text-sm  md:text-sm  font-medium ${
-            value === 1 ? "text-green-500" : "text-gray-500"
+            value === 1 ? "text-green-500" : "text-gray-500 dark:text-gray-100 dark:hover:text-green-600"
           } hover:text-green-500 focus:outline-none`}
         >
           Browse
@@ -51,7 +51,7 @@ const NavbarTabTop = () => {
           to="/leaderboard"
           onClick={() => handleChange(2)}
           className={`block px-4 py-2  xl:text-sm lg:text-sm md:text-sm font-medium ${
-            value === 2 ? "text-green-500" : "text-gray-500"
+            value === 2 ? "text-green-500" : "text-gray-500 dark:text-gray-100 dark:hover:text-green-600"
           } hover:text-green-500 focus:outline-none`}
         >
           Leaderboard
@@ -61,7 +61,7 @@ const NavbarTabTop = () => {
             to="/store"
             onClick={() => handleChange(3)}
             className={`block px-4 py-2  xl:text-sm lg:text-sm md:text-sm font-medium ${
-              value === 3 ? "text-green-500" : "text-gray-500"
+              value === 3 ? "text-green-500" : "text-gray-500 dark:text-gray-100 dark:hover:text-green-600"
             } hover:text-green-500 focus:outline-none`}
           >
             Store

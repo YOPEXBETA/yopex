@@ -89,13 +89,13 @@ const SocialPostCard = ({
               }
               style={{ textDecoration: "none", color: "#000000" }}
             >
-              <p className="text-md font-medium truncate w-52">
+              <p className="text-md font-medium dark:text-gray-300 truncate w-52">
                 {post.companyName !== undefined
                   ? `${post?.companyName}`
                   : `${post?.firstname} ${post?.lastname}`}
               </p>
             </Link>
-            <p className=" text-[14px]  text-gray-500">
+            <p className=" text-[14px] dark:text-gray-400  text-gray-500">
               {formatDistance(new Date(post.createdAt), new Date(), {
                 addSuffix: true,
               })}
@@ -157,7 +157,7 @@ const SocialPostCard = ({
                 /*isliked*/ user._id in post.likes ? (
                   <AiFillHeart className="text-red-500 w-6 h-6" />
                 ) : (
-                  <AiOutlineHeart className="text-gray-500 w-6 h-6" />
+                  <AiOutlineHeart className="text-gray-500 w-6 h-6 dark:text-gray-300" />
                 )
               }
             </button>

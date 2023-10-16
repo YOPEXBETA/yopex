@@ -25,10 +25,10 @@ const UserProgressCard = () => {
               />
             )}
             <div className=" space-y-1">
-              <p className="text-lg font-md">
+              <p className="text-lg font-md dark:text-gray-100">
                 {`${user.firstname} ${user.lastname}`}
               </p>
-              <p className="text-md font-md text-zinc-500">{user.country}</p>
+              <p className="text-md font-md text-zinc-500 dark:text-gray-100">{user.country}</p>
             </div>
           </div>
 

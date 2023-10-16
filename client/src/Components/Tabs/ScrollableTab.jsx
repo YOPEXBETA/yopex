@@ -40,7 +40,7 @@ export default function ScrollableTabs() {
                   className={`px-4 py-2 text-sm font-medium ${
                     selectedCategory === ""
                       ? "text-green-500 border-green-500"
-                      : "text-gray-500"
+                      : "text-gray-500 dark:text-gray-300"
                   } border-b-2 focus:outline-none`}
                 >
                   All
@@ -52,7 +52,7 @@ export default function ScrollableTabs() {
                     className={`px-4 py-2 text-sm font-medium truncate w-48 ${
                       selectedCategory === tab.name
                         ? "text-green-600 border-green-500"
-                        : "text-gray-500"
+                        : "text-gray-500 dark:text-gray-300"
                     } border-b-2 focus:outline-none`}
                   >
                     {tab.name}
@@ -64,7 +64,7 @@ export default function ScrollableTabs() {
                     "md:grid-cols-2 xl:grid-cols-4" // Responsive classes
                   }`}
                 >
-                  <BsThreeDots />
+                  <BsThreeDots className="dark:text-gray-200" />
                 </button>
               </nav>
             </div>

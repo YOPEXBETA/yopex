@@ -5,6 +5,9 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
+
+
+
 function TabPanel({ children, value, index, ...other }) {
   return (
     <div
@@ -31,25 +34,41 @@ TabPanel.propTypes = {
 
 const VerticalSettingsTab = ({ changeValue, value }) => {
   return (
-    <Box>
-      <Tabs
-        orientation="vertical"
-        value={value}
-        onChange={changeValue}
-        variant="scrollable"
-        sx={{
-          borderRight: 1,
-          borderColor: "divider",
-          height: "100vh",
-          paddingTop: "2rem",
-        }}
+    <div className="flex  md:h-max flex-col bg-white mt-8 dark:bg-zinc-800  ">
+      <button
+        className={`w-full py-3 px-4 focus:outline-none ${
+          value === 0
+            ? "bg-green-500 text-white border border-green-500"
+            : "text-gray-500 dark:text-gray-200 border-b dark:border-zinc-600 "
+        }`}
+        onClick={() => changeValue(0)} // Pass 0 to changeValue for the first tab
       >
-        <Tab label="General Informations" />
-        <Tab label="Privacy" />
-        <Tab label="Billing" />
-      </Tabs>
-    </Box>
+        General Information
+      </button>
+      <button
+        className={`w-full py-3 px-4 focus:outline-none ${
+          value === 1
+            ? "bg-green-500 text-white border border-green-500"
+            : "text-gray-500 dark:text-gray-200  border-b dark:border-zinc-600  "
+        }`}
+        onClick={() => changeValue(1)} // Pass 1 to changeValue for the second tab
+      >
+        Privacy
+      </button>
+      <button
+        className={`w-full py-3 px-4 focus:outline-none ${
+          value === 2
+            ? "bg-green-500 text-white border border-green-500"
+            : "text-gray-500 dark:text-gray-200  border-b dark:border-zinc-600  "
+        }`}
+        onClick={() => changeValue(2)} // Pass 2 to changeValue for the third tab
+      >
+        Billing
+      </button>
+      
+    </div>
   );
 };
+
 
 export default VerticalSettingsTab;

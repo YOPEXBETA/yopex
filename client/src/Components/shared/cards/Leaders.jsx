@@ -9,10 +9,10 @@ const Leaders = () => {
     return (
       <div className="p-4 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
         <div className="flex justify-between items-center mb-6">
-          <h4 className="text-xl font-medium">Leaders</h4>
+          <h4 className="text-xl font-medium dark:text-gray-200">Leaders</h4>
           <a
             href="/leaderboard"
-            className="text-sm text-gray-500 hover:underline"
+            className="text-sm text-gray-500 dark:text-gray-400 hover:underline"
           >
             view all
           </a>
@@ -41,8 +41,8 @@ const Leaders = () => {
                   />
                 )}
                 <div className="ml-3">
-                  <h6 className="text-md font-medium">{leader.firstname}</h6>
-                  <p className="text-sm text-gray-500">{leader.country}</p>
+                  <h6 className="text-md font-medium dark:text-gray-200">{leader.firstname}</h6>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{leader.country}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">

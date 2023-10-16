@@ -38,7 +38,7 @@ const FeedbacksPage = () => {
           </div>
         ))
       ) : (
-        <div>No Reviews Found.</div>
+        <div className="dark:text-gray-200">No Reviews Found.</div>
       )}
       <AddReviewModal open={isOpen} onClose={toggleOpen} />
     </div>

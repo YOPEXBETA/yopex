@@ -8,8 +8,8 @@ const FollowingsHighlights = () => {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="text-medium text-gray-500"> Followings</div>
-      <div className="text-xl font-bold">{followings?.userFollowingss.length + followings?.companyFollowings.length}</div>
+      <div className="text-medium text-gray-500 dark:text-gray-200"> Followings</div>
+      <div className="text-xl font-bold dark:text-gray-300">{followings?.userFollowingss.length + followings?.companyFollowings.length}</div>
     </div>
   );
 };

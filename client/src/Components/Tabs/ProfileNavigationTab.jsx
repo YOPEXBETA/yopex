@@ -16,8 +16,8 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         <button
           className={`w-1/2 sm:w-auto py-2 px-4  rounded-tl-lg ${
             value === 0
-              ? "bg-green-500 text-white border-green-500"
-              : "text-gray-500 border-gray-300"
+              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+              : "text-gray-500 border-gray-300 dark:text-gray-300 "
           }`}
           onClick={() => changeValue(0)}
         >
@@ -26,8 +26,8 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         <button
           className={`w-1/2 sm:w-auto py-2 px-4  rounded-tl-lg ${
             value === 1
-              ? "bg-green-500 text-white border-green-500"
-              : "text-gray-500 border-gray-300"
+              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+              : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
           onClick={() => changeValue(1)}
         >
@@ -36,8 +36,8 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         <button
           className={`w-1/2 sm:w-auto py-2 px-4  ${
             value === 2
-              ? "bg-green-500 text-white border-green-500"
-              : "text-gray-500 border-gray-300"
+              ? "bg-green-500 text-white dark:text-gray-200  border-green-500"
+              : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
           onClick={() => changeValue(2)}
         >
@@ -46,8 +46,8 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 3
-              ? "bg-green-500 text-white border-green-500"
-              : "text-gray-500 border-gray-300"
+              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+              : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
           onClick={() => changeValue(3)}
         >
@@ -56,8 +56,8 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 4
-              ? "bg-green-500 text-white border-green-500"
-              : "text-gray-500 border-gray-300"
+              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+              : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
           onClick={() => changeValue(4)}
         >
@@ -66,8 +66,8 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 5
-              ? "bg-green-500 text-white border-green-500"
-              : "text-gray-500 border-gray-300"
+              ? "bg-green-500 text-white "
+              : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
           onClick={() => changeValue(5)}
         >
@@ -77,8 +77,8 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           <button
             className={`w-1/2 sm:w-auto py-2 px-4  rounded-tr-lg ${
               value === 6
-                ? "bg-green-500 text-white border-green-500"
-                : "text-gray-500 border-gray-300"
+                ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                : "text-gray-500 border-gray-300 dark:text-gray-300"
             }`}
             onClick={() => changeValue(6)}
           >
