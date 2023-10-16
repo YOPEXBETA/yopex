@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
@@ -37,7 +35,7 @@ const HorizantalSettingsTab = ({ changeValue, value }) => {
       <button
         className={`flex-1 px-4 focus:outline-none ${
           value === 0
-            ? "bg-green-500 text-white border border-green-500"
+            ? "bg-green-500 text-white border border-green-500 rounded-full py-4"
             : "text-gray-500 dark:text-gray-200 border-r dark:border-zinc-600"
         }`}
         onClick={() => changeValue(0)} // Pass 0 to changeValue for the first tab
@@ -47,7 +45,7 @@ const HorizantalSettingsTab = ({ changeValue, value }) => {
       <button
         className={`flex-1  px-4 focus:outline-none ${
           value === 1
-            ? "bg-green-500 text-white border border-green-500"
+            ? "bg-green-500 text-white border border-green-500 rounded-full py-4"
             : "text-gray-500 dark:text-gray-200 border-r dark:border-zinc-600"
         }`}
         onClick={() => changeValue(1)} // Pass 1 to changeValue for the second tab
@@ -57,7 +55,7 @@ const HorizantalSettingsTab = ({ changeValue, value }) => {
       <button
         className={`flex-1  px-4 focus:outline-none ${
           value === 2
-            ? "bg-green-500 text-white border border-green-500"
+            ? "bg-green-500 text-white border border-green-500 rounded-full py-4"
             : "text-gray-500 dark:text-gray-200"
         }`}
         onClick={() => changeValue(2)} // Pass 2 to changeValue for the third tab
@@ -66,7 +64,6 @@ const HorizantalSettingsTab = ({ changeValue, value }) => {
       </button>
     </div>
   );
-
 };
 
 export default HorizantalSettingsTab;
