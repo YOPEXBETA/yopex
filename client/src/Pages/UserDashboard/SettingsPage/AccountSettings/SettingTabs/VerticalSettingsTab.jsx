@@ -35,7 +35,7 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
       <button
         className={`w-full py-3 px-4 focus:outline-none ${
           value === 0
-            ? "bg-green-500 text-white border border-green-500"
+            ? "bg-green-500 text-white border border-green-500 rounded-2xl"
             : "text-gray-500 dark:text-gray-200  dark:border-zinc-600 "
         }`}
         onClick={() => changeValue(0)}
@@ -45,7 +45,7 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
       <button
         className={`w-full py-3 px-4 focus:outline-none ${
           value === 1
-            ? "bg-green-500 text-white border border-green-500"
+            ? "bg-green-500 text-white border border-green-500 rounded-2xl"
             : "text-gray-500 dark:text-gray-200  dark:border-zinc-600  "
         }`}
         onClick={() => changeValue(1)}
@@ -55,10 +55,10 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
       <button
         className={`w-full py-3 px-4 focus:outline-none ${
           value === 2
-            ? "bg-green-500 text-white border border-green-500"
+            ? "bg-green-500 text-white border border-green-500 rounded-2xl"
             : "text-gray-500 dark:text-gray-200   dark:border-zinc-600  "
         }`}
-        onClick={() => changeValue(2)} // Pass 2 to changeValue for the third tab
+        onClick={() => changeValue(2)}
       >
         Billing
       </button>
