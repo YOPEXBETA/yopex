@@ -1,4 +1,4 @@
-import { Autocomplete, Select, TextField } from "@mui/material";
+import { Autocomplete, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -6,8 +6,7 @@ import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useCreatePost } from "../../../hooks/react-query/usePosts";
 import uploadFile from "../../../utils/uploadFile";
 import { FaImage } from "react-icons/fa";
-
-
+import Select from "react-select";
 
 export const AddSocialPostModal = ({ open, handleClose }) => {
   // Global states |  @redux/toolkit
@@ -56,11 +55,11 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
     <div
       open={open}
       onClose={handleClose}
-      className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}
+      className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"} `}
     >
       <div className="flex justify-center items-center min-h-screen">
         <div className="bg-transparent absolute inset-0 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-xl">
+          <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl w-full max-w-xl">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex justify-between items-center p-4">
                 <h5 className="text-lg font-bold">Create a Post</h5>
@@ -91,7 +90,7 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
               <div className="px-4">
                 <div className="space-y-4">
                   <textarea
-                    className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none"
+                    className="w-full h-40 p-2 border bg-white dark:bg-zinc-700 rounded focus:outline-none resize-none"
                     {...register("description", { required: true })}
                     placeholder="What's on your mind?"
                   />
@@ -99,7 +98,7 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                     name="categories"
                     control={control}
                     render={({ field: { onChange, value } }) => (
-                      <div className="w-full">
+                      <div className="w-full dark:bg-zinc-700">
                         <Select
                           isMulti
                           options={
@@ -114,7 +113,7 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                             onChange(selectedOptions)
                           }
                           value={value}
-                          className="w-full border-gray-300 rounded focus:outline-none focus:border-green-500"
+                          className="w-full border-gray-300 bg-white dark:bg-zinc-700 rounded focus:outline-none focus:border-green-500"
                           placeholder="Select Categories"
                         />
                       </div>

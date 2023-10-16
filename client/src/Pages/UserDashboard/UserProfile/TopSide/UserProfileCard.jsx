@@ -68,7 +68,9 @@ const UserProfileCard = () => {
           </p>
 
           <button className="flex items-center gap-1">
-            <span className="text-xl font-bold text-yellow-500 dark:text-yellow-300 ">{rating}</span>
+            <span className="text-xl font-bold text-yellow-500 dark:text-yellow-300 ">
+              {rating}
+            </span>
             <FaStar className="text-yellow-500 dark:text-yellow-300 w-5 h-5 mb-[0.15rem]" />
           </button>
         </div>
@@ -85,7 +87,7 @@ const UserProfileCard = () => {
               </button>
             </a>
           ) : (
-            <button 
+            <button
               className="cursor-pointer capitalize font-medium hover:scale-105  bg-green-500 py-2 px-4 rounded-lg w-full text-white"
               onClick={mutate}
               sx={{ height: "2rem" }}
@@ -103,13 +105,17 @@ const UserProfileCard = () => {
 
         {userProfile?.badgesEarned?.length !== 0 && (
           <div className="w-full">
-            <p className="mb-2 text-left text-gray-500 dark:text-gray-200">Badges</p>
+            <p className="mb-2 text-left text-gray-500 dark:text-gray-200">
+              Badges
+            </p>
             <Badges userProfile={userProfile} />
           </div>
         )}
         {userProfile?.companies?.length !== 0 && (
           <div className="w-full ">
-            <p className="mb-2 text-left text-gray-500 dark:text-gray-200">Companies</p>
+            <p className="mb-2 text-left text-gray-500 dark:text-gray-200">
+              Companies
+            </p>
             <ul className="flex justify-start gap-2">
               {userProfile.companies.map((company, index) => (
                 <Link key={index} to={`/company/${company._id}`}>
