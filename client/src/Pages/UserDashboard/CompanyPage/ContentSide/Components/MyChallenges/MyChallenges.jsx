@@ -3,6 +3,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router-dom";
 import { useChallengesById } from "../../../../../../hooks/react-query/useChallenges";
 import ChallengeCard from "../../../../../../Components/shared/cards/ChallengeCard";
+import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 
 const MyCompanyChallenges = () => {
   const { companyId } = useParams();
@@ -11,15 +12,8 @@ const MyCompanyChallenges = () => {
 
   if (isLoading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-        }}
-      >
-        <CircularProgress />
+      <div className="flex items-center justify-center">
+        <LoadingSpinner />
       </div>
     );
   }
@@ -36,7 +30,7 @@ const MyCompanyChallenges = () => {
             />
           ))
         ) : (
-          <p>No challenge found.</p>
+          <p className="dark:text-gray-200">No challenge found.</p>
         )}
       </div>
     </div>

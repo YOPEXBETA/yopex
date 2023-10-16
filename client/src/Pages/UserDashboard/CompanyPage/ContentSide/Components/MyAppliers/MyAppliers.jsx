@@ -8,6 +8,7 @@ import {
 } from "../../../../../../hooks/react-query/useJobs";
 import ApplierCard from "../../../../../../Components/shared/cards/ApplierCard";
 import { useAcceptedAppliers } from "../../../../../../hooks/react-query/useJobs";
+import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 
 const MyAppliersJob = () => {
   const [searchAppliers, setSearchAppliers] = useState("");
@@ -27,17 +28,10 @@ const MyAppliersJob = () => {
   const twentyFourHoursAgo = new Date();
   twentyFourHoursAgo.setHours(currentTime.getHours() - 24);
 
-  if (jobsLoading || appliersLoading) {
+  if (appliersLoading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-        }}
-      >
-        <CircularProgress />
+      <div className="flex items-center justify-center">
+        <LoadingSpinner />
       </div>
     );
   }
@@ -47,6 +41,7 @@ const MyAppliersJob = () => {
       <input
         type="text"
         placeholder="Find applier"
+        className="w-full divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4"
         onChange={(e) => setSearchAppliers(e.currentTarget.value)}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4  py-5">

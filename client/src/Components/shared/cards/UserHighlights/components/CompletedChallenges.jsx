@@ -28,8 +28,8 @@ const CompletedChallenges = () => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <div className="text-medium text-gray-500"> Completed Challenges</div>
-        <div className="text-xl font-bold">{completed}</div>
+        <div className="text-medium text-gray-500 dark:text-gray-200"> Completed Challenges</div>
+        <div className="text-xl font-bold dark:text-gray-300">{completed}</div>
       </div>
     </div>
   );

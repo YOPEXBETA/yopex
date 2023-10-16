@@ -40,16 +40,16 @@ const Register = () => {
   }, [success, dispatch, navigate]);
 
   return (
-    <div>
+    <div >
       <form
-        className="md:w-[35rem] w-96 h-full"
+        className="md:w-[35rem] w-80 h-full "
         onSubmit={handleSubmit(onSubmit)}
       >
         {error && <AlertContainer error={error} />}
 
         <div className="grid grid-cols-1 mb-4">
           <div className="flex justify-center">
-            <p className=" text-green-500 font-bold text-4xl">
+            <p className=" text-green-500 font-bold text-2xl md:text-4xl">
               JOIN YOPEX COMMUNITY
             </p>
           </div>
@@ -60,14 +60,14 @@ const Register = () => {
             <div>
               <label
                 for="first_name"
-                className="block mb-2 text-sm font-medium text-gray-400"
+                className="block mb-2 text-sm font-medium dark:text-gray-100 text-gray-400"
               >
                 First name
               </label>
               <input
                 type="text"
                 id="first_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border dark:text-gray-100 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="John"
                 {...register("firstname", { required: true })}
               />
@@ -75,7 +75,7 @@ const Register = () => {
             <div>
               <label
                 for="last_name"
-                className="block mb-2 text-sm font-medium text-gray-400"
+                className="block mb-2 text-sm font-medium dark:text-gray-100 text-gray-400"
               >
                 Last name
               </label>
@@ -92,7 +92,7 @@ const Register = () => {
           <div className="col-span-12">
             <label
               htmlFor="country"
-              className="block mb-2 text-sm font-medium text-gray-400"
+              className="block mb-2 text-sm font-medium dark:text-gray-100 text-gray-400"
             >
               Country
             </label>
@@ -114,7 +114,7 @@ const Register = () => {
             <div className="col-span-12">
               <label
                 for="input-group-1"
-                className="block  text-sm font-medium text-gray-400 mb-2"
+                className="block dark:text-gray-100  text-sm font-medium text-gray-400 mb-2"
               >
                 Email
               </label>
@@ -143,7 +143,7 @@ const Register = () => {
             <div className="col-span-12">
               <label
                 for="input-group-1"
-                className="block  text-sm font-medium text-gray-400 mb-2"
+                className="block  dark:text-gray-100  text-sm font-medium text-gray-400 mb-2"
               >
                 Password
               </label>
@@ -160,14 +160,14 @@ const Register = () => {
                   onClick={togglePasswordVisibility}
                   className="absolute inset-y-0 right-0 flex items-center pr-2"
                 >
-                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                  {showPassword ? <FaEye className="dark:text-gray-100" /> : <FaEyeSlash className="dark:text-gray-100" />}
                 </button>
               </div>
             </div>
             <div className="col-span-12 mt-5">
               <label
                 for="input-group-1"
-                className="block  text-sm font-medium text-gray-400 mb-2"
+                className="block dark:text-gray-100  text-sm font-medium text-gray-400 mb-2"
               >
                 Repeat Password
               </label>
@@ -184,7 +184,7 @@ const Register = () => {
                   onClick={togglePasswordVisibility}
                   className="absolute inset-y-0 right-0 flex items-center pr-2"
                 >
-                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                  {showPassword ? <FaEye className="dark:text-gray-100" /> : <FaEyeSlash className="dark:text-gray-100" />}
                 </button>
               </div>
             </div>
@@ -204,9 +204,9 @@ const Register = () => {
         <div className="grid grid-cols-12 w-full mt-6">
           <div className="col-span-12">
             <div className="flex justify-center gap-1">
-              <p className="text-gray-400">Already have an account?</p>
+              <p className="text-gray-400 dark:text-gray-100">Already have an account?</p>
               <a
-                className="no-underline hover:underline text-sm fontmedium text-green-500"
+                className="no-underline mt-[2px]  hover:underline text-sm fontmedium text-green-500"
                 href="/login"
               >
                 Login
@@ -218,7 +218,7 @@ const Register = () => {
           <div className="col-span-12">
             <div className="flex items-center">
               <hr className="flex-grow border-t border-gray-300" />
-              <p className="text-sm mx-4 text-gray-400">Sign up with</p>
+              <p className="text-sm mx-4 text-gray-400 dark:text-gray-100">Sign up with</p>
               <hr className="flex-grow border-t border-gray-300" />
             </div>
           </div>

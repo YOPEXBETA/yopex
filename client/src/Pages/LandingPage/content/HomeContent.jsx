@@ -10,27 +10,28 @@ import GetStartedNow from "./components/GetStartedNow";
 const HomeContent = () => {
   return (
     <div>
-      <div className="pb-16">
+      <div className="pb-16 dark:bg-zinc-800">
         <HomeSection />
       </div>
-      <div className="pb-16">
+      <div className="pb-16 dark:bg-zinc-800">
         <HighlightSection />
       </div>
-      <div className="pb-16">
+      <div className="pb-16 dark:bg-zinc-800">
         <Features />
       </div>
-      <div className="pb-16">
+      <div className="pb-16 dark:bg-zinc-800">
         <Companies />
       </div>
-      <div className="pb-16">
+      <div className="pb-16 dark:bg-zinc-800">
         <GetStartedNow />
       </div>
-      <div className="pb-16">
+      <div className="pb-16 dark:bg-zinc-800">
         <RecentJobs />
       </div>
       <Contact />
     </div>
   );
 };
+
 
 export default HomeContent;

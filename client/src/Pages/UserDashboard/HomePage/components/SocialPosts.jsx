@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 //card
 import SocialPostCard from "../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const SocialPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,9 +38,9 @@ const SocialPosts = () => {
 
   return (
     <div>
-      <div className="space-y-2">
+      <div className="space-y-2 ">
         {isLoading ? (
-          <p>Loading posts...</p>
+          <LoadingSpinner />
         ) : (
           posts?.map((post, index) => (
             <SocialPostCard
@@ -55,7 +56,6 @@ const SocialPosts = () => {
           ))
         )}
       </div>
-      {/* Render the SocialPostModal conditionally 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <SocialPostModal
@@ -64,7 +64,7 @@ const SocialPosts = () => {
             post={selectedPost}
           />
         </div>
-      )}*/}
+      )}
     </div>
   );
 };

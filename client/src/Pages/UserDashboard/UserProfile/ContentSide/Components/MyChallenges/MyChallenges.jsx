@@ -2,10 +2,15 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useUserChallenges } from "../../../../../../hooks/react-query/useUsers";
 import ChallengeCard from "../../../../../../Components/shared/cards/ChallengeCard";
+import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 
 const MyChallenges = () => {
   const { userId } = useParams();
-  const { data } = useUserChallenges(userId);
+  const { data, isLoading } = useUserChallenges(userId);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   if (data)
     return (
@@ -21,7 +26,7 @@ const MyChallenges = () => {
               />
             ))
           ) : (
-            <p>No Challenge Found.</p>
+            <p className="dark:text-gray-200 text-md "> No Challenge Found.</p>
           )}
         </div>
       </div>

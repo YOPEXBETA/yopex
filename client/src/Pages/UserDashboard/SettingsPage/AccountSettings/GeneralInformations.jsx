@@ -8,10 +8,10 @@ const GeneralInformations = () => {
   return (
     <React.Fragment>
       <Stack>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" className="dark:text-gray-200" gutterBottom>
           General Informations
         </Typography>
-        <Divider />
+        <Divider className=" dark:bg-gray-200" />
         <br />
         <UserEdit />
       </Stack>

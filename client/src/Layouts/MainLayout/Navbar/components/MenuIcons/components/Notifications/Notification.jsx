@@ -7,6 +7,7 @@ import {
 } from "../../../../../../../hooks/react-query/useUsers";
 import { timeSince } from "../../../../../../../utils";
 import { io } from "socket.io-client";
+import AvatarProfile from "../../../../../../../assets/images/AvatarProfile.jpg";
 import { NotificationsModal } from "../../../../../../../Components/shared/Modals/NotificationsModal";
 
 const NotificationBell = () => {
@@ -36,7 +37,6 @@ const NotificationBell = () => {
   useEffect(() => {
     if (!socket) return;
     socket.on("notification", (notification) => {
-      
       setNotifications((prev) => [notification, ...prev]);
       setNbrNotifications((prev) => prev + 1);
     });
@@ -89,7 +89,7 @@ const NotificationBell = () => {
               handleClick();
               mutate();
             }}
-            className="flex items-center justify-center rounded-full  w-8 h-8 text-gray-600"
+            className="flex items-center justify-center rounded-full dark:text-gray-100 dark:hover:text-green-600  w-8 h-8 text-gray-600"
           >
             <NotificationsIcon />
           </button>
@@ -103,12 +103,12 @@ const NotificationBell = () => {
       {isMenuOpen && (
         <div
           ref={menuRef}
-          className={`absolute z-10 right-28 mt-2 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible filter drop-shadow(0px 2px 8px rgba(0,0,0,0.32)) `}
+          className={`absolute z-10 right-28 mt-2 dark:bg-zinc-700 bg-white shadow-lg rounded-lg min-w-[380px] max-w-[380px] overflow-visible filter drop-shadow(0px 2px 8px rgba(0,0,0,0.32)) `}
         >
           <ul>
             <li>
               <div className="p-4">
-                <h4 className="text-xl font-bold">Notifications</h4>
+                <h4 className="text-xl font-bold dark:text-gray-200">Notifications</h4>
               </div>
               <hr className="border-t border-gray-200" />
             </li>
@@ -116,36 +116,49 @@ const NotificationBell = () => {
               <div key={notification?._id}>
                 <li>
                   <button
-                    className="flex items-center p-4 space-x-4 hover:bg-gray-100 w-full text-left"
+                    className="flex items-center p-4 space-x-4 hover:bg-green-600 hover:bg-gray-100 w-full text-left"
                     onClick={() => mutate(notification?._id)}
                   >
-                    <img
-                      src={
-                        notification?.user
-                          ? notification?.user?.picturePath
-                          : notification?.job
-                          ? notification?.job.company?.picturePath
-                          : user?.picturePath
-                      }
-                      className="w-10 h-10 rounded-full"
-                    />
+                    {notification?.user?.picturePath ||
+                    (notification?.job
+                      ? notification?.job?.company?.picturePath
+                      : user?.picturePath) ? (
+                      <img
+                        src={
+                          notification?.user
+                            ? notification?.user?.picturePath
+                            : notification?.job
+                            ? notification?.job.company?.picturePath
+                            : user?.picturePath
+                        }
+                        className="w-10 h-10 rounded-full"
+                      />
+                    ) : (
+                      <img
+                        alt="default"
+                        src={AvatarProfile}
+                        className="w-10 h-10 rounded-full"
+                      />
+                    )}
                     <div className="flex-grow">
-                      <h5 className="text-md font-bold">
-                        {notification?.user
-                          ? notification?.user?.firstname +
-                            " " +
-                            notification?.user?.lastname
-                          : notification?.job
-                          ? notification?.job.company?.companyName
-                          : user.firstname}
-                      </h5>
-                      <p className="text-sm text-gray-500">
-                        {notification?.message}
-                        <span className="font-bold">
-                          {notification?.job ? notification?.job?.title : ""}
-                        </span>
-                      </p>
-                      <p className="text-xs text-gray-500">
+                      <div className="flex items-center gap-1">
+                        <h5 className="text-sm dark:text-gray-200 text-gray-500">
+                          {notification?.user
+                            ? notification?.user?.firstname +
+                              " " +
+                              notification?.user?.lastname
+                            : notification?.job
+                            ? notification?.job.company?.companyName
+                            : ""}
+                        </h5>
+                        <p className="text-sm text-gray-500 dark:text-gray-200 truncate w-60">
+                          {notification?.message}
+                          <span className="font-bold">
+                            {notification?.job ? notification?.job?.title : ""}
+                          </span>
+                        </p>
+                      </div>
+                      <p className="text-xs dark:text-gray-200 text-gray-500">
                         sent {timeSince(notification?.createdAt)} ago
                       </p>
                     </div>

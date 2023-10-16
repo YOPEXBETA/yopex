@@ -38,7 +38,7 @@ const UserProfileCard = () => {
 
   if (userProfile)
     return (
-      <div className="bg-white p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 xl:shadow-md lg:shadow-md h-[100vh] md:shadow-md md:border-green-500 border-b-2 mr-0">
+      <div className="bg-white dark:bg-zinc-800 p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 mr-0">
         <div className="relative">
           <div>
             {userProfile.picturePath ? (
@@ -63,24 +63,26 @@ const UserProfileCard = () => {
         </div>
 
         <div className="flex items-center justify-center gap-2 truncate w-80">
-          <p className="text-xl font-md truncate">
+          <p className="text-xl font-semibold truncate dark:text-gray-200">
             {`${userProfile.firstname} ${userProfile.lastname}`}
           </p>
 
           <button className="flex items-center gap-1">
-            <span className="text-xl font-bold text-yellow-500 ">{rating}</span>
-            <FaStar className="text-yellow-500 w-5 h-5 mb-[0.15rem]" />
+            <span className="text-xl font-bold text-yellow-500 dark:text-yellow-300 ">
+              {rating}
+            </span>
+            <FaStar className="text-yellow-500 dark:text-yellow-300 w-5 h-5 mb-[0.15rem]" />
           </button>
         </div>
 
-        <p className="text-md whitespace-normal">
+        <p className="text-md whitespace-normal dark:text-gray-200">
           {userProfile.userDescription || "No description"}
         </p>
 
         <div className="w-full">
           {userId === user._id ? (
             <a href="/settings" className="block">
-              <button className="cursor-pointer capitalize font-medium hover:scale-105  bg-green-500 py-2 px-4 rounded-lg w-full text-white">
+              <button className="cursor-pointer capitalize font-medium hover:scale-105 hover:bg-green-600 bg-green-500 py-2 px-4 rounded-lg w-full text-white">
                 Edit Profile
               </button>
             </a>
@@ -99,26 +101,34 @@ const UserProfileCard = () => {
         <div className="w-full">
           <HighlightSection />
         </div>
-        <hr className=" border-zinc-400 w-full h-2" />
+        <hr className=" border-zinc-400 w-full" />
+
         {userProfile?.badgesEarned?.length !== 0 && (
           <div className="w-full">
+            <p className="mb-2 text-left text-gray-500 dark:text-gray-200">
+              Badges
+            </p>
             <Badges userProfile={userProfile} />
           </div>
         )}
-        <div className="w-full ">
-          <p className="mb-2 text-left text-gray-500">Companies</p>
-          <ul className="flex justify-start gap-2">
-            {userProfile.companies.map((company, index) => (
-              <Link key={index} to={`/company/${company._id}`}>
-                <img
-                  src={company.companyLogo}
-                  alt={`Company ${index + 1}`}
-                  className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
-                />
-              </Link>
-            ))}
-          </ul>
-        </div>
+        {userProfile?.companies?.length !== 0 && (
+          <div className="w-full ">
+            <p className="mb-2 text-left text-gray-500 dark:text-gray-200">
+              Companies
+            </p>
+            <ul className="flex justify-start gap-2">
+              {userProfile.companies.map((company, index) => (
+                <Link key={index} to={`/company/${company._id}`}>
+                  <img
+                    src={company.companyLogo}
+                    alt={`Company ${index + 1}`}
+                    className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
+                  />
+                </Link>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     );
 };

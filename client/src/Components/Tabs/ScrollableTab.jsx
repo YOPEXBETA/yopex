@@ -31,7 +31,7 @@ export default function ScrollableTabs() {
   if (categories)
     return (
       <div className="w-full">
-        <div className="bg-white shadow-md p-4 rounded-lg border-green-500 border-b-2">
+        <div className="p-4 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
           <div className="border-b border-gray-200 mb-4">
             <div>
               <nav className="flex">
@@ -40,7 +40,7 @@ export default function ScrollableTabs() {
                   className={`px-4 py-2 text-sm font-medium ${
                     selectedCategory === ""
                       ? "text-green-500 border-green-500"
-                      : "text-gray-500"
+                      : "text-gray-500 dark:text-gray-300"
                   } border-b-2 focus:outline-none`}
                 >
                   All
@@ -52,7 +52,7 @@ export default function ScrollableTabs() {
                     className={`px-4 py-2 text-sm font-medium truncate w-48 ${
                       selectedCategory === tab.name
                         ? "text-green-600 border-green-500"
-                        : "text-gray-500"
+                        : "text-gray-500 dark:text-gray-300"
                     } border-b-2 focus:outline-none`}
                   >
                     {tab.name}
@@ -64,7 +64,7 @@ export default function ScrollableTabs() {
                     "md:grid-cols-2 xl:grid-cols-4" // Responsive classes
                   }`}
                 >
-                  <BsThreeDots />
+                  <BsThreeDots className="dark:text-gray-200" />
                 </button>
               </nav>
             </div>

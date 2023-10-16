@@ -31,24 +31,38 @@ TabPanel.propTypes = {
 
 const VerticalSettingsTab = ({ changeValue, value }) => {
   return (
-    <Box>
-      <Tabs
-        orientation="vertical"
-        value={value}
-        onChange={changeValue}
-        variant="scrollable"
-        sx={{
-          borderRight: 1,
-          borderColor: "divider",
-          height: "100vh",
-          paddingTop: "2rem",
-        }}
+    <div className="flex  md:h-max flex-col bg-white mt-8 dark:bg-zinc-800">
+      <button
+        className={`w-full py-3 px-4 focus:outline-none ${
+          value === 0
+            ? "bg-green-500 text-white border border-green-500 rounded-2xl"
+            : "text-gray-500 dark:text-gray-200  dark:border-zinc-600 "
+        }`}
+        onClick={() => changeValue(0)}
       >
-        <Tab label="General Informations" />
-        <Tab label="Privacy" />
-        <Tab label="Billing" />
-      </Tabs>
-    </Box>
+        General Information
+      </button>
+      <button
+        className={`w-full py-3 px-4 focus:outline-none ${
+          value === 1
+            ? "bg-green-500 text-white border border-green-500 rounded-2xl"
+            : "text-gray-500 dark:text-gray-200  dark:border-zinc-600  "
+        }`}
+        onClick={() => changeValue(1)}
+      >
+        Privacy
+      </button>
+      <button
+        className={`w-full py-3 px-4 focus:outline-none ${
+          value === 2
+            ? "bg-green-500 text-white border border-green-500 rounded-2xl"
+            : "text-gray-500 dark:text-gray-200   dark:border-zinc-600  "
+        }`}
+        onClick={() => changeValue(2)}
+      >
+        Billing
+      </button>
+    </div>
   );
 };
 

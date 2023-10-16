@@ -50,7 +50,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
     >
       {isError && <AlertContainer error={""} />}
       {isSuccess && <AlertSuccess message="Job offer created successfully" />}
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
+      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0  ">
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
           aria-hidden="true"
@@ -61,17 +61,17 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
         <div
           className={`${
             open ? "w-full sm:w-[40rem]" : "hidden"
-          } inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
+          } inline-block align-bottom bg-white dark:bg-zinc-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
         >
           <div>
-            <h2 className="text-lg leading-6 text-gray-900 mb-4 font-bold">
-              Create a Job Offer
+            <h2 className="text-lg leading-6 text-gray-900 mb-4 font-bold dark:text-white">
+              Create a Work Offer
             </h2>
             <div className="mt-2">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <select
                   id="selectField"
-                  className="block w-full p-2 border rounded-md focus:ring focus:ring-blue-300 mb-2"
+                  className="block w-full p-2 border dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500 mb-2"
                   value={selectedOption}
                   onChange={handleSelectChange}
                 >
@@ -84,13 +84,13 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                 </select>
 
                 <input
-                  className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                  className="w-full py-2 px-3 dark:bg-zinc-700 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                   type="text"
                   placeholder="job title"
                   {...register("title", { required: true })}
                 />
                 <textarea
-                  className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
+                  className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none dark:bg-zinc-700 mb-2"
                   {...register("description", { required: true })}
                   placeholder="job description"
                 />
@@ -153,14 +153,14 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                 </div>
 
                 <input
-                  className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-4 "
+                  className="w-full py-2 px-3 rounded border border-gray-300 dark:bg-zinc-800 focus:outline-none focus:border-green-500 mb-4 "
                   type="text"
                   placeholder="salary"
                   {...register("salary", { required: true })}
                 />
                 <div className="flex justify-between">
                   <button
-                    className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500"
+                    className="bg-white dark:bg-zinc-800 px-6 py-2 text-green-500 rounded-md border-2 border-green-500"
                     onClick={handleClose}
                     type="button"
                   >

@@ -11,11 +11,11 @@ const FireBaseSocialIcons = ({
     <div className="flex flex-row space-x-2 sm:space-x-4 justify-between items-center px-2 mt-4">
       {!showbutton && (
         <button
-          className="w-full flex items-center justify-center border border-secondary text-secondary py-3  px-4 rounded-lg hover:bg-secondary"
+          className="w-full flex items-center justify-center border border-secondary text-secondary py-3 hover:bg-slate-50 dark:hover:bg-green-600   px-4 rounded-lg hover:bg-secondary"
           onClick={handleSignIn}
         >
-          <img src={GoogleIcon} alt="Google" className="w-6 h-6 mr-1" />
-          <span className="hidden sm:inline">Google</span>
+          <img src={GoogleIcon} alt="Google" className="w-6 h-6 mr-1 " />
+          <span className="hidden sm:inline dark:text-white">Google</span>
         </button>
       )}
       {showbutton && (

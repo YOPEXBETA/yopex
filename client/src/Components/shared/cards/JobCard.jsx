@@ -17,12 +17,12 @@ const JobCard = ({ job }) => {
     <div>
       <div
         onClick={toggleOpen}
-        className="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 overflow-hidden  border border-gray-100"
+        className="bg-white dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 h-48 rounded-lg border-[1px] cursor-pointer hover:scale-102 duration-500"
       >
         <div className="flex flex-col">
           <div className="bg- rounded-md p-4 h-full">
             <div className="flex justify-between flex-row-reverse mb-4">
-              <div className=" w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
+              <div className=" w-16 h-16  rounded-full flex items-center justify-center">
                 <img
                   src={job?.company?.companyLogo}
                   alt="Icon"
@@ -30,14 +30,16 @@ const JobCard = ({ job }) => {
                 />
               </div>
               <div>
-                <p className="text-lg font-bold text-left">{job?.title}</p>
-                <p className="text-gray-500 mt-2 text-left">
+                <p className="text-lg font-bold text-left dark:text-white">
+                  {job?.title}
+                </p>
+                <p className="text-gray-500 mt-2 text-left dark:text-white">
                   By {job?.company?.companyName}
                 </p>
               </div>
             </div>
             <div>
-              <p className="text-md font-normal text-left mb-6 truncate w-80">
+              <p className="text-md font-normal text-left mb-6 dark:text-white truncate w-80">
                 {job?.description?.length > 100
                   ? `${job?.description.substring(0, 150)} ....`
                   : job?.description}

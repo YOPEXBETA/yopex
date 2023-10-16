@@ -7,6 +7,7 @@ import { Grid, Stack } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useUserById } from "../../../../../../hooks/react-query/useUsers";
 import MyJob from "./MyJob";
+import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 
 const MyJobs = () => {
   // const { user } = useSelector((state) => state.auth);
@@ -23,15 +24,8 @@ const MyJobs = () => {
 
   if (isLoading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-        }}
-      >
-        <CircularProgress />
+      <div className="flex items-center justify-center">
+        <LoadingSpinner />
       </div>
     );
   }

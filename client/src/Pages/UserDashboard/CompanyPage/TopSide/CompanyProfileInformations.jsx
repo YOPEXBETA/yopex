@@ -72,7 +72,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
 
   return (
     <div>
-      <div className="md:pt-10 pt-6 xl:px-16 lg:px-6 px-0 flex flex-col justify-end bg-white">
+      <div className="md:pt-10 pt-6 xl:px-16 lg:px-6 px-0 flex flex-col justify-end  dark:bg-zinc-800 bg-white">
         <div className="space-y-0 md:space-y-8">
           <div className="flex flex-col xl:flex-row lg:flex-row md:flex-row xl:px-0 items-start md:items-center px-4 gap-0 pb-8 md:pb-0 md:gap-2 justify-between">
             <div className="flex lg:flex-row flex-row items-center gap-4">
@@ -80,13 +80,13 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 <img
                   alt="Profile picture"
                   src={company.companyLogo}
-                  className="object-cover w-full h-full rounded-xl bg-gray-400"
+                  className="object-cover w-full h-full rounded-xl "
                 />
               </div>
 
               <div className="space-y-2 sm:space-y-5 xl:block md:flex lg:block  flex flex-col ">
                 <div className="flex items-center gap-2">
-                  <p className="text-lg font-semibold">{company.companyName}</p>
+                  <p className="text-lg font-semibold dark:text-gray-200">{company.companyName}</p>
 
                   <button
                     className="flex items-center gap-1"
@@ -103,22 +103,22 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 </div>
                 <div className="hidden xl:flex lg:flex md:flex flex-row sm:flex-row justify-between gap-2 sm:gap-4 w-full sm:w-72">
                   <div className="flex items-center gap-1 sm:gap-2 justify-between">
-                    <p className="text-base font-bold">
+                    <p className="text-base font-bold dark:text-gray-200">
                       {company?.posts.length}
                     </p>
-                    <p className="text-zinc-500 text-md">Posts</p>
+                    <p className="text-zinc-500 text-md dark:text-gray-400">Posts</p>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 justify-between">
-                    <p className="text-base font-bold">
+                    <p className="text-base font-bold dark:text-gray-200">
                       {company?.challenges.length}
                     </p>
-                    <p className="text-zinc-500 text-md">Challenges</p>
+                    <p className="text-zinc-500 text-md dark:text-gray-400">Challenges</p>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 justify-between">
-                    <p className="text-base font-bold">
+                    <p className="text-base font-bold dark:text-gray-200">
                       {company?.jobs.length}
                     </p>
-                    <p className="text-zinc-500 text-md">Jobs</p>
+                    <p className="text-zinc-500 text-md dark:text-gray-400">Jobs</p>
                   </div>
                 </div>
                 {/*mobile version*/}
@@ -151,13 +151,13 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                   )}
                 </div>
                 {/*mobile version*/}
-                <p className="hidden md:block truncate w-full xl:w-[50rem]">
+                <p className="hidden md:block truncate dark:text-gray-200 w-full xl:w-[50rem]">
                   {company?.companyDescription}
                 </p>
               </div>
             </div>
             {/*mobile version*/}
-            <p className="block md:hidden  truncate w-full xl:w-[50rem] pt-3">
+            <p className="block md:hidden dark:text-gray-200 w-full xl:w-[50rem] pt-3">
               {company?.companyDescription}
             </p>
             <div className="hidden md:flex gap-1 flex-wrap">
@@ -190,22 +190,22 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           {/*mobile version*/}
           <div className="flex xl:hidden lg:hidden md:hidden flex-row sm:flex-row justify-between w-screen px-16 py-4 border-y-2 border-gray">
             <div className="flex-col items-center">
-              <p className="text-base font-bold text-center">
+              <p className="text-base font-bold text-center dark:text-gray-200">
                 {company?.posts.length}
               </p>
-              <p className="text-zinc-500 text-md">Posts</p>
+              <p className="text-zinc-500 text-md dark:text-gray-400">Posts</p>
             </div>
             <div className="flex-col items-center">
-              <p className="text-base font-bold text-center">
+              <p className="text-base font-bold text-center dark:text-gray-200">
                 {company?.challenges.length}
               </p>
-              <p className="text-zinc-500 text-md">Challenges</p>
+              <p className="text-zinc-500 text-md dark:text-gray-400">Challenges</p>
             </div>
             <div className="flex-col items-center">
-              <p className="text-base font-bold text-center">
+              <p className="text-base font-bold text-center dark:text-gray-200">
                 {company?.jobs.length}
               </p>
-              <p className="text-zinc-500 text-md">Jobs</p>
+              <p className="text-zinc-500 text-md dark:text-gray-400">Jobs</p>
             </div>
           </div>
           {/*mobile version*/}

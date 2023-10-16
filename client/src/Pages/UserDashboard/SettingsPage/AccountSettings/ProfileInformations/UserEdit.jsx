@@ -35,6 +35,7 @@ const UserEdit = () => {
     defaultValues: {
       firstname: user.firstname,
       lastname: user.lastname,
+
     },
   });
 
@@ -93,49 +94,50 @@ const UserEdit = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label htmlFor="firstname" className="block text-gray-600">
+            <label htmlFor="firstname" className="block text-gray-600 dark:text-gray-300">
               First Name
             </label>
             <input
               id="firstname"
               type="text"
               placeholder="First name"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               {...register("firstname")}
             />
           </div>
           <div className="col-span-1">
-            <label htmlFor="lastname" className="block text-gray-600">
+            <label htmlFor="lastname" className="block text-gray-600 dark:text-gray-300">
               Last Name
             </label>
             <input
               id="lastname"
               type="text"
               placeholder="Last name"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               {...register("lastname")}
             />
           </div>
         </div>
         <div className="grid grid-cols-1">
           <div className="col-span-1">
-            <label>Description</label>
+            <label className="dark:text-gray-300">Description</label>
 
             <textarea
+            id="userDescription"
               placeholder="Description"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              value={user.userDescription}
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              defaultValue={user.userDescription}
               {...register("userDescription")}
             />
           </div>
         </div>
         <div className="grid grid-cols-1">
           <div className="col-span-1">
-            <label>Email</label>
+            <label className="dark:text-gray-300">Email</label>
             <input
               placeholder="Email"
               disabled
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-200"
+              className="w-full border dark:bg-zinc-800 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-200"
               type="email"
               value={user.email}
             />
@@ -144,10 +146,10 @@ const UserEdit = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label>Country</label>
+            <label className="dark:text-gray-300">Country</label>
             <select
               id="demo-multiple-name"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
               defaultValue={
                 user.country
                   ? user.country.charAt(0).toUpperCase() + user.country.slice(1)
@@ -165,10 +167,10 @@ const UserEdit = () => {
           </div>
 
           <div className="col-span-1">
-            <label>Gender</label>
+            <label className="dark:text-gray-300">Gender</label>
             <select
               id="gender-select"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
               defaultValue={user.gender}
               {...register("gender")}
             >
@@ -182,23 +184,23 @@ const UserEdit = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label shrink={true}>Date of Birth</label>
+            <label shrink={true} className="dark:text-gray-300">Date of Birth</label>
 
             <input
               type="date"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               defaultValue={formatDate(user.birthDate)}
               {...register("birthDate")}
             />
           </div>
 
           <div className="col-span-1">
-            <label>Phone Number</label>
+            <label className="dark:text-gray-300 ">Phone Number</label>
 
             <input
               id="phone"
               placeholder="+216"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               defaultValue={user.phoneNumber}
               {...register("phoneNumber")}
             />
@@ -212,7 +214,7 @@ const UserEdit = () => {
           <div className="col-span-1">
             <button
               className={`${
-                isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-green-500"
+                isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-green-500 dark:hover:bg-green-600 hover:bg-green-600"
               } px-4 py-2 rounded-lg text-white w-40`}
               type="submit"
               disabled={isSubmitting}

@@ -6,8 +6,8 @@ import LandingHeader from "./header/LandingHeader";
 
 const LandingPage = () => {
   return (
-    <div className="">
-      <div className="pb-32">
+    <div >
+      <div >
         <HomeHeader />
       </div>
       <HomeContent />

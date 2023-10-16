@@ -1,40 +1,57 @@
-import React, { useEffect } from "react";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Stack,
-  Typography,
-} from "@mui/material";
-import { Box, fontWeight } from "@mui/system";
-import { SocialMediaSection } from "./CardSections/SocialMediaSection";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { getUserById } from "../../../../../../redux/actions/UserAction";
-const UserProfileInformations = () => {
-  const dispatch = useDispatch();
-  const id = useParams().userId;
-  const userProfile = useSelector((state) => state.User.userProfile);
-  console.log("profileInfo", userProfile);
+import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-  useEffect(() => {
-    dispatch(getUserById(id));
-  }, [dispatch, id]);
+import {
+  useFollowUser,
+  useUserById,
+} from "../../../../../../hooks/react-query/useUsers";
+import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+
+const UserProfileInformations = () => {
+  const { userId } = useParams();
+  const { data: userProfile, isLoading } = useUserById(userId);
+  console.log(userProfile);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
   return (
-    <div>
-      <Card variant="outlined">
-        <CardContent>
-          <Stack spacing={3}>
-            <Stack spacing={1}>
-              <Typography variant="h5">ABOUT ME</Typography>
-              <Typography variant="body">{userProfile.AboutMe}</Typography>
-            </Stack>
-            <SocialMediaSection />
-          </Stack>
-        </CardContent>
-      </Card>
+    <div className="p-4 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <div className="space-y-4">
+        {userProfile?.email?.length !== 0 && (
+          <div className="flex items-center gap-2">
+            <label className="text-gray-600 dark:text-gray-400">Email:</label>
+            <p className="font-semibold dark:text-gray-200">{userProfile?.email}</p>
+          </div>
+        )}
+        {userProfile?.phoneNumber?.length !== 0 && (
+          <div className="flex items-center gap-2">
+            <label className="text-gray-600 dark:text-gray-400">Phone:</label>
+            <p className="font-semibold dark:text-gray-200">{userProfile?.phoneNumber}</p>
+          </div>
+        )}
+        {userProfile?.gender?.length !== 0 && (
+          <div className="flex items-center gap-2">
+            <label className="text-gray-600 dark:text-gray-400">Gender:</label>
+            <p className="font-semibold dark:text-gray-200">{userProfile?.gender}</p>
+          </div>
+        )}
+        {userProfile?.birthDate?.length !== 0 && (
+          <div className="flex items-center gap-2">
+            <label className="text-gray-600 dark:text-gray-400">Birth Date:</label>
+            <p className="font-semibold dark:text-gray-200">
+              {userProfile?.birthDate
+                ? new Date(userProfile?.birthDate).toLocaleDateString()
+                : "N/A"}
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

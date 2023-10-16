@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const MobileMenu = ({ userImage, user }) => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white z-50 px-4 py-4 flex justify-between items-center border-t-2 border-gray-200">
+    <div className="fixed bottom-0 left-0 right-0 dark:bg-zinc-800 dark:border-zinc-600 bg-white z-50 px-4 py-4 flex justify-between items-center border-t-2 border-gray-200">
       <div className="flex justify-between items-center flex-1">
         <Link to={`/profile/${user._id}`}>
           {userImage ? (
@@ -30,19 +30,19 @@ const MobileMenu = ({ userImage, user }) => {
           )}
         </Link>
         <Link to={`/feed`}>
-          <FiHome className="text-2xl text-gray-600 mr-4" />
+          <FiHome className="text-2xl dark:text-gray-200 dark:selection:text-green-600 text-gray-600 mr-4" />
         </Link>
         <Link to={`/browse`}>
-          <FiCompass className="text-2xl text-gray-600 mr-4" />
+          <FiCompass className="text-2xl dark:text-gray-200 text-gray-600 mr-4" />
         </Link>
         <Link to={`/leaderboard`}>
-          <FiAward className="text-2xl text-gray-600 mr-4" />
+          <FiAward className="text-2xl dark:text-gray-200 text-gray-600 mr-4" />
         </Link>
         <Link to={`/Notifications`}>
-          <FiBell className="text-2xl text-gray-600 mr-4" />
+          <FiBell className="text-2xl dark:text-gray-200 text-gray-600 mr-4" />
         </Link>
         <Link to={`/chat`}>
-          <FiMessageSquare className="text-2xl text-gray-600 mr-4" />
+          <FiMessageSquare className="text-2xl dark:text-gray-200 text-gray-600 mr-4" />
         </Link>
       </div>
     </div>

@@ -12,7 +12,7 @@ const ContentSide = () => {
 
   return (
     <div>
-      <div className="space-y-2 mb-5">
+      <div className="space-y-2">
         <SearchbarFilter setQuery={setQuery} />
         <LeaderBoardTable data={data} query={query} />
       </div>

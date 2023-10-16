@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useUserPosts } from "../../../../../../hooks/react-query/usePosts";
 import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
+import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 
 const MyCompanySocialPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,10 +24,10 @@ const MyCompanySocialPosts = () => {
   // console.log(companyId, posts);
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4  py-5">
+    <div className="dark:bg-zinc-800 lg:h-[60vh] min-h-fit">
+      <div className="grid grid-cols-1  md:grid-cols-4 gap-4 py-5">
         {isLoading ? (
-          <p>Loading posts...</p>
+          <LoadingSpinner />
         ) : posts?.length ? (
           posts.map((post) => (
             <SocialPostCard
@@ -40,13 +41,13 @@ const MyCompanySocialPosts = () => {
             />
           ))
         ) : (
-          <p>No posts found.</p>
+          <p className="dark:text-gray-200 text-base">No posts found.</p>
         )}
       </div>
 
       {/* Render the SocialPostModal conditionally */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0  flex items-center justify-center z-50">
           <SocialPostModal
             image={selectedImage}
             closeModal={closeModal}
