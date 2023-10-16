@@ -139,7 +139,12 @@ export const useCreateChallenge = () => {
     },
     {
       onSuccess: () => {
+        toast.success("Challenge created successfully");
         queryClient.invalidateQueries(["challenges"]);
+      },
+      onError: () => {
+        toast.error("Error creating challenge");
+        
       },
     }
   );

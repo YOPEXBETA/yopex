@@ -17,9 +17,9 @@ const LeaderbordTable = ({ data, query }) => {
       .map((user, index) => ({
         ...user,
         rank: index + 1,
-      }));
+      })).filter((user) => user.firstname.toLowerCase().includes(searchQ) || user.lastname.toLowerCase().includes(searchQ));
     setRankedUsers(res);
-  }, [data]);
+  }, [data,searchQ]);
 
   const handleChangePage = (newPage) => {
     if (newPage >= 0 && newPage <= Math.ceil(data?.length / rowsPerPage)) {
@@ -30,6 +30,7 @@ const LeaderbordTable = ({ data, query }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
   return (
     <div>
       <div className="  overflow-hidden  bg-white">
@@ -45,15 +46,11 @@ const LeaderbordTable = ({ data, query }) => {
             </thead>
             <tbody className="divide-y  divide-gray-200">
               {rankedUsers
-                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(
-                  (user) =>
-                    (  user.firstname.toLowerCase().includes(searchQ) ||
-                      user.lastname.toLowerCase().includes(searchQ) 
-                    ) && (
+                ?.map(
+                  (user) =>(
                       <UserRow user={user} key={user._id} />
                     )
-                )}
+                ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
             </tbody>
           </table>
         </div>

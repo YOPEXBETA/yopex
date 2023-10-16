@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -58,6 +59,7 @@ export const useCreatePost = (category, userId) => {
       await axios.post(`${url}/post/`, postData);
     },
     onSuccess: () => {
+      toast.success("Post created successfully");
       queryClient.invalidateQueries({ queryKey: ["posts"] });
       queryClient.invalidateQueries({ queryKey: ["posts", category] });
       queryClient.invalidateQueries({ queryKey: ["posts", userId] });
