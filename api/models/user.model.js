@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema(
     score: { type: Number, default: 0 },
     gender: {
       type: String,
-      enum: ["Male", "Female", "Other"],
+      enum: ["Male", "Female", "Other", ""],
     },
     balance: { type: Number, default: 0.0 },
     yearsRegistered: { type: Number, default: 0 },
