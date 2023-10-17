@@ -1,4 +1,5 @@
 import React from "react";
+import { TypeAnimation } from "react-type-animation";
 
 const HomeSection = () => {
   return (
@@ -10,17 +11,31 @@ const HomeSection = () => {
         >
           <div className="blur-[106px] dark:hidden h-56 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
           <div className="blur-[106px] dark:hidden h-32 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
-         
         </div>
-       
+
         <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
           <div classNameName="relative pt-36 ml-auto">
             <div className="lg:w-2/3 text-center mx-auto">
               <h1 className="text-gray-900 dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">
-                Connect With Fellow
+                Connect With
+                <br></br>
                 <span className="text-green-500 dark:text-green-500">
-                  {" "}
-                  Freelancers.
+                  {""}
+                  <TypeAnimation
+                    sequence={[
+                      "Freelancers",
+                      2000,
+                      "Talented Youth",
+                      2000,
+                      "Startups",
+                      2000,
+                      "Interns",
+                      2000,
+                    ]}
+                    wrapper="span"
+                    speed={50}
+                    repeat={Infinity}
+                  />
                 </span>
               </h1>
               <p className="mt-8 text-gray-700 dark:text-gray-300">

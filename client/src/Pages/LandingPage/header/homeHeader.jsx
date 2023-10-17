@@ -5,31 +5,29 @@ import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../../redux/auth/authSlice";
-import LightModeIcon from '@mui/icons-material/LightMode';
+import LightModeIcon from "@mui/icons-material/LightMode";
 import ProfileMenu from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/ProfileMenu";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const HomeHeader = () => {
- 
   const [nav, setNav] = useState(false);
-  const { user, error } = useSelector((state) => state.auth); 
+  const { user, error } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
- 
-  const [ isDark , toggleDark] = useState(document.documentElement.classList.contains("dark"));
 
-
+  const [isDark, toggleDark] = useState(
+    document.documentElement.classList.contains("dark")
+  );
 
   const toggleTheme = () => {
     if (document.documentElement.classList.contains("dark")) {
       document.documentElement.classList.remove("dark");
-      toggleDark(false)
+      toggleDark(false);
       localStorage.theme = "light";
     } else {
       document.documentElement.classList.add("dark");
       localStorage.theme = "dark";
-      toggleDark(true)
+      toggleDark(true);
     }
   };
 
@@ -41,8 +39,7 @@ const HomeHeader = () => {
 
   return (
     <div className="container  dark:bg-zinc-800 ">
-      
-      <div className="flex justify-between dark:bg-zinc-800   items-center w-full h-20 px-4 lg:px-24 md:px-24 text-white  absolute z-10 ">
+      <div className="flex justify-between dark:bg-zinc-800 fixed   items-center w-full h-20 px-4 lg:px-24 md:px-24 text-white  z-10 ">
         <div className="flex items-center gap-8">
           <img src={YopexLogo} width={35} alt="Yopex Logo" />
           <ul className="hidden md:flex">
@@ -65,25 +62,19 @@ const HomeHeader = () => {
         </div>
 
         <div className="hidden md:flex gap-4 items-center">
-        {!user && (
-        <a  
-          onClick={toggleTheme}
-            className="px-3 py-2  space-x-2   flex items-center cursor-pointer"
-           >
-         
-            {
-            isDark ? 
-               (
-            <LightModeIcon className="w-6 h-6 dark:hover:text-green-500 text-gray-600 dark:text-white" />
-              
-            ) : (
-              <DarkModeIcon className="w-6 h-6 text-gray-600 hover:text-green-500 dark:text-white" />
-            )
-          
-            } 
-          
-            </a>  )}  
-        
+          {!user && (
+            <a
+              onClick={toggleTheme}
+              className="px-3 py-2  space-x-2   flex items-center cursor-pointer"
+            >
+              {isDark ? (
+                <LightModeIcon className="w-6 h-6 dark:hover:text-green-500 text-gray-600 dark:text-white" />
+              ) : (
+                <DarkModeIcon className="w-6 h-6 text-gray-600 hover:text-green-500 dark:text-white" />
+              )}
+            </a>
+          )}
+
           {user && (
             <p className="hover:scale-105 flex items-center ">
               <p className=" px-3 z-50 cursor-pointer capitalize dark:text-white font-medium text-gray-500  duration-200">
