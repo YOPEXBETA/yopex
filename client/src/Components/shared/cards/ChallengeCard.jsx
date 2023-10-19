@@ -57,6 +57,10 @@ const ChallengeCard = ({ challenge, type }) => {
                   <p className="font-bold dark:text-white">
                     {challenge.users.length}
                   </p>
+                  <div>/</div>
+                  <p className="font-bold dark:text-white">
+                    {challenge.nbruser}
+                  </p>
                   <p className="dark:text-white">Participants</p>
                 </div>
               </div>

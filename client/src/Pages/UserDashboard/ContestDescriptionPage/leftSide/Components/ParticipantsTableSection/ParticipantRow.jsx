@@ -53,7 +53,7 @@ const ParticipantRow = ({ user, index, challenge }) => {
                 <img
                   alt="picture"
                   src={user?.user?.picturePath}
-                  className="w-10 h-10 rounded-full"
+                  className="w-10 h-10 rounded-full object-cover"
                 />
               ) : (
                 <img

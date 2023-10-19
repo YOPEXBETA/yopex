@@ -11,22 +11,22 @@ const TasksDescription = () => {
     return (
       <div>
         <div className="mb-4 dark:text-white ">
-          <h4 className="text-xl font-semibold uppercase">Description</h4>
+          <h4 className="text-xl font-semibold">Description</h4>
         </div>
-        <hr className="my-2 game-divider" />
+        <hr className="my-2 game-divider mb-2" />
         <div className="mb-4" style={{ wordWrap: "break-word" }}>
           <p className="text-md dark:text-white">{challenge.description}</p>
         </div>
         <div className="mb-4  dark:text-white">
-          <h4 className="text-xl font-semibold uppercase">Categories</h4>
+          <h4 className="text-xl font-semibold">Categories</h4>
         </div>
         <hr className="my-4" />
         <div className="mb-4">
-          <div className="flex flex-row flex-wrap space-x-2 md:space-x-0 space-y-2 md:space-y-0 w-full">
+          <div className="flex flex-row flex-wrap space-x-0 md:space-x-2 space-y-2 md:space-y-0 w-full">
             {challenge.category.map((cat, i) => (
               <span
                 key={i}
-                className="px-2 py-1 dark:text-white font-bold text-md border-2 border-gray-300 rounded-full"
+                className="px-2 py-1 dark:text-white  text-md border-2 border-gray-300 rounded-full"
               >
                 {cat}
               </span>
@@ -35,17 +35,17 @@ const TasksDescription = () => {
         </div>
         <hr className="my-2" />
         <div className="mb-4 game-skills">
-          <h4 className="text-xl font-semibold uppercase dark:text-white">
+          <h4 className="text-xl font-semibold dark:text-white">
             Recommended Skills
           </h4>
         </div>
         <hr className="my-4" />
         <div className="mb-4">
-          <div className="flex flex-row space-x-2">
+          <div className="flex flex-row space-x-2 overflow-x-auto">
             {challenge.RecommendedSkills.map((skill, i) => (
               <span
                 key={i}
-                className="px-2 py-1 dark:text-white font-bold  text-md border-2 border-gray-300 rounded-full"
+                className="px-2 py-1 dark:text-white  text-md border-2 border-gray-300 rounded-full"
               >
                 {skill}
               </span>
