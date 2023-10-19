@@ -5,7 +5,6 @@ import { useChallengeById } from "../../../../../../hooks/react-query/useChallen
 const TasksDescription = () => {
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
-  console.log(challenge.category);
 
   if (challenge)
     return (
