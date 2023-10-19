@@ -67,9 +67,9 @@ const ChallengeConversation = ({ conversationId, id }) => {
       {arrivalMessage?.length === 0 ? (
         <div
           ref={chatContainerRef}
-          style={{ textAlign: "center", padding: "20vh 0vh" }}
+          className="flex h-80 items-center justify-center"
         >
-          <p className="opacity-50 text-xl">
+          <p className="opacity-50 text-xl dark:text-white">
             Open a conversation to start a chat
           </p>
         </div>
