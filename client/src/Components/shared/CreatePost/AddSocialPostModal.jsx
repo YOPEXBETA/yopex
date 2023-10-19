@@ -1,4 +1,3 @@
-import { Autocomplete, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -101,10 +100,12 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                       <div className="w-full dark:bg-zinc-700">
                         <Select
                           isMulti
+                          className="my-react-select-container"
+                          classNamePrefix="my-react-select"
                           options={
                             categories
-                              ? categories.map((category) => ({
-                                  label: category.name,
+                              ? categories?.map((category) => ({
+                                  label: category?.name,
                                   value: category,
                                 }))
                               : []
@@ -113,7 +114,6 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                             onChange(selectedOptions)
                           }
                           value={value}
-                          className="w-full border-gray-300 bg-white dark:bg-zinc-700 rounded focus:outline-none focus:border-green-500"
                           placeholder="Select Categories"
                         />
                       </div>
