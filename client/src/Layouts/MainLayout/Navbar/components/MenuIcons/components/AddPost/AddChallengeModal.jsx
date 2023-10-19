@@ -11,6 +11,8 @@ import { useCreateChallenge } from "../../../../../../../hooks/react-query/useCh
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
 import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
+import Select from "react-select";
+
 import { useCreateContestConversation } from "../../../../../../../hooks/react-query/useContestConversation";
 
 export const AddChallengeModal = ({ open, handleClose }) => {
@@ -57,7 +59,9 @@ export const AddChallengeModal = ({ open, handleClose }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}
+      className={`fixed  z-50 inset-0 overflow-y-auto ${
+        open ? "backdrop-blur-sm" : "hidden"
+      }`}
     >
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
         <span
@@ -69,12 +73,36 @@ export const AddChallengeModal = ({ open, handleClose }) => {
         <div
           className={`${
             open ? "w-full sm:w-[40rem]" : "hidden"
-          } inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
+          } inline-block align-bottom bg-white dark:bg-zinc-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
         >
           <div>
-            <h2 className="text-lg leading-6 text-gray-900 mb-4 font-bold">
-              Create a Challenge
-            </h2>
+            <div className="flex justify-between items-center">
+              <h4 className="text-xl font-bold mb-4 text-black dark:text-white">
+                Add a Challenge
+              </h4>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="defaultModal"
+              >
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+              </button>
+            </div>
             <div className="mt-2">
               <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -82,26 +110,164 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                 spacing={2}
                 lang="en"
               >
-                <select
-                  id="selectField"
-                  className="block w-full p-2 border rounded-md focus:ring focus:ring-blue-300 mb-2"
-                  value={selectedOption}
-                  onChange={handleSelectChange}
-                >
-                  <option value="">Select a company</option>
-                  {userProfile?.companies.map((option) => (
-                    <option key={option._id} value={option._id}>
-                      {option.companyName}
-                    </option>
-                  ))}
-                </select>
+                <div className="mb-4">
+                  <label
+                    htmlFor="jobTitle"
+                    className="dark:text-white block mb-2"
+                  >
+                    Select your company
+                  </label>
+                  <select
+                    id="selectField"
+                    className="block w-full p-2 border dark:text-white dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500 mb-2"
+                    value={selectedOption}
+                    onChange={handleSelectChange}
+                  >
+                    <option value="">Select a company</option>
+                    {userProfile?.companies.map((option) => (
+                      <option key={option._id} value={option._id}>
+                        {option.companyName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="jobTitle"
+                    className="dark:text-white block mb-2"
+                  >
+                    Challenge Title
+                  </label>
+                  <input
+                    className="w-full py-2 px-3 dark:bg-zinc-700  dark:text-white rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                    type="text"
+                    placeholder="challenge title"
+                    {...register("title", { required: true })}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="jobDescription"
+                    className="dark:text-white block mb-2"
+                  >
+                    Challenge Description
+                  </label>
+                  <textarea
+                    className="w-full h-40 p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2"
+                    {...register("description", { required: true })}
+                    placeholder="challenge description"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="Challengeprize"
+                    className="dark:text-white block mb-2"
+                  >
+                    Challenge prize
+                  </label>
+                  <div className="flex gap-3 mb-2">
+                    <select
+                      id="selectFieldpaid"
+                      className="p-2 w-[20%] border rounded-md focus:ring dark:bg-zinc-700 focus:ring-blue-300 dark:text-zinc-400"
+                      value={selectedOptionpaid}
+                      onChange={(e, value) => {
+                        setSelectedOptionpaid(e.target.value);
+                      }}
+                    >
+                      <option value={"false"}>free</option>
+                      <option value={"true"}>paid</option>
+                    </select>
+                    <input
+                      className="py-2 w-[80%] px-3 rounded border border-gray-30 bg-zinc-700 focus:outline-none focus:border-green-500"
+                      type="number"
+                      placeholder="challenge prize"
+                      {...register("price", { required: false })}
+                      disabled={selectedOptionpaid === "false"}
+                    />
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="selectSkills"
+                    className="dark:text-white block mb-2"
+                  >
+                    Select Skills
+                  </label>
+                  <div className="mb-2">
+                    <Controller
+                      control={control}
+                      name="RecommendedSkills"
+                      defaultValue={"Any"}
+                      render={({ field }) =>
+                        itSkills && (
+                          <Select
+                            isMulti
+                            className="my-react-select-container"
+                            classNamePrefix="my-react-select"
+                            id="tags-outlined"
+                            options={itSkills.map((skill) => ({
+                              value: skill,
+                              label: skill,
+                            }))}
+                            value={field.value.map((skill) => ({
+                              value: skill,
+                              label: skill,
+                            }))}
+                            onBlur={field.onBlur}
+                            onChange={(selectedOptions) => {
+                              const selectedValues = selectedOptions.map(
+                                (option) => option.value
+                              );
+                              field.onChange(selectedValues);
+                            }}
+                          />
+                        )
+                      }
+                    />
+                  </div>
+                </div>
 
-                <input
-                  className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
-                  type="text"
-                  placeholder="challenge title"
-                  {...register("title", { required: true })}
-                />
+                <div className="mb-4">
+                  <label
+                    htmlFor="selectCategories"
+                    className="dark:text-white block mb-2"
+                  >
+                    Select Categories
+                  </label>
+                  <div className="mb-2">
+                    <Controller
+                      control={control}
+                      name="category"
+                      defaultValue={"Any"}
+                      render={({ field }) =>
+                        itCategory && (
+                          <Select
+                            isMulti
+                            className="my-react-select-container"
+                            classNamePrefix="my-react-select"
+                            id="tags-outlined"
+                            options={itCategory.map((category) => ({
+                              value: category,
+                              label: category,
+                            }))}
+                            value={field.value.map((category) => ({
+                              value: category,
+                              label: category,
+                            }))}
+                            onBlur={field.onBlur}
+                            onChange={(selectedOptions) => {
+                              const selectedValues = selectedOptions.map(
+                                (option) => option.value
+                              );
+                              field.onChange(selectedValues);
+                            }}
+                          />
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+                {/*
                 <div className="mb-2">
                   <Controller
                     control={control}
@@ -130,35 +296,8 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                       )
                     }
                   />
-                </div>
-
-                <textarea
-                  className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
-                  {...register("description", { required: true })}
-                  placeholder="challenge description"
-                />
-                <div className="flex gap-3 mb-2">
-                  <select
-                    id="selectFieldpaid"
-                    className="p-2 w-[20%] border rounded-md focus:ring focus:ring-blue-300"
-                    value={selectedOptionpaid}
-                    onChange={(e, value) => {
-                      setSelectedOptionpaid(e.target.value);
-                    }}
-                  >
-                    <option value={"false"}>free</option>
-                    <option value={"true"}>paid</option>
-                  </select>
-                  <input
-                    className="py-2 w-[80%] px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500"
-                    type="number"
-                    placeholder="challenge prize"
-                    {...register("price", { required: false })}
-                    disabled={selectedOptionpaid === "false"}
-                  />
-                </div>
-
-                <div className="mb-2">
+                  </div>*/}
+                {/* <div className="mb-2">
                   <Controller
                     control={control}
                     name="category"
@@ -184,18 +323,62 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                       )
                     }
                   />
+                  </div>*/}
+                <div className="mb-4">
+                  <label
+                    htmlFor="jobDescription"
+                    className="dark:text-white block mb-2"
+                  >
+                    Specify the participant number
+                  </label>
+                  <input
+                    className="w-full py-2 px-3 dark:bg-zinc-700  dark:text-white rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                    type="number"
+                    placeholder="number of particiant"
+                    {...register("nbruser", { required: true })}
+                  />
                 </div>
-                <input
-                  className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
-                  type="number"
-                  placeholder="number of particiant"
-                  {...register("nbruser", { required: true })}
-                />
+
                 {isError && (
                   <AlertContainer error={error?.response?.data?.error?.msg} />
                 )}
                 {isSuccess && <AlertSuccess message="Created the challenge" />}
 
+                <div className="mb-4">
+                  <label
+                    htmlFor="deadline"
+                    className="dark:text-white block mb-2"
+                  >
+                    Deadline
+                  </label>
+                  <Controller
+                    control={control}
+                    name="deadline"
+                    defaultValue={new Date().toISOString().slice(0, -8)}
+                    render={({ field }) => (
+                      <input
+                        required
+                        type="datetime-local"
+                        className="w-full py-2 px-3 dark:bg-zinc-700  dark:text-white rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                        {...field}
+                        onChange={(e) => {
+                          const now = moment();
+                          const diff = moment(deadline).diff(now);
+
+                          if (diff < 0) {
+                            setValue("deadline", "");
+                            return false;
+                          }
+
+                          setValue("deadline", `${e.currentTarget.value}:00`);
+                        }}
+                        min={now}
+                      />
+                    )}
+                  />
+                </div>
+
+                {/* 
                 <div className="mb-4">
                   <Controller
                     control={control}
@@ -228,17 +411,10 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     )}
                   />
                 </div>
-
+                */}
                 <div className="flex justify-between">
                   <button
-                    type="button"
-                    className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500"
-                    onClick={handleClose}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="bg-green-500 px-6 py-2 text-white rounded-md"
+                    className="bg-green-500 px-6 py-2 w-full hover:bg-green-700 text-white rounded-md"
                     type="submit"
                     disabled={isSubmitting}
                   >

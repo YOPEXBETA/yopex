@@ -52,7 +52,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
 
   return (
     <div
-      className={`fixed  z-50 inset-0 overflow-y-auto ${
+      className={`fixed z-50 inset-0 overflow-y-auto  ${
         open ? "backdrop-blur-sm" : "hidden"
       }`}
     >
@@ -72,9 +72,33 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
           } inline-block align-bottom bg-white dark:bg-zinc-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
         >
           <div>
-            <h2 className="text-2xl font-bold mb-4 text-black dark:text-white">
-              Add a Work Offer
-            </h2>
+            <div className="flex justify-between items-center">
+              <h4 className="text-xl font-bold mb-4 text-black dark:text-white">
+                Add a Work Offer
+              </h4>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="defaultModal"
+              >
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+              </button>
+            </div>
 
             <div className="mt-2">
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +111,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                   </label>
                   <select
                     id="selectField"
-                    className="block w-full p-2 border dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500 mb-2"
+                    className="block w-full dark:text-white p-2 border dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500 mb-2"
                     value={selectedOption}
                     onChange={handleSelectChange}
                   >
@@ -147,6 +171,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                           isMulti
                           className="my-react-select-container"
                           classNamePrefix="my-react-select"
+                          id="tags-outlined"
                           options={
                             RecommendedSkills
                               ? RecommendedSkills?.map((skill) => ({
@@ -183,6 +208,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                           isMulti
                           className="my-react-select-container"
                           classNamePrefix="my-react-select"
+                          id="tags-outlined"
                           options={
                             categories
                               ? categories?.map((category) => ({
@@ -202,7 +228,6 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                   />
                 </div>
 
-                <div className="mb-2"></div>
                 {/*<div className="mb-2">
                   <Controller
                     control={control}
@@ -235,14 +260,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
 
                 <div className="flex justify-between">
                   <button
-                    className="bg-white dark:bg-zinc-800 px-6 py-2 text-green-500 rounded-md border-2 border-green-500"
-                    onClick={handleClose}
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="bg-green-500 px-6 py-2 text-white rounded-md"
+                    className="bg-green-500 px-6 py-2 text-white rounded-md w-full hover:bg-green-700"
                     type="submit"
                     disabled={isSubmitting}
                   >
