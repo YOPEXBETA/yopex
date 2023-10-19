@@ -36,10 +36,12 @@ const ParticipantRow = ({ user, index, challenge }) => {
   return (
     <tr
       key={user._id}
-      className="hover:bg-gray-50 bg-white"
+      className="hover:bg-gray-50 bg-white dark:bg-zinc-800"
       onClick={isOwner || user.user._id === currentUser._id ? toggleOpen : null}
     >
-      <td className=" py-4 px-4 font-bold text-md">{index + 1} </td>
+      <td className=" py-4 px-4 font-bold text-md dark:text-white">
+        {index + 1}{" "}
+      </td>
       <td className="py-4 px-4">
         <div className="flex items-center">
           <Link
@@ -62,18 +64,18 @@ const ParticipantRow = ({ user, index, challenge }) => {
               )}
             </div>
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 dark:text-white">
               <span className="text-sm">{user?.user?.firstname}</span>
               <span className="text-sm">{user?.user?.lastname}</span>
             </div>
           </Link>
         </div>
       </td>
-      <td className="text-sm text-left py-4 px-4">
+      <td className="text-sm text-left py-4 px-4 dark:text-white">
         {" "}
         {formatDate(user?.registrationDate)}
       </td>
-      <td className="text-sm text-right py-4 px-4">
+      <td className="text-sm text-right py-4 px-4 dark:text-white">
         <div>{formatDate(user?.submissionDate)}</div>
       </td>
       {user && (

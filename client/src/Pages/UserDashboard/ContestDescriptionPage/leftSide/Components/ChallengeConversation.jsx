@@ -67,7 +67,7 @@ const ChallengeConversation = ({ conversationId, id }) => {
       {arrivalMessage?.length === 0 ? (
         <div
           ref={chatContainerRef}
-          style={{ textAlign: "center", padding: "40vh 0vh" }}
+          style={{ textAlign: "center", padding: "20vh 0vh" }}
         >
           <p className="opacity-50 text-xl">
             Open a conversation to start a chat
@@ -86,7 +86,7 @@ const ChallengeConversation = ({ conversationId, id }) => {
                   <div className="col-span-12">
                     {message.sender._id === user._id ? (
                       <div className="text-right">
-                        <p>{message.message}</p>
+                        <p className="dark:text-white">{message.message}</p>
                         <p className="text-gray-500 text-[0.75rem]">
                           {formatDistance(
                             new Date(message.createdAt),
@@ -114,7 +114,9 @@ const ChallengeConversation = ({ conversationId, id }) => {
                             />
                           )}
                           <div>
-                            <p>{message.message}</p>
+                            <p className="text-black dark:text-white">
+                              {message.message}
+                            </p>
                             <p className="text-gray-500 text-[0.75rem]">
                               {formatDistance(
                                 new Date(message.createdAt),
