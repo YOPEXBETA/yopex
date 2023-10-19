@@ -19,9 +19,9 @@ const ChallengeCard = ({ challenge, type }) => {
     <div>
       <Link to={`/browse/contestDetails/${challenge._id}`}>
         <div
-          className={`w-full h-full flex-col lg:h-40 border-b-2 gap-6 bg-white md:flex-row lg:pr-11 rounded-2xl border border-gray-300 divide-gray-100 dark:divide-gray-700 md:rounded-lg flex`}
+          className={`w-full h-full flex-col lg:h-40 border-b-2 gap-6  dark:bg-zinc-700 overflow-hidden bg-white md:flex-row lg:pr-11 rounded-2xl border border-gray-300 divide-gray-100 dark:divide-gray-700 md:rounded-lg flex`}
         >
-          <div className="w-full xl:w-[30%]">
+          <div className="w-full xl:w-[30%] border-r">
             <img
               className={`h-full xl:h-30 md:h-40 w-screen md:rounded-l-lg object-cover lg:block`}
               src={challenge.company?.companyLogo}
@@ -30,7 +30,9 @@ const ChallengeCard = ({ challenge, type }) => {
           </div>
           <div className="flex w-full flex-col justify-between xl:w-[70%] lg:px-0 px-4">
             <div className="py-4 pb-4 flex justify-between items-center">
-              <h5 className="text-lg font-semibold">{challenge.title}</h5>
+              <h5 className="text-lg font-semibold dark:text-white">
+                {challenge.title}
+              </h5>
 
               {user?.companies?.includes(challenge?.company._id) ? (
                 <div onClick={(e) => e.preventDefault()}>
@@ -44,22 +46,28 @@ const ChallengeCard = ({ challenge, type }) => {
             <p></p>
 
             <div className="flex items-center justify-between gap-2 pb-4">
-              <p className="truncate w-[35rem]">{challenge.description}</p>
+              <p className="truncate w-[35rem] dark:text-white">
+                {challenge.description}
+              </p>
             </div>
 
             <div className="flex flex-wrap justify-between pb-8">
               <div className="flex items-center justify-start gap-2">
                 <div className="flex gap-1">
-                  <p className="font-bold">{challenge.users.length}</p>
-                  <p>Participants</p>
+                  <p className="font-bold dark:text-white">
+                    {challenge.users.length}
+                  </p>
+                  <p className="dark:text-white">Participants</p>
                 </div>
               </div>
 
               <div className="flex items-center justify-start gap-2">
-                <div className="text-sm capitalize text-opacity-75 font-bold text-green-500">
-                  {challenge.price} Points
+                <div className="flex gap-1">
+                  <p className="font-bold text-green-500">{challenge.price} </p>
+                  <p className="text-green-500"> Points</p>
                 </div>
               </div>
+
               <div className="flex items-center justify-start gap-2">
                 <button
                   className={`${
