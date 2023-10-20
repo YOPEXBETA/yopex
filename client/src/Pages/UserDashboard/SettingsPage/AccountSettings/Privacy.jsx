@@ -27,15 +27,12 @@ export default function Privacy() {
   return (
     <div className="space-y-8">
       <div className="dark:text-gray-200">
-        <h5 className="text-2xl font-bold">Privacy Information</h5>
-        <hr className="border-t border-gray-200 dark:bg-gray-200 my-2" />
-
+        <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
+          Privacy Information{" "}
+        </h2>
+        <hr className="border dark:border-gray-200 mb-2" />
         <br />
-        <div className="dark:text-gray-300">
-          <h5 className="text-2xl font-bold">Change Password</h5>
-        </div>
 
-        <br />
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-1 gap-3"
@@ -50,7 +47,7 @@ export default function Privacy() {
                 <input
                   type="password"
                   placeholder="Enter old password"
-                  className="w-full border dark:bg-zinc-800 dark:text-gray-200 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+                  className="w-full border dark:bg-zinc-700 dark:text-gray-200 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
                   {...register("oldPassword")}
                 />
               </div>
@@ -62,7 +59,7 @@ export default function Privacy() {
                 </label>
                 <input
                   placeholder="New Password"
-                  className="w-full border border-gray-300 dark:bg-zinc-800 dark:text-gray-200 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+                  className="w-full border border-gray-300 dark:bg-zinc-700 dark:text-gray-200 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
                   type="password"
                   {...register("password")}
                 />
@@ -75,7 +72,7 @@ export default function Privacy() {
               <input
                 type="password"
                 placeholder="ReType Password"
-                className="w-full border border-gray-300 dark:bg-zinc-800 dark:text-gray-200 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+                className="w-full border border-gray-300 dark:bg-zinc-700 dark:text-gray-200 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
                 {...register("password2")}
               />
             </div>

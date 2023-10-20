@@ -1,21 +1,19 @@
-import { Divider } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import { Stack } from "@mui/system";
 import React from "react";
 import UserEdit from "./ProfileInformations/UserEdit";
 
 const GeneralInformations = () => {
   return (
     <React.Fragment>
-      <Stack>
-        <Typography variant="h5" className="dark:text-gray-200" gutterBottom>
+      <div className="">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
           General Informations
-        </Typography>
-        <Divider className=" dark:bg-gray-200" />
+        </h2>
+        <hr className="border dark:border-gray-200 mb-2" />
         <br />
         <UserEdit />
-      </Stack>
+      </div>
     </React.Fragment>
   );
 };
+
 export default GeneralInformations;

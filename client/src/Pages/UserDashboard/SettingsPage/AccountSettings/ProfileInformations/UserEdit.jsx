@@ -35,7 +35,6 @@ const UserEdit = () => {
     defaultValues: {
       firstname: user.firstname,
       lastname: user.lastname,
-
     },
   });
 
@@ -94,7 +93,10 @@ const UserEdit = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label htmlFor="firstname" className="block text-gray-600 dark:text-gray-300">
+            <label
+              htmlFor="firstname"
+              className="block text-gray-600 dark:text-gray-300"
+            >
               First Name
             </label>
             <input
@@ -106,7 +108,10 @@ const UserEdit = () => {
             />
           </div>
           <div className="col-span-1">
-            <label htmlFor="lastname" className="block text-gray-600 dark:text-gray-300">
+            <label
+              htmlFor="lastname"
+              className="block text-gray-600 dark:text-gray-300"
+            >
               Last Name
             </label>
             <input
@@ -123,7 +128,7 @@ const UserEdit = () => {
             <label className="dark:text-gray-300">Description</label>
 
             <textarea
-            id="userDescription"
+              id="userDescription"
               placeholder="Description"
               className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               defaultValue={user.userDescription}
@@ -184,7 +189,9 @@ const UserEdit = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label shrink={true} className="dark:text-gray-300">Date of Birth</label>
+            <label shrink={true} className="dark:text-gray-300">
+              Date of Birth
+            </label>
 
             <input
               type="date"
@@ -214,7 +221,9 @@ const UserEdit = () => {
           <div className="col-span-1">
             <button
               className={`${
-                isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-green-500 dark:hover:bg-green-600 hover:bg-green-600"
+                isSubmitting
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-green-500 dark:hover:bg-green-600 hover:bg-green-600"
               } px-4 py-2 rounded-lg text-white w-40`}
               type="submit"
               disabled={isSubmitting}
