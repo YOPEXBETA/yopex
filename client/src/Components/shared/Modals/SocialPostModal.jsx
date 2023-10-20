@@ -108,7 +108,9 @@ const SocialPostModal = ({ closeModal, post }) => {
             </div>
           </div>
           <div className="my-4">
-            <h2 className="dark:text-white mb-4 text-xl">Categories</h2>
+            <h2 className="dark:text-white mb-4 text-xl font-bold">
+              Categories
+            </h2>
             <div className="flex flex-row flex-wrap space-x-2 md:space-x-2 space-y-0 md:space-y-0 w-full">
               {post.categories &&
                 Array?.isArray(post?.categories) &&
