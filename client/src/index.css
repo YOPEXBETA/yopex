@@ -4,8 +4,17 @@
 
 @layer base {
   html {
+    @apply bg-white;
     font-family: "Raleway", sans-serif;
   }
+
+  @media (prefers-color-scheme: dark) {
+    /* Apply a dark background color when in dark mode */
+    .dark {
+      @apply bg-gray-900;
+    }
+  }
+
   @layer components {
     /* .my-react-select-container {
     } */

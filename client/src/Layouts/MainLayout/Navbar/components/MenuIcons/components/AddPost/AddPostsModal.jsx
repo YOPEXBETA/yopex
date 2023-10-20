@@ -126,7 +126,7 @@ export const AddPostModal = ({ open, handleClose }) => {
                     </label>
                     <textarea
                       className="w-full h-40 p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2"
-                      {...register("description", { required: true })}
+                      {...register("description", { required: false })}
                       placeholder="What's on your mind?"
                     />
                   </div>

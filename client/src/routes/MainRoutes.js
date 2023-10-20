@@ -55,11 +55,6 @@ const BrowseLayout = Loadable(
 //     import("../Pages/UserDashboard/BrowsePage/Content/WorkCards/AllJobs")
 //   )
 // );
-const BlogDetail = Loadable(
-  lazy(() =>
-    import("../Pages/UserDashboard/BrowsePage/Content/WorkCards/BlogDetail")
-  )
-);
 
 const PaymentSuccess = Loadable(
   lazy(() =>
@@ -129,10 +124,6 @@ const MainRoutes = {
         {
           path: "contestDetails/:id",
           element: <ContestDetails />,
-        },
-        {
-          path: "MyJobs/:id",
-          element: <BlogDetail />,
         },
       ],
     },

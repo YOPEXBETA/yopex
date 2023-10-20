@@ -12,7 +12,7 @@ const TasksDescription = () => {
         <div className="mb-4 dark:text-white ">
           <h4 className="text-xl font-semibold">Description</h4>
         </div>
-        <hr className="my-2 game-divider mb-2" />
+        <hr className="my-2 mb-2" />
         <div className="mb-4" style={{ wordWrap: "break-word" }}>
           <p className="text-md dark:text-white mb-8">
             {challenge.description}
@@ -23,7 +23,7 @@ const TasksDescription = () => {
         </div>
         <hr className="my-4" />
         <div className="mb-4">
-          <div className="flex flex-row flex-wrap space-x-0 md:space-x-2 space-y-2 md:space-y-0 w-full">
+          <div className="flex flex-row flex-wrap space-x-2 md:space-x-2 space-y-0 md:space-y-0 w-full">
             {challenge.category.map((cat, i) => (
               <span
                 key={i}

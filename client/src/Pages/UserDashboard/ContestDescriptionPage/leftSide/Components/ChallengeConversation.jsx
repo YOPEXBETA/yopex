@@ -77,7 +77,7 @@ const ChallengeConversation = ({ conversationId, id }) => {
         <div
           id="messages"
           ref={chatContainerRef}
-          className="flex flex-col space-y-4 lg:p-3 p-0 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch h-80  w-full px-4 overflow-auto lg:overflow-auto"
+          className="flex flex-col space-y-4 lg:p-3 p-0  scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch min-h-80 max-h-[22rem] overflow-y-auto  w-full px-4 overflow-auto lg:overflow-auto"
         >
           {arrivalMessage?.map((message, index) => {
             return (

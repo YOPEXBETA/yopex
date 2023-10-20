@@ -16,7 +16,7 @@ const ContestDetails = () => {
     return (
       <div className="md:space-y-6 bg-white dark:bg-zinc-800">
         <Banner value={value} changeValue={changeValue} />
-        <div className="grid grid-cols-12 gap-4 px-6 lg:px-8 xl:px-32 dark:bg-zinc-800 h-full md:h-[100vh]">
+        <div className="grid grid-cols-12 gap-4 px-6 lg:px-8 xl:px-32 dark:bg-zinc-800 h-full">
           <div className="col-span-12 mb-2">
             <ContentSide value={value} />
           </div>

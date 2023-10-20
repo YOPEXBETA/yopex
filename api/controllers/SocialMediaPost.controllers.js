@@ -37,6 +37,7 @@ const CreatePost = async (req, res) => {
         owner.picturePath != undefined ? owner.picturePath : owner.companyLogo,
       description: req.body.description,
       postPicturePath: req.body.postPicturePath,
+      //postPicturePath: req.file ? req.downloadURL : "", // Use req.downloadURL from middleware
       postVideoePath: req.body.postVideoPath,
       categories: req.body.categories,
     });

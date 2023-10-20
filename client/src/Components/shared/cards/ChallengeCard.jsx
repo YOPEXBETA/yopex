@@ -19,7 +19,7 @@ const ChallengeCard = ({ challenge, type }) => {
     <div>
       <Link to={`/browse/contestDetails/${challenge._id}`}>
         <div
-          className={`w-full h-full flex-col lg:h-40 border-b-2 gap-6  dark:bg-zinc-700 overflow-hidden bg-white md:flex-row lg:pr-11 rounded-2xl border border-gray-300 divide-gray-100 dark:divide-gray-700 md:rounded-lg flex`}
+          className={`w-full h-full flex-col lg:h-40 border-b-2 gap-6  dark:bg-zinc-800 overflow-hidden bg-white md:flex-row lg:pr-11 rounded-2xl border border-gray-300 divide-gray-100 dark:divide-gray-700 md:rounded-lg flex`}
         >
           <div className="w-full xl:w-[30%] border-r">
             <img
@@ -57,7 +57,7 @@ const ChallengeCard = ({ challenge, type }) => {
                   <p className="font-bold dark:text-white">
                     {challenge.users.length}
                   </p>
-                  <div>/</div>
+                  <div className="dark:text-white">/</div>
                   <p className="font-bold dark:text-white">
                     {challenge.nbruser}
                   </p>

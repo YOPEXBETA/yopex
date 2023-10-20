@@ -26,7 +26,15 @@ SocialMediaPostRouter.delete("/:id", authenticateToken, deletePost);
 SocialMediaPostRouter.put("/:id", authenticateToken, updateAPost);
 SocialMediaPostRouter.patch("/:id/like", authenticateToken, likePost);
 SocialMediaPostRouter.patch("/share", authenticateToken, sharePost);
-SocialMediaPostRouter.patch("/:userId/bookmark/:postId", authenticateToken, BookmarkPost);
-SocialMediaPostRouter.get("/bookmarks/:userId", authenticateToken, getBookmarks);
+SocialMediaPostRouter.patch(
+  "/:userId/bookmark/:postId",
+  authenticateToken,
+  BookmarkPost
+);
+SocialMediaPostRouter.get(
+  "/bookmarks/:userId",
+  authenticateToken,
+  getBookmarks
+);
 
 module.exports = SocialMediaPostRouter;

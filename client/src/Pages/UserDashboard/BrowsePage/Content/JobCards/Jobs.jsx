@@ -50,7 +50,7 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
             ) : null
           )
         ) : (
-          <p>No jobs found</p>
+          <p className="dark:text-white">No jobs found</p>
         )}
       </div>
     </div>

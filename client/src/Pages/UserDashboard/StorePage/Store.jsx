@@ -1,40 +1,41 @@
-import { Button } from '@mui/material';
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import { usePayment, useVerifyPayment } from '../../../hooks/react-query/useUsers';
-import { useLocation } from 'react-router-dom';
-import AlertContainer from '../../../Components/alerts';
-import AlertSuccess from '../../../Components/successalert';
-import StorePointCard from '../../../Components/shared/cards/StorePointCard';
-
+import {
+  usePayment,
+  useVerifyPayment,
+} from "../../../hooks/react-query/useUsers";
+import { useLocation } from "react-router-dom";
+import AlertContainer from "../../../Components/alerts";
+import AlertSuccess from "../../../Components/successalert";
+import StorePointCard from "../../../Components/shared/cards/StorePointCard";
 
 const Store = () => {
-    const { user } = useSelector((state) => state.auth);
-    const { mutate, isLoading } = usePayment();
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const paymentId = searchParams.get('payment_id');
-    const {mutate:verify,data} = useVerifyPayment();
-    const [error,setError] = useState(null);
-    const [success,setSuccess] = useState(null);
+  const { user } = useSelector((state) => state.auth);
+  const { mutate, isLoading } = usePayment();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const paymentId = searchParams.get("payment_id");
+  const { mutate: verify, data } = useVerifyPayment();
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
-    useEffect(() => {
-        if(!paymentId) return;
-        verify(paymentId);
-    }, [paymentId]);
+  useEffect(() => {
+    if (!paymentId) return;
+    verify(paymentId);
+  }, [paymentId]);
 
-    useEffect(() => {
-        if(!data) return;
-        if (data.result.status === "SUCCESS"){
-          setSuccess(true);
-          setError("Payment Successfull!");
-      }else{
-          setSuccess(false);
-          setError("Payment Fail!");
-      }
-    }, [data]);
-
+  useEffect(() => {
+    if (!data) return;
+    if (data.result.status === "SUCCESS") {
+      setSuccess(true);
+      setError("Payment Successfull!");
+    } else {
+      setSuccess(false);
+      setError("Payment Fail!");
+    }
+  }, [data]);
 
   const pointItems = [
     { points: 50, amount: 50 },
@@ -58,7 +59,9 @@ const Store = () => {
           key={index}
           points={item.points}
           amount={item.amount}
-          onClick={() => {mutate(item.points)}}
+          onClick={() => {
+            mutate(item.points);
+          }}
         />
       ))}
     </div>

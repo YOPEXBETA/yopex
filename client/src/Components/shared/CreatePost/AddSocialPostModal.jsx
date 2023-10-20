@@ -1,4 +1,3 @@
-import { Autocomplete, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -91,7 +90,7 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                 <div className="space-y-4">
                   <textarea
                     className="w-full h-40 p-2 border bg-white dark:text-white dark:bg-zinc-700 rounded focus:outline-none resize-none"
-                    {...register("description", { required: true })}
+                    {...register("description", { required: false })}
                     placeholder="What's on your mind?"
                   />
                   <Controller

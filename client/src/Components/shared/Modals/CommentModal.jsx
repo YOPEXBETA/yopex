@@ -55,35 +55,36 @@ const CommentModal = ({
                             className="w-10 h-10 rounded-full"
                           />
                           <div className="ml-2 w-full">
-                            <div className="flex gap-2  items-start">
-                              <p className="text-md font-semibold dark:text-gray-200">
-                                {`${comment.userId.firstname} ${comment.userId.lastname}`}
-                              </p>
-
-                              <div className="flex justify-between items-start ">
-                                <p className="text-md text-gray-400 dark:text-gray-400 ">
-                                  {" "}
-                                  |{" "}
-                                  {formatDistance(
-                                    new Date(comment.createdAt),
-                                    new Date(),
-                                    {
-                                      addSuffix: true,
-                                    }
-                                  )}
+                            <div className="flex gap-2  items-start justify-between">
+                              <div className="flex-col">
+                                <div className="flex gap-1">
+                                  <p className="text-md font-semibold dark:text-gray-200">
+                                    {`${comment.userId.firstname} ${comment.userId.lastname}`}
+                                  </p>
+                                  <p className="text-md text-gray-400 dark:text-gray-400">
+                                    {" "}
+                                    |{" "}
+                                    {formatDistance(
+                                      new Date(comment.createdAt),
+                                      new Date(),
+                                      {
+                                        addSuffix: true,
+                                      }
+                                    )}
+                                  </p>
+                                </div>
+                                <p className="text-md dark:text-gray-200 text-zinc-700 whitespace-nowrap max-w-[70px]">
+                                  {comment.desc}
                                 </p>
-                                {comment.userId._id === user._id && (
-                                  <CommentMenuIcon
-                                    className="text-black text-md   "
-                                    post={comment}
-                                  />
-                                )}
                               </div>
-                            </div>
 
-                            <p className="text-md dark:text-gray-200 text-zinc-700 whitespace-nowrap max-w-[70px]">
-                              {comment.desc}
-                            </p>
+                              {comment.userId._id === user._id && (
+                                <CommentMenuIcon
+                                  className="text-black text-md   "
+                                  post={comment}
+                                />
+                              )}
+                            </div>
                           </div>
                         </div>
                         <hr className="border-t border-gray-300 mt-2" />
@@ -94,7 +95,9 @@ const CommentModal = ({
                   )}
                 </ul>
               ) : (
-                <p className="mt-4 text-md text-gray-700">No comments yet.</p>
+                <p className="mt-4 text-md text-gray-700 dark:text-white">
+                  No comments yet.
+                </p>
               )}
             </div>
           </div>

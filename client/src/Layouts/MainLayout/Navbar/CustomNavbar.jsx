@@ -25,7 +25,11 @@ const CustomNavbar = () => {
                 to="/feed"
                 className="text-2xl font-bold text-primary flex items-center"
               >
-                <img src={YopexLogo} alt="Yopex Logo" className="w-9 h-9" />
+                <img
+                  src={YopexLogo}
+                  alt="Yopex Logo"
+                  className="w-9 h-9 object-contain"
+                />
               </Link>
               <NavbarSearchDropDown />
             </div>
