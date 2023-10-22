@@ -3,6 +3,7 @@ import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import uploadFile from "../../../../../../../utils/uploadFile";
 import { useCreateCompany } from "../../../../../../../hooks/react-query/useCompany";
+import { FaImage, FaFile } from "react-icons/fa";
 
 export const AddCompanyModal = ({ open, handleClose }) => {
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
@@ -49,15 +50,13 @@ export const AddCompanyModal = ({ open, handleClose }) => {
     <div
       open={open}
       onClose={handleClose}
-      className={`fixed  z-50 inset-0 overflow-y-auto ${
-        open ? "backdrop-blur-sm" : "hidden"
-      }`}
+      className={`fixed  z-50 inset-0  ${open ? "backdrop-blur-sm" : "hidden"}`}
     >
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex items-end justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
         <div
           className={`${
             open ? "w-full sm:w-[40rem]" : "hidden"
-          } inline-block align-bottom bg-white scroll-smooth scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg max-h-[40rem] overflow-y-auto  pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
+          } inline-block align-bottom bg-white scroll-smooth px-2 scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg max-h-[40rem] overflow-y-auto  pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
         >
           <form onSubmit={handleSubmit(onSubmit)} spacing={1}>
             <div className="flex justify-between">
@@ -117,7 +116,9 @@ export const AddCompanyModal = ({ open, handleClose }) => {
 
               {uploadedFile && (
                 <div className="mb-4">
-                  <p className="mb-1">Upload Progress: {uploadProgress}%</p>
+                  <p className="mb-1">
+                    Upload profile picture Progress: {uploadProgress}%
+                  </p>
                   <div className="bg-green-300 h-2 rounded">
                     <div
                       className="bg-green-500 h-2 rounded"
@@ -126,43 +127,78 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                   </div>
                 </div>
               )}
-              <div className="mb-4">
-                <label
-                  htmlFor="CompanyName"
-                  className="dark:text-white block mb-2"
-                >
-                  Upload Company Picture
-                </label>
-                <Controller
-                  className="w-full"
-                  name="picture"
-                  onChange={(value) => setValue("picture", value)}
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <div className="mt-4">
-                      <label className="block w-full p-2 hover:bg-green-700 border rounded-md shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer">
-                        <span className="text-green-600">
-                          {field.value && field.value.length > 0
-                            ? // Display the file names when files are selected
-                              `Files selected: ${field.value.length}`
-                            : // Display this when no file is chosen
-                              "Company Picture"}
-                        </span>
-                        <input
-                          type="file"
-                          multiple
-                          onChange={(e) => field.onChange(e.target.files)}
-                          className="hidden"
-                        />
-                      </label>
-                    </div>
-                  )}
-                />
+              <div className="flex gap-2">
+                <div className="mb-4">
+                  <Controller
+                    className="w-full"
+                    name="picture"
+                    onChange={(value) => setValue("picture", value)}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <div className="mt-4">
+                        <label
+                          title="Upload company profile picture"
+                          className="w-12 h-12 p-2 flex items-center justify-center hover:bg-green-700 border rounded-full shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer"
+                        >
+                          {field.value && field.value.length > 0 ? (
+                            <span className="text-green-600">
+                              <FaImage />
+                            </span>
+                          ) : (
+                            <span className="text-green-600">
+                              <FaImage />
+                            </span>
+                          )}
+                          <input
+                            type="file"
+                            multiple
+                            onChange={(e) => field.onChange(e.target.files)}
+                            className="hidden"
+                          />
+                        </label>
+                      </div>
+                    )}
+                  />
+                </div>
+                <div className="mb-4">
+                  <Controller
+                    name="document"
+                    control={control}
+                    rules={{ required: false }}
+                    onChange={(value) => setValue("document", value)}
+                    render={({ field }) => (
+                      <div className="mt-4">
+                        <label
+                          className="w-12 h-12 p-2 flex items-center justify-center hover:bg-green-700 border rounded-full shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer"
+                          title="Upload company legal document"
+                        >
+                          {field.value && field.value.length > 0 ? (
+                            <span className="text-green-600">
+                              <FaFile />
+                            </span>
+                          ) : (
+                            <span className="text-green-600">
+                              <FaFile />
+                            </span>
+                          )}
+                          <input
+                            type="file"
+                            multiple
+                            onChange={(e) => field.onChange(e.target.files)}
+                            className="hidden"
+                          />
+                        </label>
+                      </div>
+                    )}
+                  />
+                </div>
               </div>
               {uploadedFiledoc && (
                 <div className="mb-4">
-                  <p className="mb-1">Upload Progress: {uploadProgressdoc}%</p>
+                  <p className="mb-1">
+                    Upload Legal Document Progress: {uploadProgressdoc}%
+                  </p>
                   <div className="bg-green-300 h-2 rounded">
                     <div
                       className="bg-green-500 h-2 rounded"
@@ -171,39 +207,6 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                   </div>
                 </div>
               )}
-              <div className="mb-4">
-                <label
-                  htmlFor="CompanyDescription"
-                  className="dark:text-white block"
-                >
-                  Optional
-                </label>
-                <Controller
-                  name="document"
-                  control={control}
-                  rules={{ required: false }}
-                  onChange={(value) => setValue("document", value)}
-                  render={({ field }) => (
-                    <div className="mt-4">
-                      <label className="block w-full p-2 hover:bg-green-700 border rounded-md shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer">
-                        <span className="text-green-600">
-                          {field.value && field.value.length > 0
-                            ? // Display the file names when files are selected
-                              `Documents selected: ${field.value.length}`
-                            : // Display this when no file is chosen
-                              "Company Documents"}
-                        </span>
-                        <input
-                          type="file"
-                          multiple
-                          onChange={(e) => field.onChange(e.target.files)}
-                          className="hidden"
-                        />
-                      </label>
-                    </div>
-                  )}
-                />
-              </div>
             </div>
 
             <div className="flex justify-between py-4">

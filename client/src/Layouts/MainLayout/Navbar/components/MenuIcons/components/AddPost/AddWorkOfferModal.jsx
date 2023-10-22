@@ -52,24 +52,15 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
 
   return (
     <div
-      className={`fixed z-50 inset-0 overflow-y-auto  ${
-        open ? "backdrop-blur-sm" : "hidden"
-      }`}
+      className={`fixed z-50 inset-0  ${open ? "backdrop-blur-sm" : "hidden"}`}
     >
       {isError && <AlertContainer error={""} />}
       {isSuccess && <AlertSuccess message="Job offer created successfully" />}
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
-        <span
-          className="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-        >
-          &#8203;
-        </span>
-
+      <div className="flex items-end justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
         <div
           className={`${
             open ? "w-full sm:w-[40rem]" : "hidden"
-          } inline-block align-bottom bg-white scroll-smooth scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg max-h-[40rem] overflow-y-auto  pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
+          } inline-block align-bottom bg-white scroll-smooth px-2 scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg max-h-[40rem] overflow-y-auto  pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
         >
           <div>
             <div className="flex justify-between items-center">
