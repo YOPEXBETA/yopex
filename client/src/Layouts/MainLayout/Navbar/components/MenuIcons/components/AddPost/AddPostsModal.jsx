@@ -1,4 +1,3 @@
-import { Autocomplete, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -7,6 +6,7 @@ import { useCreatePost } from "../../../../../../../hooks/react-query/usePosts";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import uploadFile from "../../../../../../../utils/uploadFile";
 import Select from "react-select";
+import { FaImage } from "react-icons/fa";
 
 export const AddPostModal = ({ open, handleClose }) => {
   // Global states |  @redux/toolkit
@@ -183,14 +183,16 @@ export const AddPostModal = ({ open, handleClose }) => {
                     rules={{ required: true }}
                     render={({ field }) => (
                       <div className="mt-4">
-                        <label className="block w-full p-2 hover:bg-green-700 border rounded-md shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer">
-                          <span className="text-green-600">
-                            {field.value && field.value.length > 0
-                              ? // Display the file names when files are selected
-                                `Files selected: ${field.value.length}`
-                              : // Display this when no file is chosen
-                                "Upload File"}
-                          </span>
+                        <label className="w-12 h-12 p-2 flex items-center justify-center hover:bg-green-700 border rounded-full shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer">
+                          {field.value && field.value.length > 0 ? (
+                            <span className="text-green-600">
+                              <FaImage />
+                            </span>
+                          ) : (
+                            <span className="text-green-600">
+                              <FaImage />
+                            </span>
+                          )}
                           <input
                             type="file"
                             multiple
@@ -198,6 +200,11 @@ export const AddPostModal = ({ open, handleClose }) => {
                             className="hidden"
                           />
                         </label>
+                        {field.value && field.value.length > 0 && (
+                          <div className="text-green-600 mt-2">
+                            Files selected: {field.value.length}
+                          </div>
+                        )}
                       </div>
                     )}
                   />
