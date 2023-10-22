@@ -263,3 +263,14 @@ export const useSeeNotification = (userId) => {
     },
   });
 };
+
+
+export const useStat = () =>{
+  return useQuery({
+    queryKey: ["stat"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/get/stat`);
+      return data;
+    },
+  });
+}

@@ -25,6 +25,7 @@ const {
   followUnfollowCompany,
   getUserFollowingsCompanies,
   seeNotification,
+  getStatistic,
 } = require("../controllers/user.controller");
 
 const validate = require("../middlewares/SchemaValidation.middleware");
@@ -47,7 +48,7 @@ const {
 userRouter.put("/users/edit/", authenticateToken, editProfile);
 userRouter.get("/me", authenticateToken, getCurrentUser); //seach users
 userRouter.get("/users", authenticateToken, SearchUsers); //seach users
-userRouter.get("/allusers", getUsers); //seach users
+userRouter.get("/allusers",authenticateToken, getUsers); //seach users
 userRouter.get("/:id", authenticateToken, getUser);
 userRouter.get("/find/friends/:userId", authenticateToken, getUserFriends);
 userRouter.get(
@@ -99,5 +100,7 @@ userRouter.patch("/special", async (req, res) => {
   const users = await userSchema.updateMany({}, { status: "active" });
   return res.status(200).json(users);
 });
+
+userRouter.get("/get/stat",getStatistic)
 
 module.exports = userRouter;

@@ -43,8 +43,7 @@ const editProfile = async (req, res) => {
 
 const getAllCompanies = async (req,res)=>{
   try {
-    const companies = await companySchema.find();
-    console.log(companies);
+    const companies = await companySchema.find().select("companyName companyLogo").limit(6);
     res.status(200).json(companies);
   } catch (error) {
     console.error(error.message);

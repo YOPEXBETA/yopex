@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import UserRow from "./UserRow";
-
+ 
 const LeaderbordTable = ({ data, query }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(8);
