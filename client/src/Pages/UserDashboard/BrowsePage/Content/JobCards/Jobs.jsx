@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useJobs } from "../../../../../hooks/react-query/useJobs";
 import JobCard from "../../../../../Components/shared/cards/JobCard";
 import LoadingSpinner from "../../../../../Components/LoadingSpinner";
+import JobCardSkeleton from "../../../../../Components/SkeletonLoading/JobCardSkeleton";
 
 const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
   // ==============================|| JOB CARD MODAL ||============================== //
@@ -20,7 +21,7 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
   {
     isLoading && (
       <div>
-        <LoadingSpinner />
+        <JobCardSkeleton />
       </div>
     );
   }

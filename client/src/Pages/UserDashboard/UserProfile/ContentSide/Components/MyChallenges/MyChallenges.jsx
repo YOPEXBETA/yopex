@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import { useUserChallenges } from "../../../../../../hooks/react-query/useUsers";
 import ChallengeCard from "../../../../../../Components/shared/cards/ChallengeCard";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import ChallengeCardSkeleton from "../../../../../../Components/SkeletonLoading/ChallengeCardSkeleton";
 
 const MyChallenges = () => {
   const { userId } = useParams();
   const { data, isLoading } = useUserChallenges(userId);
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <ChallengeCardSkeleton />;
   }
 
   if (data)

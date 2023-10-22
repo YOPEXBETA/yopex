@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFindChallenges } from "../../../../../hooks/react-query/useChallenges";
 import ChallengeCard from "../../../../../Components/shared/cards/ChallengeCard";
 import LoadingSpinner from "../../../../../Components/LoadingSpinner";
+import ChallengeCardSkeleton from "../../../../../Components/SkeletonLoading/ChallengeCardSkeleton";
 
 const Challenges = ({
   minAmount,
@@ -30,7 +31,7 @@ const Challenges = ({
     <div className="grid grid-cols-1 md:grid-cols-1 gap-2 xl:grid-cols-1 mb-16 xl:mb-4">
       {isLoading ? (
         <div>
-          <LoadingSpinner />
+          <ChallengeCardSkeleton />
         </div>
       ) : sortedChallenges.length > 0 ? (
         sortedChallenges.map((item) => (

@@ -70,7 +70,7 @@ const SocialPostCard = ({
   return (
     <div className=" divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
       <div className=" flex justify-between items-start">
-        <div className=" flex items-center py-4 pl-2 gap-2">
+        <div className=" flex items-center py-4 pl-4 gap-2">
           {post.userPicturePath ? (
             <img
               alt="post"
