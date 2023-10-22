@@ -17,7 +17,7 @@ const JobCard = ({ job }) => {
     <div>
       <div
         onClick={toggleOpen}
-        className="bg-white dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 h-48 rounded-lg border-[1px] cursor-pointer hover:scale-102 duration-500"
+        className="bg-white dark:bg-zinc-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 h-48 rounded-lg border-[1px] cursor-pointer hover:scale-102 duration-500"
       >
         <div className="flex flex-col">
           <div className="bg- rounded-md p-4 h-full">

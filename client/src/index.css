@@ -4,6 +4,47 @@
 
 @layer base {
   html {
+    @apply bg-white;
     font-family: "Raleway", sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    /* Apply a dark background color when in dark mode */
+    .dark {
+      @apply bg-gray-900;
+    }
+  }
+
+  @layer components {
+    /* .my-react-select-container {
+    } */
+    .my-react-select-container .my-react-select__control {
+      @apply bg-white rounded-lg dark:bg-zinc-700 border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500;
+    }
+
+    .my-react-select-container .my-react-select__control--is-focused {
+      @apply border-neutral-500 rounded-lg hover:border-zinc-500 dark:border-neutral-400 dark:hover:border-neutral-400 shadow-none;
+    }
+
+    .my-react-select-container .my-react-select__menu {
+      @apply bg-neutral-100 rounded-lg dark:bg-zinc-700 border  border-neutral-300 dark:border-neutral-600;
+    }
+
+    .my-react-select-container .my-react-select__option {
+      @apply text-neutral-600 rounded-lg dark:text-neutral-200 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-800;
+    }
+    /* .my-react-select-container .my-react-select__option--is-focused {
+      @apply bg-neutral-200 dark:bg-neutral-800;
+    } */
+
+    .my-react-select-container .my-react-select__indicator-separator {
+      @apply bg-neutral-600 rounded-lg;
+    }
+
+    .my-react-select-container .my-react-select__input-container,
+    .my-react-select-container .my-react-select__placeholder,
+    .my-react-select-container .my-react-select__single-value {
+      @apply text-gray-400 rounded-lg dark:text-gray-200;
+    }
   }
 }

@@ -5,7 +5,7 @@ import { timeSince } from "../../utils";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 
 const MobileNotifications = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state?.auth);
   const { data: notifications } = useUserNotifications(user?._id);
 
   return (
@@ -13,15 +13,14 @@ const MobileNotifications = () => {
       <div className="bg-white dark:bg-zinc-800 w-full h-full overflow-y-auto shadow-xl">
         <div className="p-4">
           <div className="flex flex-row items-center justify-between mb-2">
-            <h5 className="text-xl font-semibold dark:text-gray-200">Notifications</h5>
+            <h5 className="text-xl font-semibold dark:text-gray-200">
+              Notifications
+            </h5>
           </div>
           <hr className="border-gray-300" />
           <div className="mt-4 space-y-4">
-            {notifications?.notification?.map((notification) => (
-              <div
-                key={notification?._id}
-                className="flex items-start space-x-2"
-              >
+            {notifications?.notification?.map((notification, index) => (
+              <div key={index} className="flex items-start space-x-2">
                 <div className="w-10 h-10">
                   {notification?.user ? (
                     notification.user.picturePath ? (

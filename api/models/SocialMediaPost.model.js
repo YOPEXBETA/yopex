@@ -19,7 +19,7 @@ const SocialMediaPostSchema = new mongoose.Schema(
     description: {
       type: String,
       max: 500,
-      required: true,
+      required: false,
     },
     postPicturePath: {
       type: Array,

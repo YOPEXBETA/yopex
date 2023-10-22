@@ -26,7 +26,7 @@ const SocialPostModal = ({ closeModal, post }) => {
   return (
     <div className="h-screen flex z-50 justify-center items-center dark:bg-zinc-800 bg-white w-full">
       <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center overflow-y-auto mb-8">
-        <div className="max-w-full md:max-w-5xl w-full bg-white rounded-lg h-full p-4">
+        <div className="max-w-full md:max-w-5xl w-full dark:bg-zinc-800 rounded-lg h-full p-4">
           {/* Image */}
           <div className="flex  md:flex-row items-start justify-between">
             <div className="flex items-center gap-3">
@@ -43,7 +43,7 @@ const SocialPostModal = ({ closeModal, post }) => {
                   className="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover bg-white border-2"
                 />
               )}
-              <div>
+              <div className="flex-col justify-between">
                 <Link
                   key={post.userId}
                   to={
@@ -53,7 +53,7 @@ const SocialPostModal = ({ closeModal, post }) => {
                   }
                   style={{ textDecoration: "none", color: "#000000" }}
                 >
-                  <p className="text-sm md:text-md font-medium">
+                  <p className="text-sm md:text-md dark:text-white font-medium">
                     {post.companyName !== undefined
                       ? `${post?.companyName}`
                       : `${post?.firstname} ${post?.lastname}`}
@@ -81,9 +81,9 @@ const SocialPostModal = ({ closeModal, post }) => {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeWidth="2"
                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                 />
               </svg>
@@ -91,7 +91,7 @@ const SocialPostModal = ({ closeModal, post }) => {
           </div>
           {/* Description */}
           <div className="col-span-1 md:col-span-1 py-6">
-            <p className="text-gray-700 text-sm md:text-md">
+            <p className="text-gray-700 dark:text-white text-sm md:text-md">
               {post.description}
             </p>
           </div>
@@ -100,11 +100,28 @@ const SocialPostModal = ({ closeModal, post }) => {
               <img
                 src={post.postPicturePath[currentPage]}
                 alt="Profile"
-                className="w-full h-full object-cover rounded-lg max-h-[40rem]"
+                className="w-full h-full object-cover rounded-lg"
               />
               <div className="flex justify-center mt-3 absolute bottom-4 left-0 w-full z-10">
                 {renderPaginationDots()}
               </div>
+            </div>
+          </div>
+          <div className="my-4">
+            <h2 className="dark:text-white mb-4 text-xl font-bold">
+              Categories
+            </h2>
+            <div className="flex flex-row flex-wrap space-x-2 md:space-x-2 space-y-0 md:space-y-0 w-full">
+              {post.categories &&
+                Array?.isArray(post?.categories) &&
+                post?.categories?.map((cat, i) => (
+                  <span
+                    key={i}
+                    className="px-2 py-1 dark:text-white  text-md border-2 border-gray-300 rounded-full"
+                  >
+                    {cat.name}
+                  </span>
+                ))}
             </div>
           </div>
         </div>

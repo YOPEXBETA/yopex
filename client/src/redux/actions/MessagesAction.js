@@ -13,7 +13,6 @@ export const getMessages = (conversationId) => async (dispatch) => {
       type: "getMessages",
       payload: response.data,
     });
-    console.log(response.data, "lms");
   } catch (error) {
     console.log("error:", error);
   }

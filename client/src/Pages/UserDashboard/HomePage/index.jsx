@@ -15,7 +15,6 @@ const HomeLayout = () => {
         <UserProgressCard />
         <UserHighlights />
         <div className="xl:hidden">
-          {" "}
           <MoneyBalance />
         </div>
       </div>

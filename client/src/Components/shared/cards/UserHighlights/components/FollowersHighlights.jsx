@@ -3,14 +3,19 @@ import { useSelector } from "react-redux";
 import { useUserFollowers } from "../../../../../hooks/react-query/useUsers";
 
 const FollowersHighlights = () => {
-  const { user } = useSelector((state) => state.auth);
-  const { data: followers } = useUserFollowers(user._id);
+  const { user } = useSelector((state) => state?.auth);
+  const { data: followers } = useUserFollowers(user?._id);
 
   return (
     <div>
       <div className="flex items-center justify-between">
-        <div className="text-medium text-gray-500 dark:text-gray-200"> Followers</div>
-        <div className="text-xl font-bold dark:text-gray-300">{followers?.length}</div>
+        <div className="text-medium text-gray-500 dark:text-gray-200">
+          {" "}
+          Followers
+        </div>
+        <div className="text-xl font-bold dark:text-gray-300">
+          {followers?.length}
+        </div>
       </div>
     </div>
   );

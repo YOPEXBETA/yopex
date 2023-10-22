@@ -8,7 +8,6 @@ import {
 } from "../../../../hooks/react-query/useConversations";
 
 const Conversation = ({ conversationId, socket, otherUser }) => {
-  console.log(otherUser);
   const chatContainerRef = useRef(null);
 
   const { user } = useSelector((state) => state.auth);
@@ -26,13 +25,12 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
   }, [messages]);
 
   useEffect(() => {
-    socket.on("getMessage", (data) => {
-      console.log(data);
+    socket?.on("getMessage", (data) => {
       setArrivalMessage((prev) => [...prev, data]);
     });
 
     return () => {
-      socket.off("getMessage"); // This will remove the listener when the component unmounts or before the effect runs again
+      socket?.off("getMessage"); // This will remove the listener when the component unmounts or before the effect runs again
     };
   }, [socket]);
 
@@ -109,7 +107,7 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
                             />
                           )}
                           <div>
-                            <p>{message.message}</p>
+                            <p>{message?.message}</p>
                             <p className="text-gray-500 text-[0.75rem]">
                               {formatDistance(
                                 new Date(message.createdAt),
@@ -125,7 +123,7 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
                 </div>
               </div>
             );
-          })} 
+          })}
         </div>
       )}
 

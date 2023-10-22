@@ -26,7 +26,7 @@ const MyCompanyJobs = () => {
             <JobCard key={job._id} companyJobs={companyJobs} job={job} />
           ))
         ) : (
-          <p>No jobs found.</p>
+          <p className="dark:text-white">No jobs found.</p>
         )}
       </div>
     </div>

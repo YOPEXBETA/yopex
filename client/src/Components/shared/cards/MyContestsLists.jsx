@@ -26,10 +26,10 @@ const MyContestLists = () => {
   return (
     <div>
       {inProgress?.length > 0 && (
-        <div className="p-4 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+        <div className="p-4 divide-gray-100 dark:text-white dark:divide-gray-700 overflow-hidden  rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
           <div className="space-y-2">
             <div className="flex justify-between items-center mb-4">
-              <h5 className="text-lg font-medium">My Contests</h5>
+              <h4 className="text-xl font-bold dark:text-gray-200">Contests</h4>
             </div>
             {inProgress.slice(0, 2).map((user) => (
               <div key={user._id} className="flex items-center justify-between">

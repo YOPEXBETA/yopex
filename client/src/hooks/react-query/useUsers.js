@@ -6,9 +6,7 @@ const url = process.env.REACT_APP_API_ENDPOINT;
 
 export const useUsers = () => {
   return useQuery("users", async () => {
-    const { data } = await axios.get(`${url}/allusers`, {
-      
-    });
+    const { data } = await axios.get(`${url}/allusers`, {});
     return data;
   });
 };
@@ -17,7 +15,7 @@ export const useAdminUsers = () => {
   return useQuery({
     queryKey: ["admin/users"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/admin/Users`, );
+      const { data } = await axios.get(`${url}/admin/Users`);
       return data;
     },
   });
@@ -27,7 +25,7 @@ export const useUserById = (userId) => {
   return useQuery(
     ["user", userId],
     async () => {
-      const { data } = await axios.get(`${url}/${userId}`, );
+      const { data } = await axios.get(`${url}/${userId}`);
       return data;
     },
     {
@@ -41,7 +39,7 @@ export const useSearchUser = () => {
 
   return useMutation({
     mutationFn: async (searchQuery) => {
-      await axios.get(`${url}/users?search=${searchQuery}`, );
+      await axios.get(`${url}/users?search=${searchQuery}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("users");
@@ -56,10 +54,9 @@ export const usePayment = () => {
 
   return useMutation({
     mutationFn: async (amount) => {
-      const { data } = await axios.post(
-        `${url}/api/payment`,
-        { amount: amount },
-      );
+      const { data } = await axios.post(`${url}/api/payment`, {
+        amount: amount,
+      });
       return data;
     },
     onSuccess: (data) => {
@@ -74,10 +71,9 @@ export const useVerifyPayment = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.post(
-        `${url}/api/payment/${id}`,
-        { amount: 0 },
-      );
+      const { data } = await axios.post(`${url}/api/payment/${id}`, {
+        amount: 0,
+      });
       return data;
     },
     onSuccess: (data) => {
@@ -91,10 +87,9 @@ export const useFollowUser = (currentUserId, userId) => {
 
   return useMutation({
     mutationFn: async () => {
-      await axios.put(
-        `${url}/toggleFollow/${userId}`,
-        { userId: currentUserId },
-      );
+      await axios.put(`${url}/toggleFollow/${userId}`, {
+        userId: currentUserId,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["user", userId]);
@@ -110,10 +105,9 @@ export const useFollowCompany = (currentUserId, companyId) => {
 
   return useMutation({
     mutationFn: async () => {
-      await axios.put(
-        `${url}/toggleFollowCompany/${companyId}`,
-        { userId: currentUserId },
-      );
+      await axios.put(`${url}/toggleFollowCompany/${companyId}`, {
+        userId: currentUserId,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["companies", companyId]); // Invalidate the company data query
@@ -126,7 +120,7 @@ export const useUserFollowers = (userId) => {
   return useQuery(
     ["followers", userId],
     async () => {
-      const { data } = await axios.get(`${url}/find/friends/${userId}`, );
+      const { data } = await axios.get(`${url}/find/friends/${userId}`);
       return data;
     },
     {
@@ -139,7 +133,7 @@ export const useUserFollowings = (userId) => {
   return useQuery(
     ["followings", userId],
     async () => {
-      const { data } = await axios.get(`${url}/find/followings/${userId}`, );
+      const { data } = await axios.get(`${url}/find/followings/${userId}`);
       return data;
     },
     {
@@ -167,7 +161,7 @@ export const useSearchUsers = () => {
   return useQuery({
     queryKey: ["searchUsers"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/users?search=${query}`, );
+      const { data } = await axios.get(`${url}/users?search=${query}`);
       return data;
     },
   });
@@ -177,7 +171,7 @@ export const useSuggestedUsers = () => {
   return useQuery({
     queryKey: ["suggestedUsers"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/find/suggestedUsers`, );
+      const { data } = await axios.get(`${url}/find/suggestedUsers`);
       return data;
     },
   });
@@ -191,7 +185,6 @@ export const useUserChallenges = (userId) => {
         params: {
           userId: userId,
         },
-        
       });
       return data;
     },
@@ -202,7 +195,7 @@ export const useUserBadges = (userId) => {
   return useQuery({
     queryKey: ["badges", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/${userId}/badges`, );
+      const { data } = await axios.get(`${url}/${userId}/badges`);
       return data;
     },
   });
@@ -212,7 +205,7 @@ export const useUserJobs = (userId) => {
   return useQuery({
     queryKey: ["jobs", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/job/user/${userId}`, );
+      const { data } = await axios.get(`${url}/job/user/${userId}`);
       return data;
     },
   });
@@ -222,7 +215,7 @@ export const useUserFeedbacks = (userId) => {
   return useQuery({
     queryKey: ["reviews", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/reviews/${userId}`, );
+      const { data } = await axios.get(`${url}/reviews/${userId}`);
       return data;
     },
   });
@@ -232,9 +225,8 @@ export const useUserNotifications = (userId) => {
   return useQuery({
     queryKey: ["notifications", userId],
     queryFn: async () => {
-      const response = await axios.get(`${url}/user/${userId}/notifications`, );
-      console.log(response.data);
-      return response.data;
+      const response = await axios.get(`${url}/user/${userId}/notifications`);
+      return response?.data;
     },
   });
 };
@@ -243,7 +235,7 @@ export const useGetPaymentByUser = (userId) => {
   return useQuery({
     queryKey: ["payment", userId],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/api/payment/user/${userId}`, );
+      const { data } = await axios.get(`${url}/api/payment/user/${userId}`);
       return data;
     },
   });
@@ -253,7 +245,7 @@ export const useGetPayments = () => {
   return useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/api/allpayments`, );
+      const { data } = await axios.get(`${url}/api/allpayments`);
       return data;
     },
   });
@@ -264,10 +256,7 @@ export const useSeeNotification = (userId) => {
 
   return useMutation({
     mutationFn: async () => {
-      await axios.put(
-        `${url}/notifications/seen`,
-        {},
-      );
+      await axios.put(`${url}/notifications/seen`, {});
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["notifications", userId]);

@@ -67,9 +67,9 @@ const ChallengeConversation = ({ conversationId, id }) => {
       {arrivalMessage?.length === 0 ? (
         <div
           ref={chatContainerRef}
-          style={{ textAlign: "center", padding: "40vh 0vh" }}
+          className="flex h-80 items-center justify-center"
         >
-          <p className="opacity-50 text-xl">
+          <p className="opacity-50 text-xl dark:text-white">
             Open a conversation to start a chat
           </p>
         </div>
@@ -77,7 +77,7 @@ const ChallengeConversation = ({ conversationId, id }) => {
         <div
           id="messages"
           ref={chatContainerRef}
-          className="flex flex-col space-y-4 lg:p-3 p-0 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch h-80  w-full px-4 overflow-auto lg:overflow-auto"
+          className="flex flex-col space-y-4 lg:p-3 p-0  scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch min-h-80 max-h-[22rem] overflow-y-auto  w-full px-4 overflow-auto lg:overflow-auto"
         >
           {arrivalMessage?.map((message, index) => {
             return (
@@ -86,7 +86,7 @@ const ChallengeConversation = ({ conversationId, id }) => {
                   <div className="col-span-12">
                     {message.sender._id === user._id ? (
                       <div className="text-right">
-                        <p>{message.message}</p>
+                        <p className="dark:text-white">{message.message}</p>
                         <p className="text-gray-500 text-[0.75rem]">
                           {formatDistance(
                             new Date(message.createdAt),
@@ -114,7 +114,9 @@ const ChallengeConversation = ({ conversationId, id }) => {
                             />
                           )}
                           <div>
-                            <p>{message.message}</p>
+                            <p className="text-black dark:text-white">
+                              {message.message}
+                            </p>
                             <p className="text-gray-500 text-[0.75rem]">
                               {formatDistance(
                                 new Date(message.createdAt),

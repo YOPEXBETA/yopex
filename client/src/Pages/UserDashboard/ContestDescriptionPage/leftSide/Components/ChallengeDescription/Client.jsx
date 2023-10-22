@@ -61,7 +61,7 @@ const ClientCard = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 dark:bg-zinc-800">
       <div className="border-2 border-zinc-200 rounded-xl py-4 px-11 flex justify-center ">
         {/*<div className="space-y-3">
         <div className="space-y-4">
@@ -86,11 +86,15 @@ const ClientCard = () => {
         <div className="flex flex-col items-center pb-3">
           <div className="flex flex-col items-center">
             <h5 className="text-lg text-gray-400 pb-2">Contest Prize</h5>
-            <p className="text-3xl font-bold pb-6">{challenge.price}</p>
+            <p className="text-3xl font-bold pb-6 dark:text-white">
+              {challenge.price}
+            </p>
           </div>
           <div className="flex flex-col items-center">
             <p className="text-lg text-gray-400 pb-3">Contest ending in</p>
-            <p className="text-xl font-bold text-black">{deadline}</p>
+            <p className="text-xl font-bold text-black dark:text-white">
+              {deadline}
+            </p>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
 import { useCreateJob } from "../../../../../../../hooks/react-query/useJobs";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
@@ -6,16 +7,13 @@ import { useSelector } from "react-redux";
 import AlertContainer from "../../../../../../../Components/alerts";
 import AlertSuccess from "../../../../../../../Components/successalert";
 import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
-import { TextField, Autocomplete } from "@mui/material";
 import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
 
 export const AddWorkOfferModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
 
-  const { data: Skills } = useSkills();
-  const itSkills = Skills?.map((skill) => skill.name);
-  const { data: categorys } = useCategories();
-  const itCategory = categorys?.map((category) => category.name);
+  const { data: RecommendedSkills } = useSkills();
+  const { data: categories } = useCategories();
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -42,61 +40,187 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
   const onSubmit = (JobData) => {
     const companyId = selectedOption;
 
-    mutate({ companyId, JobData });
+    const modifiedJobData = {
+      ...JobData,
+      category: JobData?.category?.map((category) => category?.value),
+      RecommendedSkills: JobData?.RecommendedSkills?.map(
+        (skill) => skill?.value
+      ),
+    };
+
+    mutate({ companyId, JobData: modifiedJobData });
   };
 
   return (
     <div
-      className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}
+      className={`fixed z-50 inset-0  ${open ? "backdrop-blur-sm" : "hidden"}`}
     >
       {isError && <AlertContainer error={""} />}
       {isSuccess && <AlertSuccess message="Job offer created successfully" />}
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0  ">
-        <span
-          className="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-        >
-          &#8203;
-        </span>
-
+      <div className="flex items-end justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
         <div
           className={`${
             open ? "w-full sm:w-[40rem]" : "hidden"
-          } inline-block align-bottom bg-white dark:bg-zinc-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
+          } inline-block align-bottom bg-white scroll-smooth px-2 scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg max-h-[40rem] overflow-y-auto  pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
         >
           <div>
-            <h2 className="text-lg leading-6 text-gray-900 mb-4 font-bold dark:text-white">
-              Create a Work Offer
-            </h2>
+            <div className="flex justify-between items-center">
+              <h4 className="text-xl font-bold mb-4 text-black dark:text-white">
+                Add a Work Offer
+              </h4>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="defaultModal"
+              >
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+              </button>
+            </div>
+
             <div className="mt-2">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <select
-                  id="selectField"
-                  className="block w-full p-2 border dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500 mb-2"
-                  value={selectedOption}
-                  onChange={handleSelectChange}
-                >
-                  <option value="">Select a company</option>
-                  {userProfile?.companies.map((option) => (
-                    <option key={option._id} value={option._id}>
-                      {option.companyName}
-                    </option>
-                  ))}
-                </select>
+                <div className="mb-4">
+                  <label
+                    htmlFor="jobTitle"
+                    className="dark:text-white block mb-2"
+                  >
+                    Select your company
+                  </label>
+                  <select
+                    id="selectField"
+                    className="block w-full dark:text-white p-2 border dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500 mb-2"
+                    value={selectedOption}
+                    onChange={handleSelectChange}
+                  >
+                    <option value="">Select your company</option>
+                    {userProfile?.companies.map((option) => (
+                      <option key={option._id} value={option._id}>
+                        {option.companyName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                <input
-                  className="w-full py-2 px-3 dark:bg-zinc-700 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
-                  type="text"
-                  placeholder="job title"
-                  {...register("title", { required: true })}
-                />
-                <textarea
-                  className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none dark:bg-zinc-700 mb-2"
-                  {...register("description", { required: true })}
-                  placeholder="job description"
-                />
-                <div className="mb-2"></div>
-                <div className="mb-2">
+                <div className="mb-4">
+                  <label
+                    htmlFor="jobTitle"
+                    className="dark:text-white block mb-2"
+                  >
+                    Job Title
+                  </label>
+                  <input
+                    className="w-full py-2 px-3 dark:bg-zinc-700  dark:text-white rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
+                    type="text"
+                    placeholder="job title"
+                    id="jobTitle"
+                    {...register("title", { required: true })}
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label
+                    htmlFor="jobDescription"
+                    className="dark:text-white block mb-2"
+                  >
+                    Job Description
+                  </label>
+                  <textarea
+                    className="w-full h-40 p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2"
+                    {...register("description", { required: true })}
+                    placeholder="job description"
+                  />
+                </div>
+
+                {/* Render skills options */}
+                <div className="mb-4">
+                  <label
+                    htmlFor="selectSkills"
+                    className="dark:text-white block mb-2"
+                  >
+                    Select Skills
+                  </label>
+                  <Controller
+                    name="RecommendedSkills"
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <div className="w-full dark:bg-zinc-700">
+                        <Select
+                          isMulti
+                          className="my-react-select-container"
+                          classNamePrefix="my-react-select"
+                          id="tags-outlined"
+                          options={
+                            RecommendedSkills
+                              ? RecommendedSkills?.map((skill) => ({
+                                  label: skill?.name,
+                                  value: skill.name,
+                                }))
+                              : []
+                          }
+                          onChange={(selectedOptions) =>
+                            onChange(selectedOptions)
+                          }
+                          value={value}
+                          placeholder="Select Skills"
+                        />
+                      </div>
+                    )}
+                  />
+                </div>
+
+                {/* Render categories options */}
+                <div className="mb-4">
+                  <label
+                    htmlFor="selectCategories"
+                    className="dark:text-white block mb-2"
+                  >
+                    Select Categories
+                  </label>
+                  <Controller
+                    name="category"
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <div className="w-full dark-bg-zinc-700">
+                        <Select
+                          isMulti
+                          className="my-react-select-container"
+                          classNamePrefix="my-react-select"
+                          id="tags-outlined"
+                          options={
+                            categories
+                              ? categories?.map((category) => ({
+                                  label: category?.name,
+                                  value: category?.name,
+                                }))
+                              : []
+                          }
+                          onChange={(selectedOptions) =>
+                            onChange(selectedOptions)
+                          }
+                          value={value}
+                          placeholder="Select Categories"
+                        />
+                      </div>
+                    )}
+                  />
+                </div>
+
+                {/*<div className="mb-2">
                   <Controller
                     control={control}
                     name="RecommendedSkills"
@@ -124,51 +248,11 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                       )
                     }
                   />
-                </div>
-                <div className="mb-2">
-                  <Controller
-                    control={control}
-                    name="category"
-                    defaultValue={"Any"}
-                    render={({ field }) =>
-                      itCategory && (
-                        <Autocomplete
-                          multiple
-                          id="tags-outlined"
-                          options={itCategory}
-                          getOptionLabel={(option) => option}
-                          value={field.value}
-                          onBlur={field.onBlur}
-                          onChange={(e, value) => setValue("category", value)}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              variant="outlined"
-                              placeholder="Categories"
-                            />
-                          )}
-                        />
-                      )
-                    }
-                  />
-                </div>
+                  </div>*/}
 
-                <input
-                  className="w-full py-2 px-3 rounded border border-gray-300 dark:bg-zinc-800 focus:outline-none focus:border-green-500 mb-4 "
-                  type="text"
-                  placeholder="salary"
-                  {...register("salary", { required: true })}
-                />
                 <div className="flex justify-between">
                   <button
-                    className="bg-white dark:bg-zinc-800 px-6 py-2 text-green-500 rounded-md border-2 border-green-500"
-                    onClick={handleClose}
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="bg-green-500 px-6 py-2 text-white rounded-md"
+                    className="bg-green-500 px-6 py-2 text-white rounded-md w-full hover:bg-green-700"
                     type="submit"
                     disabled={isSubmitting}
                   >

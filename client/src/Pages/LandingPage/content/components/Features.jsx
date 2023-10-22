@@ -6,8 +6,8 @@ import { FiUsers } from "react-icons/fi";
 
 const Features = () => {
   return (
-    <div className="dark:bg-zinc-800 pt-8">
-      <div id="features">
+    <div className="dark:bg-zinc-800 pt-8" id="about">
+      <div>
         <div className="max-w-7xl   mx-auto px-6 md:px-12 xl:px-6">
           <div className="md:w-2/3 lg:w-1/2">
             <h2 className=" text-2xl font-bold text-gray-700 dark:text-white md:text-4xl">

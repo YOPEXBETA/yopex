@@ -32,37 +32,27 @@ export default function App() {
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
 
-
   return (
-    <Stack>
-      <Typography 
-      className="dark:text-gray-200"
-      variant="h5" gutterBottom>
+    <div className="">
+      <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
         Billing Informations
-      </Typography>
-      <Divider className="dark:bg-gray-200"/>
+      </h2>
+      <hr className="border dark:border-gray-200 mb-2" />
       <br />
-      <Card
-      className="dark:bg-zinc-700"
-      >
-        <CardContent>
-          <Stack spacing={2}>
-            <Typography 
-            className="dark:text-gray-200"
-            variant="h6" gutterBottom>
-              Current Balance
-            </Typography>
-            <Typography 
-            className="dark:text-gray-200"
-            variant="h4" gutterBottom>
+      <div className="dark:bg-zinc-700 p-4 rounded-lg">
+        <div>
+          <div className="space-y-2">
+            <h6 className="dark:text-gray-200 text-lg mb-2">Current Balance</h6>
+            <h4 className="dark:text-gray-200 text-2xl mb-2">
               {userProfile?.balance} Points
-            </Typography>
-          </Stack>
+            </h4>
+          </div>
+
           <br />
           <div className="border border-gray-300 rounded-md overflow-hidden">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="text-black">
-                <tr className="bg-white h-11">
+                <tr className="bg-white h-11 overflow-x-auto">
                   <th className="py-2 px-4 text-left">Payment Id</th>
                   <th className="py-2 px-4 text-left">Amount</th>
                   <th className="py-2 px-4 text-left">State</th>
@@ -92,13 +82,13 @@ export default function App() {
                         <div>{formatDate(payment?.createdAt)}</div>
                       </td>
                     </tr>
-                  )})}
+                  );
+                })}
               </tbody>
             </table>
           </div>
-            
-          </CardContent>
-      </Card>
-    </Stack>
+        </div>
+      </div>
+    </div>
   );
 }

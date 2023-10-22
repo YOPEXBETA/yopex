@@ -1,4 +1,3 @@
-import { Autocomplete, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -62,7 +61,9 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
           <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl w-full max-w-xl">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex justify-between items-center p-4">
-                <h5 className="text-lg font-bold">Create a Post</h5>
+                <h5 className="text-xl font-bold mb-4 text-black dark:text-white">
+                  Add a Post
+                </h5>
                 <button
                   type="button"
                   onClick={handleClose}
@@ -78,9 +79,9 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                     />
                   </svg>
@@ -90,8 +91,8 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
               <div className="px-4">
                 <div className="space-y-4">
                   <textarea
-                    className="w-full h-40 p-2 border bg-white dark:bg-zinc-700 rounded focus:outline-none resize-none"
-                    {...register("description", { required: true })}
+                    className="w-full h-40 p-2 border bg-white dark:text-white dark:bg-zinc-700 rounded focus:outline-none resize-none"
+                    {...register("description", { required: false })}
                     placeholder="What's on your mind?"
                   />
                   <Controller
@@ -101,10 +102,12 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                       <div className="w-full dark:bg-zinc-700">
                         <Select
                           isMulti
+                          className="my-react-select-container"
+                          classNamePrefix="my-react-select"
                           options={
                             categories
-                              ? categories.map((category) => ({
-                                  label: category.name,
+                              ? categories?.map((category) => ({
+                                  label: category?.name,
                                   value: category,
                                 }))
                               : []
@@ -113,7 +116,6 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                             onChange(selectedOptions)
                           }
                           value={value}
-                          className="w-full border-gray-300 bg-white dark:bg-zinc-700 rounded focus:outline-none focus:border-green-500"
                           placeholder="Select Categories"
                         />
                       </div>
@@ -170,7 +172,7 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                   className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded w-full"
                   type="submit"
                 >
-                  Upload
+                  Post
                 </button>
               </div>
             </form>

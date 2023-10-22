@@ -44,7 +44,6 @@ const Login = () => {
   useEffect(() => {
     if (!user) {
       const { data: currentUser } = dispatch(getCurrentUser());
-      console.log("currentUser", currentUser);
       if (!currentUser) return;
     }
     const isAdmin = user.role === "admin";
@@ -176,7 +175,9 @@ const Login = () => {
           <div className="col-span-12">
             <div className="flex items-center">
               <hr className="flex-grow border-t border-gray-300" />
-              <p className="text-sm mx-4 text-gray-400 dark:text-white">Login with</p>
+              <p className="text-sm mx-4 text-gray-400 dark:text-white">
+                Login with
+              </p>
               <hr className="flex-grow border-t border-gray-300" />
             </div>
           </div>

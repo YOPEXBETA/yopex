@@ -14,6 +14,7 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 import SocialPostImage from "../../PostImage/SocialPostImage";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
+import LoadingSpinner from "../../../LoadingSpinner";
 
 const SocialPostCard = ({
   post,
@@ -28,8 +29,12 @@ const SocialPostCard = ({
   const [isliked, setIsLiked] = useState(user._id in post.likes);
 
   const { category } = useSelector((state) => state.global);
-  const { mutate: likePost } = useLikePost(user._id, post.userId, category);
-  const { mutate: BookmarkPost } = useBookmarkPost(
+  const { mutate: likePost, isLoading: likeLoading } = useLikePost(
+    user._id,
+    post.userId,
+    category
+  );
+  const { mutate: BookmarkPost, isLoading: bookmarkLoading } = useBookmarkPost(
     user._id,
     post._id,
     category
@@ -65,7 +70,7 @@ const SocialPostCard = ({
   return (
     <div className=" divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
       <div className=" flex justify-between items-start">
-        <div className=" flex items-center py-4 pl-2 gap-2">
+        <div className=" flex items-center py-4 pl-4 gap-2">
           {post.userPicturePath ? (
             <img
               alt="post"
@@ -153,13 +158,15 @@ const SocialPostCard = ({
               }}
               className="focus:outline-none"
             >
-              {
-                /*isliked*/ user._id in post.likes ? (
-                  <AiFillHeart className="text-red-500 w-6 h-6" />
-                ) : (
-                  <AiOutlineHeart className="text-gray-500 w-6 h-6 dark:text-gray-300" />
-                )
-              }
+              {likeLoading ? (
+                <div>
+                  <LoadingSpinner />
+                </div> // Show a loader while liking
+              ) : /*isliked*/ user._id in post.likes ? (
+                <AiFillHeart className="text-red-500 w-6 h-6" />
+              ) : (
+                <AiOutlineHeart className="text-gray-500 w-6 h-6 dark:text-gray-300" />
+              )}
             </button>
             <>
               <p className="text-gray-500">{post.likesCount}</p>
@@ -180,19 +187,22 @@ const SocialPostCard = ({
           {ownerId == post.userId ? (
             ""
           ) : (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center">
               <button
                 aria-label="bookmark"
                 onClick={() => bookmark(post._id)}
                 className="focus:outline-none"
               >
-                {bookmarks.includes(post._id) ? (
+                {bookmarkLoading ? (
+                  <div>
+                    <LoadingSpinner />
+                  </div>
+                ) : bookmarks.includes(post._id) ? (
                   <BsBookmarkFill className="text-green-500 w-5 h-5" />
                 ) : (
                   <BsBookmark className="text-gray-500 w-5 h-5" />
                 )}
               </button>
-              <p className="">{post.BookMarks.length}</p>
             </div>
           )}
         </div>

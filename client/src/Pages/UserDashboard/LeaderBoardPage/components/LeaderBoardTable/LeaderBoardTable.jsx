@@ -9,7 +9,7 @@ const LeaderbordTable = ({ data, query }) => {
   const [rankedUsers, setRankedUsers] = useState([]);
   //
   const searchQ = query.toLowerCase();
-  
+
   useEffect(() => {
     if (!data) return;
     const res = data
@@ -40,8 +40,12 @@ const LeaderbordTable = ({ data, query }) => {
               <tr className="bg-white dark:bg-zinc-700  h-11">
                 <th className="py-2 px-4 text-left dark:text-gray-200">RANK</th>
                 <th className="py-2 px-4 text-left dark:text-gray-200">USER</th>
-                <th className="py-2 px-4 text-left dark:text-gray-200">COUNTRY</th>
-                <th className="py-2 px-4 text-right dark:text-gray-200">POINTS</th>
+                <th className="py-2 px-4 text-left dark:text-gray-200">
+                  COUNTRY
+                </th>
+                <th className="py-2 px-4 text-right dark:text-gray-200">
+                  POINTS
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y  divide-gray-200">
@@ -55,11 +59,11 @@ const LeaderbordTable = ({ data, query }) => {
           </table>
         </div>
       </div>
-      <div className="flex items-center justify-between dark:bg-zinc-700 py-2 px-4 text-black dark:border-transparent rounded-md bg-white border-2">
+      <div className="flex items-center justify-between dark:bg-zinc-700 py-2 px-4 text-black dark:border-transparent  bg-white border-2">
         <div className="flex items-center gap-3">
           <span className="text-sm dark:text-gray-200">Rows per page:</span>
           <select
-            className="mx-2 px-2 py-1 border rounded-md text-black "
+            className="mx-2 px-2 py-1 border  text-black "
             value={rowsPerPage}
             onChange={handleChangeRowsPerPage}
           >

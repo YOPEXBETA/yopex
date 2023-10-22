@@ -11,7 +11,7 @@ const MenuIcons = () => {
         <div className="hidden md:block ">
           <AddPostMenuList />
         </div>
-        <div className="h-6 my-0.5 border-l border-gray-300" />
+        <div className="hidden md:block h-6 my-0.5 border-l border-gray-300" />
 
         <div className="hidden md:flex">
           <Chat />

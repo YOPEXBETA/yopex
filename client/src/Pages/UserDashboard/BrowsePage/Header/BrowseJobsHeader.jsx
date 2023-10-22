@@ -42,7 +42,7 @@ const BrowseJobsHeader = ({
   };
 
   return (
-    <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end dark:bg-zinc-700  bg-black ">
+    <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end dark:bg-zinc-900 border-b  bg-black ">
       <div className="space-y-2 items-start">
         <h1 className="text-white text-2xl font-bold">Browse Jobs</h1>
         <div className="flex space-x-2 ">
@@ -62,12 +62,12 @@ const BrowseJobsHeader = ({
               </button>
             </div>
             {isOpenCat && (
-              <div className="origin-top-right absolute right-32 lg:right-50 xl:right-60 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div className="origin-top-right absolute right-32 lg:right-50 xl:right-60 mt-2 w-48 rounded-md max-h-60 overflow-y-auto dark:bg-zinc-800 border shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div className="py-1">
                   {itCategory.map((Category) => (
                     <label
                       key={Category}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     >
                       <input
                         type="checkbox"
@@ -93,12 +93,12 @@ const BrowseJobsHeader = ({
               </button>
             </div>
             {isOpen && (
-              <div className="origin-top-right absolute right-[2rem] lg:right-[2rem] md:right-[2rem]  xl:right-[10rem]  mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div className="origin-top-right absolute right-[2rem] lg:right-[2rem] md:right-[2rem] max-h-60 overflow-y-auto dark:bg-zinc-800 border  xl:right-[10rem]  mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div className="py-1">
                   {itSkills.map((skillName) => (
                     <label
                       key={skillName}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      className="block px-4 dark:text-white py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     >
                       <input
                         type="checkbox"

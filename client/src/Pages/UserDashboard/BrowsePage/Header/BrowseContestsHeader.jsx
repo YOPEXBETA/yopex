@@ -1,9 +1,9 @@
 import React from "react";
 import BrowseNavigationTab from "../Content/BrowseNavigationTabs/BrowseNavigationTab";
 
-const BrowseContestsHeader = ({ changeValue, value, setContestQuery  }) => {
+const BrowseContestsHeader = ({ changeValue, value, setContestQuery }) => {
   return (
-    <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end dark:bg-zinc-700 bg-black ">
+    <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end dark:bg-zinc-900 border-b bg-black ">
       <div className="space-y-2 items-start">
         <h1 className="text-white text-2xl font-bold">Browse Contests</h1>
 

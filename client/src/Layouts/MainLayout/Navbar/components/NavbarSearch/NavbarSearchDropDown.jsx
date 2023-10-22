@@ -4,6 +4,7 @@ import {
   useSearchUsers,
   useSetquery,
 } from "../../../../../hooks/react-query/useUsers";
+import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 
 export default function NavbarSearchDropDown() {
   const [query, setQuery] = useState("");
@@ -47,27 +48,26 @@ export default function NavbarSearchDropDown() {
                   }
                 }}
               >
-                {option.picturePath ? (
-                  <div className=" flex items-center gap-4">
+                <div className="flex items-center gap-4">
+                  {option.picturePath ? (
                     <img
                       src={option.picturePath}
                       alt={`${option.firstname} ${option.lastname}`}
-                      className="w-8 h-8 rounded-full"
+                      className="w-8 h-8 rounded-full object-cover border"
                     />
-                    <span className="text-[#000000] dark:text-gray-100">
-                      {option.firstname} {option.lastname}
-                    </span>
-                  </div>
-                ) : (
-                  <div className=" flex items-center gap-4">
+                  ) : option.picturePath === null ? null : (
                     <img
                       src={option.companyLogo}
                       alt={option.companyName}
-                      className="w-8 h-8 rounded-full"
+                      className="w-8 h-8 rounded-full object-cover border"
                     />
-                    <span className="text-[#000000] dark:text-gray-100">{option.companyName}</span>
-                  </div>
-                )}
+                  )}
+                  <span className="text-[#000000] dark:text-gray-100">
+                    {option.firstname
+                      ? `${option.firstname} ${option.lastname}`
+                      : option.companyName}
+                  </span>
+                </div>
               </li>
             );
           })}

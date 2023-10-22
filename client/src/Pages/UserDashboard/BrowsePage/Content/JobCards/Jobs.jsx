@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useJobs } from "../../../../../hooks/react-query/useJobs";
 import JobCard from "../../../../../Components/shared/cards/JobCard";
+import LoadingSpinner from "../../../../../Components/LoadingSpinner";
+import JobCardSkeleton from "../../../../../Components/SkeletonLoading/JobCardSkeleton";
 
 const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
   // ==============================|| JOB CARD MODAL ||============================== //
@@ -10,11 +12,19 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
     setOpenJobModal(true);
   };
 
-  const { data: jobs } = useJobs();
+  const { data: jobs, isLoading } = useJobs();
 
   const sortedJobs = jobs
     ? jobs.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     : [];
+
+  {
+    isLoading && (
+      <div>
+        <JobCardSkeleton />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -50,7 +60,7 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
             ) : null
           )
         ) : (
-          <p>No jobs found</p>
+          <p className="dark:text-white">No jobs found</p>
         )}
       </div>
     </div>

@@ -13,8 +13,8 @@ const SettingsLayout = () => {
   };
 
   return (
-    <div className="dark:bg-zinc-800 h-[130vh]">
-      <div className="px-2 md:px-5 lg:px-5   ">
+    <div className="dark:bg-zinc-800">
+      <div className="px-2 md:px-5 lg:px-5">
         <div className="grid grid-cols-12 lg:gap-8 gap-0 ">
           <div className="col-span-3 lg:block hidden md:hidden">
             <VerticalSettingsTab changeValue={changeValue} value={value} />

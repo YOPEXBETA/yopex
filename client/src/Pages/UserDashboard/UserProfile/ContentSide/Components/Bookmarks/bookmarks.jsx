@@ -4,6 +4,7 @@ import { useBookmarkedPosts } from "../../../../../../hooks/react-query/usePosts
 import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import SocialPostSkeleton from "../../../../../../Components/SkeletonLoading/SocialPostSkeleton";
 
 const Bookmarks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,7 +32,7 @@ const Bookmarks = () => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
         {isLoading ? (
-          <LoadingSpinner />
+          <SocialPostSkeleton />
         ) : bookmarksId.length === 0 ? (
           <p className="dark:text-gray-200">No Favorites found.</p>
         ) : (

@@ -2,7 +2,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../config/firebase";
 import { v4 } from "uuid";
 
-const uploadFile = async (file, setUploadProgress,type="files") => {
+const uploadFile = async (file, setUploadProgress, type = "files") => {
   const fileName = v4();
   console.log("Upload Type:", type);
   const storageRef = ref(storage, `${type}/${fileName}`);
