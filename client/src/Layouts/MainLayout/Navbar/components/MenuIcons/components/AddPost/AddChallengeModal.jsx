@@ -73,7 +73,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
         <div
           className={`${
             open ? "w-full sm:w-[40rem]" : "hidden"
-          } inline-block align-bottom bg-white dark:bg-zinc-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
+          } inline-block align-bottom bg-white scroll-smooth scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg max-h-[40rem] overflow-y-auto  pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:p-6 lg:w-[40rem]`}
         >
           <div>
             <div className="flex justify-between items-center">
