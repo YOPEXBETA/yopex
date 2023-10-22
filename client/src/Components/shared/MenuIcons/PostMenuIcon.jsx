@@ -93,7 +93,7 @@ const PostMenuIcon = ({ post }) => {
       )}
       {confirmationDialogOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-10">
-          <div className="dark:bg-zinc-800 p-6 rounded-lg shadow-lg border">
+          <div className="dark:bg-zinc-800 bg-white p-6 rounded-lg shadow-lg border">
             <h2 className="text-xl font-semibold dark:text-white text-center mb-4">
               Confirm Delete
             </h2>

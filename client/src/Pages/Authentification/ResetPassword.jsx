@@ -15,7 +15,6 @@ const ResetPassword = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const data = await dispatch(resetPassword({ resetToken, password }));
-    console.log(data);
     if (data) navigate("/login");
   };
 

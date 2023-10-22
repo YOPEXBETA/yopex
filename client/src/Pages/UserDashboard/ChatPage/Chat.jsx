@@ -11,8 +11,8 @@ import { FaBars, FaTimes } from "react-icons/fa"; // Import the icons
 import UsersConversation from "./components/UsersConversation";
 
 const Chat = () => {
-  const { user } = useSelector((state) => state.auth);
-  const { data: conversations } = useConversations(user._id);
+  const { user } = useSelector((state) => state?.auth);
+  const { data: conversations } = useConversations(user?._id);
   const { selectedConversationId } = useParams();
   const [otherUser, setOtherUser] = useState({});
   const navigate = useNavigate();
@@ -22,22 +22,22 @@ const Chat = () => {
     if (!conversations) return;
     else {
       const conn = conversations.find(
-        (item) => item.conversationId === selectedConversationId
+        (item) => item?.conversationId === selectedConversationId
       );
 
       if (!conn) navigate("/chat");
       else {
-        if (conn.members[0].role === "company") {
-          setOtherUser(conn.members[1]);
+        if (conn?.members[0]?.role === "company") {
+          setOtherUser(conn?.members[1]);
         } else {
-          setOtherUser(conn.members[0]);
+          setOtherUser(conn?.members[0]);
         }
       }
     }
   }, [selectedConversationId, conversations]);
   const socket = useSocket();
 
-  socket.emit("joinRoom", { id: user._id, roomid: selectedConversationId });
+  socket.emit("joinRoom", { id: user?._id, roomid: selectedConversationId });
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -53,7 +53,11 @@ const Chat = () => {
       <div className="bg-white dark:bg-zinc-800  w-full relative lg:hidden md:hidden border-b-2 py-4">
         <div className="border-gray-300  lg:hidden md:hidden pl-6 l">
           <button onClick={toggleSidebar} className="text-2xl">
-            {isSidebarOpen ? <FaTimes className="dark:text-gray-200"  /> : <FaBars className="dark:text-gray-200"/>}
+            {isSidebarOpen ? (
+              <FaTimes className="dark:text-gray-200" />
+            ) : (
+              <FaBars className="dark:text-gray-200" />
+            )}
           </button>
         </div>
       </div>

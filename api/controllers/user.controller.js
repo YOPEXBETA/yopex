@@ -507,13 +507,13 @@ const getUserNotifications = async (req, res) => {
           },
         });
 
-      notifications = notifications.concat(company.notificationsCompany);
+      notifications = notifications.concat(company?.notificationsCompany);
     }
     notifications.sort((a, b) => b.createdAt - a.createdAt);
-    notseen = notifications.filter(
-      (notification) => notification.seen === false
+    notseen = notifications?.filter(
+      (notification) => notification?.seen === false
     );
-    res.status(200).json({ notification: notifications, nbr: notseen.length });
+    res.status(200).json({ notification: notifications, nbr: notseen?.length });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Server Error" });
