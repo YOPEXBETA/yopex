@@ -12,7 +12,7 @@ import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
 import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
 import Select from "react-select";
-
+import RichtTextEditor from "../../../../../../../Components/RichtTextEditor";
 import { useCreateContestConversation } from "../../../../../../../hooks/react-query/useContestConversation";
 
 export const AddChallengeModal = ({ open, handleClose }) => {
@@ -149,6 +149,15 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     {...register("description", { required: true })}
                     placeholder="challenge description"
                   />
+                  {/*
+                  <div className="w-full h-40 p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2">
+                    {" "}
+                    <RichtTextEditor
+                      {...register("description", { required: true })}
+                    />
+                    
+                  </div>
+                  */}
                 </div>
                 <div className="mb-4">
                   <label

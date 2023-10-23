@@ -14,9 +14,10 @@ const TasksDescription = () => {
         </div>
         <hr className="my-2 mb-2" />
         <div className="mb-4" style={{ wordWrap: "break-word" }}>
-          <p className="text-md dark:text-white mb-8">
-            {challenge.description}
-          </p>
+          <div
+            className="text-md dark:text-white mb-8"
+            dangerouslySetInnerHTML={{ __html: challenge.description }}
+          />
         </div>
         <div className="mb-4  dark:text-white">
           <h4 className="text-xl font-semibold">Categories</h4>
