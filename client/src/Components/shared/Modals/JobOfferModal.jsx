@@ -5,6 +5,7 @@ import { formatDistance } from "date-fns";
 import { useApplyJob } from "../../../hooks/react-query/useJobs";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
 
 const JobOfferModal = ({ open, handleClose, job }) => {
   // Global states |  @redux/toolkit
@@ -23,9 +24,9 @@ const JobOfferModal = ({ open, handleClose, job }) => {
     >
       <div className="flex justify-center items-center min-h-screen">
         <div className="bg-transparent absolute inset-0 flex justify-center items-center">
-          <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl w-full h-full">
+          <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl w-5/6 h-5/6 overflow-y-auto max-h-full">
             <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 sm:col-span-8 md:col-span-9 lg:col-span-8 xl:col-span-8">
+              <div className="col-span-12 sm:col-span-8 md:col-span-12 lg:col-span-8 xl:col-span-8">
                 {" "}
                 <div className="p-4 border col-span-8 sm:col-span-4">
                   <div className="p-8">
@@ -78,10 +79,9 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                       />
                     </div>
                     <hr className="my-4 border-t" />
-
                     <div className="flex justify-between">
                       <p className="text-md font-semibold dark:text-gray-200">
-                        Posted from
+                        Posted time
                       </p>
                       <p className="text-md font-normal text-green-500">
                         {formatDistance(new Date(job?.createdAt), new Date(), {
@@ -89,11 +89,57 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                         })}
                       </p>
                     </div>
+                    <hr className="my-4 border-t" />
+                    <div className="flex flex-col justify-between my-4">
+                      <p className="text-md font-semibold dark:text-gray-200 mb-2">
+                        Recommended Skills
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {job?.RecommendedSkills?.map((skill, index) => (
+                          <span
+                            key={index}
+                            className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <hr className="my-2" />
+                    <div className="flex flex-col justify-between my-4">
+                      <p className="text-md font-semibold dark:text-gray-200 mb-2">
+                        Categories
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {job?.category?.map((category, index) => (
+                          <span
+                            key={index}
+                            className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
+                          >
+                            {category}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <hr className="my-2" />
                   </div>
-                  <hr className="my-2" />
+
+                  <div className="flex md:block lg:hidden w-full dark:bg-zinc-800 justify-between px-4 py-2 bg-white">
+                    {user && !user.companies.includes(job.company._id) && (
+                      <button
+                        className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded w-80 w-full"
+                        onClick={onclick}
+                      >
+                        Apply
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
-              <div className="hidden sm:block border col-span-4 md:col-span-3 lg:col-span-4 xl:col-span-4">
+              <div className="hidden lg:block  border md:col-span-0  lg:col-span-4 xl:col-span-4">
+                <div className="flex flex-col m-8">
+                  {/*<h2 className="text-left">Job Overview</h2>*/}
+                </div>
                 <div className="flex flex-col items-center justify-center gap-4 mt-8">
                   <img
                     src={job?.company?.companyLogo}
@@ -101,31 +147,33 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                     className="w-16 h-16 rounded-lg object-cover"
                   />
                   <div>
-                    <p className="dark:text-gray-200">
-                      By {job?.company?.companyName}
+                    <p className="dark:text-gray-200 font-bold">
+                      {job?.company?.companyName}
                     </p>
                   </div>
-                  <div className="flex dark:bg-zinc-800 justify-between px-4 py-2 bg-white">
+                  <div className="flex flex-col dark:bg-zinc-800 items-center bg-white">
                     <Link to={`/company/${job.company._id}`}>
-                      <button className="bg-green-500 hover:bg-green-700 text-white px-6 py-4 rounded w-96">
+                      <button className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded w-80">
                         <div className="flex items-center justify-center">
                           <FaEye className="mr-2" />
                           <p>View Profile</p>
                         </div>
                       </button>
                     </Link>
+                    <div className="flex dark:bg-zinc-800 justify-between px-4 py-2 bg-white">
+                      {user && !user.companies.includes(job.company._id) && (
+                        <button
+                          className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded w-80"
+                          onClick={onclick}
+                        >
+                          <div className="flex items-center justify-center">
+                            <p className="mr-2">Apply Now</p>
+                            <IoIosArrowForward />
+                          </div>
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex dark:bg-zinc-800 justify-between px-4 py-2 bg-white">
-                  {user && !user.companies.includes(job.company._id) && (
-                    <button
-                      className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded w-full"
-                      onClick={onclick}
-                    >
-                      Apply
-                    </button>
-                  )}
                 </div>
               </div>
             </div>

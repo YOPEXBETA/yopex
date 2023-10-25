@@ -45,6 +45,7 @@ const SettingsLayout = Loadable(
 const ContestDetails = Loadable(
   lazy(() => import("../Pages/UserDashboard/ContestDescriptionPage/index"))
 );
+
 //BrowsePage
 const BrowseLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/BrowsePage/BrowseLayout"))
