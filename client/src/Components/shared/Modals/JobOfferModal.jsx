@@ -45,7 +45,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
           </button>
           <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl md:w-5/6 md:h-5/6 border h-screen w-screen overflow-y-auto max-h-full">
             <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 sm:col-span-8 md:col-span-12 lg:col-span-12 xl:col-span-12">
+              <div className="col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-12">
                 <div className="flex flex-col items-center justify-center gap-4 mt-8">
                   <img
                     src={job?.company?.companyLogo}
@@ -88,7 +88,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                 <hr className="mt-8 border-b" />
               </div>
 
-              <div className="col-span-12 sm:col-span-8 md:col-span-12 lg:col-span-8 xl:col-span-8">
+              <div className="col-span-12  md:col-span-12 lg:col-span-8 xl:col-span-8">
                 <div className="p-4 col-span-8 sm:col-span-4">
                   <div className="px-8">
                     <div>
