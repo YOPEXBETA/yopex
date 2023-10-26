@@ -3,13 +3,13 @@ import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useLocation } from "react-router-dom";
-import { useVerifyPayment } from "../../../../hooks/react-query/useUsers";
+import { useVerifyPayment } from "../../../../../hooks/react-query/useUsers";
 
 const PaymentSuccess = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const paymentId = searchParams.get('payment_id');
-  const {mutate} = useVerifyPayment();
+  const paymentId = searchParams.get("payment_id");
+  const { mutate } = useVerifyPayment();
 
   useEffect(() => {
     mutate(paymentId);

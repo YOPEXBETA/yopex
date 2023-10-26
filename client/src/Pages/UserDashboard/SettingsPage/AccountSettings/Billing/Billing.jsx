@@ -1,20 +1,9 @@
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import {
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import {
   useGetPaymentByUser,
-  usePayment,
   useUserById,
-} from "../../../../hooks/react-query/useUsers";
+} from "../../../../../hooks/react-query/useUsers";
 import { useForm } from "react-hook-form";
 
 export default function App() {
@@ -34,9 +23,14 @@ export default function App() {
 
   return (
     <div className="">
-      <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
-        Billing Informations
-      </h2>
+      <div>
+        <h2 className="text-xl font-bold  dark:text-white uppercase">
+          Billing Informations
+        </h2>
+        <p className="text-gray-400 mb-4">
+          Check your account billing informations
+        </p>
+      </div>
       <hr className="border dark:border-gray-200 mb-2" />
       <br />
       <div className="dark:bg-zinc-700 p-4 rounded-lg">
@@ -59,7 +53,7 @@ export default function App() {
                   <th className="py-2 px-4 text-right">Payment Date</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-200 overflow-x-auto">
                 {payment?.map((payment, index) => {
                   return (
                     <tr key={payment._id} className="hover:bg-gray-50 bg-white">

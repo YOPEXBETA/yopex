@@ -33,30 +33,30 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
   return (
     <div className="flex  md:h-max flex-col bg-white mt-8 dark:bg-zinc-800">
       <button
-        className={`w-full py-3 px-4 focus:outline-none ${
+        className={`w-52 text-left py-3 px-4 focus:outline-none ${
           value === 0
-            ? "bg-green-500 text-white border border-green-500 rounded-2xl"
-            : "text-gray-500 dark:text-gray-200  dark:border-zinc-600 "
+            ? "bg-green-200 text-green-500 border border-green-500 rounded-lg"
+            : "text-gray-500 dark:text-green-500  dark:border-zinc-600 "
         }`}
         onClick={() => changeValue(0)}
       >
         General Information
       </button>
       <button
-        className={`w-full py-3 px-4 focus:outline-none ${
+        className={`w-52 text-left py-3 px-4 focus:outline-none ${
           value === 1
-            ? "bg-green-500 text-white border border-green-500 rounded-2xl"
-            : "text-gray-500 dark:text-gray-200  dark:border-zinc-600  "
+            ? "bg-green-200 text-green-500 border border-green-500 rounded-lg"
+            : "text-gray-500 dark:text-green-500  dark:border-zinc-600 "
         }`}
         onClick={() => changeValue(1)}
       >
-        Privacy
+        Settings
       </button>
       <button
-        className={`w-full py-3 px-4 focus:outline-none ${
+        className={`w-52 text-left py-3 px-4 focus:outline-none ${
           value === 2
-            ? "bg-green-500 text-white border border-green-500 rounded-2xl"
-            : "text-gray-500 dark:text-gray-200   dark:border-zinc-600  "
+            ? "bg-green-200 text-green-500 border border-green-500 rounded-lg"
+            : "text-gray-500 dark:text-green-500  dark:border-zinc-600 "
         }`}
         onClick={() => changeValue(2)}
       >

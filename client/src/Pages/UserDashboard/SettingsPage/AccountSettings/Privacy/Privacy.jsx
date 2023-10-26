@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import AlertSuccess from "../../../../Components/successalert";
-import { edit, reset } from "../../../../redux/auth/authSlice";
-import AlertContainer from "../../../../Components/alerts";
+import AlertSuccess from "../../../../../Components/successalert";
+import { edit, reset } from "../../../../../redux/auth/authSlice";
+import AlertContainer from "../../../../../Components/alerts";
 
 export default function Privacy() {
   const dispatch = useDispatch();
@@ -27,9 +27,14 @@ export default function Privacy() {
   return (
     <div className="space-y-8">
       <div className="dark:text-gray-200">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
-          Privacy Information{" "}
-        </h2>
+        <div>
+          <h2 className="text-xl font-bold  dark:text-white uppercase">
+            SETTINGS
+          </h2>
+          <p className="text-gray-400 mb-4">
+            Edit your account prefs and settings
+          </p>
+        </div>
         <hr className="border dark:border-gray-200 mb-2" />
         <br />
 

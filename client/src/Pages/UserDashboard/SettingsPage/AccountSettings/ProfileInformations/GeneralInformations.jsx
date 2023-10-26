@@ -19,7 +19,7 @@ const formatDate = (date) => {
   return `${year}-${month}-${day}`;
 };
 
-const UserEdit = () => {
+const GeneralInformations = () => {
   const dispatch = useDispatch();
   const { user, error, loading, success } = useSelector((state) => state.auth);
 
@@ -56,6 +56,16 @@ const UserEdit = () => {
 
   return (
     <div className="mb-24 md:mb-8">
+      <div>
+        <h2 className="text-xl font-bold  dark:text-white uppercase">
+          General Info
+        </h2>
+        <p className="text-gray-400 mb-4">
+          Edit your account's general information
+        </p>
+      </div>
+      <hr className="border dark:border-gray-200 mb-2" />
+      <br />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 gap-3"
@@ -236,4 +246,4 @@ const UserEdit = () => {
     </div>
   );
 };
-export default UserEdit;
+export default GeneralInformations;

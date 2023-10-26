@@ -40,7 +40,7 @@ const HorizantalSettingsTab = ({ changeValue, value }) => {
         }`}
         onClick={() => changeValue(0)} // Pass 0 to changeValue for the first tab
       >
-        General Information
+        General
       </button>
       <button
         className={`flex-1  px-4 focus:outline-none ${
@@ -50,7 +50,7 @@ const HorizantalSettingsTab = ({ changeValue, value }) => {
         }`}
         onClick={() => changeValue(1)} // Pass 1 to changeValue for the second tab
       >
-        Privacy
+        Settings
       </button>
       <button
         className={`flex-1  px-4 focus:outline-none ${

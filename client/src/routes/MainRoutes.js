@@ -1,7 +1,7 @@
 import React, { lazy } from "react";
 import Loadable from "../Components/PageLoading/Loadable";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
-import PaymentFail from "../Pages/UserDashboard/SettingsPage/AccountSettings/PaymentFail";
+import PaymentFail from "../Pages/UserDashboard/SettingsPage/AccountSettings/Billing/PaymentFail";
 import Store from "../Pages/UserDashboard/StorePage/Store";
 
 // ==============================|| USER PAGES ||============================== //
@@ -59,13 +59,17 @@ const BrowseLayout = Loadable(
 
 const PaymentSuccess = Loadable(
   lazy(() =>
-    import("../Pages/UserDashboard/SettingsPage/AccountSettings/PaymentSuccess")
+    import(
+      "../Pages/UserDashboard/SettingsPage/AccountSettings/Billing/PaymentSuccess"
+    )
   )
 );
 
 const paymentFail = Loadable(
   lazy(() =>
-    import("../Pages/UserDashboard/SettingsPage/AccountSettings/PaymentFail")
+    import(
+      "../Pages/UserDashboard/SettingsPage/AccountSettings/Billing/PaymentFail"
+    )
   )
 );
 
