@@ -65,7 +65,9 @@ const Register = () => {
         </div>
 
         <div className="grid grid-cols-1 my-2">
-          <h2 className="text-3xl font-bold mb-2">Welcome to yopex</h2>
+          <h2 className="text-3xl font-bold mb-2 dark:text-white">
+            Welcome to yopex
+          </h2>
           <p size="sm" className="text-gray-400 mb-4">
             Let's start by creating you account
           </p>

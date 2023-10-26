@@ -76,7 +76,7 @@ const HomeHeader = () => {
           )}
 
           {user && (
-            <p className="hover:scale-105 flex items-center ">
+            <p className="flex items-center ">
               <p className=" px-3 z-50 cursor-pointer capitalize dark:text-white font-medium text-gray-500  duration-200">
                 Welcome, {user.firstname}
               </p>

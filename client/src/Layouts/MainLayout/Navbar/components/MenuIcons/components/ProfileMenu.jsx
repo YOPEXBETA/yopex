@@ -1,43 +1,42 @@
 import React, { useEffect, useRef, useState } from "react";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Logout from "@mui/icons-material/Logout";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import Settings from "@mui/icons-material/Settings";
 import AvatarProfile from "../../../../../../assets/images/AvatarProfile.jpg";
+import { FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../../../../redux/auth/authSlice";
-import LightModeIcon from '@mui/icons-material/LightMode';
-
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 // ==============================|| CODE ||============================== //
 
 const ProfileMenu = () => {
-  const [ isDark , toggleDark] = useState(false);
+  const [isDark, toggleDark] = useState(false);
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
   const handleClick = (event) => setOpen(!open);
 
-
   const toggleTheme = () => {
     if (document.documentElement.classList.contains("dark")) {
       document.documentElement.classList.remove("dark");
-    
-      localStorage.theme = "light";  
-      toggleDark(false)
+
+      localStorage.theme = "light";
+      toggleDark(false);
       handleCloseMenu();
     } else {
       document.documentElement.classList.add("dark");
-    
-      localStorage.theme = "dark"; 
-       toggleDark(true)
+
+      localStorage.theme = "dark";
+      toggleDark(true);
       handleCloseMenu();
     }
   };
 
   const handleCloseMenu = () => {
-    setOpen(false); 
+    setOpen(false);
   };
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -48,8 +47,6 @@ const ProfileMenu = () => {
     dispatch(logout());
     navigate("/");
   };
-
-
 
   // Use a ref to detect clicks outside of the menu
   const outsideClickRef = useRef(null);
@@ -126,10 +123,14 @@ const ProfileMenu = () => {
                     <p className="text-[1rem] text-black dark:text-white font-medium">
                       {user.firstname + " " + user.lastname}
                     </p>
-                    <p className="text-gray-500 dark:text-white">{user.country}</p>
+                    <p className="text-gray-500 dark:text-white">
+                      {user.country}
+                    </p>
                   </div>
                 ) : (
-                  <p className="text-xl font-medium dark:text-white">{user.companyName}</p>
+                  <p className="text-xl font-medium dark:text-white">
+                    {user.companyName}
+                  </p>
                 )}
               </div>
             </a>
@@ -144,37 +145,39 @@ const ProfileMenu = () => {
               </a>
             )}
             <a
+              href="/"
+              className="px-3 py-2 hover:bg-gray-100 dark:hover:bg-green-600 space-x-2 flex items-center"
+            >
+              <FaHome className="w-6 h-6 text-gray-600 dark:text-white" />
+              <span className="text-gray-600 dark:text-white">Home</span>
+            </a>
+            <a
               href="/settings"
               className="px-3 py-2 hover:bg-gray-100 dark:hover:bg-green-600 space-x-2 flex items-center"
             >
               <Settings className="w-6 h-6 text-gray-600 dark:text-white" />
               <span className="text-gray-600 dark:text-white">Settings</span>
             </a>
-        
-           <a  onClick={toggleTheme}
-            className="px-3 py-2 hover:bg-gray-100 space-x-2  dark:hover:bg-green-600 flex items-center cursor-pointer"
-           >
-            
-            {
-             document.documentElement.classList.contains("dark") || isDark  ?
-            (
-            <LightModeIcon className="w-6 h-6 text-gray-600 dark:text-white" />
-              
-            ) : (
-              <DarkModeIcon className="w-6 h-6 text-gray-600 dark:text-white" />
-            )
-               
-            }
-          
-              {document.documentElement.classList.contains("dark") ? (
-              <span className="text-gray-600 dark:text-white">Light Mode</span>
-            ) : (
-              <span className="text-gray-600 dark:text-white">Dark Mode</span>
-            )
 
-              }
-            </a> 
-        
+            <a
+              onClick={toggleTheme}
+              className="px-3 py-2 hover:bg-gray-100 space-x-2  dark:hover:bg-green-600 flex items-center cursor-pointer"
+            >
+              {document.documentElement.classList.contains("dark") || isDark ? (
+                <LightModeIcon className="w-6 h-6 text-gray-600 dark:text-white" />
+              ) : (
+                <DarkModeIcon className="w-6 h-6 text-gray-600 dark:text-white" />
+              )}
+
+              {document.documentElement.classList.contains("dark") ? (
+                <span className="text-gray-600 dark:text-white">
+                  Light Mode
+                </span>
+              ) : (
+                <span className="text-gray-600 dark:text-white">Dark Mode</span>
+              )}
+            </a>
+
             <a
               href="/"
               onClick={handleLogout}

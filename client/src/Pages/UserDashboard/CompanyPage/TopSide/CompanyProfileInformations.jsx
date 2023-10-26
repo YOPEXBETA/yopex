@@ -141,7 +141,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                       }
                     >
                       {company && company.user === user._id ? (
-                        <p>Edit Company</p>
+                        <p>Edit</p>
                       ) : isfollow ? (
                         <FaUserMinus className="w-4 h-4" />
                       ) : (

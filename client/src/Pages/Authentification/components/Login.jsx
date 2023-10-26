@@ -2,11 +2,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as z from "zod";
 import AlertContainer from "../../../Components/alerts";
 import Copyright from "../../../Components/shared/Copyright";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import YopexLogo from "../../../images/LogoYopex.png";
+import { IoIosArrowBack } from "react-icons/io";
 import {
   getCurrentUser,
   login,
@@ -61,10 +63,28 @@ const Login = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full lg:w-4/6">
       <div>
         {error && <AlertContainer error={error} />}
-        <div className="grid grid-cols-1">
-          <div className="flex justify-center">
-            <p className=" text-green-500 font-bold text-4xl">LOGIN TO YOPEX</p>
+
+        <div className="grid grid-cols-1 mb-4">
+          <div className="flex justify-between items-center">
+            <div className="flex gap-2 items-center">
+              <Link to="/">
+                <div className="flex items-center gap-2 text-gray-400">
+                  <IoIosArrowBack />
+                  <p className="text-light">Home</p>
+                </div>
+              </Link>
+            </div>
+            <img src={YopexLogo} className="h-10 w-10 object-contain" />
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 my-2">
+          <h2 className="text-3xl font-bold mb-2 dark:text-white">
+            Login to yopex
+          </h2>
+          <p size="sm" className="text-gray-400 mb-4">
+            Login to your yopex account
+          </p>
         </div>
         <div className="grid grid-cols-12 w-full mt-6">
           <div className="col-span-12">
@@ -90,8 +110,8 @@ const Login = () => {
               <input
                 type="text"
                 id="input-group-1"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5   dark:placeholder-zinc-800 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="email@email.com"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="name@flowbite.com"
                 {...register("email", { required: true })}
               />
             </div>
@@ -107,7 +127,7 @@ const Login = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 id="input-group-2"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5   dark:placeholder-zinc-800 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="password"
                 {...register("password", { required: true })}
               />
