@@ -19,16 +19,6 @@ const TasksDescription = () => {
             dangerouslySetInnerHTML={{ __html: challenge?.description }}
           />
         </div>
-        <div className="text-md dark:text-white mb-4">
-          <div className="formatted-text" style={{ whiteSpace: "pre-line" }}>
-            {challenge?.description?.split("\n").map((line, index) => (
-              <span key={index}>
-                {index > 0 && <br />}
-                {line.trim()}
-              </span>
-            ))}
-          </div>
-        </div>
         <div className="mb-4  dark:text-white">
           <h4 className="text-xl font-semibold">Categories</h4>
         </div>
