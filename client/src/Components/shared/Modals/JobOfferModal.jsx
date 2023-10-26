@@ -24,7 +24,27 @@ const JobOfferModal = ({ open, handleClose, job }) => {
     >
       <div className="flex justify-center items-center min-h-screen">
         <div className="bg-transparent absolute inset-0 flex justify-center items-center">
-          <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl w-5/6 h-5/6 overflow-y-auto max-h-full">
+          <button
+            className="text-gray-400 absolute bg-zinc-900 rounded-full right-4 top-4  hover:bg-gray-200 hover:text-gray-900 text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            onClick={handleClose}
+          >
+            <svg
+              className="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+          </button>
+          <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl md:w-5/6 md:h-5/6 h-screen w-screen overflow-y-auto max-h-full">
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-12 sm:col-span-8 md:col-span-12 lg:col-span-8 xl:col-span-8">
                 {" "}
@@ -46,26 +66,6 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                           </p>
                         </div>
                       </div>
-                      <button
-                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        onClick={handleClose}
-                      >
-                        <svg
-                          className="w-3 h-3"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 14"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                          />
-                        </svg>
-                      </button>
                     </div>
 
                     <hr className="my-4 border-t" />
@@ -127,7 +127,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   <div className="flex md:block lg:hidden w-full dark:bg-zinc-800 justify-between px-4 py-2 bg-white">
                     {user && !user.companies.includes(job.company._id) && (
                       <button
-                        className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded w-80 w-full"
+                        className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded  w-full"
                         onClick={onclick}
                       >
                         Apply
