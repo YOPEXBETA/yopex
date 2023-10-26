@@ -57,21 +57,23 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
     setMessage("");
   };
   return (
-    <div className="dark:bg-zinc-800 lg:max-h-screen">
-      <div className="flex-1 pt-4  min-h-[80vh] justify-between flex flex-col ">
+    <div className="dark:bg-zinc-800">
+      <div className="flex-1 pt-4  min-h-[85vh] justify-between flex flex-col ">
         <div className="flex sm:items-center justify-between pb-3 border-b-2 border-gray-200 px-4">
-          <div className="relative flex items-center justify-between space-x-4">
-            <img
-              src={otherUser.picturePath}
-              alt=""
-              className="w-10 sm:w-12 h-10 sm:h-12 rounded-full"
-            />
-            <div className="text-lg mt-1  dark:text-gray-200 flex items-center font-bold">
-              <span className="mr-3">
-                {otherUser.firstname} {otherUser.lastname}
-              </span>
+          {otherUser.picturePath && (
+            <div className="relative flex items-center justify-between space-x-4">
+              <img
+                src={otherUser.picturePath}
+                alt=""
+                className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border object-cover"
+              />
+              <div className="text-lg mt-1 dark:text-gray-200 flex items-center font-bold">
+                <span className="mr-3">
+                  {otherUser.firstname} {otherUser.lastname}
+                </span>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div
@@ -81,7 +83,7 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
         >
           {arrivalMessage?.length === 0 ? (
             <div>
-              <p className="opacity-70 text-xl dark:text-gray-200">
+              <p className="opacity-70 text-xl text-center dark:text-white">
                 Open a conversation to start a chat
               </p>
             </div>
@@ -113,7 +115,7 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
                               {message.sender.picturePath && (
                                 <img
                                   alt="image"
-                                  className="h-11 w-11 rounded-full bg-green-500"
+                                  className="h-11 w-11 rounded-full border"
                                   src={
                                     message.sender.companyLogo
                                       ? message.sender.companyLogo

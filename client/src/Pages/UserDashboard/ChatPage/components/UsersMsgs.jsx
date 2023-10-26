@@ -9,13 +9,13 @@ const UsersMsgs = ({ onConversationSelect }) => {
   const { user } = useSelector((state) => state?.auth);
   const { data: conversations } = useConversations(user?._id);
   return (
-    <div className="dark:bg-zinc-800 bg-white h-screen lg:h-auto">
-      <div className="w-full overflow-auto h-[88vh]   sticky">
+    <div className="dark:bg-zinc-800 bg-white">
+      <div className="w-full overflow-auto">
         <div className="flex justify-between items-center px-4 py-2">
           <p className="text-lg font-bold dark:text-gray-200">Chats</p>
           <CreateConversationDrawer />
         </div>
-        <div className="w-full my-0.5 border-l border-gray-200 border-b-2" />
+        <div className="w-full my-0.5 border-l border-gray-200 border-b-2 overflow-y-auto" />
 
         {conversations?.map((conversation) => {
           const otherUser = conversation?.members?.find(
@@ -33,7 +33,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
                     <img
                       alt="image"
                       src={otherUser?.picturePath}
-                      className="h-14 w-14 rounded-full bg-green-500"
+                      className="h-14 w-14 rounded-full border object-cover"
                     />
                     <div>
                       <div>
