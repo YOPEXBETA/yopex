@@ -1,11 +1,7 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { useParams } from "react-router-dom";
 
-import {
-  useFollowUser,
-  useUserById,
-} from "../../../../../../hooks/react-query/useUsers";
+import { useUserById } from "../../../../../../hooks/react-query/useUsers";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 
 const UserProfileInformations = () => {

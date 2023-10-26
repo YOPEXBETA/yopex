@@ -16,11 +16,9 @@ const MyAppliersJob = () => {
   const { companyId } = useParams();
   const { data: jobData, isLoading: jobsLoading } = useJobById(companyId);
   const jobIds = jobData?.map((job) => job?._id);
-  console.log(jobIds);
   const { data: appliersChallenges, isLoading: appliersLoading } =
     useAppliers(jobIds);
   const { data: AcceptedAppliers } = useAcceptedAppliers(jobIds);
-  // console.log(Accepted);
 
   const currentTime = new Date();
   currentTime.setHours(currentTime.getHours() + 1);
@@ -28,7 +26,7 @@ const MyAppliersJob = () => {
   const twentyFourHoursAgo = new Date();
   twentyFourHoursAgo.setHours(currentTime.getHours() - 24);
 
-  if (appliersLoading) {
+  if (appliersLoading || jobsLoading) {
     return (
       <div className="flex items-center justify-center">
         <LoadingSpinner />
@@ -41,7 +39,7 @@ const MyAppliersJob = () => {
       <input
         type="text"
         placeholder="Find applier"
-        className="w-full divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4"
+        className=" w-full p-3 border mt-2 rounded-full focus:outline-none dark:placeholder-gray-100  dark:bg-zinc-700 dark:border-zinc-800 dark:text-gray-100 dark:focus:border-green-600 focus:border-green-300 text-[#000000] bg-gray-100"
         onChange={(e) => setSearchAppliers(e.currentTarget.value)}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4  py-5">
@@ -78,7 +76,7 @@ const MyAppliersJob = () => {
               ))
           )
         ) : (
-          <p>No Appliers found.</p>
+          <p className="dark:text-white p-3">No Applier found.</p>
         )}
       </div>
     </div>

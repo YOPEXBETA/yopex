@@ -19,7 +19,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
 
   const handleConfirmDelete = () => {
     // Perform the delete action
-      handleDeleteCompany();
+    handleDeleteCompany();
 
     // Close the confirmation dialog
     setConfirmationDialogOpen(false);
@@ -27,7 +27,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   const handleCancelDelete = () => {
     // Close the confirmation dialog without deleting
     setConfirmationDialogOpen(false);
-  };  
+  };
 
   const [openPostModal, setOpenPostModal] = useState(false);
   const { companyId } = useParams();
@@ -52,7 +52,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
     }
   }, [user.followings]);
 
-  const followCompany= async () => {
+  const followCompany = async () => {
     mutate();
     setIsFollow((prev) => !prev);
   };
@@ -86,7 +86,9 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
 
               <div className="space-y-2 sm:space-y-5 xl:block md:flex lg:block  flex flex-col ">
                 <div className="flex items-center gap-2">
-                  <p className="text-lg font-semibold dark:text-gray-200">{company.companyName}</p>
+                  <p className="text-lg font-semibold dark:text-gray-200">
+                    {company.companyName}
+                  </p>
 
                   <button
                     className="flex items-center gap-1"
@@ -106,19 +108,25 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     <p className="text-base font-bold dark:text-gray-200">
                       {company?.posts.length}
                     </p>
-                    <p className="text-zinc-500 text-md dark:text-gray-400">Posts</p>
+                    <p className="text-zinc-500 text-md dark:text-gray-400">
+                      Posts
+                    </p>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 justify-between">
                     <p className="text-base font-bold dark:text-gray-200">
                       {company?.challenges.length}
                     </p>
-                    <p className="text-zinc-500 text-md dark:text-gray-400">Challenges</p>
+                    <p className="text-zinc-500 text-md dark:text-gray-400">
+                      Challenges
+                    </p>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 justify-between">
                     <p className="text-base font-bold dark:text-gray-200">
                       {company?.jobs.length}
                     </p>
-                    <p className="text-zinc-500 text-md dark:text-gray-400">Jobs</p>
+                    <p className="text-zinc-500 text-md dark:text-gray-400">
+                      Jobs
+                    </p>
                   </div>
                 </div>
                 {/*mobile version*/}
@@ -151,21 +159,18 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                   )}
                 </div>
                 {/*mobile version*/}
-                <p className="hidden md:block truncate dark:text-gray-200 w-full xl:w-[50rem]">
-                  {company?.companyDescription}
-                </p>
               </div>
             </div>
             {/*mobile version*/}
-            <p className="block md:hidden dark:text-gray-200 w-full xl:w-[50rem] pt-3">
-              {company?.companyDescription}
-            </p>
+
             <div className="hidden md:flex gap-1 flex-wrap">
               <a href="#" className="xl:block lg:block md:block">
                 <button
                   className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 p-2 sm:p-4 rounded-lg text-white"
                   onClick={
-                    company && company.user === user._id ? toggleModal : followCompany
+                    company && company.user === user._id
+                      ? toggleModal
+                      : followCompany
                   }
                 >
                   {company && company.user === user._id ? (
@@ -199,7 +204,9 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <p className="text-base font-bold text-center dark:text-gray-200">
                 {company?.challenges.length}
               </p>
-              <p className="text-zinc-500 text-md dark:text-gray-400">Challenges</p>
+              <p className="text-zinc-500 text-md dark:text-gray-400">
+                Challenges
+              </p>
             </div>
             <div className="flex-col items-center">
               <p className="text-base font-bold text-center dark:text-gray-200">
@@ -217,8 +224,8 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           <CompanyProfileNavigationTab
             changeValue={changeValue}
             value={value}
-            companyId = {companyId}
-            userPassed = {user}
+            companyId={companyId}
+            userPassed={user}
           />
         </div>
       </div>
