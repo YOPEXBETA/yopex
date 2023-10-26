@@ -91,13 +91,13 @@ const JobOfferModal = ({ open, handleClose, job }) => {
               <div className="col-span-12  md:col-span-12 lg:col-span-8 xl:col-span-8">
                 <div className="p-4 col-span-8 sm:col-span-4">
                   <div className="px-8">
-                    <div>
+                    <div className="flex flex-col">
                       <p className="text-lg font-semibold dark:text-gray-200 mb-4">
                         Job Description
                       </p>
                       <div
                         className="text-md dark:text-white mb-4"
-                        style={{ wordWrap: "break-word" }}
+                        style={{ whiteSpace: "pre-line" }}
                         dangerouslySetInnerHTML={{ __html: job?.description }}
                       />
                     </div>

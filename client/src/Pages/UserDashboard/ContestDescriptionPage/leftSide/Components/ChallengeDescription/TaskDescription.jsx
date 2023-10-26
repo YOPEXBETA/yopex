@@ -13,11 +13,21 @@ const TasksDescription = () => {
           <h4 className="text-xl font-semibold">Description</h4>
         </div>
         <hr className="my-2 mb-2" />
-        <div className="mb-4" style={{ wordWrap: "break-word" }}>
+        <div className="mb-4" style={{ whiteSpace: "pre-line" }}>
           <div
             className="text-md dark:text-white mb-8"
-            dangerouslySetInnerHTML={{ __html: challenge.description }}
+            dangerouslySetInnerHTML={{ __html: challenge?.description }}
           />
+        </div>
+        <div className="text-md dark:text-white mb-4">
+          <div className="formatted-text" style={{ whiteSpace: "pre-line" }}>
+            {challenge?.description?.split("\n").map((line, index) => (
+              <span key={index}>
+                {index > 0 && <br />}
+                {line.trim()}
+              </span>
+            ))}
+          </div>
         </div>
         <div className="mb-4  dark:text-white">
           <h4 className="text-xl font-semibold">Categories</h4>

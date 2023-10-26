@@ -34,7 +34,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
   const { data: userProfile, isLoading } = useUserById(userId);
-  
+
   const { mutate, isError, isSuccess, error } = useCreateJob(user);
 
   const onSubmit = (JobData) => {
