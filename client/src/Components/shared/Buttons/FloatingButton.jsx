@@ -56,7 +56,7 @@ const FloatingButton = () => {
   };
 
   return (
-    <div className="fixed bottom-20 right-2 z-50">
+    <div className="fixed bottom-20 right-2 z-10">
       <div className="relative">
         <button
           className={`${
