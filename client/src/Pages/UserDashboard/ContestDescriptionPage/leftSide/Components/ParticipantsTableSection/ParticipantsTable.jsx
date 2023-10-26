@@ -24,7 +24,7 @@ const ParticipantsTable = () => {
     return (
       <div>
         <div>
-          <div className="border border-gray-300 rounded-md overflow-hidden dark:bg-zinc-800">
+          <div className="overflow-hidden dark:bg-zinc-800">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200 ">
                 <thead className="text-black ">
@@ -52,7 +52,7 @@ const ParticipantsTable = () => {
               </table>
             </div>
           </div>
-          <div className="flex items-center justify-between py-2 px-4 text-black bg-white border-2 dark:bg-zinc-800 dark:text-white">
+          <div className="flex items-center justify-between py-2 px-4 text-black bg-white border-t dark:bg-zinc-800 dark:text-white">
             <div className="flex items-center gap-3">
               <span className="text-sm">Rows per page:</span>
               <select

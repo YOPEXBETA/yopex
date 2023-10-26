@@ -9,17 +9,12 @@ import MobileMenu from "../../../Components/Mobile/MobileMenu";
 
 const CustomNavbar = () => {
   const { user } = useSelector((state) => state.auth);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
-
-  const toggleMobileMenu = () => {
-    setShowMobileMenu(!showMobileMenu);
-  };
 
   return (
     <div>
       <div className="grid fixed w-full grid-cols-1 lg:grid-cols-12 dark:bg-zinc-800 bg-white items-center xl:px-16 px-6  border-b border-gray-300 text-gray-600 dark:border-gray-700 lg:py-1 py-4 z-50">
         <div className="md:col-span-9 text-white items-center lg:col-span-3">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             <div className="flex gap-4 items-center ">
               <Link
                 to="/feed"
@@ -33,12 +28,7 @@ const CustomNavbar = () => {
               </Link>
               <NavbarSearchDropDown />
             </div>
-            {/*<button
-              onClick={toggleMobileMenu}
-              className="block lg:hidden md:block p-2 text-gray-400 hover:text-black focus:outline-none"
-            >
-              <FiMoreVertical className="h-6 w-6" />
-            </button>*/}
+
             <div className="block xl:hidden lg:hidden">
               <MenuIcons />
             </div>
@@ -60,14 +50,6 @@ const CustomNavbar = () => {
       <div className="lg:hidden  bg-white md:flex flex-col items-center">
         <MobileMenu userImage={user?.picturePath} user={user} />
       </div>
-
-      {/* Mobile menu content 
-      {showMobileMenu && (
-        <div className="lg:hidden  bg-white h-full border-b-2 border-gray-200">
-          <NavbarTabTop />
-        </div>
-      )}
-      */}
     </div>
   );
 };

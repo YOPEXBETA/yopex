@@ -52,13 +52,13 @@ const ParticipantRow = ({ user, index, challenge }) => {
                 <img
                   alt="picture"
                   src={user?.user?.picturePath}
-                  className="hidden md:block w-10 h-10 rounded-full object-cover"
+                  className="hidden md:block w-10 h-10 rounded-full border object-cover"
                 />
               ) : (
                 <img
                   alt="default"
                   src={AvatarProfile}
-                  className="rounded-full object-cover w-10 h-10 border-2 border-gray-200"
+                  className="rounded-full object-cover w-10 h-10 border border-gray-200"
                 />
               )}
             </div>

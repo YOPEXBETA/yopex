@@ -8,9 +8,10 @@ import {
 } from "react-icons/fi";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const MobileMenu = ({ userImage, user }) => {
+  const location = useLocation();
   return (
     <div className="fixed bottom-0 left-0 right-0 dark:bg-zinc-800 dark:border-zinc-600 bg-white z-50 px-4 py-4 flex justify-between items-center border-t-2 border-gray-200">
       <div className="flex justify-between items-center flex-1">
@@ -29,20 +30,65 @@ const MobileMenu = ({ userImage, user }) => {
             />
           )}
         </Link>
-        <Link to={`/feed`}>
-          <FiHome className="text-2xl dark:text-gray-200 dark:selection:text-green-600 text-gray-600 mr-4" />
+        <Link
+          to={`/feed`}
+          className={location.pathname === "/feed" ? "selected" : ""}
+        >
+          <FiHome
+            className={`text-2xl ${
+              location.pathname === "/feed"
+                ? "dark:text-green-500"
+                : "dark:text-gray-200"
+            } text-gray-600 mr-4`}
+          />
         </Link>
-        <Link to={`/browse`}>
-          <FiCompass className="text-2xl dark:text-gray-200 text-gray-600 mr-4" />
+        <Link
+          to={`/browse`}
+          className={location.pathname === "/browse" ? "selected" : ""}
+        >
+          <FiCompass
+            className={`text-2xl ${
+              location.pathname === "/browse"
+                ? "dark:text-green-500"
+                : "dark:text-gray-200"
+            } text-gray-600 mr-4`}
+          />
         </Link>
-        <Link to={`/leaderboard`}>
-          <FiAward className="text-2xl dark:text-gray-200 text-gray-600 mr-4" />
+        <Link
+          to={`/leaderboard`}
+          className={location.pathname === "/leaderboard" ? "selected" : ""}
+        >
+          <FiAward
+            className={`text-2xl ${
+              location.pathname === "/leaderboard"
+                ? "dark:text-green-500"
+                : "dark:text-gray-200"
+            } text-gray-600 mr-4`}
+          />
         </Link>
-        <Link to={`/Notifications`}>
-          <FiBell className="text-2xl dark:text-gray-200 text-gray-600 mr-4" />
+        <Link
+          to={`/Notifications`}
+          className={location.pathname === "/Notifications" ? "selected" : ""}
+        >
+          <FiBell
+            className={`text-2xl ${
+              location.pathname === "/Notifications"
+                ? "dark:text-green-500"
+                : "dark:text-gray-200"
+            } text-gray-600 mr-4`}
+          />
         </Link>
-        <Link to={`/chat`}>
-          <FiMessageSquare className="text-2xl dark:text-gray-200 text-gray-600 mr-4" />
+        <Link
+          to={`/chat`}
+          className={location.pathname === "/chat" ? "selected" : ""}
+        >
+          <FiMessageSquare
+            className={`text-2xl ${
+              location.pathname === "/chat"
+                ? "dark:text-green-500"
+                : "dark:text-gray-200"
+            } text-gray-600 mr-4`}
+          />
         </Link>
       </div>
     </div>

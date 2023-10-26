@@ -18,7 +18,7 @@ const ContentSide = ({ value, changeValue }) => {
       <div className="">
         <div className="space-y-2 ">
           {value === 0 && (
-            <div className="grid grid-cols-12 gap-2 ">
+            <div className="grid grid-cols-12 gap-2 mt-4 md:mt-0">
               <div className="lg:col-span-8 md:col-span-8 sm:col-span-12 col-span-12 lg:pr-6 ">
                 <TasksDescription />
               </div>
@@ -28,7 +28,7 @@ const ContentSide = ({ value, changeValue }) => {
             </div>
           )}
           {value === 1 && (
-            <div className="lg:col-span-12 md:col-span-12">
+            <div className="lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
               <MTable />
             </div>
           )}
