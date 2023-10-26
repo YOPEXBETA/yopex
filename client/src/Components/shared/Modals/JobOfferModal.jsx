@@ -171,7 +171,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                     <div className="rounded-full bg-green-200 w-12 h-12 text-lg flex items-center justify-center text-green-500">
                       <FaCalendarAlt />
                     </div>
-                    <div>
+                    <div className="mb-2">
                       <h2 className="text-left dark:text-white text-sm font-semibold">
                         Job Posted
                       </h2>

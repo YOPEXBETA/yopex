@@ -90,11 +90,15 @@ const SocialPostModal = ({ closeModal, post }) => {
             </button>
           </div>
           {/* Description */}
-          <div className="col-span-1 md:col-span-1 py-6">
-            <p className="text-gray-700 dark:text-white text-sm md:text-md">
-              {post.description}
-            </p>
+          <div className="col-span-1 md:col-span-1 pt-6 pb-2">
+            <div className="mb-4" style={{ whiteSpace: "pre-line" }}>
+              <div
+                className="text-md dark:text-white"
+                dangerouslySetInnerHTML={{ __html: post?.description }}
+              />
+            </div>
           </div>
+
           <div className="col-span-1 md:col-span-1">
             <div className="mx-auto relative h-full">
               <img
