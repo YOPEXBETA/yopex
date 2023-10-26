@@ -25,12 +25,12 @@ const AddSocialPostCard = () => {
               className="w-10 h-10 rounded-full object-cover cursor-pointer border-2"
             />
           )}
-          <input
-            type="text"
-            className="flex-1 px-3  focus:outline-none rounded-full h-10 dark:bg-zinc-700 dark:placeholder-gray-200 bg-gray-100"
-            placeholder="Share your work..."
+          <button
+            className="flex-1 px-3 text-gray-400 text-left border  focus:outline-none rounded-full h-10 dark:bg-zinc-700 dark:placeholder-gray-200 bg-gray-100"
             onClick={toggleModal}
-          />
+          >
+            Share your work...
+          </button>
         </div>
       </div>
 

@@ -52,7 +52,7 @@ const CommentModal = ({
                           <img
                             src={comment.userId.picturePath}
                             alt="Avatar"
-                            className="w-10 h-10 rounded-full"
+                            className="w-10 h-10 rounded-full border mr-1"
                           />
                           <div className="ml-2 w-full">
                             <div className="flex gap-2  items-start justify-between">
