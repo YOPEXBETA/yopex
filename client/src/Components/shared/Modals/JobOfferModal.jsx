@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-//import { useUserById } from "../../../hooks/react-query/useUsers";
 import { formatDistance } from "date-fns";
 import { useApplyJob } from "../../../hooks/react-query/useJobs";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
+import { FaCalendarAlt, FaUsers } from "react-icons/fa";
 
 const JobOfferModal = ({ open, handleClose, job }) => {
   // Global states |  @redux/toolkit
@@ -92,7 +92,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                 <div className="p-4 col-span-8 sm:col-span-4">
                   <div className="px-8">
                     <div>
-                      <p className="text-xl font-semibold dark:text-gray-200 mb-4">
+                      <p className="text-lg font-semibold dark:text-gray-200 mb-4">
                         Job Description
                       </p>
                       <div
@@ -101,11 +101,10 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                         dangerouslySetInnerHTML={{ __html: job?.description }}
                       />
                     </div>
-                    <hr className="my-4 border-t" />
 
                     <hr className="my-4 border-t" />
                     <div className="flex flex-col justify-between my-4">
-                      <p className="text-md font-semibold dark:text-gray-200 mb-2">
+                      <p className="textlg font-semibold dark:text-gray-200 mb-2">
                         Recommended Skills
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -121,7 +120,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                     </div>
                     <hr className="my-2" />
                     <div className="flex flex-col justify-between my-4">
-                      <p className="text-md font-semibold dark:text-gray-200 mb-2">
+                      <p className="text-lg font-semibold dark:text-gray-200 mb-2">
                         Categories
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -151,24 +150,37 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                 </div>
               </div>
               <div className="hidden lg:block md:col-span-0 lg:col-span-4 xl:col-span-4 ">
-                <div className="border mx-8 rounded-lg">
-                  <div className="flex flex-col   rounded-lg px-8 py-2">
-                    <h2 className="text-left dark:text-white font-semibold text-gray-500">
-                      Appliers
-                    </h2>
-                    <p className="dark:text-white font-bold">
-                      {job?.appliers?.length} applier
-                    </p>
+                <div className="border mx-8 rounded-lg  px-8 py-2 flex flex-col gap-4">
+                  <h2 className="text-lg font-semibold dark:text-gray-200 mt-2">
+                    Job Overview
+                  </h2>
+                  <div className="flex gap-2">
+                    <div className="rounded-full bg-green-200 w-12 h-12 text-lg flex items-center justify-center text-green-500">
+                      <FaUsers />
+                    </div>
+                    <div>
+                      <h2 className="text-left dark:text-white text-sm font-semibold">
+                        Appliers
+                      </h2>
+                      <p className="dark:text-white">
+                        {job?.appliers?.length} applier
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex flex-col  rounded-lg px-8 py-2">
-                    <h2 className="text-left dark:text-white font-semibold text-gray-500">
-                      Job Posted
-                    </h2>
-                    <p className="dark:text-white font-bold">
-                      {formatDistance(new Date(job?.createdAt), new Date(), {
-                        addSuffix: true,
-                      })}
-                    </p>
+                  <div className="flex gap-2">
+                    <div className="rounded-full bg-green-200 w-12 h-12 text-lg flex items-center justify-center text-green-500">
+                      <FaCalendarAlt />
+                    </div>
+                    <div>
+                      <h2 className="text-left dark:text-white text-sm font-semibold">
+                        Job Posted
+                      </h2>
+                      <p className="dark:text-white">
+                        {formatDistance(new Date(job?.createdAt), new Date(), {
+                          addSuffix: true,
+                        })}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
