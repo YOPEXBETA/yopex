@@ -24,11 +24,11 @@ const TasksDescription = () => {
         </div>
         <hr className="my-4" />
         <div className="mb-4">
-          <div className="flex flex-row flex-wrap space-x-2 md:space-x-2 space-y-0 md:space-y-0 w-full">
+          <div className="flex flex-wrap gap-2">
             {challenge.category.map((cat, i) => (
               <span
                 key={i}
-                className="px-2 py-1 dark:text-white  text-md border-2 border-gray-300 rounded-full"
+                className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
               >
                 {cat}
               </span>
@@ -43,11 +43,11 @@ const TasksDescription = () => {
         </div>
         <hr className="my-4" />
         <div className="mb-4">
-          <div className="flex flex-row space-x-2 overflow-x-auto">
+          <div className="flex flex-wrap gap-2">
             {challenge.RecommendedSkills.map((skill, i) => (
               <span
                 key={i}
-                className="px-2 py-1 dark:text-white  text-md border-2 border-gray-300 rounded-full"
+                className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
               >
                 {skill}
               </span>

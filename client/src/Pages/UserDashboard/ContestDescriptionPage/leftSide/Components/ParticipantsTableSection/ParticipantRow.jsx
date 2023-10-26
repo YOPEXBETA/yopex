@@ -14,7 +14,6 @@ const ParticipantRow = ({ user, index, challenge }) => {
   const togglereview = () => setreviewIsOpen((prev) => !prev);
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
-    console.log("close");
   };
   const { user: currentUser } = useSelector((state) => state.auth);
   const isOwner = currentUser.companies.find(
