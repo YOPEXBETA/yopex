@@ -4,7 +4,7 @@ const Contact = () => {
   return (
     <div
       name="contact"
-      className="w-full px-4  lg:px-24 md:px-11  border-b-2 dark:bg-zinc-800"
+      className="w-full px-4 bg-white lg:px-24 md:px-11  border-b-2 dark:bg-zinc-800"
     >
       <section className="relative  overflow-hidden bg-white dark:bg-zinc-800 py-20 lg:py-[120px]">
         <div className="container mx-auto">
