@@ -8,11 +8,11 @@ export const CompanyProfileNavigationTab = ({
 }) => {
   return (
     <div>
-      <div className="flex flex-wrap bg-white dark:border-zinc-700 dark:bg-zinc-800 border-b-[1px] border-zinc-200">
+      <div className="flex flex-wrap">
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 0
-              ? "bg-green-500 text-white border-green-500"
+              ? "bg-green-500 text-white border-green-500 border-b-green-500"
               : "text-gray-500 dark:text-gray-200 border-gray-300"
           }`}
           onClick={() => changeValue(0)}
@@ -27,7 +27,7 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(1)}
         >
-          My Posts
+          Posts
         </button>
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
@@ -37,7 +37,7 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(2)}
         >
-          My Jobs
+          Jobs
         </button>
         <button
           className={`w-1/2 sm:w-auto py-2 px-4  ${
@@ -47,7 +47,7 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(3)}
         >
-          My Challenges
+          Challenges
         </button>
         {userPassed.companies.includes(companyId) && (
           <button

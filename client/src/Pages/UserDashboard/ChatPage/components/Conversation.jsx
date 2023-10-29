@@ -71,7 +71,7 @@ const Conversation = ({ conversationId, socket, otherUser }) => {
         </div>
       ) : (
         <div
-          className="lg:block lg:fixed  lg:h-[82vh] xl:w-[75%] lg:overflow-auto lg:pb-8"
+          className="lg:block lg:fixed bg-white  lg:h-[82vh] xl:w-[75%] lg:overflow-auto lg:pb-8"
           ref={chatContainerRef}
         >
           {arrivalMessage?.map((message, index) => {

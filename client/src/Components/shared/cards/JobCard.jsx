@@ -1,11 +1,8 @@
 import { formatDistance } from "date-fns";
 import React, { useState } from "react";
-//import Appliers from "./Appliers";
-
 import { useSelector } from "react-redux";
 import JobOfferModal from "../Modals/JobOfferModal";
 import PostMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyJobs/Components/JobMenuIcon";
-import { EditJobModal } from "../../shared/Modals/EditJobModal";
 
 const JobCard = ({ job }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +14,7 @@ const JobCard = ({ job }) => {
     <div>
       <div
         onClick={toggleOpen}
-        className="bg-white dark:bg-zinc-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 h-48 rounded-lg border-[1px] cursor-pointer hover:scale-102 duration-500"
+        className="bg-white  dark:bg-zinc-700 transition hover:shadow-xl rounded-lg shadow-md rrounded-lg cursor-pointer hover:scale-102 duration-500"
       >
         <div className="flex flex-col">
           <div className="bg- rounded-md p-4 h-full">
@@ -45,7 +42,7 @@ const JobCard = ({ job }) => {
                   : job?.description}
               </p>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mb-1">
               {/* <p className="text-lg  text-left font-bold">Published</p> */}
               <p className="text-md  text-left font-normal text-green-500">
                 {formatDistance(new Date(job?.createdAt), new Date(), {

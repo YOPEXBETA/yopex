@@ -10,49 +10,48 @@ const MyContestLists = () => {
   const { data } = useGetChallenges(userId);
   const [inProgress, setInProgress] = useState([]);
 
-  const handleProgress = (card) => {
-    if (getDeadlineDifference(card?.deadline) === "0 Days 0 Hours 0 Minutes")
-      return false;
-    return true;
-  };
-
   useEffect(() => {
     if (!data) return;
-    setInProgress(
-      data.challenges?.filter((challenge) => handleProgress(challenge))
+
+    const filteredChallenges = data.challenges?.filter(
+      (challenge) =>
+        getDeadlineDifference(challenge?.deadline) ===
+        "0 Days 0 Hours 0 Minutes"
     );
+
+    setInProgress(filteredChallenges);
   }, [data]);
 
+  if (inProgress?.length === 0) {
+    return null;
+  }
+
   return (
-    <div>
-      {inProgress?.length > 0 && (
-        <div className="p-4 divide-gray-100 dark:text-white dark:divide-gray-700 overflow-hidden  rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
-          <div className="space-y-2">
-            <div className="flex justify-between items-center mb-4">
-              <h4 className="text-xl font-bold dark:text-gray-200">Contests</h4>
-            </div>
-            {inProgress.slice(0, 2).map((user) => (
-              <div key={user._id} className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <img
-                    className="w-10 h-10 rounded-lg object-cover"
-                    src={user.company.companyLogo}
-                    alt="Company Logo"
-                  />
-                  <div className="space-y-1">
-                    <h6 className="text-md font-bold">
-                      {user?.company.companyName}
-                    </h6>
-                    <p className="text-xs text-primary">
-                      {getTimeLeft(user.deadline)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+    <div className="p-4 divide-gray-100 dark:text-white dark:divide-gray-700 overflow-hidden rounded-lg shadow-md bg-white dark:bg-zinc-700 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <div className="space-y-2">
+        <div className="flex justify-between items-center mb-4">
+          <h4 className="text-xl font-bold dark:text-gray-200">Contests</h4>
         </div>
-      )}
+        {inProgress.slice(0, 2).map((user) => (
+          <div key={user._id} className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <img
+                className="w-10 h-10 rounded-lg object-cover"
+                src={user.company.companyLogo}
+                alt="Company Logo"
+              />
+              <div className="space-y-1">
+                <h6 className="text-md font-bold">
+                  {user?.company.companyName}
+                </h6>
+                <p className="text-xs text-primary">
+                  {getTimeLeft(user.deadline)}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

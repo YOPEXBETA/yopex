@@ -42,9 +42,16 @@ const BrowseJobsHeader = ({
   };
 
   return (
-    <div className="h-48 px-6 lg:px-8 xl:px-40 flex flex-col justify-end dark:bg-zinc-900 border-b  bg-black ">
+    <div className="h-56 px-6 lg:px-8 xl:px-40 flex flex-col justify-end dark:bg-zinc-900 border-b from-black w-full to-purple-900 bg-gradient-to-tr">
       <div className="space-y-2 items-start">
-        <h1 className="text-white text-2xl font-bold">Browse Jobs</h1>
+        <div>
+          <h4 class=" max-w-full text-xl font-bold text-white md:w-[64%] md:text-3xl md:leading-[42px] lg:w-[46%] xl:w-[85%] 2xl:w-[75%] 3xl:w-[52%]">
+            Browse Jobs
+          </h4>
+          <p class="mb-4 max-w-full text-base font-medium text-zinc-400 md:w-[64%] lg:w-[40%] xl:w-[72%] 2xl:w-[60%] 3xl:w-[45%]">
+            Apply to job opportunities and advance your career
+          </p>
+        </div>
         <div className="flex space-x-2 ">
           <input
             type="text"

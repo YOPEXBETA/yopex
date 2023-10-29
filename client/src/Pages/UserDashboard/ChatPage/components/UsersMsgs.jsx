@@ -9,7 +9,7 @@ const UsersMsgs = ({ onConversationSelect }) => {
   const { user } = useSelector((state) => state?.auth);
   const { data: conversations } = useConversations(user?._id);
   return (
-    <div className="dark:bg-zinc-800 bg-white">
+    <div className="dark:bg-zinc-800 bg-white ">
       <div className="w-full overflow-auto">
         <div className="flex justify-between items-center px-4 py-2">
           <p className="text-lg font-bold dark:text-gray-200">Chats</p>

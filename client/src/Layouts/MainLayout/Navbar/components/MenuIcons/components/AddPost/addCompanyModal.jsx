@@ -50,7 +50,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
     <div
       open={open}
       onClose={handleClose}
-      className={`fixed  z-50 inset-0  ${open ? "backdrop-blur-sm" : "hidden"}`}
+      className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"} `}
     >
       <div className="flex items-end justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
         <div

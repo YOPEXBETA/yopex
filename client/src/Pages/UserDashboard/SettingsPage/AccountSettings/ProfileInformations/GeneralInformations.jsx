@@ -55,7 +55,7 @@ const GeneralInformations = () => {
   };
 
   return (
-    <div className="mb-24 md:mb-8">
+    <div className="mb-24 md:mb-8 ">
       <div>
         <h2 className="text-xl font-bold  dark:text-white uppercase">
           General Info
@@ -64,7 +64,7 @@ const GeneralInformations = () => {
           Edit your account's general information
         </p>
       </div>
-      <hr className="border dark:border-gray-200 mb-2" />
+      <hr className=" dark:border-gray-200 mb-2" />
       <br />
       <form
         onSubmit={handleSubmit(onSubmit)}

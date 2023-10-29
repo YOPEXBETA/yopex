@@ -4,8 +4,8 @@
 
 @layer base {
   html {
-    @apply bg-white;
-    font-family: "Raleway", sans-serif;
+    @apply bg-slate-100;
+    font-family: "Golos Text", sans-serif;
   }
 
   @media (prefers-color-scheme: dark) {

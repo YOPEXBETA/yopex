@@ -9,7 +9,7 @@ const AddSocialPostCard = () => {
   const toggleModal = () => setOpenPostModal((prev) => !prev);
 
   return (
-    <div className=" divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+    <div className="divide-gray-100 dark:divide-gray-700 dark:bg-zinc-700 overflow-hidden bg-white rounded-lg shadow-md  border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
       <div className="p-4">
         <div className="flex items-center space-x-2">
           {user.picturePath ? (
@@ -26,7 +26,7 @@ const AddSocialPostCard = () => {
             />
           )}
           <button
-            className="flex-1 px-3 text-gray-400 text-left border  focus:outline-none rounded-full h-10 dark:bg-zinc-700 dark:placeholder-gray-200 bg-gray-100"
+            className="flex-1 px-3 text-gray-400 text-left border  focus:outline-none rounded-full h-10 dark:bg-zinc-800 dark:placeholder-gray-200 bg-gray-100"
             onClick={toggleModal}
           >
             Share your work...

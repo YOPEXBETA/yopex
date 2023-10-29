@@ -31,7 +31,7 @@ TabPanel.propTypes = {
 
 const HorizantalSettingsTab = ({ changeValue, value }) => {
   return (
-    <div className="flex bg-white mt-8 dark:bg-zinc-800">
+    <div className="flex  mt-8 dark:bg-zinc-800">
       <button
         className={`flex-1 px-4 focus:outline-none ${
           value === 0

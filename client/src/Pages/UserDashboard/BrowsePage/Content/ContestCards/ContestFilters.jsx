@@ -44,7 +44,7 @@ const ContestsFilters = ({
   }, [maxAmount, setMaxAmount]);
 
   return (
-    <div className="bg-white md:rounded-lg border-b-2 p-4 dark:bg-zinc-800 border  border-zinc-200">
+    <div className="bg-white md:rounded-lg  p-4 dark:bg-zinc-800  shadow-md border-zinc-200">
       <form className="space-y-4">
         <div className="space-y-2">
           <label
@@ -80,7 +80,7 @@ const ContestsFilters = ({
           <label className="font-bold text-md mb-4 dark:text-gray-200">
             Skills
           </label>
-          <div className="py-2 max-h-60 overflow-y-auto">
+          <div className="py-2 max-h-52 overflow-y-auto scroll-smooth px-2 scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg pt-5 pb-4 text-left overflow-hidden transform transition-all">
             {itSkills?.map((skillName) => (
               <label
                 key={skillName}
@@ -107,7 +107,7 @@ const ContestsFilters = ({
         <label className="font-bold text-md mb-4 dark:text-gray-200">
           Categories
         </label>
-        <div className="py-2 max-h-60 overflow-y-auto">
+        <div className="py-2 max-h-52 overflow-y-auto scroll-smooth px-2 scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg pt-5 pb-4 text-left overflow-hidden transform transition-all">
           {itCategory?.map((CategoryName) => (
             <label
               key={CategoryName}

@@ -2,13 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import LevelLoading from "./LevelLoading";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 const UserProgressCard = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
     <div>
-      <div className="px-4 py-2 mt-2 lg:mt-0 md:mt-0 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border md:border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <div className="px-4 py-2 mt-2 lg:mt-0 md:mt-0 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-lg shadow-md bg-white dark:bg-zinc-700 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
         <div className="flex flex-col space-y-5">
           <div className="flex items-center gap-4">
             {user.picturePath ? (
@@ -25,10 +26,17 @@ const UserProgressCard = () => {
               />
             )}
             <div className=" space-y-1">
-              <p className="text-lg font-md dark:text-gray-100">
+              <p className="text-lg font-md dark:text-white font-bold">
                 {`${user.firstname} ${user.lastname}`}
               </p>
-              <p className="text-md font-md text-zinc-500 dark:text-gray-100">{user.country}</p>
+              <div className="flex items-center gap-1">
+                <div>
+                  <FaMapMarkerAlt />
+                </div>
+                <p className="text-md font-md  dark:text-gray-100">
+                  {user.country}
+                </p>
+              </div>
             </div>
           </div>
 

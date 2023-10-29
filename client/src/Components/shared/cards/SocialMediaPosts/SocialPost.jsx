@@ -68,7 +68,7 @@ const SocialPostCard = ({
   };
 
   return (
-    <div className=" divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-2xl border border-gray-300 text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+    <div className="bg-white divide-gray-100 dark:divide-gray-700 overflow-hidden shadow-md rounded-lg dark:bg-zinc-700  text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
       <div className=" flex justify-between items-start">
         <div className=" flex items-center py-4 pl-4 gap-2">
           {post.userPicturePath ? (
@@ -114,6 +114,17 @@ const SocialPostCard = ({
         )}
       </div>
 
+      <div className="col-span-1 md:col-span-1 px-4">
+        {type === "profile" ? null : (
+          <div className="mb-4">
+            <div
+              className="text-md dark:text-white"
+              dangerouslySetInnerHTML={{ __html: post?.description }}
+            />
+          </div>
+        )}
+      </div>
+
       <div className="mx-auto relative">
         <div className="flex items-center">
           <div className="object-cover static">
@@ -134,7 +145,7 @@ const SocialPostCard = ({
                         className="text-white cursor-pointer"
                         onClick={() => openModal()}
                       >
-                        Click to view
+                        View more details
                       </p>
                     </div>
                   </div>
