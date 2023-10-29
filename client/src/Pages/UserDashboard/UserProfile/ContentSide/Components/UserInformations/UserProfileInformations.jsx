@@ -17,7 +17,7 @@ const UserProfileInformations = () => {
   }
   return (
     <div>
-      <div className="p-4 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-lg shadow-md bg-white text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <div className="p-4 divide-gray-100 dark:bg-zinc-700 dark:divide-gray-700 overflow-hidden rounded-lg shadow-md bg-white text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
         <div className="space-y-4">
           {userProfile?.email?.length !== 0 && (
             <div className="flex items-center gap-2">
