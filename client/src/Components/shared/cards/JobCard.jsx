@@ -14,20 +14,20 @@ const JobCard = ({ job }) => {
     <div>
       <div
         onClick={toggleOpen}
-        className="bg-white  dark:bg-zinc-700 transition hover:shadow-xl rounded-lg shadow-md rrounded-lg cursor-pointer hover:scale-102 duration-500"
+        className="bg-white h-full dark:bg-zinc-700 transition hover:shadow-xl rounded-lg shadow-md rrounded-lg cursor-pointer hover:scale-102 duration-500"
       >
         <div className="flex flex-col">
-          <div className="bg- rounded-md p-4 h-full">
+          <div className="rounded-md p-4 h-full">
             <div className="flex justify-between flex-row-reverse mb-4">
               <div className=" w-16 h-16  rounded-full flex items-center justify-center">
                 <img
                   src={job?.company?.companyLogo}
                   alt="Icon"
-                  className="w-16 h-16 rounded-lg object-cover"
+                  className="w-16 h-16 rounded-lg object-cover hidden md:block lg:block"
                 />
               </div>
               <div>
-                <p className="text-lg font-bold text-left dark:text-white">
+                <p className="text-lg font-bold text-left dark:text-white w-72 truncate">
                   {job?.title}
                 </p>
                 <p className="text-gray-500 mt-2 text-left dark:text-white">
