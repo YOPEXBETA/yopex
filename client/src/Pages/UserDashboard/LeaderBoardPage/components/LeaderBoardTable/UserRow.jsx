@@ -4,8 +4,13 @@ import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 
 const UserRow = ({ user }) => {
   return (
-    <tr key={user?._id} className="hover:bg-gray-50 dark:hover:bg-zinc-800 bg-white dark:bg-zinc-600">
-      <td className=" py-4 px-4 font-bold text-md dark:text-gray-200">{user?.rank}</td>
+    <tr
+      key={user?._id}
+      className="hover:bg-gray-50 dark:hover:bg-zinc-800 bg-white dark:bg-zinc-600"
+    >
+      <td className=" py-4 px-4 font-bold text-md dark:text-gray-200">
+        {user?.rank}
+      </td>
       <td className="py-4 px-4">
         <div className="flex items-center">
           <Link
@@ -28,14 +33,22 @@ const UserRow = ({ user }) => {
               )}
             </div>
             <div className="flex items-center gap-1">
-              <span className="text-sm dark:text-gray-200">{user?.firstname}</span>
-              <span className="text-sm dark:text-gray-200">{user?.lastname}</span>
+              <span className="text-sm dark:text-gray-200">
+                {user?.firstname}
+              </span>
+              <span className="text-sm dark:text-gray-200">
+                {user?.lastname}
+              </span>
             </div>
           </Link>
         </div>
       </td>
-      <td className="text-sm text-left py-4 px-4 dark:text-gray-200">{user?.country}</td>
-      <td className="text-sm text-right py-4 px-4 dark:text-gray-200">{user?.score}</td>
+      <td className="text-sm text-left py-4 px-4 dark:text-gray-200">
+        {user?.country}
+      </td>
+      <td className="text-sm text-right py-4 px-4 dark:text-gray-200">
+        {user?.score}
+      </td>
     </tr>
   );
 };

@@ -55,16 +55,12 @@ export const useDeleteJob = () => {
   });
 };
 
-export const useAppliers = (jobIds) => {
+export const useAppliers = (jobId) => {
   return useQuery({
     queryKey: ["appliers"],
     queryFn: async () => {
-      const appliersPromises = jobIds?.map(async (jobId) => {
-        const { data } = await axios.get(`${url}/job/jobs/${jobId}/appliers`);
-        return data;
-      });
-      const appliersData = await Promise.all(appliersPromises);
-      return appliersData;
+      const { data } = await axios.get(`${url}/job/jobs/${jobId}/appliers`);
+      return data;
     },
   });
 };

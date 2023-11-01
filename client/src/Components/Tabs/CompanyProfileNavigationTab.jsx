@@ -58,7 +58,7 @@ export const CompanyProfileNavigationTab = ({
             }`}
             onClick={() => changeValue(4)}
           >
-            My Appliers
+            Appliers
           </button>
         )}
       </div>
