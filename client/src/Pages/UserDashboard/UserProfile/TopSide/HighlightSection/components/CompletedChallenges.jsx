@@ -32,7 +32,7 @@ const CompletedChallenges = () => {
 
   return (
     <div className=" flex items-center gap-2 justify-between">
-      <p className="text-zinc-500 dark:text-gray-200">Completed Challenges</p>
+      <p className="dark:text-gray-200">Completed Challenges</p>
       <p className="text-lg dark:text-gray-200">{completed}</p>
     </div>
   );

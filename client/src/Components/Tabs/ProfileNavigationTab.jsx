@@ -66,21 +66,31 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 5
-              ? "bg-green-500 text-white "
+              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
               : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
           onClick={() => changeValue(5)}
+        >
+          Badges
+        </button>
+        <button
+          className={`w-1/2 sm:w-auto py-2 px-4 ${
+            value === 6
+              ? "bg-green-500 text-white "
+              : "text-gray-500 border-gray-300 dark:text-gray-300"
+          }`}
+          onClick={() => changeValue(6)}
         >
           {`Reviews (${reviews?.length || 0})`}
         </button>
         {userId == user._id ? (
           <button
             className={`w-1/2 sm:w-auto py-2 px-4  rounded-tr-lg ${
-              value === 6
+              value === 7
                 ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
                 : "text-gray-500 border-gray-300 dark:text-gray-300"
             }`}
-            onClick={() => changeValue(6)}
+            onClick={() => changeValue(7)}
           >
             {`Favorites (${userProfile?.bookmarks.length || 0})`}
           </button>

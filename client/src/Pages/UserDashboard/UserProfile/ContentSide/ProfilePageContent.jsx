@@ -6,6 +6,7 @@ import MyChallenges from "./Components/MyChallenges/MyChallenges";
 import MySocialPosts from "./Components/MyPosts/MySocialPosts";
 import Bookmarks from "./Components/Bookmarks/bookmarks";
 import UserProfileInformations from "./Components/UserInformations/UserProfileInformations";
+import BadgesPage from "./Components/Badges/BadgesPage";
 
 const ProfilePageContent = ({ changeValue, value }) => {
   return (
@@ -50,12 +51,20 @@ const ProfilePageContent = ({ changeValue, value }) => {
       {value === 5 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
-            <FeedbacksPage />
+            <BadgesPage />
           </div>
         </div>
       )}
 
       {value === 6 && (
+        <div className="flex justify-center">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
+            <FeedbacksPage />
+          </div>
+        </div>
+      )}
+
+      {value === 7 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <Bookmarks />

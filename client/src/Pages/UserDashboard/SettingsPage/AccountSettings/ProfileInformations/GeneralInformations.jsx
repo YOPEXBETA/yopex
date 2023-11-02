@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FaCamera } from "react-icons/fa";
-import { useForm } from "react-hook-form";
+import Select from "react-select";
+import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import countries from "../../../../../countries.json";
+import { useSkills } from "../../../../../hooks/react-query/useSkills";
 import { edit, reset } from "../../../../../redux/auth/authSlice";
 import uploadFile from "../../../../../utils/uploadFile";
 import AlertContainer from "../../../../../Components/alerts";
@@ -22,6 +24,7 @@ const formatDate = (date) => {
 const GeneralInformations = () => {
   const dispatch = useDispatch();
   const { user, error, loading, success } = useSelector((state) => state.auth);
+  const { data: skills } = useSkills();
 
   useEffect(() => {
     dispatch(reset());
@@ -30,11 +33,16 @@ const GeneralInformations = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { isSubmitting },
   } = useForm({
     defaultValues: {
       firstname: user.firstname,
       lastname: user.lastname,
+      skills: user.skills.map((skill) => ({
+        label: skill.label,
+        value: skill.value,
+      })),
     },
   });
 
@@ -135,11 +143,24 @@ const GeneralInformations = () => {
         </div>
         <div className="grid grid-cols-1">
           <div className="col-span-1">
+            <label className="dark:text-gray-300">Occupation</label>
+
+            <input
+              type="text"
+              placeholder="EX: Web developer, Art Director, Student"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              {...register("occupation")}
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
             <label className="dark:text-gray-300">Description</label>
 
             <textarea
               id="userDescription"
               placeholder="Description"
+              rows={6}
               className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               defaultValue={user.userDescription}
               {...register("userDescription")}
@@ -220,6 +241,37 @@ const GeneralInformations = () => {
               className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               defaultValue={user.phoneNumber}
               {...register("phoneNumber")}
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <label className="dark:text-gray-300 ">Skills</label>
+
+            <Controller
+              name="skills"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <div className="w-full dark:bg-zinc-700">
+                  <Select
+                    isMulti
+                    className="my-react-select-container"
+                    classNamePrefix="my-react-select"
+                    id="tags-outlined"
+                    options={
+                      skills
+                        ? skills?.map((skill) => ({
+                            label: skill?.name,
+                            value: skill?.name,
+                          }))
+                        : []
+                    }
+                    onChange={(selectedOptions) => onChange(selectedOptions)}
+                    value={value}
+                    placeholder="Select Skills"
+                  />
+                </div>
+              )}
             />
           </div>
         </div>

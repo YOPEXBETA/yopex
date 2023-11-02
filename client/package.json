@@ -33,6 +33,7 @@
     "ee-first": "^1.1.1",
     "firebase": "^9.18.0",
     "gapi-script": "^1.2.0",
+    "html-react-parser": "^5.0.4",
     "i18n-iso-countries": "^7.5.0",
     "js-cookie": "^3.0.1",
     "moment": "^2.29.4",

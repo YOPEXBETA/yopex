@@ -18,46 +18,76 @@ const UserProfileInformations = () => {
   return (
     <div>
       <div className="p-4 divide-gray-100 dark:bg-zinc-700 dark:divide-gray-700 overflow-hidden rounded-lg shadow-md bg-white text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
-        <div className="space-y-4">
-          {userProfile?.email?.length !== 0 && (
-            <div className="flex items-center gap-2">
-              <label className="text-gray-600 dark:text-gray-400">Email:</label>
-              <p className="font-semibold dark:text-gray-200">
-                {userProfile?.email}
-              </p>
-            </div>
-          )}
+        <div className="mt-2 mb-8 w-full">
+          <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
+            General Information
+          </h4>
+          <p className="mt-2 px-2 text-base  dark:text-white">
+            {userProfile.userDescription || "No description"}
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2 w-full">
+          <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <p className="text-sm text-gray-600 dark:text-white">Email</p>
+            <p className="text-base text-navy-700 dark:text-white font-semibold">
+              {userProfile?.email}
+            </p>
+          </div>
           {userProfile?.phoneNumber?.length !== 0 && (
-            <div className="flex items-center gap-2">
-              <label className="text-gray-600 dark:text-gray-400">Phone:</label>
-              <p className="font-semibold dark:text-gray-200">
+            <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+              <p className="text-sm text-gray-600 dark:text-white">Phone</p>
+              <p className="text-base text-navy-700 dark:text-white font-semibold">
                 {userProfile?.phoneNumber}
               </p>
             </div>
           )}
 
           {userProfile?.gender?.length !== 0 && (
-            <div className="flex items-center gap-2">
-              <label className="text-gray-600 dark:text-gray-400">
-                Gender:
-              </label>
-              <p className="font-semibold dark:text-gray-200">
-                {userProfile?.gender}
+            <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+              <p className="text-sm text-gray-600 dark:text-white">Gender</p>
+              <p className="text-base text-navy-700 dark:text-white font-semibold">
+                {userProfile?.gender || "N/A"}
               </p>
             </div>
           )}
-          {userProfile?.birthDate?.length !== 0 && (
-            <div className="flex items-center gap-2">
-              <label className="text-gray-600 dark:text-gray-400">
-                Birth Date:
-              </label>
-              <p className="font-semibold dark:text-gray-200">
-                {userProfile?.birthDate
-                  ? new Date(userProfile?.birthDate).toLocaleDateString()
-                  : "N/A"}
-              </p>
+
+          <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <p className="text-sm text-gray-600 dark:text-white">Country</p>
+            <p className="text-base text-navy-700 dark:text-white font-semibold">
+              {userProfile?.country || "Not specified"}
+            </p>
+          </div>
+
+          <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <p className="text-sm text-gray-600 dark:text-white">Birthday</p>
+            <p className="text-base text-navy-700 dark:text-white font-semibold">
+              {userProfile?.birthDate
+                ? new Date(userProfile?.birthDate).toLocaleDateString()
+                : "N/A"}{" "}
+            </p>
+          </div>
+        </div>
+        <div className="mt-2 mb-8 w-full">
+          <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
+            Skills
+          </h4>
+
+          <div className="mt-2 px-2 text-base">
+            <div className="flex flex-wrap gap-2">
+              {userProfile?.skills?.length > 0 ? (
+                userProfile.skills.map((skill, index) => (
+                  <span
+                    key={index}
+                    className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
+                  >
+                    {skill?.value}
+                  </span>
+                ))
+              ) : (
+                <p className="text-base  dark:text-white">No skill selected</p>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

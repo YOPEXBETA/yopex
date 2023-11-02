@@ -3,6 +3,7 @@ const companySchema = require("../models/company.model");
 const challengeSchema = require("../models/Challenge.model");
 const bcrypt = require("bcryptjs");
 const Job = require("../models/job.model");
+
 const { pick } = require("lodash");
 const ChallengeModel = require("../models/Challenge.model");
 const notificationModel = require("../models/notification.model");
@@ -10,18 +11,7 @@ const notificationModel = require("../models/notification.model");
 // ==============================|| EditProfile ||============================== //
 const editProfile = async (req, res) => {
   try {
-    const updateFields = pick(req.body, [
-      "firstname",
-      "lastname",
-      "email",
-      "password",
-      "picturePath",
-      "country",
-      "gender",
-      "phoneNumber",
-      "birthDate",
-      "userDescription",
-    ]);
+    const updateFields = req.body;
 
     if (updateFields.password) {
       const user = await userSchema.findById(req.userId);
@@ -122,7 +112,9 @@ const getUser = async (req, res) => {
 //getAllUsers
 const getUsers = async (req, res) => {
   try {
-    const users = await userSchema.find({ role: { $ne: "admin" } }).select("_id firstname lastname picturePath score country");
+    const users = await userSchema
+      .find({ role: { $ne: "admin" } })
+      .select("_id firstname lastname picturePath score country");
     res.status(200).json(users);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -588,19 +580,19 @@ const seeNotification = async (req, res) => {
 };
 
 const getStatistic = async (req, res) => {
-  try{
+  try {
     console.log("m");
     const countusers = await userSchema.countDocuments();
     const countcompanies = await companySchema.countDocuments();
     const countjobs = await Job.countDocuments();
     const countchallenges = await ChallengeModel.countDocuments();
-    return res.status(200).send({countusers,countcompanies,countjobs,countchallenges})
-  }catch(err){
+    return res
+      .status(200)
+      .send({ countusers, countcompanies, countjobs, countchallenges });
+  } catch (err) {
     return res.status(500).json({ message: "Internal server error" });
   }
-  
-
-}
+};
 
 module.exports = {
   editProfile,
@@ -622,5 +614,5 @@ module.exports = {
   followUnfollowCompany,
   getUserFollowingsCompanies,
   seeNotification,
-  getStatistic
+  getStatistic,
 };

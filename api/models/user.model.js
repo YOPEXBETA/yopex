@@ -3,6 +3,7 @@ const SocialMediaPost = require("./SocialMediaPost.model");
 const Company = require("./company.model");
 const submissionModel = require("./submission.model");
 const notificationModel = require("./notification.model");
+const experiences = require("./Experience.model");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -10,10 +11,13 @@ const UserSchema = new mongoose.Schema(
     lastname: { type: String, required: true },
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: false },
+    occupation: { type: String, required: false },
+    websiteURL: { type: String, required: false },
     country: { type: String },
     picturePath: { type: String, required: false },
     userDescription: { type: String, required: false },
-    birthDate: { type: Date },
+    birthDate: { type: Date, required: false },
+
     score: { type: Number, default: 0 },
     gender: {
       type: String,
@@ -53,6 +57,26 @@ const UserSchema = new mongoose.Schema(
     isFaceRecognition: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },
     status: { type: String, default: "disabled" },
+    skills: {
+      type: Array,
+      default: [],
+    },
+    socialMediaLinks: [
+      {
+        platform: { type: String, required: false },
+        url: { type: String, required: false },
+        icon: { type: String },
+      },
+    ],
+    experiences: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "JobExperience",
+        },
+      ],
+      default: [],
+    },
     posts: {
       type: [
         {
