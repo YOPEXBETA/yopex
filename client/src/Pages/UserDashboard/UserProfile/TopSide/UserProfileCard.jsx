@@ -132,15 +132,6 @@ const UserProfileCard = () => {
               </ul>
             </div>
           )}
-          <div className="w-full">
-            <HighlightSection />
-          </div>
-          <div className="w-full">
-            <HighlightSection />
-          </div>
-          <div className="w-full">
-            <HighlightSection />
-          </div>
         </div>
       </div>
     );
