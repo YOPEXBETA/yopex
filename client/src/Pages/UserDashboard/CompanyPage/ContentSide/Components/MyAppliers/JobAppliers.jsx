@@ -30,7 +30,7 @@ const JobAppliers = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 xl:md:grid-cols-3 lg:md:grid-cols-3 md:grid-cols-2 gap-4 mt-8">
+    <div className="grid grid-cols-1 xl:md:grid-cols-3 lg:md:grid-cols-3 md:grid-cols-2 gap-4 py-2">
       {jobData?.length > 0 ? (
         jobData.map((job) => (
           <JobAppliersCard

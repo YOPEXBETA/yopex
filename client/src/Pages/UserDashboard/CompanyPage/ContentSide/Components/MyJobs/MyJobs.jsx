@@ -6,9 +6,7 @@ import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 
 const MyCompanyJobs = () => {
   const { companyId } = useParams();
-  console.log(companyId);
   const { data: companyJobs, isLoading } = useJobById(companyId);
-  console.log("companyJobs", companyJobs);
 
   if (isLoading) {
     return (
@@ -21,9 +19,9 @@ const MyCompanyJobs = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-3 gap-4 py-5">
-        {companyJobs.length > 0 ? (
-          companyJobs.map((job) => (
-            <JobCard key={job._id} companyJobs={companyJobs} job={job} />
+        {companyJobs?.length > 0 ? (
+          companyJobs?.map((job) => (
+            <JobCard key={job?._id} companyJobs={companyJobs} job={job} />
           ))
         ) : (
           <p className="dark:text-white">No jobs found.</p>

@@ -7,7 +7,7 @@ const JobAppliersCard = ({ job, onCardClick }) => {
   return (
     <div>
       <div
-        className="flex w-full items-center justify-between rounded-lg bg-white p-3 shadow-md shadow-shadow-500 dark:bg-zinc-700 hover:shadow-xl dark:shadow-none"
+        className="flex w-full items-center justify-between rounded-lg bg-white  shadow-md shadow-shadow-500 dark:bg-zinc-700 hover:shadow-xl dark:shadow-none"
         onClick={() => onCardClick(job)}
       >
         <div className="flex items-center">

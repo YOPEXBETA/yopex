@@ -15,8 +15,6 @@ import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
 
-  console.log(user, "user");
-
   const { userId } = useParams();
   const { data: levelsData, isloading } = useGetLevels();
   const { data: userProfile } = useUserById(userId);
@@ -39,8 +37,8 @@ const UserProfileCard = () => {
 
   if (userProfile)
     return (
-      <div>
-        <div className="bg-white p-6 md:rounded-lg flex flex-col   dark:bg-zinc-700 items-center gap-6 xl:mr-11 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-lg shadow-md text-gray-600 dark:border-gray-700 mr-0">
+      <div className="xl:h-screen lg:h-screen  hover:overflow-y-auto">
+        <div className="bg-white px-11 py-16 w-full flex flex-col dark:bg-zinc-800 dark:border-r dark:border-zinc-500 items-center gap-6 xl:mr-11 divide-gray-100 dark:divide-gray-700 overflow-hidden text-gray-600 mr-0 shadow-md">
           <div className="relative">
             <div>
               {userProfile.picturePath ? (
@@ -66,7 +64,7 @@ const UserProfileCard = () => {
 
           <div className="flex flex-col items-center justify-center gap-2 truncate w-80">
             <div className="flex items-center justify-center gap-2 truncate w-80">
-              <p className="text-xl font-semibold truncate dark:text-gray-200">
+              <p className="text-xl font-semibold truncate dark:text-zinc-200">
                 {`${userProfile.firstname} ${userProfile.lastname}`}
               </p>
               <button className="flex items-center gap-1">
@@ -90,7 +88,11 @@ const UserProfileCard = () => {
               </a>
             ) : (
               <button
-                className="cursor-pointer capitalize font-medium hover:scale-105  bg-green-500 py-2 px-4 rounded-lg w-full text-white"
+                className={
+                  userProfile.followers.includes(user._id)
+                    ? "cursor-pointer capitalize font-medium hover:scale-105 border border-zinc-600 py-3 px-4 rounded-full w-full text-zinc-600 dark:text-white dark:border-white"
+                    : "cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-3 px-4 rounded-full w-full text-white"
+                }
                 onClick={mutate}
                 sx={{ height: "2rem" }}
                 disabled={isLoading}
@@ -106,24 +108,39 @@ const UserProfileCard = () => {
             <HighlightSection />
           </div>
 
-          <hr className=" border-zinc-400 w-full" />
+          <hr className="border-zinc-800 border w-full" />
 
           {userProfile?.companies?.length !== 0 && (
             <div className="w-full ">
-              <p className="mb-2 text-left  dark:text-gray-200">Companies</p>
+              <p className="mb-3 text-leftdark:text-gray-200 uppercase font-bold dark:text-white">
+                Companies
+              </p>
               <ul className="flex justify-start gap-2">
-                {userProfile.companies.map((company, index) => (
-                  <Link key={index} to={`/company/${company._id}`}>
-                    <img
-                      src={company.companyLogo}
-                      alt={`Company ${index + 1}`}
-                      className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
-                    />
+                {userProfile?.companies?.map((company, index) => (
+                  <Link key={index} to={`/company/${company?._id}`}>
+                    {company?.companyLogo ? (
+                      <img
+                        src={company?.companyLogo}
+                        alt={`Company ${index + 1}`}
+                        className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
+                      />
+                    ) : (
+                      <div>No company logo available</div>
+                    )}
                   </Link>
                 ))}
               </ul>
             </div>
           )}
+          <div className="w-full">
+            <HighlightSection />
+          </div>
+          <div className="w-full">
+            <HighlightSection />
+          </div>
+          <div className="w-full">
+            <HighlightSection />
+          </div>
         </div>
       </div>
     );

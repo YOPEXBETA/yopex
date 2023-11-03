@@ -79,7 +79,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <div className="w-24 h-24 sm:w-40 sm:h-40">
                 <img
                   alt="Profile picture"
-                  src={company.companyLogo}
+                  src={company?.companyLogo}
                   className="object-cover w-full h-full rounded-xl "
                 />
               </div>
@@ -87,19 +87,21 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <div className="space-y-2 sm:space-y-5 xl:block md:flex lg:block  flex flex-col ">
                 <div className="flex items-center gap-2">
                   <p className="text-lg font-semibold dark:text-gray-200">
-                    {company.companyName}
+                    {company?.companyName}
                   </p>
 
                   <button
                     className="flex items-center gap-1"
                     aria-label="verification badge"
-                    disabled={!company.verified}
+                    disabled={!company?.verified}
                   >
                     <FaCheckCircle
                       className={`text-${
-                        company.verified ? "green" : "gray"
+                        company?.verified ? "green" : "gray"
                       }-500 w-4 h-4 sm:w-5 sm:h-5 mb-[0.1rem] ${
-                        !company.verified ? "opacity-50 cursor-not-allowed" : ""
+                        !company?.verified
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
                       }`}
                     />
                   </button>
@@ -107,7 +109,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 <div className="hidden xl:flex lg:flex md:flex flex-row sm:flex-row justify-between gap-2 sm:gap-4 w-full sm:w-72">
                   <div className="flex items-center gap-1 sm:gap-2 justify-between">
                     <p className="text-base font-bold dark:text-gray-200">
-                      {company?.posts.length}
+                      {company?.posts?.length}
                     </p>
                     <p className="text-zinc-500 text-md dark:text-gray-400">
                       Posts
@@ -115,7 +117,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 justify-between">
                     <p className="text-base font-bold dark:text-gray-200">
-                      {company?.challenges.length}
+                      {company?.challenges?.length}
                     </p>
                     <p className="text-zinc-500 text-md dark:text-gray-400">
                       Challenges
@@ -123,7 +125,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 justify-between">
                     <p className="text-base font-bold dark:text-gray-200">
-                      {company?.jobs.length}
+                      {company?.jobs?.length}
                     </p>
                     <p className="text-zinc-500 text-md dark:text-gray-400">
                       Jobs
@@ -136,12 +138,12 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     <button
                       className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-2 px-6 sm:p-4 rounded-lg text-white"
                       onClick={
-                        company && company.user === user._id
+                        company && company?.user === user?._id
                           ? toggleModal
                           : followCompany
                       }
                     >
-                      {company && company.user === user._id ? (
+                      {company && company?.user === user?._id ? (
                         <p>Edit Company</p>
                       ) : isfollow ? (
                         <FaUserMinus className="w-4 h-4" />
@@ -150,7 +152,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                       )}
                     </button>
                   </div>
-                  {company && company.user === user._id && (
+                  {company && company?.user === user?._id && (
                     <button
                       onClick={handleDeleteCompany}
                       className="xl:block lg:block md:block cursor-pointer capitalize font-medium hover:scale-105 bg-red-500 py-2 px-6 rounded-lg text-white"
@@ -174,12 +176,12 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 <button
                   className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 p-2 sm:p-4 rounded-lg text-white"
                   onClick={
-                    company && company.user === user._id
+                    company && company?.user === user?._id
                       ? toggleModal
                       : followCompany
                   }
                 >
-                  {company && company.user === user._id ? (
+                  {company && company?.user === user?._id ? (
                     <FaEdit className="w-4 h-4 sm:w-6 sm:h-6" />
                   ) : isfollow ? (
                     <FaUserMinus className="w-4 h-4 sm:w-6 sm:h-6" />
@@ -188,7 +190,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                   )}
                 </button>
               </a>
-              {company && company.user === user._id && (
+              {company && company?.user === user?._id && (
                 <button
                   onClick={handleDeleteClick}
                   className="xl:block lg:block md:block cursor-pointer capitalize font-medium hover:scale-105 bg-red-500 p-2 sm:p-4 rounded-lg text-white"
@@ -202,13 +204,13 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           <div className="flex xl:hidden lg:hidden md:hidden flex-row sm:flex-row justify-between w-screen px-16 py-4 border-y-2 border-gray">
             <div className="flex-col items-center">
               <p className="text-base font-bold text-center dark:text-gray-200">
-                {company?.posts.length}
+                {company?.posts?.length}
               </p>
               <p className="text-zinc-500 text-md dark:text-gray-400">Posts</p>
             </div>
             <div className="flex-col items-center">
               <p className="text-base font-bold text-center dark:text-gray-200">
-                {company?.challenges.length}
+                {company?.challenges?.length}
               </p>
               <p className="text-zinc-500 text-md dark:text-gray-400">
                 Challenges
@@ -216,7 +218,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
             </div>
             <div className="flex-col items-center">
               <p className="text-base font-bold text-center dark:text-gray-200">
-                {company?.jobs.length}
+                {company?.jobs?.length}
               </p>
               <p className="text-zinc-500 text-md dark:text-gray-400">Jobs</p>
             </div>

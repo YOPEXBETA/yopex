@@ -2,7 +2,7 @@ import React from "react";
 
 const FeedbacksCard = ({ review }) => {
   return (
-    <div className="bg-white p-4 shadow-md md:rounded-lg space-y-4 border-green-500 border-b-2 ">
+    <div className="bg-white p-4 shadow-md md:rounded-lg space-y-4 dark:bg-zinc-800 dark:border-zinc-500 dark:border dark:text-white border-green-500 border-b-2 ">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <img

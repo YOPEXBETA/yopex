@@ -8,7 +8,6 @@ import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 const MyCompanyChallenges = () => {
   const { companyId } = useParams();
   const { data: companyChallenges, isLoading } = useChallengesById(companyId);
-  console.log("companyChallenges", companyChallenges);
 
   if (isLoading) {
     return (
@@ -21,10 +20,10 @@ const MyCompanyChallenges = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4  py-5">
-        {companyChallenges.length > 0 ? (
+        {companyChallenges?.length > 0 ? (
           companyChallenges?.map((challenge) => (
             <ChallengeCard
-              key={challenge._id}
+              key={challenge?._id}
               companyChallenges={companyChallenges}
               challenge={challenge}
             />

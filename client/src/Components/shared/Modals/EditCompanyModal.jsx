@@ -1,9 +1,7 @@
-import { Button, LinearProgress, Typography } from "@mui/material";
+import { LinearProgress, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useCreateJob } from "../../../hooks/react-query/useJobs";
-import { useUserById } from "../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 import { Controller } from "react-hook-form";
 import { MuiFileInput } from "mui-file-input";
@@ -11,15 +9,15 @@ import { useEditCompany } from "../../../hooks/react-query/useCompany";
 import uploadFile from "../../../utils/uploadFile";
 
 export const EditCompanyModal = ({ open, handleClose, company }) => {
-  const { mutate } = useEditCompany(company._id);
+  const { mutate } = useEditCompany(company?._id);
 
   const [uploadProgress, setUploadProgress] = useState(0);
   const { user } = useSelector((state) => state.auth);
 
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
     defaultValues: {
-      companyName: company.companyName,
-      companyDescription: company.companyDescription,
+      companyName: company?.companyName,
+      companyDescription: company?.companyDescription,
       files: [],
     },
   });
@@ -70,14 +68,14 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
         <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-96 sm:p-6 lg:w-[40rem]">
           <div>
             <h2 className="text-lg leading-6 text-gray-900 mb-4 font-bold">
-              Edit "{company.companyName}" now
+              Edit "{company?.companyName}" now
             </h2>
             <div className="mt-2">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <input
                   className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                   type="text"
-                  placeholder={company.companyName}
+                  placeholder={company?.companyName}
                   {...register("companyName")}
                   margin="normal"
                   variant="outlined"
@@ -91,7 +89,7 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
                 <textarea
                   className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
                   {...register("companyDescription")}
-                  placeholder={company.companyDescription}
+                  placeholder={company?.companyDescription}
                   id="companyDescription"
                   label="companyDescription"
                 />

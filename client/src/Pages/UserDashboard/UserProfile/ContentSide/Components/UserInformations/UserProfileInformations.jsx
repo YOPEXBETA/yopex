@@ -17,7 +17,7 @@ const UserProfileInformations = () => {
   }
   return (
     <div>
-      <div className="p-4 divide-gray-100 dark:bg-zinc-700 dark:divide-gray-700 overflow-hidden rounded-lg shadow-md bg-white text-gray-600 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <div className="p-4 divide-gray-100 dark:bg-zinc-800 dark:border-zinc-500 dark:border dark:divide-gray-700 overflow-hidden rounded-lg shadow-md bg-white text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
         <div className="mt-2 mb-8 w-full">
           <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
             General Information
@@ -54,7 +54,7 @@ const UserProfileInformations = () => {
           <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <p className="text-sm text-gray-600 dark:text-white">Country</p>
             <p className="text-base text-navy-700 dark:text-white font-semibold">
-              {userProfile?.country || "Not specified"}
+              {userProfile?.country || "N/A"}
             </p>
           </div>
 
