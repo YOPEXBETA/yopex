@@ -14,7 +14,6 @@ import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
-  console.log(user, "user");
   const { userId } = useParams();
   const { data: levelsData, isloading } = useGetLevels();
   const { data: userProfile } = useUserById(userId);
