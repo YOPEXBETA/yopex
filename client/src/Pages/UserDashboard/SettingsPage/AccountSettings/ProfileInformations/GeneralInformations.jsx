@@ -155,6 +155,17 @@ const GeneralInformations = () => {
         </div>
         <div className="grid grid-cols-1">
           <div className="col-span-1">
+            <label className="dark:text-gray-300">Website url</label>
+            <input
+              type="text"
+              placeholder="Website url"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              {...register("websiteURL")}
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
             <label className="dark:text-gray-300">Description</label>
 
             <textarea

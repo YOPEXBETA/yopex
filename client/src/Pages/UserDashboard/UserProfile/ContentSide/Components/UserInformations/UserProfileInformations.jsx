@@ -72,7 +72,7 @@ const UserProfileInformations = () => {
             Skills
           </h4>
 
-          <div className="mt-2 px-2 text-base">
+          <div className="mt-4 px-2 text-base">
             <div className="flex flex-wrap gap-2">
               {userProfile?.skills?.length > 0 ? (
                 userProfile.skills.map((skill, index) => (

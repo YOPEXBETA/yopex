@@ -12,10 +12,10 @@ const UserProfileLayout = () => {
 
   return (
     <div className="dark:bg-zinc-800">
-      <div className="grid grid-cols-12 xl:gap-2">
+      <div className="grid grid-cols-12">
         <div className="xl:col-span-4 lg:col-span-12 md:col-span-12 col-span-12">
           <div className="relative">
-            <div className="xl:fixed top-10 left-0 w-full xl:w-auto xl:col-span-4 lg:col-span-12 md:col-span-12 col-span-12">
+            <div className="xl:fixed top-10  left-0 w-full xl:w-auto xl:col-span-4 lg:col-span-12 md:col-span-12 col-span-12">
               <UserProfileCard />
             </div>
           </div>
