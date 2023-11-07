@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Controller } from "react-hook-form";
 import { MuiFileInput } from "mui-file-input";
 import { useEditCompany } from "../../../hooks/react-query/useCompany";
-import uploadFile from "../../../utils/uploadFile";
+import { axios } from "../../../axios";
 
 export const EditCompanyModal = ({ open, handleClose, company }) => {
   const { mutate } = useEditCompany(company?._id);
@@ -26,12 +26,24 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
   const onSubmit = async (data) => {
     if (data.files.length > 0) {
       const file = data.files[0];
-      const companyLogo = await uploadFile(file, setUploadProgress);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("type", "companyLogo");
+      const datalogo = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          const percentage = Math.floor((loaded * 100) / total);
+          setUploadProgress(percentage);
+        },
+      });
 
       return mutate({
         companyName: data.companyName,
         companyDescription: data.companyDescription,
-        companyLogo,
+        companyLogo:datalogo.data.downloadURL,
       });
     }
 

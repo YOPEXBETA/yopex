@@ -16,8 +16,8 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useEditPost } from "../../../hooks/react-query/usePosts";
-import uploadFile from "../../../utils/uploadFile";
 import { useCategories } from "../../../hooks/react-query/useCategories";
+import {axios} from "../../../axios";
 
 export const EditPostModal = ({ open, handleClose, post }) => {
   const { category } = useSelector((state) => state.global);
@@ -40,7 +40,20 @@ export const EditPostModal = ({ open, handleClose, post }) => {
     if (data.files.length > 0) {
       const postPicturePath = [];
       for (let file of data.files) {
-        postPicturePath.push(await uploadFile(file, setUploadProgress));
+        const formData = new FormData();
+        formData.append("file", file);
+      formData.append("type", "posts");
+      const datalogo = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          const percentage = Math.floor((loaded * 100) / total);
+          setUploadProgress(percentage);
+        },
+      });
+        postPicturePath.push(datalogo.data.downloadURL);
       }
       return mutate({ description: data.description, postPicturePath });
     }

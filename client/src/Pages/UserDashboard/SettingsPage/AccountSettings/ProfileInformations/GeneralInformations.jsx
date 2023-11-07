@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import countries from "../../../../../countries.json";
 import { useSkills } from "../../../../../hooks/react-query/useSkills";
 import { edit, reset } from "../../../../../redux/auth/authSlice";
-import uploadFile from "../../../../../utils/uploadFile";
 import AlertContainer from "../../../../../Components/alerts";
 import AlertSuccess from "../../../../../Components/successalert";
 import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
+
+import axios from "axios";
 
 const formatDate = (date) => {
   const currentDate = new Date(date);
@@ -25,6 +26,11 @@ const GeneralInformations = () => {
   const dispatch = useDispatch();
   const { user, error, loading, success } = useSelector((state) => state.auth);
   const { data: skills } = useSkills();
+  const [github, setGithub] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [behance, setBehance] = useState("");
+  const [dribbble, setDribbble] = useState("");
+  const [instagram, setInstagram] = useState("");
 
   useEffect(() => {
     dispatch(reset());
@@ -51,15 +57,24 @@ const GeneralInformations = () => {
 
   const onSubmit = async (data) => {
     const { file, ...values } = data;
+    
     if (data.file.length > 0) {
-      const url = await uploadFile(
-        data.file[0],
-        setUploadProgress,
-        "profilePic"
-      );
-      return dispatch(edit({ ...values, picturePath: url }));
+      const formData = new FormData();
+      formData.append("file", file[0]);
+      const data = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          const percentage = Math.floor((loaded * 100) / total);
+          setUploadProgress(percentage);
+        },
+      });
+      
+      return dispatch(edit({ ...values, picturePath: data.data.downloadURL,socialMediaLinks:[{platform:"github",url:github},{platform:"linkedin",url:linkedin},{platform:"behance",url:behance},{platform:"dribbble",url:dribbble},{platform:"instagram",url:instagram}]}));
     }
-    return dispatch(edit(values));
+    return dispatch(edit({...values,socialMediaLinks:[{platform:"github",url:github},{platform:"linkedin",url:linkedin},{platform:"behance",url:behance},{platform:"dribbble",url:dribbble},{platform:"instagram",url:instagram}]}));
   };
 
   return (
@@ -286,6 +301,70 @@ const GeneralInformations = () => {
             />
           </div>
         </div>
+        <p className="dark:text-gray-300">social media links</p>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <label className="dark:text-gray-300">Github</label>
+            <input
+              type="text"
+              value={github}
+              placeholder="github url : https://github.com/.."
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              onChange={(e) => {setGithub(e.target.value)}}
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <label className="dark:text-gray-300">Linkedin</label>
+            <input
+              value={linkedin}
+              type="text"
+              placeholder="linkedin url : https://linkedin.com/.."
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              onChange={(e) => {
+                setLinkedin(e.target.value);
+              }}
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <label className="dark:text-gray-300">behance</label>
+            <input
+              type="text"
+              value={behance}
+              placeholder="behance url : https://www.behance.net/.."
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              onChange={(e) => {setBehance(e.target.value)}} 
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <label className="dark:text-gray-300">dribbble</label>
+            <input
+              value={dribbble}
+              type="text"
+              placeholder="dribbble url : https://dribbble.com/.."
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              onChange={(e) => {setDribbble(e.target.value)}}
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <label className="dark:text-gray-300">instagram</label>
+            <input
+              type="text"
+              placeholder="instagram url : https://www.instagram.com/.."
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              value={instagram}
+              onChange={(e) => {setInstagram(e.target.value)}}
+            />
+          </div>
+        </div>
+
 
         {success && <AlertSuccess message="Edited" />}
         {!loading && error && <AlertContainer error={error} />}

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import uploadFile from "../../../../../../../utils/uploadFile";
 import { useCreateCompany } from "../../../../../../../hooks/react-query/useCompany";
 import { FaImage, FaFile } from "react-icons/fa";
+import {axios} from "../../../../../../../axios";
 
 export const AddCompanyModal = ({ open, handleClose }) => {
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
@@ -20,23 +20,41 @@ export const AddCompanyModal = ({ open, handleClose }) => {
   const uploadedFiledoc = watch("document");
 
   const onSubmit = async (data) => {
-    const picturePath = await uploadFile(
-      data.picture[0],
-      setUploadProgress,
-      "companyLogo"
-    );
+    
+    const formData = new FormData();
+      formData.append("file", data.picture[0]);
+      formData.append("type", "companyLogo");
+      const datalogo = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          const percentage = Math.floor((loaded * 100) / total);
+          setUploadProgress(percentage);
+        },
+      });
     let documentPath = "";
     if (data.document != undefined) {
-      documentPath = await uploadFile(
-        data.document[0],
-        setUploadProgressdoc,
-        "companyDocument"
-      );
+      const formData = new FormData();
+      formData.append("file", data.document[0]);
+      formData.append("type", "companyDocument");
+      const data = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          const percentage = Math.floor((loaded * 100) / total);
+          setUploadProgressdoc(percentage);
+        },
+      });
+      documentPath = data.data.downloadURL;
     }
     mutate({
       companyName: data.name,
       companyDescription: data.description,
-      companyLogo: picturePath,
+      companyLogo: datalogo.data.downloadURL,
       companyDocument: documentPath,
     });
 

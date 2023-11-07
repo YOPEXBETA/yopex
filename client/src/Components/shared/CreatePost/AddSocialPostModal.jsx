@@ -3,9 +3,9 @@ import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useCreatePost } from "../../../hooks/react-query/usePosts";
-import uploadFile from "../../../utils/uploadFile";
 import { FaImage } from "react-icons/fa";
 import Select from "react-select";
+import { axios } from "../../../axios";
 
 export const AddSocialPostModal = ({ open, handleClose }) => {
   // Global states |  @redux/toolkit
@@ -31,7 +31,21 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
   const onSubmit = async (data) => {
     const postPicturePath = [];
     for (let file of data.files) {
-      postPicturePath.push(await uploadFile(file, setUploadProgress));
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("type", "posts");
+      const data = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          const percentage = Math.floor((loaded * 100) / total);
+          setUploadProgress(percentage);
+        },
+      });
+      console.log(data.data.downloadURL);
+      postPicturePath.push(data.data.downloadURL);
     }
 
     const selectedCategories = data.categories.map(

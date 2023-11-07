@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
 import { useCreatePost } from "../../../../../../../hooks/react-query/usePosts";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
-import uploadFile from "../../../../../../../utils/uploadFile";
+import { axios } from "../../../../../../../axios";
+
 import Select from "react-select";
 import { FaImage } from "react-icons/fa";
 
@@ -38,8 +39,22 @@ export const AddPostModal = ({ open, handleClose }) => {
 
   const onSubmit = async (data) => {
     const postPicturePath = [];
+    
     for (let file of data.files) {
-      postPicturePath.push(await uploadFile(file, setUploadProgress, "posts"));
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("type", "posts");
+      const data = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          const percentage = Math.floor((loaded * 100) / total);
+          setUploadProgress(percentage);
+        },
+      });
+      postPicturePath.push(data.data.downloadURL);
     }
 
     const selectedCategories = data.categories.map(
