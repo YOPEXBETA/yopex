@@ -7,8 +7,7 @@ import {
   useSubmitToChallenge,
   useUserSubmission,
 } from "../../../hooks/react-query/useChallenges";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import storage from "../../../config/firebase";
+import {axios} from "../../../axios";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
@@ -44,15 +43,20 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   const { mutate, isSuccess, isLoading } = useEditSubmission(id, participant);
 
   const handleFileUpload = async (file) => {
-    const storageRef = ref(storage);
-    const fileRef = ref(storageRef, `files/${user._id}+${id}+${file.name}`);
-    const uploadTask = uploadBytesResumable(fileRef, file);
+    const formData = new FormData();
+    formData.append("file", data.picture[0]);
+      formData.append("type", "submission");
+      const data = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        
+      });
 
     try {
-      await uploadTask;
-      const url = await getDownloadURL(fileRef);
-      setFilesPaths((prev) => [...prev, url]);
-      return url;
+      
+      setFilesPaths((prev) => [...prev, data.data.downloadURL]);
+      return data.data.downloadURL;
     } catch (error) {
       console.log(error);
     }
