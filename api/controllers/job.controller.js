@@ -19,6 +19,9 @@ const addJob = async (req, res, next) => {
       description,
       companyId,
       salary,
+      job_type,
+      offer_type,
+      paid,
     } = req.body;
 
     const userId = req.userId;
@@ -41,6 +44,9 @@ const addJob = async (req, res, next) => {
       category,
       RecommendedSkills,
       salary,
+      job_type,
+      offer_type,
+      paid,
     });
 
     await jobOffer.save();
@@ -60,7 +66,7 @@ const addJob = async (req, res, next) => {
 
 const getAllJobs = async (req, res, next) => {
   try {
-    const jobs = await Job.find().populate("company");
+    const jobs = await Job.find().select('-appliers -acceptedAppliers').populate("company", "companyName companyLogo").limit(6);
 
     return res.status(200).json(jobs);
   } catch (error) {
@@ -72,7 +78,7 @@ const getAllJobs = async (req, res, next) => {
 };
 
 const updateJob = async (req, res, next) => {
-  const { title, description, salary, category, RecommendedSkills } = req.body;
+  const { title, description, salary, category, RecommendedSkills,job_type,offer_type,paid } = req.body;
   const jobId = req.params.id;
   let job;
   try {
@@ -82,6 +88,9 @@ const updateJob = async (req, res, next) => {
       salary,
       category,
       RecommendedSkills,
+      job_type,
+      offer_type,
+      paid,
     });
     res.status(200).json({ job });
   } catch (err) {
@@ -102,7 +111,8 @@ const geJobById = async (req, res, next) => {
 
     // Find all job offers related to the company and populate the 'company' field
     const jobOffers = await Job.find({ company: companyId }).populate(
-      "company"
+      "company",
+      "companyName companyLogo _id"
     );
 
     res.status(200).json(jobOffers);
