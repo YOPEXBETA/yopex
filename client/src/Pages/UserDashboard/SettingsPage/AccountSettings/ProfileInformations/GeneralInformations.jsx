@@ -9,7 +9,7 @@ import { edit, reset } from "../../../../../redux/auth/authSlice";
 import AlertContainer from "../../../../../Components/alerts";
 import AlertSuccess from "../../../../../Components/successalert";
 import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
-
+import { MdEdit } from "react-icons/md";
 import axios from "axios";
 
 const formatDate = (date) => {
@@ -57,7 +57,7 @@ const GeneralInformations = () => {
 
   const onSubmit = async (data) => {
     const { file, ...values } = data;
-    
+
     if (data.file.length > 0) {
       const formData = new FormData();
       formData.append("file", file[0]);
@@ -71,21 +71,51 @@ const GeneralInformations = () => {
           setUploadProgress(percentage);
         },
       });
-      
-      return dispatch(edit({ ...values, picturePath: data.data.downloadURL,socialMediaLinks:[{platform:"github",url:github},{platform:"linkedin",url:linkedin},{platform:"behance",url:behance},{platform:"dribbble",url:dribbble},{platform:"instagram",url:instagram}]}));
+
+      return dispatch(
+        edit({
+          ...values,
+          picturePath: data.data.downloadURL,
+          socialMediaLinks: [
+            { platform: "github", url: github },
+            { platform: "linkedin", url: linkedin },
+            { platform: "behance", url: behance },
+            { platform: "dribbble", url: dribbble },
+            { platform: "instagram", url: instagram },
+          ],
+        })
+      );
     }
-    return dispatch(edit({...values,socialMediaLinks:[{platform:"github",url:github},{platform:"linkedin",url:linkedin},{platform:"behance",url:behance},{platform:"dribbble",url:dribbble},{platform:"instagram",url:instagram}]}));
+    return dispatch(
+      edit({
+        ...values,
+        socialMediaLinks: [
+          { platform: "github", url: github },
+          { platform: "linkedin", url: linkedin },
+          { platform: "behance", url: behance },
+          { platform: "dribbble", url: dribbble },
+          { platform: "instagram", url: instagram },
+        ],
+      })
+    );
   };
 
   return (
     <div className="mb-24 md:mb-8 ">
-      <div>
-        <h2 className="text-xl font-bold  dark:text-white uppercase">
-          General Info
-        </h2>
-        <p className="text-gray-400 mb-4">
-          Edit your account's general information
-        </p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h2 className="text-xl font-bold  dark:text-white uppercase">
+            General Info
+          </h2>
+          <p className="text-gray-400 mb-4">
+            Edit your account's general information
+          </p>
+        </div>
+        <div>
+          <button className="hover:bg-gray-500 hover:bg-opacity-10 hover:text-green-500 flex items-center  py-1.5 px-4 rounded space-x-2 cursor-pointer">
+            <MdEdit size={20} />
+          </button>
+        </div>
       </div>
       <hr className=" dark:border-gray-200 mb-2" />
       <br />
@@ -310,7 +340,9 @@ const GeneralInformations = () => {
               value={github}
               placeholder="github url : https://github.com/.."
               className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              onChange={(e) => {setGithub(e.target.value)}}
+              onChange={(e) => {
+                setGithub(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -336,7 +368,9 @@ const GeneralInformations = () => {
               value={behance}
               placeholder="behance url : https://www.behance.net/.."
               className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              onChange={(e) => {setBehance(e.target.value)}} 
+              onChange={(e) => {
+                setBehance(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -348,7 +382,9 @@ const GeneralInformations = () => {
               type="text"
               placeholder="dribbble url : https://dribbble.com/.."
               className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              onChange={(e) => {setDribbble(e.target.value)}}
+              onChange={(e) => {
+                setDribbble(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -360,11 +396,12 @@ const GeneralInformations = () => {
               placeholder="instagram url : https://www.instagram.com/.."
               className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
               value={instagram}
-              onChange={(e) => {setInstagram(e.target.value)}}
+              onChange={(e) => {
+                setInstagram(e.target.value);
+              }}
             />
           </div>
         </div>
-
 
         {success && <AlertSuccess message="Edited" />}
         {!loading && error && <AlertContainer error={error} />}

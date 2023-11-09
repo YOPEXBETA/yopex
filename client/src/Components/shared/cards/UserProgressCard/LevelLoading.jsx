@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getUserLevelData } from "../../../../utils";
 import { useUserById } from "../../../../hooks/react-query/useUsers";
 import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 
@@ -17,17 +16,11 @@ function LinearProgressWithLabel(props) {
               ></div>
             </div>
           </div>
-          <div className=" flex justify-between items-center">
-            <p className="font-medium dark:text-gray-200">Progress</p>
-            <div className="text-xs text-center p-0.5 leading-none rounded-full">
-              <span className="font-medium dark:text-gray-200">
-                {props.value}
-              </span>
-              /
-              <span className="font-medium dark:text-gray-200">
-                {props.difference}
-              </span>
-            </div>
+          <div className="flex items-center gap-1 dark:text-gray-200 text-sm">
+            <span className="text-sm font-bold dark:text-gray-200">
+              Just {props.difference} points away!
+            </span>
+            <p className="text-sm dark:text-gray-200">Level up in no time</p>
           </div>
         </div>
       </div>

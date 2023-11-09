@@ -16,7 +16,9 @@ const SettingsLayout = () => {
       <div className="px-2 md:px-5 lg:px-32">
         <div className="grid grid-cols-12 lg:gap-8 gap-0 ">
           <div className="col-span-3 lg:block hidden md:hidden">
-            <VerticalSettingsTab changeValue={changeValue} value={value} />
+            <div className="sticky top-24">
+              <VerticalSettingsTab changeValue={changeValue} value={value} />
+            </div>
           </div>
 
           <div className="col-span-12 mt-2 block lg:hidden md:block">

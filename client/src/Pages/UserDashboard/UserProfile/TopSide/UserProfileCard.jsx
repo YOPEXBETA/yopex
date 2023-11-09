@@ -12,6 +12,7 @@ import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import { useUserReviews } from "../../../../hooks/react-query/useReviews";
 import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
+import getIconByPlatform from "../../../../utils/getIconByPlatform";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -20,7 +21,11 @@ const UserProfileCard = () => {
   const { data: userProfile } = useUserById(userId);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
+  const selectedPlatforms = userProfile?.socialMediaLinks?.filter(
+    (link) => link?.url
+  );
 
+  console.log(userProfile);
   const userLevel = levelsData
     ? levelsData.find(
         (level) =>
@@ -35,6 +40,8 @@ const UserProfileCard = () => {
     return sum / reviews.length;
   }, [reviews]);
 
+  if (!userProfile) return null;
+
   if (userProfile)
     return (
       <div className="bg-white dark:bg-zinc-800 p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-lg shadow-md dark:border-zinc-500 dark:border text-gray-600  mr-0">
@@ -44,13 +51,13 @@ const UserProfileCard = () => {
               <img
                 alt="picture"
                 src={userProfile.picturePath}
-                className="object-cover rounded-full border-2 border-gray-200 w-36 h-36"
+                className="object-cover rounded-full w-36 h-36 border-4 border-green-500"
               />
             ) : (
               <img
                 alt="default"
                 src={AvatarProfile}
-                className="object-cover rounded-full border-2 border-gray-200 w-36 h-36"
+                className="object-cover rounded-full w-36 h-36 border-4 border-green-500"
               />
             )}
           </div>
@@ -112,14 +119,30 @@ const UserProfileCard = () => {
         <div className="w-full">
           <HighlightSection />
         </div>
+        <hr className="border-zinc-800 border w-full" />
+
+        <div className="w-full flex flex-col space-y-2">
+          <h5 className="mb-3 text-left uppercase font-bold dark:text-white">
+            Explore My Creations
+          </h5>
+          {selectedPlatforms?.length === 0 ? (
+            <p>No links selected</p>
+          ) : (
+            selectedPlatforms.map((link, index) => (
+              <a key={index} href={link?.url} target="_blank">
+                {getIconByPlatform(link?.platform)}
+              </a>
+            ))
+          )}
+        </div>
 
         <hr className="border-zinc-800 border w-full" />
 
         {userProfile?.companies?.length !== 0 && (
           <div className="w-full ">
-            <p className="mb-3 text-left  uppercase font-bold dark:text-white">
+            <h5 className="mb-3 text-left uppercase font-bold dark:text-white">
               Companies
-            </p>
+            </h5>
             <ul className="flex justify-start gap-2">
               {userProfile?.companies?.map((company, index) => (
                 <Link key={index} to={`/company/${company?._id}`}>
