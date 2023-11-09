@@ -4,8 +4,6 @@ const challengeSchema = require("../models/Challenge.model");
 const bcrypt = require("bcryptjs");
 const Job = require("../models/job.model");
 
-
-
 const { pick } = require("lodash");
 const ChallengeModel = require("../models/Challenge.model");
 const notificationModel = require("../models/notification.model");
@@ -13,12 +11,9 @@ const { uploadFileToFirebase } = require("./firebase.controllers");
 
 // ==============================|| EditProfile ||============================== //
 
-
-
 const editProfile = async (req, res) => {
   try {
     const updateFields = req.body;
-    console.log(updateFields);
 
     if (updateFields.password) {
       const user = await userSchema.findById(req.userId);
@@ -26,39 +21,66 @@ const editProfile = async (req, res) => {
         req.body.oldPassword,
         user.password
       );
+
       if (!isOldPasswordValid) {
         return res
           .status(400)
           .json({ error: "Please verify your old password !" });
       }
+
       const salt = await bcrypt.genSalt(10);
       const hashedPass = await bcrypt.hash(updateFields.password, salt);
       updateFields.password = hashedPass;
     }
 
-    // Validate and sanitize socialMediaLinks
-    const validLinks = updateFields.socialMediaLinks.map((link) => {
-      if (!["instagram", "github", "linkedin", "behance", "dribbble"].includes(link.platform)) {
-        return { error: "Invalid social media platform" };
-      } else if (link.platform === "instagram" && link.url && !link.url.startsWith("https://www.instagram.com/")) {
-        return { error: "Invalid instagram link" };
-      } else if (link.platform === "github" && link.url && !link.url.startsWith("https://github.com/")) {
-        return { error: "Invalid github link" };
-      } else if (link.platform === "linkedin" && link.url && !link.url.startsWith("https://www.linkedin.com/")) {
-        return { error: "Invalid linkedin link" };
-      } else if (link.platform === "behance" && link.url && !link.url.startsWith("https://www.behance.net/")) {
-        return { error: "Invalid behance link" };
-      } else if (link.platform === "dribbble" && link.url && !link.url.startsWith("https://dribbble.com/")) {
-        return { error: "Invalid dribbble link" };
+    if (Array.isArray(updateFields.socialMediaLinks)) {
+      const validLinks = updateFields.socialMediaLinks.map((link) => {
+        if (
+          !["instagram", "github", "linkedin", "behance", "dribbble"].includes(
+            link.platform
+          )
+        ) {
+          return { error: "Invalid social media platform" };
+        } else if (
+          link.platform === "instagram" &&
+          link.url &&
+          !link.url.startsWith("https://www.instagram.com/")
+        ) {
+          return { error: "Invalid instagram link" };
+        } else if (
+          link.platform === "github" &&
+          link.url &&
+          !link.url.startsWith("https://github.com/")
+        ) {
+          return { error: "Invalid github link" };
+        } else if (
+          link.platform === "linkedin" &&
+          link.url &&
+          !link.url.startsWith("https://www.linkedin.com/")
+        ) {
+          return { error: "Invalid linkedin link" };
+        } else if (
+          link.platform === "behance" &&
+          link.url &&
+          !link.url.startsWith("https://www.behance.net/")
+        ) {
+          return { error: "Invalid behance link" };
+        } else if (
+          link.platform === "dribbble" &&
+          link.url &&
+          !link.url.startsWith("https://dribbble.com/")
+        ) {
+          return { error: "Invalid dribbble link" };
+        }
+        return link;
+      });
+
+      if (validLinks.some((link) => link.error)) {
+        return res.status(400).json(validLinks.filter((link) => link.error));
       }
-      return link; // Link is valid
-    });
 
-    if (validLinks.some((link) => link.error)) {
-      return res.status(400).json(validLinks.filter((link) => link.error));
+      updateFields.socialMediaLinks = validLinks;
     }
-
-    updateFields.socialMediaLinks = validLinks;
 
     const updatedUser = await userSchema
       .findByIdAndUpdate(req.userId, updateFields, { new: true })
@@ -70,7 +92,6 @@ const editProfile = async (req, res) => {
     return res.status(500).json(error);
   }
 };
-
 
 // ==============================|| Search for  users ||============================== //
 const SearchUsers = async (req, res) => {
@@ -109,8 +130,12 @@ const SearchUsers = async (req, res) => {
       companyName: { $regex: searchTerm, $options: "i" },
     };
 
-    const users = await userSchema.find(userQuery).select("_id firstname lastname picturePath score country");
-    const companies = await companySchema.find(companyQuery).select("_id companyName companyLogo");
+    const users = await userSchema
+      .find(userQuery)
+      .select("_id firstname lastname picturePath score country");
+    const companies = await companySchema
+      .find(companyQuery)
+      .select("_id companyName companyLogo");
 
     const results = [...users, ...companies];
 
@@ -614,7 +639,6 @@ const seeNotification = async (req, res) => {
 
 const getStatistic = async (req, res) => {
   try {
-    
     const countusers = await userSchema.countDocuments();
     const countcompanies = await companySchema.countDocuments();
     const countjobs = await Job.countDocuments();
@@ -627,7 +651,7 @@ const getStatistic = async (req, res) => {
   }
 };
 
-const uploadFile = async (req,res) => {
+const uploadFile = async (req, res) => {
   try {
     const file = req.files;
     console.log(file);
@@ -637,9 +661,7 @@ const uploadFile = async (req,res) => {
     console.error(err);
     return res.status(500).json({ message: "Internal server error" });
   }
-}
-
-
+};
 
 module.exports = {
   editProfile,
@@ -662,5 +684,5 @@ module.exports = {
   getUserFollowingsCompanies,
   seeNotification,
   getStatistic,
-  uploadFile
+  uploadFile,
 };
