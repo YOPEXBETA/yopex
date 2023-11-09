@@ -29,16 +29,34 @@ const UserProfileInformations = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2 w-full">
           <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <p className="text-sm text-gray-600 dark:text-white">Email</p>
-            <p className="text-base text-navy-700 dark:text-white font-semibold">
-              {userProfile?.email}
+            <p className="text-base text-navy-700 dark:text-white font-semibold hover:text-green-500">
+              <a href={`mailto:${userProfile?.email}`}>{userProfile?.email}</a>
             </p>
           </div>
           {userProfile?.phoneNumber?.length !== 0 && (
             <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
               <p className="text-sm text-gray-600 dark:text-white">Phone</p>
               <p className="text-base text-navy-700 dark:text-white font-semibold">
-                {userProfile?.phoneNumber}
+                <a href={`tel:${userProfile?.phoneNumber}`}>
+                  {userProfile?.phoneNumber}
+                </a>
               </p>
+            </div>
+          )}
+          {userProfile?.websiteURL && (
+            <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+              <p className="text-sm text-gray-600 dark:text-white">
+                Website URL
+              </p>
+
+              <a
+                href={userProfile?.websiteURL || "N/A"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex justify-start gap-2 text-green-500 hover:underline"
+              >
+                {userProfile?.websiteURL || "N/A"}
+              </a>
             </div>
           )}
 

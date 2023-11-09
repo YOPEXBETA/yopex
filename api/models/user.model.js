@@ -61,6 +61,7 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    //Behance,Linkedin,Github,Dribble,Instagram
     socialMediaLinks: [
       {
         platform: { type: String, required: false },

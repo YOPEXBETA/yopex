@@ -21,14 +21,11 @@ const App = () => {
     }
     localStorage.theme = isDarkMode ? "dark" : "light";
   }, [isDarkMode]);
-  //console.log("Process", process.env.REACT_APP_API_ENDPOINT);
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     if (queryParams.has("token")) {
-      // Extract the access code from the URL
       const accessToken = queryParams.get("token");
       localStorage.setItem("accessToken", accessToken);
-      // Remove the access code from the URL
       window.history.replaceState({}, document.title, "/");
     }
   }, []);

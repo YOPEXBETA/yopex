@@ -4,12 +4,15 @@ import getDeadlineDifference from "../../../../../utils/deadlineModif";
 import { useUserFollowers } from "../../../../../hooks/react-query/useUsers";
 import { useUserFollowings } from "../../../../../hooks/react-query/useUsers";
 import { useUserChallenges } from "../../../../../hooks/react-query/useUsers";
+import LoadingSpinner from "../../../../../Components/LoadingSpinner";
 
 const HighlightSection = () => {
   const { userId } = useParams();
-  const { data: followers } = useUserFollowers(userId);
-  const { data: followings } = useUserFollowings(userId);
-  const { data } = useUserChallenges(userId);
+  const { data: followers, isLoading: followersLoading } =
+    useUserFollowers(userId);
+  const { data: followings, isLoading: followingsLoading } =
+    useUserFollowings(userId);
+  const { data, isLoading: challengesLoading } = useUserChallenges(userId);
 
   const isChallengeInProgress = (challenge) => {
     return getDeadlineDifference(challenge?.deadline) ===
@@ -32,22 +35,34 @@ const HighlightSection = () => {
 
   return (
     <div className="space-y-4">
-      <div className=" flex items-center gap-2  justify-between">
-        <p className="dark:text-gray-200 ">Followers</p>
-        <p className="text-lg dark:text-gray-200 font-bold">
-          {followers?.length}
-        </p>
+      <div className="flex items-center gap-2 justify-between">
+        <p className="dark:text-gray-200">Followers</p>
+        {followersLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <p className="text-lg dark:text-gray-200 font-bold">
+            {followers?.length}
+          </p>
+        )}
       </div>
-      <div className=" flex items-center gap-2 justify-between">
-        <p className="dark:text-gray-200"> Followings</p>
-        <p className="text-lg dark:text-gray-200 font-bold">
-          {followings?.userFollowingss.length +
-            followings?.companyFollowings.length}
-        </p>
+      <div className="flex items-center gap-2 justify-between">
+        <p className="dark:text-gray-200">Followings</p>
+        {followingsLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <p className="text-lg dark:text-gray-200 font-bold">
+            {followings?.userFollowingss.length +
+              followings?.companyFollowings.length}
+          </p>
+        )}
       </div>
-      <div className=" flex items-center gap-2 justify-between">
+      <div className="flex items-center gap-2 justify-between">
         <p className="dark:text-gray-200">Completed Challenges</p>
-        <p className="text-lg dark:text-gray-200 font-bold">{completed}</p>
+        {challengesLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <p className="text-lg dark:text-gray-200 font-bold">{completed}</p>
+        )}
       </div>
     </div>
   );

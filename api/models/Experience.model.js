@@ -7,6 +7,7 @@ const JobExperienceSchema = new mongoose.Schema(
     startDate: { type: Date, required: true },
     endDate: { type: Date },
     description: { type: String },
+    //employement type
   },
   { timestamps: true }
 );
