@@ -4,10 +4,8 @@ import MyContestLists from "../../../Components/shared/cards/MyContestsLists";
 import MoneyBalance from "../../../Components/shared/cards/MoneyBalance";
 import Leaders from "../../../Components/shared/cards/Leaders";
 import UserProgressCard from "../../../Components/shared/cards/UserProgressCard/UserProgressCard";
-import UserHighlights from "../../../Components/shared/cards/UserHighlights/UserHighlights";
 import ScrollableTabs from "../../../Components/Tabs/ScrollableTab";
 import SocialPosts from "./components/SocialPosts";
-import UserInfoCard from "../../../Components/shared/cards/UserInfoCard";
 
 const HomeLayout = () => {
   return (

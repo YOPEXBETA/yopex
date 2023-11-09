@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
-import LeaderBoardTable from "./LeaderBoardTable/LeaderBoardTable";
-import {
-  useAdminUsers,
-  useUsers,
-} from "../../../../hooks/react-query/useUsers";
+import React, { useState } from "react";
 import SearchbarFilter from "./SearchbarFilter";
+import Leaderboard from "./Leaderboard";
 
-const ContentSide = () => {
+const ContentSide = ({ data, onSelect }) => {
   const [query, setQuery] = useState("");
-  const { data } = useUsers();
 
   return (
     <div>
       <div className="space-y-2">
         <SearchbarFilter setQuery={setQuery} />
-        <LeaderBoardTable data={data} query={query} />
+        <Leaderboard data={data} query={query} onSelect={onSelect} />
       </div>
     </div>
   );

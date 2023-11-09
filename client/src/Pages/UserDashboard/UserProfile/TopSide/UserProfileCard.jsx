@@ -25,7 +25,6 @@ const UserProfileCard = () => {
     (link) => link?.url
   );
 
-  console.log(userProfile);
   const userLevel = levelsData
     ? levelsData.find(
         (level) =>
@@ -121,19 +120,21 @@ const UserProfileCard = () => {
         </div>
         <hr className="border-zinc-800 border w-full" />
 
-        <div className="w-full flex flex-col space-y-2">
+        <div className="w-full flex flex-col">
           <h5 className="mb-3 text-left uppercase font-bold dark:text-white">
             Explore My Creations
           </h5>
-          {selectedPlatforms?.length === 0 ? (
-            <p>No links selected</p>
-          ) : (
-            selectedPlatforms.map((link, index) => (
-              <a key={index} href={link?.url} target="_blank">
-                {getIconByPlatform(link?.platform)}
-              </a>
-            ))
-          )}
+          <div className="flex gap-2">
+            {selectedPlatforms?.length === 0 ? (
+              <p>No links selected</p>
+            ) : (
+              selectedPlatforms.map((link, index) => (
+                <a key={index} href={link?.url} target="_blank">
+                  {getIconByPlatform(link?.platform)}
+                </a>
+              ))
+            )}
+          </div>
         </div>
 
         <hr className="border-zinc-800 border w-full" />

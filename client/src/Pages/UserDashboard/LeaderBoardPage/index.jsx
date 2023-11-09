@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import { useUsers } from "../../../hooks/react-query/useUsers";
+import LeaderboardDetailCard from "./components/LeaderboardDetailCard";
 import ContentSide from "./components/ContentSide";
 
 const LeaderBoardLayout = () => {
+  const { data } = useUsers();
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleRowSelect = (user) => {
+    setSelectedUser(user);
+  };
   return (
-    <div className=" lg:h-screen dark:bg-zinc-800  min-h-screen ">
-      <div className="grid dark:bg-zinc-800   grid-cols-2 md:grid-cols-12 xl:px-48 lg:px-20 md:px-6 px-0 pb-16 md:pb-10 md:py-11 py-2 bg-white mb-24">
-        <div className="col-span-12">
-          <ContentSide />
+    <div className="dark:bg-zinc-800 h-full">
+      <div className="grid grid-cols-12 xl:gap-2 lg:gap-4 md:gap-2 xl:py-6 py-0 xl:mx-16 ">
+        <div className="xl:col-span-4 lg:col-span-12 md:col-span-12 col-span-12">
+          <LeaderboardDetailCard data={selectedUser} />
+        </div>
+        <div className="xl:col-span-8 lg:col-span-12 md:col-span-12  col-span-12 xl:space-y-2 lg:space-y-2 md:space-y-2 ">
+          <ContentSide data={data} onSelect={handleRowSelect} />
         </div>
       </div>
     </div>
