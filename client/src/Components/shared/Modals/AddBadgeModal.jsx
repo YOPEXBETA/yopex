@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 
-//redux
-import { useDispatch } from "react-redux";
-import { addBadge } from "../../../redux/actions/BadgeTypeAction";
-//firebase
-import storage from "../../../config/firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useCreateBadge } from "../../../hooks/react-query/useBadges";
+import { axios } from "../../../axios";
 
 const AddBadgeModal = ({ open, handleClose }) => {
   const myData = JSON.parse(localStorage.getItem("user")) ?? {};
@@ -15,6 +10,7 @@ const AddBadgeModal = ({ open, handleClose }) => {
   const [badgeImg, setBadgeImg] = useState(null);
   const [badgeImgUrl, setBadgeImgUrl] = useState(null);
   const [badgeImgName, setBadgeImgName] = useState("");
+  
 
   const { mutate } = useCreateBadge();
 
@@ -53,17 +49,18 @@ const AddBadgeModal = ({ open, handleClose }) => {
   };
 
   const handleImageUpload = async () => {
-    const storageRef = ref(storage);
-    const timestamp = Date.now(); // generate a timestamp
-    const imageRef = ref(
-      storageRef,
-      `images/${myData.badgesEarned}-${timestamp}`
-    );
-    const uploadTask = uploadBytes(imageRef, badgeImg);
+    
     try {
-      await uploadTask;
-      const url = await getDownloadURL(imageRef);
-      return url;
+      const formData = new FormData();
+      formData.append("file", badgeImg);
+      formData.append("type", "badge");
+      const data = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        
+      });
+      return data.data.downloadURL;
     } catch (error) {
       console.log(error);
     }

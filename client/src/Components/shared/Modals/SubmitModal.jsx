@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { useSubmitToChallenge } from "../../../hooks/react-query/useChallenges";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import storage from "../../../config/firebase";
+import { axios } from "../../../axios";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
@@ -29,13 +28,18 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
   const { mutate, isSuccess, isLoading } = useSubmitToChallenge(id);
 
   const handleFileUpload = async (file) => {
-    const storageRef = ref(storage);
-    const fileRef = ref(storageRef, `files/${user._id}+${id}+${file.name}`);
-    const uploadTask = uploadBytesResumable(fileRef, file);
 
     try {
-      await uploadTask;
-      const url = await getDownloadURL(fileRef);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("type", "submission");
+      const data = await axios.post("http://localhost:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        
+      });
+      const url = data.data.downloadURL;
       setFilesPaths((prev) => [...prev, url]);
       return url;
     } catch (error) {

@@ -66,7 +66,6 @@ const UserSchema = new mongoose.Schema(
       {
         platform: { type: String, required: false },
         url: { type: String, required: false },
-        icon: { type: String },
       },
     ],
     experiences: {
