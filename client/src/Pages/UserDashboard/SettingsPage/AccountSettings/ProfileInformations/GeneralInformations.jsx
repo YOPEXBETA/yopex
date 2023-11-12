@@ -11,12 +11,19 @@ import AlertSuccess from "../../../../../Components/successalert";
 import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 import { MdEdit } from "react-icons/md";
 import axios from "axios";
-import UserInfosEditModal from "../UserInfosEditModal";
+
+const formatDate = (date) => {
+  const currentDate = new Date(date);
+  const year = currentDate.getFullYear();
+  let month = currentDate.getMonth() + 1;
+  let day = currentDate.getDate();
+  if (month < 10) month = `0${month}`;
+  if (day < 10) day = `0${day}`;
+  return `${year}-${month}-${day}`;
+};
 
 const GeneralInformations = () => {
   const dispatch = useDispatch();
-  const [openPostModal, setOpenPostModal] = useState(false);
-  const toggleModal = () => setOpenPostModal((prev) => !prev);
   const { user, error, loading, success } = useSelector((state) => state.auth);
   const { data: skills } = useSkills();
   const [github, setGithub] = useState("");
@@ -106,16 +113,15 @@ const GeneralInformations = () => {
         </div>
         <div>
           <button className="hover:bg-gray-500 hover:bg-opacity-10 hover:text-green-500 flex items-center  py-1.5 px-4 rounded space-x-2 cursor-pointer">
-            <MdEdit onClick={toggleModal} />
+            <MdEdit size={20} />
           </button>
         </div>
-        <UserInfosEditModal open={openPostModal} handleClose={toggleModal} />
       </div>
       <hr className=" dark:border-gray-200 mb-2" />
       <br />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-1 gap-5"
+        className="grid grid-cols-1 gap-3"
       >
         <div className="relative">
           <div className="relative w-24 h-24">
@@ -148,76 +154,150 @@ const GeneralInformations = () => {
             </label>
           </div>
         </div>
-        <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
-            <p className="dark:text-gray-300 font-bold">First Name</p>
-
-            <p>{user?.firstname}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="col-span-1">
+            <label
+              htmlFor="firstname"
+              className="block text-gray-600 dark:text-gray-300"
+            >
+              First Name
+            </label>
+            <input
+              id="firstname"
+              type="text"
+              placeholder="First name"
+              className="w-full border border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              {...register("firstname")}
+            />
+          </div>
+          <div className="col-span-1">
+            <label
+              htmlFor="lastname"
+              className="block text-gray-600 dark:text-gray-300"
+            >
+              Last Name
+            </label>
+            <input
+              id="lastname"
+              type="text"
+              placeholder="Last name"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              {...register("lastname")}
+            />
           </div>
         </div>
         <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
-            <label className="dark:text-gray-300">Last Name</label>
-
-            <p>{user?.lastname}</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
+          <div className="col-span-1">
             <label className="dark:text-gray-300">Occupation</label>
 
-            <p>{user?.occupation}</p>
+            <input
+              type="text"
+              placeholder="EX: Web developer, Art Director, Student"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              {...register("occupation")}
+            />
           </div>
         </div>
         <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
+          <div className="col-span-1">
             <label className="dark:text-gray-300">Website url</label>
-            <p>{user?.websiteURL}</p>
+            <input
+              type="text"
+              placeholder="Website url"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              {...register("websiteURL")}
+            />
           </div>
         </div>
         <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
+          <div className="col-span-1">
             <label className="dark:text-gray-300">Description</label>
 
-            <p>{user?.userDescription}</p>
+            <textarea
+              id="userDescription"
+              placeholder="Description"
+              rows={6}
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              defaultValue={user.userDescription}
+              {...register("userDescription")}
+            />
           </div>
         </div>
         <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
+          <div className="col-span-1">
             <label className="dark:text-gray-300">Email</label>
-            <p>{user?.email}</p>
+            <input
+              placeholder="Email"
+              disabled
+              className="w-full border dark:bg-zinc-800 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-200"
+              type="email"
+              value={user.email}
+            />
           </div>
         </div>
 
-        <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="col-span-1">
             <label className="dark:text-gray-300">Country</label>
-            <p>{user?.country}</p>
+            <select
+              id="demo-multiple-name"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
+              defaultValue={
+                user.country
+                  ? user.country.charAt(0).toUpperCase() + user.country.slice(1)
+                  : ""
+              }
+              {...register("country")}
+            >
+              <option value="">Choose your country</option>
+              {countryList.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
           </div>
-        </div>
 
-        <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
+          <div className="col-span-1">
             <label className="dark:text-gray-300">Gender</label>
-            <p>{user?.gender}</p>
+            <select
+              id="gender-select"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
+              defaultValue={user.gender}
+              {...register("gender")}
+            >
+              <option value="">Choose your gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
         </div>
 
-        <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="col-span-1">
             <label shrink={true} className="dark:text-gray-300">
               Date of Birth
             </label>
 
-            <p>{user?.birthDate}</p>
+            <input
+              type="date"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              defaultValue={formatDate(user.birthDate)}
+              {...register("birthDate")}
+            />
           </div>
-        </div>
 
-        <div className="grid grid-cols-1">
-          <div className="flex items-center gap-16">
+          <div className="col-span-1">
             <label className="dark:text-gray-300 ">Phone Number</label>
-            <p>{user?.phoneNumber}</p>
+
+            <input
+              id="phone"
+              placeholder="+216"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              defaultValue={user.phoneNumber}
+              {...register("phoneNumber")}
+            />
           </div>
         </div>
         <div className="grid grid-cols-1">
