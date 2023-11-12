@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Billing from "./AccountSettings/Billing/Billing";
 import Privacy from "./AccountSettings/Privacy/Privacy";
 import HorizantalSettingsTab from "./AccountSettings/SettingTabs/HorizantalSettingsTab";
@@ -6,7 +6,7 @@ import VerticalSettingsTab from "./AccountSettings/SettingTabs/VerticalSettingsT
 import GeneralInformations from "./AccountSettings/ProfileInformations/GeneralInformations";
 
 const SettingsLayout = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const changeValue = (newValue) => {
     setValue(newValue);
   };

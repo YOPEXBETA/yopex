@@ -131,7 +131,7 @@ const UserProfileCard = () => {
 
         <div className="w-full flex flex-col">
           <h5 className="mb-3 text-left uppercase font-bold dark:text-white">
-            Explore My Creations
+            Social Links
           </h5>
           <div className="flex gap-2">
             {selectedPlatforms?.length === 0 ? (

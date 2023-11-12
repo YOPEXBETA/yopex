@@ -10,31 +10,40 @@ import AlertContainer from "../../../../../Components/alerts";
 import AlertSuccess from "../../../../../Components/successalert";
 import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 import { MdEdit } from "react-icons/md";
+import { format } from "date-fns";
 import axios from "axios";
-
-const formatDate = (date) => {
-  const currentDate = new Date(date);
-  const year = currentDate.getFullYear();
-  let month = currentDate.getMonth() + 1;
-  let day = currentDate.getDate();
-  if (month < 10) month = `0${month}`;
-  if (day < 10) day = `0${day}`;
-  return `${year}-${month}-${day}`;
-};
 
 const GeneralInformations = () => {
   const dispatch = useDispatch();
   const { user, error, loading, success } = useSelector((state) => state.auth);
-  const { data: skills } = useSkills();
-  const [github, setGithub] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [behance, setBehance] = useState("");
-  const [dribbble, setDribbble] = useState("");
-  const [instagram, setInstagram] = useState("");
+  const { data: skills } = useSkills("");
+  const [github, setGithub] = useState(
+    user?.socialMediaLinks.find((link) => link.platform === "github")?.url || ""
+  );
+  const [linkedin, setLinkedin] = useState(
+    user?.socialMediaLinks.find((link) => link.platform === "linkedin")?.url ||
+      ""
+  );
+  const [behance, setBehance] = useState(
+    user?.socialMediaLinks.find((link) => link.platform === "behance")?.url ||
+      ""
+  );
+  const [dribbble, setDribbble] = useState(
+    user?.socialMediaLinks.find((link) => link.platform === "dribbble")?.url ||
+      ""
+  );
+  const [instagram, setInstagram] = useState(
+    user?.socialMediaLinks.find((link) => link.platform === "instagram")?.url ||
+      ""
+  );
 
   useEffect(() => {
     dispatch(reset());
   }, []);
+
+  const formatDate = (date) => {
+    return date ? format(new Date(date), "yyyy-MM-dd") : "";
+  };
 
   const {
     register,
@@ -43,17 +52,25 @@ const GeneralInformations = () => {
     formState: { isSubmitting },
   } = useForm({
     defaultValues: {
-      firstname: user.firstname,
-      lastname: user.lastname,
-      skills: user.skills.map((skill) => ({
-        label: skill.label,
-        value: skill.value,
-      })),
+      firstname: user?.firstname,
+      lastname: user?.lastname,
+      occupation: user?.occupation,
+      birthDate: user?.birthDate ? formatDate(user?.birthDate) : null,
+      websiteURL: user?.websiteURL,
+      country: user?.country,
+      gender: user?.gender,
+      phoneNumber: user?.phoneNumber,
+      userDescription: user?.userDescription,
+      skills:
+        user?.skills.map((skill) => ({
+          label: skill.label,
+          value: skill.value,
+        })) || [],
     },
   });
 
   const [progress, setUploadProgress] = useState(0);
-  const countryList = countries.map((country) => country.name.common);
+  const countryList = countries?.map((country) => country.name.common);
 
   const onSubmit = async (data) => {
     const { file, ...values } = data;
@@ -101,7 +118,7 @@ const GeneralInformations = () => {
   };
 
   return (
-    <div className="mb-24 md:mb-8 ">
+    <div className="mb-24 md:mb-8">
       <div className="flex items-start justify-between">
         <div>
           <h2 className="text-xl font-bold  dark:text-white uppercase">
@@ -191,6 +208,7 @@ const GeneralInformations = () => {
             <label className="dark:text-gray-300">Occupation</label>
 
             <input
+              defaultValue={user?.occupation}
               type="text"
               placeholder="EX: Web developer, Art Director, Student"
               className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
@@ -283,7 +301,6 @@ const GeneralInformations = () => {
             <input
               type="date"
               className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              defaultValue={formatDate(user.birthDate)}
               {...register("birthDate")}
             />
           </div>
