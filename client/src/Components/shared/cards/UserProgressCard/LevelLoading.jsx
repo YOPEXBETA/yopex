@@ -7,7 +7,7 @@ function LinearProgressWithLabel(props) {
   return (
     <div>
       <div spacing={1}>
-        <div className="flex flex-col mb-2">
+        <div className="flex flex-col">
           <div className="flex items-center mb-2">
             <div className="w-full rounded-full bg-zinc-200 border-2 border-gray-200">
               <div
@@ -16,11 +16,13 @@ function LinearProgressWithLabel(props) {
               ></div>
             </div>
           </div>
-          <div className="flex items-center gap-1 dark:text-gray-200 text-sm">
-            <span className="text-sm font-bold dark:text-gray-200">
-              Just {props.difference} points away!
-            </span>
-            <p className="text-sm dark:text-gray-200">Level up in no time</p>
+          <div className="flex justify-between items-center">
+            <p className="font-medium">Next level</p>
+            <div className="">
+              <span className="font-medium text-sm ">{props.value}</span>
+              <span className="font-medium text-sm">/</span>
+              <span className="font-medium text-sm ">{props.difference}</span>
+            </div>
           </div>
         </div>
       </div>

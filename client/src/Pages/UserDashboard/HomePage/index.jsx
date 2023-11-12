@@ -2,10 +2,11 @@ import React from "react";
 import AddSocialPostCard from "../../../Components/shared/CreatePost/AddSocialPostCard";
 import MyContestLists from "../../../Components/shared/cards/MyContestsLists";
 import MoneyBalance from "../../../Components/shared/cards/MoneyBalance";
-import Leaders from "../../../Components/shared/cards/Leaders";
 import UserProgressCard from "../../../Components/shared/cards/UserProgressCard/UserProgressCard";
 import ScrollableTabs from "../../../Components/Tabs/ScrollableTab";
 import SocialPosts from "./components/SocialPosts";
+import UserCardHome from "./UserCardHome";
+import TopLeadersCard from "../../../Components/shared/cards/TopLeadersCard";
 
 const HomeLayout = () => {
   return (
@@ -22,7 +23,7 @@ const HomeLayout = () => {
 
       <div className="hidden col-span-12 md:col-span-12 xl:block xl:col-span-3 lg:col-span-4 space-y-4">
         {/* <MoneyBalance />*/}
-        <Leaders />
+        <TopLeadersCard />
         <MyContestLists />
       </div>
     </div>

@@ -14,15 +14,15 @@ const LeaderboardDetailCard = ({ data }) => {
 
   if (!data) {
     return (
-      <div className="bg-white dark:text-white dark:bg-zinc-800 font-semibold text-center rounded-lg border p-10 xl:max-w-md w-full">
+      <div className="bg-white dark:text-white dark:bg-zinc-800 font-semibold text-center rounded-lg border dark:border-zinc-500 p-10 xl:max-w-md w-full">
         No user selected.
       </div>
     );
   }
   return (
     <div>
-      <div className="bg-white dark:bg-zinc-800 text-center rounded-lg border p-10 xl:max-w-md w-full flex flex-col items-center">
-        <div className="relative mb-2">
+      <div className="bg-white dark:bg-zinc-800 text-center rounded-lg border p-10 xl:max-w-md w-full flex flex-col items-center dark:border-zinc-500">
+        <div className="relative mb-4">
           <Link to={`/profile/${data?._id}`}>
             <div>
               {data?.picturePath ? (
@@ -51,13 +51,13 @@ const LeaderboardDetailCard = ({ data }) => {
             <h1 className="text-lg text-gray-700 dark:text-white font-bold">
               {data?.firstname} {data?.lastname}
             </h1>
-            <p className="whitespace-normal dark:text-gray-200 text-gray-500">
+            <p className="whitespace-normal dark:text-gray-200 text-gray-400">
               {data?.occupation || "No occupation selected"}
             </p>
           </div>
           <Link to={`/profile/${data?._id}`}>
-            <button className="bg-green-500 px-8 py-2 mt-3 rounded-3xl text-gray-100 font-semibold  tracking-wide">
-              Visit Profile
+            <button className="bg-green-500 px-8 py-2 mt-3 rounded-3xl text-gray-100 font-medium tracking-wide">
+              View Profile
             </button>
           </Link>
         </div>

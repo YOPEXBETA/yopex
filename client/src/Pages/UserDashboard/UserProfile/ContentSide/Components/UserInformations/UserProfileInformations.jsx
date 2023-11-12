@@ -17,7 +17,7 @@ const UserProfileInformations = () => {
   }
   return (
     <div>
-      <div className="p-4 divide-gray-100 dark:bg-zinc-800 dark:border-zinc-500 dark:border dark:divide-gray-700 overflow-hidden rounded-lg shadow-md bg-white text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <div className="p-4 divide-gray-100 dark:bg-zinc-800 dark:border-zinc-500 dark:border dark:divide-gray-700 overflow-hidden rounded-lg border bg-white text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
         <div className="mt-2 mb-8 w-full">
           <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
             General Information

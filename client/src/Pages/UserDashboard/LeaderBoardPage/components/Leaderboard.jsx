@@ -36,8 +36,8 @@ const Leaderboard = ({ data, query, onSelect }) => {
       <div className="flex flex-col">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <div className="overflow-hidden border border-gray-200 dark:border-zinc-500 md:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-zinc-500">
                 <thead className="bg-gray-50 dark:bg-zinc-900">
                   <tr>
                     <div className="flex items-center gap-x-3">
@@ -71,12 +71,16 @@ const Leaderboard = ({ data, query, onSelect }) => {
                   </tr>
                 </thead>
 
-                <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-zinc-800">
+                <tbody className="bg-white divide-y divide-gray-200 dark:divide-zinc-500 dark:bg-zinc-800">
                   {rankedUsers
                     .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                     .map((item) => (
-                      <tr key={item.id} onClick={() => onSelect(item)}>
-                        <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
+                      <tr
+                        key={item.id}
+                        onClick={() => onSelect(item)}
+                        className="hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                      >
+                        <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap ">
                           <div className="inline-flex items-center gap-x-3">
                             <span>{item.rank}</span>
                           </div>
@@ -102,11 +106,11 @@ const Leaderboard = ({ data, query, onSelect }) => {
                             </span>
                           </div>
                         </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                        <td className="px-4 py-4 text-sm text-zinc-500 dark:text-gray-300 whitespace-nowrap">
                           {item.country || "N/A"}
                         </td>
 
-                        <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap text-right">
+                        <td className="px-4 py-4 text-sm font-medium text-zinc-500 whitespace-nowrap text-right">
                           <div
                             className={`inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-green-500 bg-green-100/60 dark:bg-gray-800`}
                           >
@@ -125,7 +129,7 @@ const Leaderboard = ({ data, query, onSelect }) => {
       <div className="flex items-center justify-between mt-6">
         <a
           onClick={() => handleChangePage(page - 1)}
-          className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-zinc-800"
+          className="flex items-center px-5 py-2 text-sm text-zinc-500 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-zinc-700 dark:hover:bg-zinc-800"
           disabled={page === 0}
         >
           <svg
