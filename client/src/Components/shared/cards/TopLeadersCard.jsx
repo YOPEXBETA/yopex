@@ -13,7 +13,7 @@ const TopLeadersCard = () => {
 
   return (
     <div className="mx-auto">
-      <div className="bg-white rounded-lg border py-4 px-6 dark:bg-zinc-800 dark:border-zinc-700">
+      <div className="bg-white rounded-lg py-4 px-6 dark:bg-zinc-800 dark:border-zinc-700">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-bold leading-none text-zinc-900 dark:text-white">
             Leaders
@@ -35,7 +35,7 @@ const TopLeadersCard = () => {
                 <LoadingSpinner />
               </div>
             ) : (
-              sortedLeaders?.slice(0, 5)?.map((leader, index) => (
+              sortedLeaders?.slice(0, 3)?.map((leader, index) => (
                 <li
                   key={index}
                   className={`py-3 ${
