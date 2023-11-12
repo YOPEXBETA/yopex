@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeCategory } from "../../../../redux/global/globalSlice";
 import { useCategories } from "../../../../hooks/react-query/useCategories";
 import { BsThreeDots } from "react-icons/bs"; // Import the 3 dots icon
-import CategoriesModal from "../../../shared/Modals/CategoriesModal";
+import CategoriesModal from "../../Modals/CategoriesModal";
 
-const UserCardHome = () => {
+const ExploreCard = () => {
   const { category: selectedCategory } = useSelector((state) => state.global);
   const dispatch = useDispatch();
   const { data: categories } = useCategories();
@@ -30,9 +30,11 @@ const UserCardHome = () => {
 
   return (
     <div className="w-full sticky top-24 z-50">
-      <div className="w-full rounded-lg bg-white p-3 divide-y divide-gray-200 overflow-y-auto">
+      <div className="w-full rounded-lg bg-white p-3 divide-y divide-gray-200 overflow-y-auto dark:bg-zinc-800 dark:border">
         <div aria-label="navigation" className="py-2">
-          <h2 className="text-2xl font-bold mb-4 px-4">Explore</h2>
+          <h2 className="text-2xl font-bold mb-4 px-4 dark:text-white">
+            Explore
+          </h2>
           <nav className="grid gap-1">
             <button
               onClick={() => handleChange(null, "")}
@@ -77,4 +79,4 @@ const UserCardHome = () => {
   );
 };
 
-export default UserCardHome;
+export default ExploreCard;

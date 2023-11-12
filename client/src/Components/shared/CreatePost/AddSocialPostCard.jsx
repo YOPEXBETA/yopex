@@ -26,7 +26,7 @@ const AddSocialPostCard = () => {
             />
           )}
           <button
-            className="flex-1 px-3 text-gray-400 text-left border  focus:outline-none rounded-full h-10 dark:bg-zinc-800 dark:placeholder-gray-200 bg-gray-100"
+            className="flex-1 px-3 text-gray-400 text-left border  focus:outline-none rounded-full h-10 dark:bg-zinc-800 dark:placeholder-gray-200 bg-zinc-100"
             onClick={toggleModal}
           >
             Share your work...

@@ -17,11 +17,15 @@ function LinearProgressWithLabel(props) {
             </div>
           </div>
           <div className="flex justify-between items-center">
-            <p className="font-medium">Next level</p>
-            <div className="">
-              <span className="font-medium text-sm ">{props.value}</span>
-              <span className="font-medium text-sm">/</span>
-              <span className="font-medium text-sm ">{props.difference}</span>
+            <p className="font-medium text-green-500">Level {props.level}</p>
+            <div className="flex items-center">
+              <span className="font-medium text-sm text-green-500">
+                {props.value}
+              </span>
+              <span className="font-medium text-sm text-gray-500">/</span>
+              <span className="font-medium text-sm text-gray-500">
+                {props.difference}
+              </span>
             </div>
           </div>
         </div>
@@ -33,7 +37,7 @@ function LinearProgressWithLabel(props) {
 const LevelLoading = () => {
   const { user } = useSelector((state) => state.auth);
   const { data: userProfile } = useUserById(user._id);
-  const { data: levelsData, isloading } = useGetLevels();
+  const { data: levelsData, isLoading } = useGetLevels();
   const userLevel = levelsData
     ? levelsData.find(
         (level) =>
@@ -43,12 +47,14 @@ const LevelLoading = () => {
     : null;
 
   return (
-    <div>
-      <LinearProgressWithLabel
-        value={userProfile?.score}
-        level={userLevel}
-        difference={userLevel?.maxScore}
-      />
+    <div className="flex justify-center text-gray-800 dark:text-white md:justify-start items-center space-x-4 py-4 border-b border-gray-200 w-full">
+      <div className="cursor-pointer text-sm leading-5 w-full ">
+        <LinearProgressWithLabel
+          value={userProfile?.score}
+          level={userLevel?.name.replace("Level ", "")}
+          difference={userLevel?.maxScore}
+        />
+      </div>
     </div>
   );
 };
