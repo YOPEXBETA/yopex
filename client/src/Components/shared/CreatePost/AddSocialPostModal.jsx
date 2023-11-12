@@ -44,7 +44,6 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
           setUploadProgress(percentage);
         },
       });
-      console.log(data.data.downloadURL);
       postPicturePath.push(data.data.downloadURL);
     }
 

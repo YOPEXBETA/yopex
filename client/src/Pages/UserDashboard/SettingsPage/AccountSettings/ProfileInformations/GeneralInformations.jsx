@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaCamera } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,8 +13,12 @@ import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 import { MdEdit } from "react-icons/md";
 import { format } from "date-fns";
 import axios from "axios";
+import EditSocialLinksModal from "../SettingsModals/EditSocialLinksModal";
+import SocialMediaLinks from "./components/SocialMediaLinks";
 
 const GeneralInformations = () => {
+  const [openPostModal, setOpenPostModal] = useState(false);
+  const toggleModal = () => setOpenPostModal((prev) => !prev);
   const dispatch = useDispatch();
   const { user, error, loading, success } = useSelector((state) => state.auth);
   const { data: skills } = useSkills("");
@@ -36,6 +41,12 @@ const GeneralInformations = () => {
     user?.socialMediaLinks.find((link) => link.platform === "instagram")?.url ||
       ""
   );
+
+  const [showGithubInput, setShowGithubInput] = useState(false);
+  const [showLinkedinInput, setShowLinkedinInput] = useState(false);
+  const [showBehanceInput, setShowBehanceInput] = useState(false);
+  const [showDribbbleInput, setShowDribbbleInput] = useState(false);
+  const [showInstagramInput, setShowInstagramInput] = useState(false);
 
   useEffect(() => {
     dispatch(reset());
@@ -130,9 +141,10 @@ const GeneralInformations = () => {
         </div>
         <div>
           <button className="hover:bg-gray-500 hover:bg-opacity-10 hover:text-green-500 flex items-center  py-1.5 px-4 rounded space-x-2 cursor-pointer">
-            <MdEdit size={20} />
+            <MdEdit onClick={toggleModal} />
           </button>
         </div>
+        <EditSocialLinksModal open={openPostModal} handleClose={toggleModal} />
       </div>
       <hr className=" dark:border-gray-200 mb-2" />
       <br />
@@ -348,74 +360,51 @@ const GeneralInformations = () => {
             />
           </div>
         </div>
-        <p className="dark:text-gray-300">social media links</p>
-        <div className="grid grid-cols-1">
-          <div className="col-span-1">
-            <label className="dark:text-gray-300">Github</label>
-            <input
-              type="text"
-              value={github}
-              placeholder="github url : https://github.com/.."
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              onChange={(e) => {
-                setGithub(e.target.value);
-              }}
+        <hr />
+        <div className="py-4">
+          <div className="space-y-6">
+            <p className="dark:text-white uppercase font-bold">
+              social media links
+            </p>
+
+            <SocialMediaLinks
+              label="Github"
+              showInput={showGithubInput}
+              inputValue={github}
+              setInputValue={setGithub}
+              toggleInput={() => setShowGithubInput(!showGithubInput)}
             />
-          </div>
-        </div>
-        <div className="grid grid-cols-1">
-          <div className="col-span-1">
-            <label className="dark:text-gray-300">Linkedin</label>
-            <input
-              value={linkedin}
-              type="text"
-              placeholder="linkedin url : https://linkedin.com/.."
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              onChange={(e) => {
-                setLinkedin(e.target.value);
-              }}
+
+            <SocialMediaLinks
+              label="Linkedin"
+              showInput={showLinkedinInput}
+              inputValue={linkedin}
+              setInputValue={setLinkedin}
+              toggleInput={() => setShowLinkedinInput(!showLinkedinInput)}
             />
-          </div>
-        </div>
-        <div className="grid grid-cols-1">
-          <div className="col-span-1">
-            <label className="dark:text-gray-300">behance</label>
-            <input
-              type="text"
-              value={behance}
-              placeholder="behance url : https://www.behance.net/.."
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              onChange={(e) => {
-                setBehance(e.target.value);
-              }}
+
+            <SocialMediaLinks
+              label="Behance"
+              showInput={showBehanceInput}
+              inputValue={behance}
+              setInputValue={setBehance}
+              toggleInput={() => setShowBehanceInput(!showBehanceInput)}
             />
-          </div>
-        </div>
-        <div className="grid grid-cols-1">
-          <div className="col-span-1">
-            <label className="dark:text-gray-300">dribbble</label>
-            <input
-              value={dribbble}
-              type="text"
-              placeholder="dribbble url : https://dribbble.com/.."
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              onChange={(e) => {
-                setDribbble(e.target.value);
-              }}
+
+            <SocialMediaLinks
+              label="Dribbble"
+              showInput={showDribbbleInput}
+              inputValue={dribbble}
+              setInputValue={setDribbble}
+              toggleInput={() => setShowDribbbleInput(!showDribbbleInput)}
             />
-          </div>
-        </div>
-        <div className="grid grid-cols-1">
-          <div className="col-span-1">
-            <label className="dark:text-gray-300">instagram</label>
-            <input
-              type="text"
-              placeholder="instagram url : https://www.instagram.com/.."
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-              value={instagram}
-              onChange={(e) => {
-                setInstagram(e.target.value);
-              }}
+
+            <SocialMediaLinks
+              label="Instagram"
+              showInput={showInstagramInput}
+              inputValue={instagram}
+              setInputValue={setInstagram}
+              toggleInput={() => setShowInstagramInput(!showInstagramInput)}
             />
           </div>
         </div>
