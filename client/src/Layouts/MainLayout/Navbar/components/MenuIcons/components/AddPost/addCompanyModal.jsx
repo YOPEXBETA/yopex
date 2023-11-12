@@ -39,7 +39,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
       const formData = new FormData();
       formData.append("file", data.document[0]);
       formData.append("type", "companyDocument");
-      const data = await axios.post("http://localhost:8000/upload", formData, {
+      const docpic = await axios.post("http://localhost:8000/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -49,7 +49,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
           setUploadProgressdoc(percentage);
         },
       });
-      documentPath = data.data.downloadURL;
+      documentPath = docpic.data.downloadURL;
     }
     mutate({
       companyName: data.name,
