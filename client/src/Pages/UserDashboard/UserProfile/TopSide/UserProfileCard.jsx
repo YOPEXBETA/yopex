@@ -2,7 +2,8 @@ import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
+
 import {
   useFollowUser,
   useUserById,
@@ -72,16 +73,24 @@ const UserProfileCard = () => {
             <p className="text-xl font-semibold truncate dark:text-zinc-200">
               {`${userProfile.firstname} ${userProfile.lastname}`}
             </p>
-            <button className="flex items-center gap-1">
-              <span className="text-xl font-bold text-yellow-500 dark:text-yellow-300 ">
-                {rating}
-              </span>
-              <FaStar className="text-yellow-500 dark:text-yellow-300 w-5 h-5 mb-[0.15rem]" />
-            </button>
           </div>
           <p className="text-md whitespace-normal dark:text-gray-200">
             {userProfile.occupation || "No occupation selected"}
           </p>
+        </div>
+
+        <div className="flex items-center gap-6">
+          <p className="text-base text-navy-700 dark:text-white flex items-center">
+            <FaMapMarkerAlt className="inline-block mr-2 text-green-500" />
+            {userProfile?.country || "N/A"}
+          </p>
+          <div className="h-6 border-l border-solid border-zinc-500"></div>
+          <button className="flex items-center gap-1">
+            <span className="text-lg font-semibold dark:text-yellow-300 ">
+              {rating}
+            </span>
+            <FaStar className="text-yellow-500 dark:text-yellow-300 w-5 h-5" />
+          </button>
         </div>
 
         <div className="w-full">
