@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useCreateCompany } from "../../../../../../../hooks/react-query/useCompany";
 import { FaImage, FaFile } from "react-icons/fa";
-import {axios} from "../../../../../../../axios";
+import { axios } from "../../../../../../../axios";
 
 export const AddCompanyModal = ({ open, handleClose }) => {
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
@@ -20,11 +20,13 @@ export const AddCompanyModal = ({ open, handleClose }) => {
   const uploadedFiledoc = watch("document");
 
   const onSubmit = async (data) => {
-    
     const formData = new FormData();
-      formData.append("file", data.picture[0]);
-      formData.append("type", "companyLogo");
-      const datalogo = await axios.post("http://localhost:8000/upload", formData, {
+    formData.append("file", data.picture[0]);
+    formData.append("type", "companyLogo");
+    const datalogo = await axios.post(
+      "http://localhost:8000/upload",
+      formData,
+      {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -33,22 +35,27 @@ export const AddCompanyModal = ({ open, handleClose }) => {
           const percentage = Math.floor((loaded * 100) / total);
           setUploadProgress(percentage);
         },
-      });
+      }
+    );
     let documentPath = "";
     if (data.document != undefined) {
       const formData = new FormData();
       formData.append("file", data.document[0]);
       formData.append("type", "companyDocument");
-      const docpic = await axios.post("http://localhost:8000/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          const percentage = Math.floor((loaded * 100) / total);
-          setUploadProgressdoc(percentage);
-        },
-      });
+      const docpic = await axios.post(
+        "http://localhost:8000/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            const { loaded, total } = progressEvent;
+            const percentage = Math.floor((loaded * 100) / total);
+            setUploadProgressdoc(percentage);
+          },
+        }
+      );
       documentPath = docpic.data.downloadURL;
     }
     mutate({
@@ -108,7 +115,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
               <div className="mb-4">
                 <label
                   htmlFor="CompanyName"
-                  className="dark:text-white block mb-2"
+                  className="dark:text-white block mb-2 text-black"
                 >
                   Company Name
                 </label>
@@ -121,7 +128,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
               <div className="mb-4">
                 <label
                   htmlFor="CompanyDescription"
-                  className="dark:text-white block mb-2"
+                  className="dark:text-white block mb-2 text-black"
                 >
                   Company Description
                 </label>
@@ -134,7 +141,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
 
               {uploadedFile && (
                 <div className="mb-4">
-                  <p className="mb-1">
+                  <p className="mb-1 text-black dark:text-white">
                     Upload profile picture Progress: {uploadProgress}%
                   </p>
                   <div className="bg-green-300 h-2 rounded">
@@ -214,7 +221,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
               </div>
               {uploadedFiledoc && (
                 <div className="mb-4">
-                  <p className="mb-1">
+                  <p className="mb-1 text-black dark:text-white">
                     Upload Legal Document Progress: {uploadProgressdoc}%
                   </p>
                   <div className="bg-green-300 h-2 rounded">

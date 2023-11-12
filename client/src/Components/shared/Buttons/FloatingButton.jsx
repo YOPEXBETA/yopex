@@ -56,55 +56,56 @@ const FloatingButton = () => {
   };
 
   return (
-    <div className="fixed bottom-20 right-2 z-10">
-      <div className="relative">
-        <button
-          className={`${
-            isOpen ? "bg-green-600" : "bg-green-500"
-          }  text-white font-bold p-6 rounded-full transition-transform transform ${
-            isOpen ? "rotate-45" : ""
-          }`}
-          onClick={toggleOptions}
-          style={{ zIndex: isOpen ? 1000 : 1 }}
-        >
-          <FaPlus />
-        </button>
-        {isOpen && (
-          <div
-            className="absolute flex flex-col items-center space-y-1 z-30 bottom-20 right-16"
-            style={{
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "3rem",
-            }}
+    <div>
+      <div className="fixed bottom-20 right-2 z-10">
+        <div className="relative">
+          <button
+            className={`${
+              isOpen ? "bg-green-600" : "bg-green-500"
+            }  text-white font-bold p-6 rounded-full transition-transform transform ${
+              isOpen ? "rotate-45" : ""
+            }`}
+            onClick={toggleOptions}
           >
-            <button
-              onClick={handleClickOpenModalWork}
-              className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
+            <FaPlus />
+          </button>
+          {isOpen && (
+            <div
+              className="absolute flex flex-col items-center space-y-1 z-30 bottom-20 right-16"
+              style={{
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "3rem",
+              }}
             >
-              <FaSuitcase className="mr-2 inline-block dark:text-gray-200" />
-            </button>
-            <button
-              onClick={handleClickOpenModalChallenge}
-              className="block p-4 text-center  text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
-            >
-              <FaFire className="mr-2 inline-block dark:text-gray-200" />
-            </button>
+              <button
+                onClick={handleClickOpenModalWork}
+                className="block p-4 text-center  text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
+              >
+                <FaSuitcase className="mr-2 inline-block dark:text-gray-200" />
+              </button>
+              <button
+                onClick={handleClickOpenModalChallenge}
+                className="block p-4 text-center  text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
+              >
+                <FaFire className="mr-2 inline-block dark:text-gray-200" />
+              </button>
 
-            <button
-              onClick={handleClickOpenModalCompany}
-              className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
-            >
-              <FaBuilding className="mr-2 inline-block dark:text-gray-200" />
-            </button>
-            <button
-              onClick={handleClickOpenModalPost}
-              className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
-            >
-              <FaPen className="mr-2 inline-block dark:text-gray-200" />
-            </button>
-          </div>
-        )}
+              <button
+                onClick={handleClickOpenModalCompany}
+                className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
+              >
+                <FaBuilding className="mr-2 inline-block dark:text-gray-200" />
+              </button>
+              <button
+                onClick={handleClickOpenModalPost}
+                className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
+              >
+                <FaPen className="mr-2 inline-block dark:text-gray-200" />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       <AddWorkOfferModal
         open={openWorkModal}
