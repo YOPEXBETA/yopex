@@ -126,6 +126,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     Challenge Title
                   </label>
                   <input
+                    required
                     className="w-full py-2 px-3 dark:bg-zinc-700  dark:text-white rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                     type="text"
                     placeholder="challenge title"
@@ -140,6 +141,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     Challenge Description
                   </label>
                   <textarea
+                    required
                     className="w-full h-40 p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2"
                     {...register("description", { required: true })}
                     placeholder="challenge description"
@@ -174,7 +176,11 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                       <option value={"true"}>paid</option>
                     </select>
                     <input
-                      className="py-2 w-[80%] px-3 rounded border border-gray-30 bg-zinc-700 focus:outline-none focus:border-green-500"
+                      className={`py-2 w-[80%] px-3 rounded border ${
+                        selectedOptionpaid === "false"
+                          ? "bg-zinc-200 dark:bg-zinc-900"
+                          : "bg-white"
+                      } border-gray-30 dark:bg-zinc-700 focus:outline-none focus:border-green-500`}
                       type="number"
                       placeholder="challenge prize"
                       {...register("price", { required: false })}
@@ -198,7 +204,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                         itSkills && (
                           <Select
                             isMulti
-                            className="my-react-select-container"
+                            className="my-react-select-container border rounded-lg"
                             classNamePrefix="my-react-select"
                             id="tags-outlined"
                             options={itSkills.map((skill) => ({
@@ -239,7 +245,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                         itCategory && (
                           <Select
                             isMulti
-                            className="my-react-select-container"
+                            className="my-react-select-container border rounded-lg"
                             classNamePrefix="my-react-select"
                             id="tags-outlined"
                             options={itCategory.map((category) => ({
@@ -263,63 +269,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     />
                   </div>
                 </div>
-                {/*
-                <div className="mb-2">
-                  <Controller
-                    control={control}
-                    name="RecommendedSkills"
-                    defaultValue={"Any"}
-                    render={({ field }) =>
-                      itSkills && (
-                        <Autocomplete
-                          multiple
-                          id="tags-outlined"
-                          options={itSkills}
-                          getOptionLabel={(option) => option}
-                          value={field.value}
-                          onBlur={field.onBlur}
-                          onChange={(e, value) =>
-                            setValue("RecommendedSkills", value)
-                          }
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              variant="outlined"
-                              placeholder="Skills"
-                            />
-                          )}
-                        />
-                      )
-                    }
-                  />
-                  </div>*/}
-                {/* <div className="mb-2">
-                  <Controller
-                    control={control}
-                    name="category"
-                    defaultValue={"Any"}
-                    render={({ field }) =>
-                      itCategory && (
-                        <Autocomplete
-                          multiple
-                          id="tags-outlined"
-                          value={field.value}
-                          options={itCategory}
-                          getOptionLabel={(option) => option}
-                          onBlur={field.onBlur}
-                          onChange={(e, value) => setValue("category", value)}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              variant="outlined"
-                              placeholder="Categories"
-                            />
-                          )}
-                        />
-                      )
-                    }
-                  />
-                  </div>*/}
+
                 <div className="mb-4">
                   <label
                     htmlFor="jobDescription"
@@ -328,6 +278,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     Specify the participant number
                   </label>
                   <input
+                    required
                     className="w-full py-2 px-3 dark:bg-zinc-700  dark:text-white rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                     type="number"
                     placeholder="number of particiant"
@@ -374,40 +325,6 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                   />
                 </div>
 
-                {/* 
-                <div className="mb-4">
-                  <Controller
-                    control={control}
-                    name="deadline"
-                    defaultValue={new Date().toISOString().slice(0, -8)}
-                    render={({ field }) => (
-                      <TextField
-                        required
-                        fullWidth
-                        type="datetime-local"
-                        {...field}
-                        onChange={(e) => {
-                          const now = moment();
-                          const diff = moment(deadline).diff(now);
-
-                          if (diff < 0) {
-                            setValue("deadline", "");
-                            return false;
-                          }
-
-                          setValue("deadline", `${e.currentTarget.value}:00`);
-                        }}
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        inputProps={{
-                          min: now,
-                        }}
-                      />
-                    )}
-                  />
-                </div>
-                */}
                 <div className="flex justify-between">
                   <button
                     className="bg-green-500 px-6 py-2 w-full hover:bg-green-700 text-white rounded-md"
