@@ -19,6 +19,8 @@ const payementRouter = require("./payment.router");
 const skillRouter = require("./skill.router");
 const contestConversationRouter = require("./contestConversation.router");
 const FirebaseRouter = require("./firebase.router");
+const ExperienceRouter = require("./expepinece.router");
+const EducationRouter = require("./education.router");
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -38,5 +40,7 @@ router.use("/api", payementRouter);
 router.use("/skill", skillRouter);
 router.use("/contestconversation", contestConversationRouter);
 router.use("/firebase", FirebaseRouter);
+router.use("/experience", ExperienceRouter);
+router.use("/education", EducationRouter);
 
 module.exports = router;
