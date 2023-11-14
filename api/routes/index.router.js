@@ -19,7 +19,7 @@ const payementRouter = require("./payment.router");
 const skillRouter = require("./skill.router");
 const contestConversationRouter = require("./contestConversation.router");
 const FirebaseRouter = require("./firebase.router");
-const ExperienceRouter = require("./expepinece.router");
+const ExperienceRouter = require("./experience.router");
 const EducationRouter = require("./education.router");
 
 router.use("/job", jobRouter);
