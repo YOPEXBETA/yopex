@@ -80,7 +80,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 <img
                   alt="Profile picture"
                   src={company?.companyLogo}
-                  className="object-cover w-full h-full rounded-xl "
+                  className="object-contain w-full h-full rounded-xl "
                 />
               </div>
 

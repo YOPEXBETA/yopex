@@ -18,6 +18,7 @@ import SocialMediaLinks from "./components/SocialMediaLinks";
 
 const GeneralInformations = () => {
   const url = process.env.REACT_APP_API_ENDPOINT;
+
   const [openPostModal, setOpenPostModal] = useState(false);
   const toggleModal = () => setOpenPostModal((prev) => !prev);
   const dispatch = useDispatch();
@@ -140,12 +141,12 @@ const GeneralInformations = () => {
             Edit your account's general information
           </p>
         </div>
-        <div>
+        {/* <div>
           <button className="hover:bg-gray-500 hover:bg-opacity-10 hover:text-green-500 flex items-center  py-1.5 px-4 rounded space-x-2 cursor-pointer">
             <MdEdit onClick={toggleModal} />
           </button>
         </div>
-        <EditSocialLinksModal open={openPostModal} handleClose={toggleModal} />
+        <EditSocialLinksModal open={openPostModal} handleClose={toggleModal} />*/}
       </div>
       <hr className=" dark:border-gray-200 mb-2" />
       <br />

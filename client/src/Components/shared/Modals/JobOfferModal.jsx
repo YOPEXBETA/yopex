@@ -50,7 +50,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   <img
                     src={job?.company?.companyLogo}
                     alt="Icon"
-                    className="w-24 h-24 rounded-lg object-cover"
+                    className="w-24 h-24 rounded-lg object-contain"
                   />
                   <div className="flex flex-col justify-center items-center">
                     <p className="text-2xl font-bold dark:text-gray-200 mb-2">

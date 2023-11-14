@@ -23,7 +23,7 @@ const JobCard = ({ job }) => {
                 <img
                   src={job?.company?.companyLogo}
                   alt="Icon"
-                  className="w-16 h-16 rounded-lg object-cover hidden md:block lg:block"
+                  className="w-16 h-16 rounded-lg object-contain hidden md:block lg:block"
                 />
               </div>
               <div>
