@@ -12,7 +12,6 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
   };
 
   const { data: jobs, isLoading } = useJobs();
-  console.log(jobs);
 
   const sortedJobs = jobs
     ? jobs.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -28,10 +27,6 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
       (selectedSkill?.length === 0 ||
         selectedSkill?.some((skill) => job.RecommendedSkills.includes(skill)))
   );
-
-  console.log("Fetched Jobs:", jobs); // Check the fetched jobs
-  console.log("Sorted Jobs:", sortedJobs);
-  console.log("Filtered Jobs:", filteredJobs);
 
   return (
     <div>
