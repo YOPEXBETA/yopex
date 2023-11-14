@@ -16,7 +16,7 @@ const AddSocialPostCard = () => {
             <img
               alt="banner"
               src={user.picturePath}
-              className="w-10 h-10 rounded-full object-cover cursor-pointer border-2"
+              className="w-10 h-10 rounded-full object-contain cursor-pointer border-2"
             />
           ) : (
             <img

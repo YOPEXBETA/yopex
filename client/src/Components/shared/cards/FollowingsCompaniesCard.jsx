@@ -14,7 +14,7 @@ const FollowingsCompaniesCard = ({ following }) => {
           <img
             alt="yourphoto"
             src={following.companyLogo}
-            className="w-28 h-28 rounded-full items-center mx-auto"
+            className="w-28 h-28 rounded-full object-contain items-center mx-auto"
           />
 
           <div className="flex items-center mt-2 ">

@@ -33,7 +33,7 @@ const Testy = () => {
               <img
                 src={user?.picturePath}
                 alt="avatar"
-                className="rounded-full h-12 w-12"
+                className="rounded-full h-12 w-12 object-contain"
               />
               <div className="flex justify-start items-start flex-col space-y-2">
                 <p className="text-base dark:text-white font-semibold leading-4 text-left text-gray-800">

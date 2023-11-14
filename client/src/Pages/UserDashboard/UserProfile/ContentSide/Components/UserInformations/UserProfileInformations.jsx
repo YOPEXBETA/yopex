@@ -27,14 +27,14 @@ const UserProfileInformations = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2 w-full">
-          <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+          <div className="flex flex-col items-start justify-center  px-3 py-4  dark:!bg-navy-700 dark:shadow-none">
             <p className="text-sm text-gray-600 dark:text-white">Email</p>
             <p className="text-base text-navy-700 dark:text-white font-semibold hover:text-green-500">
               <a href={`mailto:${userProfile?.email}`}>{userProfile?.email}</a>
             </p>
           </div>
           {userProfile?.phoneNumber?.length !== 0 && (
-            <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <div className="flex flex-col items-start justify-center  px-3 py-4 dark:!bg-navy-700 dark:shadow-none">
               <p className="text-sm text-gray-600 dark:text-white">Phone</p>
               <p className="text-base text-navy-700 dark:text-white font-semibold">
                 <a href={`tel:${userProfile?.phoneNumber}`}>
@@ -44,7 +44,7 @@ const UserProfileInformations = () => {
             </div>
           )}
           {userProfile?.websiteURL && (
-            <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <div className="flex flex-col items-start justify-center  px-3 py-4 dark:!bg-navy-700 dark:shadow-none">
               <p className="text-sm text-gray-600 dark:text-white">
                 Website URL
               </p>
@@ -61,7 +61,7 @@ const UserProfileInformations = () => {
           )}
 
           {userProfile?.gender?.length !== 0 && (
-            <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <div className="flex flex-col items-start justify-center  px-3 py-4  dark:!bg-navy-700 dark:shadow-none">
               <p className="text-sm text-gray-600 dark:text-white">Gender</p>
               <p className="text-base text-navy-700 dark:text-white font-semibold">
                 {userProfile?.gender || "N/A"}
@@ -69,14 +69,14 @@ const UserProfileInformations = () => {
             </div>
           )}
 
-          <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+          <div className="flex flex-col items-start justify-center  px-3 py-4 dark:!bg-navy-700 dark:shadow-none">
             <p className="text-sm text-gray-600 dark:text-white">Country</p>
             <p className="text-base text-navy-700 dark:text-white font-semibold">
               {userProfile?.country || "N/A"}
             </p>
           </div>
 
-          <div className="flex flex-col items-start justify-center rounded-3xl bg-white dark:bg-zinc-700 bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+          <div className="flex flex-col items-start justify-center  px-3 py-4 dark:!bg-navy-700 dark:shadow-none">
             <p className="text-sm text-gray-600 dark:text-white">Birthday</p>
             <p className="text-base text-navy-700 dark:text-white font-semibold">
               {userProfile?.birthDate
