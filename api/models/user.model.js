@@ -72,7 +72,16 @@ const UserSchema = new mongoose.Schema(
       type: [
         {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "JobExperience",
+          ref: "Experience",
+        },
+      ],
+      default: [],
+    },
+    educations: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Education",
         },
       ],
       default: [],
