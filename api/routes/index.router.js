@@ -40,7 +40,7 @@ router.use("/api", payementRouter);
 router.use("/skill", skillRouter);
 router.use("/contestconversation", contestConversationRouter);
 router.use("/firebase", FirebaseRouter);
-router.use("/experience", ExperienceRouter);
+//router.use("/experience", ExperienceRouter);
 router.use("/education", EducationRouter);
 
 module.exports = router;
