@@ -3,7 +3,7 @@ import LevelMenuIcon from "../../../Pages/AdminDashboard/LevelPage/LevelMenuIcon
 
 const LevelCard = ({ badgeData }) => {
   return (
-    <div className="border-[1px] rounded-lg border-gray-300 shadow-md p-4 transform hover:scale-105 transition duration-300 relative">
+    <div className="border-[1px] rounded-lg border-gray-300  p-4 transform hover:scale-105 transition duration-300 relative">
       <div className="flex justify-between absolute top-2 right-2">
         <LevelMenuIcon level={badgeData} />
       </div>

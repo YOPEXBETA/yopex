@@ -3,7 +3,7 @@ import React from "react";
 const UserBadgeCard = ({ badge }) => {
   return (
     <div>
-      <div className="flex w-full items-center justify-between rounded-lg bg-white p-3 shadow-md shadow-shadow-500 dark:bg-zinc-800 dark:border-zinc-500 dark:border hover:shadow-xl dark:shadow-none">
+      <div className="flex w-full items-center justify-between rounded-lg bg-white p-3 shadow-shadow-500 dark:bg-zinc-800 dark:border-zinc-500 dark:border hover:shadow-xl dark:shadow-none">
         <div className="flex items-center">
           <div className="">
             <img

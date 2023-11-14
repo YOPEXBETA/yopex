@@ -156,7 +156,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                     render={({ field }) => (
                       <div className="mt-4">
                         <label
-                          title="Upload company profile picture"
+                          title="Upload company logo"
                           className="w-12 h-12 p-2 flex items-center justify-center hover:bg-green-700 border rounded-full shadow-sm bg-green-200 focus:ring focus:ring-opacity-50 cursor-pointer"
                         >
                           {field.value && field.value.length > 0 ? (

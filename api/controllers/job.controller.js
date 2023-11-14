@@ -66,7 +66,9 @@ const addJob = async (req, res, next) => {
 
 const getAllJobs = async (req, res, next) => {
   try {
-    const jobs = await Job.find().select('-appliers -acceptedAppliers').populate("company", "companyName companyLogo").limit(6);
+    const jobs = await Job.find()
+      .select("-acceptedAppliers")
+      .populate("company", "companyName companyLogo");
 
     return res.status(200).json(jobs);
   } catch (error) {
@@ -78,7 +80,16 @@ const getAllJobs = async (req, res, next) => {
 };
 
 const updateJob = async (req, res, next) => {
-  const { title, description, salary, category, RecommendedSkills,job_type,offer_type,paid } = req.body;
+  const {
+    title,
+    description,
+    salary,
+    category,
+    RecommendedSkills,
+    job_type,
+    offer_type,
+    paid,
+  } = req.body;
   const jobId = req.params.id;
   let job;
   try {

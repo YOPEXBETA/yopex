@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCategory } from "../../../../redux/global/globalSlice";
 import { useCategories } from "../../../../hooks/react-query/useCategories";
-import { BsThreeDots } from "react-icons/bs"; // Import the 3 dots icon
+import { FaChevronDown } from "react-icons/fa";
 import CategoriesModal from "../../Modals/CategoriesModal";
 
 const ExploreCard = () => {
@@ -61,7 +61,7 @@ const ExploreCard = () => {
               onClick={toggleIconModal}
               className={`flex items-center leading-6 gap-3 py-3 px-4 w-full text-lg focus:outline-none`}
             >
-              <BsThreeDots className="text-gray-600" />
+              <FaChevronDown className="text-green-500" />
               <h5 className="text-green-500">See All</h5>
             </button>
           </nav>
