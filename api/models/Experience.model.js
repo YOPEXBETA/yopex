@@ -1,15 +1,41 @@
 const mongoose = require("mongoose");
+const userModel = require("./user.model");
 
-const JobExperienceSchema = new mongoose.Schema(
-  {
-    jobTitle: { type: String, required: true },
-    company: { type: String, required: true },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date },
-    description: { type: String },
-    //employement type
+const ExperienceShema = new mongoose.Schema({
+  title: { type: String, required: true },
+  type: {
+    type: String,
+    required: true,
+    enum: ["internship", "Full-time", "volunteering", "Part-time"],
   },
-  { timestamps: true }
+  company: { type: String, required: true },
+  localtion: { type: String, required: true },
+  locationtype: {
+    type: String,
+    required: true,
+    enum: ["remote", "office", "hybrid"],
+  },
+  startdate: { type: Date, required: true },
+  enddate: { type: Date, required: true },
+  description: { type: String, required: true },
+  skills: { type: Array, default: [] },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+});
+
+ExperienceShema.pre(
+  "findOneAndDelete",
+  { document: false, query: true },
+  async function (next) {
+    console.log(this._conditions._id, "mmmmm");
+    const experience = await this.model.findById(this._conditions._id);
+
+    const userId = experience.user;
+    const user = await userModel.findById(userId);
+
+    user.experiences.pull(experience._id);
+    user.save();
+    next();
+  }
 );
 
-module.exports = mongoose.model("JobExperience", JobExperienceSchema);
+module.exports = mongoose.model("Experience", ExperienceShema);

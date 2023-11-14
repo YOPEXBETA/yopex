@@ -3,7 +3,7 @@ const SocialMediaPost = require("./SocialMediaPost.model");
 const Company = require("./company.model");
 const submissionModel = require("./submission.model");
 const notificationModel = require("./notification.model");
-const experiences = require("./Experience.model");
+//const experiences = require("./Experience.model");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -68,7 +68,7 @@ const UserSchema = new mongoose.Schema(
         url: { type: String, required: false },
       },
     ],
-    experiences: {
+    /*experiences: {
       type: [
         {
           type: mongoose.Schema.Types.ObjectId,
@@ -76,7 +76,7 @@ const UserSchema = new mongoose.Schema(
         },
       ],
       default: [],
-    },
+    },*/
     educations: {
       type: [
         {
