@@ -81,7 +81,7 @@ const deleteExperience = async (req, res) => {
         if (experience.user.toString() !== req.userId) {
             return res.status(401).json({ error: "You are not authorized to delete this Experience" });
         }
-        await ExperienceModel.findByIdAndDelete(id);
+        await ExperienceModel.findByIdAndDelete({_id: id});
         res.status(200).json({ message: "Experience deleted successfully" });
     } catch (error) {
         res.status(400).json({ error: `Failed to delete Experience: ${error.message}` });

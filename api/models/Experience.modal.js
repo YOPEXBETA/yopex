@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const userModel = require("./user.model");
 
 
 
@@ -16,5 +17,20 @@ const ExperienceShema = new mongoose.Schema(
         user: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
     }
 )
+
+
+ExperienceShema.pre("findOneAndDelete",
+{ document: false, query: true },
+async function (next) {
+    console.log(this._conditions._id,"mmmmm");
+    const experience = await this.model.findById(this._conditions._id);
+    
+    const userId = experience.user;
+    const user = await userModel.findById(userId);
+    
+    user.experiences.pull(experience._id);
+    user.save();
+  next();
+})
 
 module.exports = mongoose.model("Experience", ExperienceShema);

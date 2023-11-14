@@ -16,8 +16,8 @@ const {
 
 ExperienceRouter.post("/add", authenticateToken, addExperience);
 ExperienceRouter.get("/get/:userId", getUserExperience);
-ExperienceRouter.put("/updateexperience/:id", authenticateToken, updateExperience);
-ExperienceRouter.delete("/deleteexperience/:id", authenticateToken, deleteExperience);
+ExperienceRouter.put("/update/:id", authenticateToken, updateExperience);
+ExperienceRouter.delete("/delete/:id", authenticateToken, deleteExperience);
 ExperienceRouter.get("/getexperiencebyId/:id", getExperienceById);
 
 module.exports = ExperienceRouter;

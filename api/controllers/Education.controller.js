@@ -23,6 +23,7 @@ const addEducation = async (req, res) => {
         });
         const newEducation = await education.save();
         user.educations.push(newEducation._id);
+        user.save();
         res.status(201).json({ message: "Education created successfully", newEducation });
 
 
@@ -67,7 +68,7 @@ const deleteEducation = async (req, res) => {
     if (education.user.toString() !== req.userId) {
         return res.status(401).json({ error: "Not authorized" });
     }
-    await Education.findByIdAndDelete(id);
+    await Education.findOneAndDelete({_id: id});
     res.status(200).json({ message: "Education deleted successfully" });
     }catch (error) {
         res.status(400).json({ error: `Failed to delete Education: ${error.message}` });
