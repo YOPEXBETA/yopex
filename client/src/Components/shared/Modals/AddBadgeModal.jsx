@@ -4,13 +4,13 @@ import { useCreateBadge } from "../../../hooks/react-query/useBadges";
 import { axios } from "../../../axios";
 
 const AddBadgeModal = ({ open, handleClose }) => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
   const myData = JSON.parse(localStorage.getItem("user")) ?? {};
   const [badgeName, setBadgeName] = useState("");
   const [badgeDescription, setBadgeDescription] = useState("");
   const [badgeImg, setBadgeImg] = useState(null);
   const [badgeImgUrl, setBadgeImgUrl] = useState(null);
   const [badgeImgName, setBadgeImgName] = useState("");
-  
 
   const { mutate } = useCreateBadge();
 
@@ -49,16 +49,14 @@ const AddBadgeModal = ({ open, handleClose }) => {
   };
 
   const handleImageUpload = async () => {
-    
     try {
       const formData = new FormData();
       formData.append("file", badgeImg);
       formData.append("type", "badge");
-      const data = await axios.post("http://localhost:8000/upload", formData, {
+      const data = await axios.post(`${url}/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        
       });
       return data.data.downloadURL;
     } catch (error) {

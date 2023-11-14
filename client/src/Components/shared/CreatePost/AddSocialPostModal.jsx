@@ -8,6 +8,7 @@ import Select from "react-select";
 import { axios } from "../../../axios";
 
 export const AddSocialPostModal = ({ open, handleClose }) => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
   // Global states |  @redux/toolkit
   const { category } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
@@ -34,7 +35,7 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("type", "posts");
-      const data = await axios.post("http://localhost:8000/upload", formData, {
+      const data = await axios.post(`${url}/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

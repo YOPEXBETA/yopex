@@ -9,6 +9,7 @@ import { useEditCompany } from "../../../hooks/react-query/useCompany";
 import { axios } from "../../../axios";
 
 export const EditCompanyModal = ({ open, handleClose, company }) => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
   const { mutate } = useEditCompany(company?._id);
 
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -29,7 +30,7 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("type", "companyLogo");
-      const datalogo = await axios.post("http://localhost:8000/upload", formData, {
+      const datalogo = await axios.post(`${url}/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -43,7 +44,7 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
       return mutate({
         companyName: data.companyName,
         companyDescription: data.companyDescription,
-        companyLogo:datalogo.data.downloadURL,
+        companyLogo: datalogo.data.downloadURL,
       });
     }
 

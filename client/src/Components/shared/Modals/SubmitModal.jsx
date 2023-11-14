@@ -8,6 +8,7 @@ import { axios } from "../../../axios";
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
 const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
   const [filesSelected, setFilesSelected] = useState([]);
   const [SubmissionTitle, setSubmissionTitle] = useState("");
   const [SubmissionDescription, setSubmissionDescription] = useState("");
@@ -28,16 +29,14 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
   const { mutate, isSuccess, isLoading } = useSubmitToChallenge(id);
 
   const handleFileUpload = async (file) => {
-
     try {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("type", "submission");
-      const data = await axios.post("http://localhost:8000/upload", formData, {
+      const data = await axios.post(`${url}/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        
       });
       const url = data.data.downloadURL;
       setFilesPaths((prev) => [...prev, url]);
@@ -81,9 +80,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
-      if (
-        file.size <= maxSize
-      ) {
+      if (file.size <= maxSize) {
         validFiles.push(file);
         setFilesSelected([...filesSelected, file]);
       } else {

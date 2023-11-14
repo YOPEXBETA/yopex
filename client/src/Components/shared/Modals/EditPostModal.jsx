@@ -17,9 +17,10 @@ import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useEditPost } from "../../../hooks/react-query/usePosts";
 import { useCategories } from "../../../hooks/react-query/useCategories";
-import {axios} from "../../../axios";
+import { axios } from "../../../axios";
 
 export const EditPostModal = ({ open, handleClose, post }) => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
   const { category } = useSelector((state) => state.global);
   const [uploadProgress, setUploadProgress] = useState(0);
   const { mutate } = useEditPost(post._id, post.userId, category);
@@ -42,17 +43,17 @@ export const EditPostModal = ({ open, handleClose, post }) => {
       for (let file of data.files) {
         const formData = new FormData();
         formData.append("file", file);
-      formData.append("type", "posts");
-      const datalogo = await axios.post("http://localhost:8000/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          const percentage = Math.floor((loaded * 100) / total);
-          setUploadProgress(percentage);
-        },
-      });
+        formData.append("type", "posts");
+        const datalogo = await axios.post(`${url}/upload`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            const { loaded, total } = progressEvent;
+            const percentage = Math.floor((loaded * 100) / total);
+            setUploadProgress(percentage);
+          },
+        });
         postPicturePath.push(datalogo.data.downloadURL);
       }
       return mutate({ description: data.description, postPicturePath });

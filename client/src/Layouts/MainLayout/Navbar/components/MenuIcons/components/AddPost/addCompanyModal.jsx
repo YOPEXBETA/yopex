@@ -6,6 +6,7 @@ import { FaImage, FaFile } from "react-icons/fa";
 import { axios } from "../../../../../../../axios";
 
 export const AddCompanyModal = ({ open, handleClose }) => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
     defaultValues: {
       name: "",
@@ -23,39 +24,31 @@ export const AddCompanyModal = ({ open, handleClose }) => {
     const formData = new FormData();
     formData.append("file", data.picture[0]);
     formData.append("type", "companyLogo");
-    const datalogo = await axios.post(
-      "http://localhost:8000/upload",
-      formData,
-      {
+    const datalogo = await axios.post(`${url}/upload`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (progressEvent) => {
+        const { loaded, total } = progressEvent;
+        const percentage = Math.floor((loaded * 100) / total);
+        setUploadProgress(percentage);
+      },
+    });
+    let documentPath = "";
+    if (data.document != undefined) {
+      const formData = new FormData();
+      formData.append("file", data.document[0]);
+      formData.append("type", "companyDocument");
+      const docpic = await axios.post(`${url}/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
         onUploadProgress: (progressEvent) => {
           const { loaded, total } = progressEvent;
           const percentage = Math.floor((loaded * 100) / total);
-          setUploadProgress(percentage);
+          setUploadProgressdoc(percentage);
         },
-      }
-    );
-    let documentPath = "";
-    if (data.document != undefined) {
-      const formData = new FormData();
-      formData.append("file", data.document[0]);
-      formData.append("type", "companyDocument");
-      const docpic = await axios.post(
-        "http://localhost:8000/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          onUploadProgress: (progressEvent) => {
-            const { loaded, total } = progressEvent;
-            const percentage = Math.floor((loaded * 100) / total);
-            setUploadProgressdoc(percentage);
-          },
-        }
-      );
+      });
       documentPath = docpic.data.downloadURL;
     }
     mutate({

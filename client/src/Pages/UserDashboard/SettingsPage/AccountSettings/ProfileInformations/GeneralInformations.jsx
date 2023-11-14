@@ -17,6 +17,7 @@ import EditSocialLinksModal from "../SettingsModals/EditSocialLinksModal";
 import SocialMediaLinks from "./components/SocialMediaLinks";
 
 const GeneralInformations = () => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
   const [openPostModal, setOpenPostModal] = useState(false);
   const toggleModal = () => setOpenPostModal((prev) => !prev);
   const dispatch = useDispatch();
@@ -89,7 +90,7 @@ const GeneralInformations = () => {
     if (data.file.length > 0) {
       const formData = new FormData();
       formData.append("file", file[0]);
-      const data = await axios.post("http://localhost:8000/upload", formData, {
+      const data = await axios.post(`${url}/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

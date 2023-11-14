@@ -7,11 +7,12 @@ import {
   useSubmitToChallenge,
   useUserSubmission,
 } from "../../../hooks/react-query/useChallenges";
-import {axios} from "../../../axios";
+import { axios } from "../../../axios";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
 const EditSubmitModal = ({ open, handleClose, participant }) => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
   const [filesSelected, setFilesSelected] = useState([]);
   const [SubmissionTitle, setSubmissionTitle] = useState("");
   const [SubmissionDescription, setSubmissionDescription] = useState("");
@@ -45,16 +46,14 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   const handleFileUpload = async (file) => {
     const formData = new FormData();
     formData.append("file", data.picture[0]);
-      formData.append("type", "submission");
-      const data = await axios.post("http://localhost:8000/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        
-      });
+    formData.append("type", "submission");
+    const data = await axios.post(`${url}/upload`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
     try {
-      
       setFilesPaths((prev) => [...prev, data.data.downloadURL]);
       return data.data.downloadURL;
     } catch (error) {
