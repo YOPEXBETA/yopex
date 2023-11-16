@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaImage } from "react-icons/fa";
 import Select from "react-select";
@@ -27,36 +27,23 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
     },
   });
 
-  const [uploadProgress, setUploadProgress] = useState(0);
   const uploadedFile = watch("files");
 
   const onSubmit = async (data) => {
     const postPicturePath = [];
-    let totalUploadProgress = 0;
 
     for (let file of data.files) {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("type", "posts");
 
-      try {
-        const result = await fileUploadMutation.mutateAsync(formData);
-        totalUploadProgress += result.uploadPercentage;
-        postPicturePath.push(result.data.downloadURL);
-      } catch (error) {
-        console.error("File upload error:", error);
-      }
+      const result = await fileUploadMutation.mutateAsync(formData);
+      postPicturePath.push(result.data.downloadURL);
     }
-
-    // Calculate the average progress
-    const averageUploadProgress =
-      data.files.length > 0 ? totalUploadProgress / data.files.length : 0;
 
     const selectedCategories = data.categories.map(
       (category) => category.value
     );
-
-    setUploadProgress(averageUploadProgress);
 
     mutate({
       userId: user._id,
@@ -66,7 +53,6 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
     });
 
     reset();
-    setUploadProgress(0);
     handleClose();
   };
 

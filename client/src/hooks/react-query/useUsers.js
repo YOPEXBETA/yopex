@@ -279,16 +279,9 @@ export const useFileUpload = () => {
 
   return useMutation(
     async (formData) => {
-      let uploadPercentage = 0;
-      const response = await axios.post(`${url}/upload`, formData, {
-        onUploadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          uploadPercentage = Math.floor((loaded * 100) / total);
-          queryClient.setQueryData(["uploadProgress"], uploadPercentage);
-        },
-      });
+      const response = await axios.post(`${url}/upload`, formData);
 
-      return { data: response.data, uploadPercentage };
+      return { data: response.data };
     },
     {
       onSuccess: () => {

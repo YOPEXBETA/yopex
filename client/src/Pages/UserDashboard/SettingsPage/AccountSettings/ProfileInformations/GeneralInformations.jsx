@@ -6,22 +6,20 @@ import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import countries from "../../../../../countries.json";
 import { useSkills } from "../../../../../hooks/react-query/useSkills";
+import { useFileUpload } from "../../../../../hooks/react-query/useUsers";
 import { edit, reset } from "../../../../../redux/auth/authSlice";
 import AlertContainer from "../../../../../Components/alerts";
 import AlertSuccess from "../../../../../Components/successalert";
 import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
-import { MdEdit } from "react-icons/md";
 import { format } from "date-fns";
-import axios from "axios";
 import EditSocialLinksModal from "../SettingsModals/EditSocialLinksModal";
 import SocialMediaLinks from "./components/SocialMediaLinks";
 
 const GeneralInformations = () => {
-  const url = process.env.REACT_APP_API_ENDPOINT;
-
   const [openPostModal, setOpenPostModal] = useState(false);
   const toggleModal = () => setOpenPostModal((prev) => !prev);
   const dispatch = useDispatch();
+  const fileUploadMutation = useFileUpload();
   const { user, error, loading, success } = useSelector((state) => state.auth);
   const { data: skills } = useSkills("");
   const [github, setGithub] = useState(
@@ -82,7 +80,6 @@ const GeneralInformations = () => {
     },
   });
 
-  const [progress, setUploadProgress] = useState(0);
   const countryList = countries?.map((country) => country.name.common);
 
   const onSubmit = async (data) => {
@@ -91,16 +88,7 @@ const GeneralInformations = () => {
     if (data.file.length > 0) {
       const formData = new FormData();
       formData.append("file", file[0]);
-      const data = await axios.post(`${url}/upload`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          const percentage = Math.floor((loaded * 100) / total);
-          setUploadProgress(percentage);
-        },
-      });
+      const data = await fileUploadMutation.mutateAsync(formData);
 
       return dispatch(
         edit({

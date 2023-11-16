@@ -44,7 +44,7 @@ const ContestsFilters = ({
   }, [maxAmount, setMaxAmount]);
 
   return (
-    <div className="bg-white md:rounded-lg  p-4 dark:bg-zinc-800  shadow-md border-zinc-200">
+    <div className="bg-white md:rounded-lg p-4 dark:bg-zinc-800 border-zinc-200">
       <form className="space-y-4">
         <div className="space-y-2">
           <label

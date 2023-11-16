@@ -153,7 +153,7 @@ const SocialPostCard = ({
             </div>
           </div>
         </div>
-        <div className="flex justify-center mt-3 absolute bottom-4 left-0 w-full z-10">
+        <div className="flex justify-center mt-3 absolute bottom-4 left-0 w-full">
           {renderPaginationDots()}
         </div>
       </div>

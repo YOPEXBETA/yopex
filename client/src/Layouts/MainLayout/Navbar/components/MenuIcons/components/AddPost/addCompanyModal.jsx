@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useCreateCompany } from "../../../../../../../hooks/react-query/useCompany";
+import { useFileUpload } from "../../../../../../../hooks/react-query/useUsers";
 import { FaImage, FaFile } from "react-icons/fa";
-import { axios } from "../../../../../../../axios";
+import LoadingSpinner from "../../../../../../../Components/LoadingSpinner";
 
 export const AddCompanyModal = ({ open, handleClose }) => {
-  const url = process.env.REACT_APP_API_ENDPOINT;
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
     defaultValues: {
       name: "",
@@ -15,8 +15,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
     },
   });
   const { mutate } = useCreateCompany();
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [uploadProgressdoc, setUploadProgressdoc] = useState(0);
+  const fileUploadMutation = useFileUpload();
   const uploadedFile = watch("picture");
   const uploadedFiledoc = watch("document");
 
@@ -24,31 +23,13 @@ export const AddCompanyModal = ({ open, handleClose }) => {
     const formData = new FormData();
     formData.append("file", data.picture[0]);
     formData.append("type", "companyLogo");
-    const datalogo = await axios.post(`${url}/upload`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      onUploadProgress: (progressEvent) => {
-        const { loaded, total } = progressEvent;
-        const percentage = Math.floor((loaded * 100) / total);
-        setUploadProgress(percentage);
-      },
-    });
+    const datalogo = await fileUploadMutation.mutateAsync(formData);
     let documentPath = "";
     if (data.document != undefined) {
       const formData = new FormData();
       formData.append("file", data.document[0]);
       formData.append("type", "companyDocument");
-      const docpic = await axios.post(`${url}/upload`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          const percentage = Math.floor((loaded * 100) / total);
-          setUploadProgressdoc(percentage);
-        },
-      });
+      const docpic = await fileUploadMutation.mutateAsync(formData);
       documentPath = docpic.data.downloadURL;
     }
     mutate({
@@ -59,8 +40,7 @@ export const AddCompanyModal = ({ open, handleClose }) => {
     });
 
     reset();
-    setUploadProgressdoc(0);
-    setUploadProgress(0);
+
     handleClose();
   };
 
@@ -105,46 +85,21 @@ export const AddCompanyModal = ({ open, handleClose }) => {
               </button>
             </div>
             <div className="mt-2">
-              <div className="mb-4">
-                <label
-                  htmlFor="CompanyName"
-                  className="dark:text-white block mb-2 text-black"
-                >
-                  Company Name
-                </label>
+              <div>
                 <input
                   {...register("name", { required: true })}
                   placeholder="Company Name"
                   className="w-full p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2"
                 />
               </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="CompanyDescription"
-                  className="dark:text-white block mb-2 text-black"
-                >
-                  Company Description
-                </label>
+              <div>
                 <textarea
-                  className="w-full h-40 p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2"
+                  className="w-full h-40 p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                   {...register("description", { required: true })}
                   placeholder="Company Description"
                 />
               </div>
 
-              {uploadedFile && (
-                <div className="mb-4">
-                  <p className="mb-1 text-black dark:text-white">
-                    Upload profile picture Progress: {uploadProgress}%
-                  </p>
-                  <div className="bg-green-300 h-2 rounded">
-                    <div
-                      className="bg-green-500 h-2 rounded"
-                      style={{ width: `${uploadProgress}%` }}
-                    ></div>
-                  </div>
-                </div>
-              )}
               <div className="flex gap-2">
                 <div className="mb-4">
                   <Controller
@@ -212,19 +167,39 @@ export const AddCompanyModal = ({ open, handleClose }) => {
                   />
                 </div>
               </div>
-              {uploadedFiledoc && (
-                <div className="mb-4">
-                  <p className="mb-1 text-black dark:text-white">
-                    Upload Legal Document Progress: {uploadProgressdoc}%
-                  </p>
-                  <div className="bg-green-300 h-2 rounded">
-                    <div
-                      className="bg-green-500 h-2 rounded"
-                      style={{ width: `${uploadProgressdoc}%` }}
-                    ></div>
+              <div>
+                {uploadedFile && uploadedFile.length > 0 && (
+                  <div className="mb-4">
+                    {fileUploadMutation.isLoading ? (
+                      <>
+                        <LoadingSpinner />
+                      </>
+                    ) : (
+                      <p className="text-green-600">
+                        {uploadedFile.length}{" "}
+                        {uploadedFile.length === 1 ? "file" : "files"} selected
+                        for company logo
+                      </p>
+                    )}
                   </div>
-                </div>
-              )}
+                )}
+
+                {uploadedFiledoc && uploadedFiledoc.length > 0 && (
+                  <div className="mb-4">
+                    {fileUploadMutation.isLoading ? (
+                      <>
+                        <LoadingSpinner />
+                      </>
+                    ) : (
+                      <p className="text-green-600">
+                        {uploadedFiledoc.length}{" "}
+                        {uploadedFiledoc.length === 1 ? "file" : "files"}{" "}
+                        selected for company document
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="flex justify-between py-4">
