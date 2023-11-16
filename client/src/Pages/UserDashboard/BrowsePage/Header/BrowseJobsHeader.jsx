@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useCategories } from "../../../../hooks/react-query/useCategories";
-import { useSkills } from "../../../../hooks/react-query/useSkills";
+
 import BrowseNavigationTab from "../Content/BrowseNavigationTabs/BrowseNavigationTab";
 import JobFilterModal from "../../../../Components/Modals/JobFilterModal";
-import { FaFilter } from "react-icons/fa";
 
 const BrowseJobsHeader = ({
   changeValue,
@@ -14,35 +12,6 @@ const BrowseJobsHeader = ({
   selectedCategory,
   selectedSkill,
 }) => {
-  const { data: categorys } = useCategories();
-  const { data: Skills } = useSkills();
-  const itCategory = categorys?.map((category) => category.name);
-  const itSkills = Skills?.map((skill) => skill.name);
-
-  const handleCheckboxChange = (skillName) => {
-    const updatedSkill = selectedSkill.includes(skillName)
-      ? selectedSkill.filter((selected) => selected !== skillName)
-      : [...selectedSkill, skillName];
-
-    setSkillQuery(updatedSkill);
-  };
-  const handleCheckboxChangeCategorie = (Category) => {
-    const updatedCategory = selectedCategory.includes(Category)
-      ? selectedCategory.filter((selected) => selected !== Category)
-      : [...selectedCategory, Category];
-
-    setCategoryQuery(updatedCategory);
-  };
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenCat, setIsOpenCat] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-  const toggleDropdownCatgory = () => {
-    setIsOpenCat(!isOpenCat);
-  };
-
   const [openPostModal, setOpenPostModal] = useState(false);
   const toggleModal = () => setOpenPostModal((prev) => !prev);
 

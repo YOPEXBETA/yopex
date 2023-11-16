@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCategories } from "../../hooks/react-query/useCategories";
 import { useSkills } from "../../hooks/react-query/useSkills";
+import { FaList, FaTools } from "react-icons/fa";
 
 const JobFilterModal = ({
   open,
@@ -74,28 +75,40 @@ const JobFilterModal = ({
             </div>
             <hr className="border-zinc-100 border w-full mt-4" />
           </div>
+
           {/* Left side for tabs */}
-          <div className="col-span-4">
+          <div className="col-span-3">
             <div className="mt-4">
               <ul className="flex flex-col space-y-4">
                 <li
-                  className={`${tabStyles} ${
+                  className={`flex items-center ${tabStyles} ${
                     selectedTab === 0 ? activeTabStyles : ""
                   }`}
                   onClick={() => handleTabClick(0)}
                 >
-                  Categories
+                  <div className="flex items-center gap-2">
+                    <FaList />
+                    <span className="mr-2">Categories</span>
+                  </div>
                 </li>
+                <div className="border-r border-gray-300 h-full" />{" "}
+                {/* Vertical Divider */}
                 <li
-                  className={`${tabStyles} ${
+                  className={`flex items-center ${tabStyles} ${
                     selectedTab === 1 ? activeTabStyles : ""
                   }`}
                   onClick={() => handleTabClick(1)}
                 >
-                  Skills
+                  <div className="flex items-center gap-2">
+                    <FaTools />
+                    <span className="mr-2">Skills</span>
+                  </div>
                 </li>
               </ul>
             </div>
+          </div>
+          <div className="col-span-1">
+            <div className="border-l h-full"></div>
           </div>
           {/* Right side for content */}
           <div className="col-span-8">
