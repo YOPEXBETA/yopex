@@ -264,8 +264,7 @@ export const useSeeNotification = (userId) => {
   });
 };
 
-
-export const useStat = () =>{
+export const useStat = () => {
   return useQuery({
     queryKey: ["stat"],
     queryFn: async () => {
@@ -273,4 +272,28 @@ export const useStat = () =>{
       return data;
     },
   });
-}
+};
+
+export const useFileUpload = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    async (formData) => {
+      let uploadPercentage = 0;
+      const response = await axios.post(`${url}/upload`, formData, {
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          uploadPercentage = Math.floor((loaded * 100) / total);
+          queryClient.setQueryData(["uploadProgress"], uploadPercentage);
+        },
+      });
+
+      return { data: response.data, uploadPercentage };
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["someKey"] });
+      },
+    }
+  );
+};

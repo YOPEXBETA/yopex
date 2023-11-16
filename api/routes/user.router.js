@@ -1,6 +1,8 @@
 const express = require("express");
 const userRouter = express.Router();
-
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 // Only enable if special route is enabled
 const userSchema = require("../models/user.model");
 
@@ -46,10 +48,6 @@ const {
   authenticateToken,
 } = require("../middlewares/authenticateToken.middleware");
 const { uploadFileToFirebase } = require("../controllers/firebase.controllers");
-
-const multer = require("multer");
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 userRouter.put("/users/edit/", authenticateToken, editProfile);
 userRouter.get("/me", authenticateToken, getCurrentUser); //seach users
@@ -109,21 +107,6 @@ userRouter.patch("/special", async (req, res) => {
 
 userRouter.get("/get/stat", getStatistic);
 
-userRouter.post("/upload", upload.single("file"), async (req, res) => {
-  try {
-    const file = req.file;
-
-    const type = req.body.type || "undefined"; // You can pass the type in the request body
-
-    const downloadURL = await uploadFileToFirebase(file, type);
-
-    res
-      .status(200)
-      .json({ message: "File uploaded to Firebase Storage", downloadURL });
-  } catch (error) {
-    console.error("Error uploading file:", error);
-    res.status(500).json({ error: "File upload failed" });
-  }
-});
+userRouter.post("/upload", upload.single("file"), uploadFile);
 
 module.exports = userRouter;

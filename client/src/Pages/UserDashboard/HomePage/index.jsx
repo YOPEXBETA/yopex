@@ -16,7 +16,7 @@ const HomeLayout = () => {
         <ExploreCard />
       </div>
 
-      <div className="col-span-12 md:col-span-12 xl:col-span-6 lg:col-span-8 space-y-4 lg:px-11 px-0 mb-20 md:mt-2">
+      <div className="col-span-12 md:col-span-12 xl:col-span-6 lg:col-span-8 space-y-4 lg:px-11 px-0 mb-20 mt-2 lg:mt-0 md:mt-0">
         <AddSocialPostCard />
         <div className="xl:hidden lg:hidden block">
           <ScrollableTabs />

@@ -653,13 +653,17 @@ const getStatistic = async (req, res) => {
 
 const uploadFile = async (req, res) => {
   try {
-    const file = req.files;
-    console.log(file);
-    const url = await uploadFileToFirebase(file);
-    return res.status(200).json({ url });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: "Internal server error" });
+    const file = req.file;
+
+    const type = req.body.type || "undefined";
+
+    const downloadURL = await uploadFileToFirebase(file, type);
+
+    res
+      .status(200)
+      .json({ message: "File uploaded to Firebase Storage", downloadURL });
+  } catch (error) {
+    res.status(500).json({ error: "File upload failed" });
   }
 };
 

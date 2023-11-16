@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { FaImage } from "react-icons/fa";
+import Select from "react-select";
 import { useSelector } from "react-redux";
 import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useCreatePost } from "../../../hooks/react-query/usePosts";
-import { FaImage } from "react-icons/fa";
-import Select from "react-select";
-import { axios } from "../../../axios";
+import { useFileUpload } from "../../../hooks/react-query/useUsers";
+import LoadingSpinner from "../../LoadingSpinner";
 
 export const AddSocialPostModal = ({ open, handleClose }) => {
-  const url = process.env.REACT_APP_API_ENDPOINT;
   // Global states |  @redux/toolkit
   const { category } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // Data fetching | react-query
   const { data: categories } = useCategories();
+  const fileUploadMutation = useFileUpload();
   const { mutate } = useCreatePost(category);
 
   // Form handling | react-hook-form
@@ -31,26 +32,31 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
 
   const onSubmit = async (data) => {
     const postPicturePath = [];
+    let totalUploadProgress = 0;
+
     for (let file of data.files) {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("type", "posts");
-      const data = await axios.post(`${url}/upload`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          const percentage = Math.floor((loaded * 100) / total);
-          setUploadProgress(percentage);
-        },
-      });
-      postPicturePath.push(data.data.downloadURL);
+
+      try {
+        const result = await fileUploadMutation.mutateAsync(formData);
+        totalUploadProgress += result.uploadPercentage;
+        postPicturePath.push(result.data.downloadURL);
+      } catch (error) {
+        console.error("File upload error:", error);
+      }
     }
+
+    // Calculate the average progress
+    const averageUploadProgress =
+      data.files.length > 0 ? totalUploadProgress / data.files.length : 0;
 
     const selectedCategories = data.categories.map(
       (category) => category.value
     );
+
+    setUploadProgress(averageUploadProgress);
 
     mutate({
       userId: user._id,
@@ -135,16 +141,13 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
                       </div>
                     )}
                   />
-
                   {uploadedFile && (
                     <div className="mb-4">
-                      <p className="mb-1">Upload Progress: {uploadProgress}%</p>
-                      <div className="bg-green-300 h-2 rounded">
-                        <div
-                          className="bg-green-500 h-2 rounded"
-                          style={{ width: `${uploadProgress}%` }}
-                        ></div>
-                      </div>
+                      {fileUploadMutation.isLoading ? (
+                        <>
+                          <LoadingSpinner />
+                        </>
+                      ) : null}
                     </div>
                   )}
                   <Controller

@@ -29,7 +29,7 @@ const ExploreCard = () => {
   };
 
   return (
-    <div className="w-full sticky top-24 z-50">
+    <div className="w-full sticky top-24">
       <div className="w-full rounded-lg bg-white p-3 divide-y divide-gray-200 overflow-y-auto dark:bg-zinc-800 dark:border">
         <div aria-label="navigation" className="py-2">
           <h2 className="text-2xl font-bold mb-4 px-4 dark:text-white">
