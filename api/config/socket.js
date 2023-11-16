@@ -4,7 +4,7 @@ const { sendNotification } = require("../server");
 const initializeSocketIO = (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
-      origin: ["https://yopex.tabaani.co","http://localhost:3000"],
+      origin: ["https://yopex.tabaani.co", "http://localhost:3000"],
     },
   });
 
@@ -20,7 +20,6 @@ const initializeSocketIO = (httpServer) => {
 
   io.on("connection", (socket) => {
     console.log("a user connected.");
-    
     socket.on("joinRoom", (data) => {
       socket.join(data.roomid);
     });
