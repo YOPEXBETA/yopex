@@ -19,7 +19,8 @@ const ProfileMenu = () => {
 
   const handleClick = (event) => setOpen(!open);
 
-  const toggleTheme = () => {
+  {
+    /*const toggleTheme = () => {
     if (document.documentElement.classList.contains("dark")) {
       document.documentElement.classList.remove("dark");
 
@@ -33,7 +34,8 @@ const ProfileMenu = () => {
       toggleDark(true);
       handleCloseMenu();
     }
-  };
+  };*/
+  }
 
   const handleCloseMenu = () => {
     setOpen(false);
@@ -159,7 +161,7 @@ const ProfileMenu = () => {
               <span className="text-gray-600 dark:text-white">Settings</span>
             </a>
 
-            <a
+            {/* <a
               onClick={toggleTheme}
               className="px-3 py-2 hover:bg-gray-100 space-x-2  dark:hover:bg-green-600 flex items-center cursor-pointer"
             >
@@ -177,7 +179,7 @@ const ProfileMenu = () => {
                 <span className="text-gray-600 dark:text-white">Dark Mode</span>
               )}
             </a>
-
+              */}
             <a
               href="/"
               onClick={handleLogout}
