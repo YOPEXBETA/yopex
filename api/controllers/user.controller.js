@@ -663,7 +663,9 @@ const uploadFile = async (req, res) => {
       .status(200)
       .json({ message: "File uploaded to Firebase Storage", downloadURL });
   } catch (error) {
-    res.status(500).json({ error: "File upload failed" });
+    res
+      .status(500)
+      .json({ error: "File upload failed", details: error.message });
   }
 };
 

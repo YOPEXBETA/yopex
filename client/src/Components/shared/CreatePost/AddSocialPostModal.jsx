@@ -30,16 +30,11 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
   const uploadedFile = watch("files");
 
   const onSubmit = async (data) => {
-    const postPicturePath = [];
+    const formData = new FormData();
+    formData.append("file", data.files[0]);
+    formData.append("type", "posts");
 
-    for (let file of data.files) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("type", "posts");
-
-      const result = await fileUploadMutation.mutateAsync(formData);
-      postPicturePath.push(result.data.downloadURL);
-    }
+    const result = await fileUploadMutation.mutateAsync(formData);
 
     const selectedCategories = data.categories.map(
       (category) => category.value
@@ -49,7 +44,7 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
       userId: user._id,
       description: data.description,
       categories: selectedCategories,
-      postPicturePath: postPicturePath,
+      postPicturePath: [result.data.downloadURL],
     });
 
     reset();

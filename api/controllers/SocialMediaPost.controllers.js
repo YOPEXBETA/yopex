@@ -27,6 +27,13 @@ const CreatePost = async (req, res) => {
       throw new Error("User not found");
     }
 
+    // Check if a file was uploaded
+    let postPicturePath;
+    if (req.file) {
+      // If a file was uploaded, upload it to Firebase and get the download URL
+      postPicturePath = await uploadFileToFirebase(req.file, "posts");
+    }
+
     // Create a new post with the current user's information
     const newPost = new Post({
       userId: req.body.userId,
@@ -36,8 +43,7 @@ const CreatePost = async (req, res) => {
       userPicturePath:
         owner.picturePath != undefined ? owner.picturePath : owner.companyLogo,
       description: req.body.description,
-      postPicturePath: req.body.postPicturePath,
-      //postPicturePath: req.file ? req.downloadURL : "", // Use req.downloadURL from middleware
+      postPicturePath: postPicturePath || req.body.postPicturePath,
       postVideoePath: req.body.postVideoPath,
       categories: req.body.categories,
     });
@@ -51,7 +57,9 @@ const CreatePost = async (req, res) => {
 
     res.status(201).json(data);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res
+      .status(500)
+      .json({ message: "Error creating post", error: err.message });
   }
 };
 
