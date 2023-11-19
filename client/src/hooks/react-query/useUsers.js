@@ -279,9 +279,12 @@ export const useFileUpload = () => {
 
   return useMutation(
     async (formData) => {
-      const response = await axios.post(`${url}/upload`, formData);
-
-      return { data: response.data };
+      try {
+        const response = await axios.post(`${url}/upload`, formData);
+        return { data: response?.data };
+      } catch (error) {
+        throw new Error(`File upload failed: ${error.message}`);
+      }
     },
     {
       onSuccess: () => {
