@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useChallengeById } from "../../../hooks/react-query/useChallenges";
 import Banner from "./TopSide/Banner";
 import ContentSide from "./leftSide/ContentSide";
+import LoadingSpinner from "../../../Components/LoadingSpinner";
 
 const ContestDetails = () => {
   const [value, setValue] = useState(0);
@@ -24,7 +25,11 @@ const ContestDetails = () => {
       </div>
     );
   } else {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LoadingSpinner />
+      </div>
+    );
   }
 };
 

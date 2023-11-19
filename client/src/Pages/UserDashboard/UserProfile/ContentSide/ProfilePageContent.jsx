@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FeedbacksPage from "./Components/FeedBacks/feedbacks";
 import Followers from "./Components/Followers/Followers";
 import Followings from "./Components/Followings/Followings";

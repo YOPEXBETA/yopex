@@ -4,6 +4,7 @@ import { changeCategory } from "../../../../redux/global/globalSlice";
 import { useCategories } from "../../../../hooks/react-query/useCategories";
 import { FaChevronDown } from "react-icons/fa";
 import CategoriesModal from "../../Modals/CategoriesModal";
+import { FaCompass } from "react-icons/fa";
 
 const ExploreCard = () => {
   const { category: selectedCategory } = useSelector((state) => state.global);
@@ -32,9 +33,10 @@ const ExploreCard = () => {
     <div className="w-full sticky top-24 z-10">
       <div className="w-full rounded-lg bg-white p-3 divide-y divide-gray-200 overflow-y-auto dark:bg-zinc-800 dark:border">
         <div aria-label="navigation" className="py-2">
-          <h2 className="text-2xl font-bold mb-4 px-4 dark:text-white">
-            Explore
-          </h2>
+          <div className="flex items-center gap-2 mb-4 px-2">
+            <FaCompass className="h-6 w-6" />
+            <h2 className="text-2xl font-bold dark:text-white">Explore</h2>
+          </div>
           <nav className="grid gap-1">
             <button
               onClick={() => handleChange(null, "")}

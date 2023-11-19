@@ -2,7 +2,7 @@ import React from "react";
 
 const SocialPostSkeleton = () => {
   return (
-    <div className="border border-gray-200 shadow animate-pulse dark:border-gray-700  rounded-2xl">
+    <div className="border border-gray-200 shadow animate-pulse dark:border-gray-700 rounded-2xl bg-white">
       <div className="flex items-center p-4 gap-2">
         <svg
           className="w-10 h-10 text-gray-200 dark:text-gray-700"

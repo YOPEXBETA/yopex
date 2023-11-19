@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useUserById } from "../../../../hooks/react-query/useUsers";
 import { useGetLevels } from "../../../../hooks/react-query/useLevels";
+import LoadingSpinner from "../../../LoadingSpinner";
 
 function LinearProgressWithLabel(props) {
   return (
@@ -45,6 +46,10 @@ const LevelLoading = () => {
           level.maxScore >= userProfile?.score
       )
     : null;
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="flex justify-center text-gray-800 dark:text-white md:justify-start items-center space-x-4 py-4 border-b border-gray-200 w-full">

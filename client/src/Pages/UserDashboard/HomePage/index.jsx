@@ -2,10 +2,8 @@ import React from "react";
 import AddSocialPostCard from "../../../Components/shared/CreatePost/AddSocialPostCard";
 import MyContestLists from "../../../Components/shared/cards/MyContestsLists";
 import MoneyBalance from "../../../Components/shared/cards/MoneyBalance";
-import UserProgressCard from "../../../Components/shared/cards/UserProgressCard/UserProgressCard";
 import ScrollableTabs from "../../../Components/Tabs/ScrollableTab";
 import SocialPosts from "./components/SocialPosts";
-import TopLeadersCard from "../../../Components/shared/cards/TopLeadersCard";
 import ExploreCard from "../../../Components/shared/cards/UserProgressCard/ExploreCard";
 import Testy from "../../../Components/shared/cards/UserProgressCard/Testy";
 

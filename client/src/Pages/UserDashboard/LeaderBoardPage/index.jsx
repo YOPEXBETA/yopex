@@ -4,7 +4,7 @@ import LeaderboardDetailCard from "./components/LeaderboardDetailCard";
 import ContentSide from "./components/ContentSide";
 
 const LeaderBoardLayout = () => {
-  const { data } = useUsers();
+  const { data, isLoading } = useUsers();
   const [selectedUser, setSelectedUser] = useState(null);
 
   const handleRowSelect = (user) => {
@@ -17,7 +17,11 @@ const LeaderBoardLayout = () => {
           <LeaderboardDetailCard data={selectedUser} />
         </div>
         <div className="xl:col-span-8 lg:col-span-12 md:col-span-12  col-span-12 xl:space-y-2 lg:space-y-2 md:space-y-2 ">
-          <ContentSide data={data} onSelect={handleRowSelect} />
+          <ContentSide
+            data={data}
+            onSelect={handleRowSelect}
+            isLoading={isLoading}
+          />
         </div>
       </div>
     </div>

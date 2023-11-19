@@ -9,6 +9,7 @@ import { EditCompanyModal } from "../../../../Components/shared/Modals/EditCompa
 
 import { FaUserMinus, FaTrash, FaEdit, FaUserPlus } from "react-icons/fa";
 import { CompanyProfileNavigationTab } from "../../../../Components/Tabs/CompanyProfileNavigationTab";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const CompanyProfileInformations = ({ changeValue, value }) => {
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
@@ -60,7 +61,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   const { data: company, isLoading, isError } = useCompanyById(companyId);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   if (isError) {

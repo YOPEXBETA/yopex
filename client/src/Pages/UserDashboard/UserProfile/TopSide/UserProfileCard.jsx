@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
+import LoadingSkeleton from "react-loading-skeleton";
 
 import {
   useFollowUser,
@@ -18,8 +19,8 @@ import getIconByPlatform from "../../../../utils/getIconByPlatform";
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
   const { userId } = useParams();
-  const { data: levelsData, isloading } = useGetLevels();
-  const { data: userProfile } = useUserById(userId);
+  const { data: levelsData, isLoading: levelsLoading } = useGetLevels();
+  const { data: userProfile, isLoading: userLoading } = useUserById(userId);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
   const selectedPlatforms = userProfile?.socialMediaLinks?.filter(
@@ -40,7 +41,9 @@ const UserProfileCard = () => {
     return sum / reviews.length;
   }, [reviews]);
 
-  if (!userProfile) return null;
+  if (userLoading) {
+    return <LoadingSpinner />;
+  }
 
   if (userProfile)
     return (
@@ -63,26 +66,46 @@ const UserProfileCard = () => {
           </div>
           <div className="absolute bottom-0 right-0">
             <div className="flex items-center justify-center rounded-full bg-green-500 w-11 h-11 text-white">
-              {"LV " + parseInt(userLevel?.name.replace("Level ", ""))}
+              {userLevel ? (
+                <p className="dark:text-white">
+                  {"LV " + parseInt(userLevel?.name.replace("Level ", ""))}
+                </p>
+              ) : (
+                <LoadingSpinner />
+              )}
             </div>
           </div>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-2 truncate w-80">
           <div className="flex items-center justify-center gap-2 truncate w-80">
-            <p className="text-xl font-semibold truncate dark:text-zinc-200">
-              {`${userProfile.firstname} ${userProfile.lastname}`}
-            </p>
+            {userProfile ? (
+              <p className="text-xl font-semibold truncate dark:text-zinc-200">
+                {`${userProfile.firstname} ${userProfile.lastname}`}
+              </p>
+            ) : (
+              <LoadingSkeleton width={160} height={24} />
+            )}
           </div>
-          <p className="text-md whitespace-normal dark:text-gray-200">
-            {userProfile.occupation || "No occupation selected"}
-          </p>
+          {userProfile ? (
+            <p className="text-md whitespace-normal dark:text-gray-200">
+              {userProfile.occupation || "No occupation selected"}
+            </p>
+          ) : (
+            <LoadingSkeleton width={120} height={16} />
+          )}
         </div>
 
         <div className="flex items-center gap-6">
           <p className="text-base text-navy-700 dark:text-white flex items-center">
             <FaMapMarkerAlt className="inline-block mr-2 text-green-500" />
-            {userProfile?.country || "N/A"}
+            {userProfile ? (
+              <p className="text-md whitespace-normal dark:text-gray-200">
+                {userProfile?.country || "N/A"}
+              </p>
+            ) : (
+              <LoadingSkeleton width={120} height={16} />
+            )}
           </p>
           <div className="h-6 border-l border-solid border-zinc-500"></div>
           <button className="flex items-center gap-1">

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
+import TableSkeleton from "../../../../Components/SkeletonLoading/TableSkeleton";
 
-const Leaderboard = ({ data, query, onSelect }) => {
+const Leaderboard = ({ data, query, onSelect, isLoading }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(8);
   const [rankedUsers, setRankedUsers] = useState([]);
@@ -31,6 +32,9 @@ const Leaderboard = ({ data, query, onSelect }) => {
   const totalPages = Math?.ceil(data?.length / rowsPerPage);
   const displayedPages = Math?.min(10, totalPages);
 
+  if (isLoading) {
+    return <TableSkeleton />;
+  }
   return (
     <section className="container mx-auto">
       <div className="flex flex-col">

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFindChallenges } from "../../../../../hooks/react-query/useChallenges";
 import ChallengeCard from "../../../../../Components/shared/cards/ChallengeCard";
-import LoadingSpinner from "../../../../../Components/LoadingSpinner";
 import ChallengeCardSkeleton from "../../../../../Components/SkeletonLoading/ChallengeCardSkeleton";
 
 const Challenges = ({

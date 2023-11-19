@@ -90,13 +90,16 @@ const JobFilterModal = ({
                   aria-current="page"
                 >
                   <svg
-                    className="w-4 h-4 me-2 "
+                    className="w-4 h-4 me-2"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
-                    viewBox="0 0 20 20"
+                    viewBox="0 0 24 24"
                   >
-                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
+                    <g>
+                      <path fill="none" d="M0 0h24v24H0z" />
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v2h-2zm0 4h2v4h-2z" />
+                    </g>
                   </svg>
                   Categories
                 </a>
@@ -117,13 +120,16 @@ const JobFilterModal = ({
                   aria-current="page"
                 >
                   <svg
-                    className="w-4 h-4 me-2 "
+                    className="w-4 h-4 me-2"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
-                    viewBox="0 0 18 18"
+                    viewBox="0 0 24 24"
                   >
-                    <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
+                    <g>
+                      <path fill="none" d="M0 0h24v24H0z" />
+                      <path d="M18.07 2.44a1.61 1.61 0 0 0-2.28 0L3.55 15.29a1.61 1.61 0 0 0 0 2.28l1.43 1.43a1.61 1.61 0 0 0 2.28 0l12.24-12.24a3.61 3.61 0 0 0 0-5.12L18.07 2.44zM15.36 4.71l-1.42 1.42 2.85 2.85 1.42-1.42-2.85-2.85zM14.64 5.43L5 15.07 6.41 16.5l9.64-9.64-1.41-1.43zM8.05 13.56l-2.85-2.85-1.42 1.42 2.85 2.85 1.42-1.42zM17.37 4.22l-1.42-1.42a3.61 3.61 0 0 0-5.12 0l-1.41 1.42 2.85 2.85 1.41-1.42 2.85 2.85 1.42-1.42a3.61 3.61 0 0 0 0-5.12z" />
+                    </g>
                   </svg>
                   Skills
                 </a>
@@ -134,21 +140,27 @@ const JobFilterModal = ({
                 <>
                   <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
                     {itCategories.map((category) => (
-                      <label
+                      <div
                         key={category}
                         className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       >
                         <input
+                          id="green-checkbox"
+                          className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           type="checkbox"
                           value={category}
                           checked={selectedCategory.includes(category)}
                           onChange={() =>
                             handleCheckboxChangeCategory(category)
                           }
-                          className="mr-2"
                         />
-                        {category}
-                      </label>
+                        <label
+                          for="green-checkbox"
+                          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        >
+                          {category}
+                        </label>
+                      </div>
                     ))}
                   </div>
                 </>
@@ -157,19 +169,24 @@ const JobFilterModal = ({
                 <>
                   <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
                     {itSkills.map((skillName) => (
-                      <label
+                      <div
                         key={skillName}
                         className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       >
                         <input
                           type="checkbox"
+                          className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           value={skillName}
                           checked={selectedSkill.includes(skillName)}
                           onChange={() => handleCheckboxChange(skillName)}
-                          className="mr-2"
                         />
-                        {skillName}
-                      </label>
+                        <label
+                          for="green-checkbox"
+                          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        >
+                          {skillName}
+                        </label>
+                      </div>
                     ))}
                   </div>
                 </>

@@ -1,5 +1,4 @@
 import React from "react";
-import TopLeadersCard from "../TopLeadersCard";
 import { useSelector } from "react-redux";
 import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
