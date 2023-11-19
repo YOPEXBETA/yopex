@@ -15,6 +15,34 @@ const UserProfileInformations = () => {
       </div>
     );
   }
+  const staticExperienceData = [
+    {
+      logo: "",
+      title: "Web Developer, ABC Company",
+      description:
+        "Developed and maintained company website, implementing responsive design and optimizing performance. Collaborated with the design team to create visually appealing web pages.",
+      startDate: "January 2020",
+      endDate: "Present",
+    },
+    {
+      logo: "",
+      title: "Frontend Developer, XYZ Agency",
+      description:
+        "Worked on various client projects, translating design mockups into interactive web pages. Utilized modern web technologies to ensure cross-browser compatibility.",
+      startDate: "June 2018",
+      endDate: "December 2019",
+    },
+  ];
+
+  const staticEducationData = [
+    {
+      degree: "Bachelor of Science in Computer Science",
+      school: "Harvard",
+      graduationDate: "May 2018",
+    },
+    // Add more education entries if needed
+  ];
+
   return (
     <div>
       <div className="bg-white font-sans rounded-lg">
@@ -38,39 +66,51 @@ const UserProfileInformations = () => {
           )}
 
           <h2 className="text-xl font-semibold mt-4 mb-2">Experience</h2>
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold">
-              Web Developer, ABC Company
-            </h3>
-            <p className="text-gray-700">
-              Developed and maintained company website, implementing responsive
-              design and optimizing performance. Collaborated with the design
-              team to create visually appealing web pages.
-            </p>
-            <p className="text-gray-600">January 2020 - Present</p>
-          </div>
+          {staticExperienceData.map((experience, index) => (
+            <div key={index} className="flex gap-4 items-start mb-8">
+              <img
+                className="rounded-lg h-16 w-16 object-cover bg-gray-50"
+                src={
+                  "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                }
+                alt={`Experience ${index}`}
+              />
+              <div>
+                <h3 className="text-lg font-semibold">{experience.title}</h3>
+                <p className="text-gray-700">NETFLIX</p>
+                <p className="text-gray-600 mb-2">
+                  {experience.startDate} - {experience.endDate}
+                </p>
+                <p className="text-gray-700">{experience.description}</p>
+              </div>
+              <hr className="border-b-2  border-gray-700 my-4" />
+            </div>
+          ))}
 
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold">
-              Frontend Developer, XYZ Agency
-            </h3>
-            <p className="text-gray-700">
-              Worked on various client projects, translating design mockups into
-              interactive web pages. Utilized modern web technologies to ensure
-              cross-browser compatibility.
-            </p>
-            <p className="text-gray-600">June 2018 - December 2019</p>
+          <div>
+            <h2 className="text-xl font-semibold mt-4 mb-2">Education</h2>
+            {staticEducationData.map((education, index) => (
+              <div key={index} className="flex gap-4 items-start mb-8">
+                <img
+                  className="rounded-lg h-16 w-16 object-cover bg-gray-50"
+                  src={
+                    "https://images.unsplash.com/photo-1576049519901-ef17971aedc4?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  }
+                  alt={`Experience ${index}`}
+                />
+                <div>
+                  <h3 className="text-lg font-semibold">{education.degree}</h3>
+                  <p className="text-gray-700">{education.school}</p>
+                  <p className="text-gray-600">
+                    Graduated in {education.graduationDate}
+                  </p>
+                  {index < staticEducationData.length - 1 && (
+                    <hr className="border-t border-gray-300 my-4" />
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-
-          <h2 className="text-xl font-semibold mt-4 mb-2">Education</h2>
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold">
-              Bachelor of Science in Computer Science
-            </h3>
-            <p className="text-gray-700">University of Example</p>
-            <p className="text-gray-600">Graduated in May 2018</p>
-          </div>
-
           <h2 className="text-xl font-semibold mt-4 mb-2">Contact</h2>
           <ul className="list-disc list-inside text-gray-700">
             <li>email: {userProfile?.email}</li>
