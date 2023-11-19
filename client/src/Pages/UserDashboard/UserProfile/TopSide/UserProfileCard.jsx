@@ -3,17 +3,18 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
+import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
+
 import LoadingSkeleton from "react-loading-skeleton";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 import {
   useFollowUser,
   useUserById,
 } from "../../../../hooks/react-query/useUsers";
-import HighlightSection from "./HighlightSection/HighlightSection";
-import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import { useUserReviews } from "../../../../hooks/react-query/useReviews";
 import { useGetLevels } from "../../../../hooks/react-query/useLevels";
-import LoadingSpinner from "../../../../Components/LoadingSpinner";
+import HighlightSection from "./HighlightSection/HighlightSection";
 import getIconByPlatform from "../../../../utils/getIconByPlatform";
 
 const UserProfileCard = () => {
