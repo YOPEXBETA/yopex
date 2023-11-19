@@ -28,7 +28,7 @@ async function (next) {
     const userId = experience.user;
     const user = await userModel.findById(userId);
     
-    user.experiences.pull(experience._id);
+    user.experiences.pull(experiencegit ._id);
     user.save();
   next();
 })
