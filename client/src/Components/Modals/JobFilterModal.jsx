@@ -17,10 +17,10 @@ const JobFilterModal = ({
     setSelectedTab(index);
   };
 
-  const { data: categorys } = useCategories();
-  const { data: Skills } = useSkills();
-  const itCategory = categorys?.map((category) => category.name);
-  const itSkills = Skills?.map((skill) => skill.name);
+  const { data: categories } = useCategories();
+  const { data: skills } = useSkills();
+  const itCategories = categories?.map((category) => category.name);
+  const itSkills = skills?.map((skill) => skill.name);
 
   const handleCheckboxChange = (skillName) => {
     const updatedSkill = selectedSkill.includes(skillName)
@@ -29,128 +29,155 @@ const JobFilterModal = ({
 
     setSkillQuery(updatedSkill);
   };
-  const handleCheckboxChangeCategorie = (Category) => {
-    const updatedCategory = selectedCategory.includes(Category)
-      ? selectedCategory.filter((selected) => selected !== Category)
-      : [...selectedCategory, Category];
+  const handleCheckboxChangeCategory = (category) => {
+    const updatedCategory = selectedCategory.includes(category)
+      ? selectedCategory.filter((selected) => selected !== category)
+      : [...selectedCategory, category];
 
     setCategoryQuery(updatedCategory);
   };
-  const tabStyles = "text-gray-500 dark:text-green-500 dark:border-zinc-600";
-  const activeTabStyles = "text-green-500";
-
+  const tabStyles = "hover:text-green-500 dark:border-zinc-600";
+  const activeTabStyles = "bg-green-500 rounded-lg";
   return (
     <div
       className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}
     >
       <div className="fixed inset-0 flex items-center justify-center">
-        <div className="bg-white grid grid-cols-12 px-8 py-4 shadow-md overflow-auto w-[60rem] h-[40rem]">
-          <div className="col-span-12">
-            <div className="flex justify-between items-center">
-              <h5 className="font-medium text-lg">Filter by</h5>
-              <div>
-                <button
-                  type="button"
-                  onClick={handleClose}
-                  className="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-xs md:text-sm inline-flex justify-center items-center dark:hover:text-white"
-                  data-modal-hide="defaultModal"
+        <div className="bg-white  px-8 py-4 shadow-md overflow-auto w-[60rem] h-[40rem]">
+          <div className="md:flex">
+            <ul className="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
+              <li className="flex items-center gap-2">
+                <div>
+                  <button
+                    type="button"
+                    onClick={handleClose}
+                    className="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-xs md:text-sm inline-flex justify-center items-center dark:hover:text-white"
+                    data-modal-hide="defaultModal"
+                  >
+                    <svg
+                      className="w-3 h-3 me-2 "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 14"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <h5 className="text-[1.15rem]">Filter by</h5>
+              </li>
+              <li
+                className={`flex items-center ${tabStyles} ${
+                  selectedTab === 0 ? activeTabStyles : ""
+                }`}
+                onClick={() => handleTabClick(0)}
+              >
+                <a
+                  href="#"
+                  className={`inline-flex items-center px-4 py-3 rounded-lg  ${
+                    selectedTab === 0
+                      ? "bg-green-500 text-white"
+                      : "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                  } w-full`}
+                  aria-current="page"
                 >
                   <svg
-                    className="w-3 h-3"
+                    className="w-4 h-4 me-2 "
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 14"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
                   >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                    />
+                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
                   </svg>
-                </button>
-              </div>
-            </div>
-            <hr className="border-zinc-100 border w-full mt-4" />
-          </div>
+                  Categories
+                </a>
+              </li>
 
-          {/* Left side for tabs */}
-          <div className="col-span-3">
-            <div className="mt-4">
-              <ul className="flex flex-col space-y-4">
-                <li
-                  className={`flex items-center ${tabStyles} ${
-                    selectedTab === 0 ? activeTabStyles : ""
-                  }`}
-                  onClick={() => handleTabClick(0)}
+              <li
+                className={`flex items-center ${tabStyles} ${
+                  selectedTab === 1 ? activeTabStyles : "text-zinc-400"
+                }`}
+                onClick={() => handleTabClick(1)}
+              >
+                <a
+                  className={`inline-flex items-center px-4 py-3 rounded-lg  ${
+                    selectedTab === 1
+                      ? "bg-green-500 text-white"
+                      : "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                  } w-full`}
+                  aria-current="page"
                 >
-                  <div className="flex items-center gap-2">
-                    <FaList />
-                    <span className="mr-2">Categories</span>
-                  </div>
-                </li>
-                <div className="border-r border-gray-300 h-full" />{" "}
-                {/* Vertical Divider */}
-                <li
-                  className={`flex items-center ${tabStyles} ${
-                    selectedTab === 1 ? activeTabStyles : ""
-                  }`}
-                  onClick={() => handleTabClick(1)}
-                >
-                  <div className="flex items-center gap-2">
-                    <FaTools />
-                    <span className="mr-2">Skills</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="col-span-1">
-            <div className="border-l h-full"></div>
-          </div>
-          {/* Right side for content */}
-          <div className="col-span-8">
-            {/* Content based on the selected tab */}
-            <div className="mt-4">
+                  <svg
+                    className="w-4 h-4 me-2 "
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 18 18"
+                  >
+                    <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
+                  </svg>
+                  Skills
+                </a>
+              </li>
+            </ul>
+            <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
               {selectedTab === 0 && (
-                <div className="grid grid-cols-2 grid-rows-5 gap-4">
-                  {itCategory.map((Category) => (
-                    <label
-                      key={Category}
-                      className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    >
-                      <input
-                        type="checkbox"
-                        value={Category}
-                        checked={selectedCategory.includes(Category)}
-                        onChange={() => handleCheckboxChangeCategorie(Category)}
-                        className="mr-2"
-                      />
-                      {Category}
-                    </label>
-                  ))}
-                </div>
+                <>
+                  <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                    Categories
+                  </h3>
+                  <div className="grid grid-cols-2 grid-rows-5 gap-4">
+                    {itCategories.map((category) => (
+                      <label
+                        key={category}
+                        className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        <input
+                          type="checkbox"
+                          value={category}
+                          checked={selectedCategory.includes(category)}
+                          onChange={() =>
+                            handleCheckboxChangeCategory(category)
+                          }
+                          className="mr-2"
+                        />
+                        {category}
+                      </label>
+                    ))}
+                  </div>
+                </>
               )}
               {selectedTab === 1 && (
-                <div className="grid grid-cols-2 grid-rows-5 gap-4">
-                  {itSkills.map((skillName) => (
-                    <label
-                      key={skillName}
-                      className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    >
-                      <input
-                        type="checkbox"
-                        value={skillName}
-                        checked={selectedSkill.includes(skillName)}
-                        onChange={() => handleCheckboxChange(skillName)}
-                        className="mr-2"
-                      />
-                      {skillName}
-                    </label>
-                  ))}
-                </div>
+                <>
+                  <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                    Skills
+                  </h3>
+                  <div className="grid grid-cols-2 grid-rows-5 gap-4">
+                    {itSkills.map((skillName) => (
+                      <label
+                        key={skillName}
+                        className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        <input
+                          type="checkbox"
+                          value={skillName}
+                          checked={selectedSkill.includes(skillName)}
+                          onChange={() => handleCheckboxChange(skillName)}
+                          className="mr-2"
+                        />
+                        {skillName}
+                      </label>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           </div>
