@@ -43,36 +43,37 @@ const JobFilterModal = ({
       className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}
     >
       <div className="fixed inset-0 flex items-center justify-center">
-        <div className="bg-white  px-8 py-4 shadow-md overflow-auto w-[60rem] h-[40rem]">
+        <div className="bg-white px-8 py-4 shadow-md overflow-auto md:w-[60rem] md:h-[40rem] w-full h-full">
+          <div className="flex items-center justify-between mb-4">
+            <h5 className="text-[1.15rem]">Filter by</h5>
+            <div>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-xs md:text-sm inline-flex justify-center items-center dark:hover:text-white"
+                data-modal-hide="defaultModal"
+              >
+                <svg
+                  className="w-3 h-3 me-2 "
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <hr className="mb-4" />
           <div className="md:flex">
             <ul className="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
-              <li className="flex items-center gap-2">
-                <div>
-                  <button
-                    type="button"
-                    onClick={handleClose}
-                    className="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-xs md:text-sm inline-flex justify-center items-center dark:hover:text-white"
-                    data-modal-hide="defaultModal"
-                  >
-                    <svg
-                      className="w-3 h-3 me-2 "
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 14 14"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <h5 className="text-[1.15rem]">Filter by</h5>
-              </li>
               <li
                 className={`flex items-center ${tabStyles} ${
                   selectedTab === 0 ? activeTabStyles : ""
@@ -128,13 +129,10 @@ const JobFilterModal = ({
                 </a>
               </li>
             </ul>
-            <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+            <div className="md:px-6 py-2  text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
               {selectedTab === 0 && (
                 <>
-                  <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                    Categories
-                  </h3>
-                  <div className="grid grid-cols-2 grid-rows-5 gap-4">
+                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
                     {itCategories.map((category) => (
                       <label
                         key={category}
@@ -157,10 +155,7 @@ const JobFilterModal = ({
               )}
               {selectedTab === 1 && (
                 <>
-                  <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                    Skills
-                  </h3>
-                  <div className="grid grid-cols-2 grid-rows-5 gap-4">
+                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
                     {itSkills.map((skillName) => (
                       <label
                         key={skillName}
