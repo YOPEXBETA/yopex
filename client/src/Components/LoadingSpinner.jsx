@@ -3,7 +3,7 @@ import React from "react";
 const LoadingSpinner = () => (
   <div>
     <svg
-      className="w-12 h-12 animate-spin text-green-500"
+      className="w-12 h-12 animate-spin text-zinc-900"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

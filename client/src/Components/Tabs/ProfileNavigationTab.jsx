@@ -12,9 +12,9 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
 
   return (
     <div>
-      <div className="divide-gray-100  dark:border dark:border-zinc-500  overflow-hidden rounded-lg border bg-white dark:bg-zinc-800 text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <div className="divide-gray-100 p-2 dark:border-zinc-500 overflow-hidden rounded-lg bg-white dark:bg-zinc-800 text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
         <button
-          className={`w-1/2 sm:w-auto py-2 px-4  rounded-tl-lg ${
+          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
             value === 0
               ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
               : "text-gray-500 border-gray-300 dark:text-gray-300 "
@@ -24,27 +24,27 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           About
         </button>
         <button
-          className={`w-1/2 sm:w-auto py-2 px-4  rounded-tl-lg ${
+          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
             value === 1
               ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
               : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
           onClick={() => changeValue(1)}
         >
-          My Posts
+          Posts
         </button>
         <button
-          className={`w-1/2 sm:w-auto py-2 px-4  ${
+          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
             value === 2
               ? "bg-green-500 text-white dark:text-gray-200  border-green-500"
               : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
           onClick={() => changeValue(2)}
         >
-          My Challenges
+          Challenges
         </button>
         <button
-          className={`w-1/2 sm:w-auto py-2 px-4 ${
+          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
             value === 3
               ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
               : "text-gray-500 border-gray-300 dark:text-gray-300"
@@ -54,7 +54,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           Followers
         </button>
         <button
-          className={`w-1/2 sm:w-auto py-2 px-4 ${
+          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
             value === 4
               ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
               : "text-gray-500 border-gray-300 dark:text-gray-300"
@@ -64,7 +64,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           Followings
         </button>
         <button
-          className={`w-1/2 sm:w-auto py-2 px-4 ${
+          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
             value === 5
               ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
               : "text-gray-500 border-gray-300 dark:text-gray-300"
@@ -74,7 +74,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           Badges
         </button>
         <button
-          className={`w-1/2 sm:w-auto py-2 px-4 ${
+          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
             value === 6
               ? "bg-green-500 text-white "
               : "text-gray-500 border-gray-300 dark:text-gray-300"
@@ -85,7 +85,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
         </button>
         {userId == user._id ? (
           <button
-            className={`w-1/2 sm:w-auto py-2 px-4  rounded-tr-lg ${
+            className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
               value === 7
                 ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
                 : "text-gray-500 border-gray-300 dark:text-gray-300"

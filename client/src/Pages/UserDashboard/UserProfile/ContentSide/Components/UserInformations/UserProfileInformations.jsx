@@ -17,95 +17,82 @@ const UserProfileInformations = () => {
   }
   return (
     <div>
-      <div className="p-4 divide-gray-100 dark:bg-zinc-800 dark:border-zinc-500 dark:border dark:divide-gray-700 overflow-hidden rounded-lg border bg-white text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
-        <div className="mt-2 mb-8 w-full">
-          <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
-            General Information
-          </h4>
-          <p className="mt-2 px-2 text-base  dark:text-white">
+      <div className="bg-white font-sans rounded-lg">
+        <div className="bg-white p-6 rounded-lg">
+          <h2 className="text-xl font-semibold mb-2">Summary</h2>
+          <p className="text-gray-700">
             {userProfile.userDescription || "No description"}
           </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2 w-full">
-          <div className="flex flex-col items-start justify-center  px-3 py-4  dark:!bg-navy-700 dark:shadow-none">
-            <p className="text-sm text-gray-600 dark:text-white">Email</p>
-            <p className="text-base text-navy-700 dark:text-white font-semibold hover:text-green-500">
-              <a href={`mailto:${userProfile?.email}`}>{userProfile?.email}</a>
-            </p>
-          </div>
-          {userProfile?.phoneNumber?.length !== 0 && (
-            <div className="flex flex-col items-start justify-center  px-3 py-4 dark:!bg-navy-700 dark:shadow-none">
-              <p className="text-sm text-gray-600 dark:text-white">Phone</p>
-              <p className="text-base text-navy-700 dark:text-white font-semibold">
-                <a href={`tel:${userProfile?.phoneNumber}`}>
-                  {userProfile?.phoneNumber}
-                </a>
-              </p>
-            </div>
-          )}
-          {userProfile?.websiteURL && (
-            <div className="flex flex-col items-start justify-center  px-3 py-4 dark:!bg-navy-700 dark:shadow-none">
-              <p className="text-sm text-gray-600 dark:text-white">
-                Website URL
-              </p>
 
+          <h2 className="text-xl font-semibold mt-4 mb-2">Skills</h2>
+          {userProfile?.skills?.length > 0 ? (
+            <ul className="list-disc list-inside text-gray-700">
+              {userProfile.skills.map((skill, index) => (
+                <li key={index} className="mb-2">
+                  {skill?.value}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-base dark:text-white">No skill selected</p>
+          )}
+
+          <h2 className="text-xl font-semibold mt-4 mb-2">Experience</h2>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold">
+              Web Developer, ABC Company
+            </h3>
+            <p className="text-gray-700">
+              Developed and maintained company website, implementing responsive
+              design and optimizing performance. Collaborated with the design
+              team to create visually appealing web pages.
+            </p>
+            <p className="text-gray-600">January 2020 - Present</p>
+          </div>
+
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold">
+              Frontend Developer, XYZ Agency
+            </h3>
+            <p className="text-gray-700">
+              Worked on various client projects, translating design mockups into
+              interactive web pages. Utilized modern web technologies to ensure
+              cross-browser compatibility.
+            </p>
+            <p className="text-gray-600">June 2018 - December 2019</p>
+          </div>
+
+          <h2 className="text-xl font-semibold mt-4 mb-2">Education</h2>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold">
+              Bachelor of Science in Computer Science
+            </h3>
+            <p className="text-gray-700">University of Example</p>
+            <p className="text-gray-600">Graduated in May 2018</p>
+          </div>
+
+          <h2 className="text-xl font-semibold mt-4 mb-2">Contact</h2>
+          <ul className="list-disc list-inside text-gray-700">
+            <li>email: {userProfile?.email}</li>
+            <li>
+              Phone:{" "}
               <a
-                href={userProfile?.websiteURL || "N/A"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex justify-start gap-2 text-green-500 hover:underline"
+                href={`tel:${userProfile?.phoneNumber}`}
+                className="text-green-500 hover:underline"
+              >
+                {userProfile?.phoneNumber}
+              </a>
+            </li>
+            <li>
+              Website:{" "}
+              <a
+                href="https://www.johndoe.com"
+                className="text-green-500 hover:underline"
               >
                 {userProfile?.websiteURL || "N/A"}
               </a>
-            </div>
-          )}
-
-          {userProfile?.gender?.length !== 0 && (
-            <div className="flex flex-col items-start justify-center  px-3 py-4  dark:!bg-navy-700 dark:shadow-none">
-              <p className="text-sm text-gray-600 dark:text-white">Gender</p>
-              <p className="text-base text-navy-700 dark:text-white font-semibold">
-                {userProfile?.gender || "N/A"}
-              </p>
-            </div>
-          )}
-
-          <div className="flex flex-col items-start justify-center  px-3 py-4 dark:!bg-navy-700 dark:shadow-none">
-            <p className="text-sm text-gray-600 dark:text-white">Country</p>
-            <p className="text-base text-navy-700 dark:text-white font-semibold">
-              {userProfile?.country || "N/A"}
-            </p>
-          </div>
-
-          <div className="flex flex-col items-start justify-center  px-3 py-4 dark:!bg-navy-700 dark:shadow-none">
-            <p className="text-sm text-gray-600 dark:text-white">Birthday</p>
-            <p className="text-base text-navy-700 dark:text-white font-semibold">
-              {userProfile?.birthDate
-                ? new Date(userProfile?.birthDate).toLocaleDateString()
-                : "N/A"}{" "}
-            </p>
-          </div>
-        </div>
-        <div className="mt-2 mb-8 w-full">
-          <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
-            Skills
-          </h4>
-
-          <div className="mt-4 px-2 text-base">
-            <div className="flex flex-wrap gap-2">
-              {userProfile?.skills?.length > 0 ? (
-                userProfile.skills.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
-                  >
-                    {skill?.value}
-                  </span>
-                ))
-              ) : (
-                <p className="text-base  dark:text-white">No skill selected</p>
-              )}
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
