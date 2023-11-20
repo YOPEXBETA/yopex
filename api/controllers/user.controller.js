@@ -154,7 +154,9 @@ const getUser = async (req, res) => {
       .populate("badgesEarned")
       .populate("jobs")
       .populate("challenges")
-      .populate("companies");
+      .populate("companies")
+      .populate("educations")
+      .populate("experiences");
 
     if (user) {
       res.status(200).json(user);

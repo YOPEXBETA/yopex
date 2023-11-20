@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { useUserById } from "../../../../../../hooks/react-query/useUsers";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import { useEducation } from "../../../../../../hooks/react-query/useEducation";
 
 const UserProfileInformations = () => {
   const { userId } = useParams();
@@ -34,15 +35,6 @@ const UserProfileInformations = () => {
     },
   ];
 
-  const staticEducationData = [
-    {
-      degree: "Bachelor of Science in Computer Science",
-      school: "Harvard",
-      graduationDate: "May 2018",
-    },
-    // Add more education entries if needed
-  ];
-
   return (
     <div>
       <div className="bg-white font-sans rounded-lg">
@@ -64,52 +56,63 @@ const UserProfileInformations = () => {
           ) : (
             <p className="text-base dark:text-white">No skill selected</p>
           )}
-
-          <h2 className="text-xl font-semibold mt-4 mb-2">Experience</h2>
-          {staticExperienceData.map((experience, index) => (
-            <div key={index} className="flex gap-4 items-start mb-8">
-              <img
-                className="rounded-lg h-16 w-16 object-cover bg-gray-50"
-                src={
-                  "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                }
-                alt={`Experience ${index}`}
-              />
-              <div>
-                <h3 className="text-lg font-semibold">{experience.title}</h3>
-                <p className="text-gray-700">NETFLIX</p>
-                <p className="text-gray-600 mb-2">
-                  {experience.startDate} - {experience.endDate}
-                </p>
-                <p className="text-gray-700">{experience.description}</p>
-              </div>
-              <hr className="border-b-2  border-gray-700 my-4" />
-            </div>
-          ))}
+          {userProfile && (
+            <>
+              <h2 className="text-xl font-semibold mt-4 mb-2">Experience</h2>
+              {userProfile.experiences.map((experience, index) => (
+                <div key={index} className="flex gap-4 items-start mb-8">
+                  <img
+                    className="rounded-lg h-16 w-16 object-cover bg-gray-50"
+                    src={
+                      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    }
+                    alt={`Experience ${index}`}
+                  />
+                  <div>
+                    <h3 className="text-lg font-semibold">
+                      {experience.title}
+                    </h3>
+                    <p className="text-gray-700">{experience.company}</p>
+                    <p className="text-gray-600 mb-2">
+                      {(new Date(experience.startdate)).toLocaleString('default', { month: 'short',year:"numeric" })} - {experience.enddate===undefined ? (new Date(experience.enddate)).toLocaleString('default', { month: 'short',year:"numeric" }):"Present"}
+                    </p>
+                    <p className="text-gray-700">{experience.description}</p>
+                  </div>
+                  <hr className="border-b-2  border-gray-700 my-4" />
+                </div>
+              ))}
+            </>
+          )}
 
           <div>
-            <h2 className="text-xl font-semibold mt-4 mb-2">Education</h2>
-            {staticEducationData.map((education, index) => (
-              <div key={index} className="flex gap-4 items-start mb-8">
-                <img
-                  className="rounded-lg h-16 w-16 object-cover bg-gray-50"
-                  src={
-                    "https://images.unsplash.com/photo-1576049519901-ef17971aedc4?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  }
-                  alt={`Experience ${index}`}
-                />
-                <div>
-                  <h3 className="text-lg font-semibold">{education.degree}</h3>
-                  <p className="text-gray-700">{education.school}</p>
-                  <p className="text-gray-600">
-                    Graduated in {education.graduationDate}
-                  </p>
-                  {index < staticEducationData.length - 1 && (
-                    <hr className="border-t border-gray-300 my-4" />
-                  )}
-                </div>
-              </div>
-            ))}
+            {userProfile && (
+              <>
+                <h2 className="text-xl font-semibold mt-4 mb-2">Education</h2>
+                {userProfile.educations.map((education, index) => (
+                  <div key={index} className="flex gap-4 items-start mb-8">
+                    <img
+                      className="rounded-lg h-16 w-16 object-cover bg-gray-50"
+                      src={
+                        "https://images.unsplash.com/photo-1576049519901-ef17971aedc4?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      }
+                      alt={`Experience ${index}`}
+                    />
+                    <div>
+                      <h3 className="text-lg font-semibold">
+                        {education.Degree}
+                      </h3>
+                      <p className="text-gray-700">{education.School}</p>
+                      <p className="text-gray-600">
+                        Graduated in {new Date(education.Enddate).getFullYear()}
+                      </p>
+                      {index < userProfile.educations.length - 1 && (
+                        <hr className="border-t border-gray-300 my-4" />
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
           <h2 className="text-xl font-semibold mt-4 mb-2">Contact</h2>
           <ul className="list-disc list-inside text-gray-700">

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import countries from "../../../../../countries.json";
-import { edit, reset } from "../../../../../redux/auth/authSlice";
 import AlertContainer from "../../../../../Components/alerts";
 import AlertSuccess from "../../../../../Components/successalert";
+import countries from "../../../../../countries.json";
+import { edit, reset } from "../../../../../redux/auth/authSlice";
 
 const EditSocialLinksModal = ({ open, handleClose }) => {
   const dispatch = useDispatch();

@@ -4,6 +4,7 @@ import Privacy from "./AccountSettings/Privacy/Privacy";
 import HorizantalSettingsTab from "./AccountSettings/SettingTabs/HorizantalSettingsTab";
 import VerticalSettingsTab from "./AccountSettings/SettingTabs/VerticalSettingsTab";
 import GeneralInformations from "./AccountSettings/ProfileInformations/GeneralInformations";
+import MoreInformation from "./AccountSettings/MoreInformation/MoreInformation";
 
 const SettingsLayout = () => {
   const [value, setValue] = useState(0);
@@ -38,6 +39,11 @@ const SettingsLayout = () => {
           {value === 2 && (
             <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8 lg:px-10 lg:py-8 px-2 bg-white rounded-lg dark:bg-zinc-700 my-8">
               <Billing />
+            </div>
+          )}
+          {value === 3 && (
+            <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8 lg:px-10 lg:py-8 px-2 bg-white rounded-lg dark:bg-zinc-700 my-8">
+              <MoreInformation />
             </div>
           )}
         </div>

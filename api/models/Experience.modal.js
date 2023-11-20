@@ -11,7 +11,7 @@ const ExperienceShema = new mongoose.Schema(
         localtion: {type: String, required: true},
         locationtype: {type: String, required: true, enum : ["remote", "office","hybrid"]},
         startdate: {type: Date, required: true},
-        enddate: {type: Date, required: true},
+        enddate: {type: Date, required: false},
         description: {type: String, required: true},
         skills: {type: Array, default: []},
         user: {type: mongoose.Schema.Types.ObjectId, ref: "User"},

@@ -54,6 +54,16 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
       </button>
       <button
         className={`w-52 text-left py-3 px-4 focus:outline-none ${
+          value === 3
+            ? "bg-green-200 text-green-500 border border-green-500 rounded-lg"
+            : "text-gray-500 dark:text-green-500  dark:border-zinc-600"
+        }`}
+        onClick={() => changeValue(3)} // Pass 3 to changeValue for the third tab
+      >
+        More Information
+      </button>
+      <button
+        className={`w-52 text-left py-3 px-4 focus:outline-none ${
           value === 2
             ? "bg-green-200 text-green-500 border border-green-500 rounded-lg"
             : "text-gray-500 dark:text-green-500  dark:border-zinc-600 "
@@ -62,6 +72,7 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
       >
         Billing
       </button>
+      
     </div>
   );
 };

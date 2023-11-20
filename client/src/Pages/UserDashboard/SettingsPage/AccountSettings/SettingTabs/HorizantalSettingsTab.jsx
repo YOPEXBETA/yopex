@@ -2,7 +2,7 @@ import React from "react";
 
 const HorizantalSettingsTab = ({ changeValue, value }) => {
   return (
-    <div className="flex  mt-8 dark:bg-zinc-800">
+    <div className="fl ex  mt-8 dark:bg-zinc-800">
       <button
         className={`flex-1 px-4 focus:outline-none ${
           value === 0
@@ -25,6 +25,16 @@ const HorizantalSettingsTab = ({ changeValue, value }) => {
       </button>
       <button
         className={`flex-1  px-4 focus:outline-none ${
+          value === 3
+            ? "bg-green-500 text-white border border-green-500 rounded-full py-4"
+            : "text-gray-500 dark:text-gray-200 border-r dark:border-zinc-600"
+        }`}
+        onClick={() => changeValue(3)} // Pass 3 to changeValue for the third tab
+      >
+        More Information
+      </button>
+      <button
+        className={`flex-1  px-4 focus:outline-none ${
           value === 2
             ? "bg-green-500 text-white border border-green-500 rounded-full py-4"
             : "text-gray-500 dark:text-gray-200"
@@ -33,6 +43,8 @@ const HorizantalSettingsTab = ({ changeValue, value }) => {
       >
         Billing
       </button>
+      
+
     </div>
   );
 };

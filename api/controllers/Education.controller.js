@@ -11,6 +11,7 @@ const addEducation = async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: "User not found" });
         }
+        console.log(skills);
         const education = new Education({
             School,
             Degree,
