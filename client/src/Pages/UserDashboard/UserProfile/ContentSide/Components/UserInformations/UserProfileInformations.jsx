@@ -102,16 +102,35 @@ const UserProfileInformations = () => {
                   <p className="text-gray-700">{experience?.description}</p>
                 </div>
               ))}
-              <hr className="border w-full" />
             </>
           )}
 
           <div>
             {userProfile && (
               <>
-                <h2 className="text-xl font-semibold mt-4 mb-2">Education</h2>
+                <div className="flex flex-col gap-4 mb-4">
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-semibold mt-4 mb-2">
+                      Education
+                    </h2>
+                  </div>
+                  <hr className="border w-full" />
+                </div>
                 {userProfile.educations.map((education, index) => (
-                  <div key={index} className="flex gap-4 items-start mb-8">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-lg font-semibold">
+                        {education?.Degree}
+                      </h3>
+                      <p className="text-green-500">{education?.School}</p>
+                      <p className="text-gray-600">
+                        Graduated in{" "}
+                        {new Date(education?.Enddate).getFullYear()}
+                      </p>
+                      {index < userProfile.educations.length - 1 && (
+                        <hr className="border-t border-gray-300 my-4" />
+                      )}
+                    </div>
                     <img
                       className="rounded-lg h-16 w-16 object-cover bg-gray-50"
                       src={
@@ -119,18 +138,6 @@ const UserProfileInformations = () => {
                       }
                       alt={`Experience ${index}`}
                     />
-                    <div>
-                      <h3 className="text-lg font-semibold">
-                        {education.Degree}
-                      </h3>
-                      <p className="text-gray-700">{education.School}</p>
-                      <p className="text-gray-600">
-                        Graduated in {new Date(education.Enddate).getFullYear()}
-                      </p>
-                      {index < userProfile.educations.length - 1 && (
-                        <hr className="border-t border-gray-300 my-4" />
-                      )}
-                    </div>
                   </div>
                 ))}
               </>
