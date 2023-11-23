@@ -34,7 +34,6 @@ const ExploreCard = () => {
       <div className="w-full rounded-lg bg-white p-3 divide-y divide-gray-200 overflow-y-auto dark:bg-zinc-800 dark:border">
         <div aria-label="navigation" className="py-2">
           <div className="flex items-center gap-2 mb-4 px-2">
-            <FaCompass className="h-6 w-6" />
             <h2 className="text-2xl font-bold dark:text-white">Explore</h2>
           </div>
           <nav className="grid gap-1">

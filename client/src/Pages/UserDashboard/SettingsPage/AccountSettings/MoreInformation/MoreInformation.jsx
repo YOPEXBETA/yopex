@@ -37,7 +37,7 @@ const MoreInformation = () => {
       </div>
       <div className="flex flex-col gap-4 mb-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg mt-4 mb-2">Education</h2>
+          <h2 className="text-lg mt-4 mb-2">Add Education</h2>
           <button
             onClick={() => {
               setEducationModel(true);
@@ -80,19 +80,21 @@ const MoreInformation = () => {
                   })}
                 </div>
               </div>
-              <div>
-                <button>Edit</button>
-                <br />
+              <div className="flex flex-col gap-2">
+                <button className="rounded-full p-2 bg-white border text-zinc-500 focus:outline-none hover:bg-zinc-500 hover:text-white">
+                  <MdEdit size={20} />
+                </button>
                 <button
                   onClick={() => {
                     Delete(item._id);
                   }}
+                  className="rounded-full p-2 bg-white border text-zinc-500 focus:outline-none hover:bg-red-500 hover:text-white"
                 >
-                  Delete
+                  <MdDelete size={20} />
                 </button>
               </div>
             </div>
-            <hr />
+            <hr className="border-t border-gray-300 my-4" />
           </>
         );
       })}

@@ -48,7 +48,7 @@ const UserProfileCard = () => {
 
   if (userProfile)
     return (
-      <div className="bg-white dark:bg-zinc-800 p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-lgdark:border-zinc-500 dark:border text-gray-600  mr-0 ">
+      <div className="bg-white dark:bg-zinc-800 border p-6 md:rounded-lg flex flex-col items-center gap-6 xl:mr-11 divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-lgdark:border-zinc-500 dark:border text-gray-600  mr-0 ">
         <div className="relative">
           <div>
             {userProfile.picturePath ? (

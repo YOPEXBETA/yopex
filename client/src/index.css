@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply bg-slate-100;
+    @apply bg-white;
     font-family: "Golos Text", sans-serif;
   }
 }

@@ -13,7 +13,7 @@ const ProfilePageContent = ({ changeValue, value }) => {
     <div>
       {value === 0 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full pb-16 md:pb-4 ">
+          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full pb-16 md:pb-4">
             <UserProfileInformations />
           </div>
         </div>

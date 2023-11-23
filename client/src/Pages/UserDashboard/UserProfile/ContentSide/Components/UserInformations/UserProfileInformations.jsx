@@ -18,7 +18,7 @@ const UserProfileInformations = () => {
 
   return (
     <div>
-      <div className="bg-white font-sans rounded-lg">
+      <div className="bg-white font-sans border rounded-lg">
         <div className="bg-white p-6 rounded-lg">
           <div className="flex flex-col gap-4 mb-4">
             <h2 className="text-xl font-semibold">Summary</h2>
