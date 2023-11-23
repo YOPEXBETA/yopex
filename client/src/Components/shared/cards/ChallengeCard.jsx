@@ -69,12 +69,18 @@ const ChallengeCard = ({ challenge, type }) => {
                 </div>
               </div>
 
-              {/*<div className="flex items-center justify-start gap-2">
-                <div className="flex gap-1">
-                  <p className="font-bold text-green-500">{challenge.price} </p>
-                  <p className="dark:text-white"> Points</p>
-                </div>
-              </div>*/}
+              <div className="flex items-center justify-start gap-2">
+                {challenge.price > 0 ? (
+                  <div className="flex gap-1">
+                    <p className="font-bold dark:text-white">
+                      {challenge.price}
+                    </p>
+                    <p className="dark:text-white">Paid Entry</p>
+                  </div>
+                ) : (
+                  <p className="font-bold dark:text-white">Free Entry</p>
+                )}
+              </div>
 
               <div className="flex items-center justify-start gap-2">
                 <button

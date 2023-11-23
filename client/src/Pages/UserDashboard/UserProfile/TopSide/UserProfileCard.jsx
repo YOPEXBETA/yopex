@@ -55,13 +55,13 @@ const UserProfileCard = () => {
               <img
                 alt="picture"
                 src={userProfile.picturePath}
-                className="object-cover rounded-full w-36 h-36 border-4 border-green-500"
+                className="object-cover rounded-full w-40 h-40 border-4 border-green-500"
               />
             ) : (
               <img
                 alt="default"
                 src={AvatarProfile}
-                className="object-cover rounded-full w-36 h-36 border-4 border-green-500"
+                className="object-cover rounded-full w-40 h-40 border-4 border-green-500"
               />
             )}
           </div>
@@ -81,7 +81,7 @@ const UserProfileCard = () => {
         <div className="flex flex-col items-center justify-center gap-2 truncate w-80">
           <div className="flex items-center justify-center gap-2 truncate w-80">
             {userProfile ? (
-              <p className="text-xl font-semibold truncate dark:text-zinc-200">
+              <p className="text-2xl font-semibold text-black truncate dark:text-zinc-200">
                 {`${userProfile.firstname} ${userProfile.lastname}`}
               </p>
             ) : (
@@ -152,9 +152,30 @@ const UserProfileCard = () => {
           <HighlightSection />
         </div>
         <hr className="border-zinc-800 border w-full" />
+        <div className="w-full flex flex-col">
+          <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
+            SKILLS AND TOOLS
+          </h5>
+          <div>
+            {userProfile?.skills?.length > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                {userProfile.skills.map((skill, index) => (
+                  <span
+                    className="px-2 py-1 bg-white border rounded-full"
+                    key={index}
+                  >
+                    {skill?.value}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="text-base dark:text-white">No skill selected</p>
+            )}
+          </div>
+        </div>
 
         <div className="w-full flex flex-col">
-          <h5 className="mb-3 text-left uppercase font-bold dark:text-white">
+          <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
             Social Links
           </h5>
           <div className="flex gap-2">
@@ -174,7 +195,7 @@ const UserProfileCard = () => {
 
         {userProfile?.companies?.length !== 0 && (
           <div className="w-full ">
-            <h5 className="mb-3 text-left uppercase font-bold dark:text-white">
+            <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
               Companies
             </h5>
             <ul className="flex justify-start gap-2">

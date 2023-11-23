@@ -27,7 +27,6 @@ const AddExperienceModel = ({ open, handleClose, userId }) => {
       locationtype,
     };
     mutate(creationData);
-
     handleClose(false);
   };
   return (
@@ -35,8 +34,8 @@ const AddExperienceModel = ({ open, handleClose, userId }) => {
       className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"} `}
     >
       <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-transparent absolute inset-0 flex justify-center items-center">
-          <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl w-full max-w-xl">
+        <div className="bg-transparent absolute inset-0 flex justify-center items-center my-8">
+          <div className="dark:bg-zinc-800 rounded-lg shadow-xl w-full md:max-w-xl h-full bg-white  overflow-y-auto ">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex justify-between px-4 pt-4">
                 <h4 className="text-xl font-bold mb-4 text-black dark:text-white">
@@ -92,7 +91,7 @@ const AddExperienceModel = ({ open, handleClose, userId }) => {
                     <input
                       id="company"
                       type="text"
-                      placeholder="Company"
+                      placeholder="Company Name"
                       className="w-full border border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
                       {...register("company")}
                       required
@@ -124,18 +123,17 @@ const AddExperienceModel = ({ open, handleClose, userId }) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="col-span-1">
                     <label
-                      htmlFor="localtion"
+                      htmlFor="location"
                       className="block text-gray-600 dark:text-gray-300"
                     >
-                      Localtion
+                      Location
                     </label>
                     <input
-                      id="localtion"
+                      id="location"
                       type="text"
-                      placeholder="localtion"
+                      placeholder="location"
                       className="w-full border border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
-                      {...register("localtion")}
-                      required
+                      {...register("location")}
                     />
                   </div>
                   <div className="col-span-1">

@@ -32,7 +32,7 @@ const NavbarTabTop = () => {
         <Link
           to="/feed"
           onClick={() => handleChange(0)}
-          className={`block px-4 py-2  xl:text-sm lg:text-sm  md:text-sm font-medium ${
+          className={`block px-4 py-2  xl:text-sm lg:text-sm  md:text-sm  ${
             value === 0
               ? "text-green-500"
               : "text-gray-500 dark:text-gray-100 dark:hover:text-green-600"
@@ -43,7 +43,7 @@ const NavbarTabTop = () => {
         <Link
           to="/browse"
           onClick={() => handleChange(1)}
-          className={`block px-4 py-2  xl:text-sm lg:text-sm  md:text-sm  font-medium ${
+          className={`block px-4 py-2  xl:text-sm lg:text-sm  md:text-sm   ${
             value === 1
               ? "text-green-500"
               : "text-gray-500 dark:text-gray-100 dark:hover:text-green-600"
@@ -54,7 +54,7 @@ const NavbarTabTop = () => {
         <Link
           to="/leaderboard"
           onClick={() => handleChange(2)}
-          className={`block px-4 py-2  xl:text-sm lg:text-sm md:text-sm font-medium ${
+          className={`block px-4 py-2  xl:text-sm lg:text-sm md:text-sm  ${
             value === 2
               ? "text-green-500"
               : "text-gray-500 dark:text-gray-100 dark:hover:text-green-600"
@@ -66,7 +66,7 @@ const NavbarTabTop = () => {
           <Link
             to="/store"
             onClick={() => handleChange(3)}
-            className={`block px-4 py-2  xl:text-sm lg:text-sm md:text-sm font-medium ${
+            className={`block px-4 py-2  xl:text-sm lg:text-sm md:text-sm  ${
               value === 3
                 ? "text-green-500"
                 : "text-gray-500 dark:text-gray-100 dark:hover:text-green-600"

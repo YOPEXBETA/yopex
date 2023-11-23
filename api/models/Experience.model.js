@@ -9,7 +9,7 @@ const ExperienceShema = new mongoose.Schema({
     enum: ["internship", "Full-time", "volunteering", "Part-time"],
   },
   company: { type: String, required: true },
-  localtion: { type: String, required: true },
+  location: { type: String, required: true },
   locationtype: {
     type: String,
     required: true,
