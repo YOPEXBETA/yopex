@@ -154,7 +154,7 @@ const UserProfileCard = () => {
         <hr className="border-zinc-800 border w-full" />
         <div className="w-full flex flex-col">
           <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
-            SKILLS AND TOOLS
+            SKILLS
           </h5>
           <div>
             {userProfile?.skills?.length > 0 ? (
