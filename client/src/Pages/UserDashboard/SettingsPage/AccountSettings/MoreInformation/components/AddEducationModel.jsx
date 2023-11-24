@@ -36,7 +36,7 @@ const AddEducationModel = ({ open, handleClose, userId }) => {
     >
       <div className="flex justify-center items-center min-h-screen">
         <div className="bg-transparent absolute inset-0 flex justify-center items-center">
-          <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl w-full max-w-xl">
+          <div className="dark:bg-zinc-800 rounded-lg shadow-xl w-full md:max-w-xl h-full bg-white  overflow-y-auto ">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex justify-between px-4 pt-4">
                 <h4 className="text-xl font-bold mb-4 text-black dark:text-white">

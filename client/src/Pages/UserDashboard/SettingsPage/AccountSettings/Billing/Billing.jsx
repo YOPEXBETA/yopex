@@ -32,14 +32,40 @@ const Billing = () => {
         </p>
       </div>
       <hr className="border dark:border-gray-200 mb-2" />
-      <div className="dark:bg-zinc-700 border p-4 rounded-lg mb-4">
-        <div className="flex items-center justify-between">
-          <h6 className="dark:text-gray-200 text-lg mb-2 uppercase">
-            Current Balance
-          </h6>
-          <h4 className="dark:text-gray-200 text-2xl mb-2">
-            {userProfile?.balance} Points
-          </h4>
+      <div className="lg:flex gap-4 items-stretch mb-4">
+        <div className="bg-white md:p-2 p-6 rounded-lg border border-gray-200 mb-4 lg:mb-0 shadow-md lg:w-[35%]">
+          <div className="flex justify-center items-center space-x-5 h-full">
+            <div>
+              <p>Current Balance</p>
+              <h2 className="text-4xl font-bold text-gray-600">
+                {userProfile?.balance} points
+              </h2>
+            </div>
+            <img
+              src="https://www.emprenderconactitud.com/img/Wallet.png"
+              alt="wallet"
+              className="h-24 md:h-20 w-38"
+            />
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg xs:mb-4 max-w-full shadow-md lg:w-[65%]">
+          <div className="flex flex-wrap justify-between h-full">
+            <div className="flex-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex flex-col items-center justify-center p-4 space-y-2 border border-gray-200 m-2">
+              <i className="fas fa-hand-holding-usd text-white text-4xl"></i>
+              <p className="text-white">Coming soon</p>
+            </div>
+
+            <div className="flex-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex flex-col items-center justify-center p-4 space-y-2 border border-gray-200 m-2">
+              <i className="fas fa-exchange-alt text-white text-4xl"></i>
+              <p className="text-white">Coming soon</p>
+            </div>
+
+            <div className="flex-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex flex-col items-center justify-center p-4 space-y-2 border border-gray-200 m-2">
+              <i className="fas fa-qrcode text-white text-4xl"></i>
+              <p className="text-white">Coming soon</p>
+            </div>
+          </div>
         </div>
       </div>
 

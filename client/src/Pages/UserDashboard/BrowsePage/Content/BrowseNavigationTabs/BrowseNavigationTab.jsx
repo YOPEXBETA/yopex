@@ -23,16 +23,6 @@ const BrowseNavigationTab = ({ value, changeValue }) => {
       >
         Jobs
       </button>
-      <button
-        className={`py-2 px-4 border-b-2 ${
-          value === 2
-            ? "border-green-500 text-green-500"
-            : "text-zinc-500 border-gray-500 dark:text-gray-200"
-        }`}
-        onClick={() => changeValue(2)}
-      >
-        Talents
-      </button>
     </div>
   );
 };

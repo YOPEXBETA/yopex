@@ -28,37 +28,8 @@ const UserProfileInformations = () => {
           <p className="text-gray-700">
             {userProfile?.userDescription || "No description"}
           </p>
-          {/*<h2 className="text-xl font-semibold mt-4 mb-2">Contact</h2>
-          <ul className="flex flex-col gap-4">
-            <li>
-              <MdEmail className="inline h-5 w-5" />{" "}
-              <span>{userProfile?.email}</span>
-            </li>
-            <li>
-              <MdPhone className="inline h-5 w-5" />{" "}
-              <span>
-                <a
-                  href={`tel:${userProfile?.phoneNumber}`}
-                  className="dark:text-green-500 hover:underline"
-                >
-                  {userProfile?.phoneNumber}
-                </a>
-              </span>
-            </li>
-            <li>
-              <MdWeb className="inline h-5 w-5" />{" "}
-              <span>
-                <a
-                  href={userProfile?.websiteURL}
-                  className="dark:text-green-500 hover:underline"
-                >
-                  {userProfile?.websiteURL || "N/A"}
-                </a>
-              </span>
-            </li>
-  </ul>*/}
 
-          {userProfile && (
+          {userProfile?.experiences && userProfile?.experiences.length > 0 && (
             <>
               <div className="flex flex-col gap-4 mb-4">
                 <div className="flex items-center justify-between">
@@ -69,7 +40,7 @@ const UserProfileInformations = () => {
                 <hr className="border w-full" />
               </div>
 
-              {userProfile.experiences.map((experience, index) => (
+              {userProfile?.experiences?.map((experience, index) => (
                 <div key={index} className="mb-4">
                   <div className="flex items-start justify-between mb-4">
                     <div>
@@ -92,11 +63,9 @@ const UserProfileInformations = () => {
                       </p>
                     </div>
                     <img
-                      className="rounded-lg h-16 w-16 object-cover bg-gray-50 mt-2"
-                      src={
-                        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      }
-                      alt={`Experience ${index}`}
+                      className="rounded-lg h-16 w-16 object-cover bg-zinc-200 mt-2"
+                      src={""}
+                      alt={`Experience`}
                     />
                   </div>
                   <p className="text-gray-700">{experience?.description}</p>
@@ -106,7 +75,7 @@ const UserProfileInformations = () => {
           )}
 
           <div>
-            {userProfile && (
+            {userProfile?.educations && userProfile?.educations.length > 0 && (
               <>
                 <div className="flex flex-col gap-4 mb-4">
                   <div className="flex items-center justify-between">
@@ -116,7 +85,7 @@ const UserProfileInformations = () => {
                   </div>
                   <hr className="border w-full" />
                 </div>
-                {userProfile.educations.map((education, index) => (
+                {userProfile?.educations?.map((education, index) => (
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h3 className="text-lg font-semibold">
@@ -132,11 +101,9 @@ const UserProfileInformations = () => {
                       )}
                     </div>
                     <img
-                      className="rounded-lg h-16 w-16 object-cover bg-gray-50"
-                      src={
-                        "https://images.unsplash.com/photo-1576049519901-ef17971aedc4?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      }
-                      alt={`Experience ${index}`}
+                      className="rounded-lg h-16 w-16 object-cover bg-zinc-200"
+                      src={""}
+                      alt={`Experience`}
                     />
                   </div>
                 ))}

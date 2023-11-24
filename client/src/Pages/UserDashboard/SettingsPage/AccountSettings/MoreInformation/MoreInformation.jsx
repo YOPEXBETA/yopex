@@ -6,7 +6,6 @@ import {
 import { useState } from "react";
 import AddEducationModel from "./components/AddEducationModel";
 import AddExperienceModel from "./components/AddExperienceModel";
-import da from "date-fns/esm/locale/da/index.js";
 import {
   useDeleteExperience,
   useExperience,

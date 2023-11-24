@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import BrowseContentPage from "./Content/BrowseContentPage";
 import BrowseContestsHeader from "./Header/BrowseContestsHeader";
 import BrowseJobsHeader from "./Header/BrowseJobsHeader";
-import BrowseTalentsHeader from "./Header/BrowseTalentsHeader";
 
 const BrowseLayout = () => {
   const [contestQuery, setContestQuery] = useState("");
@@ -35,9 +34,6 @@ const BrowseLayout = () => {
           selectedSkill={selectedSkill}
           selectedCategory={selectedCategory}
         />
-      )}
-      {value === 2 && (
-        <BrowseTalentsHeader value={value} changeValue={changeValue} />
       )}
 
       <div className="xl:mt-1 xl:mx-40 md:mx-4  lg:mx-8 mt-0 mx-0 ">

@@ -154,6 +154,36 @@ const UserProfileCard = () => {
         <hr className="border-zinc-800 border w-full" />
         <div className="w-full flex flex-col">
           <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
+            Contact
+          </h5>
+          <ul className="flex flex-col gap-4">
+            <li className="dark:text-green-500 hover:underline">
+              <span>Email: {userProfile?.email}</span>
+            </li>
+            <li>
+              <span>
+                <a
+                  href={`tel:${userProfile?.phoneNumber}`}
+                  className="dark:text-green-500 hover:underline"
+                >
+                  Phone: {userProfile?.phoneNumber}
+                </a>
+              </span>
+            </li>
+            <li>
+              <span>
+                <a
+                  href={userProfile?.websiteURL}
+                  className="dark:text-green-500 hover:underline"
+                >
+                  Website: {userProfile?.websiteURL || "N/A"}
+                </a>
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div className="w-full flex flex-col">
+          <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
             SKILLS
           </h5>
           <div>

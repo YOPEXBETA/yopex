@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ContestsFilters from "./ContestCards/ContestFilters";
 import Jobs from "./JobCards/Jobs";
 import Challenges from "./ContestCards/Challenges";
-import Talents from "./Talents/Talents";
 
 const BrowseContentPage = ({
   value,
@@ -51,11 +50,6 @@ const BrowseContentPage = ({
               selectedCategory={selectedCategory}
               selectedSkill={selectedSkill}
             />
-          </div>
-        )}
-        {value === 2 && (
-          <div className="lg:col-span-12 md:col-span-12 sm:col-span-12 col-span-12">
-            <Talents />
           </div>
         )}
       </div>

@@ -174,7 +174,9 @@ const getUsers = async (req, res) => {
   try {
     const users = await userSchema
       .find({ role: { $ne: "admin" } })
-      .select("_id firstname lastname picturePath score country");
+      .select(
+        "_id firstname lastname picturePath score country occupation followers  reviews  challengesDone"
+      );
     res.status(200).json(users);
   } catch (err) {
     res.status(404).json({ message: err.message });
