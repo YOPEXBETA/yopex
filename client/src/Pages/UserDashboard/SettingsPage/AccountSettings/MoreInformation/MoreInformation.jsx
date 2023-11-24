@@ -65,32 +65,40 @@ const MoreInformation = () => {
       {Educations?.map((item) => {
         return (
           <>
-            <div key={item._id} className="flex justify-between">
-              <div>
-                <h1>{item?.School}</h1>
-                <h1>{item?.Degree}</h1>
-                <h1>{item?.FieldOfStudy}</h1>
-              </div>
-              <div>
-                <h1>{item?.Description}</h1>
-                <div className="flex gap-2">
-                  {item?.skills.map((skill) => {
-                    return <h1>{skill} </h1>;
-                  })}
+            <div key={item._id} className="flex flex-col justify-between">
+              <div className="mb-4 flex justify-between">
+                <div>
+                  <h1 className="text-lg font-semibold">{item?.Degree}</h1>
+                  <h1 className="text-green-500">{item?.School}</h1>
+                  <h1>{item?.FieldOfStudy}</h1>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <button className="rounded-full p-2 bg-white border text-zinc-500 focus:outline-none hover:bg-zinc-500 hover:text-white">
+                    <MdEdit size={20} />
+                  </button>
+                  <button
+                    onClick={() => {
+                      Delete(item._id);
+                    }}
+                    className="rounded-full p-2 bg-white border text-zinc-500 focus:outline-none hover:bg-red-500 hover:text-white"
+                  >
+                    <MdDelete size={20} />
+                  </button>
                 </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <button className="rounded-full p-2 bg-white border text-zinc-500 focus:outline-none hover:bg-zinc-500 hover:text-white">
-                  <MdEdit size={20} />
-                </button>
-                <button
-                  onClick={() => {
-                    Delete(item._id);
-                  }}
-                  className="rounded-full p-2 bg-white border text-zinc-500 focus:outline-none hover:bg-red-500 hover:text-white"
-                >
-                  <MdDelete size={20} />
-                </button>
+
+              <div>
+                <h1>{item?.Description}</h1>
+                <div className="flex flex-wrap gap-2 my-4">
+                  {item?.skills?.map((skill, index) => (
+                    <span
+                      className="px-2 py-1 bg-white border rounded-full"
+                      key={index}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
             <hr className="border-t border-gray-300 my-4" />
@@ -128,19 +136,11 @@ const MoreInformation = () => {
       {Experience?.map((item) => {
         return (
           <>
-            <div key={item._id} className="flex justify-between">
+            <div className="mb-4 flex justify-between">
               <div>
-                <h1>{item?.title}</h1>
-                <h1>{item?.company}</h1>
+                <h1 className="text-lg font-semibold">{item?.title}</h1>
+                <h1 className="text-green-500">{item?.company}</h1>
                 <h1>{item?.type}</h1>
-              </div>
-              <div>
-                <h1>{item?.description}</h1>
-                <div className="flex gap-2">
-                  {item?.skills.map((skill) => {
-                    return <h1>{skill} </h1>;
-                  })}
-                </div>
               </div>
               <div className="flex flex-col gap-2">
                 <button className="rounded-full p-2 bg-white border text-zinc-500 focus:outline-none hover:bg-zinc-500 hover:text-white">
@@ -154,6 +154,21 @@ const MoreInformation = () => {
                 </button>
               </div>
             </div>
+
+            <div>
+              <h1>{item?.description}</h1>
+              <div className="flex flex-wrap gap-2 my-4">
+                {item?.skills?.map((skill, index) => (
+                  <span
+                    className="px-2 py-1 bg-white border rounded-full"
+                    key={index}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             <hr className="border-t border-gray-300 my-4" />
           </>
         );

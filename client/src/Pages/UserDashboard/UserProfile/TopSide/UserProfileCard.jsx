@@ -113,7 +113,7 @@ const UserProfileCard = () => {
             <span className="text-lg font-semibold dark:text-yellow-300 ">
               {rating}
             </span>
-            <FaStar className="text-yellow-500 dark:text-yellow-300 w-5 h-5" />
+            <FaStar className="text-yellow-400 dark:text-yellow-300 w-[1.125rem] h-[1.125rem]" />
           </button>
         </div>
 
@@ -158,7 +158,7 @@ const UserProfileCard = () => {
           </h5>
           <ul className="flex flex-col gap-4">
             <li className="dark:text-green-500 hover:underline">
-              <span>Email: {userProfile?.email}</span>
+              <span>Email: {userProfile?.email || "N/A"}</span>
             </li>
             <li>
               <span>
@@ -166,7 +166,7 @@ const UserProfileCard = () => {
                   href={`tel:${userProfile?.phoneNumber}`}
                   className="dark:text-green-500 hover:underline"
                 >
-                  Phone: {userProfile?.phoneNumber}
+                  Phone: {userProfile?.phoneNumber || "N/A"}
                 </a>
               </span>
             </li>

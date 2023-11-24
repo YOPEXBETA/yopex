@@ -69,6 +69,16 @@ const UserProfileInformations = () => {
                     />
                   </div>
                   <p className="text-gray-700">{experience?.description}</p>
+                  <div className="flex flex-wrap gap-2 my-4">
+                    {experience?.skills?.map((skill, index) => (
+                      <span
+                        className="px-2 py-1 bg-white border rounded-full"
+                        key={index}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               ))}
             </>
@@ -86,25 +96,37 @@ const UserProfileInformations = () => {
                   <hr className="border w-full" />
                 </div>
                 {userProfile?.educations?.map((education, index) => (
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-lg font-semibold">
-                        {education?.Degree}
-                      </h3>
-                      <p className="text-green-500">{education?.School}</p>
-                      <p className="text-gray-600">
-                        Graduated in{" "}
-                        {new Date(education?.Enddate).getFullYear()}
-                      </p>
-                      {index < userProfile.educations.length - 1 && (
-                        <hr className="border-t border-gray-300 my-4" />
-                      )}
+                  <div>
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-lg font-semibold">
+                          {education?.Degree}
+                        </h3>
+                        <p className="text-green-500">{education?.School}</p>
+                        <p className="text-gray-600">
+                          Graduated in{" "}
+                          {new Date(education?.Enddate).getFullYear()}
+                        </p>
+                        {index < userProfile.educations.length - 1 && (
+                          <hr className="border-t border-gray-300 my-4" />
+                        )}
+                      </div>
+                      <img
+                        className="rounded-lg h-16 w-16 object-cover bg-zinc-200"
+                        src={""}
+                        alt={`Experience`}
+                      />
                     </div>
-                    <img
-                      className="rounded-lg h-16 w-16 object-cover bg-zinc-200"
-                      src={""}
-                      alt={`Experience`}
-                    />
+                    <div className="flex flex-wrap gap-2 my-4">
+                      {education?.skills?.map((skill, index) => (
+                        <span
+                          className="px-2 py-1 bg-white border rounded-full"
+                          key={index}
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </>
