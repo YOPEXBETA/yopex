@@ -175,7 +175,7 @@ const deleteCompany = async (req, res) => {
     const user  = await userModel.findById(company.user);
     user.companies = user.companies.filter((companyId) => companyId.toString() !== req.params.id);
     await user.save();
-    await Company.findByIdAndRemove({_id : req.params.id});
+    await Company.findOneAndDelete({_id : req.params.id});
       res.status(200).send("Company has been deleted");
 
   
