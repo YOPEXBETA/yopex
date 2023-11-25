@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as z from "zod";
-import AlertContainer from "../../../Components/alerts";
 import Copyright from "../../../Components/shared/Copyright";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import YopexLogo from "../../../images/LogoYopex.png";
@@ -40,7 +39,9 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = (data) => dispatch(login({ ...data, rememberMe }));
+  const onSubmit = (data) => {
+    
+    dispatch(login({ ...data, rememberMe }))};
 
   // redirect user according to his role
   useEffect(() => {
@@ -62,7 +63,7 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full lg:w-4/6">
       <div>
-        {error && <AlertContainer error={error} />}
+        
 
         <div className="grid grid-cols-1 mb-4">
           <div className="flex justify-between items-center">

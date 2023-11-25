@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import AlertSuccess from "../../../../../Components/successalert";
-import { edit, reset } from "../../../../../redux/auth/authSlice";
-import AlertContainer from "../../../../../Components/alerts";
+import { edit } from "../../../../../redux/auth/authSlice";
 
 export default function Privacy() {
   const dispatch = useDispatch();
@@ -82,9 +80,6 @@ export default function Privacy() {
               />
             </div>
 
-            {error && <AlertContainer error={"Error"} />}
-            {success && <AlertSuccess message="Edited" />}
-            {!loading && error && <AlertContainer error={error} />}
             <div className="grid grid-cols-1">
               <div className="col-span-1">
                 <button
