@@ -10,7 +10,7 @@ const Features = () => {
       <div>
         <div className="max-w-7xl   mx-auto px-6 md:px-12 xl:px-6">
           <div className="md:w-2/3 lg:w-1/2">
-            <h2 className=" text-2xl font-bold text-gray-700 dark:text-white md:text-4xl">
+            <h2 className=" text-2xl font-bold text-gray-700 dark:text-white md:text-4xl mb-2">
               A social media platform designed exclusively for connecting
               freelancers with startups.
             </h2>

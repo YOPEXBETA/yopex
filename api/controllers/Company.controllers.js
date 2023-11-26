@@ -13,7 +13,6 @@ const main = require("../server");
 const ReviewModel = require("../models/Review.model");
 const { response } = require("express");
 
-
 const editProfile = async (req, res) => {
   try {
     console.log("editProfile");
@@ -41,15 +40,17 @@ const editProfile = async (req, res) => {
   }
 };
 
-const getAllCompanies = async (req,res)=>{
+const getAllCompanies = async (req, res) => {
   try {
-    const companies = await companySchema.find().select("companyName companyLogo").limit(6);
+    const companies = await companySchema
+      .find()
+      .select("companyName companyLogo createdAt");
     res.status(200).json(companies);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: "Server Error" });
   }
-}
+};
 
 /*const getCompany = async (req, res) => {
   try {
@@ -103,7 +104,10 @@ const ChallengeWinner = async (req, res) => {
       userId: idUser,
     });
     if (!review) {
-      return res.status(404).json({ message: "To be able to select this participant as the winner, you should add a review." });
+      return res.status(404).json({
+        message:
+          "To be able to select this participant as the winner, you should add a review.",
+      });
     }
 
     console.log(Challenge);
@@ -111,7 +115,8 @@ const ChallengeWinner = async (req, res) => {
     // get Admin account
     const AdminUser = await userModel.findOne({ role: "admin" });
     User.balance = (User.balance ? User.balance : 0) + Challenge.price * 0.9;
-    AdminUser.balance = (AdminUser.balance ? AdminUser.balance : 0) + Challenge.price * 0.1;
+    AdminUser.balance =
+      (AdminUser.balance ? AdminUser.balance : 0) + Challenge.price * 0.1;
 
     company.balance = company.balance - Challenge.price;
     Challenge.winner = User._id;
@@ -156,10 +161,8 @@ const getCompanyNotifications = async (req, res) => {
   //           select: "firstname lastname picturePath",
   //         },
   //       });
-
   //     notification = notification.concat(company.notificationsCompany);
   //   }
-    
   //   res.status(200).json(notification);
   // } catch (error) {
   //   console.error(error.message);
@@ -169,18 +172,16 @@ const getCompanyNotifications = async (req, res) => {
 
 const deleteCompany = async (req, res) => {
   try {
-    
     const company = await Company.findById(req.params.id);
 
-    const user  = await userModel.findById(company.user);
-    user.companies = user.companies.filter((companyId) => companyId.toString() !== req.params.id);
+    const user = await userModel.findById(company.user);
+    user.companies = user.companies.filter(
+      (companyId) => companyId.toString() !== req.params.id
+    );
     await user.save();
-    await Company.findOneAndDelete({_id : req.params.id});
-      res.status(200).send("Company has been deleted");
-
-  
+    await Company.findOneAndDelete({ _id: req.params.id });
+    res.status(200).send("Company has been deleted");
   } catch (err) {
-    
     res.status(500).json(err);
   }
 };
@@ -192,5 +193,5 @@ module.exports = {
   ChallengeWinner,
   getCompanyNotifications,
   deleteCompany,
-  getAllCompanies
+  getAllCompanies,
 };
