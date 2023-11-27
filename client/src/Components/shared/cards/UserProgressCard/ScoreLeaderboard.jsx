@@ -7,7 +7,7 @@ import { useUsers } from "../../../../hooks/react-query/useUsers";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../../../LoadingSpinner";
 
-const Testy = () => {
+const ScoreLeaderboard = () => {
   const { user } = useSelector((state) => state.auth);
   const { data: levelsData, isloading } = useGetLevels();
   const { data: leaders, isLoading } = useUsers();
@@ -119,4 +119,4 @@ const Testy = () => {
   );
 };
 
-export default Testy;
+export default ScoreLeaderboard;

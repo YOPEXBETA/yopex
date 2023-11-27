@@ -4,9 +4,8 @@ import MyContestLists from "../../../Components/shared/cards/MyContestsLists";
 import MoneyBalance from "../../../Components/shared/cards/MoneyBalance";
 import ScrollableTabs from "../../../Components/Tabs/ScrollableTab";
 import SocialPosts from "./components/SocialPosts";
-import ExploreCard from "../../../Components/shared/cards/UserProgressCard/ExploreCard";
-import Testy from "../../../Components/shared/cards/UserProgressCard/Testy";
 import ExploreSection from "./components/ExploreSection";
+import ScoreLeaderboard from "../../../Components/shared/cards/UserProgressCard/ScoreLeaderboard";
 
 const HomeLayout = () => {
   return (
@@ -25,7 +24,7 @@ const HomeLayout = () => {
 
       <div className="col-span-12 md:col-span-12 xl:block xl:col-span-3 lg:col-span-4 space-y-4 hidden md:block">
         {/* <MoneyBalance />*/}
-        <Testy />
+        <ScoreLeaderboard />
         <MyContestLists />
       </div>
     </div>
