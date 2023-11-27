@@ -93,6 +93,7 @@ export const useEditPost = (postId, userId, category = "") => {
       await axios.put(`${url}/post/${postId}`, postData);
     },
     onSuccess: () => {
+      toast.success("Post updated successfully");
       queryClient.invalidateQueries({ queryKey: ["posts", category] });
       queryClient.invalidateQueries({ queryKey: ["posts", userId] });
     },

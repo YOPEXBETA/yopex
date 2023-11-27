@@ -1,24 +1,9 @@
-import {
-  Autocomplete,
-  Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  InputLabel,
-  LinearProgress,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Stack } from "@mui/system";
-import { MuiFileInput } from "mui-file-input";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useEditPost } from "../../../hooks/react-query/usePosts";
 import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useFileUpload } from "../../../hooks/react-query/useUsers";
-import { axios } from "../../../axios";
 import LoadingSpinner from "../../LoadingSpinner";
 import { FaImage } from "react-icons/fa";
 import Select from "react-select";
