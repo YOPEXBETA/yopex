@@ -9,20 +9,16 @@ import { EditPostModal } from "../../shared/Modals/EditPostModal";
 const PostMenuIcon = ({ post }) => {
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
   const handleDeleteClickModal = () => {
-    // Show the confirmation dialog
     setConfirmationDialogOpen(true);
     handleClose();
   };
 
   const handleConfirmDelete = () => {
-    // Perform the delete action
     handleDeleteCompany();
 
-    // Close the confirmation dialog
     setConfirmationDialogOpen(false);
   };
   const handleCancelDelete = () => {
-    // Close the confirmation dialog without deleting
     setConfirmationDialogOpen(false);
     handleClose();
   };
@@ -51,7 +47,7 @@ const PostMenuIcon = ({ post }) => {
   };
 
   return (
-    <div className="relative inline-block text-center z-20">
+    <div className="relative inline-block text-center">
       <button
         onClick={handleClick}
         className="hover:bg-gray-100 dark:bg-zinc-800 px-2 py-2 rounded-full"

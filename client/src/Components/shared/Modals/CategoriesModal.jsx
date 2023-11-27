@@ -9,8 +9,8 @@ const CategoriesModal = ({
 }) => {
   return (
     showIconModal && (
-      <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm">
-        <div className="bg-white dark:bg-zinc-800 p-8 rounded-lg shadow-lg w-[50rem] overflow-auto h-full lg:h-96 md:h-96">
+      <div className="z-50 fixed inset-0 backdrop-blur-sm flex items-center justify-center ">
+        <div className="bg-white p-4 rounded-lg max-w-[50rem] w-full max-h-[40rem] overflow-y-auto border">
           <div className="flex justify-between items-start">
             <h2 className="text-lg font-semibold dark:text-gray-200 text-black mb-4">
               Choose a Category

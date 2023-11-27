@@ -108,7 +108,7 @@ const SocialPostCard = ({
           </div>
         </div>
         {(post.userId === user._id || user.companies.includes(post.userId)) && (
-          <button className="py-6 pr-2 rounded-full">
+          <button className="py-6 pr-2 rounded-full z-10">
             <PostMenuIcon className="text-black" post={post} />
           </button>
         )}
@@ -132,7 +132,7 @@ const SocialPostCard = ({
               {post.postPicturePath
                 .slice(currentPage, currentPage + 1)
                 .map((item, index) => (
-                  <div className="group relative " key={index}>
+                  <div className="group relative" key={index}>
                     <SocialPostImage
                       item={item}
                       height={height}

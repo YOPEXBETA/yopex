@@ -6,12 +6,13 @@ import ScrollableTabs from "../../../Components/Tabs/ScrollableTab";
 import SocialPosts from "./components/SocialPosts";
 import ExploreCard from "../../../Components/shared/cards/UserProgressCard/ExploreCard";
 import Testy from "../../../Components/shared/cards/UserProgressCard/Testy";
+import ExploreSection from "./components/ExploreSection";
 
 const HomeLayout = () => {
   return (
     <div className="grid grid-cols-12 dark:bg-zinc-800 gap-4 lg:py-6 lg:px-16 px-0 py-0">
       <div className="hidden col-span-12 md:col-span-12 xl:block xl:col-span-3 lg:col-span-4 space-y-4">
-        <ExploreCard />
+        <ExploreSection />
       </div>
 
       <div className="col-span-12 md:col-span-12 xl:col-span-6 lg:col-span-8 space-y-4 lg:px-11 px-0 mb-20 mt-2 lg:mt-0 md:mt-0">
