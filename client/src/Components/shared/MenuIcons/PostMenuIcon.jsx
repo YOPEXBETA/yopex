@@ -56,7 +56,7 @@ const PostMenuIcon = ({ post }) => {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 dark:bg-zinc-800 shadow-lg rounded-lg">
+        <div className="absolute right-0 mt-2 w-48 z-10 bg-white border border-gray-200 dark:bg-zinc-800 shadow-lg rounded-lg">
           <ul>
             <li>
               <button
@@ -90,7 +90,7 @@ const PostMenuIcon = ({ post }) => {
       {confirmationDialogOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-10">
           <div className="dark:bg-zinc-800 bg-white p-6 rounded-lg shadow-lg border">
-            <h2 className="text-xl font-semibold dark:text-white text-center mb-4">
+            <h2 className="text-xl font-semibold dark:text-white text-left mb-4">
               Confirm Delete
             </h2>
             <p className="text-gray-700 dark:text-white mb-4">
@@ -99,7 +99,7 @@ const PostMenuIcon = ({ post }) => {
             <div className="flex justify-between">
               <button
                 onClick={handleCancelDelete}
-                className="px-4 bg-red-500 rounded-lg py-2 text-white hover:text-gray-700"
+                className="px-4 py-2 ml-2 bg-red-500 rounded-lg text-white hover:bg-red-600"
               >
                 Cancel
               </button>

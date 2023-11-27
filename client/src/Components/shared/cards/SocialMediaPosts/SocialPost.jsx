@@ -108,7 +108,7 @@ const SocialPostCard = ({
           </div>
         </div>
         {(post.userId === user._id || user.companies.includes(post.userId)) && (
-          <button className="py-6 pr-2 rounded-full z-10">
+          <button className="py-6 pr-2 rounded-full">
             <PostMenuIcon className="text-black" post={post} />
           </button>
         )}
