@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
 // ==============================|| MODALS||============================== //
-import { AddChallengeModal } from "./AddChallengeModal";
 import { AddCompanyModal } from "./addCompanyModal";
 import { AddPostModal } from "./AddPostsModal";
 import { AddWorkOfferModal } from "../../../../../../../Components/Modals/AddWorkOfferModal";
@@ -125,12 +124,15 @@ const AddPostMenuList = () => {
                 <FaSuitcase className="mr-2 inline-block" /> Add work offer
               </button>
             </Link>
-            <button
-              onClick={handleClickOpenModalChallenge}
-              className="block px-4 py-2 text-sm text-left dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
+            <Link
+              to="/create-challenge"
+              className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
-              <FaFire className="mr-2 inline-block" /> Add a challenge
-            </button>
+              <button>
+                <FaFire className="mr-2 inline-block" /> Add a challenge
+              </button>
+            </Link>
+
             <button
               onClick={handleClickOpenModalPost}
               className="block px-4 py-2 text-left text-sm text-gray-700 w-full dark:text-gray-100 dark:hover:bg-green-600 hover:bg-gray-100 hover:text-gray-900"
@@ -151,10 +153,7 @@ const AddPostMenuList = () => {
         open={openWorkModal}
         handleClose={handleCloseModalWork}
       />
-      <AddChallengeModal
-        open={openChallengeModal}
-        handleClose={handleCloseModalChallenge}
-      />
+
       <AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />
       <AddCompanyModal
         open={openCompanyModal}
