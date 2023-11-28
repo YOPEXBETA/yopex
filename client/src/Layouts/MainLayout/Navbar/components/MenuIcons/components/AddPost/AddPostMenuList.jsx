@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
 // ==============================|| MODALS||============================== //
-import { AddWorkOfferModal } from "./AddWorkOfferModal";
 import { AddChallengeModal } from "./AddChallengeModal";
 import { AddCompanyModal } from "./addCompanyModal";
 import { AddPostModal } from "./AddPostsModal";
+import { AddWorkOfferModal } from "../../../../../../../Components/Modals/AddWorkOfferModal";
 
 // ==============================|| CODE ||============================== //
 

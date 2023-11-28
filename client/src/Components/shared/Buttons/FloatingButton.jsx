@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
-import { AddWorkOfferModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/AddWorkOfferModal";
 import { AddChallengeModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/AddChallengeModal";
 import { AddPostModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/AddPostsModal";
 import { AddCompanyModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/addCompanyModal";
+import { AddWorkOfferModal } from "../../Modals/AddWorkOfferModal";
 
 const FloatingButton = () => {
   const [isOpen, setIsOpen] = useState(false);

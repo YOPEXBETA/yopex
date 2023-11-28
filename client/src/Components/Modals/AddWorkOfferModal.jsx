@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-import { useCreateJob } from "../../../../../../../hooks/react-query/useJobs";
-import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
+import { useCreateJob } from "../../hooks/react-query/useJobs";
+import { useUserById } from "../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 
-import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
-import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
+import { useCategories } from "../../hooks/react-query/useCategories";
+import { useSkills } from "../../hooks/react-query/useSkills";
 
 export const AddWorkOfferModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -34,7 +34,7 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
   const userId = user._id;
   const { data: userProfile, isLoading } = useUserById(userId);
 
-  const { mutate, isError, isSuccess, error } = useCreateJob(user);
+  const { mutate } = useCreateJob(user);
 
   const onSubmit = (JobData) => {
     const companyId = selectedOption;
@@ -142,6 +142,47 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
                     {...register("description", { required: true })}
                     placeholder="job description"
                   />
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="jobType"
+                    className="dark:text-white block mb-2"
+                  >
+                    Job Type
+                  </label>
+                  <select
+                    id="jobType"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    {...register("job_type", { required: true })}
+                  >
+                    <option value="" defaultValue>
+                      Choose a job type
+                    </option>
+                    <option value="Full Time">Full Time</option>
+                    <option value="Part Time">Part Time</option>
+                    <option value="Freelance">Freelance</option>
+                    <option value="Internship">Internship</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="jobType"
+                    className="dark:text-white block mb-2"
+                  >
+                    Job Type
+                  </label>
+                  <select
+                    id="jobType"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    {...register("offer_type", { required: true })}
+                  >
+                    <option value="" defaultValue>
+                      Choose an offer type
+                    </option>
+                    <option value="Remote">Remote</option>
+                    <option value="On Site">On Site</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
                 </div>
 
                 {/* Render skills options */}

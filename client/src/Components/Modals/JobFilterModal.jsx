@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useCategories } from "../../hooks/react-query/useCategories";
 import { useSkills } from "../../hooks/react-query/useSkills";
-import { FaList, FaTools } from "react-icons/fa";
 
 const JobFilterModal = ({
   open,
@@ -10,13 +9,9 @@ const JobFilterModal = ({
   setSkillQuery,
   selectedCategory,
   selectedSkill,
+  selectedTab,
+  handleTabClick,
 }) => {
-  const [selectedTab, setSelectedTab] = useState(0); // 0 for Categories, 1 for Skills
-
-  const handleTabClick = (index) => {
-    setSelectedTab(index);
-  };
-
   const { data: categories } = useCategories();
   const { data: skills } = useSkills();
   const itCategories = categories?.map((category) => category.name);
@@ -36,6 +31,17 @@ const JobFilterModal = ({
 
     setCategoryQuery(updatedCategory);
   };
+
+  const preferences = [
+    { id: 1, label: "Physical - Work at the destination completely." },
+    { id: 2, label: "Remote - Work from your own home completely." },
+    {
+      id: 3,
+      label:
+        "Partly Remote - Work from your own home first and later at the destination.",
+    },
+  ];
+
   const tabStyles = "hover:text-green-500 dark:border-zinc-600";
   const activeTabStyles = "bg-green-500 rounded-lg";
   return (
@@ -134,6 +140,64 @@ const JobFilterModal = ({
                   Skills
                 </a>
               </li>
+              <li
+                className={`flex items-center ${tabStyles} ${
+                  selectedTab === 2 ? activeTabStyles : "text-zinc-400"
+                }`}
+                onClick={() => handleTabClick(2)}
+              >
+                <a
+                  className={`inline-flex items-center px-4 py-3 rounded-lg  ${
+                    selectedTab === 2
+                      ? "bg-green-500 text-white"
+                      : "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                  } w-full`}
+                  aria-current="page"
+                >
+                  <svg
+                    className="w-4 h-4 me-2"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <g>
+                      <path fill="none" d="M0 0h24v24H0z" />
+                      <path d="M18.07 2.44a1.61 1.61 0 0 0-2.28 0L3.55 15.29a1.61 1.61 0 0 0 0 2.28l1.43 1.43a1.61 1.61 0 0 0 2.28 0l12.24-12.24a3.61 3.61 0 0 0 0-5.12L18.07 2.44zM15.36 4.71l-1.42 1.42 2.85 2.85 1.42-1.42-2.85-2.85zM14.64 5.43L5 15.07 6.41 16.5l9.64-9.64-1.41-1.43zM8.05 13.56l-2.85-2.85-1.42 1.42 2.85 2.85 1.42-1.42zM17.37 4.22l-1.42-1.42a3.61 3.61 0 0 0-5.12 0l-1.41 1.42 2.85 2.85 1.41-1.42 2.85 2.85 1.42-1.42a3.61 3.61 0 0 0 0-5.12z" />
+                    </g>
+                  </svg>
+                  job_type
+                </a>
+              </li>
+              <li
+                className={`flex items-center ${tabStyles} ${
+                  selectedTab === 3 ? activeTabStyles : "text-zinc-400"
+                }`}
+                onClick={() => handleTabClick(3)}
+              >
+                <a
+                  className={`inline-flex items-center px-4 py-3 rounded-lg  ${
+                    selectedTab === 3
+                      ? "bg-green-500 text-white"
+                      : "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                  } w-full`}
+                  aria-current="page"
+                >
+                  <svg
+                    className="w-4 h-4 me-2"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <g>
+                      <path fill="none" d="M0 0h24v24H0z" />
+                      <path d="M18.07 2.44a1.61 1.61 0 0 0-2.28 0L3.55 15.29a1.61 1.61 0 0 0 0 2.28l1.43 1.43a1.61 1.61 0 0 0 2.28 0l12.24-12.24a3.61 3.61 0 0 0 0-5.12L18.07 2.44zM15.36 4.71l-1.42 1.42 2.85 2.85 1.42-1.42-2.85-2.85zM14.64 5.43L5 15.07 6.41 16.5l9.64-9.64-1.41-1.43zM8.05 13.56l-2.85-2.85-1.42 1.42 2.85 2.85 1.42-1.42zM17.37 4.22l-1.42-1.42a3.61 3.61 0 0 0-5.12 0l-1.41 1.42 2.85 2.85 1.41-1.42 2.85 2.85 1.42-1.42a3.61 3.61 0 0 0 0-5.12z" />
+                    </g>
+                  </svg>
+                  offer_type
+                </a>
+              </li>
             </ul>
             <div className="md:px-6 py-2  text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
               {selectedTab === 0 && (
@@ -185,6 +249,53 @@ const JobFilterModal = ({
                           className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                           {skillName}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+              {selectedTab === 2 && (
+                <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
+                  {preferences.map((preference) => (
+                    <div key={preference.id} className="flex items-center mb-4">
+                      <input
+                        id={`checkbox-${preference.id}`}
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        checked={selectedTab === preference.id}
+                      />
+                      <label
+                        htmlFor={`checkbox-${preference.id}`}
+                        className="ms-2 text-sm font-medium text-gray-400 dark:text-gray-500"
+                      >
+                        {preference.label}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {selectedTab === 3 && (
+                <>
+                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
+                    {preferences.map((preference) => (
+                      <div
+                        key={preference.id}
+                        className="flex items-center mb-4"
+                      >
+                        <input
+                          id={`checkbox-${preference.id}`}
+                          type="checkbox"
+                          value=""
+                          className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          checked={selectedTab === preference.id}
+                        />
+                        <label
+                          htmlFor={`checkbox-${preference.id}`}
+                          className="ms-2 text-sm font-medium text-gray-400 dark:text-gray-500"
+                        >
+                          {preference.label}
                         </label>
                       </div>
                     ))}

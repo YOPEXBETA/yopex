@@ -15,6 +15,12 @@ const BrowseJobsHeader = ({
   const [openPostModal, setOpenPostModal] = useState(false);
   const toggleModal = () => setOpenPostModal((prev) => !prev);
 
+  const [selectedTab, setSelectedTab] = useState(0); // 0 for Categories, 1 for Skills
+
+  const handleTabClick = (newValue) => {
+    setSelectedTab(newValue);
+  };
+
   return (
     <div className="h-56 px-6 lg:px-8 xl:px-40 flex flex-col justify-end dark:bg-zinc-900 border-b from-black w-full to-purple-900 bg-gradient-to-tr">
       <div className="space-y-2 items-start">
@@ -49,6 +55,8 @@ const BrowseJobsHeader = ({
             setSkillQuery={setSkillQuery}
             selectedCategory={selectedCategory}
             selectedSkill={selectedSkill}
+            selectedTab={selectedTab}
+            handleTabClick={handleTabClick}
           />
         </div>
         <BrowseNavigationTab value={value} changeValue={changeValue} />
