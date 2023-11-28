@@ -6,6 +6,7 @@ import { AddChallengeModal } from "./AddChallengeModal";
 import { AddCompanyModal } from "./addCompanyModal";
 import { AddPostModal } from "./AddPostsModal";
 import { AddWorkOfferModal } from "../../../../../../../Components/Modals/AddWorkOfferModal";
+import { Link } from "react-router-dom";
 
 // ==============================|| CODE ||============================== //
 
@@ -116,12 +117,14 @@ const AddPostMenuList = () => {
           ref={menuRef}
         >
           <div className="py-1" role="none">
-            <button
-              onClick={handleClickOpenModalWork}
+            <Link
+              to="/create-job-offer"
               className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
-              <FaSuitcase className="mr-2 inline-block" /> Add work offer
-            </button>
+              <button>
+                <FaSuitcase className="mr-2 inline-block" /> Add work offer
+              </button>
+            </Link>
             <button
               onClick={handleClickOpenModalChallenge}
               className="block px-4 py-2 text-sm text-left dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
