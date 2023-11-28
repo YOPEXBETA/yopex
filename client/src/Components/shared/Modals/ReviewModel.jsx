@@ -3,7 +3,6 @@ import { useAddReviews } from "../../../hooks/react-query/useReviews";
 import AlertContainer from "../../alerts";
 import AlertSuccess from "../../successalert";
 import { useParams } from "react-router-dom";
-import { Rating } from "@mui/material";
 
 export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
   const [description, setDescription] = useState("");

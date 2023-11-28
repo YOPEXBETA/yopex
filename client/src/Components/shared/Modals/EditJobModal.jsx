@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useEditJob } from "../../../hooks/react-query/useJobs";
 import { Controller, useForm } from "react-hook-form";
 import { Autocomplete, TextField } from "@mui/material";

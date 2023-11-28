@@ -1,5 +1,5 @@
 import { useEditChallenge } from "../../../hooks/react-query/useChallenges";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../hooks/react-query/useSkills";

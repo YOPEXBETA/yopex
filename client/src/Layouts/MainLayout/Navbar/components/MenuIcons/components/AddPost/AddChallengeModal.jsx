@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import moment from "moment";
+import Select from "react-select";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { useCreateChallenge } from "../../../../../../../hooks/react-query/useChallenges";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
 import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
-import Select from "react-select";
 
 export const AddChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-
-import { useCreateBadge } from "../../../hooks/react-query/useBadges";
 import { axios } from "../../../axios";
+import { useCreateBadge } from "../../../hooks/react-query/useBadges";
 
 const AddBadgeModal = ({ open, handleClose }) => {
   const url = process.env.REACT_APP_API_ENDPOINT;
