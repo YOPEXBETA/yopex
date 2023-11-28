@@ -9,9 +9,7 @@ import { FaImage } from "react-icons/fa";
 import Select from "react-select";
 
 export const EditPostModal = ({ open, handleClose, post }) => {
-  const url = process.env.REACT_APP_API_ENDPOINT;
   const { category } = useSelector((state) => state.global);
-  const [uploadProgress, setUploadProgress] = useState(0);
   const { mutate } = useEditPost(post._id, post.userId, category);
 
   const { data: categories } = useCategories();

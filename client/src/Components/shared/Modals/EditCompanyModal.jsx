@@ -10,7 +10,6 @@ import LoadingSpinner from "../../LoadingSpinner";
 
 export const EditCompanyModal = ({ open, handleClose, company }) => {
   const { mutate } = useEditCompany(company?._id);
-
   const { user } = useSelector((state) => state.auth);
   const fileUploadMutation = useFileUpload();
 
@@ -22,37 +21,36 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
     },
   });
   const uploadedFile = watch("files");
-
   const onSubmit = async (data) => {
-    if (data.files.length > 0) {
-      // If a file is present, proceed with file upload
-      const formData = new FormData();
-      formData.append("file", data.files[0]);
-      formData.append("type", "posts");
+    try {
+      if (data.files.length > 0) {
+        // If a file is present, proceed with file upload
+        const formData = new FormData();
+        formData.append("file", data.files[0]);
+        formData.append("type", "company");
 
-      try {
-        const datalogo = await fileUploadMutation.mutateAsync(formData);
+        try {
+          const result = await fileUploadMutation.mutateAsync(formData);
 
-        return mutate({
-          companyName: data.companyName,
-          companyDescription: data.companyDescription,
-          companyLogo: datalogo.data.downloadURL,
+          mutate({
+            ...data,
+            companyLogo: result.data.downloadURL,
+          });
+        } catch (error) {
+          console.error("Error in file upload:", error);
+        }
+      } else {
+        // If no file is uploaded, update everything
+        mutate({
+          ...data,
         });
-      } catch (error) {
-        console.error("File Upload Error:", error);
-        // Handle file upload error
       }
+
+      handleClose();
+      reset();
+    } catch (error) {
+      console.error("Error in onSubmit:", error);
     }
-
-    mutate({
-      companyData: {
-        companyName: data.companyName,
-        companyDescription: data.companyDescription,
-      },
-    });
-
-    handleClose();
-    reset();
   };
 
   return (
@@ -96,24 +94,15 @@ export const EditCompanyModal = ({ open, handleClose, company }) => {
                 <input
                   className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                   type="text"
-                  placeholder={company?.companyName}
                   {...register("companyName")}
-                  margin="normal"
-                  variant="outlined"
+                  placeholder={company?.companyName}
                   required
-                  fullWidth
-                  id="companyName"
-                  label="companyName"
-                  multiline
-                  rows={4}
                 />
 
                 <textarea
                   className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
                   {...register("companyDescription")}
                   placeholder={company?.companyDescription}
-                  id="companyDescription"
-                  label="companyDescription"
                 />
                 {uploadedFile && (
                   <div className="mb-4">

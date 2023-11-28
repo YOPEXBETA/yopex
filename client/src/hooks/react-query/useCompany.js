@@ -1,4 +1,5 @@
 import { axios } from "../../axios";
+import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
@@ -46,7 +47,11 @@ export const useEditCompany = (companyId) => {
       await axios.put(`${url}/company/${companyId}`, companyData);
     },
     onSuccess: () => {
+      toast.success("Company updated successfully");
       queryClient.invalidateQueries(["company", companyId]);
+    },
+    onError: (error) => {
+      toast.error(`Error updating company: ${error.response.data.error.msg}`);
     },
   });
 };

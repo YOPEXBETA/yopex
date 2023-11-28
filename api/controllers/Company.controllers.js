@@ -12,30 +12,17 @@ const notificationModel = require("../models/notification.model");
 const main = require("../server");
 const ReviewModel = require("../models/Review.model");
 const { response } = require("express");
-
 const editProfile = async (req, res) => {
   try {
-    console.log("editProfile");
+    const updateFields = req.body;
 
-    const updateFields = pick(req.body, [
-      "companyName",
-      "companyDescription",
-      "companyLogo",
-    ]);
-    console.log(updateFields);
-
-    if (updateFields.password) {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPass = await bcrypt.hash(updateFields.password, salt);
-      updateFields.password = hashedPass;
-    }
     const updatedCompany = await companySchema
       .findByIdAndUpdate(req.params.id, updateFields, { new: true })
       .select("-password");
 
     res.status(200).json(updatedCompany);
   } catch (error) {
-    console.log(error);
+    console.error("Error in editProfile:", error);
     return res.status(500).json(error);
   }
 };
@@ -51,16 +38,6 @@ const getAllCompanies = async (req, res) => {
     res.status(500).json({ error: "Server Error" });
   }
 };
-
-/*const getCompany = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const company = await companySchema.findById(id).populate("challenges");
-    res.status(200).json(company);
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
-};*/
 
 const getCompany = async (req, res) => {
   try {

@@ -4,7 +4,6 @@ const Job = require("../models/job.model");
 const Company = require("../models/company.model");
 
 const { sendEmail } = require("../middlewares/mail.middleware");
-const { sortappliers } = require("../tensorflow/anotherz");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
 
