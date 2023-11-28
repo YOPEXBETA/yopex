@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   {
-    /*const [isDarkMode, setIsDarkMode] = useState(
+    const [isDarkMode, setIsDarkMode] = useState(
     localStorage.theme === "dark" ||
       window.matchMedia("(prefers-color-scheme: dark)").matches
   );
@@ -29,7 +29,7 @@ const App = () => {
       localStorage.setItem("accessToken", accessToken);
       window.history.replaceState({}, document.title, "/");
     }
-  }, []);*/
+  }, []);
   }
   return (
     <>
