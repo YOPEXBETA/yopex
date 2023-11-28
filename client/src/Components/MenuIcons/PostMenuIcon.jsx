@@ -3,8 +3,8 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 import { HiDotsVertical } from "react-icons/hi";
 
 import { useSelector } from "react-redux";
-import { useDeletePost } from "../../../hooks/react-query/usePosts";
-import { EditPostModal } from "../../shared/Modals/EditPostModal";
+import { useDeletePost } from "../../hooks/react-query/usePosts";
+import { EditPostModal } from "../shared/Modals/EditPostModal";
 
 const PostMenuIcon = ({ post }) => {
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);

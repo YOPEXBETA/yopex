@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CommentMenuIcon from "../MenuIcons/CommentMenuIcon";
+import CommentMenuIcon from "../../MenuIcons/CommentMenuIcon";
 const CommentModal = ({
   isOpen,
   handleSubmit,

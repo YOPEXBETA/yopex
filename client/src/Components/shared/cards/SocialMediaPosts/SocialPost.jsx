@@ -8,14 +8,13 @@ import {
   useLikePost,
   useBookmarkPost,
 } from "../../../../hooks/react-query/usePosts";
-import PostMenuIcon from "../../MenuIcons/PostMenuIcon";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { BsThreeDots } from "react-icons/bs";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 import SocialPostImage from "../../PostImage/SocialPostImage";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import LoadingSpinner from "../../../LoadingSpinner";
+import PostMenuIcon from "../../../MenuIcons/PostMenuIcon";
 
 const SocialPostCard = ({
   post,

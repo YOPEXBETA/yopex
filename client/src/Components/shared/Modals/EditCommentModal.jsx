@@ -2,29 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useEditComment } from "../../../hooks/react-query/useComments";
 
+export const EditCommentModal = ({ open, handleClose, comment }) => {
+  const { mutate } = useEditComment(comment._id);
 
-  
-  export const EditCommentModal = ({ open, handleClose,comment }) => {
-    
-    const {mutate} = useEditComment(comment._id)
+  const { register, handleSubmit, control, setValue, reset } = useForm({
+    defaultValues: {
+      desc: comment.desc,
+    },
+  });
 
-    const { register, handleSubmit, control, setValue, reset } = useForm({
-      defaultValues: {
-        desc : comment.desc,
-      },
+  const onSubmit = async (data) => {
+    mutate({
+      desc: data.desc,
     });
-  
-    const onSubmit = async (data) => {
-      mutate({ 
-      desc : data.desc
-      });
-      handleClose();
-      
-    };
-   
-  
-    return (
-      <div
+    handleClose();
+  };
+
+  return (
+    <div
       className={`fixed z-10 inset-0 overflow-y-auto  ${
         open ? "block" : "hidden"
       }`}
@@ -63,16 +58,16 @@ import { useEditComment } from "../../../hooks/react-query/useComments";
                   rows={4}
                 />
                 <button
-                    className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500 hover:bg-gray-200"
-                    onClick={handleClose}
-                  >
-                    Cancel
-                  </button>
-                <button
-                 className=" px-6 py-2 text-white rounded-md border-2 bg-green-500 hover:bg-green-600"
-                type="submit"
+                  className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500 hover:bg-gray-200"
+                  onClick={handleClose}
                 >
-                    Edit
+                  Cancel
+                </button>
+                <button
+                  className=" px-6 py-2 text-white rounded-md border-2 bg-green-500 hover:bg-green-600"
+                  type="submit"
+                >
+                  Edit
                 </button>
               </form>
             </div>
@@ -82,4 +77,3 @@ import { useEditComment } from "../../../hooks/react-query/useComments";
     </div>
   );
 };
-  
