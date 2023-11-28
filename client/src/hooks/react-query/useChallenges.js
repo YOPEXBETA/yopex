@@ -144,7 +144,6 @@ export const useCreateChallenge = () => {
       },
       onError: () => {
         toast.error("Error creating challenge");
-        
       },
     }
   );

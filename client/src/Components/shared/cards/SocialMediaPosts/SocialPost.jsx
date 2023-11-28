@@ -10,6 +10,7 @@ import {
 } from "../../../../hooks/react-query/usePosts";
 import PostMenuIcon from "../../MenuIcons/PostMenuIcon";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { BsThreeDots } from "react-icons/bs";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 import SocialPostImage from "../../PostImage/SocialPostImage";

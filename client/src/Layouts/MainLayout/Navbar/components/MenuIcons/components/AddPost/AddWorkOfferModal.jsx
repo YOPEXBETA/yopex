@@ -4,8 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useCreateJob } from "../../../../../../../hooks/react-query/useJobs";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
-import AlertContainer from "../../../../../../../Components/alerts";
-import AlertSuccess from "../../../../../../../Components/successalert";
+
 import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../../../../../hooks/react-query/useSkills";
 
@@ -49,14 +48,13 @@ export const AddWorkOfferModal = ({ open, handleClose }) => {
     };
 
     mutate({ companyId, JobData: modifiedJobData });
+    handleClose(true);
   };
 
   return (
     <div
       className={`fixed z-50 inset-0  ${open ? "backdrop-blur-sm" : "hidden"}`}
     >
-      {isError && <AlertContainer error={""} />}
-      {isSuccess && <AlertSuccess message="Job offer created successfully" />}
       <div className="flex items-end justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
         <div
           className={`${

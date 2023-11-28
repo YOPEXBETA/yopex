@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
-import AlertContainer from "../../../../../../../Components/alerts";
 import { useSelector } from "react-redux";
-import AlertSuccess from "../../../../../../../Components/successalert";
 import { useForm, Controller } from "react-hook-form";
 import { useCreateChallenge } from "../../../../../../../hooks/react-query/useChallenges";
 import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
@@ -285,11 +283,6 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     {...register("nbruser", { required: true })}
                   />
                 </div>
-
-                {isError && (
-                  <AlertContainer error={error?.response?.data?.error?.msg} />
-                )}
-                {isSuccess && <AlertSuccess message="Created the challenge" />}
 
                 <div className="mb-4">
                   <label

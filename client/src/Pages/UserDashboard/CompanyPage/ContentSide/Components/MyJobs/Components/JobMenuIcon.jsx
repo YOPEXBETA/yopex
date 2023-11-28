@@ -1,24 +1,7 @@
-import { MoreVert } from "@mui/icons-material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Tooltip from "@mui/material/Tooltip";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { useDeleteJob } from "../../../../../../../hooks/react-query/useJobs";
 import { EditJobModal } from "../../../../../../../Components/shared/Modals/EditJobModal";
-import {
-  DialogActions,
-  DialogContentText,
-  DialogTitle,
-  Dialog,
-  DialogContent,
-  Button,
-} from "@mui/material";
+import { BsThreeDots } from "react-icons/bs";
 
 const PostMenuIcon = ({ post }) => {
   // const { user } = useSelector((state) => state.auth);
@@ -61,70 +44,37 @@ const PostMenuIcon = ({ post }) => {
   const toggleOpen = () => setIsOpen((prev) => !prev);
 
   return (
-    <React.Fragment>
-      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Job settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? "post-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            <MoreVert />
-          </IconButton>
-        </Tooltip>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="post-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+    <div>
+      <button
+        data-ripple-light="true"
+        data-popover-target="menu"
+        onClick={toggleOpen}
       >
-        <MenuItem onClick={handleDeleteClick}>
-          <ListItemIcon>
-            <DeleteIcon fontSize="small" />
-          </ListItemIcon>
-          Delete Job
-        </MenuItem>
-
-        <MenuItem onClick={handleClickEdit}>
-          <ListItemIcon>
-            <EditIcon fontSize="small" />
-          </ListItemIcon>
-          Edit Job
-        </MenuItem>
-      </Menu>
+        <BsThreeDots />
+      </button>
+      {isOpen && (
+        <ul
+          role="menu"
+          data-popover="menu"
+          data-popover-placement="bottom"
+          className="absolute z-10 min-w-[180px] overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
+        >
+          <li
+            onClick={handleDeleteClick}
+            role="menuitem"
+            className="block w-full hover:bg-gray-300 cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+          >
+            Delete Job
+          </li>
+          <li
+            onClick={handleClickEdit}
+            role="menuitem"
+            className="block w-full cursor-pointer hover:bg-gray-300 select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+          >
+            Edit Job
+          </li>
+        </ul>
+      )}
       <EditJobModal open={openEdit} handleClose={handleCloseEdit} job={post} />
       {/* Confirmation Dialog */}
       {confirmationDialogOpen && (
@@ -151,7 +101,7 @@ const PostMenuIcon = ({ post }) => {
           </div>
         </div>
       )}
-    </React.Fragment>
+    </div>
   );
 };
 

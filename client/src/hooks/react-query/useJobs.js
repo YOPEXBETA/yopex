@@ -38,6 +38,7 @@ export const useCreateJob = (user) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      toast.success("job created successfully!");
     },
   });
 };
