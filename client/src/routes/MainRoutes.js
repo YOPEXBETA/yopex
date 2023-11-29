@@ -17,6 +17,10 @@ const CreateJobOffer = Loadable(
 const CreateChallenge = Loadable(
   lazy(() => import("../Pages/UserDashboard/CreateChallengePage/index"))
 );
+//CreateCompany
+const CreateCompany = Loadable(
+  lazy(() => import("../Pages/UserDashboard/CreateCompanyPage/index"))
+);
 //HomePage
 const MobileNotifications = Loadable(
   lazy(() => import("../Components/Mobile/MobileNotifications"))
@@ -116,6 +120,10 @@ const MainRoutes = {
     {
       path: "/create-challenge",
       element: <CreateChallenge />,
+    },
+    {
+      path: "/create-company",
+      element: <CreateCompany />,
     },
     {
       path: "/store",
