@@ -60,28 +60,39 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                       By {job?.company?.companyName}
                     </p>
                   </div>
-                  <div className="flex dark:bg-zinc-800 items-center bg-white">
+                  <div
+                    className={`flex ${
+                      user && !user.companies.includes(job.company._id)
+                        ? "dark:bg-zinc-800 gap-2"
+                        : ""
+                    } items-center bg-white`}
+                  >
                     <Link to={`/company/${job.company._id}`}>
-                      <button className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded">
+                      <button
+                        className={`${
+                          !user ||
+                          (user && !user.companies.includes(job.company._id))
+                            ? "w-full"
+                            : "flex-1"
+                        } bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded`}
+                      >
                         <div className="flex items-center justify-center">
                           <FaEye className="mr-2" />
                           <p>View Profile</p>
                         </div>
                       </button>
                     </Link>
-                    <div className="flex dark:bg-zinc-800 justify-between px-4 py-2 bg-white">
-                      {user && !user.companies.includes(job.company._id) && (
-                        <button
-                          className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded"
-                          onClick={onclick}
-                        >
-                          <div className="flex items-center justify-center">
-                            <p className="mr-2">Apply Now</p>
-                            <IoIosArrowForward />
-                          </div>
-                        </button>
-                      )}
-                    </div>
+                    {user && !user.companies.includes(job.company._id) && (
+                      <button
+                        className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded"
+                        onClick={onclick}
+                      >
+                        <div className="flex items-center justify-center">
+                          <p className="mr-2">Apply Now</p>
+                          <IoIosArrowForward />
+                        </div>
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -111,7 +122,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                         {job?.RecommendedSkills?.map((skill, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
+                            className="px-2 py-1 bg-white border rounded-full"
                           >
                             {skill}
                           </span>
@@ -127,7 +138,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                         {job?.category?.map((category, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
+                            className="px-2 py-1 bg-white border rounded-full"
                           >
                             {category}
                           </span>
