@@ -229,7 +229,7 @@ const forgetpassword = async (req, res) => {
       from: process.env.EMAIL_ADDRESS,
       to: email,
       subject: "Password Reset",
-      html: `<p>Please click the following link to reset your password:</p><a href="https://yopex.tabaani.co//reset-password/${resetToken}">https://yopex.tabaani.co//reset-password/${resetToken}</a>`,
+      html: `<p>Please click the following link to reset your password:</p><a href="https://yopexhub.com/reset-password/${resetToken}">https://yopexhub.com//reset-password/${resetToken}</a>`,
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -288,7 +288,7 @@ const signInWithGoogle = async (req, res) => {
   const url =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000/feed/?token="
-      : "https://yopex.tabaani.co/feed/?token=";
+      : "https://yopexhub.com/feed/?token=";
 
   res.redirect(url + token);
   // return res.status(200).send(info);
