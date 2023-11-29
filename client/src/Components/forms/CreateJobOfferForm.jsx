@@ -45,9 +45,11 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
   };
   return (
     <div className="px-4 py-2">
-      <h1 class="text-xl font-semibold">
+      <h1 className="text-xl font-semibold">
         Hello there ?,{" "}
-        <span class="font-normal">please fill the job offer informations</span>
+        <span className="font-normal">
+          please fill the job offer informations
+        </span>
       </h1>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
         <div className="mb-4">
