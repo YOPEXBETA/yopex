@@ -10,26 +10,14 @@ const queryClient = new QueryClient();
 
 const App = () => {
   {
-    const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.theme === "dark" ||
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.theme = isDarkMode ? "dark" : "light";
-  }, [isDarkMode]);
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    if (queryParams.has("token")) {
-      const accessToken = queryParams.get("token");
-      localStorage.setItem("accessToken", accessToken);
-      window.history.replaceState({}, document.title, "/");
-    }
-  }, []);
+    useEffect(() => {
+      const queryParams = new URLSearchParams(window.location.search);
+      if (queryParams.has("token")) {
+        const accessToken = queryParams.get("token");
+        localStorage.setItem("accessToken", accessToken);
+        window.history.replaceState({}, document.title, "/");
+      }
+    }, []);
   }
   return (
     <>

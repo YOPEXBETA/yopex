@@ -13,6 +13,14 @@ const HomeLayout = Loadable(
 const CreateJobOffer = Loadable(
   lazy(() => import("../Pages/UserDashboard/CreateJobOfferPage/index"))
 );
+//CreateChallenge
+const CreateChallenge = Loadable(
+  lazy(() => import("../Pages/UserDashboard/CreateChallengePage/index"))
+);
+//CreateCompany
+const CreateCompany = Loadable(
+  lazy(() => import("../Pages/UserDashboard/CreateCompanyPage/index"))
+);
 //HomePage
 const MobileNotifications = Loadable(
   lazy(() => import("../Components/Mobile/MobileNotifications"))
@@ -108,6 +116,14 @@ const MainRoutes = {
     {
       path: "/create-job-offer",
       element: <CreateJobOffer />,
+    },
+    {
+      path: "/create-challenge",
+      element: <CreateChallenge />,
+    },
+    {
+      path: "/create-company",
+      element: <CreateCompany />,
     },
     {
       path: "/store",

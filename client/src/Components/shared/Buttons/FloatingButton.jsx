@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
-import { AddChallengeModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/AddChallengeModal";
 import { AddPostModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/AddPostsModal";
 import { AddCompanyModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/addCompanyModal";
 import { AddWorkOfferModal } from "../../Modals/AddWorkOfferModal";
@@ -111,10 +110,7 @@ const FloatingButton = () => {
         open={openWorkModal}
         handleClose={handleCloseModalWork}
       />
-      <AddChallengeModal
-        open={openChallengeModal}
-        handleClose={handleCloseModalChallenge}
-      />
+
       <AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />
       <AddCompanyModal
         open={openCompanyModal}
