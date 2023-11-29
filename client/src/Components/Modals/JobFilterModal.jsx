@@ -140,6 +140,7 @@ const JobFilterModal = ({
                   Skills
                 </a>
               </li>
+              {/*
               <li
                 className={`flex items-center ${tabStyles} ${
                   selectedTab === 2 ? activeTabStyles : "text-zinc-400"
@@ -168,7 +169,7 @@ const JobFilterModal = ({
                   </svg>
                   job_type
                 </a>
-              </li>
+                </li>
               <li
                 className={`flex items-center ${tabStyles} ${
                   selectedTab === 3 ? activeTabStyles : "text-zinc-400"
@@ -198,6 +199,7 @@ const JobFilterModal = ({
                   offer_type
                 </a>
               </li>
+              */}
             </ul>
             <div className="md:px-6 py-2  text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
               {selectedTab === 0 && (
