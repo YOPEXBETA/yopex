@@ -28,7 +28,7 @@ const Index = () => {
       <div className="md:mx-32 my-8">
         <div className="grid grid-cols-8 gap-4">
           <div className="col-span-8 md:col-span-8 lg:col-span-6">
-            <div className="p-4 rounded-lg border bg-white">
+            <div className="p-4 rounded-lg border bg-white mb-8">
               <CreateJobOfferForm
                 selectedOption={selectedOption}
                 handleCardClick={handleCardClick}

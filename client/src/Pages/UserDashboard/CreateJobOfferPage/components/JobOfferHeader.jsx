@@ -2,17 +2,16 @@ import React from "react";
 
 const JobOfferHeader = ({ selectedOption, handleCardClick, userProfile }) => {
   return (
-    <div className="flex md:items-center bg-gradient-to-b from-black to-purple-800 md:px-32 bg-cover bg-black md:h-72 py-8 overflow-hidden justify-between relative">
-      <div className="text-center">
-        <h4 className="mb-4 text-xl font-bold text-white md:text-3xl text-left">
+    <div className="flex flex-col md:flex-row items-center bg-gradient-to-b from-black to-purple-800 md:px-32 bg-cover bg-black md:h-72 py-8 overflow-hidden justify-between relative">
+      <div className="text-center mb-4 md:mb-0 md:mr-4">
+        <h4 className="mb-4 text-xl font-bold text-white md:text-3xl text-center md:text-left">
           Create a Job Offer
         </h4>
-        <p className="text-lg text-white text-center">
-          Select a company and start building your dream team or find the
-          perfect candidate.
+        <p className="text-lg text-white text-center md:text-left">
+          Select a company and start creating your job offer
         </p>
       </div>
-      <div className="flex gap-4 items-center">
+      <div className="flex flex-col md:flex-row gap-4 items-center">
         {userProfile?.companies.map((option, index) => (
           <div
             key={option._id}
