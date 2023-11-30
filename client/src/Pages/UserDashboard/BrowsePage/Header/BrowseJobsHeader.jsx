@@ -23,7 +23,7 @@ const BrowseJobsHeader = ({
 
   return (
     <div className="h-56 px-6 lg:px-8 xl:px-40 flex flex-col justify-end dark:bg-zinc-900 border-b from-black w-full to-purple-900 bg-gradient-to-tr">
-      <div className="space-y-2 items-start">
+      <div className="space-y-2 items-start mx-auto container">
         <div>
           <h4 class=" max-w-full text-xl font-bold text-white md:w-[64%] md:text-3xl md:leading-[42px] lg:w-[46%] xl:w-[85%] 2xl:w-[75%] 3xl:w-[52%]">
             Browse Jobs

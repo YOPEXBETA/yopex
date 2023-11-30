@@ -27,7 +27,7 @@ const RecentJobs = () => {
   }
 
   return (
-    <div className="mx-auto py-10 px-4 lg:px-24 md:px-11 dark:bg-zinc-800 bg-white  border-gray-500">
+    <div className="mx-auto container py-10 px-4 lg:px-24 md:px-11 dark:bg-zinc-800 bg-white  border-gray-500">
       <div class="mb-12 space-y-2 text-center">
         <h2 class="text-3xl font-bold text-gray-800 md:text-4xl dark:text-white">
           Recent Job Opportunities

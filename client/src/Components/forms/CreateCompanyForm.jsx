@@ -42,7 +42,7 @@ const CreateCompanyForm = () => {
     reset();
   };
   return (
-    <div className="flex items-end justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
+    <div>
       <h1 className="text-xl font-semibold text-left">
         Hello there ?,
         <span className="font-normal">
