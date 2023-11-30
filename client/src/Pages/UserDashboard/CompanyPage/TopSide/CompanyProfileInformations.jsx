@@ -74,7 +74,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   return (
     <div>
       <div className="md:pt-10 pt-6 xl:px-16 lg:px-6 px-0 flex flex-col justify-end dark:border-zinc-500 border-b  dark:bg-zinc-800 bg-white">
-        <div className="space-y-0 md:space-y-8">
+        <div className="space-y-0 md:space-y-8 mx-auto container">
           <div className="flex flex-col xl:flex-row lg:flex-row md:flex-row xl:px-0 items-start md:items-center px-4 gap-0 pb-8 md:pb-0 md:gap-2 justify-between">
             <div className="flex lg:flex-row flex-row items-center gap-4">
               <div className="w-24 h-24 sm:w-40 sm:h-40">
