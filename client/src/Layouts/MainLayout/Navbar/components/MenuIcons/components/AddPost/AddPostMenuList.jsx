@@ -146,10 +146,10 @@ const AddPostMenuList = () => {
       />
 
       <AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />
-      <AddCompanyModal
+      {/* <AddCompanyModal
         open={openCompanyModal}
         handleClose={handleCloseModalCompany}
-      />
+      /> */}
     </div>
   );
 };
