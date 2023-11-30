@@ -91,7 +91,7 @@ const FloatingButton = () => {
           )}
         </div>
       </div>
-
+      {/*HI*/}
       <AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />
     </div>
   );
