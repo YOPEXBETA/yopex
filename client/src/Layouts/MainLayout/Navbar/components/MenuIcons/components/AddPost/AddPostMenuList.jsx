@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
 // ==============================|| MODALS||============================== //
-import { AddCompanyModal } from "./addCompanyModal";
 import { AddPostModal } from "./AddPostsModal";
 import { AddWorkOfferModal } from "../../../../../../../Components/Modals/AddWorkOfferModal";
 import { Link } from "react-router-dom";
@@ -50,17 +49,6 @@ const AddPostMenuList = () => {
 
   const handleCloseModalPost = () => {
     setOpenPostModal(false);
-  };
-
-  // ==============================|| ADD A COMPANY CODE ||============================== //
-  const [openCompanyModal, setOpenCompanyModal] = useState(false);
-
-  const handleClickOpenModalCompany = () => {
-    setOpenCompanyModal(true);
-  };
-
-  const handleCloseModalCompany = () => {
-    setOpenCompanyModal(false);
   };
 
   // Use a ref to detect clicks outside of the menu
