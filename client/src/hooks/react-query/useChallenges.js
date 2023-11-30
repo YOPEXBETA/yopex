@@ -198,7 +198,12 @@ export const useChooseWinner = () => {
       );
       return data;
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      toast.success("Winner chosen successfully");
+    },
+    onError: () => {
+      toast.error("To be able to select this participant as the winner, you should add a review.");
+    },
   });
 };
 

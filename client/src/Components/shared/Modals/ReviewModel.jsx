@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useAddReviews } from "../../../hooks/react-query/useReviews";
-import AlertContainer from "../../alerts";
-import AlertSuccess from "../../successalert";
 import { useParams } from "react-router-dom";
-import { Rating } from "@mui/material";
 
 export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
   const [description, setDescription] = useState("");
@@ -23,8 +20,7 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
         open ? "" : "hidden"
       } w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
     >
-      {isError && <AlertContainer error={isError} />}
-      {isSuccess && <AlertSuccess message={""} />}
+      
       <div className="relative m-auto mt-[10%] min-h-screen max-w-3xl z-50">
         <div className="relative bg-white rounded-lg shadow-lg dark:bg-gray-700">
           <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">

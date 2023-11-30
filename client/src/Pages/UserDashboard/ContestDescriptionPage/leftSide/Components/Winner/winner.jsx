@@ -6,8 +6,7 @@ import {
   useChooseWinner,
   useUserSubmission,
 } from "../../../../../../hooks/react-query/useChallenges";
-import AlertContainer from "../../../../../../Components/alerts";
-import AlertSuccess from "../../../../../../Components/successalert";
+
 
 const ChooseWinner = () => {
   const [selectedUser, setSelectedUser] = useState("");
@@ -15,7 +14,7 @@ const ChooseWinner = () => {
 
   const { id } = useParams();
   const { data } = useChallengeById(id);
-  const { mutate: chooseWinner,isError,isSuccess} = useChooseWinner();
+  const { mutate: chooseWinner} = useChooseWinner();
 
   const handleSubmit = async () => {
     const companyId = data.company._id;
@@ -27,8 +26,6 @@ const ChooseWinner = () => {
   };
   return (
     <div className="w-1/2 mx-auto space-y-5">
-      {isError && <AlertContainer error={"To be able to select this participant as the winner, you should add a review."} />}
-      {isSuccess && <AlertSuccess message={""} />}
       <div className="space-y-3">
         <label
           htmlFor="demo-simple-select-label"
