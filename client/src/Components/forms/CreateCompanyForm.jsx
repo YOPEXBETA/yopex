@@ -48,7 +48,6 @@ const CreateCompanyForm = () => {
         <span className="font-normal">
           please fill the required informations to create your company page
         </span>
-        {/*what is the error */}
       </h1>
       <hr className="my-4" />
       <div className="">
