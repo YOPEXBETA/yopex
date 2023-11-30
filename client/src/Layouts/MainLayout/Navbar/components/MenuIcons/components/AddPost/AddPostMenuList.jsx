@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
 // ==============================|| MODALS||============================== //
-import { AddWorkOfferModal } from "./AddWorkOfferModal";
-import { AddChallengeModal } from "./AddChallengeModal";
-import { AddCompanyModal } from "./addCompanyModal";
 import { AddPostModal } from "./AddPostsModal";
+import { AddWorkOfferModal } from "../../../../../../../Components/Modals/AddWorkOfferModal";
+import { Link } from "react-router-dom";
 
 // ==============================|| CODE ||============================== //
 
@@ -50,17 +49,6 @@ const AddPostMenuList = () => {
 
   const handleCloseModalPost = () => {
     setOpenPostModal(false);
-  };
-
-  // ==============================|| ADD A COMPANY CODE ||============================== //
-  const [openCompanyModal, setOpenCompanyModal] = useState(false);
-
-  const handleClickOpenModalCompany = () => {
-    setOpenCompanyModal(true);
-  };
-
-  const handleCloseModalCompany = () => {
-    setOpenCompanyModal(false);
   };
 
   // Use a ref to detect clicks outside of the menu
@@ -116,30 +104,38 @@ const AddPostMenuList = () => {
           ref={menuRef}
         >
           <div className="py-1" role="none">
-            <button
-              onClick={handleClickOpenModalWork}
+            <Link
+              to="/create-job-offer"
               className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
-              <FaSuitcase className="mr-2 inline-block" /> Add work offer
-            </button>
-            <button
-              onClick={handleClickOpenModalChallenge}
-              className="block px-4 py-2 text-sm text-left dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900"
+              <button>
+                <FaSuitcase className="mr-2 inline-block" /> Add work offer
+              </button>
+            </Link>
+            <Link
+              to="/create-challenge"
+              className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
-              <FaFire className="mr-2 inline-block" /> Add a challenge
-            </button>
+              <button>
+                <FaFire className="mr-2 inline-block" /> Add a challenge
+              </button>
+            </Link>
+
             <button
               onClick={handleClickOpenModalPost}
               className="block px-4 py-2 text-left text-sm text-gray-700 w-full dark:text-gray-100 dark:hover:bg-green-600 hover:bg-gray-100 hover:text-gray-900"
             >
               <FaPen className="mr-2 inline-block" /> Add a post
             </button>
-            <button
-              onClick={handleClickOpenModalCompany}
-              className="block px-4 py-2 text-left text-sm text-gray-700 w-full dark:text-gray-100 dark:hover:bg-green-600 hover:bg-gray-100 hover:text-gray-900"
+            <Link
+              to="/create-company"
+              className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
-              <FaBuilding className="mr-2 inline-block" /> Add a company
-            </button>
+              <button>
+                <FaBuilding className="mr-2 inline-block" />
+                Add a company
+              </button>
+            </Link>
           </div>
         </div>
       )}
@@ -148,15 +144,12 @@ const AddPostMenuList = () => {
         open={openWorkModal}
         handleClose={handleCloseModalWork}
       />
-      <AddChallengeModal
-        open={openChallengeModal}
-        handleClose={handleCloseModalChallenge}
-      />
+
       <AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />
-      <AddCompanyModal
+      {/* <AddCompanyModal
         open={openCompanyModal}
         handleClose={handleCloseModalCompany}
-      />
+      /> */}
     </div>
   );
 };

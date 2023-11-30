@@ -28,9 +28,17 @@ const JobSchema = new mongoose.Schema(
       required: false,
     },
     salary: { type: Number, required: false },
-    job_type : { type: String, required: false, enum: ["Full Time", "Part Time", "Freelance", "Internship"] },
-    offer_type : { type: String, required: false, enum: ["Remote", "On Site", "Hybrid"] },
-    paid : { type: Boolean, required: false },
+    job_type: {
+      type: String,
+      required: false,
+      enum: ["Full Time", "Part Time", "Freelance", "Internship"],
+    },
+    offer_type: {
+      type: String,
+      required: false,
+      enum: ["Remote", "On Site", "Hybrid"],
+    },
+    paid: { type: Boolean, required: false },
 
     company: {
       type: mongoose.Types.ObjectId,
@@ -39,15 +47,13 @@ const JobSchema = new mongoose.Schema(
     },
     appliers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     acceptedAppliers: [
-     { user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      dateAccepted: { type: Date, default: null },
-    }
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        dateAccepted: { type: Date, default: null },
+      },
     ],
   },
-  { timestamps: true },
+  { timestamps: true }
 );
-
-
-
 
 module.exports = mongoose.model("Job", JobSchema);

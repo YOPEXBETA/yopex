@@ -85,13 +85,13 @@ const ProfileMenu = () => {
             <img
               alt="picture"
               src={user.picturePath}
-              className="rounded-full  object-contain w-10 h-10 border-2 border-gray-200"
+              className="rounded-full  object-cover w-10 h-10 border-2 border-gray-200"
             />
           ) : (
             <img
               alt="default"
               src={AvatarProfile}
-              className="rounded-full object-contain w-10 h-10 border-2 border-gray-200"
+              className="rounded-full object-cover w-10 h-10 border-2 border-gray-200"
             />
           )}
         </button>
@@ -110,13 +110,13 @@ const ProfileMenu = () => {
                 <img
                   alt="picture"
                   src={user.picturePath}
-                  className="w-12 h-12 rounded-full  border-2 border-gray-200"
+                  className="w-12 h-12 rounded-full object-cover  border-2 border-gray-200"
                 />
               ) : (
                 <img
                   alt="default"
                   src={AvatarProfile}
-                  className="w-12 h-12 rounded-full  border-2 border-gray-200"
+                  className="w-12 h-12 rounded-full object-cover  border-2 border-gray-200"
                 />
               )}
               <div className="flex-grow">

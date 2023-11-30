@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useJobs } from "../../../../hooks/react-query/useJobs";
 import JobCard from "../../../../Components/shared/cards/JobCard";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const RecentJobs = () => {
-  const { data: jobs } = useJobs();
-  const jobsPerPage = 3;
+  const jobsPerPage = 6;
+  const { data: jobs, isLoading } = useJobs();
   const [currentPage, setCurrentPage] = useState(0);
 
   const handlePageChange = (pageNumber) => {
@@ -13,10 +14,20 @@ const RecentJobs = () => {
 
   const startIndex = currentPage * jobsPerPage;
   const endIndex = startIndex + jobsPerPage;
-  const jobsToShow = jobs?.slice(startIndex, endIndex);
+  const jobsToShow = jobs
+    ?.slice(startIndex, endIndex)
+    ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
-    <div className="mx-auto py-10 px-4 lg:px-24 md:px-11 dark:bg-zinc-800 bg-white  border-gray-500">
+    <div className="mx-auto container py-10 px-4 lg:px-24 md:px-11 dark:bg-zinc-800 bg-white  border-gray-500">
       <div class="mb-12 space-y-2 text-center">
         <h2 class="text-3xl font-bold text-gray-800 md:text-4xl dark:text-white">
           Recent Job Opportunities

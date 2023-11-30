@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-
 import { useUserSubmission } from "../../../hooks/react-query/useChallenges";
 
 const ParticipantsDialogModal = ({

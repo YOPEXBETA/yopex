@@ -4,7 +4,6 @@ const Job = require("../models/job.model");
 const Company = require("../models/company.model");
 
 const { sendEmail } = require("../middlewares/mail.middleware");
-const { sortappliers } = require("../tensorflow/anotherz");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
 
@@ -12,17 +11,7 @@ const main = require("../server");
 
 const addJob = async (req, res, next) => {
   try {
-    const {
-      title,
-      category,
-      RecommendedSkills,
-      description,
-      companyId,
-      salary,
-      job_type,
-      offer_type,
-      paid,
-    } = req.body;
+    const { companyId, ...jobDetails } = req.body;
 
     const userId = req.userId;
     const user = await User.findById(userId);
@@ -39,14 +28,7 @@ const addJob = async (req, res, next) => {
 
     const jobOffer = new Job({
       company: company._id,
-      title,
-      description,
-      category,
-      RecommendedSkills,
-      salary,
-      job_type,
-      offer_type,
-      paid,
+      ...jobDetails,
     });
 
     await jobOffer.save();

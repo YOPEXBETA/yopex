@@ -9,7 +9,7 @@ const {
   ChallengeWinner,
   getCompanyNotifications,
   deleteCompany,
-  getAllCompanies
+  getAllCompanies,
 } = require("../controllers/Company.controllers");
 const { getCompany } = require("../controllers/Company.controllers");
 
@@ -25,21 +25,16 @@ const {
 } = require("../validators/company.auth.validators");
 
 companyRouter.put("/approve/:id/", authenticateToken, approveCompany);
-companyRouter.put
-companyRouter.put(
-  "/:id/",
-  validate(companyEditProfileValidator),
-  authenticateToken,
-  editProfile,
-);
+companyRouter.put;
+companyRouter.put("/:id/", authenticateToken, editProfile);
 companyRouter.get("/get/:companyId/", authenticateToken, getCompany);
-companyRouter.get("/all",getAllCompanies);
+companyRouter.get("/all", getAllCompanies);
 companyRouter.post("/challengeWinner", authenticateToken, ChallengeWinner);
 companyRouter.get(
   "/company/:userId/notifications",
   authenticateToken,
-  getCompanyNotifications,
+  getCompanyNotifications
 );
-companyRouter.delete("/:id",authenticateToken,deleteCompany);
+companyRouter.delete("/:id", authenticateToken, deleteCompany);
 
 module.exports = companyRouter;

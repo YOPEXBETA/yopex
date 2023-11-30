@@ -61,6 +61,7 @@ const SocialPosts = () => {
             image={selectedImage}
             closeModal={closeModal}
             post={selectedPost}
+            open={openModal}
           />
         </div>
       )}

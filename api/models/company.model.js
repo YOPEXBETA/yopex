@@ -8,9 +8,7 @@ const ConversationModel = require("./Conversation.model");
 
 const companySchema = new mongoose.Schema(
   {
-    companyName: {
-      type: String,
-    },
+    companyName: { type: String, required: true },
     companyDescription: { type: String },
     companyLogo: { type: String },
     country: { type: String },
@@ -53,30 +51,33 @@ const companySchema = new mongoose.Schema(
     ],
   },
 
-  { timestamps: true },
+  { timestamps: true }
 );
 
-companySchema.pre('findOneAndDelete', { document: false, query: true }, async function (next) {
-  try {
-    console.log("Middleware executed");
-    
-    const query = this;
-    const companyId = query._conditions._id;
+companySchema.pre(
+  "findOneAndDelete",
+  { document: false, query: true },
+  async function (next) {
+    try {
+      console.log("Middleware executed");
 
-    SocialMediaPostModel.deleteMany({ userId: companyId }).exec();
+      const query = this;
+      const companyId = query._conditions._id;
 
-    jobModel.deleteMany({ company: companyId }).exec();
+      SocialMediaPostModel.deleteMany({ userId: companyId }).exec();
 
-    ChallengeModel.deleteMany({ company: companyId }).exec();
-    
-    ConversationModel.deleteMany({ company: companyId }).exec();
-    
-    
-    next();
-  } catch (error) {
-    console.log("Middleware error");
-    next(error);
+      jobModel.deleteMany({ company: companyId }).exec();
+
+      ChallengeModel.deleteMany({ company: companyId }).exec();
+
+      ConversationModel.deleteMany({ company: companyId }).exec();
+
+      next();
+    } catch (error) {
+      console.log("Middleware error");
+      next(error);
+    }
   }
-});
+);
 
 module.exports = mongoose.model("Company", companySchema);

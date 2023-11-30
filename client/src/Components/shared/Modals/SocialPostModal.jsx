@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { formatDistance } from "date-fns";
 import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
 
-const SocialPostModal = ({ closeModal, post }) => {
+const SocialPostModal = ({ open, closeModal, post }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const pageCount = post.postPicturePath.length;
 
@@ -24,11 +24,11 @@ const SocialPostModal = ({ closeModal, post }) => {
   };
 
   return (
-    <div className="h-screen flex z-50 justify-center items-center dark:bg-zinc-800 bg-white w-full">
-      <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center overflow-y-auto mb-8">
-        <div className="max-w-full md:max-w-5xl w-full dark:bg-zinc-800 rounded-lg h-full p-4">
+    <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
+      <div className="bg-white p-4 rounded-lg max-w-[50rem] w-full max-h-[40rem] overflow-y-auto border">
+        <div className="max-w-full  w-full dark:bg-zinc-800 rounded-lg h-full mb-6">
           {/* Image */}
-          <div className="flex  md:flex-row items-start justify-between">
+          <div className="flex  md:flex-row items-start">
             <div className="flex items-center gap-3">
               {post.userPicturePath ? (
                 <img
@@ -89,26 +89,27 @@ const SocialPostModal = ({ closeModal, post }) => {
               </svg>
             </button>
           </div>
+        </div>
+        <div className="col-span-1 md:col-span-1">
+          <div className="mx-auto relative">
+            <img
+              src={post.postPicturePath[currentPage]}
+              alt="Profile"
+              className="w-full h-full object-cover rounded-lg"
+            />
+            <div className="flex justify-center mt-3 absolute bottom-4 left-0 w-full z-10">
+              {renderPaginationDots()}
+            </div>
+          </div>
+        </div>{" "}
+        <div>
           {/* Description */}
-          <div className="col-span-1 md:col-span-1 pt-6 pb-2">
+          <div className="col-span-1 md:col-span-1 pt-6">
             <div className="mb-4" style={{ whiteSpace: "pre-line" }}>
               <div
                 className="text-md dark:text-white"
                 dangerouslySetInnerHTML={{ __html: post?.description }}
               />
-            </div>
-          </div>
-
-          <div className="col-span-1 md:col-span-1">
-            <div className="mx-auto relative h-full">
-              <img
-                src={post.postPicturePath[currentPage]}
-                alt="Profile"
-                className="w-full h-full object-cover rounded-lg"
-              />
-              <div className="flex justify-center mt-3 absolute bottom-4 left-0 w-full z-10">
-                {renderPaginationDots()}
-              </div>
             </div>
           </div>
           <div className="my-4">

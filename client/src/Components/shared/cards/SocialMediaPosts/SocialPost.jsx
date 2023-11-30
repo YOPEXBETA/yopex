@@ -8,13 +8,13 @@ import {
   useLikePost,
   useBookmarkPost,
 } from "../../../../hooks/react-query/usePosts";
-import PostMenuIcon from "../../MenuIcons/PostMenuIcon";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 import SocialPostImage from "../../PostImage/SocialPostImage";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import LoadingSpinner from "../../../LoadingSpinner";
+import PostMenuIcon from "../../../MenuIcons/PostMenuIcon";
 
 const SocialPostCard = ({
   post,
@@ -132,7 +132,7 @@ const SocialPostCard = ({
               {post.postPicturePath
                 .slice(currentPage, currentPage + 1)
                 .map((item, index) => (
-                  <div className="group relative " key={index}>
+                  <div className="group relative" key={index}>
                     <SocialPostImage
                       item={item}
                       height={height}

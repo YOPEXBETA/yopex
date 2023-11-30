@@ -1,4 +1,5 @@
 import { axios } from "../../axios";
+import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
@@ -34,7 +35,11 @@ export const useCreateCompany = () => {
     mutationFn: async (companyData) => {
       await axios.post(`${url}/create/`, companyData);
     },
-    onSuccess: () => queryClient.invalidateQueries("companies"),
+
+    onSuccess: () => {
+      toast.success("Company created successfully");
+      queryClient.invalidateQueries("companies");
+    },
   });
 };
 
@@ -46,7 +51,11 @@ export const useEditCompany = (companyId) => {
       await axios.put(`${url}/company/${companyId}`, companyData);
     },
     onSuccess: () => {
+      toast.success("Company updated successfully");
       queryClient.invalidateQueries(["company", companyId]);
+    },
+    onError: (error) => {
+      toast.error(`Error updating company: ${error.response.data.error.msg}`);
     },
   });
 };
@@ -70,6 +79,7 @@ export const useDeleteCompany = (companyId) => {
       await axios.delete(`${url}/company/${companyId}`);
     },
     onSuccess: () => {
+      toast.success("Company deleted successfully");
       queryClient.invalidateQueries(["companies"]);
     },
   });

@@ -1,5 +1,5 @@
 import { useEditChallenge } from "../../../hooks/react-query/useChallenges";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../hooks/react-query/useSkills";
@@ -11,14 +11,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
   const { data: categorys } = useCategories();
   const itCategory = categorys?.map((category) => category.name);
 
-  const [formData, setFormData] = useState({
-    title: challenge.title,
-    description: challenge.description,
-    price: challenge.price,
-    nbruser: challenge.nbruser,
-    category: challenge.category,
-    RecommendedSkills: challenge.RecommendedSkills,
-  });
+  const [formData, setFormData] = useState({ ...challenge });
 
   const handleCategoryChange = (_, value) => {
     setFormData({
@@ -58,24 +51,32 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
 
   return (
     <div
-      className={`fixed z-10 inset-0 overflow-y-auto  ${
-        open ? "block" : "hidden"
-      }`}
+      open={open}
+      className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"} `}
     >
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
-        <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-          <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-        </div>
-
-        <span
-          className="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-        >
-          &#8203;
-        </span>
-
-        <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-96 sm:p-6 lg:w-[40rem]">
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl md:w-[40rem] p-4 h-[40rem] border  w-screen overflow-y-auto max-h-full">
           <div>
+            <button
+              className="text-gray-400 absolute bg-zinc-900 rounded-full right-4 top-4  hover:bg-gray-200 hover:text-gray-900 text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              onClick={handleClose}
+            >
+              <svg
+                className="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+            </button>
             <h2 className="text-lg leading-6 text-gray-900 mb-4 font-bold">
               Edit "{challenge.title}"
             </h2>
@@ -174,17 +175,10 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                   />
                 </>
               )}
-              <div className="flex justify-between mt-4">
-                <button
-                  className="bg-white px-6 py-2 text-green-500 rounded-md border-2 border-green-500 hover:bg-gray-200"
-                  onClick={handleClose}
-                  type="button"
-                >
-                  Cancel
-                </button>
+              <div className="mt-4">
                 <button
                   id="btn1"
-                  className="px-6 py-2 text-white rounded-md border-2 bg-green-500 hover:bg-green-600"
+                  className="px-6 py-2 text-white rounded-md w-full border-2 bg-green-500 hover:bg-green-600"
                   onClick={handleEdit}
                 >
                   Edit your Challenge
