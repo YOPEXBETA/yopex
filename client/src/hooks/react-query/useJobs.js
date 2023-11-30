@@ -40,6 +40,9 @@ export const useCreateJob = (user) => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
       toast.success("job created successfully!");
     },
+    onError: (error) => {
+      toast.error(`can't create a job ${error.response.data.message}`);
+    },
   });
 };
 
@@ -53,6 +56,9 @@ export const useDeleteJob = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
     },
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
+    },
   });
 };
 
@@ -62,6 +68,9 @@ export const useAppliers = (jobId) => {
     queryFn: async () => {
       const { data } = await axios.get(`${url}/job/jobs/${jobId}/appliers`);
       return data;
+    },
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
     },
   });
 };
@@ -87,6 +96,9 @@ export const useAcceptedAppliers = (job) => {
       );
       return data;
     },
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
+    },
   });
 };
 
@@ -103,6 +115,9 @@ export const useAcceptApplier = (job) => {
       queryClient.invalidateQueries({
         queryKey: ["accepted/appliers"],
       });
+    },
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
     },
   });
 };

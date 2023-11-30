@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
 // ==============================|| MODALS||============================== //
-import { AddCompanyModal } from "./addCompanyModal";
 import { AddPostModal } from "./AddPostsModal";
 import { AddWorkOfferModal } from "../../../../../../../Components/Modals/AddWorkOfferModal";
 import { Link } from "react-router-dom";
@@ -50,17 +49,6 @@ const AddPostMenuList = () => {
 
   const handleCloseModalPost = () => {
     setOpenPostModal(false);
-  };
-
-  // ==============================|| ADD A COMPANY CODE ||============================== //
-  const [openCompanyModal, setOpenCompanyModal] = useState(false);
-
-  const handleClickOpenModalCompany = () => {
-    setOpenCompanyModal(true);
-  };
-
-  const handleCloseModalCompany = () => {
-    setOpenCompanyModal(false);
   };
 
   // Use a ref to detect clicks outside of the menu
@@ -139,12 +127,15 @@ const AddPostMenuList = () => {
             >
               <FaPen className="mr-2 inline-block" /> Add a post
             </button>
-            <button
-              onClick={handleClickOpenModalCompany}
-              className="block px-4 py-2 text-left text-sm text-gray-700 w-full dark:text-gray-100 dark:hover:bg-green-600 hover:bg-gray-100 hover:text-gray-900"
+            <Link
+              to="/create-company"
+              className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
-              <FaBuilding className="mr-2 inline-block" /> Add a company
-            </button>
+              <button>
+                <FaBuilding className="mr-2 inline-block" />
+                Add a company
+              </button>
+            </Link>
           </div>
         </div>
       )}
