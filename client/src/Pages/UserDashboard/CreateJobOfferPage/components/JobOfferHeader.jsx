@@ -7,9 +7,16 @@ const JobOfferHeader = ({ selectedOption, handleCardClick, userProfile }) => {
         <h4 className="mb-4 text-xl font-bold text-white md:text-3xl text-center md:text-left">
           Create a Job Offer
         </h4>
-        <p className="text-lg text-white text-center md:text-left">
-          Select a company and start creating your job offer
-        </p>
+        {userProfile?.companies.length > 0 ? (
+          <p className="text-lg text-white text-center md:text-left">
+            Select a company and start creating your job offer
+          </p>
+        ) : (
+          <p className="text-lg text-white text-center md:text-left">
+            You don't have a company. Please create a company to create a job
+            offer offer.
+          </p>
+        )}
       </div>
       <div className="flex flex-col md:flex-row gap-4 items-center">
         {userProfile?.companies.map((option, index) => (
