@@ -139,12 +139,15 @@ const AddPostMenuList = () => {
             >
               <FaPen className="mr-2 inline-block" /> Add a post
             </button>
-            <button
-              onClick={handleClickOpenModalCompany}
-              className="block px-4 py-2 text-left text-sm text-gray-700 w-full dark:text-gray-100 dark:hover:bg-green-600 hover:bg-gray-100 hover:text-gray-900"
+            <Link
+              to="/create-company"
+              className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             >
-              <FaBuilding className="mr-2 inline-block" /> Add a company
-            </button>
+              <button>
+                <FaBuilding className="mr-2 inline-block" />
+                Add a company
+              </button>
+            </Link>
           </div>
         </div>
       )}

@@ -35,7 +35,11 @@ export const useCreateCompany = () => {
     mutationFn: async (companyData) => {
       await axios.post(`${url}/create/`, companyData);
     },
-    onSuccess: () => queryClient.invalidateQueries("companies"),
+
+    onSuccess: () => {
+      toast.success("Company created successfully");
+      queryClient.invalidateQueries("companies");
+    },
   });
 };
 
