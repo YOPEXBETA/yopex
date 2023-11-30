@@ -75,6 +75,7 @@ export const useDeleteCompany = (companyId) => {
       await axios.delete(`${url}/company/${companyId}`);
     },
     onSuccess: () => {
+      toast.success("Company deleted successfully");
       queryClient.invalidateQueries(["companies"]);
     },
   });
