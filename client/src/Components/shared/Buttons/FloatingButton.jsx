@@ -2,7 +2,6 @@ import React, { useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
 import { AddPostModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/AddPostsModal";
-import { AddCompanyModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/addCompanyModal";
 import { AddWorkOfferModal } from "../../Modals/AddWorkOfferModal";
 import { Link } from "react-router-dom";
 
@@ -67,21 +66,21 @@ const FloatingButton = () => {
             >
               <Link to="/create-job-offer">
                 <button className="block p-4 text-center  text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full">
-                  <FaSuitcase className="mr-2 inline-block dark:text-gray-200" />
+                  <FaSuitcase className="inline-block dark:text-gray-200" />
                 </button>
               </Link>
               <Link to="/create-challenge">
                 <button className="block p-4 text-center  text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full">
-                  <FaFire className="mr-2 inline-block dark:text-gray-200" />
+                  <FaFire className="inline-block dark:text-gray-200" />
                 </button>
               </Link>
 
-              <button
-                onClick={handleClickOpenModalCompany}
-                className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
-              >
-                <FaBuilding className="mr-2 inline-block dark:text-gray-200" />
-              </button>
+              <Link to="/create-company">
+                <button className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full">
+                  <FaBuilding className="inline-block dark:text-gray-200" />
+                </button>
+              </Link>
+
               <button
                 onClick={handleClickOpenModalPost}
                 className="block p-4 text-center   text-sm w-full dark:bg-zinc-700 text-gray-700 bg-white shadow-lg rounded-full"
@@ -92,16 +91,8 @@ const FloatingButton = () => {
           )}
         </div>
       </div>
-      <AddWorkOfferModal
-        open={openWorkModal}
-        handleClose={handleCloseModalWork}
-      />
-
+      {/*HI*/}
       <AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />
-      <AddCompanyModal
-        open={openCompanyModal}
-        handleClose={handleCloseModalCompany}
-      />
     </div>
   );
 };
