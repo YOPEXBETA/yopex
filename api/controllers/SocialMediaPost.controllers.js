@@ -10,8 +10,8 @@ const main = require("../server");
 const CreatePost = async (req, res) => {
   try {
     // Find the current user by ID
-    const user = await UserModel.findById(req.body.userId);
-    const company = await CompanyModel.findById(req.body.userId);
+    const user = await UserModel.findById(req.userId);
+    const company = await CompanyModel.findById(req.userId);
     // Determine whether the current user is a UserModel or CompanyModel
     let owner;
     let isUser = true;
@@ -36,7 +36,7 @@ const CreatePost = async (req, res) => {
 
     // Create a new post with the current user's information
     const newPost = new Post({
-      userId: req.body.userId,
+      userId: req.userId,
       firstname: isUser ? owner.firstname : undefined,
       lastname: isUser ? owner.lastname : undefined,
       companyName: !isUser ? owner.companyName : undefined,
@@ -50,7 +50,7 @@ const CreatePost = async (req, res) => {
     savedpost = await newPost.save();
 
     const data = await Model.findOneAndUpdate(
-      { _id: req.body.userId },
+      { _id: req.userId },
       { $push: { posts: savedpost._id } },
       { new: true }
     ).populate("posts");

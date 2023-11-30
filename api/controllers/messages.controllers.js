@@ -5,7 +5,10 @@ const createMessage = async (req, res) => {
   if (!req.body.message) {
     return res.status(400).json({ error: "Message cannot be empty" });
   }
-
+  console.log(req.userId == req.body.sender);
+  if (req.userId != req.body.sender) {
+    return res.status(401).json({ error: "Not authorized" });
+  }
   const newMessage = new MessageModel(req.body);
   console.log(req.body);
 
@@ -21,6 +24,10 @@ const getMessages = async (req, res) => {
   try {
     const conversation = await ConversationModel.findById(req.params.conversationId)
       .populate("company", "user companyLogo");
+    if (!conversation.members.includes(req.userId)) {
+      return res.status(401).json({ error: "Not authorized" });
+    }
+
     const messages = await MessageModel.find({
       conversationId: req.params.conversationId,
     })

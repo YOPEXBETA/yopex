@@ -20,9 +20,9 @@ const {
   editLevel,
 } = require("../controllers/levels.controller");
 
-adminRouter.post("/createLevel", createLevel);
-adminRouter.put("/updateLevel/:id", editLevel);
-adminRouter.get("/allLevels", getLevels);
+adminRouter.post("/createLevel",isAdmin, createLevel);
+adminRouter.put("/updateLevel/:id",isAdmin, editLevel);
+adminRouter.get("/allLevels",  getLevels);
 adminRouter.delete("/delLevel/:id", isAdmin, deleteLevel);
 adminRouter.get("/Users", isAdmin, getUsers);
 adminRouter.get("/Companies", getCompanies);

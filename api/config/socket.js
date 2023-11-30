@@ -4,7 +4,8 @@ const { sendNotification } = require("../server");
 const initializeSocketIO = (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
-      origin: ["https://yopex.tabaani.co", "http://localhost:3000"],
+      origin: ["https://yopexhub.com", "http://localhost:3000"],
+      methods: ["GET", "POST","PUT", "DELETE"],
     },
   });
 
