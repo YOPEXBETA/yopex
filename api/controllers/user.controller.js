@@ -13,7 +13,7 @@ const { uploadFileToFirebase } = require("./firebase.controllers");
 
 const editProfile = async (req, res) => {
   try {
-    const updateFields = req.body;
+    const { role,score,balance,email,historyPayment,isVerified,yearsRegistered,badgesEarned,reviews,posts,status,...updateFields} = req.body;
 
     if (updateFields.password) {
       const user = await userSchema.findById(req.userId);
@@ -84,7 +84,7 @@ const editProfile = async (req, res) => {
 
     const updatedUser = await userSchema
       .findByIdAndUpdate(req.userId, updateFields, { new: true })
-      .select("-password");
+      .select("firstname lastname email picturePath score country occupation");
 
     return res.status(200).json(updatedUser);
   } catch (error) {
@@ -413,7 +413,7 @@ const getUserStats = async (req, res) => {
 
 const JoinChallenge = async (req, res) => {
   try {
-    const user = await userSchema.findById(req.body.idUser).select("-password");
+    const user = await userSchema.findById(req.userId).select("-password");
     const challenge = await challengeSchema.findById(req.body.idChallenge);
     if (challenge.users.length > challenge.nbruser) {
       return res
@@ -443,7 +443,7 @@ const JoinChallenge = async (req, res) => {
 
 const unjoinChallenge = async (req, res) => {
   try {
-    const user = await userSchema.findById(req.body.idUser).select("-password");
+    const user = await userSchema.findById(req.userId).select("-password");
     const challenge = await challengeSchema.findById(req.body.idChallenge);
 
     // Remove challenge from user's challenges array
@@ -486,8 +486,9 @@ const getUserChallenges = async (req, res) => {
 };
 const getUserNotifications = async (req, res) => {
   try {
+    userId = req.userId;
     const user = await userSchema
-      .findById(req.params.userId)
+      .findById(userId)
       .populate("notifications")
       .populate({
         path: "notifications",

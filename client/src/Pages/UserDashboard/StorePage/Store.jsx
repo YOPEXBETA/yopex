@@ -7,9 +7,8 @@ import {
   useVerifyPayment,
 } from "../../../hooks/react-query/useUsers";
 import { useLocation } from "react-router-dom";
-import AlertContainer from "../../../Components/alerts";
-import AlertSuccess from "../../../Components/successalert";
 import StorePointCard from "../../../Components/shared/cards/StorePointCard";
+import toast from "react-hot-toast";
 
 const Store = () => {
   const { user } = useSelector((state) => state.auth);
@@ -18,8 +17,7 @@ const Store = () => {
   const searchParams = new URLSearchParams(location.search);
   const paymentId = searchParams.get("payment_id");
   const { mutate: verify, data } = useVerifyPayment();
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+
 
   useEffect(() => {
     if (!paymentId) return;
@@ -29,11 +27,9 @@ const Store = () => {
   useEffect(() => {
     if (!data) return;
     if (data.result.status === "SUCCESS") {
-      setSuccess(true);
-      setError("Payment Successfull!");
+      toast.success("Payment Success!");
     } else {
-      setSuccess(false);
-      setError("Payment Fail!");
+      toast.error("Payment Failed!");
     }
   }, [data]);
 
@@ -52,8 +48,7 @@ const Store = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-0 lg:mx-16 md:mx-6 mt-0 md:mt-8 gap-5 ">
-      {error && !success && <AlertContainer error={error} />}
-      {success && <AlertSuccess message={error} />}
+      
       {pointItems.map((item, index) => (
         <StorePointCard
           key={index}

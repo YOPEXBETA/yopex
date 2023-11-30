@@ -5,6 +5,7 @@ const initializeSocketIO = (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
       origin: ["https://yopexhub.com", "http://localhost:3000"],
+      methods: ["GET", "POST","PUT", "DELETE"],
     },
   });
 

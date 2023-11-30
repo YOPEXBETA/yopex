@@ -6,8 +6,10 @@ import toast, { ToastBar } from "react-hot-toast";
 export const register = createAsyncThunk("auth/register", async (data) => {
   try {
     const response = await authService.register(data);
+    toast.success("Registered successfully");
     return response;
   } catch (error) {
+    toast.error(error?.response?.data?.error?.msg);
     throw new Error(error?.response?.data?.error?.msg);
   }
 });
