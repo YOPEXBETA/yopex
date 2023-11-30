@@ -123,7 +123,7 @@ const GeneralInformations = () => {
       <div className="flex items-start justify-between">
         <div>
           <h2 className="text-xl font-bold  dark:text-white uppercase">
-            General Info
+            General Informations
           </h2>
           <p className="text-gray-400 mb-4">
             Edit your account's general information

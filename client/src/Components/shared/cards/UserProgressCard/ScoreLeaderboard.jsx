@@ -29,11 +29,19 @@ const ScoreLeaderboard = () => {
         <div className="flex flex-col  justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-2 xl:space-x-0">
           <div className="flex flex-col justify-start items-start flex-shrink-0">
             <div className="flex justify-center w-full md:justify-start items-center space-x-4 pt-4  border-gray-200">
-              <img
-                src={user?.picturePath}
-                alt="avatar"
-                className="rounded-full h-12 w-12 object-contain"
-              />
+              {user?.picturePath ? (
+                <img
+                  alt="picture"
+                  src={user?.picturePath}
+                  className="rounded-full border h-12 w-12 object-contain"
+                />
+              ) : (
+                <img
+                  alt="default"
+                  src={AvatarProfile}
+                  className="rounded-full h-12 border w-12 object-contain"
+                />
+              )}
               <div className="flex justify-start items-start flex-col space-y-2">
                 <p className="text-base dark:text-white font-semibold leading-4 text-left text-gray-800">
                   {`${user?.firstname} ${user?.lastname}`}

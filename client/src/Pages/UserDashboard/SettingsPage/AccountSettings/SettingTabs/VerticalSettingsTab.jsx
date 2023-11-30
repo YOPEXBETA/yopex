@@ -60,7 +60,7 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
         }`}
         onClick={() => changeValue(3)} // Pass 3 to changeValue for the third tab
       >
-        More Information
+        Experience & Education
       </button>
       <button
         className={`w-52 text-left py-3 px-4 focus:outline-none ${
@@ -72,7 +72,6 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
       >
         Billing
       </button>
-      
     </div>
   );
 };
