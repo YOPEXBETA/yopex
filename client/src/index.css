@@ -4,8 +4,11 @@
 
 @layer base {
   html {
-    @apply bg-zinc-100;
     font-family: "Golos Text", sans-serif;
+  }
+  .bg-dark {
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 25 40 / var(--tw-bg-opacity));
   }
 }
 

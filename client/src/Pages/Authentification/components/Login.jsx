@@ -40,8 +40,8 @@ const Login = () => {
   };
 
   const onSubmit = (data) => {
-    
-    dispatch(login({ ...data, rememberMe }))};
+    dispatch(login({ ...data, rememberMe }));
+  };
 
   // redirect user according to his role
   useEffect(() => {
@@ -63,8 +63,6 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full lg:w-4/6">
       <div>
-        
-
         <div className="grid grid-cols-1 mb-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-2 items-center">
@@ -89,10 +87,7 @@ const Login = () => {
         </div>
         <div className="grid grid-cols-12 w-full mt-6">
           <div className="col-span-12">
-            <label
-              for="input-group-1"
-              className="block  text-sm font-medium text-gray-400 dark:text-white mb-2"
-            >
+            <label className="block  text-sm font-medium text-gray-400 dark:text-white mb-2">
               Email
             </label>
             <div className="relative mb-6">
@@ -118,10 +113,7 @@ const Login = () => {
             </div>
           </div>
           <div className="col-span-12">
-            <label
-              for="input-group-1"
-              className="block  text-sm font-medium dark:text-white text-gray-400 mb-2"
-            >
+            <label className="block  text-sm font-medium dark:text-white text-gray-400 mb-2">
               Password
             </label>
             <div className="relative">

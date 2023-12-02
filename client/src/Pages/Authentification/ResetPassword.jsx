@@ -38,10 +38,7 @@ const ResetPassword = () => {
           </div>
 
           <div className="col-span-12">
-            <label
-              for="input-group-1"
-              className="block  text-sm font-medium text-gray-400 mb-2"
-            >
+            <label className="block  text-sm font-medium text-gray-400 mb-2">
               New Password
             </label>
             <div className="relative mb-6">
@@ -55,10 +52,7 @@ const ResetPassword = () => {
             </div>
           </div>
           <div className="col-span-12">
-            <label
-              for="input-group-1"
-              className="block  text-sm font-medium text-gray-400 mb-2"
-            >
+            <label className="block  text-sm font-medium text-gray-400 mb-2">
               Retype Password
             </label>
             <div className="relative mb-6">

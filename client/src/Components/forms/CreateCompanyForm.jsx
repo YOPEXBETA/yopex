@@ -90,7 +90,7 @@ const CreateCompanyForm = () => {
                     <div className="mt-4">
                       <label
                         className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
-                        for="file_input"
+                        htmlFor="file_input"
                       >
                         Add Company Logo*
                       </label>
@@ -132,14 +132,14 @@ const CreateCompanyForm = () => {
                     <div className="mt-4">
                       <label
                         className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
-                        for="file_input"
+                        htmlFor="file_input"
                       >
                         Please provide company documents to verify your account
                         (optional)
                       </label>
                       <div class="flex items-center justify-center w-full">
                         <label
-                          for="dropzone-file"
+                          htmlFor="dropzone-file"
                           title="Upload company legal document"
                           className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                         >

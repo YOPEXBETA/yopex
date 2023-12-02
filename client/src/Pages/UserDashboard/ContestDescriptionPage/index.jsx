@@ -13,21 +13,21 @@ const ContestDetails = () => {
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
 
+  <div className="flex items-center justify-center h-screen">
+    <LoadingSpinner />
+  </div>;
+
   if (challenge) {
     return (
       <div className="md:space-y-6  dark:bg-zinc-800">
-        <Banner value={value} changeValue={changeValue} />
+        <div className="lg:px-8 xl:px-32 md:pt-8">
+          <Banner value={value} changeValue={changeValue} />
+        </div>
         <div className="grid grid-cols-12 gap-4 px-6 lg:px-8 xl:px-32 dark:bg-zinc-800 h-full">
           <div className="col-span-12 mb-2">
             <ContentSide value={value} />
           </div>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <LoadingSpinner />
       </div>
     );
   }

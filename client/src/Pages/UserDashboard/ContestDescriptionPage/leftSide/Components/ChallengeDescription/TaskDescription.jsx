@@ -9,45 +9,26 @@ const TasksDescription = () => {
   if (challenge)
     return (
       <div>
-        <div className="mb-4 dark:text-white ">
-          <h4 className="text-xl font-semibold">Description</h4>
-        </div>
-        <hr className="my-2 mb-2" />
-        <div className="mb-4" style={{ whiteSpace: "pre-line" }}>
+        <h2 className="mb-8 text-2xl font-bold text-dark dark:text-white sm:text-3xl md:text-[35px] md:leading-[1.28]">
+          {challenge?.title}
+        </h2>
+        <div
+          className="mb-6 text-base text-body-color dark:text-dark-6"
+          style={{ whiteSpace: "pre-line" }}
+        >
           <div
             className="text-md dark:text-white mb-8"
             dangerouslySetInnerHTML={{ __html: challenge?.description }}
           />
         </div>
-        <div className="mb-4  dark:text-white">
-          <h4 className="text-xl font-semibold">Categories</h4>
-        </div>
+
         <hr className="my-4" />
         <div className="mb-4">
           <div className="flex flex-wrap gap-2">
-            {challenge.category.map((cat, i) => (
+            {challenge.RecommendedSkills.map((skill, index) => (
               <span
-                key={i}
-                className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
-              >
-                {cat}
-              </span>
-            ))}
-          </div>
-        </div>
-        <hr className="my-2" />
-        <div className="mb-4 game-skills">
-          <h4 className="text-xl font-semibold dark:text-white">
-            Recommended Skills
-          </h4>
-        </div>
-        <hr className="my-4" />
-        <div className="mb-4">
-          <div className="flex flex-wrap gap-2">
-            {challenge.RecommendedSkills.map((skill, i) => (
-              <span
-                key={i}
-                className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
+                key={index}
+                className="block rounded-md bg-primary/[0.08] py-[5px] px-[14px] text-base text-dark dark:text-white hover:bg-primary hover:text-white"
               >
                 {skill}
               </span>

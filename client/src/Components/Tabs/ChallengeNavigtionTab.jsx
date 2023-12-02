@@ -4,7 +4,7 @@ import { useChallengeById } from "../../hooks/react-query/useChallenges";
 import { useSelector } from "react-redux";
 import moment from "moment";
 
-const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
+const ChallengeNavigationTab = ({ value, changeValue, isRegistered }) => {
   const { id: challengeId } = useParams();
 
   const { data: challenge } = useChallengeById(challengeId);
@@ -17,10 +17,10 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
     : false;
 
   const getDeadlineDifference = (deadline) => {
-      const now = moment();
-      const diff = moment(deadline).diff(now);
-      
-      if (diff < 0) return "0 Days 0 Hours 0 Minutes";
+    const now = moment();
+    const diff = moment(deadline).diff(now);
+
+    if (diff < 0) return "0 Days 0 Hours 0 Minutes";
   };
   const handleProgress = (card) => {
     console.log(getDeadlineDifference(card?.deadline));
@@ -28,7 +28,7 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
       return true;
     return false;
   };
-  
+
   return (
     <div className="w-full">
       <div className="border-b border-divider">
@@ -49,14 +49,16 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
           >
             Participants
           </li>
-          {isRegistered || isOwner?(<li
-            className={`cursor-pointer px-4 py-2 ${
-              value === 3 ? "bg-green-500 text-white" : "text-green-500"
-            }`}
-            onClick={() => changeValue(3)}
-          >
-            Conversation
-          </li>):null}
+          {isRegistered || isOwner ? (
+            <li
+              className={`cursor-pointer px-4 py-2 ${
+                value === 3 ? "bg-green-500 text-white" : "text-green-500"
+              }`}
+              onClick={() => changeValue(3)}
+            >
+              Conversation
+            </li>
+          ) : null}
           {isOwner && handleProgress(challenge) && !challenge?.winner && (
             <li
               className="cursor-pointer px-4 py-2 ml-auto font-semibold uppercase text-red-500 border border-red-500"

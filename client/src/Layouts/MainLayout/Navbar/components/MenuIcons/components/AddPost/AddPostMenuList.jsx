@@ -99,44 +99,36 @@ const AddPostMenuList = () => {
         </button>
       </div>
       {Open && (
-        <div
-          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-zinc-700 ring-1 ring-black ring-opacity-5"
-          ref={menuRef}
-        >
-          <div className="py-1" role="none">
-            <Link
-              to="/create-job-offer"
-              className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-            >
-              <button>
-                <FaSuitcase className="mr-2 inline-block" /> Add work offer
-              </button>
-            </Link>
-            <Link
-              to="/create-challenge"
-              className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-            >
-              <button>
-                <FaFire className="mr-2 inline-block" /> Add a challenge
-              </button>
-            </Link>
+        <div className="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
+          <Link
+            to="/create-challenge"
+            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Create a challenge
+          </Link>
 
-            <button
-              onClick={handleClickOpenModalPost}
-              className="block px-4 py-2 text-left text-sm text-gray-700 w-full dark:text-gray-100 dark:hover:bg-green-600 hover:bg-gray-100 hover:text-gray-900"
-            >
-              <FaPen className="mr-2 inline-block" /> Add a post
-            </button>
-            <Link
-              to="/create-company"
-              className="block px-4 py-2 text-left text-sm w-full dark:text-gray-100 dark:hover:bg-green-600 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-            >
-              <button>
-                <FaBuilding className="mr-2 inline-block" />
-                Add a company
-              </button>
-            </Link>
-          </div>
+          <Link
+            to="/create-job-offer"
+            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Create a work offer
+          </Link>
+
+          <Link
+            to="/create-company"
+            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Create a Company
+          </Link>
+
+          <hr className="border-gray-200 dark:border-gray-700 " />
+
+          <Link
+            onClick={handleClickOpenModalPost}
+            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Create a social post
+          </Link>
         </div>
       )}
 

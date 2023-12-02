@@ -221,7 +221,7 @@ const JobFilterModal = ({
                           }
                         />
                         <label
-                          for="green-checkbox"
+                          htmlFor="green-checkbox"
                           className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                           {category}
@@ -247,7 +247,7 @@ const JobFilterModal = ({
                           onChange={() => handleCheckboxChange(skillName)}
                         />
                         <label
-                          for="green-checkbox"
+                          htmlFor="green-checkbox"
                           className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                           {skillName}
