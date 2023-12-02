@@ -64,7 +64,7 @@ const Banner = ({ changeValue, value }) => {
         <div className="w-full" key={challenge._id}>
           <div className="wow fadeInUp relative z-20 mb-4 h-[300px] overflow-hidden rounded-[5px] md:h-[400px]">
             <img
-              src={challengeBanneru}
+              src={challengeBanner}
               alt="image"
               className="h-full w-full object-cover object-center"
             />
