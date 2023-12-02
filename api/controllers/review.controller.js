@@ -12,7 +12,7 @@ const createReview = async (req, res) => {
   }
   const newReview = new reviewModel({
     companyId: req.body.companyId,
-    userId: req.body.userId,
+    userId: req.userId,
     description: req.body.description,
     star: req.body.star,
     challengeId: req.body.challengeId,
@@ -22,9 +22,9 @@ const createReview = async (req, res) => {
 
     const savedReview = await newReview.save();
     
-    const user = await userModel.findById(req.body.userId);
+    const user = await userModel.findById(req.userId);
     const updatedScore = user.score + (req.body.star*10);
-    await userModel.findByIdAndUpdate(req.body.userId, { score: updatedScore });
+    await userModel.findByIdAndUpdate(req.userId, { score: updatedScore });
 
 
     await res.status(200).json(savedReview);

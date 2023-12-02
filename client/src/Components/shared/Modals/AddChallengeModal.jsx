@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 
 import moment from "moment";
-import AlertContainer from "../../../Components/alerts";
-
 import { useSelector } from "react-redux";
-import AlertSuccess from "../../../Components/successalert";
 import { useForm, Controller } from "react-hook-form";
 
 // ==============================|| HOOKS ||============================== //
@@ -166,11 +163,6 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                     />
                   )}
                 </div>
-
-                {isError && (
-                  <AlertContainer error={error?.response?.data?.error?.msg} />
-                )}
-                {isSuccess && <AlertSuccess message="Created the challenge" />}
 
                 <div className="mb-4">
                   <Controller

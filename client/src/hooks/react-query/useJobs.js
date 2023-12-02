@@ -37,11 +37,15 @@ export const useCreateJob = (user) => {
       await axios.post(`${url}/job/add`, { companyId, ...JobData }, {});
     },
     onSuccess: () => {
+      toast.success("Job added successfully");
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
       toast.success("job created successfully!");
     },
     onError: (error) => {
       toast.error(`can't create a job ${error.response.data.message}`);
+    },
+    onError: () => {
+      toast.error("Error adding job");
     },
   });
 };

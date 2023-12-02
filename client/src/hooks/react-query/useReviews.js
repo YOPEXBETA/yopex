@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -21,6 +22,10 @@ export const useAddReviews = (userId) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews", userId]);
+      toast.success("Review added successfully");
+    },
+    onError: () => {
+      toast.error("Error adding review");
     },
   });
 };

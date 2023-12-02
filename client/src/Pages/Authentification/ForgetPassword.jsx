@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { forgetPassword } from "../../redux/actions/AuthAction";
 import Copyright from "../../Components/shared/Copyright";
+import toast from "react-hot-toast";
 
 const ForgetPassword = () => {
   const dispatch = useDispatch();
@@ -11,8 +12,8 @@ const ForgetPassword = () => {
     e.preventDefault();
     const data = await dispatch(forgetPassword({ email }));
     console.log(data);
-    if (data.message) alert("Password reset email sent");
-    else if (data.error) alert("Email not found");
+    if (data.message) toast.success("Password reset email sent");
+    else if (data.error) toast.error("Email not found");
   };
 
   return (
