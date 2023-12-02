@@ -145,8 +145,8 @@ const Leaderboard = ({ data, query, onSelect, isLoading }) => {
             className="w-5 h-5 rtl:-scale-x-100"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
             />
           </svg>
@@ -187,8 +187,8 @@ const Leaderboard = ({ data, query, onSelect, isLoading }) => {
             className="w-5 h-5 rtl:-scale-x-100"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
             />
           </svg>
