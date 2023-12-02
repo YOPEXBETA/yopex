@@ -108,7 +108,9 @@ const NotificationBell = () => {
           <ul>
             <li>
               <div className="p-4">
-                <h4 className="text-xl font-bold dark:text-gray-200">Notifications</h4>
+                <h4 className="text-xl font-bold dark:text-gray-200">
+                  Notifications
+                </h4>
               </div>
               <hr className="border-t border-gray-200" />
             </li>
@@ -116,7 +118,7 @@ const NotificationBell = () => {
               <div key={notification?._id}>
                 <li>
                   <button
-                    className="flex items-center p-4 space-x-4 hover:bg-green-600 hover:bg-gray-100 w-full text-left"
+                    className="flex items-center p-4 space-x-4  hover:bg-gray-100 w-full text-left"
                     onClick={() => mutate(notification?._id)}
                   >
                     {notification?.user?.picturePath ||
