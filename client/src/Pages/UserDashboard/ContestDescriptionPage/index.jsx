@@ -4,26 +4,39 @@ import { useChallengeById } from "../../../hooks/react-query/useChallenges";
 import Banner from "./TopSide/Banner";
 import ContentSide from "./leftSide/ContentSide";
 import LoadingSpinner from "../../../Components/LoadingSpinner";
+import ChallengeNavigationTab from "../../../Components/Tabs/ChallengeNavigtionTab";
 
 const ContestDetails = () => {
+  const [isRegistered, setIsRegistered] = useState(false);
   const [value, setValue] = useState(0);
   const changeValue = (newValue) => {
     setValue(newValue);
   };
   const { id: challengeId } = useParams();
-  const { data: challenge } = useChallengeById(challengeId);
+  const { data: challenge, isLoading } = useChallengeById(challengeId);
 
-  <div className="flex items-center justify-center h-screen">
-    <LoadingSpinner />
-  </div>;
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   if (challenge) {
     return (
-      <div className="md:space-y-6  dark:bg-zinc-800">
-        <div className="lg:px-8 xl:px-32 md:pt-8">
+      <div className="md:space-y-6  dark:bg-zinc-800 lg:px-8 xl:px-32">
+        <div className="md:mt-8">
           <Banner value={value} changeValue={changeValue} />
         </div>
-        <div className="grid grid-cols-12 gap-4 px-6 lg:px-8 xl:px-32 dark:bg-zinc-800 h-full">
+        <div>
+          <ChallengeNavigationTab
+            changeValue={changeValue}
+            value={value}
+            isRegistered={isRegistered}
+          />
+        </div>
+        <div className="grid grid-cols-12 gap-4 md:px-0 px-6  dark:bg-zinc-800 h-full">
           <div className="col-span-12 mb-2">
             <ContentSide value={value} />
           </div>

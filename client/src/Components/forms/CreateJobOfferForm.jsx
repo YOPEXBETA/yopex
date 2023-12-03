@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 import { useCategories } from "../../hooks/react-query/useCategories";
 import { useSkills } from "../../hooks/react-query/useSkills";
+import { Link } from "react-router-dom";
 
 const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
   const { data: RecommendedSkills } = useSkills();
@@ -46,9 +47,8 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
   return (
     <div className="px-4 py-2">
       <h1 className="text-xl font-semibold">
-        Hello there ?,{" "}
         <span className="font-normal">
-          please fill the required informations to create your job offer
+          Please fill the required informations to create your job offer
         </span>
       </h1>
       <hr className="mt-4" />
@@ -167,13 +167,16 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
           />
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <Link className="px-6 py-2 bg-white rounded-md border-2" to="/feed">
+            Cancel
+          </Link>
           <button
-            className="bg-green-500 px-6 py-3 text-white rounded-md w-full hover:bg-green-700"
+            className="bg-green-500 px-6 py-2 text-white rounded-md hover:bg-green-700"
             type="submit"
             disabled={isSubmitting}
           >
-            Post a job offer
+            Create a job offer
           </button>
         </div>
       </form>

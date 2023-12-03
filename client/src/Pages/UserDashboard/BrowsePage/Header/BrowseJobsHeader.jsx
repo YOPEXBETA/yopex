@@ -15,7 +15,7 @@ const BrowseJobsHeader = ({
   const [openPostModal, setOpenPostModal] = useState(false);
   const toggleModal = () => setOpenPostModal((prev) => !prev);
 
-  const [selectedTab, setSelectedTab] = useState(0); // 0 for Categories, 1 for Skills
+  const [selectedTab, setSelectedTab] = useState(0);
 
   const handleTabClick = (newValue) => {
     setSelectedTab(newValue);
