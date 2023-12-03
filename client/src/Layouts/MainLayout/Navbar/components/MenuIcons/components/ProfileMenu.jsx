@@ -162,26 +162,6 @@ const ProfileMenu = () => {
             >
               Sign Out
             </a>
-
-            {/* <a
-              onClick={toggleTheme}
-              className="px-3 py-2 hover:bg-gray-100 space-x-2  dark:hover:bg-green-600 flex items-center cursor-pointer"
-            >
-              {document.documentElement.classList.contains("dark") || isDark ? (
-                <LightModeIcon className="w-6 h-6 text-gray-600 dark:text-white" />
-              ) : (
-                <DarkModeIcon className="w-6 h-6 text-gray-600 dark:text-white" />
-              )}
-
-              {document.documentElement.classList.contains("dark") ? (
-                <span className="text-gray-600 dark:text-white">
-                  Light Mode
-                </span>
-              ) : (
-                <span className="text-gray-600 dark:text-white">Dark Mode</span>
-              )}
-            </a>
-              */}
           </div>
         )}
       </div>

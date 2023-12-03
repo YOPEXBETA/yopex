@@ -104,14 +104,14 @@ const AddPostMenuList = () => {
             to="/create-challenge"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
           >
-            Create a challenge
+            Create a Challenge
           </Link>
 
           <Link
             to="/create-job-offer"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
           >
-            Create a work offer
+            Create a Job offer
           </Link>
 
           <Link
@@ -127,7 +127,7 @@ const AddPostMenuList = () => {
             onClick={handleClickOpenModalPost}
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
           >
-            Create a social post
+            Create a Social post
           </Link>
         </div>
       )}

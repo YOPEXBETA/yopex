@@ -44,9 +44,6 @@ export const useCreateJob = (user) => {
     onError: (error) => {
       toast.error(`can't create a job ${error.response.data.message}`);
     },
-    onError: () => {
-      toast.error("Error adding job");
-    },
   });
 };
 
