@@ -7,6 +7,7 @@ import { useCreateChallenge } from "../../hooks/react-query/useChallenges";
 import { useUserById } from "../../hooks/react-query/useUsers";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCategories } from "../../hooks/react-query/useCategories";
+import { Link } from "react-router-dom";
 
 const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
   const [selectedOptionpaid, setSelectedOptionpaid] = useState("false");
@@ -45,21 +46,16 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
 
   const now = new Date().toISOString().slice(0, -8);
   return (
-    <div className="bg-white border p-4 rounded-lg">
+    <div className="bg-white p-4 rounded-lg">
       <div className="px-4 py-2">
         <h1 className="text-xl font-semibold">
-          Hello there ?,{" "}
           <span className="font-normal">
-            please fill the challenge informations
+            Please fill the required informations to create your challenge
           </span>
         </h1>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{ width: "100%" }}
-          spacing={2}
-          lang="en"
-        >
-          <div className="mt-4">
+        <hr className="mt-4" />
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
+          <div>
             <label
               htmlFor="jobTitle"
               className="block text-xs font-semibold text-gray-600 uppercase"
@@ -253,12 +249,15 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
           </div>
 
           <div className="flex justify-between">
+            <Link className="px-6 py-2 bg-white rounded-md border-2" to="/feed">
+              Cancel
+            </Link>
             <button
-              className="bg-green-500 px-6 py-2 w-full hover:bg-green-700 text-white rounded-md"
+              className="bg-green-500 px-6 py-2 text-white rounded-md hover:bg-green-700"
               type="submit"
               disabled={isSubmitting}
             >
-              Add Challenge
+              Create a Challenge
             </button>
           </div>
         </form>

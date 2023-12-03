@@ -52,7 +52,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
         </span>
       </h1>
       <hr className="mt-4" />
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
         <div>
           <label
             htmlFor="jobTitle"
@@ -81,7 +81,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
             <select
               id="jobType"
               required={true}
-              className="bg-gray-50 border border-gray-300 text-gray-900 mt-2 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-white border border-gray-300 text-gray-900 mt-2 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
               {...register("job_type", { required: true })}
             >
               <option value="" defaultValue>
@@ -94,7 +94,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
             </select>
           </div>
 
-          <div className="flex-1 mb-4">
+          <div className="flex-1">
             <label
               htmlFor="offerType"
               className="block text-xs font-semibold text-gray-600 uppercase"
@@ -104,7 +104,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
             <select
               id="offerType"
               required={true}
-              className="bg-gray-50 border border-gray-300 mt-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-white border border-gray-300 text-gray-900 mt-2 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
               {...register("offer_type", { required: true })}
             >
               <option value="" defaultValue>
@@ -118,7 +118,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
         </div>
 
         {/* Render skills options */}
-        <div className="mb-6">
+        <div className="flex-1">
           <label
             htmlFor="selectSkills"
             className="block text-xs font-semibold text-gray-600 uppercase"
