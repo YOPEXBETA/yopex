@@ -35,12 +35,12 @@ const AdminSidebar = ({ open, onClose }) => {
 
       <div className="  h-px  dark:bg-white/30" />
 
-      <ul className="mb-auto pt-1">
+      <ul className="mb-auto pt-1 overflow-y-auto h-[30rem]">
         {routes.children.map((route, index) => (
           <li key={index} className="hover:bg-green-500">
             <NavLink
               to={route.path}
-              className="flex items-center  py-4 px-[40px] space-x-3 text-gray-500 font-medium transition-colors duration-150 hover:text-white dark:hover:text-gray-300"
+              className="flex items-center py-4 px-[40px] space-x-3 text-gray-500 font-medium transition-colors duration-150 hover:text-white dark:hover:text-gray-300"
             >
               <span className="text-lg">{route.icon}</span>
               <span className="text-lg">{route.path}</span>

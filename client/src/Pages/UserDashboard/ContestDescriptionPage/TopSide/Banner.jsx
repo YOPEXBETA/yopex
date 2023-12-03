@@ -58,20 +58,20 @@ const Banner = ({ changeValue, value }) => {
 
   return (
     <div className="w-full" key={challenge._id}>
-      <div className="wow fadeInUp relative z-20 mb-4 h-[300px] overflow-hidden rounded-[5px] md:h-[400px]">
+      <div className="relative z-20 mb-4 h-[300px] overflow-hidden  md:h-[400px]">
         <img
           src={challengeBanner}
           alt="image"
           className="h-full w-full object-cover object-center"
         />
         <div className="absolute top-0 left-0 z-10 flex h-full w-full items-end bg-gradient-to-t from-dark-700 to-transparent">
-          <div className="flex flex-wrap items-center p-4 pb-4 sm:px-8">
+          <div className="flex flex-wrap items-center p-4 pb-4 lg:px-32 md:px-8">
             <div className="mb-4 mr-5 flex items-center md:mr-10">
               <div className="mr-4 h-10 w-10 overflow-hidden rounded-full">
                 <img
                   src={challenge?.company?.companyLogo}
                   alt="image"
-                  className="w-full"
+                  className="w-full object-cover"
                 />
               </div>
               <p className="text-base font-medium text-white">
@@ -122,17 +122,17 @@ const Banner = ({ changeValue, value }) => {
               <p className="flex items-center text-sm font-medium text-white">
                 <span className="mr-3">
                   <svg
+                    xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
+                    fill="currentColor"
+                    class="bi bi-people"
                     viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="fill-current"
                   >
-                    <path d="M7.9998 5.92505C6.8498 5.92505 5.9248 6.85005 5.9248 8.00005C5.9248 9.15005 6.8498 10.075 7.9998 10.075C9.1498 10.075 10.0748 9.15005 10.0748 8.00005C10.0748 6.85005 9.1498 5.92505 7.9998 5.92505ZM7.9998 8.95005C7.4748 8.95005 7.0498 8.52505 7.0498 8.00005C7.0498 7.47505 7.4748 7.05005 7.9998 7.05005C8.5248 7.05005 8.9498 7.47505 8.9498 8.00005C8.9498 8.52505 8.5248 8.95005 7.9998 8.95005Z" />
-                    <path d="M15.3 7.1251C13.875 5.0001 11.9 2.8501 8 2.8501C4.1 2.8501 2.125 5.0001 0.7 7.1251C0.35 7.6501 0.35 8.3501 0.7 8.8751C2.125 10.9751 4.1 13.1501 8 13.1501C11.9 13.1501 13.875 10.9751 15.3 8.8751C15.65 8.3251 15.65 7.6501 15.3 7.1251ZM14.375 8.2501C12.55 10.9251 10.725 12.0251 8 12.0251C5.275 12.0251 3.45 10.9251 1.625 8.2501C1.525 8.1001 1.525 7.9001 1.625 7.7501C3.45 5.0751 5.275 3.9751 8 3.9751C10.725 3.9751 12.55 5.0751 14.375 7.7501C14.45 7.9001 14.45 8.1001 14.375 8.2501Z" />
+                    <path d="M2 10s1-2 2-2h1s1 0 1 1-1 1-1 1H4s-1 2-1 2a5.4 5.4 0 0 0 2 0c0 .2 0 .3 0 .5s.1.4.1.6a2 2 0 1 0 2 0c0-.2 0-.4.1-.6s0-.3 0-.5a5.4 5.4 0 0 0 2 0c0 .2 0 .3 0 .5s0 .4.1.6a2 2 0 1 0 2 0c0-.2 0-.4.1-.6s0-.3 0-.5a5.4 5.4 0 0 0 2 0c0 .2 0 .3 0 .5s0 .4.1.6a2 2 0 1 0 2 0c0-.2 0-.4.1-.6s0-.3 0-.5a5.4 5.4 0 0 0 2 0H13s-1-2-1-2h-1s-1 0-1 1 1 1 1 1h1s1 2 1 2H2zm4-8a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
                   </svg>
                 </span>
+
                 {challenge?.users?.length}
               </p>
             </div>

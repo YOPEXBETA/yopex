@@ -25,20 +25,22 @@ const ContestDetails = () => {
 
   if (challenge) {
     return (
-      <div className="md:space-y-6  dark:bg-zinc-800 lg:px-8 xl:px-32">
-        <div className="md:mt-8">
+      <div className="md:space-y-6  dark:bg-zinc-800">
+        <div>
           <Banner value={value} changeValue={changeValue} />
         </div>
-        <div>
-          <ChallengeNavigationTab
-            changeValue={changeValue}
-            value={value}
-            isRegistered={isRegistered}
-          />
-        </div>
-        <div className="grid grid-cols-12 gap-4 md:px-0 px-6  dark:bg-zinc-800 h-full">
-          <div className="col-span-12 mb-2">
-            <ContentSide value={value} />
+        <div className="lg:px-8 xl:px-32">
+          <div className="mb-4">
+            <ChallengeNavigationTab
+              changeValue={changeValue}
+              value={value}
+              isRegistered={isRegistered}
+            />
+          </div>
+          <div className="grid grid-cols-12 gap-4 md:px-0 dark:bg-zinc-800 h-full">
+            <div className="col-span-12 mb-2">
+              <ContentSide value={value} />
+            </div>
           </div>
         </div>
       </div>

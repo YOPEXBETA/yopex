@@ -8,8 +8,8 @@ const TasksDescription = () => {
 
   if (challenge)
     return (
-      <div>
-        <h2 className="mb-8 text-2xl font-bold text-dark dark:text-white sm:text-3xl md:text-[35px] md:leading-[1.28]">
+      <div className="bg-white border rounded-lg p-4">
+        <h2 className="mb-6 text-2xl font-bold text-dark dark:text-white sm:text-3xl md:text-[35px] md:leading-[1.28]">
           {challenge?.title}
         </h2>
         <div

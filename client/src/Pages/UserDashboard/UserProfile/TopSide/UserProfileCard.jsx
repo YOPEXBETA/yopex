@@ -121,7 +121,7 @@ const UserProfileCard = () => {
           {userId === user._id ? (
             <a href="/settings" className="block">
               <button className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-3 px-4 rounded-full w-full text-white">
-                Edit Profile
+                Edit Your Profile
               </button>
             </a>
           ) : (

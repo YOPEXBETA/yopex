@@ -62,8 +62,8 @@ const ClientCard = () => {
 
   return (
     <div>
-      <div className="space-y-4 dark:bg-zinc-800">
-        <div className="border-2 border-zinc-200 rounded-xl py-4 px-11 flex justify-center ">
+      <div className="space-y-4">
+        <div className="rounded-lg py-4 px-11 flex justify-center bg-white border  dark:bg-zinc-800">
           <div className="flex flex-col items-center pb-3">
             <div className="flex flex-col items-center">
               <h5 className="text-lg text-gray-400 pb-2">Contest Prize</h5>
@@ -75,7 +75,7 @@ const ClientCard = () => {
                 </div>
               ) : (
                 <p className="text-2xl font-bold pb-6 dark:text-white">
-                  Free Entry
+                  Free Price
                 </p>
               )}
             </div>

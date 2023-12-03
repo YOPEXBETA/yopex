@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { FiAlignJustify } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser, logout } from "../../../redux/auth/authSlice";
-import { FaCog, FaSignOutAlt } from "react-icons/fa";
+import { logout } from "../../../redux/auth/authSlice";
+import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
 
 const AdminNavbar = (props) => {
   const { onOpenSidenav, brandText } = props;
@@ -92,59 +91,77 @@ const AdminNavbar = (props) => {
               <img
                 src={user.picturePath}
                 alt="picture"
-                className="rounded-full bg-green-500 w-8 h-8 object-contain"
+                className="rounded-full w-8 h-8 object-contain border"
               />
             </button>
           </div>
-          <div className="relative">
+          <div>
             {open && (
-              <div className="absolute right-0 mt-6 bg-white shadow-lg rounded-lg min-w-[320px] max-w-[380px] overflow-visible border border-gray-200">
+              <div className="absolute right-0 z-20 w-60 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
                 <a
-                  href={`/profile/${user._id}`}
-                  className="p-3 hover:bg-gray-100 space-x-2 flex items-center"
+                  href={`/profile/${user?._id}`}
+                  className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
-                  <img
-                    src={user.picturePath}
-                    alt="User Avatar"
-                    className="w-12 h-12 rounded-full bg-green-500"
-                  />
-                  <div className="flex-grow">
-                    {user.role === "user" || user.role === "admin" ? (
-                      <div>
-                        <p className="text-[1rem] font-medium">
-                          {user.firstname + " " + user.lastname}
-                        </p>
-                        <p className="text-gray-500">{user.country}</p>
-                      </div>
-                    ) : (
-                      <p className="text-xl font-medium">{user.companyName}</p>
-                    )}
+                  {user.picturePath ? (
+                    <img
+                      alt="picture"
+                      src={user.picturePath}
+                      className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9 border"
+                    />
+                  ) : (
+                    <img
+                      alt="default"
+                      src={AvatarProfile}
+                      className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9 border"
+                    />
+                  )}
+                  <div className="mx-1">
+                    <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                      {user?.firstname + " " + user?.lastname}
+                    </h1>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {user?.country}
+                    </p>
                   </div>
                 </a>
-                <hr className="border-t border-gray-200 mb-2" />
+                <hr className="border-gray-200 dark:border-gray-700 " />
+
+                <a
+                  href={`/profile/${user._id}`}
+                  className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                >
+                  View Profile
+                </a>
                 {user.role === "admin" && (
                   <a
                     href="/Dashboard"
-                    className="p-3 hover:bg-gray-100 space-x-2 flex items-center cursor-pointer"
+                    className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
-                    <AdminPanelSettingsIcon className="w-6 h-6 text-gray-600" />
-                    <span className="text-gray-600">Admin Dashboard</span>
+                    Dashboard
                   </a>
                 )}
+
                 <a
-                  href="/settings"
-                  className="px-3 py-2 hover:bg-gray-100 space-x-2 flex items-center"
+                  href="/"
+                  className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
-                  <FaCog className="w-6 h-6 text-gray-600" />
-                  <span className="text-gray-600">Settings</span>
+                  Home
                 </a>
                 <a
-                  href="/login"
-                  onClick={handleLogout}
-                  className="px-3 py-2 hover:bg-gray-100 space-x-2 flex items-center cursor-pointer"
+                  href="/settings"
+                  className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
-                  <FaSignOutAlt className="w-6 h-6 text-gray-600" />
-                  <span className="text-gray-600">Logout</span>
+                  Settings
+                </a>
+
+                <hr className="border-gray-200 dark:border-gray-700 " />
+
+                <a
+                  href="/"
+                  onClick={handleLogout}
+                  className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                >
+                  Sign Out
                 </a>
               </div>
             )}
