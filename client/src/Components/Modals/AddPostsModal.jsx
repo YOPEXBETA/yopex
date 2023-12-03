@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useCategories } from "../../../../../../../hooks/react-query/useCategories";
-import { useCreatePost } from "../../../../../../../hooks/react-query/usePosts";
-import { useUserById } from "../../../../../../../hooks/react-query/useUsers";
-import { axios } from "../../../../../../../axios";
+import { useCategories } from "../../hooks/react-query/useCategories";
+import { useCreatePost } from "../../hooks/react-query/usePosts";
+import { useUserById } from "../../hooks/react-query/useUsers";
+import { axios } from "../../axios";
 
 import Select from "react-select";
 import { FaImage } from "react-icons/fa";
@@ -86,7 +86,7 @@ export const AddPostModal = ({ open, handleClose }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex justify-between px-4 pt-4">
                 <h4 className="text-xl font-bold mb-4 text-black dark:text-white">
-                  Add a Post
+                  Create a Post
                 </h4>
                 <button
                   type="button"
@@ -128,26 +128,14 @@ export const AddPostModal = ({ open, handleClose }) => {
                   ))}
                 </select>
                 <div className="space-y-4">
-                  <div className="mb-4">
-                    <label
-                      htmlFor="CompanyDescription"
-                      className="dark:text-white block mb-2"
-                    >
-                      Post Description
-                    </label>
+                  <div>
                     <textarea
-                      className="w-full h-40 p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2"
+                      className="w-full h-40 p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                       {...register("description", { required: false })}
                       placeholder="What's on your mind?"
                     />
                   </div>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="selectCategories"
-                      className="dark:text-white block mb-2"
-                    >
-                      Select Categories
-                    </label>
+                  <div>
                     <Controller
                       name="categories"
                       control={control}

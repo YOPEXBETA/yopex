@@ -1,17 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-// ==============================|| ICONS ||============================== //
-import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
 // ==============================|| MODALS||============================== //
-import { AddPostModal } from "./AddPostsModal";
-import { AddWorkOfferModal } from "../../../../../../../Components/Modals/AddWorkOfferModal";
 import { Link } from "react-router-dom";
+import { AddPostModal } from "../../../../../../../Components/Modals/AddPostsModal";
 
 // ==============================|| CODE ||============================== //
 
 const AddPostMenuList = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null);
-
   const [Open, setOpen] = useState(false);
 
   const handleClick = (event) => setOpen(!Open);
@@ -20,26 +14,6 @@ const AddPostMenuList = () => {
     setOpen(false);
   };
 
-  // ==============================|| ADD WORK OFFER CODE ||============================== //
-  const [openWorkModal, setOpenWorkModal] = useState(false);
-
-  const handleClickOpenModalWork = () => {
-    setOpenWorkModal(true);
-  };
-
-  const handleCloseModalWork = () => {
-    setOpenWorkModal(false);
-  };
-  // ==============================|| ADD A CHALLENGE CODE ||============================== //
-  const [openChallengeModal, setOpenChallengeModal] = useState(false);
-
-  const handleClickOpenModalChallenge = () => {
-    setOpenChallengeModal(true);
-  };
-
-  const handleCloseModalChallenge = () => {
-    setOpenChallengeModal(false);
-  };
   // ==============================|| ADD A POST CODE ||============================== //
   const [openPostModal, setOpenPostModal] = useState(false);
 
@@ -132,16 +106,7 @@ const AddPostMenuList = () => {
         </div>
       )}
 
-      <AddWorkOfferModal
-        open={openWorkModal}
-        handleClose={handleCloseModalWork}
-      />
-
       <AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />
-      {/* <AddCompanyModal
-        open={openCompanyModal}
-        handleClose={handleCloseModalCompany}
-      /> */}
     </div>
   );
 };

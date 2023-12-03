@@ -66,7 +66,7 @@ const CreateCompanyForm = () => {
                 />
               </div>
               <div>
-                <div>
+                <div className="mt-2">
                   <label className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white">
                     Company Description*
                   </label>
