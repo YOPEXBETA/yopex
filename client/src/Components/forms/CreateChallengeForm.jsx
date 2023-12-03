@@ -58,7 +58,7 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
           <div>
             <label
               htmlFor="jobTitle"
-              className="block text-xs font-semibold text-gray-600 uppercase"
+              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Challenge Title
             </label>
@@ -70,10 +70,10 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
               {...register("title", { required: true })}
             />
           </div>
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="jobDescription"
-              className="block text-xs font-semibold text-gray-600 uppercase"
+              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Challenge Description
             </label>
@@ -84,10 +84,10 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
               placeholder="challenge description"
             />
           </div>
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="Challengeprize"
-              className="block text-xs font-semibold text-gray-600 uppercase"
+              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Challenge prize
             </label>
@@ -116,10 +116,10 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
               />
             </div>
           </div>
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="selectSkills"
-              className="block text-xs font-semibold text-gray-600 uppercase"
+              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Select Skills
             </label>
@@ -157,10 +157,10 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
             </div>
           </div>
 
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="selectCategories"
-              className="block text-xs font-semibold text-gray-600 uppercase"
+              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Select Categories
             </label>
@@ -198,10 +198,10 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
             </div>
           </div>
 
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="jobDescription"
-              className="block text-xs font-semibold text-gray-600 uppercase"
+              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Specify the participant number
             </label>
@@ -214,10 +214,10 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
             />
           </div>
 
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="deadline"
-              className="block text-xs font-semibold text-gray-600 uppercase"
+              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Deadline
             </label>

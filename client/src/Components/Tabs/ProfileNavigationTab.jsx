@@ -12,7 +12,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
 
   return (
     <div>
-      <div className="divide-gray-100 p-2 dark:border-zinc-500 overflow-hidden rounded-lg bg-slate-100 dark:bg-zinc-800 text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <div className="divide-gray-100 p-2 dark:border-zinc-500 overflow-hidden rounded-lg bg-slate-200 dark:bg-zinc-800 text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
         <button
           className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
             value === 0

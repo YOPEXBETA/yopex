@@ -56,7 +56,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
         <div>
           <label
             htmlFor="jobTitle"
-            className="block text-xs font-semibold text-gray-600 uppercase"
+            className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
           >
             Job Title
           </label>
@@ -71,10 +71,10 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
         </div>
 
         <div className="flex space-x-4">
-          <div className="flex-1 mb-4">
+          <div className="flex-1">
             <label
               htmlFor="jobType"
-              className="block text-xs font-semibold text-gray-600 uppercase"
+              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Job Type
             </label>
@@ -97,7 +97,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
           <div className="flex-1">
             <label
               htmlFor="offerType"
-              className="block text-xs font-semibold text-gray-600 uppercase"
+              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Offer Type
             </label>
@@ -121,7 +121,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
         <div className="flex-1">
           <label
             htmlFor="selectSkills"
-            className="block text-xs font-semibold text-gray-600 uppercase"
+            className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
           >
             Select Skills
           </label>
@@ -155,7 +155,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
         <div>
           <label
             htmlFor="jobDescription"
-            className="block text-xs font-semibold text-gray-600 uppercase"
+            className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
           >
             Job Description
           </label>
