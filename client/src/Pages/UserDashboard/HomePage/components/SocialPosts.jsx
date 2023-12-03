@@ -6,7 +6,6 @@ import {
 } from "../../../../hooks/react-query/usePosts";
 import SocialPostCard from "../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
-import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import SocialPostSkeleton from "../../../../Components/SkeletonLoading/SocialPostSkeleton";
 
 const SocialPosts = () => {

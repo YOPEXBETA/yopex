@@ -64,9 +64,13 @@ export const useCreatePost = (category, userId) => {
       queryClient.invalidateQueries({ queryKey: ["posts", category] });
       queryClient.invalidateQueries({ queryKey: ["posts", userId] });
     },
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
+    },
   });
 };
 
+// delete a post
 // delete a post
 export const useDeletePost = (userId, category = "") => {
   const queryClient = useQueryClient();
@@ -97,6 +101,9 @@ export const useEditPost = (postId, userId, category = "") => {
       queryClient.invalidateQueries({ queryKey: ["posts", category] });
       queryClient.invalidateQueries({ queryKey: ["posts", userId] });
     },
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
+    },
   });
 };
 
@@ -114,6 +121,9 @@ export const useLikePost = (userId, ownerId, category = "") => {
       queryClient.invalidateQueries({
         queryKey: ["posts", ownerId],
       });
+    },
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
     },
   });
 };
@@ -134,6 +144,9 @@ export const useSharePost = (userId, ownerId, category = "") => {
         queryKey: ["posts", ownerId],
       });
     },
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
+    },
   });
 };
 
@@ -148,6 +161,9 @@ export const useBookmarkPost = (userId, postId, category = "") => {
       queryClient.invalidateQueries({
         queryKey: ["posts", userId, "bookmarked"],
       });
+    },
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
     },
   });
 };

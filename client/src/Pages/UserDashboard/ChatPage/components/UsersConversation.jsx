@@ -58,28 +58,30 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
   };
   return (
     <div className="dark:bg-zinc-800">
-      <div className="flex-1 pt-4  min-h-[85vh] justify-between flex flex-col ">
-        <div className="flex sm:items-center justify-between pb-3 border-b-2 border-gray-200 px-4">
-          {otherUser.picturePath && (
-            <div className="relative flex items-center justify-between space-x-4">
-              <img
-                src={otherUser.picturePath}
-                alt=""
-                className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border object-cover"
-              />
-              <div className="text-lg mt-1 dark:text-gray-200 flex items-center font-bold">
-                <span className="mr-3">
-                  {otherUser.firstname} {otherUser.lastname}
-                </span>
+      <div className="flex-1   justify-between flex flex-col">
+        <div className="bg-white pt-4">
+          <div className="flex sm:items-center justify-between pb-3 border-b-2 border-gray-200 px-4">
+            {otherUser.picturePath && (
+              <div className="relative flex items-center justify-between space-x-4">
+                <img
+                  src={otherUser.picturePath}
+                  alt=""
+                  className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border object-cover"
+                />
+                <div className="text-lg mt-1 dark:text-gray-200 flex items-center font-bold">
+                  <span className="mr-3">
+                    {otherUser.firstname} {otherUser.lastname}
+                  </span>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         <div
           id="messages"
           ref={chatContainerRef}
-          className="flex flex-col  space-y-4 lg:p-3 p-0 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch h-80  w-full px-4 overflow-auto lg:overflow-auto"
+          className="h-screen overflow-y-auto p-4"
         >
           {arrivalMessage?.length === 0 ? (
             <div>
@@ -88,34 +90,25 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
               </p>
             </div>
           ) : (
-            <div className="h-full">
+            <div className="h-screen pb-36">
               {arrivalMessage?.map((message, index) => {
                 return (
-                  <div key={index} className="px-11 py-6">
-                    <div className="grid ">
+                  <div key={index} className="overflow-y-auto p-4">
+                    <div className="grid">
                       <div className="col-span-12">
                         {message.sender._id === user._id ? (
-                          <div className="text-right">
-                            <p className="dark:text-gray-200 text-md">
+                          <div className="text-right ">
+                            <p className="text-sm bg-white py-2 px-4 shadow rounded-xl max-w-96">
                               {message.message}
-                            </p>
-                            <p className="text-gray-500 text-[0.75rem]">
-                              {formatDistance(
-                                new Date(message.createdAt),
-                                new Date(),
-                                {
-                                  addSuffix: true,
-                                }
-                              )}
                             </p>
                           </div>
                         ) : (
-                          <div>
-                            <div className="flex gap-2 items-center">
+                          <div className="flex mb-4 cursor-pointer">
+                            <div className="w-9 h-9 rounded-full flex items-center justify-center mr-2">
                               {message.sender.picturePath && (
                                 <img
                                   alt="image"
-                                  className="h-11 w-11 rounded-full border"
+                                  className="h-9 w-9 rounded-full border object-cover"
                                   src={
                                     message.sender.companyLogo
                                       ? message.sender.companyLogo
@@ -123,18 +116,9 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
                                   }
                                 />
                               )}
-                              <div>
-                                <p className="dark:text-gray-200 text-md">
-                                  {message.message}
-                                </p>
-                                <p className="text-gray-500 dark:text-gray-400 text-[0.75rem]">
-                                  {formatDistance(
-                                    new Date(message.createdAt),
-                                    new Date(),
-                                    { addSuffix: true }
-                                  )}
-                                </p>
-                              </div>
+                            </div>
+                            <div className="flex max-w-96 bg-indigo-500  rounded-lg p-3 gap-3">
+                              <p className="text-white">{message.message}</p>
                             </div>
                           </div>
                         )}
@@ -147,34 +131,25 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
           )}
         </div>
 
-        <div className="border-t-2 mt-5  border-gray-200 px-4 pt-4 mb-10 sm:mb-0">
-          <form className="relative flex" onSubmit={handleCreateMessage}>
-            <input
-              type="text"
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
-              placeholder="Write your message!"
-              className="w-full focus:outline-none dark:bg-zinc-700 dark:placeholder-gray-200 dark:text-gray-200 focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-4 bg-gray-200 rounded-md py-3"
-            />
-            <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
+        <footer class="bg-white border-t border-gray-300 p-4 bottom-0 lg:w-3/4 fixed w-full">
+          <form onSubmit={handleCreateMessage}>
+            <div class="flex items-center">
+              <input
+                type="text"
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                placeholder="Type a message..."
+                class="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-green-500"
+              />
               <button
-                type="submit"
                 onClick={handleCreateMessage}
-                className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-green-500 hover:bg-purple-500 focus:outline-none"
+                class="bg-green-500 text-white px-4 py-2 rounded-md ml-2"
               >
-                <span className="font-bold">Send</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="h-6 w-6 ml-2 transform rotate-90"
-                >
-                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                </svg>
+                Send
               </button>
             </div>
           </form>
-        </div>
+        </footer>
       </div>
     </div>
   );
