@@ -5,6 +5,7 @@ import { useCreateCompany } from "../../hooks/react-query/useCompany";
 import { useFileUpload } from "../../hooks/react-query/useUsers";
 import { FaImage, FaFile } from "react-icons/fa";
 import LoadingSpinner from "../LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const CreateCompanyForm = () => {
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
@@ -43,14 +44,13 @@ const CreateCompanyForm = () => {
   };
   return (
     <div>
-      <h1 className="text-xl font-semibold text-left">
-        Hello there ?,
+      <h1 className="text-xl font-semibold">
         <span className="font-normal">
           please fill the required informations to create your company page
         </span>
       </h1>
       <hr className="my-4" />
-      <div className="">
+      <div className="space-y-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-2">
             <div>
@@ -137,7 +137,7 @@ const CreateCompanyForm = () => {
                         Please provide company documents to verify your account
                         (optional)
                       </label>
-                      <div class="flex items-center justify-center w-full">
+                      <div className="flex items-center justify-center w-full">
                         <label
                           htmlFor="dropzone-file"
                           title="Upload company legal document"
@@ -200,13 +200,15 @@ const CreateCompanyForm = () => {
               )}
             </div>
           </div>
-
-          <div className="flex justify-between py-4">
+          <div className="flex justify-between mb-6">
+            <Link className="px-6 py-2 bg-white rounded-md border-2" to="/feed">
+              Cancel
+            </Link>
             <button
+              className="bg-green-500 px-6 py-2 text-white rounded-md hover:bg-green-700"
               type="submit"
-              className=" bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded w-full mb-8"
             >
-              Add Company
+              Create a company
             </button>
           </div>
         </form>
