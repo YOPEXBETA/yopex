@@ -15,6 +15,16 @@ export const usePosts = () => {
   });
 };
 
+export const usePostById = (postId) => {
+  return useQuery({
+    queryKey: ["posts", postId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/post/single/${postId}`);
+      return data;
+    },
+  });
+};
+
 // get posts by category
 export const usePostsByCategory = (category) => {
   return useQuery({

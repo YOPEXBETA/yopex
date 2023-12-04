@@ -278,6 +278,18 @@ const getBookmarks = async (req, res) => {
   }
 };
 
+const getpostById = async (req, res) => {
+  const postId = req.params.postId; // Assuming you're passing the challenge ID as a URL parameter
+
+  try {
+    const post = await Post.findById(postId);
+
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   CreatePost,
   updateAPost,
@@ -288,4 +300,5 @@ module.exports = {
   sharePost,
   BookmarkPost,
   getBookmarks,
+  getpostById,
 };

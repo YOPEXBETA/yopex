@@ -25,6 +25,10 @@ const CreateCompany = Loadable(
 const CreatePost = Loadable(
   lazy(() => import("../Pages/UserDashboard/CreatePostPage/index"))
 );
+//CreateProject
+const PostDetails = Loadable(
+  lazy(() => import("../Pages/UserDashboard/PostDetailsPage/index"))
+);
 //HomePage
 const MobileNotifications = Loadable(
   lazy(() => import("../Components/Mobile/MobileNotifications"))
@@ -66,12 +70,6 @@ const ContestDetails = Loadable(
 const BrowseLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/BrowsePage/BrowseLayout"))
 );
-
-// const AllJobs = Loadable(
-//   lazy(() =>
-//     import("../Pages/UserDashboard/BrowsePage/Content/WorkCards/AllJobs")
-//   )
-// );
 
 const PaymentSuccess = Loadable(
   lazy(() =>
@@ -132,6 +130,10 @@ const MainRoutes = {
     {
       path: "/create-post",
       element: <CreatePost />,
+    },
+    {
+      path: "/postDetails/:id",
+      element: <PostDetails />,
     },
     {
       path: "/store",
