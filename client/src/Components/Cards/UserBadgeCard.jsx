@@ -1,9 +1,10 @@
 import React from "react";
+import Card from "./index";
 
-const UserBadgeCard = ({ badge }) => {
+const UserBadgeCard = ({ badge, extra }) => {
   return (
-    <div>
-      <div className="flex w-full border items-center justify-between rounded-lg bg-white p-3 shadow-shadow-500 dark:bg-zinc-800 dark:border-zinc-500 dark:border hover:shadow-xl dark:shadow-none">
+    <Card extra={`p-3 ${extra}`}>
+      <div className="flex w-full items-center justify-between">
         <div className="flex items-center">
           <div className="">
             <img
@@ -19,7 +20,7 @@ const UserBadgeCard = ({ badge }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

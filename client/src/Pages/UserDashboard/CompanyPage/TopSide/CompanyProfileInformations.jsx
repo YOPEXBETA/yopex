@@ -81,7 +81,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 <img
                   alt="Profile picture"
                   src={company?.companyLogo}
-                  className="object-contain w-full h-full rounded-xl "
+                  className="object-cover w-full h-full rounded-lg"
                 />
               </div>
 
@@ -162,10 +162,9 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     </button>
                   )}
                 </div>
-                {/*mobile version*/}
-                <p className="hidden md:block truncate dark:text-gray-200 w-full xl:w-[50rem]">
+                {/*<p className="hidden md:block truncate dark:text-gray-200 w-full xl:w-[50rem]">
                   {company?.companyDescription}
-                </p>
+                  </p>*/}
               </div>
             </div>
             {/*mobile version*/}

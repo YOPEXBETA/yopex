@@ -1,9 +1,8 @@
 import React from "react";
-import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router-dom";
 import { useChallengesById } from "../../../../../../hooks/react-query/useChallenges";
-import ChallengeCard from "../../../../../../Components/shared/cards/ChallengeCard";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import ChallengeCard from "../../../../../../Components/Cards/ChallengeCard";
 
 const MyCompanyChallenges = () => {
   const { companyId } = useParams();

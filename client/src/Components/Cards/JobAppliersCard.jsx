@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import ApplierMenuIcon from "../../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyAppliers/ApplierMenuIcon";
-import JobAppliersModal from "./JobAppliersModal";
+import React from "react";
+import Card from "./index";
 
-const JobAppliersCard = ({ job, onCardClick }) => {
+const JobAppliersCard = ({ job, onCardClick, extra }) => {
   return (
-    <div>
+    <Card extra={`${extra}`}>
       <div
-        className="flex w-full items-center justify-between rounded-lg bg-white  shadow-md shadow-shadow-500 dark:bg-zinc-700 hover:shadow-xl dark:shadow-none"
+        className="flex w-full items-center justify-between"
         onClick={() => onCardClick(job)}
       >
         <div className="flex items-center">
@@ -38,7 +36,7 @@ const JobAppliersCard = ({ job, onCardClick }) => {
                   </div>
               </div>*/}
       </div>
-    </div>
+    </Card>
   );
 };
 

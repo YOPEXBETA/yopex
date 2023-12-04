@@ -23,7 +23,6 @@ export default function AdminLayout(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("layout");
     if (!user) {
       dispatch(getCurrentUser());
     }

@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import YopexLogo from "../../../../src/images/LogoYopex.png";
+import React, { useEffect, useState } from "react";
+import YopexLogo from "../../../../src/assets/images/LogoYopex.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";

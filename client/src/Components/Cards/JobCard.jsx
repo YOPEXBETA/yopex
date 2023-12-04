@@ -1,21 +1,19 @@
 import { formatDistance } from "date-fns";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import JobOfferModal from "../Modals/JobOfferModal";
-import PostMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyJobs/Components/JobMenuIcon";
+import JobOfferModal from "../shared/Modals/JobOfferModal";
+import Card from "./index";
+import PostMenuIcon from "../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyJobs/Components/JobMenuIcon";
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, extra }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const { user } = useSelector((state) => state.auth);
   const handleClose = () => setIsOpen(false);
 
   return (
-    <div>
-      <div
-        onClick={toggleOpen}
-        className="bg-white h-full border dark:bg-zinc-700 transition hover:shadow-xl rounded-lg rrounded-lg cursor-pointer hover:scale-102 duration-500"
-      >
+    <Card extra={`${extra}`}>
+      <div onClick={toggleOpen}>
         <div className="flex flex-col">
           <div className="rounded-md p-4 h-full">
             <div className="flex justify-between flex-row-reverse mb-4">
@@ -63,7 +61,7 @@ const JobCard = ({ job }) => {
       </div>
       {/* Additional static content for other cards can be added similarly */}
       <JobOfferModal open={isOpen} handleClose={handleClose} job={job} />
-    </div>
+    </Card>
   );
 };
 

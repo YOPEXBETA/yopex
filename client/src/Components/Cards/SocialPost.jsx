@@ -2,19 +2,17 @@ import { useState } from "react";
 import { formatDistance } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import CommentButton from "../../comments/CommentButton";
+import CommentButton from "../shared/comments/CommentButton";
 
-import {
-  useLikePost,
-  useBookmarkPost,
-} from "../../../../hooks/react-query/usePosts";
+import { useLikePost, useBookmarkPost } from "../../hooks/react-query/usePosts";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
-import SocialPostImage from "../../PostImage/SocialPostImage";
-import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
-import LoadingSpinner from "../../../LoadingSpinner";
-import PostMenuIcon from "../../../MenuIcons/PostMenuIcon";
+import SocialPostImage from "../shared/PostImage/SocialPostImage";
+import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
+import LoadingSpinner from "../LoadingSpinner";
+import PostMenuIcon from "../MenuIcons/PostMenuIcon";
+import Card from "./index";
 
 const SocialPostCard = ({
   post,
@@ -24,6 +22,7 @@ const SocialPostCard = ({
   width,
   type = "profile",
   openModal,
+  extra,
 }) => {
   const { user } = useSelector((state) => state.auth);
   const [isliked, setIsLiked] = useState(user._id in post.likes);
@@ -68,7 +67,10 @@ const SocialPostCard = ({
   };
 
   return (
-    <div className="bg-white border divide-gray-100 overflow-hidden rounded-lg dark:bg-zinc-800 dark:border-zinc-500 dark:border text-gray-600  sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+    <Card
+      extra={`transition  cursor-pointer hover:scale-102 duration-500 ${extra}`}
+    >
+      {" "}
       <div className=" flex justify-between items-start">
         <div className=" flex items-center py-4 pl-4 gap-2">
           {post.userPicturePath ? (
@@ -113,7 +115,6 @@ const SocialPostCard = ({
           </button>
         )}
       </div>
-
       <div className="col-span-1 md:col-span-1 px-4">
         {type === "profile" ? null : (
           <div className="mb-4">
@@ -124,7 +125,6 @@ const SocialPostCard = ({
           </div>
         )}
       </div>
-
       <div className="mx-auto relative">
         <div className="flex items-center">
           <div className="object-cover static">
@@ -157,7 +157,6 @@ const SocialPostCard = ({
           {renderPaginationDots()}
         </div>
       </div>
-
       <div className="flex items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
@@ -218,7 +217,7 @@ const SocialPostCard = ({
           )}
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

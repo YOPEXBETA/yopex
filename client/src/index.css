@@ -4,13 +4,25 @@
 
 @layer base {
   html {
-    font-family: "Golos Text", sans-serif;
-    @apply bg-slate-100;
+    font-family: "DM Sans", sans-serif !important;
+    font-feature-settings: "kern" !important;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.5px;
   }
-  .bg-dark {
-    --tw-bg-opacity: 1;
-    background-color: rgb(17 25 40 / var(--tw-bg-opacity));
-  }
+}
+
+input.defaultCheckbox::before {
+  color: white;
+  opacity: 0;
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0px);
+}
+
+input:checked.defaultCheckbox::before {
+  opacity: 1;
 }
 
 @layer components {

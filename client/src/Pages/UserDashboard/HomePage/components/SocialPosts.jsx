@@ -4,7 +4,7 @@ import {
   usePostsByCategory,
   useBookmarkedPosts,
 } from "../../../../hooks/react-query/usePosts";
-import SocialPostCard from "../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
+import SocialPostCard from "../../../../Components/Cards/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
 import SocialPostSkeleton from "../../../../Components/SkeletonLoading/SocialPostSkeleton";
 

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaUsers, FaCheck, FaTimes } from "react-icons/fa";
-import getDeadlineDifference from "./../../getDeadlineDifference";
-import ChallengeMenuIcon from "../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyChallenges/Components/ChallengeMenuIcon";
+import getDeadlineDifference from "../getDeadlineDifference";
+import ChallengeMenuIcon from "../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyChallenges/Components/ChallengeMenuIcon";
 import { useSelector } from "react-redux";
+import Card from "./index";
 
-const ChallengeCard = ({ challenge, type }) => {
+const ChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);
 
   const isChallengeInProgress = (challenge) => {
@@ -17,11 +18,9 @@ const ChallengeCard = ({ challenge, type }) => {
   };
 
   return (
-    <div>
+    <Card extra={`lg:pr-11 overflow-hidden lg:h-40   ${extra}`}>
       <Link to={`/browse/contestDetails/${challenge._id}`}>
-        <div
-          className={`w-full h-full flex-col lg:h-40 border gap-6 dark:bg-zinc-800 dark:border-zinc-500 dark:border overflow-hidden bg-white md:flex-row lg:pr-11 rounded-lg hover:shadow-xl divide-gray-100 dark:divide-gray-700 md:rounded-lg flex`}
-        >
+        <div className={`flex-col gap-6 md:flex-row flex`}>
           <div className="w-full xl:w-[30%]">
             <img
               className={`h-full xl:h-30 md:h-40 w-screen md:rounded-l-lg object-cover lg:block`}
@@ -107,7 +106,7 @@ const ChallengeCard = ({ challenge, type }) => {
           </div>
         </div>
       </Link>
-    </div>
+    </Card>
   );
 };
 

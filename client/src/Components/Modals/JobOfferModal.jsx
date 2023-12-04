@@ -1,7 +1,5 @@
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useUserById } from "../../../hooks/react-query/useUsers";
 import { useApplyJob } from "../../../hooks/react-query/useJobs";
 import { formatDistance } from "date-fns";
 

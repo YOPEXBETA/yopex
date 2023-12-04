@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUserPosts } from "../../../../../../hooks/react-query/usePosts";
-import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
+import SocialPostCard from "../../../../../../Components/Cards/SocialPost";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 

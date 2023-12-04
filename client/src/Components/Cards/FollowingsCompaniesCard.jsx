@@ -1,9 +1,10 @@
 import React from "react";
+import Card from "./index";
 import { Link } from "react-router-dom";
 
-const FollowingsCompaniesCard = ({ following }) => {
+const FollowingsCompaniesCard = ({ following, extra }) => {
   return (
-    <div className="divide-gray-100 p-4 border bg-white dark:bg-zinc-800 dark:border-zinc-500 dark:border  dark:divide-gray-700 overflow-hidden rounded-lg text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+    <Card extra={`p-4 ${extra}`}>
       <Link
         to={`/company/${following._id}`}
         key={following._id}
@@ -14,7 +15,7 @@ const FollowingsCompaniesCard = ({ following }) => {
           <img
             alt="yourphoto"
             src={following.companyLogo}
-            className="w-28 h-28 rounded-full object-contain items-center mx-auto"
+            className="w-28 h-28 rounded-full object-cover items-center mx-auto"
           />
 
           <div className="flex items-center mt-2 ">
@@ -24,7 +25,7 @@ const FollowingsCompaniesCard = ({ following }) => {
           </div>
         </div>
       </Link>
-    </div>
+    </Card>
   );
 };
 

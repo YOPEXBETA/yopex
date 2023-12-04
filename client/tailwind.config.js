@@ -2,9 +2,6 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./*.html", "./src/assets/**/*.js"],
   darkMode: "class",
   theme: {
-    container: {
-      center: true,
-    },
     extend: {
       fontFamily: {
         sans: ["Roboto", "sans"],
@@ -43,10 +40,11 @@ module.exports = {
         1: "0px 1px 3px 0px rgba(166, 175, 195, 0.40)",
         2: "0px 5px 12px 0px rgba(0, 0, 0, 0.10)",
       },
+      shadow: {
+        500: "rgba(112, 144, 176, 0.08)",
+      },
     },
   },
-  variants: {
-    extend: {},
-  },
+
   plugins: [require("tailwind-scrollbar")],
 };

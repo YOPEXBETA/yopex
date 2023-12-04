@@ -1,15 +1,16 @@
 import React from "react";
-import { useDeleteBadge } from "../../../hooks/react-query/useBadges";
+import Card from "./index";
+import { useDeleteBadge } from "../../hooks/react-query/useBadges";
 
-const BadgeCard = ({ badgeData }) => {
+const BadgeCard = ({ badgeData, extra }) => {
   const { mutate } = useDeleteBadge();
 
   return (
-    <div
-      key={badgeData._id}
-      className="border-[1px] rounded-lg border-gray-300 shadow-md p-4 transform hover:scale-105 transition duration-300 relative"
-    >
-      <div className="flex justify-between absolute top-2 right-2">
+    <Card extra={`p-4 ${extra}`}>
+      <div
+        className="flex justify-between absolute top-2 right-2"
+        key={badgeData._id}
+      >
         {/*<LevelMenuIcon level={badgeData} />*/}
       </div>
       <div className="flex flex-col items-center space-y-2 mt-5 relative">
@@ -39,7 +40,7 @@ const BadgeCard = ({ badgeData }) => {
       >
         Delete
       </button>
-    </div>
+    </Card>
   );
 };
 

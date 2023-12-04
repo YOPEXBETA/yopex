@@ -1,9 +1,10 @@
 import React from "react";
+import Card from "./index";
 import { Link } from "react-router-dom";
 
-const FollowingsCard = ({ following }) => {
+const FollowingsCard = ({ following, extra }) => {
   return (
-    <div className="divide-gray-100 p-4 bg-white border dark:bg-zinc-800 dark:border-zinc-500 dark:border  dark:divide-gray-700 overflow-hidden rounded-lg text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+    <Card extra={`p-4 ${extra}`}>
       <Link
         to={`/profile/${following?._id}`}
         key={following?._id}
@@ -14,7 +15,7 @@ const FollowingsCard = ({ following }) => {
           <img
             alt="yourphoto"
             src={following?.picturePath}
-            className="w-28 h-28 rounded-full dark:border-0 items-center mx-auto object-cover border-2"
+            className="w-28 h-28 rounded-full dark:border-2 items-center mx-auto object-cover border-2"
           />
 
           <div className="flex items-center mt-2 gap-1">
@@ -27,7 +28,7 @@ const FollowingsCard = ({ following }) => {
           </div>
         </div>
       </Link>
-    </div>
+    </Card>
   );
 };
 

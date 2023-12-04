@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { useAppliers } from "../../../../hooks/react-query/useJobs";
-import LoadingSpinner from "../../../LoadingSpinner";
-import ApplierMenuIcon from "../../../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyAppliers/ApplierMenuIcon";
+import { useAppliers } from "../../hooks/react-query/useJobs";
+import ApplierMenuIcon from "../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyAppliers/ApplierMenuIcon";
+import LoadingSpinner from "../LoadingSpinner";
 
 const JobAppliersModal = ({ jobId, onClose, isModalOpen }) => {
   const { data: appliers, isLoading: appliersLoading } = useAppliers(jobId);

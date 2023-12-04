@@ -21,7 +21,6 @@ const MainLayout = () => {
         // Check if fetching current user was successful
         if (response.payload) {
           // Successfully fetched user, continue rendering
-          
         } else {
           // Fetching user failed, navigate to /login
           navigate("/login");

@@ -10,7 +10,7 @@ import { register as registerUser } from "../../../redux/auth/authSlice";
 import { reset as resetAuth } from "../../../redux/auth/authSlice";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import YopexLogo from "../../../images/LogoYopex.png";
+import YopexLogo from "../../../assets/images/LogoYopex.png";
 import { IoIosArrowBack } from "react-icons/io";
 
 const Register = () => {

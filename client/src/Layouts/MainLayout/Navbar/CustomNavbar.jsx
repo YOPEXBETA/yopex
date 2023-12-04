@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import YopexLogo from "../../../images/LogoYopex.png";
+import YopexLogo from "../../../assets/images/LogoYopex.png";
 import { Link } from "react-router-dom";
 import MenuIcons from "./components/MenuIcons/MenuIcons";
 import NavbarTabTop from "./components/NavbarNavigation/NavbarTabTop";
