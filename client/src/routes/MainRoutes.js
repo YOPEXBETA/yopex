@@ -23,7 +23,7 @@ const CreateCompany = Loadable(
 );
 //CreateProject
 const CreatePost = Loadable(
-  lazy(() => import("../Pages/UserDashboard/PostDescriptionPage/index"))
+  lazy(() => import("../Pages/UserDashboard/CreatePostPage/index"))
 );
 //HomePage
 const MobileNotifications = Loadable(

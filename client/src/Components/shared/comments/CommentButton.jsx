@@ -45,7 +45,7 @@ const CommentButton = ({ post, category, commentCount, type }) => {
             />
           </svg>
         </button>
-        <p className="text-zinc-800">{commentCount}</p>
+        <p className="text-zinc-800 dark:text-white">{commentCount}</p>
       </div>
 
       <CommentModal

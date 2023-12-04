@@ -16,6 +16,11 @@ const SocialMediaPostSchema = new mongoose.Schema(
       required: false,
     },
     companyName: { type: String, required: false },
+    title: {
+      type: String,
+      max: 250,
+      required: false,
+    },
     description: {
       type: String,
       max: 500,

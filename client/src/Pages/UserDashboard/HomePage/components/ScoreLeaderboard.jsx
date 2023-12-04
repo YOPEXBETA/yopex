@@ -18,7 +18,7 @@ const ScoreLeaderboard = ({ extra }) => {
 
   return (
     <div className="w-full sticky top-24">
-      <Card extra={`p-6 ${extra}`}>
+      <Card extra={`px-6 py-2 ${extra}`}>
         <div className="flex flex-col  justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-2 xl:space-x-0">
           <div className="flex flex-col justify-start items-start flex-shrink-0">
             <div className="flex justify-center w-full md:justify-start items-center space-x-4 pt-4  border-gray-200">
@@ -54,7 +54,7 @@ const ScoreLeaderboard = ({ extra }) => {
                 </h3>
 
                 <Link to="/leaderboard">
-                  <a className="text-sm font-medium text-zinc-500 hover:underline dark:text-green-500">
+                  <a className="text-sm text-zinc-500 hover:underline dark:text-green-500">
                     View all
                   </a>
                 </Link>

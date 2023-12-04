@@ -192,7 +192,7 @@ const SocialPostCard = ({
               )}
             </button>
             <>
-              <p className="text-zinc-800">{post.likesCount}</p>
+              <p className="text-zinc-800 dark:text-white">{post.likesCount}</p>
             </>
           </div>
 

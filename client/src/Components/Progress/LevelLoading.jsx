@@ -23,7 +23,7 @@ function LinearProgressWithLabel(props) {
               <span className="font-medium text-sm text-green-500">
                 {props.value}
               </span>
-              <span className="font-medium text-sm text-gray-500">/</span>
+              <span className="font-medium text-sm text-gray-500 mx-1">/</span>
               <span className="font-medium text-sm text-gray-500">
                 {props.difference}
               </span>

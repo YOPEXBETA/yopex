@@ -42,6 +42,7 @@ const CreatePost = async (req, res) => {
       companyName: !isUser ? owner.companyName : undefined,
       userPicturePath:
         owner.picturePath != undefined ? owner.picturePath : owner.companyLogo,
+      title: req.body.title,
       description: req.body.description,
       postPicturePath: postPicturePath || req.body.postPicturePath,
       postVideoePath: req.body.postVideoPath,
