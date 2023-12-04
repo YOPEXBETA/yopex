@@ -1,9 +1,9 @@
 import React from "react";
-import { IoWalletOutline } from "react-icons/io5";
+import Card from "./index";
 
-const StorePointCard = ({ points, amount, onClick }) => {
+const StorePointCard = ({ points, amount, onClick, extra }) => {
   return (
-    <div className="w-full  dark:bg-zinc-700 bg-white dark:text-white border z-10 rounded-lg p-6  hover:shadow-2xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
+    <Card extra={`p-6 ${extra}`}>
       <div className="flex flex-col justify-between h-full">
         <div>
           <h5 className="mb-2 text-3xl font-semibold ">{points} Points</h5>
@@ -18,7 +18,7 @@ const StorePointCard = ({ points, amount, onClick }) => {
           Comming soon
         </button>
       </div>
-    </div>
+    </Card>
   );
 };
 

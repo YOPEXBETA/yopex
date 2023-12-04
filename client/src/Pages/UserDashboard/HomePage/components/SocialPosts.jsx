@@ -7,6 +7,7 @@ import {
 import SocialPostCard from "../../../../Components/Cards/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
 import SocialPostSkeleton from "../../../../Components/SkeletonLoading/SocialPostSkeleton";
+import ProjectCard from "../../../../Components/Cards/ProjectCard";
 
 const SocialPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,7 +36,7 @@ const SocialPosts = () => {
 
   return (
     <div>
-      <div className="space-y-2 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {isLoading ? (
           <SocialPostSkeleton />
         ) : (
@@ -45,7 +46,7 @@ const SocialPosts = () => {
               post={post}
               bookmarks={bookmarksId}
               posts={posts}
-              height={"full"}
+              height={"48"}
               width={"full"}
               type="feed"
               openModal={() => openModal(post)}
@@ -54,6 +55,16 @@ const SocialPosts = () => {
         )}
       </div>
 
+      {/*<SocialPostCard
+              key={post._id}
+              post={post}
+              bookmarks={bookmarksId}
+              posts={posts}
+              height={"full"}
+              width={"full"}
+              type="feed"
+              openModal={() => openModal(post)}
+        />*/}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <SocialPostModal

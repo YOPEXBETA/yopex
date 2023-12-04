@@ -33,7 +33,8 @@ const CommentButton = ({ post, category, commentCount, type }) => {
           <FaRegComment className="text-gray-500 w-5 h-5 dark:text-gray-300 " />
         </button>
         <p className="text-gray-500">{commentCount}</p>
-        {type !== "profile" && <p className="text-gray-500">Comment</p>}
+        {type !== "profile" ||
+          ("feed" && <p className="text-gray-500">Comment</p>)}
       </div>
 
       <CommentModal

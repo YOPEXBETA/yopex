@@ -12,7 +12,7 @@ const CustomNavbar = () => {
 
   return (
     <div>
-      <div className="grid fixed w-full grid-cols-1 lg:grid-cols-12 dark:bg-zinc-800 bg-white items-center xl:px-16 px-6 dark:border-b-zinc-500 border-b-[1px] text-gray-600  lg:py-1 py-4 z-50">
+      <div className="grid fixed w-full grid-cols-1 lg:grid-cols-12 dark:bg-zinc-800 bg-white items-center xl:px-16 px-6 dark:border-b-zinc-500 border-b-[1px] text-gray-600  md:py-0 py-2 z-50">
         <div className="md:col-span-9 text-white items-center lg:col-span-3">
           <div className="flex items-center justify-between gap-4">
             <div className="flex gap-4 items-center w-full">

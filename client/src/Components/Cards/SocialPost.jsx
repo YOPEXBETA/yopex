@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { formatDistance } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CommentButton from "../shared/comments/CommentButton";
@@ -70,7 +69,6 @@ const SocialPostCard = ({
     <Card
       extra={`transition  cursor-pointer hover:scale-102 duration-500 ${extra}`}
     >
-      {" "}
       <div className=" flex justify-between items-start">
         <div className=" flex items-center py-4 pl-4 gap-2">
           {post.userPicturePath ? (
@@ -102,11 +100,6 @@ const SocialPostCard = ({
                   : `${post?.firstname} ${post?.lastname}`}
               </p>
             </Link>
-            <p className=" text-[14px] dark:text-gray-400  text-gray-500">
-              {formatDistance(new Date(post.createdAt), new Date(), {
-                addSuffix: true,
-              })}
-            </p>
           </div>
         </div>
         {(post.userId === user._id || user.companies.includes(post.userId)) && (
@@ -116,7 +109,7 @@ const SocialPostCard = ({
         )}
       </div>
       <div className="col-span-1 md:col-span-1 px-4">
-        {type === "profile" ? null : (
+        {type === "profile" || "feed" ? null : (
           <div className="mb-4">
             <div
               className="text-md dark:text-white"
@@ -180,7 +173,8 @@ const SocialPostCard = ({
             </button>
             <>
               <p className="text-gray-500">{post.likesCount}</p>
-              {type !== "profile" && <p className="text-gray-500">like</p>}
+              {type !== "profile" ||
+                ("feed" && <p className="text-gray-500">like</p>)}
             </>
           </div>
 
@@ -208,9 +202,9 @@ const SocialPostCard = ({
                     <LoadingSpinner />
                   </div>
                 ) : bookmarks.includes(post._id) ? (
-                  <BsBookmarkFill className="text-green-500 w-5 h-5" />
+                  <BsBookmarkFill className="text-green-500 w-5 h-5 font-semibold" />
                 ) : (
-                  <BsBookmark className="text-gray-500 w-5 h-5" />
+                  <BsBookmark className="text-gray-500 w-5 h-5 font-semibold" />
                 )}
               </button>
             </div>

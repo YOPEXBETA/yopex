@@ -1,9 +1,10 @@
 import React from "react";
-import LevelMenuIcon from "../../../Pages/AdminDashboard/LevelPage/LevelMenuIcon";
+import Card from "./index";
+import LevelMenuIcon from "../../Pages/AdminDashboard/LevelPage/LevelMenuIcon";
 
-const LevelCard = ({ badgeData }) => {
+const LevelCard = ({ badgeData, extra }) => {
   return (
-    <div className="border-[1px] rounded-lg border-gray-300  p-4 transform hover:scale-105 transition duration-300 relative">
+    <Card extra={`p-4 ${extra}`}>
       <div className="flex justify-between absolute top-2 right-2">
         <LevelMenuIcon level={badgeData} />
       </div>
@@ -26,7 +27,7 @@ const LevelCard = ({ badgeData }) => {
       <div className="absolute inset-0 opacity-40 rounded-lg z-0"></div>
 
       <div className="absolute bottom-0 left-0 right-0 h-4 bg-green-500 rounded-b-lg"></div>
-    </div>
+    </Card>
   );
 };
 

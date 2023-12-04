@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useUserById } from "../../../../hooks/react-query/useUsers";
-import { useGetLevels } from "../../../../hooks/react-query/useLevels";
-import LoadingSpinner from "../../../LoadingSpinner";
+import { useUserById } from "../../hooks/react-query/useUsers";
+import { useGetLevels } from "../../hooks/react-query/useLevels";
+import LoadingSpinner from "../LoadingSpinner";
 
 function LinearProgressWithLabel(props) {
   return (

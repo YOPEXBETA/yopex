@@ -54,11 +54,11 @@ const AddPostMenuList = () => {
       <div className="relative">
         <button
           onClick={handleClick}
-          className="ml-2 p-1 text-gray-600 dark:text-gray-100 dark:hover:text-green-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
+          className="px-4 py-2 flex items-center bg-zinc-800 text-white dark:text-gray-100 focus:outline-none  rounded-full"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="h-6 w-6 mr-2"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -70,6 +70,7 @@ const AddPostMenuList = () => {
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
           </svg>
+          <span>Create</span>
         </button>
       </div>
       {Open && (
@@ -106,7 +107,7 @@ const AddPostMenuList = () => {
         </div>
       )}
 
-      <AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />
+      {/*<AddPostModal open={openPostModal} handleClose={handleCloseModalPost} />*/}
     </div>
   );
 };

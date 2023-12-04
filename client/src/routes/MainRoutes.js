@@ -21,6 +21,10 @@ const CreateChallenge = Loadable(
 const CreateCompany = Loadable(
   lazy(() => import("../Pages/UserDashboard/CreateCompanyPage/index"))
 );
+//CreateProject
+const CreatePost = Loadable(
+  lazy(() => import("../Pages/UserDashboard/PostDescriptionPage/index"))
+);
 //HomePage
 const MobileNotifications = Loadable(
   lazy(() => import("../Components/Mobile/MobileNotifications"))
@@ -124,6 +128,10 @@ const MainRoutes = {
     {
       path: "/create-company",
       element: <CreateCompany />,
+    },
+    {
+      path: "/create-post",
+      element: <CreatePost />,
     },
     {
       path: "/store",

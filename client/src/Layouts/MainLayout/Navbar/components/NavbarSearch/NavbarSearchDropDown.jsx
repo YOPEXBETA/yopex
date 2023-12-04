@@ -28,7 +28,7 @@ export default function NavbarSearchDropDown() {
         value={query}
         onChange={handleSearchUsers}
         placeholder="Search for users"
-        className=" w-full p-3 border rounded-full focus:outline-none dark:placeholder-gray-100  dark:bg-zinc-700 dark:border-zinc-800 dark:text-gray-100 dark:focus:border-green-600 focus:border-green-300 text-[#000000] bg-gray-100"
+        className=" w-full p-3 border rounded-full focus:outline-none dark:placeholder-zinc-100  dark:bg-zinc-700 dark:border-zinc-800 dark:text-gray-100 dark:focus:border-green-600 focus:border-green-300  bg-white text-zinc-500"
       />
 
       {query && isSuccess && open && (
