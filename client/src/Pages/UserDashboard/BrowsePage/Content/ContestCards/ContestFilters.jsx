@@ -61,6 +61,7 @@ const ContestsFilters = ({
               className="border rounded-md dark:bg-zinc-700 p-2 w-full"
               placeholder="Min Price Amount"
               {...register("minAmount")}
+              min={0}
             />
           </div>
 

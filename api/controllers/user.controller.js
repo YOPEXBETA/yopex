@@ -173,16 +173,38 @@ const getUser = async (req, res) => {
 //getAllUsers
 const getUsers = async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = 8;
+
+    const query = { role: { $ne: "admin" } };
+    if (req.query.name) {
+      const searchRegex = new RegExp(req.query.name, 'i'); // 'i' for case-insensitive
+      query.$or = [
+        { firstname: { $regex: searchRegex } },
+        { lastname: { $regex: searchRegex } },
+      ];
+    }
+ 
     const users = await userSchema
-      .find({ role: { $ne: "admin" } })
+      .find(query)
       .select(
-        "_id firstname lastname picturePath score country occupation followers  reviews  challengesDone"
-      );
-    res.status(200).json(users);
+        "_id firstname lastname picturePath score country occupation followers reviews challengesDone"
+      )
+      .sort({score:-1,createdAt:1})
+      .skip(pageSize * (page - 1))
+      .limit(pageSize)
+      .exec();
+
+    
+
+    const userCount = await userSchema.countDocuments({ role: { $ne: "admin" } });
+
+    res.status(200).json({ users, userCount });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
+
 
 //getFollowers
 const getUserFriends = async (req, res) => {
