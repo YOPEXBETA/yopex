@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaImage } from "react-icons/fa";
 import Select from "react-select";
 import { useSelector } from "react-redux";
 import { useCategories } from "../../hooks/react-query/useCategories";
+import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCreatePost } from "../../hooks/react-query/usePosts";
+import { useUserById } from "../../hooks/react-query/useUsers";
 import { useFileUpload } from "../../hooks/react-query/useUsers";
 import LoadingSpinner from "../LoadingSpinner";
 
@@ -14,7 +16,9 @@ const CreatePostForm = () => {
   const { user } = useSelector((state) => state.auth);
 
   // Data fetching | react-query
+  const { data: userProfile, isLoading } = useUserById(user._id);
   const { data: categories } = useCategories();
+  const { data: skills } = useSkills();
   const fileUploadMutation = useFileUpload();
   const { mutate } = useCreatePost(category);
 
@@ -23,11 +27,17 @@ const CreatePostForm = () => {
     defaultValues: {
       title: "",
       description: "",
+      skills: [],
       categories: [],
       files: [],
     },
   });
 
+  const [selectedOption, setSelectedOption] = useState();
+
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
   const uploadedFile = watch("files");
 
   const onSubmit = async (data) => {
@@ -40,14 +50,17 @@ const CreatePostForm = () => {
     const selectedCategories = data.categories.map(
       (category) => category.value
     );
+    const selectedSkills = data.skills.map((skill) => skill.value);
 
     mutate({
-      userId: user._id,
+      //userId: user._id,
+      userId: selectedOption,
+      title: data.title,
       description: data.description,
       categories: selectedCategories,
+      skills: selectedSkills,
       postPicturePath: [result.data.downloadURL],
     });
-
     reset();
   };
   return (
@@ -63,6 +76,22 @@ const CreatePostForm = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <div className="space-y-4">
+                <select
+                  id="selectField"
+                  className="block w-full p-2 mb-4 border dark:text-white dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500"
+                  value={selectedOption}
+                  onChange={handleSelectChange}
+                >
+                  <option value="">Share a Post as</option>
+                  <option value={user._id}>
+                    {user?.firstname} {user?.lastname}
+                  </option>
+                  {userProfile?.companies.map((option) => (
+                    <option key={option._id} value={option._id}>
+                      {option.companyName}
+                    </option>
+                  ))}
+                </select>
                 <div>
                   <input
                     {...register("title", { required: true })}
@@ -76,6 +105,36 @@ const CreatePostForm = () => {
                   {...register("description", { required: false })}
                   placeholder="Tap here and start typing your post description"
                 />
+                <div className="flex-1">
+                  <Controller
+                    name="skills"
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <div className="w-full dark:bg-zinc-700 mt-2">
+                        <Select
+                          isMulti
+                          className="my-react-select-container"
+                          classNamePrefix="my-react-select"
+                          required={true}
+                          id="tags-outlined"
+                          options={
+                            skills
+                              ? skills?.map((skill) => ({
+                                  label: skill?.name,
+                                  value: skill,
+                                }))
+                              : []
+                          }
+                          onChange={(selectedOptions) =>
+                            onChange(selectedOptions)
+                          }
+                          value={value}
+                          placeholder="Select Skills"
+                        />
+                      </div>
+                    )}
+                  />
+                </div>
                 <Controller
                   name="categories"
                   control={control}

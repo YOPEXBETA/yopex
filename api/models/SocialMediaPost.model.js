@@ -58,6 +58,12 @@ const SocialMediaPostSchema = new mongoose.Schema(
       type: Array,
       required: false,
     },
+    skills: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skill",
+      },
+    ],
     comments: {
       type: [
         {
@@ -86,7 +92,7 @@ SocialMediaPostSchema.pre(
       const query = this;
       const postId = query._conditions._id;
 
-      CommentModel.deleteMany({ postId: postId }).exec();
+      await CommentModel.deleteMany({ postId: postId }).exec();
 
       next();
     } catch (error) {
