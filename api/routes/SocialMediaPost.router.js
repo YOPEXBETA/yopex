@@ -25,7 +25,7 @@ SocialMediaPostRouter.get("/posts", authenticateToken, getFeedPosts);
 
 SocialMediaPostRouter.get("/single/:postId", authenticateToken, getpostById);
 SocialMediaPostRouter.get("/:userId", authenticateToken, getUserPosts);
-SocialMediaPostRouter.delete("/:id", authenticateToken, deletePost);
+SocialMediaPostRouter.delete("/delete/:id", authenticateToken, deletePost);
 SocialMediaPostRouter.put("/:id", authenticateToken, updateAPost);
 SocialMediaPostRouter.patch("/:id/like", authenticateToken, likePost);
 SocialMediaPostRouter.patch("/share", authenticateToken, sharePost);
