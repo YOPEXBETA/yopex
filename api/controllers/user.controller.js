@@ -13,7 +13,20 @@ const { uploadFileToFirebase } = require("./firebase.controllers");
 
 const editProfile = async (req, res) => {
   try {
-    const { role,score,balance,email,historyPayment,isVerified,yearsRegistered,badgesEarned,reviews,posts,status,...updateFields} = req.body;
+    const {
+      role,
+      score,
+      balance,
+      email,
+      historyPayment,
+      isVerified,
+      yearsRegistered,
+      badgesEarned,
+      reviews,
+      posts,
+      status,
+      ...updateFields
+    } = req.body;
 
     if (updateFields.password) {
       const user = await userSchema.findById(req.userId);

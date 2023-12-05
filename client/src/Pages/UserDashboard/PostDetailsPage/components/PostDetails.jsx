@@ -70,10 +70,12 @@ const PostDetails = ({ post }) => {
           className="w-full object-cover md:rounded-xl"
         />
       </div>
-
       <div className="flex flex-col lg:flex-row lg:space-x-12">
-        <div class="px-4 lg:px-0 mt-6 text-gray-700 text-lg leading-relaxed w-full lg:w-full">
-          <p className="pb-6">{post?.description} </p>
+        <div className="px-4 lg:px-0 mt-6 text-gray-700 text-lg leading-relaxed w-full lg:w-full">
+          <p
+            className="pb-6"
+            dangerouslySetInnerHTML={{ __html: post?.description }}
+          ></p>
         </div>
       </div>
 

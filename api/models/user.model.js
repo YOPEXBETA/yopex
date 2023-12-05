@@ -61,7 +61,16 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    //Behance,Linkedin,Github,Dribble,Instagram
+
+    /*skills: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Skill",
+        },
+      ],
+      default: [],
+    },*/
     socialMediaLinks: [
       {
         platform: { type: String, required: false },

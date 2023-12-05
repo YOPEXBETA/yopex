@@ -140,7 +140,7 @@ const SocialPostCard = ({
                           className="text-white cursor-pointer"
                           //onClick={() => openModal()}
                         >
-                          View more details
+                          Explore post details
                         </p>
                       </div>
                     </Link>
