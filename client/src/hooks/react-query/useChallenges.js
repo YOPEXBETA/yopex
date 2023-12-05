@@ -239,11 +239,15 @@ export const useEditSubmission = (challengeId, participant) => {
       await axios.post(`${url}/challenge/editSubmission`, submission);
     },
     onSuccess: () => {
+      toast.success("Submission edited successfully");
       queryClient.invalidateQueries([
         "submissions",
         participant._id,
         challengeId,
       ]);
+    },
+    onError: () => {
+      toast.error("Error editing submission");
     },
   });
 };

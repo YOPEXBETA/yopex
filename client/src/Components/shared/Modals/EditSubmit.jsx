@@ -45,7 +45,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
 
   const handleFileUpload = async (file) => {
     const formData = new FormData();
-    formData.append("file", data.picture[0]);
+    formData.append("file", file);
     formData.append("type", "submission");
     const data = await axios.post(`${url}/upload`, formData, {
       headers: {
@@ -55,6 +55,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
 
     try {
       setFilesPaths((prev) => [...prev, data.data.downloadURL]);
+      
       return data.data.downloadURL;
     } catch (error) {
       console.log(error);
@@ -85,8 +86,10 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
     const files = event.target.files;
     handleFiles(files);
     for (const file of validFiles) {
-      file.url = await handleFileUpload(file);
-      setFilesSelected([...filesSelected, file]);
+      const url = await handleFileUpload(file);
+      console.log(url);
+      setFilesSelected([...filesSelected, url]);
+      
     }
   };
 
@@ -96,7 +99,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
 
       if (file.size <= maxSize) {
         validFiles.push(file);
-        setFilesSelected([...filesSelected, file]);
+        
       } else {
         invalidFiles.push(file);
       }

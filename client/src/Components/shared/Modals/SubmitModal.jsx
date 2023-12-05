@@ -71,16 +71,18 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
     const files = event.target.files;
     handleFiles(files);
     for (const file of validFiles) {
-      file.url = await handleFileUpload(file);
-      setFilesSelected([...filesSelected, file]);
+      const url  = await handleFileUpload(file);
+      setFilesSelected([...filesSelected, url]);
     }
   };
 
   const handleFiles = (files) => {
+    console.log(files);
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
       if (file.size <= maxSize) {
+        console.log(file);
         validFiles.push(file);
         setFilesSelected([...filesSelected, file]);
       } else {
@@ -88,6 +90,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
       }
     }
   };
+  
 
   return (
     <div

@@ -151,6 +151,7 @@ const getUser = async (req, res) => {
     const { id } = req.params;
     const user = await userSchema
       .findById(id)
+      .select("-password")
       .populate("badgesEarned")
       .populate("jobs")
       .populate("challenges")
