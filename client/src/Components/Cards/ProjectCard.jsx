@@ -21,7 +21,7 @@ const ProjectCard = ({ title, author, price, image, bidders, post, extra }) => {
             onClick={() => setHeart(!heart)}
             className="absolute top-3 right-3 flex items-center justify-center rounded-full bg-white p-2 text-brand-500 hover:cursor-pointer"
           >
-            <div className="flex h-full w-full items-center justify-center rounded-full text-xl hover:bg-gray-50 dark:text-navy-900">
+            <div className="flex h-full w-full items-center justify-center rounded-full text-xl hover:bg-gray-50 dark:text-zinc-900">
               {heart ? (
                 <IoHeartOutline />
               ) : (
@@ -32,7 +32,7 @@ const ProjectCard = ({ title, author, price, image, bidders, post, extra }) => {
         </div>
 
         <div className="mb-2 px-1">
-          <p className="text-lg font-bold text-navy-700 dark:text-white">
+          <p className="text-lg font-bold text-zinc-700 dark:text-white">
             Sample Project Title
           </p>
         </div>

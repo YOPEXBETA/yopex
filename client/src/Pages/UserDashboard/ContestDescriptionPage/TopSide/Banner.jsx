@@ -62,10 +62,10 @@ const Banner = ({ changeValue, value }) => {
         <img
           src={challengeBanner}
           alt="image"
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-cover object-center rounded-lg"
         />
         <div className="absolute top-0 left-0 z-10 flex h-full w-full items-end bg-gradient-to-t from-dark-700 to-transparent">
-          <div className="flex flex-wrap items-center p-4 pb-4 lg:px-32 md:px-8">
+          <div className="flex flex-wrap items-center p-4 pb-4 md:px-8">
             <div className="mb-4 mr-5 flex items-center md:mr-10">
               <div className="mr-4 h-10 w-10 overflow-hidden rounded-full">
                 <img

@@ -54,10 +54,10 @@ const SocialMediaPostSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    categories: {
+    /*categories: {
       type: Array,
       required: false,
-    },
+    },*/
     skills: [
       {
         type: mongoose.Schema.Types.ObjectId,

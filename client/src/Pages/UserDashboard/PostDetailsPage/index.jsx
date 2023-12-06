@@ -17,8 +17,8 @@ const Index = () => {
     );
   }
   return (
-    <div className="mx-auto container dark:bg-zinc-800">
-      <div className="grid grid-cols-12 lg:gap-8 md:gap-2 xl:py-6 py-0 xl:mx-16 ">
+    <div className="mx-auto container">
+      <div className="grid grid-cols-12 lg:gap-8 md:gap-2 xl:py-6 py-0">
         <div className="xl:col-span-8 lg:col-span-12 md:col-span-12  col-span-12 xl:space-y-2 lg:space-y-2 md:space-y-2 ">
           <PostDetails post={post} />
         </div>

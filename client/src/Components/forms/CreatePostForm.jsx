@@ -3,7 +3,6 @@ import { Controller, useForm } from "react-hook-form";
 import { FaImage } from "react-icons/fa";
 import Select from "react-select";
 import { useSelector } from "react-redux";
-import { useCategories } from "../../hooks/react-query/useCategories";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCreatePost } from "../../hooks/react-query/usePosts";
 import { useUserById } from "../../hooks/react-query/useUsers";
@@ -12,15 +11,13 @@ import LoadingSpinner from "../LoadingSpinner";
 
 const CreatePostForm = () => {
   // Global states |  @redux/toolkit
-  const { category } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // Data fetching | react-query
   const { data: userProfile, isLoading } = useUserById(user._id);
-  const { data: categories } = useCategories();
   const { data: skills } = useSkills();
   const fileUploadMutation = useFileUpload();
-  const { mutate } = useCreatePost(category);
+  const { mutate } = useCreatePost();
 
   // Form handling | react-hook-form
   const { register, handleSubmit, watch, control, setValue, reset } = useForm({
@@ -28,7 +25,6 @@ const CreatePostForm = () => {
       title: "",
       description: "",
       skills: [],
-      categories: [],
       files: [],
     },
   });
@@ -47,9 +43,6 @@ const CreatePostForm = () => {
 
     const result = await fileUploadMutation.mutateAsync(formData);
 
-    const selectedCategories = data.categories.map(
-      (category) => category.value
-    );
     const selectedSkills = data.skills.map((skill) => skill.value);
 
     mutate({
@@ -57,7 +50,6 @@ const CreatePostForm = () => {
       userId: selectedOption,
       title: data.title,
       description: data.description,
-      categories: selectedCategories,
       skills: selectedSkills,
       postPicturePath: [result.data.downloadURL],
     });
@@ -135,32 +127,7 @@ const CreatePostForm = () => {
                     )}
                   />
                 </div>
-                <Controller
-                  name="categories"
-                  control={control}
-                  render={({ field: { onChange, value } }) => (
-                    <div className="w-full dark:bg-zinc-700">
-                      <Select
-                        isMulti
-                        className="my-react-select-container"
-                        classNamePrefix="my-react-select"
-                        options={
-                          categories
-                            ? categories?.map((category) => ({
-                                label: category?.name,
-                                value: category,
-                              }))
-                            : []
-                        }
-                        onChange={(selectedOptions) =>
-                          onChange(selectedOptions)
-                        }
-                        value={value}
-                        placeholder="Select Categories"
-                      />
-                    </div>
-                  )}
-                />
+
                 {uploadedFile && uploadedFile.length > 0 && (
                   <div className="mb-4">
                     {fileUploadMutation.isLoading ? (

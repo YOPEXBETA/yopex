@@ -98,7 +98,7 @@ const UserProfileCard = () => {
         </div>
 
         <div className="flex items-center gap-6">
-          <p className="text-base text-navy-700 dark:text-white flex items-center">
+          <p className="text-base text-zinc-700 dark:text-white flex items-center">
             <FaMapMarkerAlt className="inline-block mr-2 text-green-500" />
             {userProfile ? (
               <p className="text-md whitespace-normal dark:text-gray-200">

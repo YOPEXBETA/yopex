@@ -28,33 +28,33 @@ const AdminNavbar = (props) => {
       <div className="ml-[6px]">
         <div className="h-6 w-[224px] pt-1">
           <a
-            className="text-sm font-normal text-navy-700 hover:underline dark:text-white dark:hover:text-white"
+            className="text-sm font-normal text-zinc-700 hover:underline dark:text-white dark:hover:text-white"
             href=" "
           >
             Pages
-            <span className="mx-1 text-sm text-navy-700 hover:text-navy-700 dark:text-white">
+            <span className="mx-1 text-sm text-zinc-700 hover:text-zinc-700 dark:text-white">
               {" "}
               /{" "}
             </span>
           </a>
           <Link
-            className="text-sm font-normal capitalize text-navy-700 hover:underline dark:text-white dark:hover:text-white"
+            className="text-sm font-normal capitalize text-zinc-700 hover:underline dark:text-white dark:hover:text-white"
             to="#"
           >
             {brandText}
           </Link>
         </div>
-        <p className="shrink text-[33px] capitalize text-navy-700 dark:text-white">
+        <p className="shrink text-[33px] capitalize text-zinc-700 dark:text-white">
           <Link
             to="#"
-            className="font-bold capitalize hover:text-navy-700 dark:hover:text-white"
+            className="font-bold capitalize hover:text-zinc-700 dark:hover:text-white"
           >
             {brandText}
           </Link>
         </p>
       </div>
 
-      <div className="rounded-fullshadow-shadow-500 relative mt-[3px] flex h-[61px] w-[355px] flex-grow items-center justify-around gap-2 dark:!bg-navy-800 dark:shadow-none md:w-[365px] md:flex-grow-0 md:gap-1 xl:w-[365px] xl:gap-2">
+      <div className="rounded-fullshadow-shadow-500 relative mt-[3px] flex h-[61px] w-[355px] flex-grow items-center justify-around gap-2 dark:!bg-zinc-800 dark:shadow-none md:w-[365px] md:flex-grow-0 md:gap-1 xl:w-[365px] xl:gap-2">
         <div className="flex h-full items-center rounded-full xl:w-[225px]"></div>
         <span
           className="flex cursor-pointer text-xl text-gray-600 dark:text-white xl:hidden"

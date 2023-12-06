@@ -18,13 +18,13 @@ const PostDetails = ({ post }) => {
                 <img
                   alt="post"
                   src={post?.userPicturePath}
-                  className="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover bg-white border-2"
+                  className="w-14 h-14 md:w-11 md:h-11 rounded-full object-cover bg-white border-2"
                 />
               ) : (
                 <img
                   alt="default"
                   src={AvatarProfile}
-                  className="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover bg-white border-2"
+                  className="w-14 h-14 md:w-11 md:h-11 rounded-full object-cover bg-white border-2"
                 />
               )}
             </div>
@@ -43,7 +43,7 @@ const PostDetails = ({ post }) => {
                     : `${post?.firstname} ${post?.lastname}`}
                 </p>
               </Link>
-              <p className="text-sm">
+              <p className="text-sm text-zinc-400">
                 {formatDistance(new Date(post.createdAt), new Date(), {
                   addSuffix: true,
                 })}
@@ -62,8 +62,8 @@ const PostDetails = ({ post }) => {
               ))}
             </div>
           </div>
-          <hr className="border-t  my-4 lg:px-0" />
         </div>
+        <hr className="border-t  my-4 lg:px-0" />
 
         <img
           src={post?.postPicturePath}
@@ -78,8 +78,7 @@ const PostDetails = ({ post }) => {
           ></p>
         </div>
       </div>
-
-      <div className="border-t mt-12 pt-12 pb-32 px-4 lg:px-0"></div>
+      <hr className="border-t  my-4 lg:px-0" />
     </div>
   );
 };

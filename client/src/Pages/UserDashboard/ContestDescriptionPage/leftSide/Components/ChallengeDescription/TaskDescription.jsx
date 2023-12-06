@@ -8,8 +8,8 @@ const TasksDescription = () => {
 
   if (challenge)
     return (
-      <div className="bg-white border rounded-lg p-4">
-        <h2 className="mb-6 text-2xl font-bold text-dark dark:text-white sm:text-3xl md:text-[35px] md:leading-[1.28]">
+      <div className="bg-white dark:bg-zinc-800 border rounded-lg p-4">
+        <h2 className="mb-6 text-2xl font-bold text-dark dark:text-white  sm:text-3xl md:text-[35px] md:leading-[1.28]">
           {challenge?.title}
         </h2>
         <div
@@ -28,7 +28,7 @@ const TasksDescription = () => {
             {challenge.RecommendedSkills.map((skill, index) => (
               <span
                 key={index}
-                className="block rounded-md bg-primary/[0.08] py-[5px] px-[14px] text-base text-dark dark:text-white hover:bg-primary hover:text-white"
+                className="block rounded-md  py-[5px] px-[14px] text-base text-dark dark:text-white hover:bg-green-700 border hover:text-white"
               >
                 {skill}
               </span>

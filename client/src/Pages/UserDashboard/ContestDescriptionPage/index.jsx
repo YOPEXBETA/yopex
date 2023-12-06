@@ -25,11 +25,11 @@ const ContestDetails = () => {
 
   if (challenge) {
     return (
-      <div className="md:space-y-6  dark:bg-zinc-800">
+      <div className="md:space-y-6">
         <div>
           <Banner value={value} changeValue={changeValue} />
         </div>
-        <div className="lg:px-8 xl:px-32">
+        <div>
           <div className="mb-4">
             <ChallengeNavigationTab
               changeValue={changeValue}
@@ -37,7 +37,7 @@ const ContestDetails = () => {
               isRegistered={isRegistered}
             />
           </div>
-          <div className="grid grid-cols-12 gap-4 md:px-0 dark:bg-zinc-800 h-full">
+          <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 mb-2">
               <ContentSide value={value} />
             </div>

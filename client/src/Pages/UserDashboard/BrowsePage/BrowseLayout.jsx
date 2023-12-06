@@ -14,7 +14,7 @@ const BrowseLayout = () => {
   };
 
   return (
-    <div className="md:space-y-6 dark:bg-zinc-800  space-y-1">
+    <div className="md:space-y-6 space-y-1">
       {value === 0 && (
         <BrowseContestsHeader
           setContestQuery={setContestQuery}
@@ -37,7 +37,7 @@ const BrowseLayout = () => {
       )}
 
       <div className="mx-auto container">
-        <div className="xl:mt-1 xl:mx-40 md:mx-4  lg:mx-8 mt-0">
+        <div className="xl:mt-1 mt-0">
           <BrowseContentPage
             jobQuery={jobQuery}
             selectedCategory={selectedCategory}

@@ -17,7 +17,7 @@ const JobAppliersCard = ({ job, onCardClick, extra }) => {
             />
           </div>
           <div className="ml-4">
-            <p className="text-base font-medium text-navy-700 dark:text-white">
+            <p className="text-base font-medium text-zinc-700 dark:text-white">
               {job?.title}
             </p>
             <div className="flex felx-col gap-1">

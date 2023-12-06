@@ -131,7 +131,7 @@ const UsersConversation = ({ conversationId, socket, otherUser }) => {
           )}
         </div>
 
-        <footer class="bg-white border-t border-gray-300 p-4 bottom-0 lg:w-3/4 fixed w-full">
+        <footer class="bg-white border-t border-gray-300 p-4 bottom-0 lg:w-[65%] fixed w-full">
           <form onSubmit={handleCreateMessage}>
             <div class="flex items-center">
               <input

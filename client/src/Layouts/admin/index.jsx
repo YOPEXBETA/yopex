@@ -47,7 +47,7 @@ export default function AdminLayout(props) {
     return (
       <div className="flex h-full w-full">
         <Sidebar open={open} onClose={() => setOpen(false)} />
-        <div className="h-full w-full bg-lightPrimary dark:!bg-navy-900">
+        <div className="h-full w-full bg-lightPrimary dark:!bg-zinc-900">
           <main
             className={`mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]`}
           >

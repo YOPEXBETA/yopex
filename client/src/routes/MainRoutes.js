@@ -3,6 +3,11 @@ import Loadable from "../Components/PageLoading/Loadable";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
 import PaymentFail from "../Pages/UserDashboard/SettingsPage/AccountSettings/Billing/PaymentFail";
 import Store from "../Pages/UserDashboard/StorePage/Store";
+import BrowseIcon from "../Components/icons/BrowseIcon";
+import LeaderboardIcon from "../Components/icons/LeaderboardIcon";
+import StoreIcon from "../Components/icons/StoreIcon";
+import SettingsIcon from "../Components/icons/SettingsIcon";
+import ChatIcon from "../Components/icons/ChatIcon";
 
 // ==============================|| USER PAGES ||============================== //
 //HomePage
@@ -95,52 +100,53 @@ const MainRoutes = {
   children: [
     {
       index: true,
+      name: "Feed",
       path: "feed",
       element: <HomeLayout />,
     },
-
+    {
+      name: "Browse",
+      icon: <BrowseIcon className="h-6 w-6" />,
+      path: "browse",
+      customWidth: true,
+      children: [
+        {
+          index: true,
+          element: <BrowseLayout />,
+          customWidth: true,
+        },
+        {
+          path: "contestDetails/:id",
+          element: <ContestDetails />,
+          hideInSidebar: true,
+          customWidth: false,
+        },
+      ],
+    },
     {
       path: "/profile/:userId",
       element: <UserProfileLayout />,
+
+      hideInSidebar: true,
     },
     {
       path: "/company/:companyId",
       element: <Company />,
+      hideInSidebar: true,
     },
     {
-      path: "/leaderboard",
+      name: "Leaderboard",
+      path: "leaderboard",
       element: <LeaderBoardLayout />,
+      icon: <LeaderboardIcon />,
+      customWidth: true,
     },
     {
-      path: "/settings",
-      element: <SettingsLayout />,
-    },
-    {
-      path: "/create-job-offer",
-      element: <CreateJobOffer />,
-    },
-    {
-      path: "/create-challenge",
-      element: <CreateChallenge />,
-    },
-    {
-      path: "/create-company",
-      element: <CreateCompany />,
-    },
-    {
-      path: "/create-post",
-      element: <CreatePost />,
-    },
-    {
-      path: "/postDetails/:id",
-      element: <PostDetails />,
-    },
-    {
-      path: "/store",
-      element: <Store />,
-    },
-    {
-      path: "/chat",
+      name: "Chat",
+      path: "chat",
+      icon: <ChatIcon />,
+      customWidth: true,
+
       children: [
         {
           index: true,
@@ -153,35 +159,64 @@ const MainRoutes = {
       ],
     },
     {
-      path: "/browse",
-      children: [
-        {
-          index: true,
-          element: <BrowseLayout />,
-        },
-
-        {
-          path: "contestDetails/:id",
-          element: <ContestDetails />,
-        },
-      ],
+      name: "Settings",
+      path: "settings",
+      element: <SettingsLayout />,
+      icon: <SettingsIcon />,
     },
+    {
+      path: "/create-job-offer",
+      element: <CreateJobOffer />,
+      hideInSidebar: true,
+    },
+    {
+      path: "create-challenge",
+      element: <CreateChallenge />,
+      hideInSidebar: true,
+    },
+    {
+      name: "Create company",
+      path: "create-company",
+      element: <CreateCompany />,
+      hideInSidebar: true,
+    },
+    {
+      path: "create-post",
+      element: <CreatePost />,
+      hideInSidebar: true,
+    },
+    {
+      path: "/postDetails/:id",
+      element: <PostDetails />,
+      hideInSidebar: true,
+    },
+    {
+      name: "Store",
+      path: "store",
+      element: <Store />,
+      icon: <StoreIcon className="h-6 w-6" />,
+    },
+
     {
       path: "/paymentSuccess",
       element: <PaymentSuccess />,
+      hideInSidebar: true,
     },
     {
       path: "/paymentFail",
       element: <PaymentFail />,
+      hideInSidebar: true,
     },
 
     {
       path: "*",
       element: <NotFoundPage />,
+      hideInSidebar: true,
     },
     {
       path: "/Notifications",
       element: <MobileNotifications />,
+      hideInSidebar: true,
     },
   ],
 };

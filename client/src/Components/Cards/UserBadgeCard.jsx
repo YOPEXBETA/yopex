@@ -14,7 +14,7 @@ const UserBadgeCard = ({ badge, extra }) => {
             />
           </div>
           <div className="ml-4">
-            <p className="text-md font-medium text-navy-700 dark:text-white">
+            <p className="text-md font-medium text-zinc-700 dark:text-white">
               {badge.badgeName}
             </p>
           </div>
