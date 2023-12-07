@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CustomNavbar from "./Navbar/CustomNavbar";
 
 //render the data under the navbar
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/auth/authSlice";
 import Loader from "../../Components/PageLoading/Loader";
@@ -28,7 +28,7 @@ const MainLayout = (props) => {
     );
   }, []);
 
-  const currentPath = location.pathname;
+  const currentPath = location?.pathname || "";
   const matchedRoute = routes.children.find((route) =>
     currentPath.includes(route.path)
   );
@@ -37,7 +37,7 @@ const MainLayout = (props) => {
     if (matchedRoute) {
       setCurrentRoute(matchedRoute.name);
     }
-  }, [currentPath]);
+  }, [location.pathname, routes.children]);
 
   useEffect(() => {
     if (!user) {

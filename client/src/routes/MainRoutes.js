@@ -124,15 +124,18 @@ const MainRoutes = {
       ],
     },
     {
-      path: "/profile/:userId",
-      element: <UserProfileLayout />,
-
+      name: "Profile",
+      path: "/profile",
+      children: [{ path: ":userId", element: <UserProfileLayout /> }],
       hideInSidebar: true,
+      customWidth: true,
     },
     {
-      path: "/company/:companyId",
-      element: <Company />,
+      name: "Company",
+      path: "/company",
+      children: [{ path: ":companyId", element: <Company /> }],
       hideInSidebar: true,
+      customWidth: false,
     },
     {
       name: "Leaderboard",
@@ -186,9 +189,11 @@ const MainRoutes = {
       hideInSidebar: true,
     },
     {
-      path: "/postDetails/:id",
-      element: <PostDetails />,
+      name: "post Details",
+      path: "/postDetails",
+      children: [{ path: ":id", element: <PostDetails /> }],
       hideInSidebar: true,
+      customWidth: false,
     },
     {
       name: "Store",
