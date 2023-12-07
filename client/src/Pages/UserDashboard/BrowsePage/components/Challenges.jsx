@@ -1,7 +1,7 @@
 import React from "react";
-import { useFindChallenges } from "../../../../../hooks/react-query/useChallenges";
-import ChallengeCardSkeleton from "../../../../../Components/SkeletonLoading/ChallengeCardSkeleton";
-import ChallengeCard from "../../../../../Components/Cards/ChallengeCard";
+import { useFindChallenges } from "../../../../hooks/react-query/useChallenges";
+import ChallengeCardSkeleton from "../../../../Components/SkeletonLoading/ChallengeCardSkeleton";
+import ChallengeCard from "../../../../Components/Cards/ChallengeCard";
 
 const Challenges = ({
   minAmount,

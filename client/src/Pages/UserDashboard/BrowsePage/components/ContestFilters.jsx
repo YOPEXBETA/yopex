@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSkills } from "../../../../../hooks/react-query/useSkills";
-import { useCategories } from "../../../../../hooks/react-query/useCategories";
+import { useSkills } from "../../../../hooks/react-query/useSkills";
+import { useCategories } from "../../../../hooks/react-query/useCategories";
 
 const ContestsFilters = ({
   setMinAmount,

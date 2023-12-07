@@ -14,19 +14,19 @@ const JobFilterModal = ({
 }) => {
   const { data: categories } = useCategories();
   const { data: skills } = useSkills();
-  const itCategories = categories?.map((category) => category.name);
-  const itSkills = skills?.map((skill) => skill.name);
+  const itCategories = categories?.map((category) => category?.name);
+  const itSkills = skills?.map((skill) => skill?.name);
 
   const handleCheckboxChange = (skillName) => {
     const updatedSkill = selectedSkill.includes(skillName)
-      ? selectedSkill.filter((selected) => selected !== skillName)
+      ? selectedSkill?.filter((selected) => selected !== skillName)
       : [...selectedSkill, skillName];
 
     setSkillQuery(updatedSkill);
   };
   const handleCheckboxChangeCategory = (category) => {
     const updatedCategory = selectedCategory.includes(category)
-      ? selectedCategory.filter((selected) => selected !== category)
+      ? selectedCategory?.filter((selected) => selected !== category)
       : [...selectedCategory, category];
 
     setCategoryQuery(updatedCategory);
@@ -205,7 +205,7 @@ const JobFilterModal = ({
               {selectedTab === 0 && (
                 <>
                   <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
-                    {itCategories.map((category) => (
+                    {itCategories?.map((category) => (
                       <div
                         key={category}
                         className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -234,7 +234,7 @@ const JobFilterModal = ({
               {selectedTab === 1 && (
                 <>
                   <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
-                    {itSkills.map((skillName) => (
+                    {itSkills?.map((skillName) => (
                       <div
                         key={skillName}
                         className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -259,7 +259,7 @@ const JobFilterModal = ({
               )}
               {selectedTab === 2 && (
                 <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
-                  {preferences.map((preference) => (
+                  {preferences?.map((preference) => (
                     <div key={preference.id} className="flex items-center mb-4">
                       <input
                         id={`checkbox-${preference.id}`}

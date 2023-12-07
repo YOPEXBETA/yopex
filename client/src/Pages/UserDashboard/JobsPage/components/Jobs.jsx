@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useJobs } from "../../../../../hooks/react-query/useJobs";
-import LoadingSpinner from "../../../../../Components/LoadingSpinner";
-import JobCard from "../../../../../Components/Cards/JobCard";
+import { useJobs } from "../../../../hooks/react-query/useJobs";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
+import JobCard from "../../../../Components/Cards/JobCard";
 
 const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
   // ==============================|| JOB CARD MODAL ||============================== //
@@ -36,7 +36,7 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
             <LoadingSpinner />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-1 gap-2 lg:grid-cols-2 xl:grid-cols-2">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-2 lg:grid-cols-2 xl:grid-cols-3">
             {filteredJobs.length > 0 ? (
               filteredJobs.map((job) => (
                 <div key={job._id} onClick={() => handleClickOpenModalJob(job)}>
@@ -44,7 +44,7 @@ const Jobs = ({ jobQuery, selectedCategory, selectedSkill }) => {
                 </div>
               ))
             ) : (
-              <p className="dark:text-white">No jobs found</p>
+              <p className="dark:text-white">No job found</p>
             )}
           </div>
         )}

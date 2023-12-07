@@ -3,7 +3,6 @@ import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useCreateCompany } from "../../hooks/react-query/useCompany";
 import { useFileUpload } from "../../hooks/react-query/useUsers";
-import { FaImage, FaFile } from "react-icons/fa";
 import LoadingSpinner from "../LoadingSpinner";
 import { Link } from "react-router-dom";
 import Card from "../Cards";
@@ -27,7 +26,7 @@ const CreateCompanyForm = () => {
     formData.append("type", "companyLogo");
     const datalogo = await fileUploadMutation.mutateAsync(formData);
     let documentPath = "";
-    if (data.document != undefined) {
+    if (data.document !== undefined) {
       const formData = new FormData();
       formData.append("file", data.document[0]);
       formData.append("type", "companyDocument");

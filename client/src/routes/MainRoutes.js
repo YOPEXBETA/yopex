@@ -8,6 +8,8 @@ import LeaderboardIcon from "../Components/icons/LeaderboardIcon";
 import StoreIcon from "../Components/icons/StoreIcon";
 import SettingsIcon from "../Components/icons/SettingsIcon";
 import ChatIcon from "../Components/icons/ChatIcon";
+import ContestIcon from "../Components/icons/ContestIcon";
+import JobIcon from "../Components/icons/JobIcon";
 
 // ==============================|| USER PAGES ||============================== //
 //HomePage
@@ -73,7 +75,11 @@ const ContestDetails = Loadable(
 
 //BrowsePage
 const BrowseLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/BrowsePage/BrowseLayout"))
+  lazy(() => import("../Pages/UserDashboard/BrowsePage/Index"))
+);
+//JobPage
+const JobLayout = Loadable(
+  lazy(() => import("../Pages/UserDashboard/JobsPage/Index"))
 );
 
 const PaymentSuccess = Loadable(
@@ -105,9 +111,9 @@ const MainRoutes = {
       element: <HomeLayout />,
     },
     {
-      name: "Browse",
-      icon: <BrowseIcon className="h-6 w-6" />,
-      path: "browse",
+      name: "Contests",
+      icon: <ContestIcon className="h-6 w-6" />,
+      path: "contests",
       customWidth: true,
       children: [
         {
@@ -122,6 +128,13 @@ const MainRoutes = {
           customWidth: false,
         },
       ],
+    },
+    {
+      name: "Jobs",
+      icon: <JobIcon className="h-6 w-6" />,
+      path: "/jobs",
+      element: <JobLayout />,
+      customWidth: true,
     },
     {
       name: "Profile",
