@@ -24,7 +24,7 @@ const MyCompanySocialPosts = () => {
   // console.log(companyId, posts);
 
   return (
-    <div className="dark:bg-zinc-800 lg:h-[60vh] min-h-fit">
+    <div className="">
       <div className="grid grid-cols-1  md:grid-cols-4 gap-4 py-5">
         {isLoading ? (
           <LoadingSpinner />

@@ -73,9 +73,9 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
 
   return (
     <div>
-      <div className="md:pt-10 pt-6 flex flex-col justify-end dark:border-zinc-500 border-b  dark:bg-zinc-800 bg-white">
+      <div className="md:pt-10 pt-6 flex flex-col justify-end dark:border-zinc-500 border-b">
         <div className="space-y-0 md:space-y-8 mx-auto container">
-          <div className="flex flex-col xl:flex-row lg:flex-row md:flex-row xl:px-6 items-start md:items-center px-4 gap-0 pb-8 md:pb-0 md:gap-2 justify-between">
+          <div className="flex flex-col xl:flex-row lg:flex-row md:flex-row items-start md:items-center gap-0 pb-8 md:pb-0 md:gap-2 justify-between">
             <div className="flex lg:flex-row flex-row items-center gap-4">
               <div className="w-24 h-24 sm:w-40 sm:h-40">
                 <img
@@ -145,7 +145,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                       }
                     >
                       {company && company?.user === user?._id ? (
-                        <p>Edit Company</p>
+                        <p>Edit</p>
                       ) : isfollow ? (
                         <FaUserMinus className="w-4 h-4" />
                       ) : (
