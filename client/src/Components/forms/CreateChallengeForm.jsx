@@ -8,6 +8,7 @@ import { useUserById } from "../../hooks/react-query/useUsers";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCategories } from "../../hooks/react-query/useCategories";
 import { Link } from "react-router-dom";
+import Card from "../Cards";
 
 const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
   const [selectedOptionpaid, setSelectedOptionpaid] = useState("false");
@@ -46,14 +47,8 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
 
   const now = new Date().toISOString().slice(0, -8);
   return (
-    <div className="bg-white p-4 rounded-lg">
-      <div className="px-4 py-2">
-        <h1 className="text-xl font-semibold">
-          <span className="font-normal">
-            Please fill the required informations to create your challenge
-          </span>
-        </h1>
-        <hr className="mt-4" />
+    <Card>
+      <div className="px-4 py-4">
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
           <div>
             <label
@@ -249,7 +244,10 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
           </div>
 
           <div className="flex justify-between">
-            <Link className="px-6 py-2 bg-white rounded-md border-2" to="/feed">
+            <Link
+              className="px-6 py-2 bg-white hover:bg-zinc-100 text-black rounded-md border-2"
+              to="/feed"
+            >
               Cancel
             </Link>
             <button
@@ -262,7 +260,7 @@ const CreateChallengeForm = ({ selectedOption, handleCardClick }) => {
           </div>
         </form>
       </div>
-    </div>
+    </Card>
   );
 };
 

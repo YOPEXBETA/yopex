@@ -168,11 +168,13 @@ const MainRoutes = {
       icon: <SettingsIcon />,
     },
     {
+      name: "Create Job Offer",
       path: "/create-job-offer",
       element: <CreateJobOffer />,
       hideInSidebar: true,
     },
     {
+      name: "Create Challenge",
       path: "create-challenge",
       element: <CreateChallenge />,
       hideInSidebar: true,

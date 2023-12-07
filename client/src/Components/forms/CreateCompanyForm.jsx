@@ -6,6 +6,7 @@ import { useFileUpload } from "../../hooks/react-query/useUsers";
 import { FaImage, FaFile } from "react-icons/fa";
 import LoadingSpinner from "../LoadingSpinner";
 import { Link } from "react-router-dom";
+import Card from "../Cards";
 
 const CreateCompanyForm = () => {
   const { register, handleSubmit, control, setValue, reset, watch } = useForm({
@@ -43,14 +44,8 @@ const CreateCompanyForm = () => {
     reset();
   };
   return (
-    <div className="bg-white p-4 rounded-lg">
-      <div className="px-4 py-2">
-        <h1 className="text-xl font-semibold">
-          <span className="font-normal">
-            please fill the required informations to create your company page
-          </span>
-        </h1>
-        <hr className="my-4" />
+    <Card>
+      <div className="px-8 py-4">
         <div className="space-y-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-2">
@@ -203,7 +198,7 @@ const CreateCompanyForm = () => {
             </div>
             <div className="flex justify-between mb-6">
               <Link
-                className="px-6 py-2 bg-white rounded-md border-2"
+                className="px-6 py-2 bg-white text-black rounded-md border-2"
                 to="/feed"
               >
                 Cancel
@@ -218,7 +213,7 @@ const CreateCompanyForm = () => {
           </form>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Roboto", "sans"],
+        sans: ["poppins", "sans"],
         signature: ["Great Vibes"],
       },
       colors: () => ({

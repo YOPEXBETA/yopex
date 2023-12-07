@@ -5,7 +5,7 @@ import { HiDotsVertical } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { useDeletePost } from "../../hooks/react-query/usePosts";
 import { EditPostModal } from "../shared/Modals/EditPostModal";
-import DeletePostConfirmationModal from "../Modals/DeletePostConfirmationModal";
+import DeletePostPopup from "../Popup/DeletePostPopup";
 
 const PostMenuIcon = ({ post }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -85,7 +85,7 @@ const PostMenuIcon = ({ post }) => {
       )}
 
       {isDeleteModalOpen && (
-        <DeletePostConfirmationModal
+        <DeletePostPopup
           open={isDeleteModalOpen}
           handleCancel={handleCancelDelete}
           handleConfirm={handleConfirmDelete}
