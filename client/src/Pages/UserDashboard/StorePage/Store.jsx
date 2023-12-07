@@ -44,17 +44,19 @@ const Store = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-0 md:mt-8 gap-5 ">
-      {pointItems.map((item, index) => (
-        <StorePointCard
-          key={index}
-          points={item.points}
-          amount={item.amount}
-          onClick={() => {
-            mutate(item.points);
-          }}
-        />
-      ))}
+    <div className="lg:h-[100vh]">
+      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-0 md:mt-8 gap-5 ">
+        {pointItems.map((item, index) => (
+          <StorePointCard
+            key={index}
+            points={item.points}
+            amount={item.amount}
+            onClick={() => {
+              mutate(item.points);
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 };

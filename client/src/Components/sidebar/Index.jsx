@@ -47,10 +47,9 @@ const Sidebar = ({ open, onClose, isRouteWithSpecificWidth }) => {
         />
       </ul>
 
-      {/* Free Horizon Card 
       <div className="flex justify-center">
         <SidebarCard />
-      </div>*/}
+      </div>
 
       {/* Nav item end */}
     </div>

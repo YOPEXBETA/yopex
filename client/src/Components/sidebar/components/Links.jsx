@@ -23,7 +23,7 @@ export function SidebarLinks(props) {
           <Link key={index} to={route.path}>
             <ul className="relative mb-3 flex items-center hover:cursor-pointer">
               <li
-                className="my-[10px] flex cursor-pointer items-center px-8"
+                className="my-[6px] flex cursor-pointer items-center px-8"
                 key={index}
               >
                 {!route.hideIcon && (
@@ -51,7 +51,7 @@ export function SidebarLinks(props) {
                 )}
               </li>
               {activeRoute(route.path) ? (
-                <div class="absolute right-0 top-px h-9 w-1 mt-1 rounded-lg bg-green-500 dark:bg-brand-400" />
+                <div class="absolute right-0 top-px h-9 w-1 rounded-lg bg-green-500 dark:bg-brand-400" />
               ) : null}
             </ul>
           </Link>

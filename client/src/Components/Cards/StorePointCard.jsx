@@ -11,11 +11,11 @@ const StorePointCard = ({ points, amount, onClick, extra }) => {
         </div>
         <button
           type="button"
-          className="bg-green-500 text-gray-900 font-semibold py-3 px-4 mt-4 rounded-full hover:bg-purple-500 focus:outline-none hover:text-white"
+          className="bg-green-500 dark:bg-purple-500 dark:text-white text-gray-900 font-semibold py-3 px-4 mt-4 rounded-full hover:bg-purple-500 focus:outline-none hover:text-white"
           //onClick={()=>{onClick()}}
           disabled={true}
         >
-          Comming soon
+          Coming soon
         </button>
       </div>
     </Card>
