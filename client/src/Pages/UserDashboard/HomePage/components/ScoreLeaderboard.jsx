@@ -12,9 +12,7 @@ const ScoreLeaderboard = ({ extra }) => {
   const { data: leaders, isLoading } = useUsers();
 
   // Sort leaders array by score
-  const sortedLeaders = leaders?.sort((a, b) =>
-    a.score > b.score ? -1 : a.score < b.score ? 1 : 0
-  );
+  const sortedLeaders = leaders?.users;
 
   return (
     <div className="w-full sticky top-24">

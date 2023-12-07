@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SearchbarFilter from "./SearchbarFilter";
 import Leaderboard from "./Leaderboard";
 
-const ContentSide = ({ data, onSelect, isLoading }) => {
+const ContentSide = ({ onSelect, isLoading }) => {
   const [query, setQuery] = useState("");
 
   return (
@@ -10,10 +10,8 @@ const ContentSide = ({ data, onSelect, isLoading }) => {
       <div className="space-y-2">
         <SearchbarFilter setQuery={setQuery} />
         <Leaderboard
-          data={data}
           query={query}
           onSelect={onSelect}
-          isLoading={isLoading}
         />
       </div>
     </div>
