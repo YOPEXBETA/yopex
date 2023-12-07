@@ -12,6 +12,9 @@ import {
 import getDeadlineDifference from "../../../../utils/deadlineModif";
 import ChallengeNavigationTab from "../../../../Components/Tabs/ChallengeNavigtionTab";
 import { useJoinContestConversation } from "../../../../hooks/react-query/useContestConversation";
+import SubmissionIcon from "../../../../Components/icons/SubmissionIcon";
+import UsersIcon from "../../../../Components/icons/UsersIcon";
+import CalendarIcon from "../../../../Components/icons/CalendarIcon";
 
 const Banner = ({ changeValue, value }) => {
   const [isRegistered, setIsRegistered] = useState(false);
@@ -85,56 +88,25 @@ const Banner = ({ changeValue, value }) => {
                 </a>
               </p>
             </div>
-            <div className="mb-4 flex items-center">
-              <p className="mr-5 flex items-center text-sm font-medium text-white md:mr-6">
-                <span className="mr-3">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="fill-current"
-                  >
-                    <path d="M13.9998 2.6499H12.6998V2.0999C12.6998 1.7999 12.4498 1.5249 12.1248 1.5249C11.7998 1.5249 11.5498 1.7749 11.5498 2.0999V2.6499H4.4248V2.0999C4.4248 1.7999 4.1748 1.5249 3.8498 1.5249C3.5248 1.5249 3.2748 1.7749 3.2748 2.0999V2.6499H1.9998C1.1498 2.6499 0.424805 3.3499 0.424805 4.2249V12.9249C0.424805 13.7749 1.1248 14.4999 1.9998 14.4999H13.9998C14.8498 14.4999 15.5748 13.7999 15.5748 12.9249V4.1999C15.5748 3.3499 14.8498 2.6499 13.9998 2.6499ZM1.5748 7.2999H3.6998V9.7749H1.5748V7.2999ZM4.8248 7.2999H7.4498V9.7749H4.8248V7.2999ZM7.4498 10.8999V13.3499H4.8248V10.8999H7.4498V10.8999ZM8.5748 10.8999H11.1998V13.3499H8.5748V10.8999ZM8.5748 9.7749V7.2999H11.1998V9.7749H8.5748ZM12.2998 7.2999H14.4248V9.7749H12.2998V7.2999ZM1.9998 3.7749H3.2998V4.2999C3.2998 4.5999 3.5498 4.8749 3.8748 4.8749C4.1998 4.8749 4.4498 4.6249 4.4498 4.2999V3.7749H11.5998V4.2999C11.5998 4.5999 11.8498 4.8749 12.1748 4.8749C12.4998 4.8749 12.7498 4.6249 12.7498 4.2999V3.7749H13.9998C14.2498 3.7749 14.4498 3.9749 14.4498 4.2249V6.1749H1.5748V4.2249C1.5748 3.9749 1.7498 3.7749 1.9998 3.7749ZM1.5748 12.8999V10.8749H3.6998V13.3249H1.9998C1.7498 13.3499 1.5748 13.1499 1.5748 12.8999ZM13.9998 13.3499H12.2998V10.8999H14.4248V12.9249C14.4498 13.1499 14.2498 13.3499 13.9998 13.3499Z" />
-                  </svg>
-                </span>
-                {new Date(challenge?.deadline).toLocaleString()}
-              </p>
-
-              <p className="mr-5 flex items-center text-sm font-medium text-white md:mr-6">
-                <span className="mr-3">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="fill-current"
-                  >
-                    <path d="M11.1002 4.875H4.6502C4.3502 4.875 4.0752 5.125 4.0752 5.45C4.0752 5.775 4.3252 6.025 4.6502 6.025H11.1252C11.4252 6.025 11.7002 5.775 11.7002 5.45C11.7002 5.125 11.4252 4.875 11.1002 4.875Z" />
-                    <path d="M9.8002 7.92505H4.6502C4.3502 7.92505 4.0752 8.17505 4.0752 8.50005C4.0752 8.82505 4.3252 9.07505 4.6502 9.07505H9.8002C10.1002 9.07505 10.3752 8.82505 10.3752 8.50005C10.3752 8.17505 10.1002 7.92505 9.8002 7.92505Z" />
-                    <path d="M13.9998 1.9751H1.9998C1.1498 1.9751 0.424805 2.6751 0.424805 3.5501V12.9751C0.424805 13.3751 0.649805 13.7501 1.0248 13.9251C1.1748 14.0001 1.3248 14.0251 1.4748 14.0251C1.7248 14.0251 1.9498 13.9501 2.1498 13.7751L4.2748 12.0251H13.9998C14.8498 12.0251 15.5748 11.3251 15.5748 10.4501V3.5501C15.5748 2.6751 14.8498 1.9751 13.9998 1.9751ZM14.4498 10.4501C14.4498 10.7001 14.2498 10.9001 13.9998 10.9001H4.0748C3.9498 10.9001 3.8248 10.9501 3.7248 11.0251L1.5748 12.8001V3.5501C1.5748 3.3001 1.7748 3.1001 2.0248 3.1001H14.0248C14.2748 3.1001 14.4748 3.3001 14.4748 3.5501V10.4501H14.4498Z" />
-                  </svg>
-                </span>
-                {challenge?.submissions?.length}
-              </p>
-              <p className="flex items-center text-sm font-medium text-white">
-                <span className="mr-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-people"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M2 10s1-2 2-2h1s1 0 1 1-1 1-1 1H4s-1 2-1 2a5.4 5.4 0 0 0 2 0c0 .2 0 .3 0 .5s.1.4.1.6a2 2 0 1 0 2 0c0-.2 0-.4.1-.6s0-.3 0-.5a5.4 5.4 0 0 0 2 0c0 .2 0 .3 0 .5s0 .4.1.6a2 2 0 1 0 2 0c0-.2 0-.4.1-.6s0-.3 0-.5a5.4 5.4 0 0 0 2 0c0 .2 0 .3 0 .5s0 .4.1.6a2 2 0 1 0 2 0c0-.2 0-.4.1-.6s0-.3 0-.5a5.4 5.4 0 0 0 2 0H13s-1-2-1-2h-1s-1 0-1 1 1 1 1 1h1s1 2 1 2H2zm4-8a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
-                  </svg>
-                </span>
-
-                {challenge?.users?.length}
-              </p>
+            <div className="mb-4 flex items-center gap-4">
+              <div className="text-white flex items-center">
+                <CalendarIcon />
+                <p className="text-sm font-medium text-white">
+                  {new Date(challenge?.deadline).toLocaleString()}
+                </p>
+              </div>
+              <div className="text-white flex items-center gap-2">
+                <SubmissionIcon />
+                <p className="text-sm font-medium text-white">
+                  {challenge?.submissions?.length}
+                </p>
+              </div>
+              <div className="text-white flex items-center gap-2">
+                <UsersIcon />
+                <p className="text-sm font-medium text-white">
+                  {challenge?.users?.length}
+                </p>
+              </div>
             </div>
           </div>
         </div>

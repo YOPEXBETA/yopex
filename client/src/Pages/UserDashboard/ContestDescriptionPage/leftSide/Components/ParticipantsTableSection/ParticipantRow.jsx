@@ -32,10 +32,11 @@ const ParticipantRow = ({ user, index, challenge }) => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
   const canedit = user.user._id === currentUser._id;
+
   return (
     <tr
       key={user._id}
-      className="hover:bg-gray-50 bg-white dark:bg-zinc-800"
+      className="hover:bg-gray-50 bg-white dark:bg-zinc-800 overflow-auto"
       onClick={isOwner || user.user._id === currentUser._id ? toggleOpen : null}
     >
       <td className=" py-4 px-4 font-bold text-md dark:text-white">

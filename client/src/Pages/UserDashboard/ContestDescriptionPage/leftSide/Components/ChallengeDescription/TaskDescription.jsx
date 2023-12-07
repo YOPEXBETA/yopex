@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useChallengeById } from "../../../../../../hooks/react-query/useChallenges";
+import Card from "../../../../../../Components/Cards";
 
 const TasksDescription = () => {
   const { id: challengeId } = useParams();
@@ -8,34 +9,36 @@ const TasksDescription = () => {
 
   if (challenge)
     return (
-      <div className="bg-white dark:bg-zinc-800 border rounded-lg p-4">
-        <h2 className="mb-6 text-2xl font-bold text-dark dark:text-white  sm:text-3xl md:text-[35px] md:leading-[1.28]">
-          {challenge?.title}
-        </h2>
-        <div
-          className="mb-6 text-base text-body-color dark:text-dark-6"
-          style={{ whiteSpace: "pre-line" }}
-        >
+      <Card>
+        <div className="p-4">
+          <h2 className="mb-6 text-2xl font-bold text-dark dark:text-white  sm:text-3xl md:text-[35px] md:leading-[1.28]">
+            {challenge?.title}
+          </h2>
           <div
-            className="text-md dark:text-white mb-8"
-            dangerouslySetInnerHTML={{ __html: challenge?.description }}
-          />
-        </div>
+            className="mb-6 text-base text-body-color dark:text-dark-6"
+            style={{ whiteSpace: "pre-line" }}
+          >
+            <div
+              className="text-md dark:text-white mb-8"
+              dangerouslySetInnerHTML={{ __html: challenge?.description }}
+            />
+          </div>
 
-        <hr className="my-4" />
-        <div className="mb-4">
-          <div className="flex flex-wrap gap-2">
-            {challenge.RecommendedSkills.map((skill, index) => (
-              <span
-                key={index}
-                className="block rounded-md  py-[5px] px-[14px] text-base text-dark dark:text-white hover:bg-green-700 border hover:text-white"
-              >
-                {skill}
-              </span>
-            ))}
+          <hr className="my-4" />
+          <div className="mb-4">
+            <div className="flex flex-wrap gap-2">
+              {challenge.RecommendedSkills.map((skill, index) => (
+                <span
+                  key={index}
+                  className="block rounded-md  py-[5px] px-[14px] text-base text-dark dark:text-white hover:bg-green-700 border hover:text-white"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </Card>
     );
 };
 

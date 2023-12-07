@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useChallengeById } from "../../hooks/react-query/useChallenges";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import Card from "../Cards";
 
 const ChallengeNavigationTab = ({ value, changeValue, isRegistered }) => {
   const { id: challengeId } = useParams();
@@ -31,53 +32,55 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered }) => {
 
   return (
     <div className="w-full">
-      <div className="divide-gray-100 p-2 dark:border-zinc-500 overflow-hidden rounded-lg bg-white border dark:bg-zinc-800  text-gray-600 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
-        <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 0
-              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-              : "text-gray-500 border-gray-300 dark:text-gray-300 "
-          }`}
-          onClick={() => changeValue(0)}
-        >
-          Description
-        </button>
-        <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 1
-              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-              : "text-gray-500 border-gray-300 dark:text-gray-300 "
-          }`}
-          onClick={() => changeValue(1)}
-        >
-          Participants
-        </button>
-        {isRegistered || isOwner ? (
+      <Card>
+        <div className="p-2 overflow-hidden sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
           <button
             className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-              value === 3
+              value === 0
                 ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
                 : "text-gray-500 border-gray-300 dark:text-gray-300 "
             }`}
-            onClick={() => changeValue(3)}
+            onClick={() => changeValue(0)}
           >
-            Chat
+            Description
           </button>
-        ) : null}
+          <button
+            className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+              value === 1
+                ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                : "text-gray-500 border-gray-300 dark:text-gray-300 "
+            }`}
+            onClick={() => changeValue(1)}
+          >
+            Participants
+          </button>
+          {isRegistered || isOwner ? (
+            <button
+              className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+                value === 3
+                  ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                  : "text-gray-500 border-gray-300 dark:text-gray-300 "
+              }`}
+              onClick={() => changeValue(3)}
+            >
+              Chat
+            </button>
+          ) : null}
 
-        {isOwner && handleProgress(challenge) && !challenge?.winner && (
-          <button
-            className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-              value === 2
-                ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-                : "text-gray-500 border-gray-300 dark:text-gray-300 "
-            }`}
-            onClick={() => changeValue(2)}
-          >
-            Choose Winner
-          </button>
-        )}
-      </div>
+          {isOwner && handleProgress(challenge) && !challenge?.winner && (
+            <button
+              className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+                value === 2
+                  ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                  : "text-gray-500 border-gray-300 dark:text-gray-300 "
+              }`}
+              onClick={() => changeValue(2)}
+            >
+              Choose Winner
+            </button>
+          )}
+        </div>
+      </Card>
     </div>
   );
 };

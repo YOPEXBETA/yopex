@@ -13,6 +13,7 @@ import {
 } from "../../../../../../hooks/react-query/useChallenges";
 import { useJoinContestConversation } from "../../../../../../hooks/react-query/useContestConversation";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import Card from "../../../../../../Components/Cards";
 
 const ClientCard = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -61,90 +62,92 @@ const ClientCard = () => {
   };
 
   return (
-    <div>
-      <div className="space-y-4">
-        <div className="rounded-lg py-4 px-11 flex justify-center bg-white border  dark:bg-zinc-800">
-          <div className="flex flex-col items-center pb-3">
-            <div className="flex flex-col items-center">
-              <h5 className="text-lg text-gray-400 pb-2">Contest Prize</h5>
-              {challenge.price > 0 ? (
-                <div className="flex gap-1">
-                  <p className="text-2xl font-bold pb-6 dark:text-white">
-                    {challenge?.price}
-                  </p>
-                </div>
-              ) : (
-                <p className="text-2xl font-bold pb-6 dark:text-white">
-                  Free Price
+    <Card>
+      <div className="py-6 px-11 flex justify-center">
+        <div className="flex flex-col items-center pb-3">
+          <div className="flex flex-col items-center">
+            <h5 className="text-xl text-zinc-500 font-medium pb-2">
+              Contest Price
+            </h5>
+            {challenge.price > 0 ? (
+              <div className="flex gap-1">
+                <p className="text-3xl font-bold pb-6 dark:text-white">
+                  {challenge?.price}
                 </p>
-              )}
-            </div>
-            <div className="flex flex-col items-center">
-              <p className="text-lg text-gray-400 pb-3">Contest ending in</p>
-              <p className="text-xl font-bold text-black dark:text-white">
-                {deadline}
+              </div>
+            ) : (
+              <p className="text-3xl font-bold pb-6 dark:text-white">
+                Free Price
               </p>
-            </div>
+            )}
+          </div>
+          <div className="flex flex-col items-center">
+            <p className="text-xl text-zinc-500 font-medium pb-4">
+              Contest ending in
+            </p>
+            <p className="text-xl font-bold text-black dark:text-white">
+              {deadline}
+            </p>
           </div>
         </div>
-
-        {new Date() < new Date(challenge.deadline) && (
-          <div className="flex flex-col gap-2">
-            {user.role === "user" &&
-            deadline !== "0 Days 0 Hours 0 Minutes" &&
-            !isSubmitted ? (
-              <div className="space-x-1 flex flex-col gap-4">
-                {isRegistered ? (
-                  <button
-                    className={`px-5 py-3 text-white w-full bg-purple-500 h-16 hover:bg-green-600 rounded-full animate-pulse ${
-                      isloadingun ? "opacity-50 cursor-not-allowed" : ""
-                    }`}
-                    onClick={unRegisterMutate}
-                    disabled={isloadingun}
-                  >
-                    {isloadingun ? <LoadingSpinner /> : "Unregister"}
-                  </button>
-                ) : (
-                  <div>
-                    {challenge.users.length < challenge.nbruser ? (
-                      <button
-                        onClick={handleregiser}
-                        className={`px-5 py-3 rounded-full bg-green-500 h-16 text-white w-full  ${
-                          isLoading ? "opacity-50 cursor-not-allowed" : ""
-                        }`}
-                        disabled={isLoading}
-                      >
-                        {isLoading ? <LoadingSpinner /> : "Register"}
-                      </button>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                )}
-                <button
-                  className={`px-5 py-3 rounded-full w-full h-16 ${
-                    isRegistered
-                      ? "bg-green-500 text-white"
-                      : "bg-gray-300 cursor-not-allowed pointer-events-none text-white truncate w-8"
-                  }`}
-                  disabled={!isRegistered}
-                  onClick={toggleModal}
-                >
-                  {isRegistered ? "Submit" : "Not Registered"}
-                </button>
-              </div>
-            ) : null}
-          </div>
-        )}
-
-        <SubmitModal
-          open={modalOpen}
-          handleClose={toggleModal}
-          setIsSubmitted={setIsSubmitted}
-          isRegistered={isRegistered}
-        />
       </div>
-    </div>
+
+      {new Date() < new Date(challenge.deadline) && (
+        <div className="flex flex-col gap-2">
+          {user.role === "user" &&
+          deadline !== "0 Days 0 Hours 0 Minutes" &&
+          !isSubmitted ? (
+            <div className="space-x-1 flex flex-col gap-4">
+              {isRegistered ? (
+                <button
+                  className={`px-5 py-3 text-white w-full bg-purple-500 h-16 hover:bg-green-600 rounded-full animate-pulse ${
+                    isloadingun ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={unRegisterMutate}
+                  disabled={isloadingun}
+                >
+                  {isloadingun ? <LoadingSpinner /> : "Unregister"}
+                </button>
+              ) : (
+                <div>
+                  {challenge.users.length < challenge.nbruser ? (
+                    <button
+                      onClick={handleregiser}
+                      className={`px-5 py-3 rounded-full bg-green-500 h-16 text-white w-full  ${
+                        isLoading ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? <LoadingSpinner /> : "Register"}
+                    </button>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
+              <button
+                className={`px-5 py-3 rounded-full w-full h-16 ${
+                  isRegistered
+                    ? "bg-green-500 text-white"
+                    : "bg-gray-300 cursor-not-allowed pointer-events-none text-white truncate w-8"
+                }`}
+                disabled={!isRegistered}
+                onClick={toggleModal}
+              >
+                {isRegistered ? "Submit" : "Not Registered"}
+              </button>
+            </div>
+          ) : null}
+        </div>
+      )}
+
+      <SubmitModal
+        open={modalOpen}
+        handleClose={toggleModal}
+        setIsSubmitted={setIsSubmitted}
+        isRegistered={isRegistered}
+      />
+    </Card>
   );
 };
 

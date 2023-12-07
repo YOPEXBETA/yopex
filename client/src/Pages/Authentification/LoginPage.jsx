@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   return (
-    <div className="grid gap-6 md:grid-cols-2 bg-white dark:bg-zinc-800">
+    <div className="grid gap-6 md:grid-cols-2 bg-white dark:bg-zinc-800 h-[100vh]">
       <div className="from-green-900 w-full to-green-500 i group relative hidden items-center justify-around overflow-hidden bg-gradient-to-tr md:flex">
         <div className="mx-auto max-w-xs text-center space-y-4">
           <h2 className="text-white text-3xl">Don't you Have an Account?</h2>
@@ -22,9 +22,10 @@ const LoginPage = () => {
         <div className="bg-gray-200/20 absolute -bottom-12 end-20 h-14 w-0 origin-bottom-right rotate-45 rounded-full transition-all delay-75 duration-300 group-hover:w-48"></div>
         <div className="bg-gray-200/20 absolute -end-7 bottom-24 h-14 w-0 origin-bottom-right rotate-45 rounded-full transition-all delay-[25ms] duration-300 group-hover:w-40"></div>
       </div>
-
-      <div className="col-span-6 md:col-span-1 flex flex-col items-center my-16 px-8 lg:px-0 md:px-0">
-        <Login />
+      <div className="mx-auto container">
+        <div className="col-span-6 md:col-span-1 flex flex-col justify-center items-center my-8 px-8 lg:px-0 md:px-0">
+          <Login />
+        </div>
       </div>
     </div>
   );

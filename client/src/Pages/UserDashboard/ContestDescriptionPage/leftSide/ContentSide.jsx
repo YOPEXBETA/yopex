@@ -18,11 +18,11 @@ const ContentSide = ({ value, changeValue }) => {
       <div className="">
         <div className="space-y-2 ">
           {value === 0 && (
-            <div className="grid grid-cols-12 gap-10 mt-4 md:mt-0">
-              <div className="lg:col-span-8 md:col-span-8 sm:col-span-12 col-span-12">
+            <div className="grid grid-cols-12 md:gap-10 mt-4 md:mt-0">
+              <div className="lg:col-span-8 md:col-span-12 sm:col-span-12 col-span-12">
                 <TasksDescription />
               </div>
-              <div className="lg:block md:block lg:col-span-4 md:col-span-4 sm:col-span-12 col-span-12  mb-20">
+              <div className="lg:block md:block lg:col-span-4 md:col-span-12 sm:col-span-12 col-span-12  mb-20">
                 <CompanyCard />
               </div>
             </div>
