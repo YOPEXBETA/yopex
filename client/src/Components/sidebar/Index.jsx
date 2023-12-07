@@ -37,7 +37,7 @@ const Sidebar = ({ open, onClose, isRouteWithSpecificWidth }) => {
           )}
         </div>
       </div>
-      <div className="mt-[44px] mb-7 h-px bg-gray-300 dark:bg-white/30" />
+      <div className="mt-[44px] mb-7 h-px bg-zinc-300 dark:bg-white/30" />
       {/* Nav item */}
 
       <ul className="mb-auto pt-1">
@@ -47,11 +47,9 @@ const Sidebar = ({ open, onClose, isRouteWithSpecificWidth }) => {
         />
       </ul>
 
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
         <SidebarCard />
-      </div>
-
-      {/* Nav item end */}
+      </div> */}
     </div>
   );
 };

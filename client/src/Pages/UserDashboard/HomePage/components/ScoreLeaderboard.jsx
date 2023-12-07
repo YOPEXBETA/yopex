@@ -97,9 +97,6 @@ const ScoreLeaderboard = ({ extra }) => {
                             <p className="text-sm font-medium">
                               {leader?.firstname}
                             </p>
-                            <p className="text-sm text-zinc-500 truncate">
-                              {leader?.country || "Unknown"}
-                            </p>
                           </div>
                           <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                             {leader?.score}
