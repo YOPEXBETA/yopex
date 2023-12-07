@@ -12,7 +12,7 @@ const Index = () => {
   const [maxAmount, setMaxAmount] = useState(null);
 
   return (
-    <div className="md:space-y-6 space-y-1">
+    <div className="md:space-y-6 space-y-1  h-[100vh]">
       <ContestsHeader
         setContestQuery={setContestQuery}
         selectedSkill={selectedSkill}

@@ -8,7 +8,7 @@ const Index = () => {
   const [selectedSkill, setSkillQuery] = useState([]);
 
   return (
-    <div className="flex flex-col gap-10 h-[100vh]">
+    <div className="flex flex-col gap-10">
       <JobSearchFilter
         setJobQuery={setJobQuery}
         setCategoryQuery={setCategoryQuery}

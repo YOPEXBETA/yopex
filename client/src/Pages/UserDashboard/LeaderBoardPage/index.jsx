@@ -10,7 +10,7 @@ const LeaderBoardLayout = () => {
     setSelectedUser(user);
   };
   return (
-    <div className="mx-auto container">
+    <div className="mx-auto container  h-[100vh]">
       <div className="grid grid-cols-12 xl:gap-5 lg:gap-4 md:gap-2 xl:py-6 py-0">
         <div className="xl:col-span-4 lg:col-span-12 md:col-span-12 col-span-12">
           <LeaderboardDetailCard data={selectedUser} />

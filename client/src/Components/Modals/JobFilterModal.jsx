@@ -49,9 +49,9 @@ const JobFilterModal = ({
       className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}
     >
       <div className="fixed inset-0 flex items-center justify-center">
-        <div className="bg-white px-8 py-4 shadow-md overflow-auto md:w-[60rem] md:h-[40rem] w-full h-full">
+        <div className="bg-white dark:bg-zinc-800 px-8 py-4 shadow-md overflow-auto md:w-[60rem] md:h-[40rem] w-full h-full">
           <div className="flex items-center justify-between mb-4">
-            <h5 className="text-[1.15rem]">Filter by</h5>
+            <h5 className="text-[1.15rem] dark:text-white">Filter by</h5>
             <div>
               <button
                 type="button"
@@ -91,7 +91,7 @@ const JobFilterModal = ({
                   className={`inline-flex items-center px-4 py-3 rounded-lg  ${
                     selectedTab === 0
                       ? "bg-green-500 text-white"
-                      : "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                      : "bg-gray-50 hover:bg-gray-100  dark:hover:bg-zinc-700 dark:hover:text-white"
                   } w-full`}
                   aria-current="page"
                 >
@@ -118,10 +118,11 @@ const JobFilterModal = ({
                 onClick={() => handleTabClick(1)}
               >
                 <a
+                  href="#"
                   className={`inline-flex items-center px-4 py-3 rounded-lg  ${
                     selectedTab === 1
                       ? "bg-green-500 text-white"
-                      : "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                      : "bg-gray-50 hover:bg-gray-100  dark:hover:bg-zinc-700 dark:hover:text-white"
                   } w-full`}
                   aria-current="page"
                 >
@@ -140,7 +141,7 @@ const JobFilterModal = ({
                   Skills
                 </a>
               </li>
-              {/*
+
               <li
                 className={`flex items-center ${tabStyles} ${
                   selectedTab === 2 ? activeTabStyles : "text-zinc-400"
@@ -151,7 +152,7 @@ const JobFilterModal = ({
                   className={`inline-flex items-center px-4 py-3 rounded-lg  ${
                     selectedTab === 2
                       ? "bg-green-500 text-white"
-                      : "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                      : "bg-gray-50 hover:bg-gray-100  dark:hover:bg-zinc-700 dark:hover:text-white"
                   } w-full`}
                   aria-current="page"
                 >
@@ -169,7 +170,7 @@ const JobFilterModal = ({
                   </svg>
                   job_type
                 </a>
-                </li>
+              </li>
               <li
                 className={`flex items-center ${tabStyles} ${
                   selectedTab === 3 ? activeTabStyles : "text-zinc-400"
@@ -180,7 +181,7 @@ const JobFilterModal = ({
                   className={`inline-flex items-center px-4 py-3 rounded-lg  ${
                     selectedTab === 3
                       ? "bg-green-500 text-white"
-                      : "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                      : "bg-gray-50 hover:bg-gray-100  dark:hover:bg-zinc-700 dark:hover:text-white"
                   } w-full`}
                   aria-current="page"
                 >
@@ -199,12 +200,11 @@ const JobFilterModal = ({
                   offer_type
                 </a>
               </li>
-              */}
             </ul>
-            <div className="md:px-6 py-2  text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+            <div className="md:px-6 py-2  text-medium text-gray-500 dark:text-gray-400  rounded-lg w-full">
               {selectedTab === 0 && (
                 <>
-                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
+                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 dark:bg-zinc-800 p-6 rounded-lg">
                     {itCategories?.map((category) => (
                       <div
                         key={category}
@@ -233,7 +233,7 @@ const JobFilterModal = ({
               )}
               {selectedTab === 1 && (
                 <>
-                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
+                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 bg-gray-50 p-6 rounded-lg">
                     {itSkills?.map((skillName) => (
                       <div
                         key={skillName}
@@ -258,14 +258,14 @@ const JobFilterModal = ({
                 </>
               )}
               {selectedTab === 2 && (
-                <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
+                <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 bg-gray-50 p-6 rounded-lg">
                   {preferences?.map((preference) => (
                     <div key={preference.id} className="flex items-center mb-4">
                       <input
                         id={`checkbox-${preference.id}`}
                         type="checkbox"
                         value=""
-                        className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-zinc-700 dark:border-gray-600"
                         checked={selectedTab === preference.id}
                       />
                       <label
@@ -280,7 +280,7 @@ const JobFilterModal = ({
               )}
               {selectedTab === 3 && (
                 <>
-                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 bg-gray-50 p-6 rounded-lg">
+                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 bg-gray-50 p-6 rounded-lg">
                     {preferences.map((preference) => (
                       <div
                         key={preference.id}
@@ -290,7 +290,7 @@ const JobFilterModal = ({
                           id={`checkbox-${preference.id}`}
                           type="checkbox"
                           value=""
-                          className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-zinc-700 dark:border-gray-600"
                           checked={selectedTab === preference.id}
                         />
                         <label

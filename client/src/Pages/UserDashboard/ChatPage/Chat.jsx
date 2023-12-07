@@ -42,7 +42,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="lg:grid lg:grid-cols-4 sm:grid sm:grid-cols-1 h-screen overflow-hidden">
+    <div className="lg:grid lg:grid-cols-4 sm:grid sm:grid-cols-1  overflow-hidden h-[100vh]">
       <div className="hidden col-span-1 sm:col-span-1 border-r bg-white border-gray-300 lg:block dark:bg-zinc-800">
         <UsersMsgs />
       </div>

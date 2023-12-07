@@ -2,7 +2,6 @@ import React from "react";
 import Card from "./index";
 
 const UserInfoCard = ({ userProfile, extra }) => {
-  console.log(userProfile);
   return (
     <Card extra={`w-full h-full p-6 ${extra}`}>
       {/* Header */}
