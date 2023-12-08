@@ -276,7 +276,7 @@ const getpostById = async (req, res) => {
   try {
     const post = await Post.findById(postId).populate("skills");
 
-    res.status(200).json(post);
+    return res.status(200).json(post);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
