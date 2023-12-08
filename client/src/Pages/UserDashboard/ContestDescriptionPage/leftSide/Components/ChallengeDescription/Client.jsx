@@ -13,6 +13,7 @@ import {
 } from "../../../../../../hooks/react-query/useChallenges";
 import { useJoinContestConversation } from "../../../../../../hooks/react-query/useContestConversation";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import Card from "../../../../../../Components/Cards";
 
 const ClientCard = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -61,25 +62,29 @@ const ClientCard = () => {
   };
 
   return (
-    <div className="space-y-4 dark:bg-zinc-800">
-      <div className="border-2 border-zinc-200 rounded-xl py-4 px-11 flex justify-center ">
+    <Card>
+      <div className="py-6 px-11 flex justify-center">
         <div className="flex flex-col items-center pb-3">
           <div className="flex flex-col items-center">
-            <h5 className="text-lg text-gray-400 pb-2">Contest Prize</h5>
+            <h5 className="text-xl text-zinc-500 font-medium pb-2">
+              Contest Price
+            </h5>
             {challenge.price > 0 ? (
               <div className="flex gap-1">
-                <p className="text-2xl font-bold pb-6 dark:text-white">
+                <p className="text-3xl font-bold pb-6 dark:text-white">
                   {challenge?.price}
                 </p>
               </div>
             ) : (
-              <p className="text-2xl font-bold pb-6 dark:text-white">
-                Free Entry
+              <p className="text-3xl font-bold pb-6 dark:text-white">
+                Free Price
               </p>
             )}
           </div>
           <div className="flex flex-col items-center">
-            <p className="text-lg text-gray-400 pb-3">Contest ending in</p>
+            <p className="text-xl text-zinc-500 font-medium pb-4">
+              Contest ending in
+            </p>
             <p className="text-xl font-bold text-black dark:text-white">
               {deadline}
             </p>
@@ -136,33 +141,13 @@ const ClientCard = () => {
         </div>
       )}
 
-      {/*<div className="space-y-3">
-        <div className="space-y-4">
-          <h4 className="text-xl font-bold">About the client</h4>
-          <hr className="border-t border-gray-200" />
-        </div>
-        <div className="flex flex-row space-x-4 items-center">
-          <img
-            src={challenge?.company.companyLogo}
-            alt="Client Logo"
-            className="bg-secondary w-12 h-12 rounded-lg object-cover"
-          />
-          <div className="space-y-1">
-            <div className="flex flex-row items-center space-x-1">
-              <h5 className="text-lg font-md">
-                {challenge?.company.companyName}
-              </h5>
-            </div>
-          </div>
-        </div>
-  </div>*/}
       <SubmitModal
         open={modalOpen}
         handleClose={toggleModal}
         setIsSubmitted={setIsSubmitted}
         isRegistered={isRegistered}
       />
-    </div>
+    </Card>
   );
 };
 

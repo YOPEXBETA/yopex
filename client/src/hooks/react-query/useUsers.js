@@ -1,12 +1,12 @@
 import { axios } from "../../axios";
-import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-export const useUsers = () => {
+export const useUsers = (page=1) => {
   return useQuery("users", async () => {
-    const { data } = await axios.get(`${url}/allusers`, {});
+    console.log(page);
+    const { data } = await axios.get(`${url}/allusers?page=${page}`, {});
     return data;
   });
 };

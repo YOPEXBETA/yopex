@@ -25,7 +25,13 @@ app.use(cookieParser());
 const corsOpts = {
   origin: ["https://yopexhub.com", "http://localhost:3000"], // Replace with your actual client origin
   methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "PATCH"],
-  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
+  allowedHeaders: [
+    "Origin",
+    "X-Requested-With",
+    "Content-Type",
+    "Accept",
+    "Authorization",
+  ],
   credentials: true,
   preflightContinue: false,
   optionsSuccessStatus: 204,

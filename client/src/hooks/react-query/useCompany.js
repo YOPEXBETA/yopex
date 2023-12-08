@@ -40,6 +40,9 @@ export const useCreateCompany = () => {
       toast.success("Company created successfully");
       queryClient.invalidateQueries("companies");
     },
+    onError: (error) => {
+      toast.error(`Error creating company: ${error.response.data.error.msg}`);
+    },
   });
 };
 

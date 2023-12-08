@@ -1,7 +1,7 @@
 import React from "react";
 import { useBadges } from "../../../hooks/react-query/useBadges";
 import AdminMenuList from "./components/AdminMenuList";
-import BadgeCard from "../../../Components/shared/cards/BadgeCard";
+import BadgeCard from "../../../Components/Cards/BadgeCard";
 
 const BadgesPage = () => {
   const { data } = useBadges();

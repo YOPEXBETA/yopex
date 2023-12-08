@@ -4,7 +4,7 @@ import {
   useUserPosts,
   useBookmarkedPosts,
 } from "../../../../../../hooks/react-query/usePosts";
-import SocialPostCard from "../../../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
+import SocialPostCard from "../../../../../../Components/Cards/SocialPost";
 import { useSelector } from "react-redux";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";

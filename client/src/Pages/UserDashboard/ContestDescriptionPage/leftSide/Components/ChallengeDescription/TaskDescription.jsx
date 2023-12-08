@@ -1,6 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useChallengeById } from "../../../../../../hooks/react-query/useChallenges";
+import Card from "../../../../../../Components/Cards";
+import Tag from "../../../../../../Components/tags/Index";
 
 const TasksDescription = () => {
   const { id: challengeId } = useParams();
@@ -8,53 +10,31 @@ const TasksDescription = () => {
 
   if (challenge)
     return (
-      <div>
-        <div className="mb-4 dark:text-white ">
-          <h4 className="text-xl font-semibold">Description</h4>
-        </div>
-        <hr className="my-2 mb-2" />
-        <div className="mb-4" style={{ whiteSpace: "pre-line" }}>
+      <Card>
+        <div className="p-4">
+          <h2 className="mb-6 text-2xl font-bold text-dark dark:text-white  sm:text-3xl md:text-[35px] md:leading-[1.28]">
+            {challenge?.title}
+          </h2>
           <div
-            className="text-md dark:text-white mb-8"
-            dangerouslySetInnerHTML={{ __html: challenge?.description }}
-          />
-        </div>
-        <div className="mb-4  dark:text-white">
-          <h4 className="text-xl font-semibold">Categories</h4>
-        </div>
-        <hr className="my-4" />
-        <div className="mb-4">
-          <div className="flex flex-wrap gap-2">
-            {challenge.category.map((cat, i) => (
-              <span
-                key={i}
-                className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
-              >
-                {cat}
-              </span>
-            ))}
+            className="mb-6 text-base text-body-color dark:text-dark-6"
+            style={{ whiteSpace: "pre-line" }}
+          >
+            <div
+              className="text-md dark:text-white mb-8"
+              dangerouslySetInnerHTML={{ __html: challenge?.description }}
+            />
+          </div>
+
+          <hr className="my-4" />
+          <div className="mb-4">
+            <div className="flex flex-wrap gap-2">
+              {challenge.RecommendedSkills.map((skill, index) => (
+                <Tag key={index}>{skill}</Tag>
+              ))}
+            </div>
           </div>
         </div>
-        <hr className="my-2" />
-        <div className="mb-4 game-skills">
-          <h4 className="text-xl font-semibold dark:text-white">
-            Recommended Skills
-          </h4>
-        </div>
-        <hr className="my-4" />
-        <div className="mb-4">
-          <div className="flex flex-wrap gap-2">
-            {challenge.RecommendedSkills.map((skill, i) => (
-              <span
-                key={i}
-                className="px-2 py-1 bg-green-200 text-green-700 rounded-full text-sm"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
+      </Card>
     );
 };
 

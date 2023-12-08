@@ -27,12 +27,36 @@ const ParticipantsTable = () => {
           <div className="overflow-hidden dark:bg-zinc-800">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200 ">
-                <thead className="text-black ">
-                  <tr className="bg-white h-11 dark:bg-zinc-800 dark:text-white">
-                    <th className="py-2 px-4 text-left">PARTICIPANT N</th>
-                    <th className="py-2 px-4 text-left">USERNAME</th>
-                    <th className="py-2 px-4 text-left">REGISTRATION DATE</th>
-                    <th className="py-2 px-4 text-right">SUBMISSION DATE</th>
+                <thead className="bg-gray-50 dark:bg-zinc-900">
+                  <tr>
+                    <div className="flex items-center gap-x-3">
+                      <th
+                        scope="col"
+                        className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-zinc-500 dark:text-zinc-400"
+                      >
+                        Participant N
+                      </th>
+                    </div>
+
+                    <th
+                      scope="col"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-zinc-500 dark:text-zinc-400"
+                    >
+                      Username
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-zinc-500 dark:text-zinc-400"
+                    >
+                      Registration Date
+                    </th>
+
+                    <th
+                      scope="col"
+                      className="px-4 py-3.5 text-sm font-normal  rtl:text-right text-zinc-500 dark:text-zinc-400 text-right"
+                    >
+                      Submission Date
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -52,7 +76,7 @@ const ParticipantsTable = () => {
               </table>
             </div>
           </div>
-          <div className="flex items-center justify-between py-2 px-4 text-black bg-white border-t dark:bg-zinc-800 dark:text-white">
+          {/*<div className="flex items-center justify-between py-2 px-4 text-black bg-white border-t dark:bg-zinc-800 dark:text-white">
             <div className="flex items-center gap-3">
               <span className="text-sm">Rows per page:</span>
               <select
@@ -84,7 +108,7 @@ const ParticipantsTable = () => {
                 <FaChevronRight />
               </button>
             </div>
-          </div>
+                  </div>*/}
         </div>
       </div>
     );

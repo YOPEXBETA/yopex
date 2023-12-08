@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import { useChallengeById } from "../../hooks/react-query/useChallenges";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import Card from "../Cards";
 
-const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
+const ChallengeNavigationTab = ({ value, changeValue, isRegistered }) => {
   const { id: challengeId } = useParams();
 
   const { data: challenge } = useChallengeById(challengeId);
@@ -17,10 +18,10 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
     : false;
 
   const getDeadlineDifference = (deadline) => {
-      const now = moment();
-      const diff = moment(deadline).diff(now);
-      
-      if (diff < 0) return "0 Days 0 Hours 0 Minutes";
+    const now = moment();
+    const diff = moment(deadline).diff(now);
+
+    if (diff < 0) return "0 Days 0 Hours 0 Minutes";
   };
   const handleProgress = (card) => {
     console.log(getDeadlineDifference(card?.deadline));
@@ -28,45 +29,58 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered}) => {
       return true;
     return false;
   };
-  
+
   return (
     <div className="w-full">
-      <div className="border-b border-divider">
-        <ul className="flex">
-          <li
-            className={`cursor-pointer px-4 py-2 ${
-              value === 0 ? "bg-green-500 text-white" : "text-green-500"
+      <Card>
+        <div className="p-2 overflow-hidden sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+          <button
+            className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+              value === 0
+                ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                : "text-gray-500 border-gray-300 dark:text-gray-300 "
             }`}
             onClick={() => changeValue(0)}
           >
             Description
-          </li>
-          <li
-            className={`cursor-pointer px-4 py-2 ${
-              value === 1 ? "bg-green-500 text-white" : "text-green-500"
+          </button>
+          <button
+            className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+              value === 1
+                ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                : "text-gray-500 border-gray-300 dark:text-gray-300 "
             }`}
             onClick={() => changeValue(1)}
           >
             Participants
-          </li>
-          {isRegistered || isOwner?(<li
-            className={`cursor-pointer px-4 py-2 ${
-              value === 3 ? "bg-green-500 text-white" : "text-green-500"
-            }`}
-            onClick={() => changeValue(3)}
-          >
-            Conversation
-          </li>):null}
+          </button>
+          {isRegistered || isOwner ? (
+            <button
+              className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+                value === 3
+                  ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                  : "text-gray-500 border-gray-300 dark:text-gray-300 "
+              }`}
+              onClick={() => changeValue(3)}
+            >
+              Chat
+            </button>
+          ) : null}
+
           {isOwner && handleProgress(challenge) && !challenge?.winner && (
-            <li
-              className="cursor-pointer px-4 py-2 ml-auto font-semibold uppercase text-red-500 border border-red-500"
+            <button
+              className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+                value === 2
+                  ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                  : "text-gray-500 border-gray-300 dark:text-gray-300 "
+              }`}
               onClick={() => changeValue(2)}
             >
               Choose Winner
-            </li>
+            </button>
           )}
-        </ul>
-      </div>
+        </div>
+      </Card>
     </div>
   );
 };

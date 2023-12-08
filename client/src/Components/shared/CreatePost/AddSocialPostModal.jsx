@@ -63,7 +63,7 @@ export const AddSocialPostModal = ({ open, handleClose }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex justify-between items-center p-4">
                 <h5 className="text-xl font-bold mb-4 text-black dark:text-white">
-                  Add a Post
+                  Create a Post
                 </h5>
                 <button
                   type="button"

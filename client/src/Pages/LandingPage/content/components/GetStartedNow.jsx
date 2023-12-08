@@ -25,7 +25,7 @@ const GetStartedNow = () => {
               <div className="flex flex-wrap justify-center gap-6">
                 <a
                   href="/login"
-                  className="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+                  className="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                 >
                   <span className="relative text-base text-white font-semibold border-2 border-green-500 py-4 px-8 bg-green-500 rounded-full hover:border-green-700 hover:text-green-700 transition duration-300 ease-in-out transform hover:scale-105">
                     Get Started

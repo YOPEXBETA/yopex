@@ -8,7 +8,7 @@ const AdminSidebar = ({ open, onClose }) => {
 
   return (
     <div
-      className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-black pb-10 shadow-2xl w-72 shadow-white/5 transition-all dark:!bg-navy-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 ${
+      className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-black pb-10 shadow-2xl w-72 shadow-white/5 transition-all dark:!bg-zinc-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 ${
         open ? "translate-x-0" : "-translate-x-96"
       }`}
     >
@@ -35,12 +35,12 @@ const AdminSidebar = ({ open, onClose }) => {
 
       <div className="  h-px  dark:bg-white/30" />
 
-      <ul className="mb-auto pt-1">
+      <ul className="mb-auto pt-1 overflow-y-auto h-[30rem]">
         {routes.children.map((route, index) => (
           <li key={index} className="hover:bg-green-500">
             <NavLink
               to={route.path}
-              className="flex items-center  py-4 px-[40px] space-x-3 text-gray-500 font-medium transition-colors duration-150 hover:text-white dark:hover:text-gray-300"
+              className="flex items-center py-4 px-[40px] space-x-3 text-gray-500 font-medium transition-colors duration-150 hover:text-white dark:hover:text-gray-300"
             >
               <span className="text-lg">{route.icon}</span>
               <span className="text-lg">{route.path}</span>

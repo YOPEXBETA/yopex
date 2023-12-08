@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useUserFollowers } from "../../../../../../hooks/react-query/useUsers";
-import FollowersCard from "../../../../../../Components/shared/cards/FollowersCard";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import FollowersCard from "../../../../../../Components/Cards/FollowersCard";
 
 const Followers = () => {
   const { userId } = useParams();

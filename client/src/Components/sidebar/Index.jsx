@@ -1,0 +1,68 @@
+import React, { useState } from "react";
+import { HiX } from "react-icons/hi";
+import routes from "../../routes/MainRoutes";
+import { NavLink, useLocation } from "react-router-dom";
+import YopexLogo from "../../assets/images/LogoYopex.png";
+import SidebarLinks from "./components/Links";
+import SidebarCard from "./components/SidebarCard";
+import CreateMenuModal from "../Modals/CreateMenuModal";
+
+const Sidebar = ({
+  open,
+  onClose,
+  isRouteWithSpecificWidth,
+  handleCreateClick,
+  closeCreateMenuModal,
+}) => {
+  return (
+    <div
+      className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 ${
+        open ? "translate-x-0" : "-translate-x-96"
+      } ${isRouteWithSpecificWidth ? "xl:w-24" : ""}`}
+    >
+      <span
+        className="absolute top-4 right-4 block cursor-pointer xl:hidden"
+        onClick={onClose}
+      >
+        <HiX />
+      </span>
+
+      <div className={`mx-20 mt-[50px] flex items-center`}>
+        <div className="flex items-center justify-center ">
+          {isRouteWithSpecificWidth ? (
+            <div className="absolute left-8 top-8 ">
+              <img
+                src={YopexLogo}
+                alt="Yopex Logo"
+                className="h-8 w-8 object-fill"
+              />
+            </div>
+          ) : (
+            <div className="mt-1 ml-1  font-poppins text-[26px] font-bold uppercase text-zinc-700 dark:text-white">
+              YOPEX <span className="font-medium">HUB</span>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="mt-[44px] mb-7 h-px bg-zinc-300 dark:bg-white/30" />
+      {/* Nav item */}
+
+      <ul className="mb-auto pt-1">
+        <SidebarLinks
+          routes={routes}
+          isRouteWithSpecificWidth={isRouteWithSpecificWidth}
+        />
+      </ul>
+
+      <div className="flex justify-center">
+        <SidebarCard
+          isRouteWithSpecificWidth={isRouteWithSpecificWidth}
+          handleCreateClick={handleCreateClick}
+          closeCreateMenuModal={closeCreateMenuModal}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import challengeBanner from "../../../../assets/images/challengeBanner.jpg";
 import {
   useChallengeById,
   useRegisterChallenge,
@@ -11,6 +12,9 @@ import {
 import getDeadlineDifference from "../../../../utils/deadlineModif";
 import ChallengeNavigationTab from "../../../../Components/Tabs/ChallengeNavigtionTab";
 import { useJoinContestConversation } from "../../../../hooks/react-query/useContestConversation";
+import SubmissionIcon from "../../../../Components/icons/SubmissionIcon";
+import UsersIcon from "../../../../Components/icons/UsersIcon";
+import CalendarIcon from "../../../../Components/icons/CalendarIcon";
 
 const Banner = ({ changeValue, value }) => {
   const [isRegistered, setIsRegistered] = useState(false);
@@ -56,25 +60,55 @@ const Banner = ({ changeValue, value }) => {
   };
 
   return (
-    <div className="pt-8 px-4 sm:px-6 lg:px-8 xl:px-32 flex flex-col justify-end bg-black">
-      <div
-        className="space-y-4 sm:space-y-6 lg:space-y-8 items-start"
-        key={challenge._id}
-      >
-        <div className="grid grid-cols-12 mb-4 sm:mb-6 lg:mb-11">
-          <div className="lg:col-span-8 md:col-span-8 sm:col-span-12 col-span-12">
-            <h3 className="text-xl sm:text-2xl lg:text-3xl text-white truncate">
-              {challenge.title}
-            </h3>
+    <div className="w-full" key={challenge._id}>
+      <div className="relative z-20 mb-4 h-[300px] overflow-hidden  md:h-[400px]">
+        <img
+          src={challengeBanner}
+          alt="image"
+          className="h-full w-full object-cover object-center rounded-lg"
+        />
+        <div className="absolute top-0 left-0 z-10 flex h-full w-full items-end bg-gradient-to-t from-dark-700 to-transparent">
+          <div className="flex flex-wrap items-center p-4 pb-4 md:px-8">
+            <div className="mb-4 mr-5 flex items-center md:mr-10">
+              <div className="mr-4 h-10 w-10 overflow-hidden rounded-full">
+                <img
+                  src={challenge?.company?.companyLogo}
+                  alt="image"
+                  className="w-full object-cover"
+                />
+              </div>
+              <p className="text-base font-medium text-white">
+                By
+                <a
+                  href={`/company/${challenge?.company?._id}`}
+                  className="text-white hover:opacity-70"
+                >
+                  {" "}
+                  {challenge?.company?.companyName}
+                </a>
+              </p>
+            </div>
+            <div className="mb-4 flex items-center gap-4">
+              <div className="text-white flex items-center">
+                <CalendarIcon />
+                <p className="text-sm font-medium text-white">
+                  {new Date(challenge?.deadline).toLocaleString()}
+                </p>
+              </div>
+              <div className="text-white flex items-center gap-2">
+                <SubmissionIcon />
+                <p className="text-sm font-medium text-white">
+                  {challenge?.submissions?.length}
+                </p>
+              </div>
+              <div className="text-white flex items-center gap-2">
+                <UsersIcon />
+                <p className="text-sm font-medium text-white">
+                  {challenge?.users?.length}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="grid grid-cols-12"></div>
-        <div>
-          <ChallengeNavigationTab
-            changeValue={changeValue}
-            value={value}
-            isRegistered={isRegistered}
-          />
         </div>
       </div>
     </div>

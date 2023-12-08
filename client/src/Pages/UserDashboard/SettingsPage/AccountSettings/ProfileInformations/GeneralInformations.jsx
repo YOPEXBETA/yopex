@@ -8,8 +8,6 @@ import countries from "../../../../../countries.json";
 import { useSkills } from "../../../../../hooks/react-query/useSkills";
 import { useFileUpload } from "../../../../../hooks/react-query/useUsers";
 import { edit, reset } from "../../../../../redux/auth/authSlice";
-import AlertContainer from "../../../../../Components/alerts";
-import AlertSuccess from "../../../../../Components/successalert";
 import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 import { format } from "date-fns";
 import EditSocialLinksModal from "../SettingsModals/EditSocialLinksModal";
@@ -398,9 +396,6 @@ const GeneralInformations = () => {
             />
           </div>
         </div>
-
-        {success && <AlertSuccess message="Edited" />}
-        {!loading && error && <AlertContainer error={error} />}
 
         <div className="grid grid-cols-1">
           <div className="col-span-1">

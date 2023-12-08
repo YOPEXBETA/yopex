@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { io } from "socket.io-client";
 import { useConversations } from "../../../hooks/react-query/useConversations";
-import Conversation from "./components/Conversation";
 import UsersMsgs from "./components/UsersMsgs";
 import useSocket from "../../../hooks/useSocket";
 import UserMsgsSideBar from "../../../Components/Mobile/UserMsgsSideBar";
@@ -44,11 +42,9 @@ const Chat = () => {
   };
 
   return (
-    <div className="lg:grid lg:grid-cols-4 sm:grid sm:grid-cols-1">
-      <div className="hidden col-span-1 sm:col-span-1 border-r border-gray-300 lg:block">
-        <div className="mb-4">
-          <UsersMsgs />
-        </div>
+    <div className="lg:grid lg:grid-cols-4 sm:grid sm:grid-cols-1  overflow-hidden h-[100vh]">
+      <div className="hidden col-span-1 sm:col-span-1 border-r bg-white border-gray-300 lg:block dark:bg-zinc-800">
+        <UsersMsgs />
       </div>
       <div className="bg-white dark:bg-zinc-800  w-full relative lg:hidden md:hidden border-b-2 py-4">
         <div className="border-gray-300  lg:hidden md:hidden pl-6 l">
@@ -70,11 +66,6 @@ const Chat = () => {
           socket={socket}
           otherUser={otherUser}
         />
-        {/*<Conversation
-          conversationId={selectedConversationId}
-          socket={socket}
-          otherUser={otherUser}
-  />*/}
       </div>
     </div>
   );

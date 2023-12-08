@@ -6,8 +6,8 @@ import {
   useJobById,
 } from "../../../../../../hooks/react-query/useJobs";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
-import JobAppliersCard from "../../../../../../Components/shared/cards/Jobs/JobAppliersCard";
-import JobAppliersModal from "../../../../../../Components/shared/cards/Jobs/JobAppliersModal";
+import JobAppliersCard from "../../../../../../Components/Cards/JobAppliersCard";
+import JobAppliersModal from "../../../../../../Components/Modals/JobAppliersModal";
 
 const JobAppliers = () => {
   const { companyId } = useParams();

@@ -22,18 +22,20 @@ const Index = () => {
           userProfile={userProfile}
         />
       </div>
-      <div className="grid grid-cols-8 gap-4 md:mx-32">
-        <div className="col-span-8 md:col-span-8 lg:col-span-6">
+      <div className="grid grid-cols-12 mt-4 md:mt-0 gap-4">
+        <div className="lg:col-span-8 md:col-span-8 sm:col-span-12 col-span-12">
           <CreateChallengeForm
             selectedOption={selectedOption}
             handleCardClick={handleCardClick}
           />
         </div>
-        <div className="col-span-8 md:col-span-4 lg:col-span-2 hidden md:block">
-          <CompanyInfoCard
-            selectedOption={selectedOption}
-            handleCardClick={handleCardClick}
-          />
+        <div className="lg:block md:block lg:col-span-4 md:col-span-4 sm:col-span-12 col-span-12 mb-20">
+          <div>
+            <CompanyInfoCard
+              selectedOption={selectedOption}
+              handleCardClick={handleCardClick}
+            />
+          </div>
         </div>
       </div>
     </div>

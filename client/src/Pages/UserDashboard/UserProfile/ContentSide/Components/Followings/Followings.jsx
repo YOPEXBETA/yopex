@@ -1,15 +1,16 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useUserFollowings } from "../../../../../../hooks/react-query/useUsers";
-import FollowingsCard from "../../../../../../Components/shared/cards/FollowingsCard";
-import FollowingsCompaniesCard from "../../../../../../Components/shared/cards/FollowingsCompaniesCard";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import FollowingsCard from "../../../../../../Components/Cards/FollowingsCard";
+import FollowingsCompaniesCard from "../../../../../../Components/Cards/FollowingsCompaniesCard";
+
 const Followings = () => {
   const { userId } = useParams();
   const { data: followings, isLoading } = useUserFollowings(userId);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 gap-0 py-2">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 py-2">
       {isLoading ? (
         <LoadingSpinner />
       ) : (

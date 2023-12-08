@@ -13,40 +13,38 @@ const SettingsLayout = () => {
   };
 
   return (
-    <div className="dark:bg-zinc-800">
-      <div className="px-2 md:px-5 lg:px-32">
-        <div className="grid grid-cols-12 lg:gap-8 gap-0 ">
-          <div className="col-span-3 lg:block hidden md:hidden">
-            <div className="sticky top-24">
-              <VerticalSettingsTab changeValue={changeValue} value={value} />
-            </div>
+    <div className="">
+      <div className="grid grid-cols-12 lg:gap-8 gap-0">
+        <div className="col-span-3 lg:block hidden md:hidden">
+          <div className="sticky top-24">
+            <VerticalSettingsTab changeValue={changeValue} value={value} />
           </div>
-
-          <div className="col-span-12 mt-2 block lg:hidden md:block">
-            <HorizantalSettingsTab changeValue={changeValue} value={value} />
-          </div>
-
-          {value === 0 && (
-            <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8  p-6 bg-white rounded-lg dark:bg-zinc-700 my-8">
-              <GeneralInformations />
-            </div>
-          )}
-          {value === 1 && (
-            <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8  p-6 bg-white  rounded-lg dark:bg-zinc-700 my-8">
-              <Privacy />
-            </div>
-          )}
-          {value === 2 && (
-            <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8 p-6 bg-white rounded-lg dark:bg-zinc-700 my-8">
-              <Billing />
-            </div>
-          )}
-          {value === 3 && (
-            <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8 p-6 bg-white rounded-lg dark:bg-zinc-700 my-8">
-              <MoreInformation />
-            </div>
-          )}
         </div>
+
+        <div className="col-span-12 mt-2 block lg:hidden md:block">
+          <HorizantalSettingsTab changeValue={changeValue} value={value} />
+        </div>
+
+        {value === 0 && (
+          <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8  p-6 bg-white rounded-lg dark:bg-zinc-800 my-8">
+            <GeneralInformations />
+          </div>
+        )}
+        {value === 1 && (
+          <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8  p-6 bg-white  rounded-lg dark:bg-zinc-800 my-8">
+            <Privacy />
+          </div>
+        )}
+        {value === 2 && (
+          <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8 p-6 bg-white rounded-lg dark:bg-zinc-800 my-8">
+            <Billing />
+          </div>
+        )}
+        {value === 3 && (
+          <div className="col-span-12  lg:col-span-9 md:col-span-12 mt-8 p-6 bg-white rounded-lg dark:bg-zinc-800 my-8">
+            <MoreInformation />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,22 +1,14 @@
 import React, { useState } from "react";
 // ==============================|| ICONS ||============================== //
 import { FaFire, FaBuilding, FaSuitcase, FaPen, FaPlus } from "react-icons/fa";
-import { AddPostModal } from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/AddPost/AddPostsModal";
-import { AddWorkOfferModal } from "../../Modals/AddWorkOfferModal";
 import { Link } from "react-router-dom";
+import { AddPostModal } from "../../Modals/AddPostsModal";
 
 const FloatingButton = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOptions = () => {
     setIsOpen(!isOpen);
-  };
-
-  // ==============================|| ADD WORK OFFER CODE ||============================== //
-  const [openWorkModal, setOpenWorkModal] = useState(false);
-
-  const handleCloseModalWork = () => {
-    setOpenWorkModal(false);
   };
 
   // ==============================|| ADD A POST CODE ||============================== //

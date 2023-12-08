@@ -4,10 +4,11 @@ import {
   usePostsByCategory,
   useBookmarkedPosts,
 } from "../../../../hooks/react-query/usePosts";
-import SocialPostCard from "../../../../Components/shared/cards/SocialMediaPosts/SocialPost";
+import SocialPostCard from "../../../../Components/Cards/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
-import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import SocialPostSkeleton from "../../../../Components/SkeletonLoading/SocialPostSkeleton";
+import ProjectCard from "../../../../Components/Cards/ProjectCard";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const SocialPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,9 +37,11 @@ const SocialPosts = () => {
 
   return (
     <div>
-      <div className="space-y-2 ">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
         {isLoading ? (
-          <SocialPostSkeleton />
+          <div className="flex justify-center">
+            <LoadingSpinner />
+          </div>
         ) : (
           posts?.map((post, index) => (
             <SocialPostCard
@@ -46,7 +49,7 @@ const SocialPosts = () => {
               post={post}
               bookmarks={bookmarksId}
               posts={posts}
-              height={"full"}
+              height={"48"}
               width={"full"}
               type="feed"
               openModal={() => openModal(post)}
@@ -55,6 +58,16 @@ const SocialPosts = () => {
         )}
       </div>
 
+      {/*<SocialPostCard
+              key={post._id}
+              post={post}
+              bookmarks={bookmarksId}
+              posts={posts}
+              height={"full"}
+              width={"full"}
+              type="feed"
+              openModal={() => openModal(post)}
+        />*/}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <SocialPostModal

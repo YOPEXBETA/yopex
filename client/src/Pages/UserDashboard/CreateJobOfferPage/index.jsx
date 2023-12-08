@@ -25,15 +25,13 @@ const Index = () => {
         />
       </div>
 
-      <div className="lg:mx-40 md:mx-20 my-8">
+      <div className="my-8">
         <div className="grid grid-cols-12 mt-4 md:mt-0 gap-4">
           <div className="lg:col-span-8 md:col-span-8 sm:col-span-12 col-span-12">
-            <div className="p-4 rounded-lg border bg-white mb-8">
-              <CreateJobOfferForm
-                selectedOption={selectedOption}
-                handleCardClick={handleCardClick}
-              />
-            </div>
+            <CreateJobOfferForm
+              selectedOption={selectedOption}
+              handleCardClick={handleCardClick}
+            />
           </div>
 
           <div className="lg:block md:block lg:col-span-4 md:col-span-4 sm:col-span-12 col-span-12 mb-20">

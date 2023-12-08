@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import AlertContainer from "../../../../../Components/alerts";
-import AlertSuccess from "../../../../../Components/successalert";
 import countries from "../../../../../countries.json";
 import { edit, reset } from "../../../../../redux/auth/authSlice";
 
@@ -93,8 +91,6 @@ const EditSocialLinksModal = ({ open, handleClose }) => {
               >
                 {isSubmitting ? "Submitting" : "Save"}
               </button>
-              {success && <AlertSuccess message="Edited" />}
-              {!loading && error && <AlertContainer error={error} />}
             </div>
           </div>
           <hr className="border-zinc-100 border w-full mt-4" />

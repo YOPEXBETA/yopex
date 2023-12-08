@@ -10,8 +10,8 @@ const main = require("../server");
 const CreatePost = async (req, res) => {
   try {
     // Find the current user by ID
-    const user = await UserModel.findById(req.userId);
-    const company = await CompanyModel.findById(req.userId);
+    const user = await UserModel.findById(req.body.userId);
+    const company = await CompanyModel.findById(req.body.userId);
     // Determine whether the current user is a UserModel or CompanyModel
     let owner;
     let isUser = true;
@@ -27,39 +27,31 @@ const CreatePost = async (req, res) => {
       throw new Error("User not found");
     }
 
-    // Check if a file was uploaded
-    let postPicturePath;
-    if (req.file) {
-      // If a file was uploaded, upload it to Firebase and get the download URL
-      postPicturePath = await uploadFileToFirebase(req.file, "posts");
-    }
-
     // Create a new post with the current user's information
     const newPost = new Post({
-      userId: req.userId,
+      userId: req.body.userId,
       firstname: isUser ? owner.firstname : undefined,
       lastname: isUser ? owner.lastname : undefined,
       companyName: !isUser ? owner.companyName : undefined,
       userPicturePath:
         owner.picturePath != undefined ? owner.picturePath : owner.companyLogo,
+      title: req.body.title,
       description: req.body.description,
-      postPicturePath: postPicturePath || req.body.postPicturePath,
-      postVideoePath: req.body.postVideoPath,
+      postPicturePath: req.body.postPicturePath,
+      skills: req.body.skills,
       categories: req.body.categories,
     });
     savedpost = await newPost.save();
 
     const data = await Model.findOneAndUpdate(
-      { _id: req.userId },
+      { _id: req.body.userId },
       { $push: { posts: savedpost._id } },
       { new: true }
     ).populate("posts");
 
     res.status(201).json(data);
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Error creating post", error: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -103,17 +95,18 @@ const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     const thisuser = await UserModel.findById(req.userId);
+
     if (
       post.userId.toString() === req.userId ||
       thisuser.companies.includes(post.userId)
     ) {
-      response = await Post.findOneAndDelete({ _id: req.params.id });
-      res.status(200).send("Post has been deleted");
+      await Post.findOneAndDelete({ _id: req.params.id });
+      return res.status(200).send("Post has been deleted");
     } else {
-      res.status(403).send("You are not authorized to delete this post");
+      return res.status(403).send("You are not authorized to delete this post");
     }
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -277,6 +270,18 @@ const getBookmarks = async (req, res) => {
   }
 };
 
+const getpostById = async (req, res) => {
+  const postId = req.params.postId; // Assuming you're passing the challenge ID as a URL parameter
+
+  try {
+    const post = await Post.findById(postId).populate("skills");
+
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   CreatePost,
   updateAPost,
@@ -287,4 +292,5 @@ module.exports = {
   sharePost,
   BookmarkPost,
   getBookmarks,
+  getpostById,
 };

@@ -23,9 +23,9 @@ const MobileNotifications = () => {
               <div key={index} className="flex items-start space-x-2">
                 <div className="w-10 h-10">
                   {notification?.user ? (
-                    notification.user.picturePath ? (
+                    notification?.user?.picturePath ? (
                       <img
-                        src={notification.user.picturePath}
+                        src={notification?.user?.picturePath}
                         alt="Avatar"
                         className="w-full h-full rounded-full"
                       />
@@ -37,9 +37,9 @@ const MobileNotifications = () => {
                       />
                     )
                   ) : notification?.job ? (
-                    notification.job.company?.picturePath ? (
+                    notification?.job?.company?.picturePath ? (
                       <img
-                        src={notification.job.company.picturePath}
+                        src={notification?.job?.company?.picturePath}
                         alt="Avatar"
                         className="w-full h-full rounded-full"
                       />
@@ -61,17 +61,17 @@ const MobileNotifications = () => {
                 <div className="flex-1">
                   <div className="text-md font-bold dark:text-gray-200">
                     {notification?.user
-                      ? notification.user.firstname +
+                      ? notification?.user?.firstname +
                         " " +
-                        notification.user.lastname
+                        notification?.user?.lastname
                       : notification?.job
                       ? notification?.job?.company?.companyName
-                      : user.firstname}
+                      : user?.firstname}
                   </div>
                   <div className="text-sm dark:text-gray-200">
                     {notification?.message}
                     <span className="font-bold dark:text-gray-200">
-                      {notification?.job ? notification.job.title : ""}
+                      {notification?.job ? notification?.job?.title : ""}
                     </span>
                   </div>
                   <div className="text-gray-500 dark:text-gray-400">{`sent ${timeSince(

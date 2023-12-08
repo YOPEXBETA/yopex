@@ -47,14 +47,21 @@ const addJob = async (req, res, next) => {
 };
 
 const getAllJobs = async (req, res, next) => {
+  const q = req.query;
+  const filters = {
+    ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+    ...(q.skills && { RecommendedSkills: { $in: q.skills } }),
+    ...(q.categories && { category: { $in: q.categories } }),
+    ...(q.jobType && { jobType: q.jobType }),
+    ...(q.offerType && { offerType: q.offerType }),
+  };
   try {
-    const jobs = await Job.find()
+    const jobs = await Job.find(filters)
       .select("-acceptedAppliers")
       .populate("company", "companyName companyLogo");
 
     return res.status(200).json(jobs);
   } catch (error) {
-    console.error(error);
     return res
       .status(500)
       .json({ message: "An error occurred while fetching jobs." });

@@ -6,11 +6,19 @@ const UserModel = require("../models/user.model");
 
 const CreateChallenge = async (req, res, next) => {
   try {
-    
-    const { title, description, category, price, companyId, deadline,RecommendedSkills,nbruser,paid } =
-      req.body;
+    const {
+      title,
+      description,
+      category,
+      price,
+      companyId,
+      deadline,
+      RecommendedSkills,
+      nbruser,
+      paid,
+    } = req.body;
     console.log(req.body);
-    
+
     const userId = req.userId;
     const user = await UserModel.findById(userId);
 
@@ -32,10 +40,10 @@ const CreateChallenge = async (req, res, next) => {
       description,
       category,
       deadline,
-      price:paid==="true"?price:0,
+      price: paid === "true" ? price : 0,
       RecommendedSkills,
       nbruser,
-      paid:paid==="true"?true:false,
+      paid: paid === "true" ? true : false,
     });
 
     await challenge.save();
@@ -44,7 +52,6 @@ const CreateChallenge = async (req, res, next) => {
       contestId: challenge._id,
     });
     await newCoversation.save();
-
 
     company.challenges.push(challenge._id);
     await company.save();
@@ -63,8 +70,7 @@ const getChallengeById = async (req, res) => {
   const challengeId = req.params.challengeId; // Assuming you're passing the challenge ID as a URL parameter
 
   try {
-    const challenge =
-      await ChallengeModel.findById(challengeId)
+    const challenge = await ChallengeModel.findById(challengeId)
       .populate("company")
       .populate({
         path: "users",
@@ -88,8 +94,9 @@ const getChallengeById = async (req, res) => {
 
 const deleteChallenge = async (req, res) => {
   try {
-    
-    const challenge = await ChallengeModel.findOneAndDelete({_id:req.params.id});
+    const challenge = await ChallengeModel.findOneAndDelete({
+      _id: req.params.id,
+    });
     const company = await CompanyModel.findOne({ _id: challenge.company });
     await company.challenges.pull(challenge._id);
     await company.save();
@@ -125,7 +132,6 @@ const getCompanyChallenges = async (req, res) => {
 
 const getAllChallenges = async (req, res) => {
   const q = req.query;
-  console.log(q.categories);
   const filters = {
     ...(q.userId && { userId: q.userId }),
     ...(q.category && { category: q.category }),
@@ -168,9 +174,11 @@ const getChallengeUserSubmit = async (req, res) => {
   try {
     const challengeId = req.query.challengeId; // Get idChallenge from the query parameter
     const userId = req.query.userId; // Get idUser from the query parameter
-    
-    const submit = await submissionModel.findOne({challengeId:challengeId,userId:userId});
 
+    const submit = await submissionModel.findOne({
+      challengeId: challengeId,
+      userId: userId,
+    });
 
     res.status(200).json(submit);
   } catch (err) {
@@ -178,23 +186,23 @@ const getChallengeUserSubmit = async (req, res) => {
   }
 };
 
-const updateChallenge= async (req, res, next) => {
-  
-  const {description ,title  ,nbruser ,price ,   category ,RecommendedSkills} = req.body;
-  console.log(description ,title  ,nbruser ,price ,   category ,RecommendedSkills);
+const updateChallenge = async (req, res, next) => {
+  const { description, title, nbruser, price, category, RecommendedSkills } =
+    req.body;
+  console.log(description, title, nbruser, price, category, RecommendedSkills);
   const challengeId = req.params.challengeId;
 
   let Challenge;
   try {
     Challenge = await ChallengeModel.findByIdAndUpdate(challengeId, {
-      title, 
-      description , 
-      nbruser , 
-      price , 
-      category ,
-      RecommendedSkills
-    }); 
-     res.status(200).json({ Challenge });
+      title,
+      description,
+      nbruser,
+      price,
+      category,
+      RecommendedSkills,
+    });
+    res.status(200).json({ Challenge });
   } catch (err) {
     return console.log(err);
   }

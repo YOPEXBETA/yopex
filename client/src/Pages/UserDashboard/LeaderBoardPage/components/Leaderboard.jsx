@@ -1,37 +1,35 @@
 import React, { useEffect, useState } from "react";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import TableSkeleton from "../../../../Components/SkeletonLoading/TableSkeleton";
+import { useUsers } from "../../../../hooks/react-query/useUsers";
+import { axios } from "../../../../axios";
+import { useQuery } from "react-query";
 
-const Leaderboard = ({ data, query, onSelect, isLoading }) => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(8);
-  const [rankedUsers, setRankedUsers] = useState([]);
+const url = process.env.REACT_APP_API_ENDPOINT;
 
-  const searchQ = query.toLowerCase();
-  useEffect(() => {
-    if (!data) return;
-    const res = data
-      ?.sort((a, b) => (a.score > b.score ? -1 : a.score < b.score ? 1 : 0))
-      .map((user, index) => ({
-        ...user,
-        rank: index + 1,
-      }))
-      .filter(
-        (user) =>
-          user.firstname.toLowerCase().includes(searchQ) ||
-          user.lastname.toLowerCase().includes(searchQ)
-      );
-    setRankedUsers(res);
-  }, [data, searchQ]);
+
+const Leaderboard = ({ query, onSelect }) => {
+  const [page, setPage] = useState(1);
 
   const handleChangePage = (newPage) => {
-    if (newPage >= 0 && newPage <= Math.ceil(data?.length / rowsPerPage)) {
+    if (newPage <= totalPages && newPage > 0) {
       setPage(newPage);
     }
   };
-  const totalPages = Math?.ceil(data?.length / rowsPerPage);
-  const displayedPages = Math?.min(10, totalPages);
 
+  const {data,isLoading}=useQuery({
+    queryKey:["users",page,query],
+    queryFn: async () => {
+    const { data } = await axios.get(`${url}/allusers?page=${page}&name=${query}`);
+    return data;
+    },
+  }
+  );
+  
+  const totalPages = Math.ceil(data?.userCount / 8);
+  const displayedPages = Math.min(10, totalPages);
+  
+  
   if (isLoading) {
     return <TableSkeleton />;
   }
@@ -76,8 +74,7 @@ const Leaderboard = ({ data, query, onSelect, isLoading }) => {
                 </thead>
 
                 <tbody className="bg-white divide-y divide-gray-200 dark:divide-zinc-500 dark:bg-zinc-800">
-                  {rankedUsers
-                    .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                  {data?.users
                     .map((item) => (
                       <tr
                         key={item.id}
@@ -131,33 +128,29 @@ const Leaderboard = ({ data, query, onSelect, isLoading }) => {
       </div>
 
       <div className="flex items-center justify-between mt-6">
-        <a
+        <button
           onClick={() => handleChangePage(page - 1)}
           className="flex items-center px-5 py-2 text-sm text-zinc-500 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-zinc-700 dark:hover:bg-zinc-800"
-          disabled={page === 0}
+          disabled={page === 1}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="w-5 h-5 rtl:-scale-x-100"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
           </svg>
+          <span>Previous</span>
+        </button>
 
-          <span>previous</span>
-        </a>
         <div className="items-center hidden md:flex gap-x-3">
           {Array.from({ length: displayedPages }, (_, index) => page + index)
-            .filter((pageNumber) => pageNumber < totalPages)
+            .filter((pageNumber) => pageNumber <= totalPages)
             .map((pageNumber) => (
-              <a
+              <button
                 key={pageNumber}
                 onClick={() => handleChangePage(pageNumber)}
                 className={`px-2 py-1 text-sm rounded-md ${
@@ -166,33 +159,28 @@ const Leaderboard = ({ data, query, onSelect, isLoading }) => {
                     : "text-gray-500 dark:hover:bg-zinc-800 dark:text-gray-300 hover:bg-gray-100"
                 }`}
               >
-                {pageNumber + 1}
-              </a>
+                {pageNumber}
+              </button>
             ))}
         </div>
 
-        <a
+        <button
           onClick={() => handleChangePage(page + 1)}
           className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
-          disabled={page === Math.ceil(data?.length / rowsPerPage) - 1}
+          disabled={page === totalPages}
         >
           <span>Next</span>
-
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="w-5 h-5 rtl:-scale-x-100"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
           </svg>
-        </a>
+        </button>
       </div>
     </section>
   );

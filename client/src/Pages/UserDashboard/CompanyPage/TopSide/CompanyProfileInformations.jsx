@@ -73,15 +73,15 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
 
   return (
     <div>
-      <div className="md:pt-10 pt-6 xl:px-16 lg:px-6 px-0 flex flex-col justify-end dark:border-zinc-500 border-b  dark:bg-zinc-800 bg-white">
+      <div className="md:pt-10 pt-6 flex flex-col justify-end dark:border-zinc-500 border-b">
         <div className="space-y-0 md:space-y-8 mx-auto container">
-          <div className="flex flex-col xl:flex-row lg:flex-row md:flex-row xl:px-0 items-start md:items-center px-4 gap-0 pb-8 md:pb-0 md:gap-2 justify-between">
+          <div className="flex flex-col xl:flex-row lg:flex-row md:flex-row items-start md:items-center gap-0 pb-8 md:pb-0 md:gap-2 justify-between">
             <div className="flex lg:flex-row flex-row items-center gap-4">
               <div className="w-24 h-24 sm:w-40 sm:h-40">
                 <img
                   alt="Profile picture"
                   src={company?.companyLogo}
-                  className="object-contain w-full h-full rounded-xl "
+                  className="object-cover w-full h-full rounded-lg"
                 />
               </div>
 
@@ -145,7 +145,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                       }
                     >
                       {company && company?.user === user?._id ? (
-                        <p>Edit Company</p>
+                        <p>Edit</p>
                       ) : isfollow ? (
                         <FaUserMinus className="w-4 h-4" />
                       ) : (
@@ -162,10 +162,9 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     </button>
                   )}
                 </div>
-                {/*mobile version*/}
-                <p className="hidden md:block truncate dark:text-gray-200 w-full xl:w-[50rem]">
+                {/*<p className="hidden md:block truncate dark:text-gray-200 w-full xl:w-[50rem]">
                   {company?.companyDescription}
-                </p>
+                  </p>*/}
               </div>
             </div>
             {/*mobile version*/}

@@ -4,8 +4,7 @@ import {
   useGetLevels,
   useDeleteLevel,
 } from "../../../hooks/react-query/useLevels";
-
-import LevelCard from "../../../Components/shared/cards/LevelCard";
+import LevelCard from "../../../Components/Cards/LevelCard";
 
 const LevelPage = () => {
   const [adminDefinedPoints, setAdminDefinedPoints] = useState(0);
@@ -17,16 +16,15 @@ const LevelPage = () => {
 
   const lastLevel = data && data[data.length - 1];
 
-
   const handleAddLevel = () => {
-    if(lastLevel){
+    if (lastLevel) {
       const newLevelNumber = parseInt(lastLevel.name.replace("Level ", "")) + 1;
       const message = `A new Level ${newLevelNumber} will be created. Do you want to continue?`;
 
       setConfirmationMessage(message);
 
       setShowAlert(true);
-    }else{
+    } else {
       const newLevelNumber = "1";
       const message = `A new Level ${newLevelNumber} will be created. Do you want to continue?`;
 
@@ -52,7 +50,6 @@ const LevelPage = () => {
 
   return (
     <div>
-
       <div className="flex gap-11 justify-between ">
         <input
           type="text"

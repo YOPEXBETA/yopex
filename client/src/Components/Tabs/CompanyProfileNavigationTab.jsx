@@ -12,7 +12,7 @@ export const CompanyProfileNavigationTab = ({
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 0
-              ? "bg-green-500 text-white border-green-500 border-b-green-500"
+              ? "inline-block p-4 text-black border-b-2 border-black rounded-t-lg active dark:text-purple-400 dark:border-purple-400"
               : "text-gray-500 dark:text-gray-200 border-gray-300"
           }`}
           onClick={() => changeValue(0)}
@@ -22,7 +22,7 @@ export const CompanyProfileNavigationTab = ({
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 1
-              ? "bg-green-500 text-white border-green-500"
+              ? "inline-block p-4 text-black border-b-2 border-black rounded-t-lg active dark:text-purple-400 dark:border-purple-400"
               : "text-gray-500 dark:text-gray-200 border-gray-300"
           }`}
           onClick={() => changeValue(1)}
@@ -32,7 +32,7 @@ export const CompanyProfileNavigationTab = ({
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 2
-              ? "bg-green-500 text-white border-green-500"
+              ? "inline-block p-4 text-black border-b-2 border-black rounded-t-lg active dark:text-purple-400 dark:border-purple-400"
               : "text-gray-500 dark:text-gray-200 border-gray-300"
           }`}
           onClick={() => changeValue(2)}
@@ -42,18 +42,18 @@ export const CompanyProfileNavigationTab = ({
         <button
           className={`w-1/2 sm:w-auto py-2 px-4  ${
             value === 3
-              ? "bg-green-500 text-white border-green-500"
+              ? "inline-block p-4 text-black border-b-2 border-black rounded-t-lg active dark:text-purple-400 dark:border-purple-400"
               : "text-gray-500 dark:text-gray-200 border-gray-300"
           }`}
           onClick={() => changeValue(3)}
         >
           Challenges
         </button>
-        {userPassed.companies.includes(companyId) && (
+        {userPassed?.companies?.includes(companyId) && (
           <button
             className={`w-1/2 sm:w-auto py-2 px-4  ${
               value === 4
-                ? "bg-green-500 text-white border-green-500"
+                ? "inline-block p-4 text-black border-b-2 border-black rounded-t-lg active dark:text-purple-400 dark:border-purple-400"
                 : "text-gray-500 dark:text-gray-200 border-gray-300"
             }`}
             onClick={() => changeValue(4)}

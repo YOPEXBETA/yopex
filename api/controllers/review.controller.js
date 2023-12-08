@@ -10,21 +10,26 @@ const createReview = async (req, res) => {
       .status(400)
       .json({ message: "Star value must be between 1 and 5" });
   }
+  
   const newReview = new reviewModel({
     companyId: req.body.companyId,
-    userId: req.userId,
+    userId: req.body.userId,
     description: req.body.description,
     star: req.body.star,
     challengeId: req.body.challengeId,
   });
+  
 
   try {
 
     const savedReview = await newReview.save();
+    console.log(newReview);
     
-    const user = await userModel.findById(req.userId);
-    const updatedScore = user.score + (req.body.star*10);
-    await userModel.findByIdAndUpdate(req.userId, { score: updatedScore });
+    const user = await userModel.findById(req.body.userId);
+    user.score = user.score + (req.body.star*10);
+    user.save();
+    
+
 
 
     await res.status(200).json(savedReview);
