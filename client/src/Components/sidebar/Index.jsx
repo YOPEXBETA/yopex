@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiX } from "react-icons/hi";
 import routes from "../../routes/MainRoutes";
 import { NavLink, useLocation } from "react-router-dom";
 import YopexLogo from "../../assets/images/LogoYopex.png";
 import SidebarLinks from "./components/Links";
 import SidebarCard from "./components/SidebarCard";
+import CreateMenuModal from "../Modals/CreateMenuModal";
 
-const Sidebar = ({ open, onClose, isRouteWithSpecificWidth }) => {
+const Sidebar = ({
+  open,
+  onClose,
+  isRouteWithSpecificWidth,
+  handleCreateClick,
+  closeCreateMenuModal,
+}) => {
   return (
     <div
       className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 ${
@@ -47,9 +54,13 @@ const Sidebar = ({ open, onClose, isRouteWithSpecificWidth }) => {
         />
       </ul>
 
-      {/* <div className="flex justify-center">
-        <SidebarCard />
-      </div> */}
+      <div className="flex justify-center">
+        <SidebarCard
+          isRouteWithSpecificWidth={isRouteWithSpecificWidth}
+          handleCreateClick={handleCreateClick}
+          closeCreateMenuModal={closeCreateMenuModal}
+        />
+      </div>
     </div>
   );
 };

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import CustomNavbar from "./Navbar/CustomNavbar";
 
 //render the data under the navbar
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/auth/authSlice";
 import Loader from "../../Components/PageLoading/Loader";
-import FloatingButton from "../../Components/shared/Buttons/FloatingButton";
 import Sidebar from "../../Components/sidebar/Index";
 import routes from "../../routes/MainRoutes";
 import Navbar from "../../Components/Navbar/Navbar";
+import CreateMenuModal from "../../Components/Modals/CreateMenuModal";
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -21,6 +20,15 @@ const MainLayout = (props) => {
   const location = useLocation();
   const [open, setOpen] = useState(true);
   const [currentRoute, setCurrentRoute] = useState("feed");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCreateClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeCreateMenuModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     window.addEventListener("resize", () =>
@@ -61,20 +69,13 @@ const MainLayout = (props) => {
   // Render the main layout once user data is available
   return (
     <div>
-      {/*<div className="pb-[4.6rem]">
-        <CustomNavbar />
-      </div>
-      <div className="">
-        <Outlet />
-      </div>
-      <div className="block md:hidden">
-        <FloatingButton />
-  </div>*/}
       <div className="flex h-full w-full">
         <Sidebar
           open={open}
           onClose={() => setOpen(false)}
           isRouteWithSpecificWidth={matchedRoute?.customWidth || false}
+          handleCreateClick={handleCreateClick}
+          closeCreateMenuModal={closeCreateMenuModal}
         />
         <div className="h-full w-full bg-lightPrimary dark:!bg-zinc-900">
           <main
@@ -95,6 +96,12 @@ const MainLayout = (props) => {
           </main>
         </div>
       </div>
+      {isModalOpen && (
+        <CreateMenuModal
+          onClose={closeCreateMenuModal}
+          handleCreateClick={handleCreateClick}
+        />
+      )}
     </div>
   );
 };

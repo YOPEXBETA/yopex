@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { FaImage } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Select from "react-select";
 import { useSelector } from "react-redux";
 import { useSkills } from "../../hooks/react-query/useSkills";
@@ -8,6 +8,7 @@ import { useCreatePost } from "../../hooks/react-query/usePosts";
 import { useUserById } from "../../hooks/react-query/useUsers";
 import { useFileUpload } from "../../hooks/react-query/useUsers";
 import LoadingSpinner from "../LoadingSpinner";
+import Card from "../Cards";
 
 const CreatePostForm = () => {
   // Global states |  @redux/toolkit
@@ -55,15 +56,11 @@ const CreatePostForm = () => {
     });
     reset();
   };
+
+  console.log(user);
   return (
-    <div className="bg-white p-4 rounded-lg">
-      <div className="px-4 py-2">
-        <h1 className="text-xl font-semibold">
-          <span className="font-normal">
-            please fill the required informations to create your post
-          </span>
-        </h1>
-        <hr className="my-4" />
+    <Card>
+      <div className="px-4 py-4">
         <div className="space-y-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
@@ -74,7 +71,7 @@ const CreatePostForm = () => {
                   value={selectedOption}
                   onChange={handleSelectChange}
                 >
-                  <option value="">Share a Post as</option>
+                  <option value="">Create a Post as</option>
                   <option value={user._id}>
                     {user?.firstname} {user?.lastname}
                   </option>
@@ -198,10 +195,15 @@ const CreatePostForm = () => {
                 </div>
               </div>
             </div>
-
-            <div className="flex justify-between py-4">
+            <div className="flex justify-between my-4">
+              <Link
+                className="px-6 py-2 bg-white text-black rounded-md border-2"
+                to="/feed"
+              >
+                Cancel
+              </Link>
               <button
-                className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded w-full"
+                className="bg-green-500 px-6 py-2 text-white rounded-md hover:bg-green-700"
                 type="submit"
               >
                 Post
@@ -210,7 +212,7 @@ const CreatePostForm = () => {
           </form>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

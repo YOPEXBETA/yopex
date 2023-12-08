@@ -9,7 +9,7 @@ import Widget from "../../../Components/Widget/Widget";
 
 const HomeLayout = () => {
   return (
-    <div className="mx-auto container h-[100vh]">
+    <div className="mx-auto container">
       <div className="grid grid-cols-12 gap-4  lg:py-6 px-0 py-0">
         {/*<div className="hidden col-span-12 md:col-span-12 xl:block xl:col-span-3 lg:col-span-4 space-y-4"></div>*/}
 

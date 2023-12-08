@@ -199,6 +199,7 @@ const MainRoutes = {
       hideInSidebar: true,
     },
     {
+      name: "Create Post",
       path: "create-post",
       element: <CreatePost />,
       hideInSidebar: true,

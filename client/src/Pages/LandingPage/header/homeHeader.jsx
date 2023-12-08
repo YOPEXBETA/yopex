@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../../redux/auth/authSlice";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import ProfileMenu from "../../../Layouts/MainLayout/Navbar/components/MenuIcons/components/ProfileMenu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const HomeHeader = () => {
@@ -80,7 +79,7 @@ const HomeHeader = () => {
               <p className=" px-3 z-50 cursor-pointer capitalize dark:text-white font-medium text-gray-500  duration-200">
                 Welcome, {user.firstname}
               </p>
-              <ProfileMenu />
+              {/*<ProfileMenu />*/}
             </p>
           )}
           {!user && (
