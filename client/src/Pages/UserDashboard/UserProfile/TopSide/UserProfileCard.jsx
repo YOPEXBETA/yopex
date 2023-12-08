@@ -17,6 +17,7 @@ import { useGetLevels } from "../../../../hooks/react-query/useLevels";
 import HighlightSection from "./HighlightSection/HighlightSection";
 import getIconByPlatform from "../../../../utils/getIconByPlatform";
 import Card from "../../../../Components/Cards";
+import Tag from "../../../../Components/tags/Index";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -163,12 +164,7 @@ const UserProfileCard = () => {
               {userProfile?.skills?.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
                   {userProfile.skills.map((skill, index) => (
-                    <span
-                      className="px-2 py-1 bg-white text-black border rounded-full"
-                      key={index}
-                    >
-                      {skill?.value}
-                    </span>
+                    <Tag key={index}>{skill?.value}</Tag>
                   ))}
                 </div>
               ) : (

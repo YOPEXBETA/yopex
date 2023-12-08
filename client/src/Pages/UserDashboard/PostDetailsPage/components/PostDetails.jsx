@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { formatDistance } from "date-fns";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
+import Tag from "../../../../Components/tags/Index";
 
 const PostDetails = ({ post }) => {
   return (
     <div className="">
       <div className="mb-4 md:mb-0 w-full mx-auto relative">
         <div className="px-4 lg:px-0 flex flex-col space-y-6">
-          <h2 className="text-4xl font-semibold text-gray-800 leading-tight">
+          <h2 className="text-4xl font-semibold dark:text-white leading-tight">
             {post?.title}
           </h2>
 
@@ -53,12 +54,7 @@ const PostDetails = ({ post }) => {
           <div className="mb-4">
             <div className="flex flex-wrap gap-2">
               {post?.skills?.map((skill, index) => (
-                <span
-                  key={index}
-                  className="block rounded-md bg-primary/[0.08] py-[5px] px-[14px] text-base text-dark dark:text-white hover:bg-primary hover:text-white"
-                >
-                  {skill?.name}
-                </span>
+                <Tag key={index}>{skill?.name}</Tag>
               ))}
             </div>
           </div>
@@ -71,7 +67,7 @@ const PostDetails = ({ post }) => {
         />
       </div>
       <div className="flex flex-col lg:flex-row lg:space-x-12">
-        <div className="px-4 lg:px-0 mt-6 text-gray-700 text-lg leading-relaxed w-full lg:w-full">
+        <div className="px-4 lg:px-0 mt-6 dark:text-white text-lg leading-relaxed w-full lg:w-full">
           <p
             className="pb-6"
             dangerouslySetInnerHTML={{ __html: post?.description }}

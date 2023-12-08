@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useChallengeById } from "../../../../../../hooks/react-query/useChallenges";
 import Card from "../../../../../../Components/Cards";
+import Tag from "../../../../../../Components/tags/Index";
 
 const TasksDescription = () => {
   const { id: challengeId } = useParams();
@@ -28,12 +29,7 @@ const TasksDescription = () => {
           <div className="mb-4">
             <div className="flex flex-wrap gap-2">
               {challenge.RecommendedSkills.map((skill, index) => (
-                <span
-                  key={index}
-                  className="block rounded-md  py-[5px] px-[14px] text-base text-dark dark:text-white hover:bg-green-700 border hover:text-white"
-                >
-                  {skill}
-                </span>
+                <Tag key={index}>{skill}</Tag>
               ))}
             </div>
           </div>

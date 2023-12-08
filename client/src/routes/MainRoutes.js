@@ -3,7 +3,6 @@ import Loadable from "../Components/PageLoading/Loadable";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
 import PaymentFail from "../Pages/UserDashboard/SettingsPage/AccountSettings/Billing/PaymentFail";
 import Store from "../Pages/UserDashboard/StorePage/Store";
-import BrowseIcon from "../Components/icons/BrowseIcon";
 import LeaderboardIcon from "../Components/icons/LeaderboardIcon";
 import StoreIcon from "../Components/icons/StoreIcon";
 import SettingsIcon from "../Components/icons/SettingsIcon";
