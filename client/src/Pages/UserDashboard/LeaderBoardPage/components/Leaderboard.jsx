@@ -7,7 +7,6 @@ import { useQuery } from "react-query";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-
 const Leaderboard = ({ query, onSelect }) => {
   const [page, setPage] = useState(1);
 
@@ -17,19 +16,19 @@ const Leaderboard = ({ query, onSelect }) => {
     }
   };
 
-  const {data,isLoading}=useQuery({
-    queryKey:["users",page,query],
+  const { data, isLoading } = useQuery({
+    queryKey: ["users", page, query],
     queryFn: async () => {
-    const { data } = await axios.get(`${url}/allusers?page=${page}&name=${query}`);
-    return data;
+      const { data } = await axios.get(
+        `${url}/allusers?page=${page}&name=${query}`
+      );
+      return data;
     },
-  }
-  );
-  
-  const totalPages = Math.ceil(data?.userCount / 8);
-  const displayedPages = Math.min(10, totalPages);
-  
-  
+  });
+
+  const totalPages = Math?.ceil(data?.userCount / 8);
+  const displayedPages = Math?.min(10, totalPages);
+
   if (isLoading) {
     return <TableSkeleton />;
   }
@@ -74,52 +73,51 @@ const Leaderboard = ({ query, onSelect }) => {
                 </thead>
 
                 <tbody className="bg-white divide-y divide-gray-200 dark:divide-zinc-500 dark:bg-zinc-800">
-                  {data?.users
-                    .map((item) => (
-                      <tr
-                        key={item.id}
-                        onClick={() => onSelect(item)}
-                        className="hover:bg-zinc-200 dark:hover:bg-zinc-700"
-                      >
-                        <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap ">
-                          <div className="inline-flex items-center gap-x-3">
-                            <span>{item.rank}</span>
-                          </div>
-                        </td>
+                  {data?.users.map((item) => (
+                    <tr
+                      key={item?.id}
+                      onClick={() => onSelect(item)}
+                      className="hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                    >
+                      <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap ">
+                        <div className="inline-flex items-center gap-x-3">
+                          <span>{item?.rank}</span>
+                        </div>
+                      </td>
 
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          <div className="flex items-center gap-x-3">
-                            {item.picturePath ? (
-                              <img
-                                alt="picture"
-                                src={item.picturePath}
-                                className="hidden lg:block md:block w-10 h-10 rounded-full object-cover border-2"
-                              />
-                            ) : (
-                              <img
-                                alt="default"
-                                src={AvatarProfile}
-                                className="hidden lg:block md:block w-10 h-10 rounded-full object-cover border-2"
-                              />
-                            )}
-                            <span>
-                              {item?.firstname} {item?.lastname}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="px-4 py-4 text-sm text-zinc-500 dark:text-gray-300 whitespace-nowrap">
-                          {item.country || "N/A"}
-                        </td>
+                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                        <div className="flex items-center gap-x-3">
+                          {item?.picturePath ? (
+                            <img
+                              alt="picture"
+                              src={item?.picturePath}
+                              className="hidden lg:block md:block w-10 h-10 rounded-full object-cover border-2"
+                            />
+                          ) : (
+                            <img
+                              alt="default"
+                              src={AvatarProfile}
+                              className="hidden lg:block md:block w-10 h-10 rounded-full object-cover border-2"
+                            />
+                          )}
+                          <span>
+                            {item?.firstname} {item?.lastname}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 text-sm text-zinc-500 dark:text-gray-300 whitespace-nowrap">
+                        {item?.country || "N/A"}
+                      </td>
 
-                        <td className="px-4 py-4 text-sm font-medium text-zinc-500 whitespace-nowrap text-right">
-                          <div
-                            className={`inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-green-500 bg-green-100/60 dark:bg-gray-800`}
-                          >
-                            {item.score}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                      <td className="px-4 py-4 text-sm font-medium text-zinc-500 whitespace-nowrap text-right">
+                        <div
+                          className={`inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-green-500 bg-green-100/60 dark:bg-gray-800`}
+                        >
+                          {item?.score}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -141,7 +139,11 @@ const Leaderboard = ({ query, onSelect }) => {
             stroke="currentColor"
             className="w-5 h-5 rtl:-scale-x-100"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+            />
           </svg>
           <span>Previous</span>
         </button>
@@ -178,7 +180,11 @@ const Leaderboard = ({ query, onSelect }) => {
             stroke="currentColor"
             className="w-5 h-5 rtl:-scale-x-100"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+            />
           </svg>
         </button>
       </div>
