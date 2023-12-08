@@ -1,10 +1,9 @@
-
 const jwt = require("jsonwebtoken");
 
 const authenticateToken = async (req, res, next) => {
   try {
     // const token = req.cookies.accessToken;
-    // get token from authorization headers 
+    // get token from authorization headers
     const token = req.header("Authorization").split(" ")[1];
 
     if (!token) return res.status(401).send("You are not authenticated!");
