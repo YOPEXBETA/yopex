@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Company = require("./company.model");
 
 const JobSchema = new mongoose.Schema(
   {
@@ -28,20 +27,19 @@ const JobSchema = new mongoose.Schema(
       required: false,
     },
     salary: { type: Number, required: false },
-    job_type: {
-      type: String,
-      required: false,
-      enum: ["Full Time", "Part Time", "Freelance", "Internship"],
+
+    jobType: {
+      type: Array,
+      default: [],
     },
-    offer_type: {
-      type: String,
-      required: false,
-      enum: ["Remote", "On Site", "Hybrid"],
+    offerType: {
+      type: Array,
+      default: [],
     },
     paid: { type: Boolean, required: false },
 
     company: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
       required: true,
     },

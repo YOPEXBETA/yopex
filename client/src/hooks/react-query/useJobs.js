@@ -6,11 +6,59 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-export const useJobs = () => {
+export const useJobs = (
+  searchQuery,
+  skills,
+  categories,
+  jobType,
+  offerType
+) => {
   return useQuery({
-    queryKey: ["jobs"],
+    queryKey: ["jobs", searchQuery, skills, categories, jobType, offerType],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/job/all`);
+      let query = "";
+      if (searchQuery) query += `&search=${searchQuery}`;
+
+      if (skills && skills.length > 0) {
+        query += skills.map((skill) => `&skills=${skill}`).join(""); // Use "|" as OR operator
+      }
+      if (categories && categories.length > 0) {
+        query += categories
+          .map((category) => `&categories=${category}`)
+          .join(""); // Use "|" as OR operator
+      }
+
+      if (jobType) {
+        query += `&jobType=${jobType}`;
+      }
+
+      if (offerType) {
+        query += `&offerType=${offerType}`;
+      }
+
+      const { data } = await axios.get(`${url}/job/all?${query}`);
+
+      return data;
+    },
+  });
+};
+
+// get all the posts
+export const useJobTypes = () => {
+  return useQuery({
+    queryKey: ["JobType"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/JobType/all`);
+      return data;
+    },
+  });
+};
+
+export const useOfferTypes = () => {
+  return useQuery({
+    queryKey: ["OfferType"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/OfferType/all`);
       return data;
     },
   });

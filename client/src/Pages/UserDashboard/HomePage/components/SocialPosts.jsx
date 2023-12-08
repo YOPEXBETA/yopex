@@ -8,6 +8,7 @@ import SocialPostCard from "../../../../Components/Cards/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
 import SocialPostSkeleton from "../../../../Components/SkeletonLoading/SocialPostSkeleton";
 import ProjectCard from "../../../../Components/Cards/ProjectCard";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const SocialPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +39,9 @@ const SocialPosts = () => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
         {isLoading ? (
-          <SocialPostSkeleton />
+          <div className="flex justify-center">
+            <LoadingSpinner />
+          </div>
         ) : (
           posts?.map((post, index) => (
             <SocialPostCard

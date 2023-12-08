@@ -110,9 +110,9 @@ const MainRoutes = {
       element: <HomeLayout />,
     },
     {
-      name: "Contests",
+      name: "Challenges",
       icon: <ContestIcon className="h-6 w-6" />,
-      path: "contests",
+      path: "challenges",
       customWidth: true,
       children: [
         {
@@ -121,7 +121,7 @@ const MainRoutes = {
           customWidth: true,
         },
         {
-          path: "contestDetails/:id",
+          path: "challengeDetails/:id",
           element: <ContestDetails />,
           hideInSidebar: true,
           customWidth: false,

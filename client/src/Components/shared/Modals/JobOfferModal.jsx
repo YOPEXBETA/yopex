@@ -115,8 +115,8 @@ const JobOfferModal = ({ open, handleClose, job }) => {
 
                     <hr className="my-4 border-t" />
                     <div className="flex flex-col justify-between my-4">
-                      <p className="textlg font-semibold dark:text-gray-200 mb-2">
-                        Recommended Skills
+                      <p className="text-lg font-semibold dark:text-gray-200 mb-4">
+                        Skills
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {job?.RecommendedSkills?.map((skill, index) => (
@@ -129,22 +129,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                         ))}
                       </div>
                     </div>
-                    <hr className="my-2" />
-                    <div className="flex flex-col justify-between my-4">
-                      <p className="text-lg font-semibold dark:text-gray-200 mb-2">
-                        Categories
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {job?.category?.map((category, index) => (
-                          <span
-                            key={index}
-                            className="px-2 py-1 bg-white border rounded-full"
-                          >
-                            {category}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+
                     <hr className="my-2" />
                   </div>
 
@@ -160,33 +145,52 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   </div>
                 </div>
               </div>
-              <div className="hidden lg:block md:col-span-0 lg:col-span-4 xl:col-span-4 ">
-                <div className="border mx-8 rounded-lg  px-8 py-2 flex flex-col gap-4">
-                  <h2 className="text-lg font-semibold dark:text-gray-200 mt-2">
-                    Job Overview
-                  </h2>
+              <div className="hidden lg:block md:col-span-0 lg:col-span-4 xl:col-span-4 pb-8">
+                <div className="border mx-8 rounded-lg  px-8 py-6 flex flex-col gap-4">
                   <div className="flex gap-2">
-                    <div className="rounded-full bg-green-200 w-12 h-12 text-lg flex items-center justify-center text-green-500">
-                      <FaUsers />
-                    </div>
-                    <div>
-                      <h2 className="text-left dark:text-white text-sm font-semibold">
-                        Appliers
+                    <div className="mb-2">
+                      <h2 className="text-left dark:text-white text-sm text-zinc-500">
+                        JOB TYPE
                       </h2>
-                      <p className="dark:text-white">
-                        {job?.appliers?.length} applier
+                      <p className="dark:text-white font-bold text-lg">
+                        {job?.jobType?.map((jobType, index) => (
+                          <span key={index} className="py-1 dark:text-white">
+                            {jobType}
+                          </span>
+                        ))}
                       </p>
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <div className="rounded-full bg-green-200 w-12 h-12 text-lg flex items-center justify-center text-green-500">
-                      <FaCalendarAlt />
-                    </div>
                     <div className="mb-2">
-                      <h2 className="text-left dark:text-white text-sm font-semibold">
-                        Job Posted
+                      <h2 className="text-left dark:text-white text-sm text-zinc-500">
+                        OFFER TYPE
                       </h2>
-                      <p className="dark:text-white">
+                      <p className="dark:text-white font-bold text-lg">
+                        {job?.offerType?.map((offerType, index) => (
+                          <span key={index} className="py-1 dark:text-white">
+                            {offerType}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="mb-2">
+                      <h2 className="text-left dark:text-white text-sm text-zinc-500">
+                        APPLIERS
+                      </h2>
+                      <p className="dark:text-white font-bold text-lg">
+                        {job?.appliers?.length} Applier
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="mb-2">
+                      <h2 className="text-left dark:text-white text-sm text-zinc-500">
+                        POSTED TIME
+                      </h2>
+                      <p className="dark:text-white font-bold text-lg">
                         {formatDistance(new Date(job?.createdAt), new Date(), {
                           addSuffix: true,
                         })}

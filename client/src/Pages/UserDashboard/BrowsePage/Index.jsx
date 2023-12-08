@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ContestsHeader from "./components/ContestsHeader";
 import ContestsFilters from "./components/ContestFilters";
+import { useFindChallenges } from "../../../hooks/react-query/useChallenges";
 import Challenges from "./components/Challenges";
 
 const Index = () => {
@@ -10,6 +11,15 @@ const Index = () => {
 
   const [minAmount, setMinAmount] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
+
+  // Data fetching | react-query
+  const { data: challenges, isLoading } = useFindChallenges(
+    minAmount,
+    maxAmount,
+    contestQuery,
+    selectedSkill,
+    selectedCategory
+  );
 
   return (
     <div className="md:space-y-6 space-y-1">
@@ -39,6 +49,8 @@ const Index = () => {
               searchQuery={contestQuery}
               selectedSkill={selectedSkill}
               selectedCategory={selectedCategory}
+              challenges={challenges}
+              isLoading={isLoading}
             />
           </div>
         </div>

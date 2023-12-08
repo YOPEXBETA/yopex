@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSkills } from "../../../../hooks/react-query/useSkills";
 import { useCategories } from "../../../../hooks/react-query/useCategories";
+import Card from "../../../../Components/Cards";
 
 const ContestsFilters = ({
   setMinAmount,
@@ -10,6 +11,7 @@ const ContestsFilters = ({
   selectedCategory,
   selectedSkill,
   setCategoryQuery,
+  extra,
 }) => {
   const { register, watch } = useForm();
 
@@ -44,7 +46,7 @@ const ContestsFilters = ({
   }, [maxAmount, setMaxAmount]);
 
   return (
-    <div className="bg-white md:rounded-lg border p-4 dark:bg-zinc-800 border-zinc-200">
+    <Card extra={`p-4  ${extra}`}>
       <form className="space-y-4">
         <div className="space-y-2">
           <label
@@ -58,7 +60,7 @@ const ContestsFilters = ({
             <input
               id="min-amount"
               type="number"
-              className="border rounded-md dark:bg-zinc-700 p-2 w-full"
+              className="border rounded-md dark:bg-zinc-800 text-white p-2 w-full"
               placeholder="Min Price Amount"
               {...register("minAmount")}
               min={0}
@@ -69,7 +71,7 @@ const ContestsFilters = ({
             <input
               id="max-amount"
               type="number"
-              className="border rounded-md dark:bg-zinc-700 p-2 w-full"
+              className="border rounded-md dark:bg-zinc-800 text-white p-2 w-full"
               placeholder="Max Price Amount"
               {...register("maxAmount")}
             />
@@ -81,11 +83,11 @@ const ContestsFilters = ({
           <label className="font-bold text-md mb-4 dark:text-gray-200">
             Skills
           </label>
-          <div className="py-2 max-h-52 overflow-y-auto scroll-smooth px-2 scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg pt-5 pb-4 text-left overflow-hidden transform transition-all">
-            {itSkills?.map((skillName) => (
+          <div className="py-2 max-h-52 overflow-y-auto scroll-smooth px-2 scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700   rounded-lg pt-5 pb-4 text-left overflow-hidden transform transition-all">
+            {itSkills?.map((skillName, index) => (
               <label
                 key={skillName}
-                className="block text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                className="block text-sm  hover:bg-gray-100 hover:text-gray-900"
               >
                 <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                   <input
@@ -108,11 +110,11 @@ const ContestsFilters = ({
         <label className="font-bold text-md mb-4 dark:text-gray-200">
           Categories
         </label>
-        <div className="py-2 max-h-52 overflow-y-auto scroll-smooth px-2 scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700  dark:bg-zinc-800 rounded-lg pt-5 pb-4 text-left overflow-hidden transform transition-all">
+        <div className="py-2 max-h-52 overflow-y-auto scroll-smooth px-2 scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700   rounded-lg pt-5 pb-4 text-left overflow-hidden transform transition-all">
           {itCategory?.map((CategoryName) => (
             <label
               key={CategoryName}
-              className="block text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="block text-sm hover:bg-gray-100 hover:text-gray-900"
             >
               <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                 <input
@@ -130,7 +132,7 @@ const ContestsFilters = ({
           ))}
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

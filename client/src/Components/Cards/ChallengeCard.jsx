@@ -19,7 +19,7 @@ const ChallengeCard = ({ challenge, type, extra }) => {
 
   return (
     <Card extra={`lg:pr-11 overflow-hidden lg:h-40   ${extra}`}>
-      <Link to={`/contests/contestDetails/${challenge._id}`}>
+      <Link to={`/challenges/challengeDetails/${challenge._id}`}>
         <div className={`flex-col gap-6 md:flex-row flex`}>
           <div className="w-full xl:w-[30%]">
             <img

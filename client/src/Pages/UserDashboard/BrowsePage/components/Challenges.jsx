@@ -1,24 +1,8 @@
 import React from "react";
-import { useFindChallenges } from "../../../../hooks/react-query/useChallenges";
 import ChallengeCardSkeleton from "../../../../Components/SkeletonLoading/ChallengeCardSkeleton";
 import ChallengeCard from "../../../../Components/Cards/ChallengeCard";
 
-const Challenges = ({
-  minAmount,
-  maxAmount,
-  searchQuery,
-  selectedSkill,
-  selectedCategory,
-}) => {
-  // Data fetching | react-query
-  const { data: challenges, isLoading } = useFindChallenges(
-    minAmount,
-    maxAmount,
-    searchQuery,
-    selectedSkill,
-    selectedCategory
-  );
-
+const Challenges = ({ challenges, isLoading }) => {
   // Sort challenges by the newest ones first
   const sortedChallenges = challenges
     ? challenges

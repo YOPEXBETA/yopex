@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-import { useCreateJob } from "../../hooks/react-query/useJobs";
+import {
+  useCreateJob,
+  useJobTypes,
+  useOfferTypes,
+} from "../../hooks/react-query/useJobs";
 import { useUserById } from "../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 
@@ -13,6 +17,8 @@ import Card from "../Cards";
 const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
   const { data: RecommendedSkills } = useSkills();
   const { data: categories } = useCategories();
+  const { data: JobTypes } = useJobTypes();
+  const { data: OfferTypes } = useOfferTypes();
 
   const {
     handleSubmit,
@@ -78,15 +84,16 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
                 id="jobType"
                 required={true}
                 className="bg-white border border-gray-300 text-gray-900 mt-2 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-zinc-800 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                {...register("job_type", { required: true })}
+                {...register("jobType", { required: true })}
               >
                 <option value="" defaultValue>
                   Choose a job type
                 </option>
-                <option value="Full Time">Full Time</option>
-                <option value="Part Time">Part Time</option>
-                <option value="Freelance">Freelance</option>
-                <option value="Internship">Internship</option>
+                {JobTypes?.map((jobType) => (
+                  <option key={jobType._id} value={jobType.name}>
+                    {jobType.name}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -101,14 +108,16 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
                 id="offerType"
                 required={true}
                 className="bg-white border border-gray-300 text-gray-900 mt-2 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                {...register("offer_type", { required: true })}
+                {...register("offerType", { required: true })}
               >
                 <option value="" defaultValue>
                   Choose an offer type
                 </option>
-                <option value="Remote">Remote</option>
-                <option value="On Site">On Site</option>
-                <option value="Hybrid">Hybrid</option>
+                {OfferTypes?.map((offerType) => (
+                  <option key={offerType._id} value={offerType.name}>
+                    {offerType.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
