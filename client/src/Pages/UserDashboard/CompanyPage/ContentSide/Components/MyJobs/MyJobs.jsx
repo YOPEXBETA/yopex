@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useJobById } from "../../../../../../hooks/react-query/useJobs";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import JobCard from "../../../../../../Components/Cards/JobCard";
+import WorkCard from "../../../../../../Components/Cards/WorkCard";
 
 const MyCompanyJobs = () => {
   const { companyId } = useParams();
@@ -18,10 +19,10 @@ const MyCompanyJobs = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-3 gap-4 py-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1  gap-4 py-5">
         {companyJobs?.length > 0 ? (
           companyJobs?.map((job) => (
-            <JobCard key={job?._id} companyJobs={companyJobs} job={job} />
+            <WorkCard key={job?._id} companyJobs={companyJobs} job={job} />
           ))
         ) : (
           <p className="dark:text-white">No jobs found.</p>

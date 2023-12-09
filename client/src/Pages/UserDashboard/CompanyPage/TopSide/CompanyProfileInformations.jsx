@@ -162,15 +162,9 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     </button>
                   )}
                 </div>
-                {/*<p className="hidden md:block truncate dark:text-gray-200 w-full xl:w-[50rem]">
-                  {company?.companyDescription}
-                  </p>*/}
               </div>
             </div>
-            {/*mobile version*/}
-            <p className="block md:hidden dark:text-gray-200 w-full xl:w-[50rem] pt-3">
-              {company?.companyDescription}
-            </p>
+
             <div className="hidden md:flex gap-1 flex-wrap">
               <a href="#" className="xl:block lg:block md:block">
                 <button
@@ -201,7 +195,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
             </div>
           </div>
           {/*mobile version*/}
-          <div className="flex xl:hidden lg:hidden md:hidden flex-row sm:flex-row justify-between w-screen px-16 py-4 border-y-2 border-gray">
+          <div className="flex xl:hidden lg:hidden md:hidden flex-row sm:flex-row justify-between px-16 py-4 border-y-2 border-gray">
             <div className="flex-col items-center">
               <p className="text-base font-bold text-center dark:text-gray-200">
                 {company?.posts?.length}

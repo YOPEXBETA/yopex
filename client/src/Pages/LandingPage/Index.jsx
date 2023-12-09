@@ -1,13 +1,12 @@
 import React from "react";
-import HomeHeader from "./header/homeHeader";
 import HomeContent from "./content/HomeContent";
-import Footer from "./footer/Footer";
-import LandingHeader from "./header/LandingHeader";
+import HomeHeader from "../../Components/HomeHeader/homeHeader";
+import Footer from "../../Components/footer/Footer";
 
 const LandingPage = () => {
   return (
-    <div >
-      <div >
+    <div>
+      <div>
         <HomeHeader />
       </div>
       <HomeContent />

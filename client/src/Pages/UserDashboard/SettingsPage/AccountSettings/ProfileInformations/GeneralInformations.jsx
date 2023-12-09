@@ -118,24 +118,18 @@ const GeneralInformations = () => {
 
   return (
     <div className="mb-24 md:mb-8">
-      <div className="flex items-start justify-between">
+      {/*<div className="flex items-start justify-between">
         <div>
-          <h2 className="text-xl font-bold  dark:text-white uppercase">
-            General Informations
-          </h2>
-          <p className="text-gray-400 mb-4">
-            Edit your account's general information
-          </p>
-        </div>
-        {/* <div>
-          <button className="hover:bg-gray-500 hover:bg-opacity-10 hover:text-green-500 flex items-center  py-1.5 px-4 rounded space-x-2 cursor-pointer">
-            <MdEdit onClick={toggleModal} />
+          <button
+            onClick={toggleModal}
+            className="hover:bg-white  hover:bg-opacity-10 hover:text-green-500 flex items-center  py-1.5 px-4 rounded space-x-2 cursor-pointer"
+          >
+            q{" "}
           </button>
         </div>
-        <EditSocialLinksModal open={openPostModal} handleClose={toggleModal} />*/}
-      </div>
-      <hr className=" dark:border-gray-200 mb-2" />
-      <br />
+        <EditSocialLinksModal open={openPostModal} handleClose={toggleModal} />
+  </div>*/}
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 gap-3"
@@ -173,32 +167,26 @@ const GeneralInformations = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label
-              htmlFor="firstname"
-              className="block text-gray-600 dark:text-gray-300"
-            >
+            <label htmlFor="firstname" className="block  dark:text-gray-300">
               First Name
             </label>
             <input
               id="firstname"
               type="text"
               placeholder="First name"
-              className="w-full border border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-white"
               {...register("firstname")}
             />
           </div>
           <div className="col-span-1">
-            <label
-              htmlFor="lastname"
-              className="block text-gray-600 dark:text-gray-300"
-            >
+            <label htmlFor="lastname" className="block  dark:text-gray-300">
               Last Name
             </label>
             <input
               id="lastname"
               type="text"
               placeholder="Last name"
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-white"
               {...register("lastname")}
             />
           </div>
@@ -211,7 +199,7 @@ const GeneralInformations = () => {
               defaultValue={user?.occupation}
               type="text"
               placeholder="EX: Web developer, Art Director, Student"
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-white"
               {...register("occupation")}
             />
           </div>
@@ -222,7 +210,7 @@ const GeneralInformations = () => {
             <input
               type="text"
               placeholder="Website url"
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-white"
               {...register("websiteURL")}
             />
           </div>
@@ -235,7 +223,7 @@ const GeneralInformations = () => {
               id="userDescription"
               placeholder="Description"
               rows={6}
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-white"
               defaultValue={user.userDescription}
               {...register("userDescription")}
             />
@@ -259,7 +247,7 @@ const GeneralInformations = () => {
             <label className="dark:text-gray-300">Country</label>
             <select
               id="demo-multiple-name"
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 bg-white"
               defaultValue={
                 user.country
                   ? user.country.charAt(0).toUpperCase() + user.country.slice(1)
@@ -280,7 +268,7 @@ const GeneralInformations = () => {
             <label className="dark:text-gray-300">Gender</label>
             <select
               id="gender-select"
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 bg-white"
               defaultValue={user.gender}
               {...register("gender")}
             >
@@ -300,7 +288,7 @@ const GeneralInformations = () => {
 
             <input
               type="date"
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-white"
               {...register("birthDate")}
             />
           </div>
@@ -311,7 +299,7 @@ const GeneralInformations = () => {
             <input
               id="phone"
               placeholder="+216"
-              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-gray-50"
+              className="w-full border dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 border-gray-300 rounded-md px-3 py-2 mt-1 resize-none bg-white"
               defaultValue={user.phoneNumber}
               {...register("phoneNumber")}
             />

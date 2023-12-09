@@ -7,6 +7,7 @@ import {
   FaInstagram,
   FaTimes,
 } from "react-icons/fa";
+import LinkIcon from "../../../../../../Components/icons/LinkIcon";
 
 const SocialMediaLinks = ({
   label,
@@ -48,10 +49,10 @@ const SocialMediaLinks = ({
           ) : (
             <button
               type="button"
-              className="bg-green-500 px-4 py-1 rounded-full text-sm font-medium text-white"
+              className="bg-black p-2 rounded-full text-sm font-medium text-white"
               onClick={toggleInput}
             >
-              Link
+              <LinkIcon />
             </button>
           )}
         </div>

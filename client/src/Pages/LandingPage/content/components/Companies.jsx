@@ -32,7 +32,7 @@ const Companies = () => {
         <h2 className="text-3xl font-bold text-gray-800 md:text-4xl dark:text-white">
           Recent Companies
         </h2>
-        <p className="lg:mx-auto lg:w-6/12 text-gray-600 dark:text-gray-300">
+        <p className="lg:mx-auto lg:w-6/12 dark:text-gray-300">
           Welcome to the Hub of Fresh Talent: Discover our Newly Registered
           Companies
         </p>

@@ -25,9 +25,7 @@ const EmailVerification = Loadable(
   lazy(() => import("../Pages/Authentification/EmailVerification"))
 );
 
-const LandingPage = Loadable(
-  lazy(() => import("../Pages/LandingPage/LandingPage"))
-);
+const LandingPage = Loadable(lazy(() => import("../Pages/LandingPage/Index")));
 // ==============================|| AUTH ROUTING ||============================== //
 
 const LoginRoutes = {

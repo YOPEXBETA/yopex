@@ -16,7 +16,7 @@ const HomeSection = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
           <div classNameName="relative pt-36 ml-auto">
             <div className="lg:w-2/3 text-center mx-auto">
-              <h1 className="text-gray-900 dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">
+              <h1 className=" dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">
                 Connect With
                 <br></br>
                 <span className="text-green-500 dark:text-green-500">
@@ -38,7 +38,7 @@ const HomeSection = () => {
                   />
                 </span>
               </h1>
-              <p className="mt-8 text-gray-700 dark:text-gray-300">
+              <p className="mt-8  dark:text-white">
                 Embark on a Journey of Opportunities: Seize Exciting Challenges,
                 Apply for a Myriad of Job Openings, and Forge Valuable
                 Connections with Fellow Freelancers in Your Thriving Industry.

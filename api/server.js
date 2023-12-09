@@ -23,7 +23,7 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 const corsOpts = {
-  origin: ["https://yopexhub.com", "http://localhost:3001"], // Replace with your actual client origin
+  origin: ["https://yopexhub.com", "http://localhost:3000"], // Replace with your actual client origin
   methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "PATCH"],
   allowedHeaders: [
     "Origin",

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import YopexLogo from "../../../../src/assets/images/LogoYopex.png";
+import YopexLogo from "../../../src/assets/images/LogoYopex.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getCurrentUser } from "../../../redux/auth/authSlice";
+import { getCurrentUser } from "../../redux/auth/authSlice";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
@@ -37,22 +37,22 @@ const HomeHeader = () => {
   }, [dispatch, user]);
 
   return (
-    <div className="container  dark:bg-zinc-800 ">
+    <div className="container">
       <div className="flex justify-between dark:bg-zinc-800 fixed   items-center w-full h-20 px-4 lg:px-24 md:px-24 text-white  z-10 ">
         <div className="flex items-center gap-8">
           <img src={YopexLogo} width={35} alt="Yopex Logo" />
           <ul className="hidden md:flex">
-            <li className="px-4 cursor-pointer capitalize dark:text-white  text-gray-500 hover:scale-105 duration-200">
+            <li className="px-4 cursor-pointer capitalize dark:text-white  text-zinc-500 hover:scale-105 duration-200">
               <Link to="home" smooth duration={500}>
                 Home
               </Link>
             </li>
-            <li className="px-4 cursor-pointer capitalize dark:text-white  text-gray-500 hover:scale-105 duration-200">
+            <li className="px-4 cursor-pointer capitalize dark:text-white text-zinc-500 hover:scale-105 duration-200">
               <Link to="about" smooth duration={500}>
-                About
+                Features
               </Link>
             </li>
-            <li className="px-4 cursor-pointer capitalize dark:text-white  text-gray-500 hover:scale-105 duration-200">
+            <li className="px-4 cursor-pointer capitalize dark:text-white text-zinc-500 hover:scale-105 duration-200">
               <Link to="contact" smooth duration={500}>
                 Contact
               </Link>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useJobs } from "../../../../hooks/react-query/useJobs";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import JobCard from "../../../../Components/Cards/JobCard";
+import WorkCard from "../../../../Components/Cards/WorkCard";
 
 const Jobs = ({
   searchQuery,
@@ -37,11 +38,12 @@ const Jobs = ({
             <LoadingSpinner />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-1 gap-2 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-2 lg:grid-cols-2 xl:grid-cols-2">
             {sortedJobs?.length > 0 ? (
               sortedJobs?.map((job) => (
                 <div key={job._id} onClick={() => handleClickOpenModalJob(job)}>
-                  <JobCard job={job} />
+                  {/*<JobCard job={job} />*/}
+                  <WorkCard job={job} />
                 </div>
               ))
             ) : (
