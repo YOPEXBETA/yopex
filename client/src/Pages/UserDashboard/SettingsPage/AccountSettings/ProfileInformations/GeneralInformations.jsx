@@ -10,7 +10,6 @@ import { useFileUpload } from "../../../../../hooks/react-query/useUsers";
 import { edit, reset } from "../../../../../redux/auth/authSlice";
 import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 import { format } from "date-fns";
-import EditSocialLinksModal from "../SettingsModals/EditSocialLinksModal";
 import SocialMediaLinks from "./components/SocialMediaLinks";
 
 const GeneralInformations = () => {

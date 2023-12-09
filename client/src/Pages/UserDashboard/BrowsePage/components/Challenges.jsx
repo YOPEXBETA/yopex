@@ -11,7 +11,7 @@ const Challenges = ({ challenges, isLoading }) => {
     : [];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-1 gap-2 xl:grid-cols-1 mb-16 xl:mb-4">
+    <div className="grid grid-cols-1 md:grid-cols-1 gap-2 xl:grid-cols-2 mb-16 xl:mb-4">
       {isLoading ? (
         <div>
           <ChallengeCardSkeleton />
