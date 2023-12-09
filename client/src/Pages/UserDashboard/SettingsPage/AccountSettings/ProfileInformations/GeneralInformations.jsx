@@ -116,7 +116,7 @@ const GeneralInformations = () => {
   };
 
   return (
-    <div className="mb-24 md:mb-8">
+    <div className="md:mt-0 mt-8">
       {/*<div className="flex items-start justify-between">
         <div>
           <button
@@ -133,7 +133,7 @@ const GeneralInformations = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 gap-3"
       >
-        <div className="relative">
+        <div className="relative mb-4">
           <div className="relative w-24 h-24">
             {user?.picturePath ? (
               <img
