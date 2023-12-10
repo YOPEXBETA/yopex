@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "react-quill/dist/quill.snow.css";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
 import {
@@ -13,12 +14,14 @@ import { useCategories } from "../../hooks/react-query/useCategories";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { Link } from "react-router-dom";
 import Card from "../Cards";
+import Editor from "../Editor";
 
 const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
   const { data: RecommendedSkills } = useSkills();
   const { data: categories } = useCategories();
   const { data: JobTypes } = useJobTypes();
   const { data: OfferTypes } = useOfferTypes();
+  const [content, setContent] = useState("");
 
   const {
     handleSubmit,
@@ -28,6 +31,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
     setValue,
   } = useForm({
     defaultValues: {
+      description: "",
       category: [],
       RecommendedSkills: [],
     },
@@ -43,6 +47,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
 
     const modifiedJobData = {
       ...JobData,
+      description: content,
       category: JobData?.category?.map((category) => category?.value),
       RecommendedSkills: JobData?.RecommendedSkills?.map(
         (skill) => skill?.value
@@ -157,19 +162,15 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
               )}
             />
           </div>
-          <div>
+          <div className="mb-4">
             <label
               htmlFor="jobDescription"
               className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
             >
               Job Description
             </label>
-            <textarea
-              required={true}
-              className="w-full h-40 p-2 border bg-white rounded mt-2 dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2"
-              {...register("description", { required: true })}
-              placeholder="job description"
-            />
+
+            <Editor value={content} onChange={setContent} height="14rem" />
           </div>
 
           <div className="flex justify-between">

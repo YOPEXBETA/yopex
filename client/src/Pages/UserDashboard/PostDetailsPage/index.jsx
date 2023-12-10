@@ -24,7 +24,7 @@ const Index = () => {
         </div>
 
         <div className="xl:col-span-4 lg:col-span-12 md:col-span-12 col-span-12">
-          <div className="w-full sticky top-24">
+          <div className="w-full sticky top-32">
             <Comments post={post} postId={post?._id} userId={post?.userId} />
           </div>
         </div>

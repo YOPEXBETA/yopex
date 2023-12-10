@@ -14,7 +14,7 @@ const LeaderboardDetailCard = ({ data }) => {
 
   if (!data) {
     return (
-      <div className="bg-white dark:text-white dark:bg-zinc-800 font-semibold text-center rounded-lg border dark:border-zinc-500 p-10 xl:max-w-md w-full">
+      <div className="bg-white dark:text-white dark:bg-zinc-800 text-center rounded-lg border dark:border-zinc-500 p-10 xl:max-w-md w-full">
         No user selected.
       </div>
     );

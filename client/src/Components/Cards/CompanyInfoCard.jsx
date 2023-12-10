@@ -10,7 +10,7 @@ const CompanyInfoCard = ({ selectedOption, extra }) => {
     // Return loading state or no company selected message
     return (
       <div className="bg-white border rounded-lg">
-        <p className="px-4 py-6 text-center text-gray-700">
+        <p className="px-4 py-6 text-center dark:text-white dark:bg-zinc-800">
           {isLoading ? <LoadingSpinner /> : "No company selected."}
         </p>
       </div>

@@ -40,11 +40,11 @@ const Store = () => {
   ];
 
   if (user?.companies?.length === 0) {
-    return <h1>Unauthorized</h1>;
+    return <h1 className="dark:text-white">Unauthorized</h1>;
   }
 
   return (
-    <div className="lg:h-[100vh]">
+    <div>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-0 md:mt-8 gap-5 ">
         {pointItems.map((item, index) => (
           <StorePointCard

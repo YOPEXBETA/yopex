@@ -20,23 +20,24 @@ const GeneralInformations = () => {
   const { user, error, loading, success } = useSelector((state) => state.auth);
   const { data: skills } = useSkills("");
   const [github, setGithub] = useState(
-    user?.socialMediaLinks.find((link) => link.platform === "github")?.url || ""
+    user?.socialMediaLinks?.find((link) => link.platform === "github")?.url ||
+      ""
   );
   const [linkedin, setLinkedin] = useState(
-    user?.socialMediaLinks.find((link) => link.platform === "linkedin")?.url ||
+    user?.socialMediaLinks?.find((link) => link.platform === "linkedin")?.url ||
       ""
   );
   const [behance, setBehance] = useState(
-    user?.socialMediaLinks.find((link) => link.platform === "behance")?.url ||
+    user?.socialMediaLinks?.find((link) => link.platform === "behance")?.url ||
       ""
   );
   const [dribbble, setDribbble] = useState(
-    user?.socialMediaLinks.find((link) => link.platform === "dribbble")?.url ||
+    user?.socialMediaLinks?.find((link) => link.platform === "dribbble")?.url ||
       ""
   );
   const [instagram, setInstagram] = useState(
-    user?.socialMediaLinks.find((link) => link.platform === "instagram")?.url ||
-      ""
+    user?.socialMediaLinks?.find((link) => link.platform === "instagram")
+      ?.url || ""
   );
 
   const [showGithubInput, setShowGithubInput] = useState(false);

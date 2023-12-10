@@ -39,7 +39,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
                 <img
                   src={challenge?.company?.companyLogo}
                   alt="Icon"
-                  className="w-16 h-16 rounded-lg object-cover hidden md:block lg:block"
+                  className="w-16 h-16 rounded-lg object-cover border hidden md:block lg:block"
                 />
                 <p className="mt-1 font-medium dark:text-zinc-400 md:mt-2">
                   {challenge.company.companyName}
