@@ -1,6 +1,6 @@
 import React from "react";
-import ChallengeCardSkeleton from "../../../../Components/SkeletonLoading/ChallengeCardSkeleton";
-import ChallengeCard from "../../../../Components/Cards/ChallengeCard";
+import NewChallengeCard from "../../../../Components/Cards/NewChallengeCard";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const Challenges = ({ challenges, isLoading }) => {
   // Sort challenges by the newest ones first
@@ -11,14 +11,16 @@ const Challenges = ({ challenges, isLoading }) => {
     : [];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-1 gap-2 xl:grid-cols-2 mb-16 xl:mb-4">
+    <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-1 gap-4">
       {isLoading ? (
         <div>
-          <ChallengeCardSkeleton />
+          <LoadingSpinner />
         </div>
       ) : sortedChallenges.length > 0 ? (
         sortedChallenges.map((item) => (
-          <ChallengeCard key={item._id} challenge={item} />
+          <div>
+            <NewChallengeCard key={item._id} challenge={item} />
+          </div>
         ))
       ) : (
         <p className="dark:text-white text-lg">No Challenges found</p>

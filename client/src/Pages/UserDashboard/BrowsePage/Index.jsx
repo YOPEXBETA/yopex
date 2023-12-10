@@ -21,7 +21,7 @@ const Index = () => {
   );
 
   return (
-    <div className="md:space-y-6 space-y-1">
+    <div className="md:space-y-6 space-y-10">
       <ContestsHeader
         setContestQuery={setContestQuery}
         selectedSkill={selectedSkill}
@@ -34,7 +34,7 @@ const Index = () => {
 
       <div className="mx-auto container">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-2">
-          <div className="lg:col-span-12 md:col-span-9 col-span-12">
+          <div className="lg:col-span-12  col-span-12">
             <Challenges
               minAmount={minAmount}
               maxAmount={maxAmount}
