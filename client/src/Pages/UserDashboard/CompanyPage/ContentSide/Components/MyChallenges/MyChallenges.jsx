@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useChallengesById } from "../../../../../../hooks/react-query/useChallenges";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import ChallengeCard from "../../../../../../Components/Cards/ChallengeCard";
+import NewChallengeCard from "../../../../../../Components/Cards/NewChallengeCard";
 
 const MyCompanyChallenges = () => {
   const { companyId } = useParams();
@@ -21,7 +22,7 @@ const MyCompanyChallenges = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4  py-5">
         {companyChallenges?.length > 0 ? (
           companyChallenges?.map((challenge) => (
-            <ChallengeCard
+            <NewChallengeCard
               key={challenge?._id}
               companyChallenges={companyChallenges}
               challenge={challenge}
