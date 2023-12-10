@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useJobs } from "../../../../hooks/react-query/useJobs";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
-import JobCard from "../../../../Components/Cards/JobCard";
+import WorkCard from "../../../../Components/Cards/WorkCard";
 
 const RecentJobs = () => {
-  const jobsPerPage = 6;
   const { data: jobs, isLoading } = useJobs();
-  const [currentPage, setCurrentPage] = useState(0);
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const startIndex = currentPage * jobsPerPage;
-  const endIndex = startIndex + jobsPerPage;
-  const jobsToShow = jobs
-    ?.slice(startIndex, endIndex)
-    ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const sortedJobs = jobs
+    ? jobs.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    : [];
 
   if (isLoading) {
     return (
@@ -38,29 +30,12 @@ const RecentJobs = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-        {jobsToShow?.map((job) => (
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-4">
+        {sortedJobs?.slice(0, 6)?.map((job) => (
           <div key={job._id}>
-            <JobCard job={job} />
+            <WorkCard job={job} />
           </div>
         ))}
-      </div>
-
-      <div className="mt-4 flex justify-center overflow-x-auto">
-        {Array?.from(
-          { length: Math.ceil(jobs?.length / jobsPerPage) },
-          (_, i) => (
-            <div
-              key={i}
-              onClick={() => handlePageChange(i)}
-              className={`${
-                i === currentPage
-                  ? "bg-gray-800 dark:bg-green-500"
-                  : "bg-gray-300 hover:bg-gray-400"
-              } w-3 h-3 rounded-full mx-2 cursor-pointer`}
-            />
-          )
-        )}
       </div>
     </div>
   );

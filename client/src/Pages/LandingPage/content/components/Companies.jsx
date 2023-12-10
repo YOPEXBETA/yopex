@@ -3,16 +3,7 @@ import { useCompanies } from "../../../../hooks/react-query/useCompany";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const Companies = () => {
-  const itemsPerPage = 6;
   const { data: companies, isLoading } = useCompanies();
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
 
   if (isLoading) {
     return (
@@ -23,8 +14,10 @@ const Companies = () => {
   }
 
   const recentCompanies = companies
-    ?.slice(startIndex, endIndex)
-    .sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
+    ? companies
+        .slice()
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    : [];
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
@@ -40,7 +33,7 @@ const Companies = () => {
 
       <div className="flex flex-wrap justify-center">
         {recentCompanies.length > 0 ? (
-          recentCompanies.map((company) => (
+          recentCompanies?.slice(0, 6)?.map((company) => (
             <div key={company?.id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
               <div>
                 <div className="flex gap-3 items-center mb-4 flex-col">
@@ -60,22 +53,6 @@ const Companies = () => {
           ))
         ) : (
           <p>No companies available.</p>
-        )}
-      </div>
-      <div className="mt-4 flex justify-center overflow-x-auto">
-        {Array?.from(
-          { length: Math.ceil(companies?.length / itemsPerPage) },
-          (_, i) => (
-            <div
-              key={i}
-              onClick={() => handlePageChange(i)}
-              className={`${
-                i === currentPage
-                  ? "bg-gray-800 dark:bg-green-500"
-                  : "bg-gray-300 hover:bg-gray-400"
-              } w-3 h-3 rounded-full mx-2 cursor-pointer`}
-            />
-          )
         )}
       </div>
     </div>
