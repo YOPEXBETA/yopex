@@ -17,7 +17,6 @@ const UserSchema = new mongoose.Schema(
     picturePath: { type: String, required: false },
     userDescription: { type: String, required: false },
     birthDate: { type: Date, required: false },
-
     score: { type: Number, default: 0 },
     gender: {
       type: String,
@@ -52,17 +51,16 @@ const UserSchema = new mongoose.Schema(
     },
     viewedProfile: { type: Number },
     impressions: { type: Number },
-    role: { type: String, enum: ["user", "admin", "company"], default: "user" },
-    resetToken: { type: String, default: undefined }, //need it for forget password(verification)
-    isFaceRecognition: { type: Boolean, default: false },
-    isVerified: { type: Boolean, default: false },
-    status: { type: String, default: "disabled" },
-    skills: {
-      type: Array,
-      default: [],
+    role: {
+      type: String,
+      enum: ["user", "admin", "moderator"],
+      default: "user",
     },
+    resetToken: { type: String, default: undefined }, //need it for forget password(verification)
+    isVerified: { type: Boolean, default: false },
+    status: { type: String, default: "active" },
 
-    /*skills: {
+    skills: {
       type: [
         {
           type: mongoose.Schema.Types.ObjectId,
@@ -70,13 +68,15 @@ const UserSchema = new mongoose.Schema(
         },
       ],
       default: [],
-    },*/
+    },
+
     socialMediaLinks: [
       {
         platform: { type: String, required: false },
         url: { type: String, required: false },
       },
     ],
+
     experiences: {
       type: [
         {

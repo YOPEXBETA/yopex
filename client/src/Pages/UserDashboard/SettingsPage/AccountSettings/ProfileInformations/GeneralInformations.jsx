@@ -14,12 +14,18 @@ import SocialMediaLinks from "./components/SocialMediaLinks";
 
 const GeneralInformations = () => {
   const [openPostModal, setOpenPostModal] = useState(false);
-  const toggleModal = () => setOpenPostModal((prev) => !prev);
   const dispatch = useDispatch();
   const fileUploadMutation = useFileUpload();
   const { user, error, loading, success } = useSelector((state) => state.auth);
   const { data: skills } = useSkills("");
-  const [github, setGithub] = useState(
+  const formattedSkills = user?.skills?.map((skill) => ({
+    label: skill?.name,
+    value: skill?._id,
+  }));
+  console.log(formattedSkills, "formattedSkills");
+  console.log(user?.skills, "skills");
+
+  /*const [github, setGithub] = useState(
     user?.socialMediaLinks?.find((link) => link.platform === "github")?.url ||
       ""
   );
@@ -38,7 +44,7 @@ const GeneralInformations = () => {
   const [instagram, setInstagram] = useState(
     user?.socialMediaLinks?.find((link) => link.platform === "instagram")
       ?.url || ""
-  );
+  );*/
 
   const [showGithubInput, setShowGithubInput] = useState(false);
   const [showLinkedinInput, setShowLinkedinInput] = useState(false);
@@ -70,48 +76,48 @@ const GeneralInformations = () => {
       gender: user?.gender,
       phoneNumber: user?.phoneNumber,
       userDescription: user?.userDescription,
-      skills:
-        user?.skills.map((skill) => ({
-          label: skill.label,
-          value: skill.value,
-        })) || [],
+      skills: formattedSkills,
     },
   });
 
   const countryList = countries?.map((country) => country.name.common);
 
   const onSubmit = async (data) => {
-    const { file, ...values } = data;
+    const { file, skills, ...values } = data;
 
     if (data.file.length > 0) {
       const formData = new FormData();
       formData.append("file", file[0]);
       const data = await fileUploadMutation.mutateAsync(formData);
+      const SkillsId = data.skills.map((skill) => skill.value);
 
       return dispatch(
         edit({
           ...values,
           picturePath: data.data.downloadURL,
-          socialMediaLinks: [
+          skills: SkillsId,
+          /*socialMediaLinks: [
             { platform: "github", url: github },
             { platform: "linkedin", url: linkedin },
             { platform: "behance", url: behance },
             { platform: "dribbble", url: dribbble },
             { platform: "instagram", url: instagram },
-          ],
+          ],*/
         })
       );
     }
     return dispatch(
       edit({
         ...values,
-        socialMediaLinks: [
+        skills: skills.map((skill) => skill.value),
+
+        /* socialMediaLinks: [
           { platform: "github", url: github },
           { platform: "linkedin", url: linkedin },
           { platform: "behance", url: behance },
           { platform: "dribbble", url: dribbble },
           { platform: "instagram", url: instagram },
-        ],
+        ],*/
       })
     );
   };
@@ -322,8 +328,8 @@ const GeneralInformations = () => {
                     options={
                       skills
                         ? skills?.map((skill) => ({
-                            label: skill?.name,
-                            value: skill?.name,
+                            label: skill.name,
+                            value: skill._id,
                           }))
                         : []
                     }
@@ -342,7 +348,7 @@ const GeneralInformations = () => {
             <p className="dark:text-white uppercase font-bold">
               social media links
             </p>
-
+            {/*
             <SocialMediaLinks
               label="Github"
               showInput={showGithubInput}
@@ -382,6 +388,7 @@ const GeneralInformations = () => {
               setInputValue={setInstagram}
               toggleInput={() => setShowInstagramInput(!showInstagramInput)}
             />
+            */}
           </div>
         </div>
 

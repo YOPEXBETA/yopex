@@ -3,7 +3,6 @@ import Billing from "./AccountSettings/Billing/Billing";
 import Privacy from "./AccountSettings/Privacy/Privacy";
 import VerticalSettingsTab from "./AccountSettings/SettingTabs/VerticalSettingsTab";
 import GeneralInformations from "./AccountSettings/ProfileInformations/GeneralInformations";
-import MoreInformation from "./AccountSettings/MoreInformation/MoreInformation";
 
 const SettingsLayout = () => {
   const [value, setValue] = useState(0);
@@ -35,11 +34,6 @@ const SettingsLayout = () => {
             <Billing />
           </div>
         )}
-        {/*value === 3 && (
-          <div className="col-span-12  lg:col-span-9 md:col-span-12  p-6  dark:bg-zinc-800 my-8">
-            <MoreInformation />
-          </div>
-        )*/}
       </div>
     </div>
   );

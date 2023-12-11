@@ -47,7 +47,7 @@ const CreatePost = async (req, res) => {
       { _id: req.body.userId },
       { $push: { posts: savedpost._id } },
       { new: true }
-    ).populate("posts");
+    );
 
     res.status(201).json(data);
   } catch (err) {

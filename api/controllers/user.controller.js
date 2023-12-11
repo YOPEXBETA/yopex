@@ -13,22 +13,9 @@ const { uploadFileToFirebase } = require("./firebase.controllers");
 
 const editProfile = async (req, res) => {
   try {
-    const {
-      role,
-      score,
-      balance,
-      email,
-      historyPayment,
-      isVerified,
-      yearsRegistered,
-      badgesEarned,
-      reviews,
-      posts,
-      status,
-      ...updateFields
-    } = req.body;
+    const { password, oldPassword, ...updateFields } = req.body;
 
-    if (updateFields.password) {
+    /*if (updateFields.password) {
       const user = await userSchema.findById(req.userId);
       const isOldPasswordValid = await bcrypt.compare(
         req.body.oldPassword,
@@ -46,7 +33,7 @@ const editProfile = async (req, res) => {
       updateFields.password = hashedPass;
     }
 
-    if (Array.isArray(updateFields.socialMediaLinks)) {
+    /*if (Array.isArray(updateFields.socialMediaLinks)) {
       const validLinks = updateFields.socialMediaLinks.map((link) => {
         if (
           !["instagram", "github", "linkedin", "behance", "dribbble"].includes(
@@ -94,10 +81,13 @@ const editProfile = async (req, res) => {
 
       updateFields.socialMediaLinks = validLinks;
     }
+    */
 
     const updatedUser = await userSchema
       .findByIdAndUpdate(req.userId, updateFields, { new: true })
-      .select("firstname lastname email picturePath score country occupation");
+      .select(
+        "firstname lastname email picturePath score country occupation skills"
+      );
 
     return res.status(200).json(updatedUser);
   } catch (error) {
@@ -170,7 +160,8 @@ const getUser = async (req, res) => {
       .populate("challenges")
       .populate("companies")
       .populate("educations")
-      .populate("experiences");
+      .populate("experiences")
+      .populate("skills");
 
     if (user) {
       res.status(200).json(user);
@@ -191,33 +182,32 @@ const getUsers = async (req, res) => {
 
     const query = { role: { $ne: "admin" } };
     if (req.query.name) {
-      const searchRegex = new RegExp(req.query.name, 'i'); // 'i' for case-insensitive
+      const searchRegex = new RegExp(req.query.name, "i"); // 'i' for case-insensitive
       query.$or = [
         { firstname: { $regex: searchRegex } },
         { lastname: { $regex: searchRegex } },
       ];
     }
- 
+
     const users = await userSchema
       .find(query)
       .select(
         "_id firstname lastname picturePath score country occupation followers reviews challengesDone"
       )
-      .sort({score:-1,createdAt:1})
+      .sort({ score: -1, createdAt: 1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize)
       .exec();
 
-    
-
-    const userCount = await userSchema.countDocuments({ role: { $ne: "admin" } });
+    const userCount = await userSchema.countDocuments({
+      role: { $ne: "admin" },
+    });
 
     res.status(200).json({ users, userCount });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
-
 
 //getFollowers
 const getUserFriends = async (req, res) => {
@@ -648,7 +638,10 @@ const CreateCompany = async (req, res) => {
 
 const getCurrentUser = async (req, res) => {
   try {
-    const user = await userSchema.findById(req.userId).select("-password");
+    const user = await userSchema
+      .findById(req.userId)
+      .select("-password")
+      .populate("skills");
 
     return res.status(200).json(user);
   } catch (error) {

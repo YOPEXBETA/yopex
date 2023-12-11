@@ -10,103 +10,47 @@ const moment = require("moment");
 
 const signUp = async (req, res) => {
   try {
-    // Generate a salt for password hashing
     const salt = await bcrypt.genSalt(10);
 
-    // Log the request body and password for debugging purposes
-    // console.log(req.body);
-    // console.log(typeof req.body.password, req.body.password);
-
-    // Hash the password using the generated salt
     const hashedPass = await bcrypt.hash(req.body.password, salt);
 
-    // Log the hashed password for debugging purposes
-    // console.log(typeof hashedPass, hashedPass);
-
-    // Check if the user already exists in the userSchema collection
     const userExist = await userSchema.findOne({ email: req.body.email });
     if (userExist) {
       return res.status(400).send({ error: { msg: "User already exists" } });
     }
 
-    // Check if the user already exists in the companySchema collection
     const companyExist = await companySchema.findOne({
       email: req.body.email,
     });
     if (companyExist) {
       return res.status(400).send({ error: { msg: "User already exists" } });
     }
+    const newUser = new userSchema({
+      ...req.body,
+      password: hashedPass,
+    });
 
-    // If the role is "user"
-    if (req.body.role === "user") {
-      // Create a new user with the hashed password
-      const newUser = new userSchema({
-        ...req.body,
-        password: hashedPass,
-      });
+    const badge = await badgeSchema.findOne({
+      badgeName: "Account Creation",
+    });
 
-      // Check if the user is a first-time user and add the "Account Creation" badge
-      const badge = await badgeSchema.findOne({
-        badgeName: "Account Creation",
-      });
-
-      if (badge && !newUser.badgesEarned.includes(badge._id)) {
-        newUser.badgesEarned.push(badge._id);
-      }
-
-      // Save the new user to the userSchema collection
-      const user = await newUser.save();
-
-      // Create a new badge for the user
-      const newBadge = new badgeSchema({
-        userId: req.userId,
-        badgeName: req.body.badgeName,
-        badgeDescription: req.body.badgeDescription,
-        badgeImg: req.body.badgeImg,
-        Etat: true,
-      });
-      await newBadge.save();
-
-      // Return a success response with the new user data
-      return res.status(200).json({ msg: "user successfully created", user });
+    if (badge && !newUser.badgesEarned.includes(badge._id)) {
+      newUser.badgesEarned.push(badge._id);
     }
-    // If the role is "company"
-    else if (req.body.role === "company") {
-      // Create a new company with the hashed password
 
-      if (!req.body.firstname || !req.body.lastname) {
-        return res.status(400).send({
-          error: {
-            msg: "First name and last name are required for company sign up",
-          },
-        });
-      }
+    const user = await newUser.save();
 
-      const newCompany = new companySchema({
-        ...req.body,
-        password: hashedPass,
-      });
+    const newBadge = new badgeSchema({
+      userId: req.userId,
+      badgeName: req.body.badgeName,
+      badgeDescription: req.body.badgeDescription,
+      badgeImg: req.body.badgeImg,
+      Etat: true,
+    });
+    await newBadge.save();
 
-      // Save the new company to the companySchema collection
-      // const company = await newCompany.save();
-
-      // Check if the company is a first-time user and add the "Account Creation" badge
-      const badge = await badgeSchema.findOne({
-        badgeName: "Account Creation",
-      });
-      if (badge && !newCompany.badgesEarned.includes(badge._id)) {
-        newCompany.badgesEarned.push(badge._id);
-      }
-
-      await newCompany.save();
-      // Return a success response with the new company data
-      return res
-        .status(200)
-        .json({ msg: "Company successfully created", newCompany });
-    }
+    return res.status(200).json({ msg: "user successfully created", user });
   } catch (error) {
-    // Log any errors that occur and return an error response with the error data
-    console.log(error);
     return res.status(500).json(error);
   }
 };
