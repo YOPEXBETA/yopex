@@ -20,13 +20,23 @@ const UserSchema = new mongoose.Schema(
     score: { type: Number, default: 0 },
     gender: {
       type: String,
-      enum: ["Male", "Female", "Other", ""],
+      enum: ["Male", "Female", "Other"],
     },
+    role: {
+      type: String,
+      enum: ["user", "admin", "moderator"],
+      default: "user",
+    },
+    resetToken: { type: String, default: undefined },
+    isVerified: { type: Boolean, default: false },
+    status: { type: String, default: "active" },
     balance: { type: Number, default: 0.0 },
     yearsRegistered: { type: Number, default: 0 },
     challengesDone: { type: Number, default: 0 },
     challengesWon: { type: Number, default: 0 },
     reviews: { type: Number, default: 0 },
+    viewedProfile: { type: Number },
+    impressions: { type: Number },
     phoneNumber: {
       type: String,
       maxLength: 14,
@@ -49,16 +59,6 @@ const UserSchema = new mongoose.Schema(
         },
       ],
     },
-    viewedProfile: { type: Number },
-    impressions: { type: Number },
-    role: {
-      type: String,
-      enum: ["user", "admin", "moderator"],
-      default: "user",
-    },
-    resetToken: { type: String, default: undefined }, //need it for forget password(verification)
-    isVerified: { type: Boolean, default: false },
-    status: { type: String, default: "active" },
 
     skills: {
       type: [
@@ -143,7 +143,7 @@ const UserSchema = new mongoose.Schema(
       ],
       default: [],
     },
-    jobs: [{ type: mongoose.Types.ObjectId, ref: "Job", required: true }],
+    jobs: [{ type: mongoose.Types.ObjectId, ref: "Job" }],
     notifications: [
       {
         type: mongoose.Schema.Types.ObjectId,

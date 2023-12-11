@@ -48,6 +48,8 @@ const UserProfileCard = () => {
     return <LoadingSpinner />;
   }
 
+  console.log(userProfile);
+
   if (userProfile)
     return (
       <Card>
@@ -164,7 +166,7 @@ const UserProfileCard = () => {
               {userProfile?.skills?.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
                   {userProfile.skills.map((skill, index) => (
-                    <Tag key={index}>{skill?.value}</Tag>
+                    <Tag key={index}>{skill?.name}</Tag>
                   ))}
                 </div>
               ) : (

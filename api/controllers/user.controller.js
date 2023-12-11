@@ -15,7 +15,7 @@ const editProfile = async (req, res) => {
   try {
     const { password, oldPassword, ...updateFields } = req.body;
 
-    /*if (updateFields.password) {
+    if (updateFields.password) {
       const user = await userSchema.findById(req.userId);
       const isOldPasswordValid = await bcrypt.compare(
         req.body.oldPassword,

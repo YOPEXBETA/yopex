@@ -44,6 +44,7 @@ export default function Privacy() {
               <input
                 type="password"
                 placeholder="Enter old password"
+                required
                 className="w-full border border-gray-300 dark:bg-zinc-700 dark:text-gray-200 rounded-md px-3 py-2 mt-1 resize-none bg-white"
                 {...register("oldPassword")}
               />
@@ -57,6 +58,7 @@ export default function Privacy() {
                 placeholder="New Password"
                 className="w-full border border-gray-300 dark:bg-zinc-700 dark:text-gray-200 rounded-md px-3 py-2 mt-1 resize-none bg-white"
                 type="password"
+                required
                 {...register("password")}
               />
             </div>
@@ -66,6 +68,7 @@ export default function Privacy() {
             <input
               type="password"
               placeholder="ReType Password"
+              required
               className="w-full border border-gray-300 dark:bg-zinc-700 dark:text-gray-200 rounded-md px-3 py-2 mt-1 resize-none bg-white"
               {...register("password2")}
             />
