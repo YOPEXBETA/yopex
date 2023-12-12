@@ -13,28 +13,39 @@ const { uploadFileToFirebase } = require("./firebase.controllers");
 
 const editProfile = async (req, res) => {
   try {
-    const { password, oldPassword, ...updateFields } = req.body;
+    const {
+      role,
+      score,
+      balance,
+      email,
+      historyPayment,
+      isVerified,
+      yearsRegistered,
+      badgesEarned,
+      reviews,
+      posts,
+      status,
+      ...updateFields
+    } = req.body;
 
-    if (updateFields.password) {
-      const user = await userSchema.findById(req.userId);
-      const isOldPasswordValid = await bcrypt.compare(
-        req.body.oldPassword,
-        user.password
+    const updatedUser = await userSchema
+      .findByIdAndUpdate(req.userId, updateFields, { new: true })
+      .select(
+        "firstname lastname email picturePath score country occupation skills"
       );
 
-      if (!isOldPasswordValid) {
-        return res
-          .status(400)
-          .json({ error: "Please verify your old password !" });
-      }
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+};
 
-      const salt = await bcrypt.genSalt(10);
-      const hashedPass = await bcrypt.hash(updateFields.password, salt);
-      updateFields.password = hashedPass;
-    }
-
-    /*if (Array.isArray(updateFields.socialMediaLinks)) {
-      const validLinks = updateFields.socialMediaLinks.map((link) => {
+const updateSocialMediaLink = async (req,res) => {
+  let { socialmedialinks } = req.body;
+  try {
+    if (socialmedialinks) {
+      const validLinks = socialmedialinks.map((link) => {
         if (
           !["instagram", "github", "linkedin", "behance", "dribbble"].includes(
             link.platform
@@ -74,25 +85,44 @@ const editProfile = async (req, res) => {
         }
         return link;
       });
-
       if (validLinks.some((link) => link.error)) {
         return res.status(400).json(validLinks.filter((link) => link.error));
       }
 
-      updateFields.socialMediaLinks = validLinks;
+      socialmedialinks = validLinks;
+    
+    const user = await userSchema.findById(req.userId);
+    user.socialMediaLinks = validLinks;
+    
+    user.save();
+    return res.status(200).json(user);
     }
-    */
-
-    const updatedUser = await userSchema
-      .findByIdAndUpdate(req.userId, updateFields, { new: true })
-      .select(
-        "firstname lastname email picturePath score country occupation skills"
-      );
-
-    return res.status(200).json(updatedUser);
-  } catch (error) {
+    res.status(400).json({ error: "Invalid social media links" });
+  } catch (error) { 
     console.log(error);
     return res.status(500).json(error);
+  }
+}
+
+
+const updatepassword =  async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    console.log(req.body);
+    const user = await userSchema.findById(req.userId);
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    user.password = hashedPassword;
+    await user.save();
+    return res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.log("mmm",error);
+
+    return res.status(400).json({ message: "Invalid credentials" });
   }
 };
 
@@ -725,4 +755,6 @@ module.exports = {
   seeNotification,
   getStatistic,
   uploadFile,
+  updatepassword,
+  updateSocialMediaLink
 };

@@ -29,6 +29,8 @@ const {
   seeNotification,
   getStatistic,
   uploadFile,
+  updatepassword,
+  updateSocialMediaLink,
 } = require("../controllers/user.controller");
 
 const validate = require("../middlewares/SchemaValidation.middleware");
@@ -49,7 +51,9 @@ const {
 } = require("../middlewares/authenticateToken.middleware");
 const { uploadFileToFirebase } = require("../controllers/firebase.controllers");
 
+userRouter.put("/updatepassword", authenticateToken, updatepassword);
 userRouter.put("/users/edit/", authenticateToken, editProfile);
+userRouter.put("/users/edit/socialMedia", authenticateToken, updateSocialMediaLink);
 userRouter.get("/me", authenticateToken, getCurrentUser); //seach users
 userRouter.get("/users", authenticateToken, SearchUsers); //seach users
 userRouter.get("/allusers", authenticateToken, getUsers); //seach users
