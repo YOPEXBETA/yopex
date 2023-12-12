@@ -47,21 +47,21 @@ const addJob = async (req, res, next) => {
 };
 
 const getAllJobs = async (req, res) => {
-  const q = req.query;
-  const filters = {
-    ...(q.search && { title: { $regex: q.search, $options: "i" } }),
-    ...(q.jobType && { jobType: q.jobType }),
-    ...(q.offerType && { offerType: q.offerType }),
-    ...(q.skills && {
-      skills: {
-        $in: (await Skill.find({ name: { $in: q.skills.split(",") } })).map(
-          (skill) => skill._id
-        ),
-      },
-    }),
-  };
-
   try {
+    const q = req.query;
+    const filters = {
+      ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+      ...(q.jobType && { jobType: q.jobType }),
+      ...(q.offerType && { offerType: q.offerType }),
+      ...(q.skills && {
+        skills: {
+          $in: (await Skill.find({ name: { $in: q.skills.split(",") } })).map(
+            (skill) => skill._id
+          ),
+        },
+      }),
+    };
+
     const jobs = await Job.find(filters)
       .select("-acceptedAppliers")
       .populate("company", "companyName companyLogo")

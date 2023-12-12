@@ -8,9 +8,6 @@ const Index = () => {
   const [selectedJobType, setSelectedJobType] = useState([]);
   const [selectedOfferType, setSelectedOfferType] = useState([]);
 
-  useEffect(() => {
-    console.log("Selected Skill:", selectedSkill);
-  }, [selectedSkill]);
   return (
     <div className="flex flex-col gap-10">
       <JobSearchFilter

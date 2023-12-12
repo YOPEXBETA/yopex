@@ -26,7 +26,6 @@ export const useJobs = (searchQuery, skills, jobType, offerType) => {
       }
 
       const { data } = await axios.get(`${url}/job/all?${query}`);
-      console.log("Complete Query:", `${url}/job/all?${query}`);
 
       return data;
     },

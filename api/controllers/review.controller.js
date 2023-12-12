@@ -10,7 +10,7 @@ const createReview = async (req, res) => {
       .status(400)
       .json({ message: "Star value must be between 1 and 5" });
   }
-  
+
   const newReview = new reviewModel({
     companyId: req.body.companyId,
     userId: req.body.userId,
@@ -18,19 +18,14 @@ const createReview = async (req, res) => {
     star: req.body.star,
     challengeId: req.body.challengeId,
   });
-  
 
   try {
-
     const savedReview = await newReview.save();
     console.log(newReview);
-    
+
     const user = await userModel.findById(req.body.userId);
-    user.score = user.score + (req.body.star*10);
+    user.score = user.score + req.body.star * 10;
     user.save();
-    
-
-
 
     await res.status(200).json(savedReview);
   } catch (error) {
@@ -45,7 +40,7 @@ const getReviews = async (req, res) => {
         userId: new ObjectId(req.params.id),
       })
       .populate({ path: "companyId", model: "Company" })
-      .populate({ path: "challengeId", model: "Challenge"});
+      .populate({ path: "challengeId", model: "Challenge" });
 
     console.log(new ObjectId(req.params.id));
     res.status(200).json(reviews);
@@ -82,18 +77,17 @@ const deleteReview = async (req, res) => {
 
 const getReviewsByChallengeUser = async (req, res) => {
   try {
-    const review = await reviewModel
-      .findOne({
-        challengeId: new ObjectId(req.params.id),
-        userId: new ObjectId(req.userId),
-      });
+    const review = await reviewModel.findOne({
+      challengeId: new ObjectId(req.params.id),
+      userId: new ObjectId(req.userId),
+    });
     if (review) res.status(200).json(review);
     else res.status(404).json({ message: "Review not found" });
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
   }
-}
+};
 module.exports = {
   createReview,
   getReviews,

@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCategories } from "../../hooks/react-query/useCategories";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useJobTypes, useOfferTypes } from "../../hooks/react-query/useJobs";
+import SearchIcon from "../icons/SearchIcon";
+import LoadingSpinner from "../LoadingSpinner";
 
 const JobFilterModal = ({
   open,
   handleClose,
-  setSkillQuery,
   selectedSkill,
+  setSkillQuery,
   selectedJobType,
   setSelectedJobType,
   selectedOfferType,
@@ -15,7 +17,8 @@ const JobFilterModal = ({
   selectedTab,
   handleTabClick,
 }) => {
-  const { data: skills } = useSkills();
+  const [skillSearchQuery, setSkillSearchQuery] = useState("");
+  const { data: skills, isLoading } = useSkills(skillSearchQuery);
   const { data: JobTypes } = useJobTypes();
   const { data: OfferTypes } = useOfferTypes();
 
@@ -23,13 +26,9 @@ const JobFilterModal = ({
   const OfferTypeEnum = OfferTypes?.map((OfferType) => OfferType?.name);
 
   const handleCheckboxChange = (skillName) => {
-    console.log("Selected Skill Before:", selectedSkill);
-
     const updatedSkill = selectedSkill.includes(skillName)
       ? selectedSkill.filter((selected) => selected !== skillName)
       : [...selectedSkill, skillName];
-
-    console.log("Updated Skill:", updatedSkill);
 
     setSkillQuery(updatedSkill);
   };
@@ -181,11 +180,24 @@ const JobFilterModal = ({
             <div className="md:px-6 py-2  text-medium text-gray-500 dark:text-gray-400  rounded-lg w-full">
               {selectedTab === 0 && (
                 <>
-                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 bg-gray-50 p-6 rounded-lg">
+                  <div className="relative w-full">
+                    <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                      <SearchIcon />
+                    </div>
+                    <input
+                      type="text"
+                      onChange={(e) =>
+                        setSkillSearchQuery(e.currentTarget.value)
+                      }
+                      className="border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
+                      placeholder="Search for Job opportunities"
+                    />
+                  </div>
+                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 py-6 rounded-lg">
                     {skills?.map((skill) => (
                       <div
                         key={skill._id}
-                        className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm  hover:bg-gray-100 hover:text-gray-900"
                       >
                         <input
                           type="checkbox"
