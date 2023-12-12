@@ -16,11 +16,7 @@ const SocialMediaPostSchema = new mongoose.Schema(
       required: false,
     },
     companyName: { type: String, required: false },
-    title: {
-      type: String,
-      max: 250,
-      required: false,
-    },
+
     description: {
       type: String,
       max: 500,
@@ -54,12 +50,6 @@ const SocialMediaPostSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    skills: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Skill",
-      },
-    ],
     comments: {
       type: [
         {

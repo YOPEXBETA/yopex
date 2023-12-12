@@ -50,18 +50,22 @@ const getAllJobs = async (req, res, next) => {
   const q = req.query;
   const filters = {
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
-    ...(q.skills && { RecommendedSkills: { $in: q.skills } }),
-    ...(q.categories && { category: { $in: q.categories } }),
+    ...(q.skills && { skill: { $in: q.skills } }),
     ...(q.jobType && { jobType: q.jobType }),
     ...(q.offerType && { offerType: q.offerType }),
   };
+  console.log("Received Skills:", filters);
+
   try {
     const jobs = await Job.find(filters)
       .select("-acceptedAppliers")
-      .populate("company", "companyName companyLogo");
+      .populate("company", "companyName companyLogo")
+      .populate("skills");
 
     return res.status(200).json(jobs);
   } catch (error) {
+    console.error("Error fetching jobs:", error);
+
     return res
       .status(500)
       .json({ message: "An error occurred while fetching jobs." });
@@ -69,16 +73,8 @@ const getAllJobs = async (req, res, next) => {
 };
 
 const updateJob = async (req, res, next) => {
-  const {
-    title,
-    description,
-    salary,
-    category,
-    RecommendedSkills,
-    job_type,
-    offer_type,
-    paid,
-  } = req.body;
+  const { title, description, salary, skills, job_type, offer_type, paid } =
+    req.body;
   const jobId = req.params.id;
   let job;
   try {
@@ -86,15 +82,17 @@ const updateJob = async (req, res, next) => {
       title,
       description,
       salary,
-      category,
-      RecommendedSkills,
+      skills,
       job_type,
       offer_type,
       paid,
+      skills,
     });
     res.status(200).json({ job });
   } catch (err) {
-    return console.log(err);
+    res
+      .status(500)
+      .json({ error: `Failed to update job offers: ${error.message}` });
   }
 };
 
@@ -110,10 +108,9 @@ const geJobById = async (req, res, next) => {
     }
 
     // Find all job offers related to the company and populate the 'company' field
-    const jobOffers = await Job.find({ company: companyId }).populate(
-      "company",
-      "companyName companyLogo _id"
-    );
+    const jobOffers = await Job.find({ company: companyId })
+      .populate("company", "companyName companyLogo _id")
+      .populate("skills");
 
     res.status(200).json(jobOffers);
   } catch (error) {

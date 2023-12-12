@@ -10,15 +10,13 @@ import {
 import { useUserById } from "../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 
-import { useCategories } from "../../hooks/react-query/useCategories";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { Link } from "react-router-dom";
 import Card from "../Cards";
 import Editor from "../Editor";
 
 const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
-  const { data: RecommendedSkills } = useSkills();
-  const { data: categories } = useCategories();
+  const { data: skills } = useSkills();
   const { data: JobTypes } = useJobTypes();
   const { data: OfferTypes } = useOfferTypes();
   const [content, setContent] = useState("");
@@ -32,8 +30,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
   } = useForm({
     defaultValues: {
       description: "",
-      category: [],
-      RecommendedSkills: [],
+      skills: [],
     },
   });
   const { user } = useSelector((state) => state.auth);
@@ -49,9 +46,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
       ...JobData,
       description: content,
       category: JobData?.category?.map((category) => category?.value),
-      RecommendedSkills: JobData?.RecommendedSkills?.map(
-        (skill) => skill?.value
-      ),
+      skills: JobData?.skills.map((skill) => skill.value),
     };
 
     mutate({ companyId, JobData: modifiedJobData });
@@ -128,15 +123,10 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
           </div>
 
           {/* Render skills options */}
+
           <div className="flex-1">
-            <label
-              htmlFor="selectSkills"
-              className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
-            >
-              Select Skills
-            </label>
             <Controller
-              name="RecommendedSkills"
+              name="skills"
               control={control}
               render={({ field: { onChange, value } }) => (
                 <div className="w-full dark:bg-zinc-700 mt-2">
@@ -147,10 +137,10 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
                     required={true}
                     id="tags-outlined"
                     options={
-                      RecommendedSkills
-                        ? RecommendedSkills?.map((skill) => ({
+                      skills
+                        ? skills?.map((skill) => ({
                             label: skill?.name,
-                            value: skill.name,
+                            value: skill,
                           }))
                         : []
                     }
@@ -162,6 +152,7 @@ const CreateJobOfferForm = ({ selectedOption, handleCardClick }) => {
               )}
             />
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="jobDescription"

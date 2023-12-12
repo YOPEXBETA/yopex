@@ -110,32 +110,7 @@ export const EditPostModal = ({ open, handleClose, post }) => {
                     {...register("description", { required: false })}
                     placeholder="What's on your mind?"
                   />
-                  <Controller
-                    name="categories"
-                    control={control}
-                    render={({ field: { onChange, value } }) => (
-                      <div className="w-full dark:bg-zinc-700 text-left">
-                        <Select
-                          isMulti
-                          className="my-react-select-container"
-                          classNamePrefix="my-react-select"
-                          options={
-                            categories
-                              ? categories?.map((category) => ({
-                                  label: category?.name,
-                                  value: category,
-                                }))
-                              : []
-                          }
-                          onChange={(selectedOptions) =>
-                            onChange(selectedOptions)
-                          }
-                          value={value}
-                          placeholder="Select Categories"
-                        />
-                      </div>
-                    )}
-                  />
+
                   {uploadedFile && (
                     <div className="mb-4">
                       {fileUploadMutation.isLoading ? (

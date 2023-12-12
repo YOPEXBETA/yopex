@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaCalendarAlt, FaUsers } from "react-icons/fa";
+import Tag from "../../tags/Index";
 
 const JobOfferModal = ({ open, handleClose, job }) => {
   // Global states |  @redux/toolkit
@@ -104,7 +105,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   <div className="px-8">
                     <div className="flex flex-col">
                       <p className="text-lg font-semibold dark:text-gray-200 mb-4">
-                        Job Description
+                        Description
                       </p>
                       <div
                         className="text-md dark:text-white mb-4"
@@ -118,14 +119,10 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                       <p className="text-lg font-semibold dark:text-gray-200 mb-4">
                         Skills
                       </p>
+
                       <div className="flex flex-wrap gap-2">
-                        {job?.RecommendedSkills?.map((skill, index) => (
-                          <span
-                            key={index}
-                            className="px-2 py-1 bg-white border rounded-full"
-                          >
-                            {skill}
-                          </span>
+                        {job?.skills?.map((skill, index) => (
+                          <Tag key={index}>{skill?.name}</Tag>
                         ))}
                       </div>
                     </div>

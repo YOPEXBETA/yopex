@@ -6,9 +6,7 @@ import { useJobTypes, useOfferTypes } from "../../hooks/react-query/useJobs";
 const JobFilterModal = ({
   open,
   handleClose,
-  setCategoryQuery,
   setSkillQuery,
-  selectedCategory,
   selectedSkill,
   selectedJobType,
   setSelectedJobType,
@@ -21,14 +19,17 @@ const JobFilterModal = ({
   const { data: JobTypes } = useJobTypes();
   const { data: OfferTypes } = useOfferTypes();
 
-  const itSkills = skills?.map((skill) => skill?.name);
   const JobTypeEnum = JobTypes?.map((JobType) => JobType?.name);
   const OfferTypeEnum = OfferTypes?.map((OfferType) => OfferType?.name);
 
   const handleCheckboxChange = (skillName) => {
+    console.log("Selected Skill Before:", selectedSkill);
+
     const updatedSkill = selectedSkill.includes(skillName)
-      ? selectedSkill?.filter((selected) => selected !== skillName)
+      ? selectedSkill.filter((selected) => selected !== skillName)
       : [...selectedSkill, skillName];
+
+    console.log("Updated Skill:", updatedSkill);
 
     setSkillQuery(updatedSkill);
   };
@@ -181,23 +182,23 @@ const JobFilterModal = ({
               {selectedTab === 0 && (
                 <>
                   <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 bg-gray-50 p-6 rounded-lg">
-                    {itSkills?.map((skillName) => (
+                    {skills?.map((skill) => (
                       <div
-                        key={skillName}
+                        key={skill._id}
                         className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       >
                         <input
                           type="checkbox"
                           className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                          value={skillName}
-                          checked={selectedSkill.includes(skillName)}
-                          onChange={() => handleCheckboxChange(skillName)}
+                          value={skill.name}
+                          checked={selectedSkill.includes(skill.name)}
+                          onChange={() => handleCheckboxChange(skill.name)}
                         />
                         <label
                           htmlFor="green-checkbox"
                           className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                          {skillName}
+                          {skill.name}
                         </label>
                       </div>
                     ))}

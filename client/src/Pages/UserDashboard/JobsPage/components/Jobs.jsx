@@ -6,7 +6,6 @@ import WorkCard from "../../../../Components/Cards/WorkCard";
 
 const Jobs = ({
   searchQuery,
-  selectedCategory,
   selectedSkill,
   selectedJobType,
   selectedOfferType,
@@ -21,7 +20,6 @@ const Jobs = ({
   const { data: jobs, isLoading } = useJobs(
     searchQuery,
     selectedSkill,
-    selectedCategory,
     selectedJobType,
     selectedOfferType
   );

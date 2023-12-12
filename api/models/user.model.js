@@ -20,7 +20,8 @@ const UserSchema = new mongoose.Schema(
     score: { type: Number, default: 0 },
     gender: {
       type: String,
-      enum: ["Male", "Female", "Other"],
+      enum: ["Male", "Female", "Other", ""],
+      default: "",
     },
     role: {
       type: String,

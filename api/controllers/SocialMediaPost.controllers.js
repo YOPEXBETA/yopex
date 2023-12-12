@@ -35,11 +35,8 @@ const CreatePost = async (req, res) => {
       companyName: !isUser ? owner.companyName : undefined,
       userPicturePath:
         owner.picturePath != undefined ? owner.picturePath : owner.companyLogo,
-      title: req.body.title,
       description: req.body.description,
       postPicturePath: req.body.postPicturePath,
-      skills: req.body.skills,
-      categories: req.body.categories,
     });
     savedpost = await newPost.save();
 
@@ -274,7 +271,7 @@ const getpostById = async (req, res) => {
   const postId = req.params.postId; // Assuming you're passing the challenge ID as a URL parameter
 
   try {
-    const post = await Post.findById(postId).populate("skills");
+    const post = await Post.findById(postId);
 
     return res.status(200).json(post);
   } catch (err) {
