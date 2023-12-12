@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../models/user.model");
 const Job = require("../models/job.model");
 const Company = require("../models/company.model");
-
+const Skill = require("../models/skill.model");
 const { sendEmail } = require("../middlewares/mail.middleware");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
@@ -46,15 +46,20 @@ const addJob = async (req, res, next) => {
   }
 };
 
-const getAllJobs = async (req, res, next) => {
+const getAllJobs = async (req, res) => {
   const q = req.query;
   const filters = {
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
-    ...(q.skills && { skill: { $in: q.skills } }),
     ...(q.jobType && { jobType: q.jobType }),
     ...(q.offerType && { offerType: q.offerType }),
+    ...(q.skills && {
+      skills: {
+        $in: (await Skill.find({ name: { $in: q.skills.split(",") } })).map(
+          (skill) => skill._id
+        ),
+      },
+    }),
   };
-  console.log("Received Skills:", filters);
 
   try {
     const jobs = await Job.find(filters)

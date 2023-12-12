@@ -36,15 +36,13 @@ const JobSchema = new mongoose.Schema(
       ref: "Company",
       required: true,
     },
-    skills: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Skill",
-        },
-      ],
-      default: [],
-    },
+
+    skills: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skill",
+      },
+    ],
     appliers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     acceptedAppliers: [
       {
