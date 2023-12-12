@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { useEditJob } from "../../../hooks/react-query/useJobs";
 import { Controller, useForm } from "react-hook-form";
-import { Autocomplete, TextField } from "@mui/material";
+import Select from "react-select";
 import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../hooks/react-query/useSkills";
 
 export const EditJobModal = ({ open, handleClose, job }) => {
   const { mutate } = useEditJob(job._id);
 
-  const { data: Skills } = useSkills();
-  const itSkills = Skills?.map((skill) => skill.name);
+  const { data: skills } = useSkills();
   const { data: categorys } = useCategories();
   const itCategory = categorys?.map((category) => category.name);
 
@@ -18,13 +17,11 @@ export const EditJobModal = ({ open, handleClose, job }) => {
       title: job.title,
       description: job.description,
       salary: job.salary,
-      category: job.category,
-      RecommendedSkills: job.RecommendedSkills,
+      skills: job.skills,
     },
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     mutate({
       title: data.title,
       description: data.description,
@@ -115,59 +112,38 @@ export const EditJobModal = ({ open, handleClose, job }) => {
                   multiline
                   rows={4}
                 />
-                <Controller
-                  control={control}
-                  name="category"
-                  defaultValue={"Any"}
-                  render={({ field }) =>
-                    itCategory && (
-                      <Autocomplete
-                        multiple
-                        id="tags-outlined"
-                        options={itCategory}
-                        getOptionLabel={(option) => option}
-                        value={field.value}
-                        onBlur={field.onBlur}
-                        onChange={(e, value) => setValue("category", value)}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            variant="outlined"
-                            placeholder="Update Categories"
-                          />
-                        )}
-                      />
-                    )
-                  }
-                />
-                <Controller
-                  className="mt-2"
-                  control={control}
-                  name="RecommendedSkills"
-                  defaultValue={"Any"}
-                  render={({ field }) =>
-                    itSkills && (
-                      <Autocomplete
-                        multiple
-                        id="tags-outlined"
-                        options={itSkills}
-                        getOptionLabel={(option) => option}
-                        value={field.value}
-                        onBlur={field.onBlur}
-                        onChange={(e, value) =>
-                          setValue("RecommendedSkills", value)
-                        }
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            variant="outlined"
-                            placeholder="Update Recommanded Skills"
-                          />
-                        )}
-                      />
-                    )
-                  }
-                />
+
+                <div className="flex-1">
+                  <Controller
+                    name="skills"
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <div className="w-full dark:bg-zinc-700 mt-2">
+                        <Select
+                          isMulti
+                          className="my-react-select-container"
+                          classNamePrefix="my-react-select"
+                          required={true}
+                          id="tags-outlined"
+                          options={
+                            skills
+                              ? skills?.map((skill) => ({
+                                  label: skill?.name,
+                                  value: skill,
+                                }))
+                              : []
+                          }
+                          onChange={(selectedOptions) =>
+                            onChange(selectedOptions)
+                          }
+                          value={value}
+                          placeholder="Select Skills"
+                        />
+                      </div>
+                    )}
+                  />
+                </div>
+
                 <div className="flex justify-between mt-4">
                   <button
                     className=" px-6 py-2 text-white w-full rounded-md border-2 bg-green-500 hover:bg-green-600"

@@ -14,14 +14,7 @@ const JobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    category: {
-      type: Array,
-      default: [],
-    },
-    RecommendedSkills: {
-      type: Array,
-      default: [],
-    },
+
     image: {
       type: String,
       required: false,
@@ -43,6 +36,13 @@ const JobSchema = new mongoose.Schema(
       ref: "Company",
       required: true,
     },
+
+    skills: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skill",
+      },
+    ],
     appliers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     acceptedAppliers: [
       {

@@ -6,26 +6,15 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-export const useJobs = (
-  searchQuery,
-  skills,
-  categories,
-  jobType,
-  offerType
-) => {
+export const useJobs = (searchQuery, skills, jobType, offerType) => {
   return useQuery({
-    queryKey: ["jobs", searchQuery, skills, categories, jobType, offerType],
+    queryKey: ["jobs", searchQuery, skills, jobType, offerType],
     queryFn: async () => {
       let query = "";
       if (searchQuery) query += `&search=${searchQuery}`;
 
       if (skills && skills.length > 0) {
-        query += skills.map((skill) => `&skills=${skill}`).join(""); // Use "|" as OR operator
-      }
-      if (categories && categories.length > 0) {
-        query += categories
-          .map((category) => `&categories=${category}`)
-          .join(""); // Use "|" as OR operator
+        query += skills.map((skill) => `&skills=${skill}`).join("");
       }
 
       if (jobType) {

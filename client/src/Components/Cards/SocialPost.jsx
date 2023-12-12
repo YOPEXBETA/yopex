@@ -109,7 +109,7 @@ const SocialPostCard = ({
         )}
       </div>
       <div className="col-span-1 md:col-span-1 px-4">
-        {type === "profile" || "feed" ? null : (
+        {type === "profile" ? null : (
           <div className="mb-4">
             <div
               className="text-md dark:text-white"
@@ -134,16 +134,14 @@ const SocialPostCard = ({
                       width={width}
                       openModal={openModal}
                     />
-                    <Link to={`/postDetails/${post._id}`}>
-                      <div className="invisible group-hover:visible absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-                        <p
-                          className="text-white cursor-pointer"
-                          //onClick={() => openModal()}
-                        >
-                          Explore post details
-                        </p>
-                      </div>
-                    </Link>
+                    <div className="invisible group-hover:visible absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                      <p
+                        className="text-white cursor-pointer"
+                        onClick={() => openModal()}
+                      >
+                        Explore post details
+                      </p>
+                    </div>
                   </div>
                 ))}
             </div>

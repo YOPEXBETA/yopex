@@ -10,7 +10,6 @@ const WorkCard = ({ job, extra }) => {
   const { user } = useSelector((state) => state.auth);
   const handleClose = () => setIsOpen(false);
 
-  console.log(job);
   return (
     <Card>
       <div

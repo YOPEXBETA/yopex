@@ -4,11 +4,8 @@ const companyModel = require("./company.model");
 
 const ChallengeSchema = new mongoose.Schema(
   {
-    nbruser:{ type: Number, default: 10 },
-    company: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Company",
-    },
+    nbruser: { type: Number, default: 10 },
+
     title: { type: String, required: true },
     description: { type: String, required: true },
     totalStars: { type: Number, default: 0 },
@@ -17,7 +14,6 @@ const ChallengeSchema = new mongoose.Schema(
       type: Array,
 
       default: [],
-
     },
     RecommendedSkills: {
       type: Array,
@@ -29,18 +25,21 @@ const ChallengeSchema = new mongoose.Schema(
     deliveryTime: { type: Number },
     features: { type: [String] },
     deadline: { type: Date },
-
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
     winner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    paid:{type: Boolean, default: false},
+    paid: { type: Boolean, default: false },
     users: [
       {
-        user: {type: mongoose.Schema.Types.ObjectId,ref: "User",},
+        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         registrationDate: { type: Date, default: Date.now },
         submissionDate: { type: Date },
-      }
+      },
     ],
     submissions: {
       type: [
@@ -51,27 +50,29 @@ const ChallengeSchema = new mongoose.Schema(
       ],
       default: [],
     },
-    nbruser: {type: Number, default: 0},
+    nbruser: { type: Number, default: 0 },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
+ChallengeSchema.pre(
+  "findOneAndDelete",
+  { document: false, query: true },
+  async function (next) {
+    try {
+      console.log("Middleware executed");
 
-ChallengeSchema.pre('findOneAndDelete', { document: false, query: true }, async function (next) {
-  try {
-    console.log("Middleware executed");
-    
-    const query = this;
-    const challengeId = query._conditions._id;
+      const query = this;
+      const challengeId = query._conditions._id;
 
-    submissionModel.deleteMany({ challengeId: challengeId }).exec();
-    
+      submissionModel.deleteMany({ challengeId: challengeId }).exec();
 
-    next();
-  } catch (error) {
-    console.log("Middleware error");
-    next(error);
+      next();
+    } catch (error) {
+      console.log("Middleware error");
+      next(error);
+    }
   }
-});
+);
 
 module.exports = mongoose.model("Challenge", ChallengeSchema);

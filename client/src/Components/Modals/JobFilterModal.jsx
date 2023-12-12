@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCategories } from "../../hooks/react-query/useCategories";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useJobTypes, useOfferTypes } from "../../hooks/react-query/useJobs";
+import SearchIcon from "../icons/SearchIcon";
+import LoadingSpinner from "../LoadingSpinner";
 
 const JobFilterModal = ({
   open,
   handleClose,
-  setCategoryQuery,
-  setSkillQuery,
-  selectedCategory,
   selectedSkill,
+  setSkillQuery,
   selectedJobType,
   setSelectedJobType,
   selectedOfferType,
@@ -17,17 +17,17 @@ const JobFilterModal = ({
   selectedTab,
   handleTabClick,
 }) => {
-  const { data: skills } = useSkills();
+  const [skillSearchQuery, setSkillSearchQuery] = useState("");
+  const { data: skills, isLoading } = useSkills(skillSearchQuery);
   const { data: JobTypes } = useJobTypes();
   const { data: OfferTypes } = useOfferTypes();
 
-  const itSkills = skills?.map((skill) => skill?.name);
   const JobTypeEnum = JobTypes?.map((JobType) => JobType?.name);
   const OfferTypeEnum = OfferTypes?.map((OfferType) => OfferType?.name);
 
   const handleCheckboxChange = (skillName) => {
     const updatedSkill = selectedSkill.includes(skillName)
-      ? selectedSkill?.filter((selected) => selected !== skillName)
+      ? selectedSkill.filter((selected) => selected !== skillName)
       : [...selectedSkill, skillName];
 
     setSkillQuery(updatedSkill);
@@ -180,24 +180,37 @@ const JobFilterModal = ({
             <div className="md:px-6 py-2  text-medium text-gray-500 dark:text-gray-400  rounded-lg w-full">
               {selectedTab === 0 && (
                 <>
-                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 bg-gray-50 p-6 rounded-lg">
-                    {itSkills?.map((skillName) => (
+                  <div className="relative w-full">
+                    <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                      <SearchIcon />
+                    </div>
+                    <input
+                      type="text"
+                      onChange={(e) =>
+                        setSkillSearchQuery(e.currentTarget.value)
+                      }
+                      className="border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
+                      placeholder="Search for Job opportunities"
+                    />
+                  </div>
+                  <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 py-6 rounded-lg">
+                    {skills?.map((skill) => (
                       <div
-                        key={skillName}
-                        className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        key={skill._id}
+                        className="block px-4 dark:text-white whitespace-nowrap py-2 text-sm  hover:bg-gray-100 hover:text-gray-900"
                       >
                         <input
                           type="checkbox"
                           className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                          value={skillName}
-                          checked={selectedSkill.includes(skillName)}
-                          onChange={() => handleCheckboxChange(skillName)}
+                          value={skill.name}
+                          checked={selectedSkill.includes(skill.name)}
+                          onChange={() => handleCheckboxChange(skill.name)}
                         />
                         <label
                           htmlFor="green-checkbox"
                           className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                          {skillName}
+                          {skill.name}
                         </label>
                       </div>
                     ))}

@@ -5,9 +5,7 @@ import SearchIcon from "../../../../Components/icons/SearchIcon";
 
 const JobSearchFilter = ({
   setJobQuery,
-  setCategoryQuery,
   setSkillQuery,
-  selectedCategory,
   selectedSkill,
   selectedJobType,
   setSelectedJobType,
@@ -53,9 +51,7 @@ const JobSearchFilter = ({
       <JobFilterModal
         open={openPostModal}
         handleClose={toggleModal}
-        setCategoryQuery={setCategoryQuery}
         setSkillQuery={setSkillQuery}
-        selectedCategory={selectedCategory}
         selectedSkill={selectedSkill}
         selectedJobType={selectedJobType}
         setSelectedJobType={setSelectedJobType}
