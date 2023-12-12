@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { edit } from "../../../../../redux/auth/authSlice";
+import { useUpdatePassword } from "../../../../../hooks/react-query/useUsers";
 
 export default function Privacy() {
-  const dispatch = useDispatch();
+  const {mutate} = useUpdatePassword()
   const {
     register,
     handleSubmit,
@@ -14,12 +15,11 @@ export default function Privacy() {
 
   const onSubmit = (data) => {
     if (data.password !== data.password2) return;
-    return dispatch(
-      edit({
-        password: data.password,
-        oldPassword: data.oldPassword,
-      })
-    );
+    mutate({
+      newPassword: data.password,
+      oldPassword: data.oldPassword,
+    })
+    
   };
 
   return (

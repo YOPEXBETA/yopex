@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -10,6 +11,20 @@ export const useUsers = (page=1) => {
     return data;
   });
 };
+
+export const useUpdatePassword = ()=>{
+  return useMutation({
+    mutationFn: async (data) => {
+      await axios.put(`${url}/updatepassword`, data);
+    },
+    onError: (error) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: () => {
+      toast.success("Password updated successfully");
+    },
+  });
+}
 
 export const useAdminUsers = () => {
   return useQuery({

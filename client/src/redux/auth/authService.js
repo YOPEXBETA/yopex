@@ -60,4 +60,12 @@ const getcurrentuser = async () => {
   //
 };
 
-export const authService = { register, login, edit, getcurrentuser };
+const editProfileLinks = async (data) => {
+  const user = await axios.put(`${url}/users/edit/socialMedia`, data, {
+    withCredentials: false,
+  });
+  
+  return user.data;
+};
+
+export const authService = { register, login, edit, getcurrentuser,editProfileLinks };

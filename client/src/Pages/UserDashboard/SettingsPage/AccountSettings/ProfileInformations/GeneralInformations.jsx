@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import countries from "../../../../../countries.json";
 import { useSkills } from "../../../../../hooks/react-query/useSkills";
 import { useFileUpload } from "../../../../../hooks/react-query/useUsers";
-import { edit, reset } from "../../../../../redux/auth/authSlice";
+import { edit, reset,editProfileLinks } from "../../../../../redux/auth/authSlice";
 import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 import { format } from "date-fns";
 import SocialMediaLinks from "./components/SocialMediaLinks";
@@ -22,10 +22,8 @@ const GeneralInformations = () => {
     label: skill?.name,
     value: skill?._id,
   }));
-  console.log(formattedSkills, "formattedSkills");
-  console.log(user?.skills, "skills");
-
-  /*const [github, setGithub] = useState(
+  
+  const [github, setGithub] = useState(
     user?.socialMediaLinks?.find((link) => link.platform === "github")?.url ||
       ""
   );
@@ -44,13 +42,13 @@ const GeneralInformations = () => {
   const [instagram, setInstagram] = useState(
     user?.socialMediaLinks?.find((link) => link.platform === "instagram")
       ?.url || ""
-  );*/
-
-  const [showGithubInput, setShowGithubInput] = useState(false);
-  const [showLinkedinInput, setShowLinkedinInput] = useState(false);
-  const [showBehanceInput, setShowBehanceInput] = useState(false);
-  const [showDribbbleInput, setShowDribbbleInput] = useState(false);
-  const [showInstagramInput, setShowInstagramInput] = useState(false);
+  );
+    console.log(user);
+  const [showGithubInput, setShowGithubInput] = useState(github!="");
+  const [showLinkedinInput, setShowLinkedinInput] = useState(linkedin!="");
+  const [showBehanceInput, setShowBehanceInput] = useState(behance!="");
+  const [showDribbbleInput, setShowDribbbleInput] = useState(dribbble!="");
+  const [showInstagramInput, setShowInstagramInput] = useState(instagram!="");
 
   useEffect(() => {
     dispatch(reset());
@@ -96,13 +94,7 @@ const GeneralInformations = () => {
           ...values,
           picturePath: data.data.downloadURL,
           skills: SkillsId,
-          /*socialMediaLinks: [
-            { platform: "github", url: github },
-            { platform: "linkedin", url: linkedin },
-            { platform: "behance", url: behance },
-            { platform: "dribbble", url: dribbble },
-            { platform: "instagram", url: instagram },
-          ],*/
+          
         })
       );
     }
@@ -111,16 +103,22 @@ const GeneralInformations = () => {
         ...values,
         skills: skills.map((skill) => skill.value),
 
-        /* socialMediaLinks: [
-          { platform: "github", url: github },
-          { platform: "linkedin", url: linkedin },
-          { platform: "behance", url: behance },
-          { platform: "dribbble", url: dribbble },
-          { platform: "instagram", url: instagram },
-        ],*/
       })
     );
   };
+
+  const editProfileLinksMutation = () =>{
+    dispatch(editProfileLinks({
+      socialmedialinks: [
+        { platform: "github", url: github },
+        { platform: "linkedin", url: linkedin },
+        { platform: "behance", url: behance },
+        { platform: "dribbble", url: dribbble },
+        { platform: "instagram", url: instagram },
+      ],
+    }))
+  }
+
 
   return (
     <div className="md:mt-0 mt-8">
@@ -342,13 +340,31 @@ const GeneralInformations = () => {
             />
           </div>
         </div>
-        <hr />
+        
+
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <button
+              className={`${
+                isSubmitting
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-green-500 dark:hover:bg-green-600 hover:bg-green-600"
+              } px-4 py-2 rounded-lg text-white w-40`}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting" : "Save"}
+            </button>
+          </div>
+        </div>
+      </form>
+      <hr />
         <div className="py-4">
           <div className="space-y-6">
             <p className="dark:text-white uppercase font-bold">
               social media links
             </p>
-            {/*
+            
             <SocialMediaLinks
               label="Github"
               showInput={showGithubInput}
@@ -388,26 +404,20 @@ const GeneralInformations = () => {
               setInputValue={setInstagram}
               toggleInput={() => setShowInstagramInput(!showInstagramInput)}
             />
-            */}
+            
           </div>
         </div>
-
         <div className="grid grid-cols-1">
           <div className="col-span-1">
             <button
-              className={`${
-                isSubmitting
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-green-500 dark:hover:bg-green-600 hover:bg-green-600"
-              } px-4 py-2 rounded-lg text-white w-40`}
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Submitting" : "Save"}
+              className={`${"bg-green-500 dark:hover:bg-green-600 hover:bg-green-600"} px-4 py-2 rounded-lg text-white w-40`}
+              type="button"
+              onClick={editProfileLinksMutation}
+              >
+                Save
             </button>
           </div>
         </div>
-      </form>
     </div>
   );
 };

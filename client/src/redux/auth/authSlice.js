@@ -49,6 +49,22 @@ export const getCurrentUser = createAsyncThunk("auth/current", async () => {
   }
 });
 
+export const editProfileLinks = createAsyncThunk(
+  "auth/editProfileLinks",
+  async (data) => {
+    try {
+      const response = await authService.editProfileLinks(data);
+      toast.success("user Profile updated successfully");
+      return response;
+    } catch (error) {
+      
+      toast.error("Error");
+      throw new Error(error?.response?.data?.error);
+    }
+  }
+);
+
+
 const initialState = {
   user: null,
   loading: false,
@@ -126,6 +142,20 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+    builder
+      .addCase(editProfileLinks.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(editProfileLinks.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.success = true;
+        state.loading = false;
+      })
+      .addCase(editProfileLinks.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
