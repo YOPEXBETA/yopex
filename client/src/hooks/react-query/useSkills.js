@@ -8,7 +8,11 @@ export const useSkills = (skillsearchQuery) => {
     queryKey: ["skills", skillsearchQuery],
     queryFn: async () => {
       let query = "";
-      if (skillsearchQuery) query += `&search=${skillsearchQuery}`;
+
+      if (skillsearchQuery) {
+        query += `&search=${skillsearchQuery}`;
+      }
+
       const { data } = await axios.get(`${url}/skill/getskills?${query}`);
 
       return data;
