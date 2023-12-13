@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./index";
 
 const UserInfoCard = ({ userProfile, extra }) => {
+  console.log(userProfile);
   return (
     <Card extra={`w-full h-full p-6 ${extra}`}>
       {/* Header */}
@@ -13,47 +14,34 @@ const UserInfoCard = ({ userProfile, extra }) => {
           {userProfile?.userDescription}
         </p>
       </div>
+
       {/* Cards */}
-      <div className="grid grid-cols-2 gap-4 px-2">
-        <div className="flex flex-col items-start justify-center rounded-2xl  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
-          <p className="text-sm text-gray-600">Education</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2">
+        <div className="flex flex-col items-start justify-center rounded-2xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
+          <p className="text-sm text-gray-600">Country</p>
           <p className="text-base font-medium text-zinc-700 dark:text-white">
-            Stanford University
+            {userProfile?.country || "N/A"}
           </p>
         </div>
 
-        <div className="flex flex-col justify-center rounded-2xl  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
-          <p className="text-sm text-gray-600">Languages</p>
-          <p className="text-base font-medium text-zinc-700 dark:text-white">
-            English, Spanish, Italian
-          </p>
-        </div>
-
-        <div className="flex flex-col items-start justify-center rounded-2xl  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
+        <div className="flex flex-col items-start justify-center rounded-2xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
           <p className="text-sm text-gray-600">Email</p>
           <p className="text-base font-medium text-zinc-700 dark:text-white">
             {userProfile?.email}
           </p>
         </div>
 
-        <div className="flex flex-col justify-center rounded-2xl  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
-          <p className="text-sm text-gray-600">Work History</p>
-          <p className="text-base font-medium text-zinc-700 dark:text-white">
-            English, Spanish, Italian
-          </p>
-        </div>
-
-        <div className="flex flex-col items-start justify-center rounded-2xl  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
+        <div className="flex flex-col items-start justify-center rounded-2xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
           <p className="text-sm text-gray-600">Website</p>
           <p className="text-base font-medium text-zinc-700 dark:text-white">
-            {userProfile?.websiteURL}
+            {userProfile?.websiteURL || "N/A"}
           </p>
         </div>
 
-        <div className="flex flex-col justify-center rounded-2xl  bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
+        <div className="flex flex-col justify-center rounded-2xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
           <p className="text-sm text-gray-600">Birthday</p>
           <p className="text-base font-medium text-zinc-700 dark:text-white">
-            20 July 1986
+            {userProfile?.birthDate || "N/A"}
           </p>
         </div>
       </div>
