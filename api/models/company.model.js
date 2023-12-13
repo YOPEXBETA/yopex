@@ -12,15 +12,21 @@ const companySchema = new mongoose.Schema(
     companyDescription: { type: String },
     companyLogo: { type: String },
     country: { type: String },
+    contactPhone: { type: String },
+    address: { type: String },
     picturePath: { type: String },
+    websiteURL: { type: String, required: false },
     companyDocument: { type: String },
-    websiteUrl: { type: String },
     verified: { type: Boolean, default: false },
     isDocumentSubmitted: { type: Boolean, default: false }, // Document submission status
-
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     jobs: [{ type: mongoose.Types.ObjectId, ref: "Job" }],
-
+    roles: [
+      {
+        role: { type: mongoose.Schema.Types.ObjectId, ref: "Role" },
+        users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+      },
+    ],
     challenges: {
       type: [
         {

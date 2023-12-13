@@ -1,6 +1,7 @@
 const userSchema = require("../models/user.model");
 const companySchema = require("../models/company.model");
 const challengeSchema = require("../models/Challenge.model");
+const roleSchema = require("../models/CompanyRoles.model");
 const bcrypt = require("bcryptjs");
 const Job = require("../models/job.model");
 
@@ -41,7 +42,7 @@ const editProfile = async (req, res) => {
   }
 };
 
-const updateSocialMediaLink = async (req,res) => {
+const updateSocialMediaLink = async (req, res) => {
   let { socialmedialinks } = req.body;
   try {
     if (socialmedialinks) {
@@ -90,22 +91,21 @@ const updateSocialMediaLink = async (req,res) => {
       }
 
       socialmedialinks = validLinks;
-    
-    const user = await userSchema.findById(req.userId);
-    user.socialMediaLinks = validLinks;
-    
-    user.save();
-    return res.status(200).json(user);
+
+      const user = await userSchema.findById(req.userId);
+      user.socialMediaLinks = validLinks;
+
+      user.save();
+      return res.status(200).json(user);
     }
     res.status(400).json({ error: "Invalid social media links" });
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
     return res.status(500).json(error);
   }
-}
+};
 
-
-const updatepassword =  async (req, res) => {
+const updatepassword = async (req, res) => {
   try {
     const { oldPassword, newPassword } = req.body;
     console.log(req.body);
@@ -120,7 +120,7 @@ const updatepassword =  async (req, res) => {
     await user.save();
     return res.status(200).json({ message: "Password updated successfully" });
   } catch (error) {
-    console.log("mmm",error);
+    console.log("mmm", error);
 
     return res.status(400).json({ message: "Invalid credentials" });
   }
@@ -635,9 +635,6 @@ const getUserNotifications = async (req, res) => {
 
 const CreateCompany = async (req, res) => {
   try {
-    const { companyName, companyDescription, companyLogo, companyDocument } =
-      req.body;
-
     const userId = req.userId;
 
     const user = await userSchema.findById(userId);
@@ -647,12 +644,14 @@ const CreateCompany = async (req, res) => {
     }
 
     const company = new companySchema({
-      companyName,
-      companyDescription,
-      companyLogo,
+      ...req.body,
       user: user._id,
-      companyDocument,
     });
+
+    const adminRole = await roleSchema.findOne({ name: "admin" });
+    if (adminRole) {
+      company.roles.push({ role: adminRole._id, users: [user._id] });
+    }
 
     await company.save();
 
@@ -756,5 +755,5 @@ module.exports = {
   getStatistic,
   uploadFile,
   updatepassword,
-  updateSocialMediaLink
+  updateSocialMediaLink,
 };
