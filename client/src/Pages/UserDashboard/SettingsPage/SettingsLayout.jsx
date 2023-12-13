@@ -3,6 +3,7 @@ import Billing from "./AccountSettings/Billing/Billing";
 import Privacy from "./AccountSettings/Privacy/Privacy";
 import VerticalSettingsTab from "./AccountSettings/SettingTabs/VerticalSettingsTab";
 import GeneralInformations from "./AccountSettings/ProfileInformations/GeneralInformations";
+import Links from "./AccountSettings/Links/Links";
 
 const SettingsLayout = () => {
   const [value, setValue] = useState(0);
@@ -26,12 +27,12 @@ const SettingsLayout = () => {
         )}
         {value === 1 && (
           <div className="col-span-12  lg:col-span-9 md:col-span-12">
-            <Privacy />
+            <Links />
           </div>
         )}
         {value === 2 && (
           <div className="col-span-12  lg:col-span-9 md:col-span-12">
-            <Billing />
+            <Privacy />
           </div>
         )}
       </div>

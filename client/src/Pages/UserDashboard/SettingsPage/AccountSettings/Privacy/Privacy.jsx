@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { edit } from "../../../../../redux/auth/authSlice";
 import { useUpdatePassword } from "../../../../../hooks/react-query/useUsers";
 
 export default function Privacy() {
-  const {mutate} = useUpdatePassword()
+  const { mutate } = useUpdatePassword();
   const {
     register,
     handleSubmit,
@@ -18,8 +18,7 @@ export default function Privacy() {
     mutate({
       newPassword: data.password,
       oldPassword: data.oldPassword,
-    })
-    
+    });
   };
 
   return (
@@ -72,7 +71,7 @@ export default function Privacy() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 my-4">
+        <div className="grid grid-cols-1 my-5">
           <div className="col-span-1">
             <button
               className={`${
