@@ -14,31 +14,31 @@ const HighlightSection = () => {
   }
   return (
     <div className="dark:bg-zinc-800">
-      <div class=" max-w-7xl mx-auto px-6 md:px-12 xl:px-6 pt-16 ">
-        <div class="py-8    border-y border-gray-100 dark:border-transparent sm:flex justify-between flex-wrap">
-          <div class="text-left w-full sm:w-1/2 md:w-1/4">
-            <h6 class="text-2xl font-semibold  dark:text-white">
+      <div className=" max-w-7xl mx-auto px-6 md:px-12 xl:px-6 pt-16 ">
+        <div className="py-8    border-y border-gray-100 dark:border-transparent sm:flex justify-between flex-wrap">
+          <div className="text-left w-full sm:w-1/2 md:w-1/4">
+            <h6 className="text-2xl font-semibold  dark:text-white">
               {data?.countusers}
             </h6>
-            <p class="mt-2 dark:text-white">Registered users</p>
+            <p className="mt-2 dark:text-white">Registered users</p>
           </div>
-          <div class="text-left w-full sm:w-1/2 md:w-1/4">
-            <h6 class="text-2xl font-semibold  dark:text-white">
+          <div className="text-left w-full sm:w-1/2 md:w-1/4">
+            <h6 className="text-2xl font-semibold  dark:text-white">
               {data?.countcompanies}
             </h6>
-            <p class="mt-2  dark:text-white">Registered companies</p>
+            <p className="mt-2  dark:text-white">Registered companies</p>
           </div>
-          <div class="text-left w-full sm:w-1/2 md:w-1/4">
-            <h6 class="text-2xl font-semibold  dark:text-white">
+          <div className="text-left w-full sm:w-1/2 md:w-1/4">
+            <h6 className="text-2xl font-semibold  dark:text-white">
               {data?.countjobs}
             </h6>
-            <p class="mt-2  dark:text-white">Posted Jobs</p>
+            <p className="mt-2  dark:text-white">Posted Jobs</p>
           </div>
-          <div class="text-left w-full sm:w-1/2 md:w-1/4">
-            <h6 class="text-2xl font-semibold  dark:text-white">
+          <div className="text-left w-full sm:w-1/2 md:w-1/4">
+            <h6 className="text-2xl font-semibold  dark:text-white">
               {data?.countchallenges}
             </h6>
-            <p class="mt-2  dark:text-white">Posted Challenges</p>
+            <p className="mt-2  dark:text-white">Posted Challenges</p>
           </div>
         </div>
       </div>
