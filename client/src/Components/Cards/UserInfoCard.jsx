@@ -10,8 +10,8 @@ const UserInfoCard = ({ userProfile, extra }) => {
         <h4 className="px-2 text-xl font-bold text-zinc-700 dark:text-white">
           General Information
         </h4>
-        <p className="mt-2 px-2 text-base text-gray-600">
-          {userProfile?.userDescription}
+        <p className="mt-2 px-2 text-base dark:text-white">
+          {userProfile?.userDescription || "N/A"}
         </p>
       </div>
 
