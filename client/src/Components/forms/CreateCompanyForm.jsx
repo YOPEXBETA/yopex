@@ -40,7 +40,7 @@ const CreateCompanyForm = ({ extra }) => {
       companyLogo: datalogo.data.downloadURL,
       companyDocument: documentPath,
       address: data.address,
-      contactPhone: data.contactPhone,
+      PhoneNumber: data.PhoneNumber,
       websiteURL: data.websiteURL,
       country: data.country,
     });
@@ -188,27 +188,6 @@ const CreateCompanyForm = ({ extra }) => {
                 )}
               />
             </div>
-            <div className="md:col-span-3">
-              <label for="address">Address / Street</label>
-              <input
-                type="text"
-                className="w-full h-10 p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                placeholder="Address"
-                {...register("address", { required: true })}
-              />
-            </div>
-
-            <div className="md:col-span-2">
-              <label for="city">City</label>
-              <input
-                type="text"
-                name="city"
-                id="city"
-                className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                value=""
-                placeholder=""
-              />
-            </div>
 
             <div className="md:col-span-2">
               <label for="country">Country / region</label>
@@ -226,63 +205,33 @@ const CreateCompanyForm = ({ extra }) => {
                 ))}
               </select>
             </div>
-
-            <div className="md:col-span-2">
-              <label for="state">State / province</label>
-              <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                <input
-                  name="state"
-                  id="state"
-                  placeholder="State"
-                  className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                  value=""
-                />
-                <button
-                  tabindex="-1"
-                  className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600"
-                >
-                  <svg
-                    className="w-4 h-4 mx-2 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-                <button
-                  tabindex="-1"
-                  for="show_more"
-                  className="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600"
-                >
-                  <svg
-                    className="w-4 h-4 mx-2 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="18 15 12 9 6 15"></polyline>
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div className="md:col-span-1">
-              <label for="zipcode">Zipcode</label>
+            <div className="md:col-span-3">
+              <label for="address">Address / Street</label>
               <input
                 type="text"
-                name="zipcode"
-                id="zipcode"
-                className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                placeholder=""
-                value=""
+                className="w-full h-10 p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                placeholder="Address"
+                {...register("address", { required: true })}
+              />
+            </div>
+
+            <div className="md:col-span-3">
+              <label for="zipcode">Website</label>
+              <input
+                type="text"
+                className="w-full p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                placeholder="Website"
+                {...register("websiteURL", { required: true })}
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label for="zipcode">Phone Number</label>
+              <input
+                type="text"
+                className="w-full p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                placeholder="Phone Number"
+                {...register("PhoneNumber", { required: false })}
               />
             </div>
 

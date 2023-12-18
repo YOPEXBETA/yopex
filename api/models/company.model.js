@@ -12,7 +12,7 @@ const companySchema = new mongoose.Schema(
     companyDescription: { type: String },
     companyLogo: { type: String },
     country: { type: String },
-    contactPhone: { type: String },
+    PhoneNumber: { type: String },
     address: { type: String },
     picturePath: { type: String },
     websiteURL: { type: String, required: false },
