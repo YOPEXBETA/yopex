@@ -31,7 +31,7 @@ const {
   uploadFile,
   updatepassword,
   updateSocialMediaLink,
-} = require("../controllers/user.controller");
+} = require("../controllers/user.controllers");
 
 const validate = require("../middlewares/SchemaValidation.middleware");
 
@@ -53,7 +53,11 @@ const { uploadFileToFirebase } = require("../controllers/firebase.controllers");
 
 userRouter.put("/updatepassword", authenticateToken, updatepassword);
 userRouter.put("/users/edit/", authenticateToken, editProfile);
-userRouter.put("/users/edit/socialMedia", authenticateToken, updateSocialMediaLink);
+userRouter.put(
+  "/users/edit/socialMedia",
+  authenticateToken,
+  updateSocialMediaLink
+);
 userRouter.get("/me", authenticateToken, getCurrentUser); //seach users
 userRouter.get("/users", authenticateToken, SearchUsers); //seach users
 userRouter.get("/allusers", authenticateToken, getUsers); //seach users
@@ -114,4 +118,3 @@ userRouter.get("/get/stat", getStatistic);
 userRouter.post("/upload", upload.single("file"), uploadFile);
 
 module.exports = userRouter;
-
