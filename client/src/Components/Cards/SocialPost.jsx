@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import CommentButton from "../shared/comments/CommentButton";
-
 import { useLikePost, useBookmarkPost } from "../../hooks/react-query/usePosts";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
-
+import { BsThreeDots } from "react-icons/bs";
+import CommentButton from "../shared/comments/CommentButton";
 import SocialPostImage from "../shared/PostImage/SocialPostImage";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import LoadingSpinner from "../LoadingSpinner";
 import PostMenuIcon from "../MenuIcons/PostMenuIcon";
 import Card from "./index";
+import Dropdown from "../dropdown";
+import DeletePostPopup from "../Popup/DeletePostPopup";
+import { EditPostModal } from "../shared/Modals/EditPostModal";
+import { useDeletePost } from "../../hooks/react-query/usePosts";
 
 const SocialPostCard = ({
   post,
@@ -24,6 +25,7 @@ const SocialPostCard = ({
   extra,
 }) => {
   const { user } = useSelector((state) => state.auth);
+  const { mutate } = useDeletePost();
   const [isliked, setIsLiked] = useState(user._id in post.likes);
 
   const { category } = useSelector((state) => state.global);
@@ -65,6 +67,30 @@ const SocialPostCard = ({
     return dots;
   };
 
+  const [openEdit, setOpenEdit] = useState(false);
+  const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+
+  const handleClickEdit = () => {
+    setOpenEdit(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
+
+  const handleDeleteClick = () => {
+    setConfirmationDialogOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    mutate(post._id);
+    setConfirmationDialogOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setConfirmationDialogOpen(false);
+  };
+
   return (
     <Card
       extra={`transition  cursor-pointer hover:scale-102 duration-500 ${extra}`}
@@ -102,11 +128,30 @@ const SocialPostCard = ({
             </Link>
           </div>
         </div>
-        {(post.userId === user._id || user.companies.includes(post.userId)) && (
-          <button className="py-6 pr-2 rounded-full">
-            <PostMenuIcon className="text-black" post={post} />
-          </button>
-        )}
+        <button
+          className="font-medium p-2 flex  rounded-full"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {(post.userId === user._id ||
+            user.companies.includes(post.userId)) && (
+            <Dropdown
+              button={
+                <p className="cursor-pointer py-6 pr-4">
+                  <BsThreeDots />
+                </p>
+              }
+              animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
+              children={
+                <PostMenuIcon
+                  post={post}
+                  handleClickEdit={handleClickEdit}
+                  handleDeleteClick={handleDeleteClick}
+                />
+              }
+              classNames={"py-2 top-8 right-4"}
+            />
+          )}
+        </button>
       </div>
       <div className="col-span-1 md:col-span-1 px-4">
         {type === "profile" ? null : (
@@ -254,6 +299,20 @@ const SocialPostCard = ({
           )}
         </div>
       </div>
+      {openEdit && (
+        <EditPostModal
+          open={openEdit}
+          handleClose={handleCloseEdit}
+          post={post}
+        />
+      )}
+
+      {confirmationDialogOpen && (
+        <DeletePostPopup
+          handleCancel={handleCancelDelete}
+          handleConfirm={handleConfirmDelete}
+        />
+      )}
     </Card>
   );
 };
