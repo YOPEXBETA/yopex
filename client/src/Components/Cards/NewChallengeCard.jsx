@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Card from ".";
-import ChallengeMenuIcon from "../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyChallenges/Components/ChallengeMenuIcon";
 import { Link } from "react-router-dom";
+import ChallengeMenuIcon from "../MenuIcons/ChallengeMenuIcon";
 
 const NewChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);

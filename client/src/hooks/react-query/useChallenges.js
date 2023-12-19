@@ -201,7 +201,9 @@ export const useChooseWinner = () => {
       toast.success("Winner chosen successfully");
     },
     onError: () => {
-      toast.error("To be able to select this participant as the winner, you should add a review.");
+      toast.error(
+        "To be able to select this participant as the winner, you should add a review."
+      );
     },
   });
 };
@@ -228,6 +230,7 @@ export const useDeleteChallenge = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["challenges"] });
+      toast.success("Challenge deleted successfully");
     },
   });
 };

@@ -58,16 +58,6 @@ const SocialPosts = () => {
         )}
       </div>
 
-      {/*<SocialPostCard
-              key={post._id}
-              post={post}
-              bookmarks={bookmarksId}
-              posts={posts}
-              height={"full"}
-              width={"full"}
-              type="feed"
-              openModal={() => openModal(post)}
-        />*/}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <SocialPostModal

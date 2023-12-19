@@ -92,6 +92,7 @@ export const useDeleteJob = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      toast.success("Job successfully deleted!");
     },
     onError: (error) => {
       toast.error(`${error.response.data.message}`);

@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "../Modals";
 
-const DeletePagePopup = ({ open, handleCancel, handleConfirm }) => {
+const DeleteJobPopup = ({ handleCancel, handleConfirm }) => {
   return (
     <Modal>
       {/* content */}
@@ -36,7 +36,7 @@ const DeletePagePopup = ({ open, handleCancel, handleConfirm }) => {
           </svg>
           <h2 className="text-xl font-bold py-4">Are you sure?</h2>
           <p className="text-sm text-gray-500 px-8">
-            Do you really want to delete your Company Page?
+            Do you really want to delete your Job Offer?
           </p>
         </div>
         {/* footer */}
@@ -59,4 +59,4 @@ const DeletePagePopup = ({ open, handleCancel, handleConfirm }) => {
   );
 };
 
-export default DeletePagePopup;
+export default DeleteJobPopup;

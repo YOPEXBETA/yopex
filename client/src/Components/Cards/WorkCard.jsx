@@ -2,14 +2,43 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Card from "./index";
 import JobOfferModal from "../shared/Modals/JobOfferModal";
-import PostMenuIcon from "../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyJobs/Components/JobMenuIcon";
+import JobMenuIcon from "../MenuIcons/JobMenuIcon";
+import Dropdown from "../dropdown";
+import { BsThreeDots } from "react-icons/bs";
+import { EditJobModal } from "../shared/Modals/EditJobModal";
+import DeleteJobPopup from "../Popup/DeleteJobPopup";
+import { useDeleteJob } from "../../hooks/react-query/useJobs";
 
 const WorkCard = ({ job, extra }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const { user } = useSelector((state) => state.auth);
+  const { mutate: deleteJob } = useDeleteJob();
   const handleClose = () => setIsOpen(false);
 
+  const [openEdit, setOpenEdit] = useState(false);
+  const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+
+  const handleClickEdit = () => {
+    setOpenEdit(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
+
+  const handleDeleteClick = () => {
+    setConfirmationDialogOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteJob(job._id);
+    setConfirmationDialogOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setConfirmationDialogOpen(false);
+  };
   return (
     <Card>
       <div
@@ -55,10 +84,28 @@ const WorkCard = ({ job, extra }) => {
           </div>
         </div>
         <div>
-          <button className="font-medium p-2 rounded-md flex">
-            {user?.companies?.includes(job?.company._id) ? (
-              <div onClick={(e) => e.stopPropagation()}>
-                <PostMenuIcon post={job} />
+          <button
+            className="font-medium p-2 flex hover:bg-zinc-500 rounded-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {user?.companies?.includes(job?.company?._id) ? (
+              <div>
+                <Dropdown
+                  button={
+                    <p className="cursor-pointer ">
+                      <BsThreeDots />
+                    </p>
+                  }
+                  animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
+                  children={
+                    <JobMenuIcon
+                      job={job}
+                      handleClickEdit={handleClickEdit}
+                      handleDeleteClick={handleDeleteClick}
+                    />
+                  }
+                  classNames={"py-2 top-4 right-0"}
+                />
               </div>
             ) : (
               <p></p>
@@ -67,6 +114,16 @@ const WorkCard = ({ job, extra }) => {
         </div>
       </div>
       <JobOfferModal open={isOpen} handleClose={handleClose} job={job} />
+      {openEdit && (
+        <EditJobModal open={openEdit} handleClose={handleCloseEdit} job={job} />
+      )}
+
+      {confirmationDialogOpen && (
+        <DeleteJobPopup
+          handleCancel={handleCancelDelete}
+          handleConfirm={handleConfirmDelete}
+        />
+      )}
     </Card>
   );
 };

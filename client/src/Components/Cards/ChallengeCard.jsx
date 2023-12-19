@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaUsers, FaCheck, FaTimes } from "react-icons/fa";
 import getDeadlineDifference from "../getDeadlineDifference";
-import ChallengeMenuIcon from "../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyChallenges/Components/ChallengeMenuIcon";
 import { useSelector } from "react-redux";
 import Card from "./index";
+import ChallengeMenuIcon from "../MenuIcons/ChallengeMenuIcon";
 
 const ChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);

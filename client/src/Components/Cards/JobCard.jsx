@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import JobOfferModal from "../shared/Modals/JobOfferModal";
 import Card from "./index";
-import PostMenuIcon from "../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyJobs/Components/JobMenuIcon";
+import PostMenuIcon from "../MenuIcons/JobMenuIcon";
 
 const JobCard = ({ job, extra }) => {
   const [isOpen, setIsOpen] = useState(false);
