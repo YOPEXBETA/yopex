@@ -7,7 +7,6 @@ import {
 import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import StorePointCard from "../../../Components/Cards/StorePointCard";
-import AccessDenied from "../../../Components/AccessDenied";
 
 const Store = () => {
   const { user } = useSelector((state) => state.auth);
@@ -39,10 +38,6 @@ const Store = () => {
     { points: 500, amount: 500 },
     { points: 1000, amount: 1000 },
   ];
-
-  if (user?.companies?.length === 0) {
-    return <AccessDenied />;
-  }
 
   return (
     <div>

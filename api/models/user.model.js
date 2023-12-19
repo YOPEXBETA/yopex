@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema(
     picturePath: { type: String, required: false },
     userDescription: { type: String, required: false },
     birthDate: { type: Date, required: false },
+    rank: { type: Number, default: 0 },
     score: { type: Number, default: 0 },
     gender: {
       type: String,

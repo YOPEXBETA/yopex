@@ -128,7 +128,7 @@ const Leaderboard = ({ query, onSelect }) => {
       <div className="flex items-center justify-between mt-6">
         <button
           onClick={() => handleChangePage(page - 1)}
-          className="flex items-center px-5 py-2 text-sm text-zinc-500 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
           disabled={page === 1}
         >
           <svg
@@ -157,8 +157,8 @@ const Leaderboard = ({ query, onSelect }) => {
                 onClick={() => handleChangePage(pageNumber)}
                 className={`px-2 py-1 text-sm rounded-md ${
                   pageNumber === page
-                    ? "text-green-500 bg-green-100/60"
-                    : "text-gray-500 dark:hover:bg-zinc-800 dark:text-gray-300 hover:bg-gray-100"
+                    ? "text-green-500 bg-green-100"
+                    : "text-gray-500 dark:hover:bg-zinc-800 dark:text-gray-100 hover:bg-gray-100"
                 }`}
               >
                 {pageNumber}

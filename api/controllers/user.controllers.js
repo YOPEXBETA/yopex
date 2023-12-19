@@ -153,6 +153,12 @@ const SearchUsers = async (req, res) => {
                 },
               },
             },
+            {
+              firstname: { $regex: searchTerm, $options: "i" },
+            },
+            {
+              lastname: { $regex: searchTerm, $options: "i" },
+            },
           ],
         },
         { role: { $ne: "admin" } },
@@ -212,7 +218,7 @@ const getUsers = async (req, res) => {
 
     const query = { role: { $ne: "admin" } };
     if (req.query.name) {
-      const searchRegex = new RegExp(req.query.name, "i"); // 'i' for case-insensitive
+      const searchRegex = new RegExp(req.query.name, "i");
       query.$or = [
         { firstname: { $regex: searchRegex } },
         { lastname: { $regex: searchRegex } },
@@ -228,12 +234,16 @@ const getUsers = async (req, res) => {
       .skip(pageSize * (page - 1))
       .limit(pageSize)
       .exec();
+    //for test purpose
+    users.forEach((user, index) => {
+      user.rank = index + 1 + pageSize * (page - 1);
+    });
 
-    const userCount = await userSchema.countDocuments({
+    const totalCount = await userSchema.countDocuments({
       role: { $ne: "admin" },
     });
 
-    res.status(200).json({ users, userCount });
+    res.status(200).json({ users, userCount: totalCount });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -242,12 +252,10 @@ const getUsers = async (req, res) => {
 //getFollowers
 const getUserFriends = async (req, res) => {
   try {
-    // Find the current user by their ID using both userSchema and companySchema
     const [currentUser] = await Promise.all([
       userSchema.findById(req.params.userId).select("-password"),
     ]);
 
-    // Fetch the details of all of the user's friends using their friend IDs
     const userFriends = await Promise.all(
       currentUser.followers.map(async (friendId) => {
         const friend = await userSchema.findById(friendId).select("-password");

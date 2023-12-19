@@ -43,39 +43,40 @@ const PostMenuIcon = ({ post }) => {
   };
 
   return (
-    <div className="relative inline-block text-center z-20">
-      <button
-        onClick={handleMenuClick}
-        className="hover:bg-gray-100 dark:bg-zinc-800 px-2 py-2 rounded-full"
-      >
-        <HiDotsVertical className="text-gray-600 text-lg hover:text-green-600" />
-      </button>
+    <div>
+      <div className="relative inline-block text-center z-20">
+        <button
+          onClick={handleMenuClick}
+          className="hover:bg-gray-100 dark:bg-zinc-800 px-2 py-2 rounded-full"
+        >
+          <HiDotsVertical className="text-gray-600 text-lg hover:text-green-600" />
+        </button>
 
-      {isMenuOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 dark:bg-zinc-800 shadow-lg rounded-lg">
-          <ul>
-            <li>
-              <button
-                onClick={handleDeleteClick}
-                className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
-              >
-                <FaTrash className="text-gray-500 mr-2" />
-                Delete Post
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={handleEditClick}
-                className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
-              >
-                <FaEdit className="text-gray-500 mr-2" />
-                Edit Post
-              </button>
-            </li>
-          </ul>
-        </div>
-      )}
-
+        {isMenuOpen && (
+          <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 dark:bg-zinc-800 shadow-lg rounded-lg">
+            <ul>
+              <li>
+                <button
+                  onClick={handleDeleteClick}
+                  className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
+                >
+                  <FaTrash className="text-gray-500 mr-2" />
+                  Delete Post
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={handleEditClick}
+                  className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
+                >
+                  <FaEdit className="text-gray-500 mr-2" />
+                  Edit Post
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
       {isEditModalOpen && (
         <EditPostModal
           open={isEditModalOpen}

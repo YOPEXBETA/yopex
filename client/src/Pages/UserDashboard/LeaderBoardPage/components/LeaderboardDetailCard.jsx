@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import { useGetLevels } from "../../../../hooks/react-query/useLevels";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const LeaderboardDetailCard = ({ data }) => {
   const { data: levelsData, isloading } = useGetLevels();
@@ -11,6 +12,14 @@ const LeaderboardDetailCard = ({ data }) => {
           level.minScore <= data?.score && level.maxScore >= data?.score
       )
     : null;
+
+  if (isloading) {
+    return (
+      <div className="bg-white dark:text-white dark:bg-zinc-800 text-center rounded-lg border dark:border-zinc-500 p-10 xl:max-w-md w-full">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   if (!data) {
     return (
@@ -48,10 +57,10 @@ const LeaderboardDetailCard = ({ data }) => {
         </div>
         <div className="flex flex-col items-center justify-center gap-1 truncate w-80">
           <div>
-            <h1 className="text-lg text-gray-700 dark:text-white font-bold">
+            <h1 className="text-lg  dark:text-white font-bold">
               {data?.firstname} {data?.lastname}
             </h1>
-            <p className="whitespace-normal dark:text-gray-200 text-gray-400">
+            <p className="whitespace-normal dark:text-zinc-500 text-zinc-500">
               {data?.occupation || "No occupation selected"}
             </p>
           </div>
