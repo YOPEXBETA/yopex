@@ -32,7 +32,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           }`}
           onClick={() => changeValue(1)}
         >
-          Posts
+          Portfolio
         </button>
         <button
           className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${

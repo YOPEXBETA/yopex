@@ -8,8 +8,9 @@ import SocialPostCard from "../../../../../../Components/Cards/SocialPost";
 import { useSelector } from "react-redux";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import AddSocialPostCard from "../../../../../../Components/shared/CreatePost/AddSocialPostCard";
 
-const MySocialPosts = () => {
+const MyPortfolio = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -35,6 +36,7 @@ const MySocialPosts = () => {
 
   return (
     <div>
+      <AddSocialPostCard />
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 py-2 mb-12">
         {isLoading ? (
           <LoadingSpinner />
@@ -52,7 +54,7 @@ const MySocialPosts = () => {
             />
           ))
         ) : (
-          <p className="dark:text-gray-200 text-md">No Posts Found.</p>
+          <p className="dark:text-gray-200 text-md">No project added.</p>
         )}
       </div>
 
@@ -70,4 +72,4 @@ const MySocialPosts = () => {
   );
 };
 
-export default MySocialPosts;
+export default MyPortfolio;
