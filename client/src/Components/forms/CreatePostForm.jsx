@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { FaImage } from "react-icons/fa";
+import Select from "react-select";
 import { useSelector } from "react-redux";
+import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCreatePost } from "../../hooks/react-query/usePosts";
 import { useUserById } from "../../hooks/react-query/useUsers";
 import { useFileUpload } from "../../hooks/react-query/useUsers";
 import LoadingSpinner from "../LoadingSpinner";
-import Card from "../Cards";
 
 const CreatePostForm = () => {
   // Global states |  @redux/toolkit
@@ -14,6 +15,7 @@ const CreatePostForm = () => {
 
   // Data fetching | react-query
   const { data: userProfile, isLoading } = useUserById(user._id);
+  const { data: skills } = useSkills();
   const fileUploadMutation = useFileUpload();
   const { mutate } = useCreatePost();
 
@@ -41,18 +43,27 @@ const CreatePostForm = () => {
 
     const result = await fileUploadMutation.mutateAsync(formData);
 
+    const selectedSkills = data.skills.map((skill) => skill.value);
+
     mutate({
       //userId: user._id,
       userId: selectedOption,
+      title: data.title,
       description: data.description,
+      skills: selectedSkills,
       postPicturePath: [result.data.downloadURL],
     });
     reset();
   };
-
   return (
-    <Card>
-      <div className="px-4 py-4">
+    <div className="bg-white p-4 rounded-lg">
+      <div className="px-4 py-2">
+        <h1 className="text-xl font-semibold">
+          <span className="font-normal">
+            please fill the required informations to create your post
+          </span>
+        </h1>
+        <hr className="my-4" />
         <div className="space-y-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
@@ -63,7 +74,7 @@ const CreatePostForm = () => {
                   value={selectedOption}
                   onChange={handleSelectChange}
                 >
-                  <option value="">Create a Post as</option>
+                  <option value="">Share a Post as</option>
                   <option value={user._id}>
                     {user?.firstname} {user?.lastname}
                   </option>
@@ -73,12 +84,49 @@ const CreatePostForm = () => {
                     </option>
                   ))}
                 </select>
-
+                <div>
+                  <input
+                    {...register("title", { required: true })}
+                    required={true}
+                    placeholder="Post Title"
+                    className="w-full p-2 border bg-white rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 mb-2"
+                  />
+                </div>
                 <textarea
                   className="w-full h-40 p-2 border bg-white dark:text-white dark:bg-zinc-700 rounded focus:outline-none resize-none"
                   {...register("description", { required: false })}
                   placeholder="Tap here and start typing your post description"
                 />
+                <div className="flex-1">
+                  <Controller
+                    name="skills"
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <div className="w-full dark:bg-zinc-700 mt-2">
+                        <Select
+                          isMulti
+                          className="my-react-select-container"
+                          classNamePrefix="my-react-select"
+                          required={true}
+                          id="tags-outlined"
+                          options={
+                            skills
+                              ? skills?.map((skill) => ({
+                                  label: skill?.name,
+                                  value: skill,
+                                }))
+                              : []
+                          }
+                          onChange={(selectedOptions) =>
+                            onChange(selectedOptions)
+                          }
+                          value={value}
+                          placeholder="Select Skills"
+                        />
+                      </div>
+                    )}
+                  />
+                </div>
 
                 {uploadedFile && uploadedFile.length > 0 && (
                   <div className="mb-4">
@@ -150,15 +198,10 @@ const CreatePostForm = () => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-between my-4">
-              <Link
-                className="px-6 py-2 bg-white text-black rounded-md border-2"
-                to="/feed"
-              >
-                Cancel
-              </Link>
+
+            <div className="flex justify-between py-4">
               <button
-                className="bg-green-500 px-6 py-2 text-white rounded-md hover:bg-green-700"
+                className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded w-full"
                 type="submit"
               >
                 Post
@@ -167,7 +210,7 @@ const CreatePostForm = () => {
           </form>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 

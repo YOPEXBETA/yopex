@@ -181,7 +181,7 @@ const MainRoutes = {
       path: "chat",
       icon: <ChatIcon />,
       customWidth: true,
-      hideInSidebar: true,
+      hideInSidebar: false,
       children: [
         {
           index: true,

@@ -4,6 +4,7 @@ import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
 import { AddSocialPostModal } from "./AddSocialPostModal";
 import PlusIcon from "../../icons/PlusIcon";
 import Card from "../../Cards";
+import { Link } from "react-router-dom";
 
 const AddSocialPostCard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -12,8 +13,8 @@ const AddSocialPostCard = () => {
 
   return (
     <Card>
-      <a
-        onClick={toggleModal}
+      <Link
+        to="/create-post"
         className="relative flex h-full flex-col rounded-md border hover:bg-gray-50 border-gray-200 p-2.5 hover:border-gray-400 sm:rounded-lg sm:p-5"
       >
         <div className="flex items-center gap-2">
@@ -44,7 +45,7 @@ const AddSocialPostCard = () => {
             </span>
           </div>
         </div>
-      </a>
+      </Link>
 
       <AddSocialPostModal open={openPostModal} handleClose={toggleModal} />
     </Card>

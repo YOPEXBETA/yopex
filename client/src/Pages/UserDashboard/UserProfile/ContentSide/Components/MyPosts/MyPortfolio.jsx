@@ -54,7 +54,7 @@ const MyPortfolio = () => {
             />
           ))
         ) : (
-          <p className="dark:text-gray-200 text-md">No project added.</p>
+          <p className="dark:text-gray-200 text-md">No work added.</p>
         )}
       </div>
 
