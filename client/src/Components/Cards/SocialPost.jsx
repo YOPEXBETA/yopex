@@ -179,14 +179,16 @@ const SocialPostCard = ({
                       width={width}
                       openModal={openModal}
                     />
-                    <div className="invisible group-hover:visible absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-                      <p
-                        className="text-white cursor-pointer"
-                        onClick={() => openModal()}
-                      >
-                        Explore post details
-                      </p>
-                    </div>
+                    <Link to={`/postDetails/${post._id}`}>
+                      <div className="invisible group-hover:visible absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                        <p
+                          className="text-white cursor-pointer"
+                          //onClick={() => openModal()}
+                        >
+                          Explore post details
+                        </p>
+                      </div>
+                    </Link>
                   </div>
                 ))}
             </div>

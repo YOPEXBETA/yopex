@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
 import { AddSocialPostModal } from "./AddSocialPostModal";
+import PlusIcon from "../../icons/PlusIcon";
+import Card from "../../Cards";
+import { Link } from "react-router-dom";
 
 const AddSocialPostCard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -9,33 +12,43 @@ const AddSocialPostCard = () => {
   const toggleModal = () => setOpenPostModal((prev) => !prev);
 
   return (
-    <div className="bg-white divide-gray-100 border overflow-hidden rounded-lg dark:bg-zinc-800 dark:border-zinc-500 dark:border text-gray-600  sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
-      <div className="p-4">
-        <div className="flex items-center space-x-2">
-          {user.picturePath ? (
-            <img
-              alt="banner"
-              src={user.picturePath}
-              className="w-10 h-10 rounded-full object-cover cursor-pointer border-2"
-            />
-          ) : (
-            <img
-              alt="default"
-              src={AvatarProfile}
-              className="w-10 h-10 rounded-full object-cover cursor-pointer border-2"
-            />
-          )}
-          <button
-            className="flex-1 px-3 text-gray-400 text-left border  focus:outline-none rounded-full h-10 dark:bg-zinc-800 dark:placeholder-gray-200 bg-zinc-100"
-            onClick={toggleModal}
+    <Card>
+      <Link
+        to="/create-post"
+        className="relative flex h-full flex-col rounded-md border hover:bg-gray-50 border-gray-200 p-2.5 hover:border-gray-400 sm:rounded-lg sm:p-5"
+      >
+        <div className="flex items-center gap-2">
+          {/* SVG plus button */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="h-10 w-10 text-white mr-2 rounded-full bg-indigo-500"
           >
-            Share your work...
-          </button>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            />
+          </svg>
+
+          {/* Content */}
+          <div>
+            <span className="text-md mb-0 font-semibold text-zinc-900 dark:text-white sm:mb-1.5 sm:text-xl">
+              Share your work {user?.firstname}
+            </span>
+            <span className="text-sm leading-normal text-gray-400 sm:block">
+              Share your outstanding work and let your projects speak for
+              themselves.
+            </span>
+          </div>
         </div>
-      </div>
+      </Link>
 
       <AddSocialPostModal open={openPostModal} handleClose={toggleModal} />
-    </div>
+    </Card>
   );
 };
 

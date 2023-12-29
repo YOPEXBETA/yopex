@@ -9,11 +9,17 @@ import SettingsIcon from "../Components/icons/SettingsIcon";
 import ChatIcon from "../Components/icons/ChatIcon";
 import ContestIcon from "../Components/icons/ContestIcon";
 import JobIcon from "../Components/icons/JobIcon";
+import ProjectIcon from "../Components/icons/ProjectIcon";
+import DiscoverIcon from "../Components/icons/DiscoverIcon";
 
 // ==============================|| USER PAGES ||============================== //
 //HomePage
 const HomeLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/HomePage/index"))
+);
+//Discover
+const DiscoverTalentsLayout = Loadable(
+  lazy(() => import("../Pages/UserDashboard/DiscoverTalentsPage/Index"))
 );
 //CreateJobOffer
 const CreateJobOffer = Loadable(
@@ -105,9 +111,23 @@ const MainRoutes = {
   children: [
     {
       index: true,
-      name: "Feed",
-      path: "feed",
+      name: "Projects",
+      path: "projects",
+      icon: <ProjectIcon className="h-6 w-6" />,
       element: <HomeLayout />,
+    },
+    {
+      name: "Discover",
+      icon: <DiscoverIcon className="h-6 w-6" />,
+      path: "discover",
+      customWidth: true,
+      children: [
+        {
+          index: true,
+          element: <DiscoverTalentsLayout />,
+          customWidth: true,
+        },
+      ],
     },
     {
       name: "Challenges",
