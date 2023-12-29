@@ -45,11 +45,7 @@ export default function CreateConversationDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const handleTextFieldClick = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-
-  };
+  
   useEffect(() => {
     
     if (selectedOption !== user._id && users) {
@@ -85,9 +81,7 @@ export default function CreateConversationDrawer() {
     >
       <ul>
         <ListItem>
-          <TextField fullWidth onClick={()=>{
-            handleTextFieldClick();
-          }}
+          <TextField fullWidth 
           onChange={handleSearchUsers} />
         </ListItem>
         {userProfile?.companies.length!==0 && <select

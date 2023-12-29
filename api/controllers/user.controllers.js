@@ -171,10 +171,10 @@ const SearchUsers = async (req, res) => {
 
     const users = await userSchema
       .find(userQuery)
-      .select("_id firstname lastname picturePath score country");
+      .select("_id firstname lastname picturePath score country").limit(6);
     const companies = await companySchema
       .find(companyQuery)
-      .select("_id companyName companyLogo");
+      .select("_id companyName companyLogo").limit(6);
 
     const results = [...users, ...companies];
 
