@@ -1,23 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useConversations } from "../../../../hooks/react-query/useConversations";
-import CreateConversationDrawer from "./CreateConversationDrawer";
-import SearchUsers from "./SearchUsers";
+import { useConversations, useCreateConversation } from "../../../../hooks/react-query/useConversations";
+import {axios} from "../../../../axios";
+import { TextField } from "@mui/material";
+import { useQuery } from "react-query";
 
-const UsersMsgs = ({ onConversationSelect }) => {
+const url = process.env.REACT_APP_API_ENDPOINT;
+
+const UsersMsgs = ({ }) => {
   const { user } = useSelector((state) => state?.auth);
   const { data: conversations } = useConversations(user?._id);
+  const [query,setQuery] = useState("");
+  const { mutate,data } = useCreateConversation(user._id);
+  const { data:users } = useQuery({
+    queryKey: ["users", query],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${url}/users?search=${query}`
+      );
+      return data;
+    },
+  });
+  const handleUserClick = async (otherUser) => {
+    if (otherUser.companyName) {
+      mutate({
+        senderId: user._id,
+        receiverId: otherUser.user,
+        company: otherUser._id,
+      });
+      
+    }
+    else {
+      mutate({ senderId: user._id, receiverId: otherUser._id });
+      
+    }
+    setQuery("");
+  };
   return (
     <div>
-      <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-green-600 text-white">
-        <h1 className="text-2xl font-semibold">Chat</h1>
-        <div className="relative">
-          <CreateConversationDrawer />
-        </div>
+      <header className="p-3 border-b border-gray-300 flex justify-between items-center  text-white">
+      <TextField fullWidth onChange={(event)=>setQuery(event.target.value)}  />
       </header>
       <div className="h-screen overflow-y-auto pb-24">
-        {conversations?.map((conversation) => {
+        {query===""?conversations?.map((conversation) => {
           const otherUser = conversation?.members?.find(
             (member) => member?.id !== user?._id
           );
@@ -61,7 +87,37 @@ const UsersMsgs = ({ onConversationSelect }) => {
               </div>
             );
           } else return null;
-        })}
+        }):users?.map((user) => 
+          (
+            <li key={user._id} className="px-8 py-4 hover:bg-gray-100">
+              <button
+                className="flex items-center w-full"
+                onClick={() => handleUserClick(user)}
+              >
+                <div className="flex items-center space-x-2">
+                  <div className="w-12 h-12">
+                    <img
+                      src={user.companyName ? user.companyLogo : user.picturePath}
+                      alt="User Avatar"
+                      className="w-full h-full rounded-full bg-green-500"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    {user.companyName ? (
+                      <h6 className="text-[1rem]">{user.companyName}</h6>
+                    ) : (
+                      <div className="flex gap-1">
+                        <h6 className="text-[1rem]">{user.firstname}</h6>
+                        <h6 className="text-[1rem]">{user.lastname}</h6>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </button>
+            </li>
+          )
+        )
+        }
       </div>
     </div>
   );

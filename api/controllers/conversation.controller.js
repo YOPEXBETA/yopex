@@ -16,12 +16,7 @@ const createConversation = async (req, res) => {
     });
 
     if (existingConversation && !company) {
-      throw new Error("Conversation already exists");
-    }
-    if (existingConversation && company) {
-      if (existingConversation.company===company) {
-        throw new Error("Conversation already exists");
-      }
+      return res.status(200).json(existingConversation);
     }
 
     const newCoversation = new ConversationModel({
@@ -30,65 +25,65 @@ const createConversation = async (req, res) => {
     });
     await newCoversation.save();
     const userId = req.body.senderId;
-    const conversations = await ConversationModel.find({
-      members: { $in: [userId] },
-    }).select("_id members");
+    // const conversations = await ConversationModel.find({
+    //   members: { $in: [userId] },
+    // }).select("_id members");
 
-    // Get the user details for each member of the conversation
-    const conversationsWithUsers = await Promise.all(
-      conversations.map(async (conversation) => {
-        const membersWithDetails = await Promise.all(
-          conversation.members.map(async (member) => {
-            const user = await UserModel.findById(member);
-           if (user){
-            if (user._id.toString() !== userId) {
-              return {
-                id: user._id,
-                firstname: user.firstname,
-                lastname: user.lastname,
-                picturePath: user.picturePath,
-              };
-            }
-           }else{
-              const company = await Company.findById(member);
+    // // Get the user details for each member of the conversation
+    // const conversationsWithUsers = await Promise.all(
+    //   conversations.map(async (conversation) => {
+    //     const membersWithDetails = await Promise.all(
+    //       conversation.members.map(async (member) => {
+    //         const user = await UserModel.findById(member);
+    //        if (user){
+    //         if (user._id.toString() !== userId) {
+    //           return {
+    //             id: user._id,
+    //             firstname: user.firstname,
+    //             lastname: user.lastname,
+    //             picturePath: user.picturePath,
+    //           };
+    //         }
+    //        }else{
+    //           const company = await Company.findById(member);
               
-              if (company._id.toString() !== userId) {
+    //           if (company._id.toString() !== userId) {
                 
-                return {
-                  id: company._id,
-                  companyName: company.companyName,
-                  picturePath: company.companyLogo,
-                };
-              }
-           }
-          })
-        );
-        // Remove any undefined members from the array
-        const filteredMembers = membersWithDetails.filter(Boolean);
+    //             return {
+    //               id: company._id,
+    //               companyName: company.companyName,
+    //               picturePath: company.companyLogo,
+    //             };
+    //           }
+    //        }
+    //       })
+    //     );
+    //     // Remove any undefined members from the array
+    //     const filteredMembers = membersWithDetails.filter(Boolean);
 
-        // Get the latest message for the conversation
-        const latestMessage = await MessageModel.findOne({
-          conversationId: conversation._id,
-        })
-          .sort({ createdAt: -1 })
-          .populate("sender", "firstname lastname picturePath")
-          .lean();
+    //     // Get the latest message for the conversation
+    //     const latestMessage = await MessageModel.findOne({
+    //       conversationId: conversation._id,
+    //     })
+    //       .sort({ createdAt: -1 })
+    //       .populate("sender", "firstname lastname picturePath")
+    //       .lean();
 
-        // Set the latestMessage property for the member who is not the user
-        filteredMembers.forEach((member) => {
-          if (member.id.toString() !== userId && latestMessage) {
-            member.latestMessage = latestMessage.message;
-            member.createdAt = latestMessage.createdAt;
-          }
-        });
+    //     // Set the latestMessage property for the member who is not the user
+    //     filteredMembers.forEach((member) => {
+    //       if (member.id.toString() !== userId && latestMessage) {
+    //         member.latestMessage = latestMessage.message;
+    //         member.createdAt = latestMessage.createdAt;
+    //       }
+    //     });
 
-        return {
-          conversationId: conversation._id,
-          members: filteredMembers,
-        };
-      }),
-    );
-    res.status(200).json(conversationsWithUsers);
+    //     return {
+    //       conversationId: conversation._id,
+    //       members: filteredMembers,
+    //     };
+    //   }),
+    // );
+    res.status(200).json(newCoversation);
   } catch (error) {
     console.log(error, "Error");
     res.status(400).send(error.message);
@@ -98,6 +93,7 @@ const createConversation = async (req, res) => {
 const getConversations = async (req, res) => {
   try {
     const userId = req.params.userId;
+    
     const conversations = await ConversationModel.find({
       members: { $in: [userId] },
     }).select("_id members company");
