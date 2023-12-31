@@ -23,7 +23,7 @@ const Chat = () => {
         (item) => item?.conversationId === selectedConversationId
       );
 
-      if (!conn) navigate("/chat");
+      if (!conn) ;
       else {
         if (conn?.members[0]?.role === "company") {
           setOtherUser(conn?.members[1]);
@@ -58,8 +58,8 @@ const Chat = () => {
         </div>
       </div>
 
-      {/* Sidebar */}
-      <UserMsgsSideBar isOpen={isSidebarOpen} />
+      {/* Sidebar 
+      <UserMsgsSideBar isOpen={isSidebarOpen} />*/}
       <div className="block dark:bg-zinc-800 lg:h-full  lg:col-span-3  mb-8">
         <UsersConversation
           conversationId={selectedConversationId}
