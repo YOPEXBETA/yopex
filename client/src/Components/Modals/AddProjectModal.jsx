@@ -9,7 +9,7 @@ import { axios } from "../../axios";
 import Select from "react-select";
 import { FaImage } from "react-icons/fa";
 
-export const AddPostModal = ({ open, handleClose }) => {
+export const AddProjectModal = ({ open, handleClose }) => {
   const url = process.env.REACT_APP_API_ENDPOINT;
   // Global states |  @redux/toolkit
   const { category } = useSelector((state) => state.global);
