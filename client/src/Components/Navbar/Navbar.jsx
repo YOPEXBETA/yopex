@@ -12,6 +12,7 @@ import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import NotificationMenu from "./components/NotificationMenu";
 import ProfileMenu from "./components/ProfileMenu";
 import SearchInput from "./components/SearchInput";
+import PlusIcon from "../icons/PlusIcon";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
@@ -56,6 +57,7 @@ const Navbar = (props) => {
         >
           <FiAlignJustify className="h-5 w-5" />
         </span>
+
         {/* start Notification */}
         <Dropdown
           button={
