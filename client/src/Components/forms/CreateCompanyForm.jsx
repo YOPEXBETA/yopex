@@ -117,6 +117,17 @@ const CreateCompanyForm = ({ extra }) => {
                         PNG, JPG SVG, and GIF are Allowed.
                       </p>
                     </div>
+                    {uploadedFile && uploadedFile.length > 0 && (
+                      <div className="mb-4">
+                        {fileUploadMutation.isLoading ? (
+                          <>
+                            <LoadingSpinner />
+                          </>
+                        ) : (
+                          <p className="text-xs text-gray-400 mt-2"></p>
+                        )}
+                      </div>
+                    )}{" "}
                   </div>
                 )}
               />
@@ -158,12 +169,24 @@ const CreateCompanyForm = ({ extra }) => {
                         </div>
                       </label>
                     </div>
-
+                    <div>
+                      {uploadedFiledoc && uploadedFiledoc.length > 0 && (
+                        <div className="mb-4">
+                          {fileUploadMutation.isLoading ? (
+                            <>
+                              <LoadingSpinner />
+                            </>
+                          ) : (
+                            <p className="text-green-600 text-left"></p>
+                          )}
+                        </div>
+                      )}
+                    </div>
                     <div>
                       {bannersData?.map((banner, index) => (
                         <div
                           key={index}
-                          className="mb-5 rounded-md bg-[#F5F7FB] py-4 px-4"
+                          className="my-5 rounded-md bg-[#F5F7FB] py-4 px-4"
                         >
                           <div className="flex items-center justify-between">
                             <span className="truncate pr-3 text-base font-medium text-[#07074D]">
