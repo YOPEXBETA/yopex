@@ -8,6 +8,7 @@ import { axios } from "../../axios";
 
 import Select from "react-select";
 import { FaImage } from "react-icons/fa";
+import Modal from ".";
 
 export const AddProjectModal = ({ open, handleClose }) => {
   const url = process.env.REACT_APP_API_ENDPOINT;
@@ -75,7 +76,7 @@ export const AddProjectModal = ({ open, handleClose }) => {
   };
 
   return (
-    <div
+    <Modal
       open={open}
       onClose={handleClose}
       className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"} `}
@@ -224,6 +225,6 @@ export const AddProjectModal = ({ open, handleClose }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
