@@ -57,9 +57,9 @@ const NotFoundPage = Loadable(
   lazy(() => import("../Pages/UserDashboard/NotFoundPage/NotFoundPage"))
 );
 
-//NotFoundPage
-const Chat = Loadable(
-  lazy(() => import("../Pages/UserDashboard/ChatPage/Chat"))
+//Messenger
+const Messenger = Loadable(
+  lazy(() => import("../Pages/UserDashboard/MessengerPage/Index"))
 );
 
 //UserProfilePage
@@ -187,11 +187,11 @@ const MainRoutes = {
       children: [
         {
           index: true,
-          element: <Chat />,
+          element: <Messenger />,
         },
         {
           path: ":selectedConversationId",
-          element: <Chat />,
+          element: <Messenger />,
         },
       ],
     },
