@@ -43,7 +43,7 @@ const Messenger = () => {
   return (
     <div>
       <div class="relative flex w-full h-screen overflow-hidden antialiased bg-gray-200">
-        <div class="relative flex flex-col hidden w-[24rem] h-full bg-white border-r border-gray-300 shadow-xl md:block transform transition-all duration-500 ease-in-out">
+        <div class="relative flex flex-col hidden w-[24rem] h-full bg-white dark:bg-zinc-800 dark:text-white border-r border-gray-300 shadow-xl md:block transform transition-all duration-500 ease-in-out">
           <UsersLatestMsgs />
         </div>
 
@@ -55,7 +55,7 @@ const Messenger = () => {
           />
         </div>
 
-        <nav class="right-0 flex flex-col w-[24rem] hidden pb-2 bg-white border-l border-gray-300 xl:block">
+        <nav class="right-0 flex flex-col w-[24rem] hidden pb-2 bg-white dark:bg-zinc-800 border-l border-gray-300 xl:block">
           <UserChatInfo otherUser={otherUser} />
         </nav>
       </div>

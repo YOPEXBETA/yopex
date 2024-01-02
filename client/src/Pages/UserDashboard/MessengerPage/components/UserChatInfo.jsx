@@ -18,7 +18,9 @@ const UserChatInfo = ({ otherUser }) => {
             />
           </svg>
         </button>
-        <div className="ml-4 mr-auto text-lg font-medium">Info</div>
+        <div className="ml-4 mr-auto text-lg font-medium dark:text-white">
+          Info
+        </div>
         <button
           type="button"
           className="p-2 text-gray-500 rounded-full focus:outline-none hover:text-gray-600 "
@@ -67,7 +69,7 @@ const UserChatInfo = ({ otherUser }) => {
             />
           </button>
         </div>
-        <p className="text-lg font-semibold text-center text-gray-800">
+        <p className="text-lg font-semibold text-center text-gray-800 dark:text-white">
           {otherUser.firstname}
         </p>
         <p className="text-sm font-medium text-center text-blue-500">online</p>
@@ -123,7 +125,7 @@ const UserChatInfo = ({ otherUser }) => {
         </div>
       </div>
       <div>
-        <div className="flex items-center w-full px-3 mt-4">
+        <div className="flex items-center w-full px-3 my-4">
           <div className="px-2 text-gray-500 rounded-full hover:text-gray-600">
             <svg
               className="w-6 h-6 text-gray-600 fill-current"
@@ -148,33 +150,8 @@ const UserChatInfo = ({ otherUser }) => {
           </div>
         </div>
       </div>
-      <div>
-        <div className="flex items-center w-full px-3 mt-4 mb-2">
-          <div className="px-2 text-gray-500 cursor-pointer">
-            <svg
-              className="w-6 h-6 text-blue-500 fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill-rule="nonzero"
-                d="M18,3 C19.6568542,3 21,4.34314575 21,6 L21,18 C21,19.6568542 19.6568542,21 18,21 L6,21 C4.34314575,21 3,19.6568542 3,18 L3,6 C3,4.34314575 4.34314575,3 6,3 L18,3 Z M17.2928932,7.29289322 L10,14.5857864 L6.70710678,11.2928932 C6.31658249,10.9023689 5.68341751,10.9023689 5.29289322,11.2928932 C4.90236893,11.6834175 4.90236893,12.3165825 5.29289322,12.7071068 L9.29289322,16.7071068 C9.68341751,17.0976311 10.3165825,17.0976311 10.7071068,16.7071068 L18.7071068,8.70710678 C19.0976311,8.31658249 19.0976311,7.68341751 18.7071068,7.29289322 C18.3165825,6.90236893 17.6834175,6.90236893 17.2928932,7.29289322 Z"
-              />
-            </svg>
-          </div>
-          <div className="ml-4">
-            <div className="mr-auto text-sm font-semibold text-gray-800">
-              Notification
-            </div>
-            <div className="mt-1 mr-auto text-sm font-semibold leading-none text-gray-600">
-              Enabled
-            </div>
-          </div>
-        </div>
-      </div>
-      <ul className="flex flex-row items-center justify-around px-3 mb-1 list-none border-b select-none">
+
+      <ul className="flex flex-row items-center justify-around px-3 mb-1 list-none border-b select-none dark:text-white">
         <li className="flex-auto px-4 mx-1 -mb-px text-center rounded-t-lg cursor-pointer last:mr-0 hover:bg-gray-200">
           <a className="block py-3 text-xs font-bold leading-normal text-blue-500 uppercase border-b-4 border-blue-500">
             Media

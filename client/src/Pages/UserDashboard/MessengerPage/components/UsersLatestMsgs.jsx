@@ -144,7 +144,7 @@ const UsersLatestMsgs = () => {
                                       </div>
                                     </div>
                                     <div>
-                                      <p className="text-[0.8rem] truncate max-w-[250px] ">
+                                      <p className="text-[0.8rem] truncate dark:text-white max-w-[250px] ">
                                         {otherUser?.latestMessage}
                                       </p>
                                     </div>

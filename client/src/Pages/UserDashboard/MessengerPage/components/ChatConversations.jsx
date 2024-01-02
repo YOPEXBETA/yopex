@@ -56,7 +56,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
   };
   return (
     <div className="top-0 bottom-0 left-0 right-0 flex flex-col flex-1 overflow-hidden bg-transparent bg-bottom bg-cover">
-      <div className="z-20 flex flex-grow-0 flex-shrink-0 w-full pr-3 bg-white border-b">
+      <div className="z-20 flex flex-grow-0 flex-shrink-0 w-full pr-3 bg-white dark:bg-zinc-800 border-b">
         <img
           src={otherUser.picturePath}
           className="w-12 h-12 mx-4 my-2 bg-center bg-no-repeat border rounded-full object-cover cursor-pointer"
