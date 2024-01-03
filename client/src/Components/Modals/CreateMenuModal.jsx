@@ -7,10 +7,13 @@ import ContestIcon from "../icons/ContestIcon";
 import JobIcon from "../icons/JobIcon";
 import CompanyIcon from "../icons/CompanyIcon";
 import { AddProjectModal } from "./AddProjectModal";
+import CreateChallengeModal from "./CreateChallengeModal";
 
 const CreateMenuModal = ({ onClose }) => {
   const [openPostModal, setOpenPostModal] = useState(false);
   const toggleModal = () => setOpenPostModal((prev) => !prev);
+  const [openChallengeModal, setOpenChallengeModal] = useState(false);
+  const toggleChallengeModal = () => setOpenChallengeModal((prev) => !prev);
   return (
     <div>
       <Modal>
@@ -82,7 +85,7 @@ const CreateMenuModal = ({ onClose }) => {
                     </svg>
                   </div>
                 </Link>
-                <Link to="/create-challenge">
+                <Link onClick={toggleChallengeModal}>
                   <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-white">
                     <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white ">
                       <ContestIcon />
@@ -142,6 +145,10 @@ const CreateMenuModal = ({ onClose }) => {
         </div>
       </Modal>
       <AddProjectModal open={openPostModal} handleClose={toggleModal} />
+      <CreateChallengeModal
+        open={openChallengeModal}
+        handleClose={toggleChallengeModal}
+      />
     </div>
   );
 };

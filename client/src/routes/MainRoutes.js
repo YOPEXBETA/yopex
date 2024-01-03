@@ -26,10 +26,7 @@ const DiscoverTalentsLayout = Loadable(
 const CreateJobOffer = Loadable(
   lazy(() => import("../Pages/UserDashboard/CreateJobOfferPage/index"))
 );
-//CreateChallenge
-const CreateChallenge = Loadable(
-  lazy(() => import("../Pages/UserDashboard/CreateChallengePage/index"))
-);
+
 //CreateCompany
 const CreateCompany = Loadable(
   lazy(() => import("../Pages/UserDashboard/CreateCompanyPage/index"))
@@ -207,12 +204,7 @@ const MainRoutes = {
       element: <CreateJobOffer />,
       hideInSidebar: true,
     },
-    {
-      name: "Create Challenge",
-      path: "create-challenge",
-      element: <CreateChallenge />,
-      hideInSidebar: true,
-    },
+
     {
       name: "Create company",
       path: "create-company",
