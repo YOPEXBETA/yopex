@@ -1,60 +1,67 @@
 import React, { useState } from "react";
+import "react-quill/dist/quill.snow.css";
+
 import moment from "moment";
 import Select from "react-select";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
-import { useCreateChallenge } from "../../hooks/react-query/useChallenges";
+import { Link } from "react-router-dom";
 import { useUserById } from "../../hooks/react-query/useUsers";
 import { useSkills } from "../../hooks/react-query/useSkills";
-import { useCategories } from "../../hooks/react-query/useCategories";
+import {
+  useCreateJob,
+  useJobTypes,
+  useOfferTypes,
+} from "../../hooks/react-query/useJobs";
 import Modal from ".";
 import CloseIcon from "../icons/CloseIcon";
 import CompanyIcon from "../icons/CompanyIcon";
 import UsersIcon from "../icons/UsersIcon";
+import Editor from "../Editor";
 
-const CreateJobOfferModal = ({
-  selectedOption,
-  handleCardClick,
-  open,
-  handleClose,
-}) => {
-  const [selectedOptionpaid, setSelectedOptionpaid] = useState("false");
+const CreateJobOfferModal = ({ open, handleClose }) => {
+  const [selectedOption, setSelectedOption] = useState("");
   const [showUser, setShowUser] = useState(true);
   const [showCompanies, setShowCompanies] = useState(false);
-  const { data: Skills } = useSkills();
-  const itSkills = Skills?.map((skill) => skill.name);
-  const { data: categorys } = useCategories();
-  const itCategory = categorys?.map((category) => category.name);
+  const handleCardClick = (companyId) => {
+    setSelectedOption(companyId);
+  };
+  const { user } = useSelector((state) => state.auth);
+  const userId = user._id;
+  const { data: userProfile, isLoading } = useUserById(userId);
+
+  const { data: skills } = useSkills();
+  const { data: JobTypes } = useJobTypes();
+  const { data: OfferTypes } = useOfferTypes();
+  const [content, setContent] = useState("");
 
   const {
     handleSubmit,
     register,
-    watch,
     control,
     formState: { isSubmitting },
     setValue,
   } = useForm({
     defaultValues: {
-      category: [],
-      RecommendedSkills: [],
-      category: [],
+      description: "",
+      skills: [],
     },
   });
 
-  const deadline = watch("deadline");
+  const { mutate } = useCreateJob(user);
 
-  const { user } = useSelector((state) => state.auth);
-  const userId = user._id;
-  const { data: userProfile, isLoading } = useUserById(userId);
-
-  const { mutate, error, isError, isSuccess } = useCreateChallenge(user);
-
-  const onSubmit = (challengeData) => {
+  const onSubmit = (JobData) => {
     const companyId = selectedOption;
-    mutate({ companyId, challengeData, paid: selectedOptionpaid });
-  };
 
-  const now = new Date().toISOString().slice(0, -8);
+    const modifiedJobData = {
+      ...JobData,
+      description: content,
+      category: JobData?.category?.map((category) => category?.value),
+      skills: JobData?.skills.map((skill) => skill.value),
+    };
+
+    mutate({ companyId, JobData: modifiedJobData });
+  };
 
   const handleToggleUser = () => {
     setShowUser(true);
@@ -77,6 +84,7 @@ const CreateJobOfferModal = ({
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => (prevPage - 1 + totalPages) % totalPages);
   };
+
   return (
     <Modal
       open={open}
@@ -84,10 +92,10 @@ const CreateJobOfferModal = ({
       className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}
     >
       <div class="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
-        <div class="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white">
+        <div class="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
           <div className="flex justify-between px-4 pt-4">
             <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
-              Create Challenge
+              Create Job Offer
             </h4>
             <button
               onClick={handleClose}
@@ -99,9 +107,9 @@ const CreateJobOfferModal = ({
             </button>
           </div>
           <hr />
-          <div class="m-8  max-w-[550px] mx-auto space-y-6">
+          <div class="m-8 max-w-[550px] mx-auto space-y-6">
             <div className="space-y-6">
-              <h1 className="font-medium text-xl">
+              <h1 className="font-medium text-xl dark:text-white">
                 Are you posting as an individual, or as a company?
               </h1>
               <div className="flex inset-y-0 right-0 items-center pr-0 h-14  bg-green-50 rounded-full">
@@ -212,177 +220,98 @@ const CreateJobOfferModal = ({
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 space-y-4">
                 <div className="md:col-span-5">
                   <label className="text-sm text-black mb-2 block dark:text-white">
-                    Challenge Title
+                    Job Title
                   </label>
                   <input
                     {...register("title", { required: true })}
                     required={true}
-                    placeholder="challenge title"
+                    placeholder="job title"
                     className="w-full h-10 p-2 border mt-1  rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                   />
                 </div>
+
                 <div className="md:col-span-5">
                   <label className="text-sm text-black mb-2 block dark:text-white">
-                    Challenge Description
+                    Job Type
                   </label>
-                  <textarea
-                    className="w-full h-40 p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                    {...register("description", { required: true })}
+                  <select
+                    id="jobType"
                     required={true}
-                    placeholder="challenge description"
-                  />
+                    className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                    {...register("jobType", { required: true })}
+                  >
+                    <option value="" defaultValue>
+                      Choose a job type
+                    </option>
+                    {JobTypes?.map((jobType) => (
+                      <option key={jobType._id} value={jobType.name}>
+                        {jobType.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-
-                <div className="md:col-span-1">
+                <div className="md:col-span-5">
                   <label className="text-sm text-black mb-2 block dark:text-white">
-                    Type
+                    Offer Type
                   </label>
 
                   <select
-                    id="selectFieldpaid"
+                    id="offerType"
+                    required={true}
                     className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                    value={selectedOptionpaid}
-                    onChange={(e, value) => {
-                      setSelectedOptionpaid(e.target.value);
-                    }}
+                    {...register("offerType", { required: true })}
                   >
-                    <option value={"false"}>free</option>
-                    <option value={"true"}>paid</option>
+                    <option value="" defaultValue>
+                      Choose an offer type
+                    </option>
+                    {OfferTypes?.map((offerType) => (
+                      <option key={offerType._id} value={offerType.name}>
+                        {offerType.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
-                <div className="md:col-span-4">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
-                    Challenge Prize
-                  </label>
 
-                  <input
-                    className={`w-full p-2 border  rounded dark:text-white  ${
-                      selectedOptionpaid === "false"
-                        ? "bg-zinc-200 dark:bg-zinc-900"
-                        : "bg-white"
-                    }  dark:bg-zinc-700 focus:outline-none focus:border-green-500`}
-                    type="number"
-                    placeholder="challenge prize"
-                    {...register("price", { required: false })}
-                    disabled={selectedOptionpaid === "false"}
-                  />
-                </div>
-
+                {/* Render skills options */}
                 <div className="md:col-span-5">
                   <label className="text-sm text-black mb-2 block dark:text-white">
                     Select Skills
                   </label>
                   <Controller
+                    name="skills"
                     control={control}
-                    name="RecommendedSkills"
-                    defaultValue={"Any"}
-                    render={({ field }) =>
-                      itSkills && (
+                    render={({ field: { onChange, value } }) => (
+                      <div className="w-full dark:bg-zinc-700 mt-2">
                         <Select
                           isMulti
-                          className="my-react-select-container mt-2"
+                          className="my-react-select-container"
                           classNamePrefix="my-react-select"
+                          required={true}
                           id="tags-outlined"
-                          options={itSkills.map((skill) => ({
-                            value: skill,
-                            label: skill,
-                          }))}
-                          value={field.value.map((skill) => ({
-                            value: skill,
-                            label: skill,
-                          }))}
-                          onBlur={field.onBlur}
-                          onChange={(selectedOptions) => {
-                            const selectedValues = selectedOptions.map(
-                              (option) => option.value
-                            );
-                            field.onChange(selectedValues);
-                          }}
-                        />
-                      )
-                    }
-                  />
-                </div>
-                <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
-                    Select Categories
-                  </label>
-                  <Controller
-                    control={control}
-                    name="category"
-                    defaultValue={"Any"}
-                    render={({ field }) =>
-                      itCategory && (
-                        <Select
-                          isMulti
-                          className="my-react-select-container mt-2"
-                          classNamePrefix="my-react-select"
-                          id="tags-outlined"
-                          options={itCategory.map((category) => ({
-                            value: category,
-                            label: category,
-                          }))}
-                          value={field.value.map((category) => ({
-                            value: category,
-                            label: category,
-                          }))}
-                          onBlur={field.onBlur}
-                          onChange={(selectedOptions) => {
-                            const selectedValues = selectedOptions.map(
-                              (option) => option.value
-                            );
-                            field.onChange(selectedValues);
-                          }}
-                        />
-                      )
-                    }
-                  />
-                </div>
-
-                <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
-                    Specify The Participants Number
-                  </label>
-                  <input
-                    required
-                    className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
-                    type="number"
-                    placeholder="number of particiant"
-                    min={1}
-                    {...register("nbruser", { required: true })}
-                  />
-                </div>
-
-                <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
-                    Deadline
-                  </label>
-
-                  <Controller
-                    control={control}
-                    name="deadline"
-                    defaultValue={new Date().toISOString().slice(0, -8)}
-                    render={({ field }) => (
-                      <input
-                        required
-                        type="datetime-local"
-                        className="w-full py-2 px-3 dark:bg-zinc-700 mt-2 dark:text-white rounded border focus:outline-none focus:border-green-500 mb-2"
-                        {...field}
-                        onChange={(e) => {
-                          const now = moment();
-                          const diff = moment(deadline).diff(now);
-
-                          if (diff < 0) {
-                            setValue("deadline", "");
-                            return false;
+                          options={
+                            skills
+                              ? skills?.map((skill) => ({
+                                  label: skill?.name,
+                                  value: skill,
+                                }))
+                              : []
                           }
-
-                          setValue("deadline", `${e.currentTarget.value}:00`);
-                        }}
-                        min={now}
-                      />
+                          onChange={(selectedOptions) =>
+                            onChange(selectedOptions)
+                          }
+                          value={value}
+                          placeholder="Select Skills"
+                        />
+                      </div>
                     )}
                   />
+                </div>
+
+                <div className="md:col-span-5">
+                  <label className="text-sm text-black mb-2 block dark:text-white">
+                    Job Description
+                  </label>
+                  <Editor value={content} onChange={setContent} />
                 </div>
 
                 <div className="md:col-span-5 text-right mt-4">
@@ -392,7 +321,7 @@ const CreateJobOfferModal = ({
                       type="submit"
                       disabled={isSubmitting}
                     >
-                      Create a Challenge
+                      Create a job offer
                     </button>
                   </div>
                 </div>

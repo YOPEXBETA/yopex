@@ -391,7 +391,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                       type="submit"
                       disabled={isSubmitting}
                     >
-                      Create a Challenge
+                      Create Challenge
                     </button>
                   </div>
                 </div>

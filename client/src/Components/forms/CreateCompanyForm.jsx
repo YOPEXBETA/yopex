@@ -111,7 +111,7 @@ const CreateCompanyForm = ({ extra }) => {
                         required={true}
                         onChange={(e) => field.onChange(e.target.files)}
                         type="file"
-                        className="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black rounded"
+                        className="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black rounded dark:bg-zinc-700 dark:text-white"
                       />
                       <p className="text-xs text-gray-400 mt-2">
                         PNG, JPG SVG, and GIF are Allowed.
@@ -163,7 +163,7 @@ const CreateCompanyForm = ({ extra }) => {
                           <span className="mb-2 block text-base font-medium text-[#6B7280]">
                             Or
                           </span>
-                          <span className="inline-flex rounded border dark:text-white border-[#e0e0e0] py-2 px-7 text-base font-medium">
+                          <span className="inline-flex rounded border hover:bg-zinc-200 dark:text-white border-[#e0e0e0] py-2 px-7 text-base font-medium">
                             Browse
                           </span>
                         </div>
@@ -199,9 +199,7 @@ const CreateCompanyForm = ({ extra }) => {
                                 viewBox="0 0 10 10"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
-                              >
-                                {/* SVG paths */}
-                              </svg>
+                              ></svg>
                             </button>
                           </div>
                         </div>

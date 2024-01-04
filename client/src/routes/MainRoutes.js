@@ -22,10 +22,6 @@ const HomeLayout = Loadable(
 const DiscoverTalentsLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/DiscoverTalentsPage/Index"))
 );
-//CreateJobOffer
-const CreateJobOffer = Loadable(
-  lazy(() => import("../Pages/UserDashboard/CreateJobOfferPage/index"))
-);
 
 //CreateCompany
 const CreateCompany = Loadable(
@@ -198,13 +194,6 @@ const MainRoutes = {
       element: <SettingsLayout />,
       icon: <SettingsIcon />,
     },
-    {
-      name: "Create Job Offer",
-      path: "/create-job-offer",
-      element: <CreateJobOffer />,
-      hideInSidebar: true,
-    },
-
     {
       name: "Create company",
       path: "create-company",

@@ -1,19 +1,30 @@
 import React, { useState } from "react";
-import CloseIcon from "../icons/CloseIcon";
 import { Link } from "react-router-dom";
 import Modal from ".";
 import PlusIcon from "../icons/PlusIcon";
+import CloseIcon from "../icons/CloseIcon";
 import ContestIcon from "../icons/ContestIcon";
 import JobIcon from "../icons/JobIcon";
 import CompanyIcon from "../icons/CompanyIcon";
-import { AddProjectModal } from "./AddProjectModal";
+import CreateProjectModal from "./CreateProjectModal";
 import CreateChallengeModal from "./CreateChallengeModal";
+import CreateJobOfferModal from "./CreateJobOfferModal";
+import ArrowIcon from "../icons/ArrowIcon";
 
 const CreateMenuModal = ({ onClose }) => {
   const [openPostModal, setOpenPostModal] = useState(false);
-  const toggleModal = () => setOpenPostModal((prev) => !prev);
+  const toggleModal = () => {
+    setOpenPostModal((prev) => !prev);
+  };
   const [openChallengeModal, setOpenChallengeModal] = useState(false);
-  const toggleChallengeModal = () => setOpenChallengeModal((prev) => !prev);
+  const toggleChallengeModal = () => {
+    setOpenChallengeModal((prev) => !prev);
+  };
+  const [openJobModal, setOpenJobModal] = useState(false);
+  const toggleJobModal = () => {
+    setOpenJobModal((prev) => !prev);
+  };
+
   return (
     <div>
       <Modal>
@@ -36,107 +47,49 @@ const CreateMenuModal = ({ onClose }) => {
             <div className="m-8 my-20 max-w-[400px] mx-auto">
               <div className="flex flex-col gap-4">
                 <Link onClick={toggleModal}>
-                  <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-white">
-                    <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white ">
+                  <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-green-500">
+                    <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white hover:bg-zinc-700">
                       <PlusIcon />
                     </span>
-                    <div className="flex flex-col flex-1">
-                      <h3 className="text-lg font-medium"> Create a Project</h3>
+                    <div className="flex items-center flex-1 justify-between">
+                      <h3 className="text-lg font-medium ">Create Project</h3>
+                      <ArrowIcon />
                     </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 shrink-0"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                      <path d="M9 6l6 6l-6 6"></path>
-                    </svg>
                   </div>
                 </Link>
                 <Link to="/create-company">
-                  <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-white">
-                    <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white ">
+                  <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-green-500">
+                    <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white hover:bg-zinc-700">
                       <CompanyIcon />
                     </span>
-                    <div className="flex flex-col flex-1">
-                      <h3 className="text-lg font-medium"> Create a Company</h3>
+                    <div className="flex items-center flex-1 justify-between">
+                      <h3 className="text-lg font-medium ">Create Company</h3>
+                      <ArrowIcon />
                     </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 shrink-0"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                      <path d="M9 6l6 6l-6 6"></path>
-                    </svg>
                   </div>
                 </Link>
                 <Link onClick={toggleChallengeModal}>
-                  <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-white">
-                    <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white ">
+                  <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-green-500">
+                    <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white hover:bg-zinc-700">
                       <ContestIcon />
                     </span>
-                    <div className="flex flex-col flex-1">
-                      <h3 className="text-lg font-medium">
-                        Create a Challenge
-                      </h3>
+
+                    <div className="flex items-center flex-1 justify-between">
+                      <h3 className="text-lg font-medium ">Create Challenge</h3>
+                      <ArrowIcon />
                     </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 shrink-0"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                      <path d="M9 6l6 6l-6 6"></path>
-                    </svg>
                   </div>
                 </Link>
-                <Link to="/create-job-offer">
-                  <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-white">
-                    <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white ">
+                <Link onClick={toggleJobModal}>
+                  <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-green-500">
+                    <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white hover:bg-zinc-700">
                       <JobIcon />
                     </span>
-                    <div className="flex flex-col flex-1">
-                      <h3 className="text-lg font-medium">
-                        Create a Job Offer
-                      </h3>
+
+                    <div className="flex items-center flex-1 justify-between">
+                      <h3 className="text-lg font-medium ">Create Job Offer</h3>
+                      <ArrowIcon />
                     </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 shrink-0"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                      <path d="M9 6l6 6l-6 6"></path>
-                    </svg>
                   </div>
                 </Link>
               </div>
@@ -144,11 +97,12 @@ const CreateMenuModal = ({ onClose }) => {
           </div>
         </div>
       </Modal>
-      <AddProjectModal open={openPostModal} handleClose={toggleModal} />
+      <CreateProjectModal open={openPostModal} handleClose={toggleModal} />
       <CreateChallengeModal
         open={openChallengeModal}
         handleClose={toggleChallengeModal}
       />
+      <CreateJobOfferModal open={openJobModal} handleClose={toggleJobModal} />
     </div>
   );
 };
