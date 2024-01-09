@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./index";
+import CustomButton from "../CustomButton";
 
 const StorePointCard = ({ points, amount, onClick, extra }) => {
   return (
@@ -9,16 +10,16 @@ const StorePointCard = ({ points, amount, onClick, extra }) => {
           <h5 className="mb-2 text-3xl font-semibold ">{points} Points</h5>
           <p className="font-normal text-gray-500">{amount} TND</p>
         </div>
-        <button
+        <CustomButton
           type="button"
-          className="text-white bg-gradient-to-br from-[#868CFF] via-[#432CF3] to-brand-500 focus:ring-4  hover:bg-gradient-to-b  font-semibold py-3 px-4 mt-4 rounded-full hover:bg-purple-500 focus:outline-none hover:text-white"
+          extra={`w-full px-5 py-3 mt-4 px-4 ${extra}`}
           onClick={() => {
             onClick();
           }}
           disabled={true}
         >
           Coming soon
-        </button>
+        </CustomButton>
       </div>
     </Card>
   );

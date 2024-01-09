@@ -42,7 +42,7 @@ export function SidebarLinks(props) {
                   <p
                     className={`leading-1 ml-4 flex ${
                       activeRoute(route.path) === true
-                        ? "font-bold text-navy-700 dark:text-white"
+                        ? "font-bold dark:text-white"
                         : "font-medium text-gray-600"
                     }`}
                   >
@@ -51,7 +51,7 @@ export function SidebarLinks(props) {
                 )}
               </li>
               {activeRoute(route.path) ? (
-                <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-green-500 dark:bg-brand-400" />
+                <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-green-500 dark:bg-green-500" />
               ) : null}
             </ul>
           </Link>

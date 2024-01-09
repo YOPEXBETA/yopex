@@ -33,7 +33,7 @@ const AdminSidebar = ({ open, onClose }) => {
       </div>
       <hr className="w-full border-t-1 border-gray-200 mt-4" />
 
-      <div className="  h-px  dark:bg-white/30" />
+      <div className="h-px  dark:bg-white/30" />
 
       <ul className="mb-auto pt-1 overflow-y-scroll h-[30rem] overflow-hidden no-scrollbar">
         {routes.children.map((route, index) => (

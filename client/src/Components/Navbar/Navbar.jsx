@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import { FiAlignJustify } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { FiSearch } from "react-icons/fi";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import Dropdown from "../dropdown";
-
 import { useSelector } from "react-redux";
-
+import Dropdown from "../dropdown";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import NotificationMenu from "./components/NotificationMenu";
 import ProfileMenu from "./components/ProfileMenu";
-import SearchInput from "./components/SearchInput";
-import PlusIcon from "../icons/PlusIcon";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
@@ -20,105 +13,144 @@ const Navbar = (props) => {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-zinc-900">
-      <div className="ml-[6px]">
-        <div className="h-6 w-[224px] pt-1">
-          <a
-            className="text-sm font-normal text-zinc-700 hover:underline dark:text-white dark:hover:text-white"
-            href=" "
-          >
-            Pages
-            <span className="mx-1 text-sm text-zinc-700 hover:text-zinc-700 dark:text-white">
-              {" "}
-              /{" "}
-            </span>
-          </a>
-          <Link
-            className="text-sm font-normal capitalize text-zinc-700 hover:underline dark:text-white dark:hover:text-white"
-            to="#"
-          >
-            {brandText}
-          </Link>
-        </div>
-        <p className="shrink text-[33px] capitalize text-zinc-700 dark:text-white">
-          <Link
-            to="#"
-            className="font-bold capitalize hover:text-zinc-700 dark:hover:text-white"
-          >
-            {brandText}
-          </Link>
-        </p>
-      </div>
+    <nav class="sticky py-2 top-0 z-40 bg-white dark:bg-zinc-800 border-b-[1px] dark:border-zinc-700 w-full">
+      <div class="mx-auto  px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <button
+              type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              onClick={onOpenSidenav}
+            >
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
 
-      <div className="relative mt-[3px] flex h-[61px] w-96 flex-grow items-center justify-around gap-2 rounded-full bg-white px-2 py-2 shadow-xl shadow-shadow-500 dark:!bg-zinc-800 dark:shadow-none md:w-[365px] md:flex-grow-0 md:gap-1 xl:w-[365px] xl:gap-2">
-        <span
-          className="flex cursor-pointer text-xl text-gray-600 dark:text-white xl:hidden"
-          onClick={onOpenSidenav}
-        >
-          <FiAlignJustify className="h-5 w-5" />
-        </span>
-
-        {/* start Notification */}
-        <Dropdown
-          button={
-            <p className="cursor-pointer">
-              <IoMdNotificationsOutline className="h-4 w-4 text-gray-600 dark:text-white" />
-            </p>
-          }
-          animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
-          children={
-            <div>
-              <NotificationMenu />
-            </div>
-          }
-          classNames={"py-2 top-4 -left-[230px] md:-left-[440px] w-max"}
-        />
-        {/* start Horizon PRO */}
-
-        <div
-          className="cursor-pointer text-gray-600"
-          onClick={() => {
-            if (darkmode) {
-              document.body.classList.remove("dark");
-              setDarkmode(false);
-            } else {
-              document.body.classList.add("dark");
-              setDarkmode(true);
-            }
-          }}
-        >
-          {darkmode ? (
-            <RiSunFill className="h-4 w-4 text-gray-600 dark:text-white" />
-          ) : (
-            <RiMoonFill className="h-4 w-4 text-gray-600 dark:text-white" />
-          )}
-        </div>
-        {/* Profile & Dropdown */}
-        <Dropdown
-          button={
-            <button>
-              {user?.picturePath ? (
-                <img
-                  alt="picture"
-                  src={user.picturePath}
-                  className="rounded-full  object-cover w-10 h-10 border-2 border-gray-200"
+              <svg
+                class="block h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                 />
-              ) : (
-                <img
-                  alt="default"
-                  src={AvatarProfile}
-                  className="rounded-full object-cover w-10 h-10 border-2 border-gray-200"
+              </svg>
+
+              <svg
+                class="hidden h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
                 />
-              )}
+              </svg>
             </button>
-          }
-          children={
-            <div>
-              <ProfileMenu />
+          </div>
+          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div className="hidden sm:block">
+              <p className="shrink text-3xl capitalize text-zinc-700 dark:text-white">
+                <Link
+                  to="#"
+                  className="font-bold capitalize hover:text-zinc-700 dark:hover:text-white hidden md:block"
+                >
+                  {brandText}
+                </Link>
+              </p>
             </div>
-          }
-          classNames={"py-2 top-8 -left-[180px] w-max"}
-        />
+          </div>
+          <div class="absolute  inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <div className="flex items-center gap-3">
+              <div
+                className="cursor-pointer text-gray-600 border-gray-200 border p-2 rounded-full "
+                onClick={() => {
+                  if (darkmode) {
+                    document.body.classList.remove("dark");
+                    setDarkmode(false);
+                  } else {
+                    document.body.classList.add("dark");
+                    setDarkmode(true);
+                  }
+                }}
+              >
+                {darkmode ? (
+                  <RiSunFill className="h-6 w-6 text-gray-600 dark:text-white" />
+                ) : (
+                  <RiMoonFill className="h-6 w-6 text-gray-600 dark:text-white" />
+                )}
+              </div>
+              <Dropdown
+                button={
+                  <button
+                    type="button"
+                    class="relative rounded-full border-gray-200 border p-2 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-zinc-800"
+                  >
+                    <svg
+                      class="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                      />
+                    </svg>
+                  </button>
+                }
+                animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
+                children={
+                  <div>
+                    <NotificationMenu />
+                  </div>
+                }
+                classNames={"py-2 top-10 -left-[230px] md:-left-[420px] w-max"}
+              />
+            </div>
+
+            <div class="relative ml-6 focus:ring-offset-2 focus:ring-offset-zinc-800">
+              <Dropdown
+                button={
+                  <button>
+                    {user?.picturePath ? (
+                      <img
+                        alt="picture"
+                        src={user.picturePath}
+                        className="rounded-full  object-cover w-11 h-11 border-gray-200 border "
+                      />
+                    ) : (
+                      <img
+                        alt="default"
+                        src={AvatarProfile}
+                        className="rounded-full object-cover w-11 h-11border-gray-200 border"
+                      />
+                    )}
+                  </button>
+                }
+                children={
+                  <div>
+                    <ProfileMenu />
+                  </div>
+                }
+                classNames={"py-2 top-10 -left-[180px] w-max"}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   );
