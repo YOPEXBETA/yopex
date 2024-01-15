@@ -11,6 +11,7 @@ import ContestIcon from "../Components/icons/ContestIcon";
 import JobIcon from "../Components/icons/JobIcon";
 import ProjectIcon from "../Components/icons/ProjectIcon";
 import DiscoverIcon from "../Components/icons/DiscoverIcon";
+import DashIcon from "../Components/icons/DashIcon";
 
 // ==============================|| USER PAGES ||============================== //
 //HomePage
@@ -21,14 +22,7 @@ const HomeLayout = Loadable(
 const DiscoverTalentsLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/DiscoverTalentsPage/Index"))
 );
-//CreateJobOffer
-const CreateJobOffer = Loadable(
-  lazy(() => import("../Pages/UserDashboard/CreateJobOfferPage/index"))
-);
-//CreateChallenge
-const CreateChallenge = Loadable(
-  lazy(() => import("../Pages/UserDashboard/CreateChallengePage/index"))
-);
+
 //CreateCompany
 const CreateCompany = Loadable(
   lazy(() => import("../Pages/UserDashboard/CreateCompanyPage/index"))
@@ -56,9 +50,9 @@ const NotFoundPage = Loadable(
   lazy(() => import("../Pages/UserDashboard/NotFoundPage/NotFoundPage"))
 );
 
-//NotFoundPage
-const Chat = Loadable(
-  lazy(() => import("../Pages/UserDashboard/ChatPage/Chat"))
+//Messenger
+const Messenger = Loadable(
+  lazy(() => import("../Pages/UserDashboard/MessengerPage/Index"))
 );
 
 //UserProfilePage
@@ -111,9 +105,9 @@ const MainRoutes = {
   children: [
     {
       index: true,
-      name: "Projects",
-      path: "projects",
-      icon: <ProjectIcon className="h-6 w-6" />,
+      name: "Feed",
+      path: "feed",
+      icon: <DashIcon className="h-6 w-6" />,
       element: <HomeLayout />,
     },
     {
@@ -128,6 +122,13 @@ const MainRoutes = {
           customWidth: true,
         },
       ],
+    },
+    {
+      name: "Jobs",
+      icon: <JobIcon className="h-6 w-6" />,
+      path: "/jobs",
+      element: <JobLayout />,
+      customWidth: true,
     },
     {
       name: "Challenges",
@@ -148,13 +149,7 @@ const MainRoutes = {
         },
       ],
     },
-    {
-      name: "Jobs",
-      icon: <JobIcon className="h-6 w-6" />,
-      path: "/jobs",
-      element: <JobLayout />,
-      customWidth: true,
-    },
+
     {
       name: "Profile",
       path: "/profile",
@@ -185,11 +180,11 @@ const MainRoutes = {
       children: [
         {
           index: true,
-          element: <Chat />,
+          element: <Messenger />,
         },
         {
           path: ":selectedConversationId",
-          element: <Chat />,
+          element: <Messenger />,
         },
       ],
     },
@@ -198,18 +193,6 @@ const MainRoutes = {
       path: "settings",
       element: <SettingsLayout />,
       icon: <SettingsIcon />,
-    },
-    {
-      name: "Create Job Offer",
-      path: "/create-job-offer",
-      element: <CreateJobOffer />,
-      hideInSidebar: true,
-    },
-    {
-      name: "Create Challenge",
-      path: "create-challenge",
-      element: <CreateChallenge />,
-      hideInSidebar: true,
     },
     {
       name: "Create company",

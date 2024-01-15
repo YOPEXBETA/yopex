@@ -49,7 +49,7 @@ export default function AdminLayout(props) {
         <Sidebar open={open} onClose={() => setOpen(false)} />
         <div className="h-full w-full bg-lightPrimary dark:!bg-zinc-900">
           <main
-            className={`mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]`}
+            className={`h-full flex-none transition-all md:pr-2 xl:ml-[313px]`}
           >
             <div className="h-full">
               <AdminNavbar

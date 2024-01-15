@@ -79,7 +79,7 @@ const MainLayout = (props) => {
         />
         <div className="h-full w-full bg-lightPrimary dark:!bg-zinc-900">
           <main
-            className={`mx-[12px] h-full flex-none transition-all md:pr-2 ${
+            className={`h-full flex-none transition-all  ${
               matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[313px]"
             }`}
           >
@@ -89,7 +89,7 @@ const MainLayout = (props) => {
                 brandText={currentRoute}
                 {...rest}
               />
-              <div className="pt-11 mx-3 mb-auto h-full min-h-[100vh] p-2 md:pr-2">
+              <div className="pt-10 md:mx-6 mx-0 mb-auto h-full min-h-[100vh] p-2">
                 <Outlet />
               </div>
             </div>

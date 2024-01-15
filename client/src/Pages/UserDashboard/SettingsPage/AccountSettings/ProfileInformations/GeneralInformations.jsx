@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FaCamera } from "react-icons/fa";
-import { toast } from "react-hot-toast";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,9 +9,9 @@ import { useFileUpload } from "../../../../../hooks/react-query/useUsers";
 import { edit, reset } from "../../../../../redux/auth/authSlice";
 import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 import { format } from "date-fns";
+import Card from "../../../../../Components/Cards";
 
-const GeneralInformations = () => {
-  const [openPostModal, setOpenPostModal] = useState(false);
+const GeneralInformations = ({ extra }) => {
   const dispatch = useDispatch();
   const fileUploadMutation = useFileUpload();
   const { user, error, loading, success } = useSelector((state) => state.auth);
@@ -58,13 +57,13 @@ const GeneralInformations = () => {
     if (data.file.length > 0) {
       const formData = new FormData();
       formData.append("file", file[0]);
-      const data = await fileUploadMutation.mutateAsync(formData);
+      const data = await fileUploadMutation?.mutateAsync(formData);
       const SkillsId = data.skills.map((skill) => skill.value);
 
       return dispatch(
         edit({
           ...values,
-          picturePath: data.data.downloadURL,
+          picturePath: data?.data?.downloadURL,
           skills: SkillsId,
         })
       );
@@ -78,7 +77,7 @@ const GeneralInformations = () => {
   };
 
   return (
-    <div className="md:mt-0 mt-8">
+    <Card extra={`p-8 ${extra}`}>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 gap-3"
@@ -287,13 +286,13 @@ const GeneralInformations = () => {
         </div>
 
         <div className="grid grid-cols-1 my-5">
-          <div className="col-span-1">
+          <div className="col-span-1 flex justify-end">
             <button
               className={`${
                 isSubmitting
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-green-500 dark:hover:bg-green-600 hover:bg-green-600"
-              } px-4 py-2 rounded-lg text-white w-40`}
+                  : "bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80"
+              } text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-28`}
               type="submit"
               disabled={isSubmitting}
             >
@@ -302,7 +301,7 @@ const GeneralInformations = () => {
           </div>
         </div>
       </form>
-    </div>
+    </Card>
   );
 };
 export default GeneralInformations;
