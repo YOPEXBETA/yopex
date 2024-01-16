@@ -16,7 +16,7 @@ const StorePointCard = ({ points, amount, onClick, extra }) => {
           onClick={() => {
             onClick();
           }}
-          disabled={true}
+          disabled={false}
         >
           Coming soon
         </CustomButton>
