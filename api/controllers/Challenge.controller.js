@@ -21,21 +21,23 @@ const CreateChallenge = async (req, res, next) => {
 
     const userId = req.userId;
     const user = await UserModel.findById(userId);
-
-    const company = await CompanyModel.findOne({
-      user: user._id,
-      _id: companyId,
-    });
-    console.log("company:", company);
-
-    if (!company) {
-      return res.status(400).json({ error: "Company not found" });
+    let owner = user;
+    if (companyId){
+      owner = await CompanyModel.findOne({
+        user: user._id,
+        _id: companyId,
+      });
+      console.log("company:", owner);
+  
+      if (!owner) {
+        return res.status(400).json({ error: "Company not found" });
+      }
+      if (owner.verified === false) {
+        return res.status(400).json({ message: "Company not verified" });
+      }
     }
-    if (company.verified === false) {
-      return res.status(400).json({ message: "Company not verified" });
-    }
+    
     const challenge = new ChallengeModel({
-      company: company._id,
       title,
       description,
       category,
@@ -45,6 +47,12 @@ const CreateChallenge = async (req, res, next) => {
       nbruser,
       paid: paid === "true" ? true : false,
     });
+    if (companyId) {
+      challenge.company = onwer._id;
+    }
+    else{
+      challenge.owner = owner._id;
+    }
 
     await challenge.save();
 
@@ -52,14 +60,19 @@ const CreateChallenge = async (req, res, next) => {
       contestId: challenge._id,
     });
     await newCoversation.save();
-
-    company.challenges.push(challenge._id);
-    await company.save();
+    if (companyId) {
+      owner.challenges.push(challenge._id);
+      await owner.save();
+    }else{
+      owner.createdChallenge.push(challenge._id);
+      await owner.save();
+    }
 
     res
-      .status(201)
+      .status(201) 
       .json({ message: "Challenge created successfully", challenge });
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ error: `Failed to create challenge: ${error.message}` });
@@ -72,6 +85,7 @@ const getChallengeById = async (req, res) => {
   try {
     const challenge = await ChallengeModel.findById(challengeId)
       .populate("company")
+      .populate("owner", "firstname lastname picturePath _id")
       .populate({
         path: "users",
         populate: {

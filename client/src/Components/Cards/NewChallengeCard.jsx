@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import Card from ".";
 import { Link } from "react-router-dom";
 import ChallengeMenuIcon from "../MenuIcons/ChallengeMenuIcon";
+import challengeBanner from "../../assets/images/challengeBanner.jpg";
+
 
 const NewChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);
@@ -37,16 +39,16 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
             <div className="flex justify-between">
               <div className="flex items-center gap-4">
                 <img
-                  src={challenge?.company?.companyLogo}
+                  src={challenge?.company?.companyLogo ? challenge?.company.companyLogo : challengeBanner}
                   alt="Icon"
                   className="w-16 h-16 rounded-lg object-cover border hidden md:block lg:block"
                 />
                 <p className="mt-1 font-medium dark:text-zinc-400 md:mt-2">
-                  {challenge.company.companyName}
+                  {challenge.company?.companyName}
                 </p>
               </div>
               <div className="flex items-center justify-start gap-2">
-                {user?.companies?.includes(challenge?.company._id) ? (
+                {user?.companies?.includes(challenge?.company?._id) ? (
                   <div onClick={(e) => e.preventDefault()}>
                     <ChallengeMenuIcon challenge={challenge} />
                   </div>

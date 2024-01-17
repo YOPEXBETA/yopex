@@ -20,6 +20,7 @@ const Banner = ({ changeValue, value }) => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [deadline, setDeadline] = useState(null);
+  
 
   const { user } = useSelector((state) => state.auth);
 
@@ -58,7 +59,7 @@ const Banner = ({ changeValue, value }) => {
     registerMutate();
     join({ contestId: challenge._id, userId: user._id });
   };
-
+  
   return (
     <div className="w-full" key={challenge._id}>
       <div className="relative z-20 mb-4 h-[300px] overflow-hidden  md:h-[400px]">
@@ -72,7 +73,7 @@ const Banner = ({ changeValue, value }) => {
             <div className="mb-4 mr-5 flex items-center md:mr-10">
               <div className="mr-4 h-10 w-10 overflow-hidden rounded-full">
                 <img
-                  src={challenge?.company?.companyLogo}
+                  src={challenge?.company?.companyLogo ? challenge?.company.companyLogo : challenge?.owner?.picturePath}
                   alt="image"
                   className="w-full object-cover"
                 />
@@ -80,11 +81,11 @@ const Banner = ({ changeValue, value }) => {
               <p className="text-base font-medium text-white">
                 By
                 <a
-                  href={`/company/${challenge?.company?._id}`}
+                  href={challenge?.company?.companyLogo ? `/company/${challenge?.company?._id}`: `/profile/${challenge?.owner?._id}`}
                   className="text-white hover:opacity-70"
                 >
                   {" "}
-                  {challenge?.company?.companyName}
+                  {challenge?.company?.companyName ? challenge?.company?.companyName : challenge?.owner?.firstname + " " + challenge?.owner?.lastname}
                 </a>
               </p>
             </div>

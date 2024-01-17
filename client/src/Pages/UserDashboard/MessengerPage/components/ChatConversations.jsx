@@ -4,10 +4,11 @@ import {
   useCreateMessage,
   useMessages,
 } from "../../../../hooks/react-query/useConversations";
+import { useNavigate } from "react-router-dom";
 
 const ChatConversations = ({ conversationId, socket, otherUser }) => {
   const chatContainerRef = useRef(null);
-
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const { data: messages } = useMessages(conversationId);
   const { mutate } = useCreateMessage(conversationId);
@@ -36,11 +37,10 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
     event.preventDefault();
 
     const { id: receiverId } = otherUser;
-
+    
     socket.emit("sendMessage", {
       sender: {
         _id: user?._id,
-        firstname: user?.firstname,
         picturePath: otherUser?.companyLogo
           ? otherUser?.companyLogo
           : user?.picturePath,
@@ -58,18 +58,15 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
     <div className="top-0 bottom-0 left-0 right-0 flex flex-col flex-1 overflow-hidden bg-transparent bg-bottom bg-cover">
       <div className="z-20 flex flex-grow-0 flex-shrink-0 w-full pr-3 bg-white dark:bg-zinc-800 border-b">
         <img
-          src={otherUser.picturePath}
+          src={otherUser.companyLogo ? otherUser.companyLogo : otherUser.picturePath}
           className="w-12 h-12 mx-4 my-2 bg-center bg-no-repeat border rounded-full object-cover cursor-pointer"
         />
         <div className="flex flex-col justify-center flex-1 overflow-hidden cursor-pointer">
-          <div className="overflow-hidden text-base font-medium leading-tight text-gray-600 whitespace-no-wrap">
-            {otherUser.firstname} {otherUser.lastname}
-          </div>
-          <div className="overflow-hidden text-sm font-medium leading-tight text-gray-600 whitespace-no-wrap">
-            Online
+          <div className="overflow-hidden text-base font-medium leading-tight text-gray-600 whitespace-no-wrap" onClick={()=>{navigate(otherUser.companyLogo? "/company/"+otherUser._id:"/profile/"+otherUser._id)}}>
+            {otherUser.companyName ? otherUser.companyName : otherUser.firstname}
           </div>
         </div>
-
+        {/** 
         <button className="flex self-center p-2 ml-2 text-gray-500 rounded-full focus:outline-none hover:text-gray-600">
           <svg
             className="w-6 h-6 text-gray-600 fill-current"
@@ -129,9 +126,10 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
             />
           </svg>
         </button>
+        */}
       </div>
       <div className="top-0 bottom-0 left-0 right-0 flex flex-col flex-1 overflow-hidden bg-transparent bg-bottom bg-cover overflow-y-auto">
-        <div className="self-center flex-1 w-full max-w-xl">
+        <div className="self-center flex-1 w-full ">
           <div id="messages" ref={chatContainerRef}>
             {arrivalMessage?.length === 0 ? (
               <div className="flex items-center justify-center h-96">
@@ -147,8 +145,8 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
                       <div className="grid">
                         <div className="col-span-12">
                           {message.sender._id === user._id ? (
-                            <div className="text-right">
-                              <p className="text-sm bg-white py-2 px-4 shadow rounded-xl max-w-96">
+                            <div className="flex justify-end">
+                              <p className="text-sm bg-white  py-2 px-4 shadow rounded-xl">
                                 {message.message}
                               </p>
                             </div>
@@ -226,6 +224,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
             </span>
             <input
               type="search"
+              value={message}
               className="w-full py-2 pl-10 text-sm bg-white border border-transparent appearance-none rounded-tg placeholder-gray-800 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
               placeholder="Message..."
               onChange={(event) => setMessage(event.target.value)}

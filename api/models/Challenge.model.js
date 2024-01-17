@@ -5,7 +5,7 @@ const companyModel = require("./company.model");
 const ChallengeSchema = new mongoose.Schema(
   {
     nbruser: { type: Number, default: 10 },
-
+    picturePath: { type: String },
     title: { type: String, required: true },
     description: { type: String, required: true },
     totalStars: { type: Number, default: 0 },
@@ -28,6 +28,10 @@ const ChallengeSchema = new mongoose.Schema(
     company: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     winner: {
       type: mongoose.Schema.Types.ObjectId,

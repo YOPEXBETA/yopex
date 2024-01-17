@@ -12,11 +12,11 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered }) => {
   const { user } = useSelector((state) => state.auth);
 
   const isOwner = user.companies.find(
-    (company) => company === challenge.company._id
+    (company) => company === challenge.company?._id
   )
     ? true
-    : false;
-
+    : challenge.owner._id === user._id ? true : false;
+     
   const getDeadlineDifference = (deadline) => {
     const now = moment();
     const diff = moment(deadline).diff(now);

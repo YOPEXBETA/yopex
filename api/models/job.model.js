@@ -25,6 +25,7 @@ const JobSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    
     offerType: {
       type: Array,
       default: [],

@@ -67,3 +67,14 @@ export const useContestMessages = (conversationId) => {
     },
   });
 };
+
+
+export const useGetConversationById = (conversationId) => {
+  return useQuery({
+    queryKey: ["conversation", conversationId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/conversation/conn/${conversationId}`);
+      return data;
+    },
+  });
+}

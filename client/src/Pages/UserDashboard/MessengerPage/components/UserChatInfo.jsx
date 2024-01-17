@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const UserChatInfo = ({ otherUser }) => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="flex items-center justify-between w-full p-3">
@@ -61,18 +63,19 @@ const UserChatInfo = ({ otherUser }) => {
           <button
             type="button"
             className="content-center block w-32 h-32 p-1 overflow-hidden text-center rounded-full focus:outline-none"
+            onclick={() => {navigate(`/profile/${otherUser._id}`)}}
           >
             <img
               className="content-center object-cover w-full h-full border-2 border-gray-200 rounded-full"
-              src={otherUser.picturePath}
+              src={otherUser.companyLogo? otherUser.companyLogo : otherUser.picturePath}
               alt=""
             />
           </button>
         </div>
         <p className="text-lg font-semibold text-center text-gray-800 dark:text-white">
-          {otherUser.firstname}
+        {otherUser.companyName ? otherUser.companyName : otherUser.firstname + " " + otherUser.lastname}
         </p>
-        <p className="text-sm font-medium text-center text-blue-500">online</p>
+        
       </div>
       <div className="flex items-center w-full px-3 mt-6">
         <div className="px-2 text-gray-500 rounded-full hover:text-gray-600">
@@ -90,16 +93,19 @@ const UserChatInfo = ({ otherUser }) => {
           </svg>
         </div>
         <div className="ml-4">
-          <div className="mr-auto text-sm font-semibold text-gray-800">
-            25 y.o traveler
-          </div>
+          
           <div className="mt-1 mr-auto text-sm font-semibold leading-none text-gray-600">
             Bio
+          </div>
+          <div className="mr-auto text-sm font-semibold text-gray-800">
+            {otherUser.companyDescription? otherUser.companyDescription : otherUser.userDescription}
           </div>
         </div>
       </div>
       <div>
-        <div className="flex items-center w-full px-3 mt-4">
+        
+          {otherUser.email && (
+          <div className="flex items-center w-full px-3 mt-4">
           <div className="px-2 text-gray-500 rounded-full hover:text-gray-600">
             <svg
               className="w-6 h-6 text-gray-600 fill-current"
@@ -115,14 +121,16 @@ const UserChatInfo = ({ otherUser }) => {
             </svg>
           </div>
           <div>
+          <div className="mt-1 ml-4 mr-auto text-sm font-semibold leading-none text-gray-600">
+              Email
+            </div>
             <div className="ml-4 mr-auto text-sm font-semibold text-gray-800">
               {otherUser.email}
             </div>
-            <div className="mt-1 ml-4 mr-auto text-sm font-semibold leading-none text-gray-600">
-              Email
-            </div>
+            
           </div>
-        </div>
+          </div>) }
+          
       </div>
       <div>
         <div className="flex items-center w-full px-3 my-4">
@@ -141,17 +149,18 @@ const UserChatInfo = ({ otherUser }) => {
             </svg>
           </div>
           <div className="ml-4">
-            <div className="mr-auto text-sm font-semibold text-gray-800">
-              +1 38594 38538
-            </div>
-            <div className="mt-1 mr-auto text-sm font-semibold leading-none text-gray-600">
+          <div className="mt-1 mr-auto text-sm font-semibold leading-none text-gray-600">
               Phone
             </div>
+            <div className="mr-auto text-sm font-semibold text-gray-800">
+              {otherUser.phoneNumber}
+            </div>
+            
           </div>
         </div>
       </div>
 
-      <ul className="flex flex-row items-center justify-around px-3 mb-1 list-none border-b select-none dark:text-white">
+      {/**<ul className="flex flex-row items-center justify-around px-3 mb-1 list-none border-b select-none dark:text-white">
         <li className="flex-auto px-4 mx-1 -mb-px text-center rounded-t-lg cursor-pointer last:mr-0 hover:bg-gray-200">
           <a className="block py-3 text-xs font-bold leading-normal text-blue-500 uppercase border-b-4 border-blue-500">
             Media
@@ -172,7 +181,7 @@ const UserChatInfo = ({ otherUser }) => {
             Audio
           </a>
         </li>
-      </ul>
+  </ul>*/}
     </div>
   );
 };

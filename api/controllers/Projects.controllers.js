@@ -1,4 +1,4 @@
-const Post = require("../models/SocialMediaPost.model");
+const Post = require("../models/Projects.model");
 const UserModel = require("../models/user.model");
 const CompanyModel = require("../models/company.model");
 const userModel = require("../models/user.model");
@@ -11,7 +11,7 @@ const CreatePost = async (req, res) => {
   try {
     // Find the current user by ID
     const user = await UserModel.findById(req.body.userId);
-    const company = await CompanyModel.findById(req.body.userId);
+    //const company = await CompanyModel.findById(req.body.userId);
     // Determine whether the current user is a UserModel or CompanyModel
     let owner;
     let isUser = true;
@@ -137,9 +137,9 @@ const getUserPosts = async (req, res) => {
           { companyId: userId },
           { _id: { $in: sharedPostIds } },
         ],
-      });
+      }).populate("skills");
     } else {
-      posts = await Post.find({ userId: userId });
+      posts = await Post.find({ userId: userId }).populate("skills");
     }
     res.status(200).json(posts);
   } catch (err) {

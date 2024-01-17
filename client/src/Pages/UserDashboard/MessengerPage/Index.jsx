@@ -3,7 +3,7 @@ import ChatConversations from "./components/ChatConversations";
 import UsersLatestMsgs from "./components/UsersLatestMsgs";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { useConversations } from "../../../hooks/react-query/useConversations";
+import { useConversations, useGetConversationById } from "../../../hooks/react-query/useConversations";
 import useSocket from "../../../hooks/useSocket";
 import UserChatInfo from "./components/UserChatInfo";
 
@@ -11,27 +11,39 @@ const Messenger = () => {
   const { user } = useSelector((state) => state?.auth);
   const { data: conversations } = useConversations(user?._id);
   const { selectedConversationId } = useParams();
+  const {data: currentConversation} = useGetConversationById(selectedConversationId);
+  console.log(currentConversation);
   const [otherUser, setOtherUser] = useState({});
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    if (!conversations) return;
-    else {
-      const conn = conversations.find(
-        (item) => item?.conversationId === selectedConversationId
-      );
+  // useEffect(() => {
+  //   if (!conversations) return;
+  //   else {
+  //     const conn = conversations.find(
+  //       (item) => item?.conversationId === selectedConversationId
+  //     );
 
-      if (!conn);
-      else {
-        if (conn?.members[0]?.role === "company") {
-          setOtherUser(conn?.members[1]);
-        } else {
-          setOtherUser(conn?.members[0]);
-        }
+  //     if (!conn);
+  //     else {
+  //       if (conn?.members[0]?.role === "company") {
+  //         setOtherUser(conn?.members[1]);
+  //       } else {
+  //         setOtherUser(conn?.members[0]);
+  //       }
+  //     }
+  //   }
+  // }, [selectedConversationId, conversations]);
+  useEffect(() => {
+    if (!currentConversation) return;
+    else {
+      if (!currentConversation?.company) {
+        setOtherUser(currentConversation?.members[0]);
+      } else {
+        setOtherUser(currentConversation?.company);
       }
     }
-  }, [selectedConversationId, conversations]);
+  }, [currentConversation]);
   const socket = useSocket();
 
   socket.emit("joinRoom", { id: user?._id, roomid: selectedConversationId });

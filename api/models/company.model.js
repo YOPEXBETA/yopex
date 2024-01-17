@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { boolean } = require("yup");
 const jobModel = require("./job.model");
 const ChallengeModel = require("./Challenge.model");
-const SocialMediaPostModel = require("./SocialMediaPost.model");
+const SocialMediaPostModel = require("./Projects.model");
 const notificationModel = require("./notification.model");
 const ConversationModel = require("./Conversation.model");
 

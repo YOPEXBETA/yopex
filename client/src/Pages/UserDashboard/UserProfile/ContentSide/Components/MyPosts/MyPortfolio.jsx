@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import AddSocialPostCard from "../../../../../../Components/shared/CreatePost/AddSocialPostCard";
+import ProjectsProfile from "../../../../../../Components/Cards/ProjectsProfile";
 
 const MyPortfolio = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,6 +29,7 @@ const MyPortfolio = () => {
   const { user } = useSelector((state) => state.auth);
   const { userId } = useParams();
   const { data: posts, isLoading } = useUserPosts(userId);
+  console.log(posts);
   const { data } = useBookmarkedPosts(user._id);
   let bookmarksId = [];
   data?.map((book) => {
@@ -37,16 +39,16 @@ const MyPortfolio = () => {
   return (
     <div>
       <AddSocialPostCard />
-      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 py-2 mb-12">
+      <div className="gap-4 py-2 mb-12">
         {isLoading ? (
           <LoadingSpinner />
         ) : posts?.length > 0 ? (
           posts.map((post, index) => (
-            <SocialPostCard
+            <ProjectsProfile
               key={post._id}
               post={post}
               bookmarks={bookmarksId}
-              className="xl:h-48 xl:w-96"
+              
               height={"48"}
               width={"96"}
               openModal={() => openModal(post)}

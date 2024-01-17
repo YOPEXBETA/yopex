@@ -29,11 +29,7 @@ const CreatePostForm = () => {
     },
   });
 
-  const [selectedOption, setSelectedOption] = useState();
 
-  const handleSelectChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
   const uploadedFile = watch("files");
 
   const onSubmit = async (data) => {
@@ -47,7 +43,7 @@ const CreatePostForm = () => {
 
     mutate({
       //userId: user._id,
-      userId: selectedOption,
+      userId: user._id,
       title: data.title,
       description: data.description,
       skills: selectedSkills,
@@ -68,22 +64,7 @@ const CreatePostForm = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <div className="space-y-4">
-                <select
-                  id="selectField"
-                  className="block w-full p-2 mb-4 border dark:text-white dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500"
-                  value={selectedOption}
-                  onChange={handleSelectChange}
-                >
-                  <option value="">Share a Post as</option>
-                  <option value={user._id}>
-                    {user?.firstname} {user?.lastname}
-                  </option>
-                  {userProfile?.companies.map((option) => (
-                    <option key={option._id} value={option._id}>
-                      {option.companyName}
-                    </option>
-                  ))}
-                </select>
+                
                 <div>
                   <input
                     {...register("title", { required: true })}

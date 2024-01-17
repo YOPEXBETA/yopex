@@ -4,13 +4,14 @@ import Select from "react-select";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { useCreateChallenge } from "../../hooks/react-query/useChallenges";
-import { useUserById } from "../../hooks/react-query/useUsers";
+import { useFileUpload, useUserById } from "../../hooks/react-query/useUsers";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCategories } from "../../hooks/react-query/useCategories";
 import Modal from ".";
 import CloseIcon from "../icons/CloseIcon";
 import CompanyIcon from "../icons/CompanyIcon";
 import UsersIcon from "../icons/UsersIcon";
+import { FaImage } from "react-icons/fa";
 
 const CreateChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -37,6 +38,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
       category: [],
       RecommendedSkills: [],
       category: [],
+      files: [],
     },
   });
 
@@ -47,10 +49,21 @@ const CreateChallengeModal = ({ open, handleClose }) => {
   const { data: userProfile, isLoading } = useUserById(userId);
 
   const { mutate, error, isError, isSuccess } = useCreateChallenge(user);
+  //const fileUploadMutation = useFileUpload();
+  const onSubmit = async (challengeData) => {
+    
+    if (showCompanies) {
+      const companyId = selectedOption;
+      mutate({ companyId, challengeData, paid: selectedOptionpaid });
+    } else {
+      // const formData = new FormData();
+      // formData.append("file", challengeData.files[challengeData.files[0]]);
+      // formData.append("type", "posts");
 
-  const onSubmit = (challengeData) => {
-    const companyId = selectedOption;
-    mutate({ companyId, challengeData, paid: selectedOptionpaid });
+      // const result = await fileUploadMutation.mutateAsync(formData);
+
+      mutate({ challengeData, paid: selectedOptionpaid });
+    }
   };
 
   const now = new Date().toISOString().slice(0, -8);
@@ -351,6 +364,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                     {...register("nbruser", { required: true })}
                   />
                 </div>
+                
 
                 <div className="md:col-span-5">
                   <label className="text-sm text-black mb-2 block dark:text-white">
