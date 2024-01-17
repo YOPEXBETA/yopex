@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://yopex-api.tabaani.co";
+const url = "https://api.yopexhub.com";
 
 const searchUsers = async (searchKeyword) => {
   const { data } = await axios.get(`${url}/users`, {
