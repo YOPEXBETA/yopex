@@ -7,6 +7,7 @@ import {
   useCreateMessage,
 } from "../../../../../hooks/react-query/useConversations";
 import { io } from "socket.io-client";
+import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 
 const ChallengeConversation = ({ conversationId, id }) => {
   const chatContainerRef = useRef(null);
@@ -36,6 +37,7 @@ const ChallengeConversation = ({ conversationId, id }) => {
   useEffect(() => {
     if (!socket) return;
     socket.on("getMessageinContest", (data) => {
+      console.log(data);
       setArrivalMessage((prev) => [...prev, data]);
     });
 
@@ -86,6 +88,9 @@ const ChallengeConversation = ({ conversationId, id }) => {
                   <div className="col-span-12">
                     {message.sender._id === user._id ? (
                       <div className="text-right">
+                        <p className="text-gray-500 text-sm">
+                          {message.sender.firstname}
+                        </p>
                         <p className="dark:text-white">{message.message}</p>
                         <p className="text-gray-500 text-[0.75rem]">
                           {formatDistance(
@@ -100,7 +105,7 @@ const ChallengeConversation = ({ conversationId, id }) => {
                     ) : (
                       <div>
                         <div className="flex gap-2 items-center">
-                          {message.sender.picturePath && (
+                          {message.sender.picturePath ? (
                             <img
                               alt="image"
                               className="h-11 w-11 rounded-full bg-green-500"
@@ -112,8 +117,17 @@ const ChallengeConversation = ({ conversationId, id }) => {
                                   : ""
                               }
                             />
+                          ) : (
+                            <img
+                              alt="image"
+                              className="h-11 w-11 rounded-full bg-green-500"
+                              src={AvatarProfile}
+                            />
                           )}
                           <div>
+                            <p className="text-gray-500 text-sm">
+                              {message.sender.firstname}
+                            </p>
                             <p className="text-black dark:text-white">
                               {message.message}
                             </p>

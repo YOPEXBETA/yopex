@@ -7,7 +7,7 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
   const { id: challengeId } = useParams();
   const [rating, setRating] = useState(1);
   const { mutate, isError, isSuccess } = useAddReviews(participant.user._id);
-  console.log(companyId);
+  
 
   const handleStarClick = (index) => {
     setRating(index + 1);

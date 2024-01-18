@@ -108,6 +108,8 @@ const Banner = ({ changeValue, value }) => {
                   {challenge?.users?.length}
                 </p>
               </div>
+
+
             </div>
           </div>
         </div>

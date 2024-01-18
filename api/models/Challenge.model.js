@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const submissionModel = require("./submission.model");
 const companyModel = require("./company.model");
 
+
 const ChallengeSchema = new mongoose.Schema(
   {
     nbruser: { type: Number, default: 10 },
@@ -10,13 +11,23 @@ const ChallengeSchema = new mongoose.Schema(
     description: { type: String, required: true },
     totalStars: { type: Number, default: 0 },
     starNumber: { type: Number, default: 0 },
+    start:{type:Boolean,required:true,default:false},
     category: {
-      type: Array,
-
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Category",
+        },
+      ],
       default: [],
     },
     RecommendedSkills: {
-      type: Array,
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Skill",
+        },
+      ],
       default: [],
     },
     price: { type: Number, required: false },

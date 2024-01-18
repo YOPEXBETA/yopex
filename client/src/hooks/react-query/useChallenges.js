@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useParams } from "react-router-dom";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
@@ -254,3 +255,25 @@ export const useEditSubmission = (challengeId, participant) => {
     },
   });
 };
+
+
+export const useStartChallenge = () => {
+  const queryClient = useQueryClient();
+  const { id: challengeId } = useParams();
+  return useMutation({
+    mutationFn: async (data) => {
+      await axios.put(`${url}/challenge/start/${challengeId}`, data);
+    },
+    onSuccess: () => {
+      toast.success("Challenge started successfully");
+      queryClient.invalidateQueries(["challenges"]);
+    },
+    onError: (data) => {
+      console.log(data);
+      if (data.response.data.message === "No users registered"){
+        toast.error("No users registered");
+      }else toast.error("Error starting challenge");
+      
+    },
+  });
+}

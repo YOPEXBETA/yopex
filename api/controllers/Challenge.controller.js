@@ -48,7 +48,7 @@ const CreateChallenge = async (req, res, next) => {
       paid: paid === "true" ? true : false,
     });
     if (companyId) {
-      challenge.company = onwer._id;
+      challenge.company = owner._id;
     }
     else{
       challenge.owner = owner._id;
@@ -86,6 +86,7 @@ const getChallengeById = async (req, res) => {
     const challenge = await ChallengeModel.findById(challengeId)
       .populate("company")
       .populate("owner", "firstname lastname picturePath _id")
+      .populate("RecommendedSkills", "name _id")
       .populate({
         path: "users",
         populate: {
@@ -203,7 +204,6 @@ const getChallengeUserSubmit = async (req, res) => {
 const updateChallenge = async (req, res, next) => {
   const { description, title, nbruser, price, category, RecommendedSkills } =
     req.body;
-  console.log(description, title, nbruser, price, category, RecommendedSkills);
   const challengeId = req.params.challengeId;
 
   let Challenge;
@@ -222,6 +222,30 @@ const updateChallenge = async (req, res, next) => {
   }
 };
 
+const startChallenge = async (req, res, next) => {
+  try{
+    const challengeId = req.params.challengeId;
+    const challenge = await ChallengeModel.findById(challengeId);
+    const userId = req.userId;
+    const user = await UserModel.findById(userId);
+    if ((challenge.owner?.toString() !== userId.toString()) && (!user.companies.includes(challenge.company.toString()))) {
+      return res.status(400).json({ message: "Not authorized" });
+    }
+    if (challenge.users.length === 0) {
+      return res.status(400).json({ message: "No users registered" });
+    }
+    challenge.start = true;
+    challenge.deadline = req.body.deadline;
+    await challenge.save();
+    res.status(200).json({ message: "Challenge started" });
+  }catch(err){
+    
+    res.status(400).json({ message: "bad" });
+    return console.log(err);
+  }
+
+}
+
 module.exports = {
   CreateChallenge,
   deleteChallenge,
@@ -231,4 +255,5 @@ module.exports = {
   getChallengeUsers,
   getChallengeUserSubmit,
   updateChallenge,
+  startChallenge
 };

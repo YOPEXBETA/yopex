@@ -1,22 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useChallengeById } from "../../hooks/react-query/useChallenges";
-import { useSelector } from "react-redux";
 import moment from "moment";
 import Card from "../Cards";
 
-const ChallengeNavigationTab = ({ value, changeValue, isRegistered }) => {
-  const { id: challengeId } = useParams();
-
-  const { data: challenge } = useChallengeById(challengeId);
-  const { user } = useSelector((state) => state.auth);
-
-  const isOwner = user.companies.find(
-    (company) => company === challenge.company?._id
-  )
-    ? true
-    : challenge.owner._id === user._id ? true : false;
-     
+const ChallengeNavigationTab = ({ value, changeValue, isRegistered,challenge,isOwner }) => {
+       
   const getDeadlineDifference = (deadline) => {
     const now = moment();
     const diff = moment(deadline).diff(now);

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import moment from "moment";
 import Select from "react-select";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
@@ -11,7 +10,7 @@ import Modal from ".";
 import CloseIcon from "../icons/CloseIcon";
 import CompanyIcon from "../icons/CompanyIcon";
 import UsersIcon from "../icons/UsersIcon";
-import { FaImage } from "react-icons/fa";
+
 
 const CreateChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -22,9 +21,9 @@ const CreateChallengeModal = ({ open, handleClose }) => {
   const [showUser, setShowUser] = useState(true);
   const [showCompanies, setShowCompanies] = useState(false);
   const { data: Skills } = useSkills();
-  const itSkills = Skills?.map((skill) => skill.name);
+
   const { data: categorys } = useCategories();
-  const itCategory = categorys?.map((category) => category.name);
+
 
   const {
     handleSubmit,
@@ -51,7 +50,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
   const { mutate, error, isError, isSuccess } = useCreateChallenge(user);
   //const fileUploadMutation = useFileUpload();
   const onSubmit = async (challengeData) => {
-    
+    console.log(challengeData);
     if (showCompanies) {
       const companyId = selectedOption;
       mutate({ companyId, challengeData, paid: selectedOptionpaid });
@@ -245,7 +244,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   />
                 </div>
 
-                <div className="md:col-span-1">
+                <div className="md:col-span-2">
                   <label className="text-sm text-black mb-2 block dark:text-white">
                     Type
                   </label>
@@ -258,11 +257,11 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                       setSelectedOptionpaid(e.target.value);
                     }}
                   >
-                    <option value={"false"}>free</option>
-                    <option value={"true"}>paid</option>
+                    <option value={"false"}>Recrutement</option>
+                    <option value={"true"}>Freelance</option>
                   </select>
                 </div>
-                <div className="md:col-span-4">
+                <div className="md:col-span-3">
                   <label className="text-sm text-black mb-2 block dark:text-white">
                     Challenge Prize
                   </label>
@@ -289,20 +288,17 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                     name="RecommendedSkills"
                     defaultValue={"Any"}
                     render={({ field }) =>
-                      itSkills && (
+                    Skills && (
                         <Select
                           isMulti
                           className="my-react-select-container mt-2"
                           classNamePrefix="my-react-select"
                           id="tags-outlined"
-                          options={itSkills.map((skill) => ({
-                            value: skill,
-                            label: skill,
+                          options={Skills.map((skill) => ({
+                            value: skill._id,
+                            label: skill.name,
                           }))}
-                          value={field.value.map((skill) => ({
-                            value: skill,
-                            label: skill,
-                          }))}
+                          
                           onBlur={field.onBlur}
                           onChange={(selectedOptions) => {
                             const selectedValues = selectedOptions.map(
@@ -324,20 +320,17 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                     name="category"
                     defaultValue={"Any"}
                     render={({ field }) =>
-                      itCategory && (
+                    categorys && (
                         <Select
                           isMulti
                           className="my-react-select-container mt-2"
                           classNamePrefix="my-react-select"
                           id="tags-outlined"
-                          options={itCategory.map((category) => ({
-                            value: category,
-                            label: category,
+                          options={categorys.map((category) => ({
+                            value: category._id,
+                            label: category.name,
                           }))}
-                          value={field.value.map((category) => ({
-                            value: category,
-                            label: category,
-                          }))}
+                          
                           onBlur={field.onBlur}
                           onChange={(selectedOptions) => {
                             const selectedValues = selectedOptions.map(
@@ -365,38 +358,6 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   />
                 </div>
                 
-
-                <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
-                    Deadline
-                  </label>
-
-                  <Controller
-                    control={control}
-                    name="deadline"
-                    defaultValue={new Date().toISOString().slice(0, -8)}
-                    render={({ field }) => (
-                      <input
-                        required
-                        type="datetime-local"
-                        className="w-full py-2 px-3 dark:bg-zinc-700 mt-2 dark:text-white rounded border focus:outline-none focus:border-green-500 mb-2"
-                        {...field}
-                        onChange={(e) => {
-                          const now = moment();
-                          const diff = moment(deadline).diff(now);
-
-                          if (diff < 0) {
-                            setValue("deadline", "");
-                            return false;
-                          }
-
-                          setValue("deadline", `${e.currentTarget.value}:00`);
-                        }}
-                        min={now}
-                      />
-                    )}
-                  />
-                </div>
 
                 <div className="md:col-span-5 text-right mt-4">
                   <div className="inline-flex items-end">

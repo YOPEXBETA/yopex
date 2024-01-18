@@ -15,9 +15,8 @@ import { useJoinContestConversation } from "../../../../../../hooks/react-query/
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import Card from "../../../../../../Components/Cards";
 
-const ClientCard = () => {
+const ClientCard = ({isRegistered}) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [deadline, setDeadline] = useState(null);
 
@@ -48,14 +47,6 @@ const ClientCard = () => {
 
   const toggleModal = () => setModalOpen((prev) => !prev);
 
-  useEffect(() => {
-    if (!data) return;
-    const registered = data.challenges.find(
-      (item) => item._id === challenge._id
-    );
-    setIsRegistered(registered ? true : false);
-  }, [challenge, data]);
-
   const handleregiser = () => {
     registerMutate();
     join({ contestId: challenge._id, userId: user._id });
@@ -66,19 +57,26 @@ const ClientCard = () => {
       <div className="py-6 px-11 flex justify-center">
         <div className="flex flex-col items-center pb-3">
           <div className="flex flex-col items-center">
-            <h5 className="text-xl text-zinc-500 font-medium pb-2">
-              Contest Price
-            </h5>
             {challenge.price > 0 ? (
-              <div className="flex gap-1">
-                <p className="text-3xl font-bold pb-6 dark:text-white">
-                  {challenge?.price}
-                </p>
-              </div>
+              <>
+                <h5 className="text-xl text-zinc-500 font-medium pb-2">
+                  Contest Price
+                </h5>
+                <div className="flex gap-1">
+                  <p className="text-3xl font-bold pb-6 dark:text-white">
+                    {challenge?.price}
+                  </p>
+                </div>
+              </>
             ) : (
-              <p className="text-3xl font-bold pb-6 dark:text-white">
-                Free Price
-              </p>
+              <>
+                <h5 className="text-xl text-zinc-500 font-medium pb-2">
+                  Contest Type
+                </h5>
+                <p className="text-3xl font-bold pb-6 dark:text-white">
+                  Recrutement
+                </p>
+              </>
             )}
           </div>
           <div className="flex flex-col items-center">

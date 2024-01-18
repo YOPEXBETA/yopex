@@ -6,7 +6,7 @@ import ReviewModel from "../../../../../../Components/shared/Modals/ReviewModel"
 import EditSubmitModal from "../../../../../../Components/shared/Modals/EditSubmit";
 import AvatarProfile from "../../../../../../assets/images/AvatarProfile.jpg";
 
-const ParticipantRow = ({ user, index, challenge }) => {
+const ParticipantRow = ({ user, index, challenge,isOwner }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [reviewisOpen, setreviewIsOpen] = useState(false);
   const [editisOpen, seteditIsOpen] = useState(false);
@@ -16,11 +16,6 @@ const ParticipantRow = ({ user, index, challenge }) => {
     setIsOpen((prev) => !prev);
   };
   const { user: currentUser } = useSelector((state) => state.auth);
-  const isOwner = currentUser.companies.find(
-    (company) => company === challenge.company._id
-  )
-    ? true
-    : false;
 
   function formatDate(dateString) {
     const options = {
@@ -93,7 +88,7 @@ const ParticipantRow = ({ user, index, challenge }) => {
             open={reviewisOpen}
             participant={user}
             handleClose={togglereview}
-            companyId={challenge.company._id}
+            companyId={challenge?.company?._id ? challenge?.company?._id : challenge?.owner?._id}
           />
           <EditSubmitModal
             open={editisOpen}

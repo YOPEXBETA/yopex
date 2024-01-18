@@ -4,7 +4,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useChallengeById } from "../../../../../../hooks/react-query/useChallenges";
 import ParticipantRow from "./ParticipantRow";
 
-const ParticipantsTable = () => {
+const ParticipantsTable = ({isOwner}) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -69,6 +69,7 @@ const ParticipantsTable = () => {
                           index={index}
                           user={user}
                           challenge={challenge}
+                          isOwner={isOwner}
                         />
                       );
                     })}

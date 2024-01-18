@@ -9,6 +9,11 @@ import challengeBanner from "../../assets/images/challengeBanner.jpg";
 const NewChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
+  const isOwner = user.companies.find(
+    (company) => company === challenge.company?._id
+  )
+    ? true
+    : challenge.owner === user._id ? true : false;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -48,7 +53,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
                 </p>
               </div>
               <div className="flex items-center justify-start gap-2">
-                {user?.companies?.includes(challenge?.company?._id) ? (
+                {isOwner ? (
                   <div onClick={(e) => e.preventDefault()}>
                     <ChallengeMenuIcon challenge={challenge} />
                   </div>
@@ -85,10 +90,10 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
                   <span className="bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm">
                     {challenge.price > 0 ? (
                       <div className="flex gap-1">
-                        <p className="">{challenge.price}</p>
+                        <p className="">{challenge.price} pts</p>
                       </div>
                     ) : (
-                      <p className="">Free Price</p>
+                      <p className="">Recrutement</p>
                     )}
                   </span>
                 </div>
@@ -97,7 +102,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
 
             <div className="border px-4 py-3 rounded-2xl dark:bg-zinc-700">
               <p className="text-center font-bold text-lg dark:text-green-500">
-                {timeRemaining}
+                {challenge?.start ? timeRemaining : "Open"}
               </p>
             </div>
           </div>
