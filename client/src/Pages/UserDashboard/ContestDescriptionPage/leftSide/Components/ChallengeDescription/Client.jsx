@@ -15,7 +15,7 @@ import { useJoinContestConversation } from "../../../../../../hooks/react-query/
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import Card from "../../../../../../Components/Cards";
 
-const ClientCard = ({isRegistered}) => {
+const ClientCard = ({isRegistered,isOwner}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [deadline, setDeadline] = useState(null);
@@ -90,7 +90,7 @@ const ClientCard = ({isRegistered}) => {
         </div>
       </div>
 
-      {new Date() < new Date(challenge.deadline) && (
+      {!isOwner && !challenge?.start && (
         <div className="flex flex-col gap-2">
           {user.role === "user" &&
           deadline !== "0 Days 0 Hours 0 Minutes" &&

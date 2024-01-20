@@ -26,6 +26,7 @@ const ContentSide = ({ value,isOwner,start,isRegistered }) => {
               <div className="lg:block md:block lg:col-span-4 md:col-span-12 sm:col-span-12 col-span-12  mb-20">
                 <CompanyCard 
                 isRegistered={isRegistered}
+                isOwner={isOwner}
                 />
                 {isOwner && !start && <Start />}
               </div>
