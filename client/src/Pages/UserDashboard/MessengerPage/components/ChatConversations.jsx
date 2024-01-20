@@ -37,7 +37,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
     event.preventDefault();
 
     const { id: receiverId } = otherUser;
-    
+
     socket.emit("sendMessage", {
       sender: {
         _id: user?._id,
@@ -58,16 +58,31 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
     <div className="top-0 bottom-0 left-0 right-0 flex flex-col flex-1 overflow-hidden bg-transparent bg-bottom bg-cover">
       <div className="z-20 flex flex-grow-0 flex-shrink-0 w-full pr-3 bg-white dark:bg-zinc-800 border-b">
         <img
-          src={otherUser.companyLogo ? otherUser.companyLogo : otherUser.picturePath}
+          src={
+            otherUser.companyLogo
+              ? otherUser.companyLogo
+              : otherUser.picturePath
+          }
           className="w-12 h-12 mx-4 my-2 bg-center bg-no-repeat border rounded-full object-cover cursor-pointer"
         />
         <div className="flex flex-col justify-center flex-1 overflow-hidden cursor-pointer">
-          <div className="overflow-hidden text-base font-medium leading-tight text-gray-600 whitespace-no-wrap" onClick={()=>{navigate(otherUser.companyLogo? "/company/"+otherUser._id:"/profile/"+otherUser._id)}}>
-            {otherUser.companyName ? otherUser.companyName : otherUser.firstname}
+          <div
+            className="overflow-hidden text-base font-medium leading-tight text-gray-600 whitespace-no-wrap"
+            onClick={() => {
+              navigate(
+                otherUser.companyLogo
+                  ? "/company/" + otherUser._id
+                  : "/profile/" + otherUser._id
+              );
+            }}
+          >
+            {otherUser.companyName
+              ? otherUser.companyName
+              : otherUser.firstname}
           </div>
         </div>
-        {/** 
-        <button className="flex self-center p-2 ml-2 text-gray-500 rounded-full focus:outline-none hover:text-gray-600">
+
+        {/* <button className="flex self-center p-2 ml-2 text-gray-500 rounded-full focus:outline-none hover:text-gray-600">
           <svg
             className="w-6 h-6 text-gray-600 fill-current"
             xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +126,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
               d="M12,16 C13.1045695,16 14,16.8954305 14,18 C14,19.1045695 13.1045695,20 12,20 C10.8954305,20 10,19.1045695 10,18 C10,16.8954305 10.8954305,16 12,16 Z M12,10 C13.1045695,10 14,10.8954305 14,12 C14,13.1045695 13.1045695,14 12,14 C10.8954305,14 10,13.1045695 10,12 C10,10.8954305 10.8954305,10 12,10 Z M12,4 C13.1045695,4 14,4.8954305 14,6 C14,7.1045695 13.1045695,8 12,8 C10.8954305,8 10,7.1045695 10,6 C10,4.8954305 10.8954305,4 12,4 Z"
             />
           </svg>
-        </button>
+            </button>*/}
         <button className="p-2 text-gray-700 flex self-center rounded-full md:hidden focus:outline-none hover:text-gray-600 hover:bg-gray-200">
           <svg
             className="w-6 h-6 text-gray-600 fill-current"
@@ -126,7 +141,6 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
             />
           </svg>
         </button>
-        */}
       </div>
       <div className="top-0 bottom-0 left-0 right-0 flex flex-col flex-1 overflow-hidden bg-transparent bg-bottom bg-cover overflow-y-auto">
         <div className="self-center flex-1 w-full ">

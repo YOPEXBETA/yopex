@@ -21,7 +21,7 @@ const Index = () => {
   );
 
   return (
-    <div className="md:space-y-6 space-y-10">
+    <div className="md:space-y-6 space-y-10 mx-auto container">
       <ContestsHeader
         setContestQuery={setContestQuery}
         selectedSkill={selectedSkill}

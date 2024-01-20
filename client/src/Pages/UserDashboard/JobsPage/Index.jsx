@@ -9,24 +9,26 @@ const Index = () => {
   const [selectedOfferType, setSelectedOfferType] = useState([]);
 
   return (
-    <div className="flex flex-col gap-10">
-      <JobSearchFilter
-        setJobQuery={setJobQuery}
-        setSkillQuery={setSkillQuery}
-        setSelectedJobType={setSelectedJobType}
-        setSelectedOfferType={setSelectedOfferType}
-        selectedSkill={selectedSkill}
-        selectedJobType={selectedJobType}
-        selectedOfferType={selectedOfferType}
-      />
-      <Jobs
-        searchQuery={jobQuery}
-        selectedSkill={selectedSkill}
-        selectedJobType={selectedJobType}
-        selectedOfferType={selectedOfferType}
-        setSkillQuery={setSkillQuery}
-        setSelectedJobType={setSelectedJobType}
-      />
+    <div className="mx-auto container">
+      <div className="flex flex-col gap-10">
+        <JobSearchFilter
+          setJobQuery={setJobQuery}
+          setSkillQuery={setSkillQuery}
+          setSelectedJobType={setSelectedJobType}
+          setSelectedOfferType={setSelectedOfferType}
+          selectedSkill={selectedSkill}
+          selectedJobType={selectedJobType}
+          selectedOfferType={selectedOfferType}
+        />
+        <Jobs
+          searchQuery={jobQuery}
+          selectedSkill={selectedSkill}
+          selectedJobType={selectedJobType}
+          selectedOfferType={selectedOfferType}
+          setSkillQuery={setSkillQuery}
+          setSelectedJobType={setSelectedJobType}
+        />
+      </div>
     </div>
   );
 };
