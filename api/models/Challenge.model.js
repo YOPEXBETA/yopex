@@ -56,6 +56,12 @@ const ChallengeSchema = new mongoose.Schema(
         submissionDate: { type: Date },
       },
     ],
+    banned: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        }
+    ],
     submissions: {
       type: [
         {

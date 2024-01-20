@@ -5,11 +5,13 @@ import ParticipantsDialogModal from "../../../../../../Components/shared/Modals/
 import ReviewModel from "../../../../../../Components/shared/Modals/ReviewModel";
 import EditSubmitModal from "../../../../../../Components/shared/Modals/EditSubmit";
 import AvatarProfile from "../../../../../../assets/images/AvatarProfile.jpg";
+import { useBanUser } from "../../../../../../hooks/react-query/useChallenges";
 
-const ParticipantRow = ({ user, index, challenge,isOwner }) => {
+const ParticipantRow = ({ user, index, challenge, isOwner }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [reviewisOpen, setreviewIsOpen] = useState(false);
   const [editisOpen, seteditIsOpen] = useState(false);
+  const {mutate} = useBanUser();
   const toggleedit = () => seteditIsOpen((prev) => !prev);
   const togglereview = () => setreviewIsOpen((prev) => !prev);
   const toggleOpen = () => {
@@ -70,9 +72,26 @@ const ParticipantRow = ({ user, index, challenge,isOwner }) => {
         {" "}
         {formatDate(user?.registrationDate)}
       </td>
-      <td className="text-sm text-right py-4 px-4 dark:text-white">
+      <td className="text-sm py-4 px-4 text-center dark:text-white">
         <div>{formatDate(user?.submissionDate)}</div>
       </td>
+      {isOwner && (
+        <td
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="text-lg py-4 px-4 dark:text-white cursor-pointer text-right"
+        >
+          <button
+            className="bg-red-400 hover:bg-red-700 text-white px-4 py-2 rounded w-full"
+            type="button"
+            onClick={() => {mutate({userId: user.user?._id })}}
+          >
+            Ban
+          </button>
+          
+        </td>
+      )}
       {user && (
         <>
           <ParticipantsDialogModal
@@ -88,7 +107,11 @@ const ParticipantRow = ({ user, index, challenge,isOwner }) => {
             open={reviewisOpen}
             participant={user}
             handleClose={togglereview}
-            companyId={challenge?.company?._id ? challenge?.company?._id : challenge?.owner?._id}
+            companyId={
+              challenge?.company?._id
+                ? challenge?.company?._id
+                : challenge?.owner?._id
+            }
           />
           <EditSubmitModal
             open={editisOpen}

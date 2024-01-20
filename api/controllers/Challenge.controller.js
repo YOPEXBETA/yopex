@@ -246,6 +246,28 @@ const startChallenge = async (req, res, next) => {
 
 }
 
+const banUser = async (req, res) => {
+  try{
+    const challengeId = req.params.challengeId;
+    const {userId} = req.body;
+    const owner = req.userId
+    const user = await UserModel.findById(owner);
+    const challenge = await ChallengeModel.findById(challengeId);
+    if ((challenge.owner?.toString() !== owner.toString()) && (!user.companies.includes(challenge.company.toString()))) {
+      return res.status(400).json({ message: "Not authorized" });
+    }
+    challenge.banned.push(userId);
+    challenge.users = challenge.users.filter((user)=>user.user.toString() !== userId.toString());
+    await challenge.save();
+    res.status(200).json({ message: "User banned" });
+
+  }catch(err){
+    res.status(400).json({ message: "bad" });
+    return console.log(err);
+  }
+
+}
+
 module.exports = {
   CreateChallenge,
   deleteChallenge,
@@ -255,5 +277,6 @@ module.exports = {
   getChallengeUsers,
   getChallengeUserSubmit,
   updateChallenge,
-  startChallenge
+  startChallenge,
+  banUser
 };

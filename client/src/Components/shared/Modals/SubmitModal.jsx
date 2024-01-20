@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { useSubmitToChallenge } from "../../../hooks/react-query/useChallenges";
+import { useFileUpload } from "../../../hooks/react-query/useUsers";
 import { axios } from "../../../axios";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
@@ -16,6 +17,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
   const [platform, setPlatform] = useState("");
   const [link, setLink] = useState("");
   const [links, setLinks] = useState([]);
+  const fileUploadMutation = useFileUpload();
 
   const handleAddLink = () => {
     setLinks([...links, { platform, link }]);
@@ -29,18 +31,19 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
   const { mutate, isSuccess, isLoading } = useSubmitToChallenge(id);
 
   const handleFileUpload = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("type", "submission");
+    const data = await axios.post(`${url}/upload`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("type", "submission");
-      const data = await axios.post(`${url}/upload`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      const url = data.data.downloadURL;
-      setFilesPaths((prev) => [...prev, url]);
-      return url;
+      setFilesPaths((prev) => [...prev, data.data.downloadURL]);
+      
+      return data.data.downloadURL;
     } catch (error) {
       console.log(error);
     }
@@ -69,11 +72,18 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
 
   const handleFileSelect = async (event) => {
     const files = event.target.files;
+    console.log("files",files);
     handleFiles(files);
-    for (const file of validFiles) {
-      const url  = await handleFileUpload(file);
+    console.log("validfiles",validFiles);
+    for (let i=0;i<validFiles.length;i++) {
+      if (!validFiles[i].url) {
+      const url  = await handleFileUpload(validFiles[i]);
+      console.log(url);
+      validFiles[i].url = url;
       setFilesSelected([...filesSelected, url]);
+    }  
     }
+    console.log(filesSelected);
   };
 
   const handleFiles = (files) => {
@@ -82,7 +92,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
       const file = files[i];
 
       if (file.size <= maxSize) {
-        console.log(file);
+        
         validFiles.push(file);
         setFilesSelected([...filesSelected, file]);
       } else {
@@ -181,14 +191,14 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
             {filesSelected.length > 0 &&
               filesSelected.map((file) => {
                 return (
-                  <p key={file.name}>
+                  <p key={file?.name}>
                     {" "}
                     <a
-                      href={file.url}
+                      href={file?.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {file.name}
+                      {file?.name}
                     </a>
                   </p>
                 );

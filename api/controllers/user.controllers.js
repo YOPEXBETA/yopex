@@ -479,13 +479,13 @@ const JoinChallenge = async (req, res) => {
   try {
     const user = await userSchema.findById(req.userId).select("-password");
     const challenge = await challengeSchema.findById(req.body.idChallenge);
-    if (challenge.users.length > challenge.nbruser) {
+    if ((challenge.users.length > challenge.nbruser) || (challenge.banned.includes(user._id.toString()))) {
       return res
-        .status(400)
+        .status(200)
         .json({ message: "you cannot join this challenge" });
     }
     if (challenge.users.includes(user._id)) {
-      return res.status(400).json({ message: "User already joined challenge" });
+      return res.status(200).json({ message: "User already joined challenge" });
     }
     // Add challenge to user's challenges array
     user.challenges.push(challenge._id);

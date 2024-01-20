@@ -53,10 +53,16 @@ const ParticipantsTable = ({isOwner}) => {
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal  rtl:text-right text-zinc-500 dark:text-zinc-400 text-right"
+                      className="px-4 py-3.5 text-sm font-normal   text-zinc-500 dark:text-zinc-400"
                     >
                       Submission Date
                     </th>
+                    {isOwner && (<th
+                      scope="col"
+                      className="px-4 py-3.5 text-sm font-normal  rtl:text-right text-zinc-500 dark:text-zinc-400 text-right"
+                    >
+                      Status
+                    </th>)}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">

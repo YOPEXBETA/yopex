@@ -12,6 +12,7 @@ const {
   getChallengeUserSubmit,
   updateChallenge,
   startChallenge,
+  banUser
 } = require("../controllers/Challenge.controller");
 const { CreateSubmission, editsubmission } = require("../controllers/submission.controllers");
 
@@ -60,4 +61,5 @@ ChallengeRouter.delete("/:id", authenticateToken, deleteChallenge);
 ChallengeRouter.post("/editSubmission", authenticateToken, editsubmission);
 ChallengeRouter.put("/start/:challengeId", authenticateToken, startChallenge);
 
+ChallengeRouter.put("/ban/:challengeId", authenticateToken, banUser);
 module.exports = ChallengeRouter;

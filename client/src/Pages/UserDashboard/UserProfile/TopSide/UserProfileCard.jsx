@@ -18,6 +18,7 @@ import HighlightSection from "./HighlightSection/HighlightSection";
 import getIconByPlatform from "../../../../utils/getIconByPlatform";
 import Card from "../../../../Components/Cards";
 import Tag from "../../../../Components/tags/Index";
+import { useCreateConversation } from "../../../../hooks/react-query/useConversations";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -26,6 +27,7 @@ const UserProfileCard = () => {
   const { data: userProfile, isLoading: userLoading } = useUserById(userId);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
+  const { mutate: contact } = useCreateConversation(user._id);
   const selectedPlatforms = userProfile?.socialMediaLinks?.filter(
     (link) => link?.url
   );
@@ -122,7 +124,7 @@ const UserProfileCard = () => {
             </button>
           </div>
 
-          <div className="w-full">
+          <div className="w-full ">
             {userId === user._id ? (
               <a href="/settings" className="block">
                 <button className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-3 px-4 rounded-full w-full text-white">
@@ -130,6 +132,7 @@ const UserProfileCard = () => {
                 </button>
               </a>
             ) : (
+              <>
               <button
                 className={
                   userProfile.followers.includes(user._id)
@@ -150,6 +153,14 @@ const UserProfileCard = () => {
                   "Follow"
                 )}
               </button>
+              
+                <button
+                  onClick={() => contact({ senderId: user._id, receiverId: userId })}
+                  className="cursor-pointer mt-2 capitalize font-medium hover:scale-105 bg-green-500 py-3 px-4 rounded-full w-full text-white">
+                  Contact Me
+                </button>
+              
+              </>
             )}
           </div>
 

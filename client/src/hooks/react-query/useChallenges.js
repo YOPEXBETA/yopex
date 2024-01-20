@@ -277,3 +277,20 @@ export const useStartChallenge = () => {
     },
   });
 }
+
+export const useBanUser = () => {
+  const queryClient = useQueryClient();
+  const { id: challengeId } = useParams();
+  return useMutation({
+    mutationFn: async (data) => {
+      await axios.put(`${url}/challenge/ban/${challengeId}`, data);
+    },
+    onSuccess: () => {
+      toast.success("User banned successfully");
+      queryClient.invalidateQueries(["challenges"]);
+    },
+    onError: () => {
+      toast.error("Error banning user");
+    },
+  });
+}
