@@ -197,7 +197,8 @@ const getConversations = async (req, res) => {
 };
 
 const getConversationById = async (req, res) => {
-  try {
+  try { 
+    
     const conversationId = new ObjectId(req.params.id);
     const userId = req.userId;
     const conversation = await ConversationModel.findById(conversationId).populate("members", "firstname lastname role picturePath userDescription phoneNumber email")

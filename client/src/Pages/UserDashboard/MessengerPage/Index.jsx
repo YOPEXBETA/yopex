@@ -11,11 +11,16 @@ const Messenger = () => {
   const { user } = useSelector((state) => state?.auth);
   const { data: conversations } = useConversations(user?._id);
   const { selectedConversationId } = useParams();
-  const {data: currentConversation} = useGetConversationById(selectedConversationId);
-  console.log(currentConversation);
   const [otherUser, setOtherUser] = useState({});
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  useEffect(() => {
+    if (selectedConversationId===undefined && conversations?.length>0) {
+      navigate(`/chat/${conversations[0]?.conversationId}`);
+    }
+  }
+  , [selectedConversationId, conversations]);
+  const {data: currentConversation} = useGetConversationById(selectedConversationId);
 
   // useEffect(() => {
   //   if (!conversations) return;
