@@ -12,7 +12,7 @@ const UserProfileLayout = () => {
 
   return (
     <div className="mx-auto container">
-      <div className="grid grid-cols-12 xl:gap-8 lg:gap-2 md:gap-2">
+      <div className="grid grid-cols-12 xl:gap-8 lg:gap-2 md:gap-2 md:mx-6 mx-0 pt-6">
         <div className="xl:col-span-4 lg:col-span-12 md:col-span-12 col-span-12">
           <UserProfileCard />
         </div>

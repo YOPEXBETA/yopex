@@ -3,7 +3,10 @@ import ChatConversations from "./components/ChatConversations";
 import UsersLatestMsgs from "./components/UsersLatestMsgs";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { useConversations, useGetConversationById } from "../../../hooks/react-query/useConversations";
+import {
+  useConversations,
+  useGetConversationById,
+} from "../../../hooks/react-query/useConversations";
 import useSocket from "../../../hooks/useSocket";
 import UserChatInfo from "./components/UserChatInfo";
 
@@ -11,7 +14,9 @@ const Messenger = () => {
   const { user } = useSelector((state) => state?.auth);
   const { data: conversations } = useConversations(user?._id);
   const { selectedConversationId } = useParams();
-  const {data: currentConversation} = useGetConversationById(selectedConversationId);
+  const { data: currentConversation } = useGetConversationById(
+    selectedConversationId
+  );
   console.log(currentConversation);
   const [otherUser, setOtherUser] = useState({});
   const navigate = useNavigate();
@@ -55,7 +60,7 @@ const Messenger = () => {
   return (
     <div>
       <div class="relative flex w-full h-screen overflow-hidden antialiased bg-gray-200">
-        <div class="relative flex flex-col hidden w-[24rem] h-full bg-white dark:bg-zinc-800 dark:text-white border-r border-gray-300 shadow-xl md:block transform transition-all duration-500 ease-in-out">
+        <div class="relative flex-col hidden w-[24rem] h-full bg-white dark:bg-zinc-800 dark:text-white border-r border-gray-300 shadow-xl md:block transform transition-all duration-500 ease-in-out">
           <UsersLatestMsgs />
         </div>
 
@@ -67,7 +72,7 @@ const Messenger = () => {
           />
         </div>
 
-        <nav class="right-0 flex flex-col w-[24rem] hidden pb-2 bg-white dark:bg-zinc-800 border-l border-gray-300 xl:block">
+        <nav class="right-0 lg:flex flex-col w-[24rem] hidden pb-2 bg-white dark:bg-zinc-800 border-l border-gray-300 xl:block">
           <UserChatInfo otherUser={otherUser} />
         </nav>
       </div>

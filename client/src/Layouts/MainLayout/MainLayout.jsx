@@ -89,7 +89,7 @@ const MainLayout = (props) => {
                 brandText={currentRoute}
                 {...rest}
               />
-              <div className="pt-10 md:mx-6 mx-0 mb-auto h-full min-h-[100vh] p-2">
+              <div className="mb-auto h-full min-h-[100vh]">
                 <Outlet />
               </div>
             </div>
