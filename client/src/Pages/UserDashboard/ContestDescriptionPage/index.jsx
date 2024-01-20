@@ -44,7 +44,7 @@ const ContestDetails = () => {
 
   if (challenge) {
     return (
-      <div className="md:space-y-6">
+      <div className="md:space-y-6 mx-auto container">
         <div>
           <Banner value={value} changeValue={changeValue} />
         </div>

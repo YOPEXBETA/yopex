@@ -67,6 +67,10 @@ const MainLayout = (props) => {
   }
 
   // Render the main layout once user data is available
+
+  //I used this to not apply the margin paramter on the chat page
+  const isChatRoute = currentRoute.toLowerCase() === "chat";
+
   return (
     <div>
       <div className="flex h-full w-full">
@@ -89,7 +93,11 @@ const MainLayout = (props) => {
                 brandText={currentRoute}
                 {...rest}
               />
-              <div className="mb-auto h-full min-h-[100vh]">
+              <div
+                className={`mb-auto h-full min-h-[100vh]${
+                  isChatRoute ? "" : " mt-4 md:mx-6 md:p-2"
+                }`}
+              >
                 <Outlet />
               </div>
             </div>
