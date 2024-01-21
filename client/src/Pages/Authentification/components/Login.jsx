@@ -57,7 +57,7 @@ const Login = () => {
       return navigate("/Dashboard");
     }
 
-    navigate("/projects");
+    navigate("/feed");
     dispatch(resetAuth());
   }, [dispatch, navigate, user]);
 

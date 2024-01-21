@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import {
   useConversations,
   useCreateConversation,
@@ -60,7 +61,7 @@ const UsersLatestMsgs = () => {
             <input
               type="search"
               name="q"
-              className="w-full py-2 pl-12 text-sm text-white bg-gray-200 border border-transparent appearance-none rounded-tg focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
+              className="w-full py-2 pl-12 text-sm text-white bg-gray-200 border border-transparent appearance-none rounded-tg focus:bg-white focus:outline-none focus:border-green-500 focus:text-gray-900 focus:shadow-outline-blue"
               placeholder="Search..."
               autocomplete="off"
               onChange={(event) => setQuery(event.target.value)}
@@ -88,11 +89,20 @@ const UsersLatestMsgs = () => {
                                 className=" hover:bg-gray-100  p-4 flex flex-col gap-2 w-full"
                               >
                                 <div className="flex gap-4 items-center">
-                                  <img
-                                    src={otherUser?.picturePath}
-                                    alt="User Avatar"
-                                    className="w-12 h-12 rounded-full object-cover"
-                                  />
+                                  {otherUser?.picturePath ? (
+                                    <img
+                                      src={otherUser.picturePath}
+                                      alt="User Avatar"
+                                      className="w-12 h-12 rounded-full object-cover"
+                                    />
+                                  ) : (
+                                    <img
+                                      src={AvatarProfile}
+                                      alt="Default Avatar"
+                                      className="w-12 h-12 rounded-full object-cover"
+                                    />
+                                  )}
+
                                   <div>
                                     <div>
                                       <div className=" flex flex-row gap-1">
