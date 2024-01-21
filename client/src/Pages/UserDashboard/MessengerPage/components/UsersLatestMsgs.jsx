@@ -133,7 +133,7 @@ const UsersLatestMsgs = () => {
                     : users?.map((user) => (
                         <li
                           key={user._id}
-                          className="px-8 py-4 hover:bg-gray-100"
+                          className="px-4 py-4 hover:bg-gray-100"
                         >
                           <button
                             className="flex items-center w-full"
@@ -157,7 +157,7 @@ const UsersLatestMsgs = () => {
                                   className="object-cover w-12 h-12 rounded-full border"
                                 />
                               )}
-                              <div className="flex flex-col">
+                              <div className="flex flex-col dark:text-white">
                                 {user.companyName ? (
                                   <h6 className="text-[1rem]">
                                     {user.companyName}
