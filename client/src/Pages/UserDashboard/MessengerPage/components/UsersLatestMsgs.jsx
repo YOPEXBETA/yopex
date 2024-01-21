@@ -140,15 +140,23 @@ const UsersLatestMsgs = () => {
                             onClick={() => handleUserClick(user)}
                           >
                             <div className="flex items-center space-x-2">
-                              <img
-                                src={
-                                  user.companyName
-                                    ? user.companyLogo
-                                    : user.picturePath
-                                }
-                                alt="User Avatar"
-                                className="object-cover w-12 h-12 rounded-full border"
-                              />
+                              {user?.picturePath || user.companyLogo ? (
+                                <img
+                                  src={
+                                    user.companyName
+                                      ? user.companyLogo
+                                      : user.picturePath
+                                  }
+                                  alt="User Avatar"
+                                  className="object-cover w-12 h-12 rounded-full border"
+                                />
+                              ) : (
+                                <img
+                                  src={AvatarProfile}
+                                  alt="Default Avatar"
+                                  className="object-cover w-12 h-12 rounded-full border"
+                                />
+                              )}
                               <div className="flex flex-col">
                                 {user.companyName ? (
                                   <h6 className="text-[1rem]">
