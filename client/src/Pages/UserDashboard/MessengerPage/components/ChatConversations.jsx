@@ -56,7 +56,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
     setMessage("");
   };
   return (
-    <div className="top-0 bottom-0 left-0 right-0 flex flex-col flex-1 overflow-hidden bg-transparent bg-bottom bg-cover">
+    <div className="top-0 bottom-0 left-0 right-0 flex flex-col flex-1 overflow-hidden bg-transparent  bg-bottom bg-cover">
       <div className="z-20 flex flex-grow-0 flex-shrink-0 w-full pr-3 bg-white dark:bg-zinc-800 border-b">
         {otherUser?.companyLogo || otherUser.picturePath ? (
           <img
@@ -77,7 +77,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
         )}
         <div className="flex flex-col justify-center flex-1 overflow-hidden cursor-pointer">
           <div
-            className="overflow-hidden text-base font-medium leading-tight text-gray-600 whitespace-no-wrap"
+            className="overflow-hidden text-base font-medium leading-tight dark:text-white whitespace-no-wrap"
             onClick={() => {
               navigate(
                 otherUser.companyLogo
@@ -107,12 +107,12 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
           </svg>
         </button>
       </div>
-      <div className="top-0 bottom-0 left-0 right-0 flex flex-col flex-1 overflow-hidden bg-transparent bg-bottom bg-cover overflow-y-auto">
+      <div className="top-0 bottom-0 left-0 right-0 flex flex-col flex-1 overflow-hidden  dark:bg-zinc-700 bg-bottom bg-cover overflow-y-auto">
         <div className="self-center flex-1 w-full ">
           <div id="messages" ref={chatContainerRef}>
             {arrivalMessage?.length === 0 ? (
               <div className="flex items-center justify-center h-96">
-                <p className="opacity-70 text-xl text-cente">
+                <p className="opacity-70 text-xl text-center dark:text-white">
                   Open a conversation to start a chat
                 </p>
               </div>

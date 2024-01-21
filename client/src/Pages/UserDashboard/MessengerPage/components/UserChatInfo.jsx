@@ -112,10 +112,10 @@ const UserChatInfo = ({ otherUser }) => {
           <div className="mt-1 mr-auto text-sm font-semibold leading-none text-gray-600">
             Bio
           </div>
-          <div className="mr-auto text-sm font-semibold text-gray-800">
-            {otherUser.companyDescription
-              ? otherUser.companyDescription
-              : otherUser.userDescription}
+          <div className="mr-auto text-sm font-semibold dark:text-white">
+            {otherUser.companyDescription || "N/A"
+              ? otherUser.companyDescription || "N/A"
+              : otherUser.userDescription || "N/A"}
           </div>
         </div>
       </div>
@@ -140,8 +140,8 @@ const UserChatInfo = ({ otherUser }) => {
               <div className="mt-1 ml-4 mr-auto text-sm font-semibold leading-none text-gray-600">
                 Email
               </div>
-              <div className="ml-4 mr-auto text-sm font-semibold text-gray-800">
-                {otherUser.email}
+              <div className="ml-4 mr-auto text-sm font-semibold  dark:text-white">
+                {otherUser?.email}
               </div>
             </div>
           </div>
@@ -167,8 +167,8 @@ const UserChatInfo = ({ otherUser }) => {
             <div className="mt-1 mr-auto text-sm font-semibold leading-none text-gray-600">
               Phone
             </div>
-            <div className="mr-auto text-sm font-semibold text-gray-800">
-              {otherUser.phoneNumber}
+            <div className="mr-auto text-sm font-semibold dark:text-white">
+              {otherUser?.phoneNumber || "N/A"}
             </div>
           </div>
         </div>

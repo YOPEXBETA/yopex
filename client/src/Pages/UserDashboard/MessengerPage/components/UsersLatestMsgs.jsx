@@ -86,7 +86,7 @@ const UsersLatestMsgs = () => {
                             <div key={conversation?.conversationId}>
                               <Link
                                 to={`/chat/${conversation?.conversationId}`}
-                                className=" hover:bg-gray-100  p-4 flex flex-col gap-2 w-full"
+                                className=" dark:hover:bg-zinc-500 p-4 flex flex-col gap-2 w-full"
                               >
                                 <div className="flex gap-4 items-center">
                                   {otherUser?.picturePath ? (
