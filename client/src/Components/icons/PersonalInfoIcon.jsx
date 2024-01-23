@@ -3,7 +3,7 @@ import React from "react";
 const PersonalInfoIcon = () => {
   return (
     <svg
-      className="mx-auto items-center justify-center h-6 w-6 text-indigo-500 group-hover:text-indigo-600"
+      className="mx-auto items-center justify-center h-6 w-6 dark:text-green-500"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
