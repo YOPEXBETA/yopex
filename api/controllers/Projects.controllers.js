@@ -9,48 +9,26 @@ const main = require("../server");
 
 const CreatePost = async (req, res) => {
   try {
-    // Find the current user by ID
-    const user = await UserModel.findById(req.body.userId);
-    //const company = await CompanyModel.findById(req.body.userId);
-    // Determine whether the current user is a UserModel or CompanyModel
-    let owner;
-    let isUser = true;
-    let Model;
-    if (user) {
-      owner = user;
-      Model = UserModel;
-    } else if (company) {
-      owner = company;
-      isUser = false;
-      Model = CompanyModel;
-    } else {
-      throw new Error("User not found");
+    const userId = req.userId;
+    console.log(userId, "bb");
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
+    const { ...projectDetails } = req.body;
 
-    // Create a new post with the current user's information
     const newPost = new Post({
-      userId: req.body.userId,
-      firstname: isUser ? owner.firstname : undefined,
-      lastname: isUser ? owner.lastname : undefined,
-      companyName: !isUser ? owner.companyName : undefined,
-      userPicturePath:
-        owner.picturePath != undefined ? owner.picturePath : owner.companyLogo,
-      title: req.body.title,
-      description: req.body.description,
-      postPicturePath: req.body.postPicturePath,
-      skills: req.body.skills,
+      user: user._id,
+      ...projectDetails,
     });
-    savedpost = await newPost.save();
 
-    const data = await Model.findOneAndUpdate(
-      { _id: req.body.userId },
-      { $push: { posts: savedpost._id } },
-      { new: true }
-    );
+    const savedPost = await newPost.save();
+    console.log(savedPost, "xs");
 
-    res.status(201).json(data);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.status(200).json(savedPost);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -77,12 +55,10 @@ const updateAPost = async (req, res) => {
 
 //getFeedPosts
 const getFeedPosts = async (req, res) => {
-  const q = req.query;
-  const filters = {
-    ...(q.categories && { "categories.name": q.categories }),
-  };
   try {
-    const posts = await Post.find(filters).sort({ createdAt: "desc" });
+    const posts = await Post.find()
+      .populate("user", "_id firstname lastname picturePath")
+      .sort({ createdAt: "desc" });
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -115,32 +91,14 @@ const getUserPosts = async (req, res) => {
     const userId = req.params.userId;
     const user = await UserModel.findById(userId);
 
-    const company = await CompanyModel.findById(userId);
-
-    // Find the owner of the posts by ID
-    let owner;
-    let isUser = true;
-    if (user) {
-      owner = user;
-    } else {
-      owner = company;
-      isUser = false;
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    let posts;
+    const posts = await Post.find({
+      $or: [{ userId: userId }, { _id: { $in: user.posts } }],
+    }).populate("skills");
 
-    if (isUser) {
-      const sharedPostIds = owner.posts;
-      posts = await Post.find({
-        $or: [
-          { userId: userId },
-          { companyId: userId },
-          { _id: { $in: sharedPostIds } },
-        ],
-      }).populate("skills");
-    } else {
-      posts = await Post.find({ userId: userId }).populate("skills");
-    }
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ message: err.message });

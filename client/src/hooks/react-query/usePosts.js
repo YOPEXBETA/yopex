@@ -71,8 +71,6 @@ export const useCreatePost = (category, userId) => {
     onSuccess: () => {
       toast.success("Post created successfully");
       queryClient.invalidateQueries({ queryKey: ["posts"] });
-      queryClient.invalidateQueries({ queryKey: ["posts", category] });
-      queryClient.invalidateQueries({ queryKey: ["posts", userId] });
     },
     onError: (error) => {
       toast.error(`${error.response.data.message}`);

@@ -22,13 +22,12 @@ const CreateChallenge = async (req, res, next) => {
     const userId = req.userId;
     const user = await UserModel.findById(userId);
     let owner = user;
-    if (companyId){
+    if (companyId) {
       owner = await CompanyModel.findOne({
         user: user._id,
         _id: companyId,
       });
-      console.log("company:", owner);
-  
+
       if (!owner) {
         return res.status(400).json({ error: "Company not found" });
       }
@@ -36,7 +35,7 @@ const CreateChallenge = async (req, res, next) => {
         return res.status(400).json({ message: "Company not verified" });
       }
     }
-    
+
     const challenge = new ChallengeModel({
       title,
       description,
@@ -49,8 +48,7 @@ const CreateChallenge = async (req, res, next) => {
     });
     if (companyId) {
       challenge.company = owner._id;
-    }
-    else{
+    } else {
       challenge.owner = owner._id;
     }
 
@@ -63,13 +61,13 @@ const CreateChallenge = async (req, res, next) => {
     if (companyId) {
       owner.challenges.push(challenge._id);
       await owner.save();
-    }else{
+    } else {
       owner.createdChallenge.push(challenge._id);
       await owner.save();
     }
 
     res
-      .status(201) 
+      .status(201)
       .json({ message: "Challenge created successfully", challenge });
   } catch (error) {
     console.log(error);
@@ -223,12 +221,15 @@ const updateChallenge = async (req, res, next) => {
 };
 
 const startChallenge = async (req, res, next) => {
-  try{
+  try {
     const challengeId = req.params.challengeId;
     const challenge = await ChallengeModel.findById(challengeId);
     const userId = req.userId;
     const user = await UserModel.findById(userId);
-    if ((challenge.owner?.toString() !== userId.toString()) && (!user.companies.includes(challenge.company.toString()))) {
+    if (
+      challenge.owner?.toString() !== userId.toString() &&
+      !user.companies.includes(challenge.company.toString())
+    ) {
       return res.status(400).json({ message: "Not authorized" });
     }
     if (challenge.users.length === 0) {
@@ -238,35 +239,36 @@ const startChallenge = async (req, res, next) => {
     challenge.deadline = req.body.deadline;
     await challenge.save();
     res.status(200).json({ message: "Challenge started" });
-  }catch(err){
-    
+  } catch (err) {
     res.status(400).json({ message: "bad" });
     return console.log(err);
   }
-
-}
+};
 
 const banUser = async (req, res) => {
-  try{
+  try {
     const challengeId = req.params.challengeId;
-    const {userId} = req.body;
-    const owner = req.userId
+    const { userId } = req.body;
+    const owner = req.userId;
     const user = await UserModel.findById(owner);
     const challenge = await ChallengeModel.findById(challengeId);
-    if ((challenge.owner?.toString() !== owner.toString()) && (!user.companies.includes(challenge.company.toString()))) {
+    if (
+      challenge.owner?.toString() !== owner.toString() &&
+      !user.companies.includes(challenge.company.toString())
+    ) {
       return res.status(400).json({ message: "Not authorized" });
     }
     challenge.banned.push(userId);
-    challenge.users = challenge.users.filter((user)=>user.user.toString() !== userId.toString());
+    challenge.users = challenge.users.filter(
+      (user) => user.user.toString() !== userId.toString()
+    );
     await challenge.save();
     res.status(200).json({ message: "User banned" });
-
-  }catch(err){
+  } catch (err) {
     res.status(400).json({ message: "bad" });
     return console.log(err);
   }
-
-}
+};
 
 module.exports = {
   CreateChallenge,
@@ -278,5 +280,5 @@ module.exports = {
   getChallengeUserSubmit,
   updateChallenge,
   startChallenge,
-  banUser
+  banUser,
 };
