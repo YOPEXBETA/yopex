@@ -74,9 +74,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
       links: links,
     });
 
-    if (isSuccess) {
-      handleClose();
-    }
+    handleClose();
   };
 
   const validFiles = [];

@@ -21,6 +21,7 @@ const MainLayout = (props) => {
   const [open, setOpen] = useState(true);
   const [currentRoute, setCurrentRoute] = useState("feed");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // log the url of the current page
 
   const handleCreateClick = () => {
     setIsModalOpen(true);
@@ -55,7 +56,7 @@ const MainLayout = (props) => {
           // Successfully fetched user, continue rendering
         } else {
           // Fetching user failed, navigate to /login
-          navigate("/login");
+          navigate("/login?redirect="+location.pathname);
         }
       });
     }

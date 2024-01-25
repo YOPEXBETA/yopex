@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useGetContestConversation } from "../../../../hooks/react-query/useContestConversation";
 import ChallengeConversation from "./Components/ChallengeConversation";
 import Start from "./Components/ChallengeDescription/Start";
+import Removed from "./Components/ParticipantsTableSection/Removed";
 
 const ContentSide = ({ value,isOwner,start,isRegistered }) => {
   const { id: challengeId } = useParams();
@@ -48,6 +49,11 @@ const ContentSide = ({ value,isOwner,start,isRegistered }) => {
                 conversationId={challengeId}
                 id={conversation.id}
               />
+            </div>
+          )}
+          {value === 4 && (
+            <div className="lg:col-span-12 md:col-span-12">
+              <Removed isOwner={isOwner} />
             </div>
           )}
         </div>

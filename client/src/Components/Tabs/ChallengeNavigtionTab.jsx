@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import Card from "../Cards";
+import toast from "react-hot-toast";
 
 const ChallengeNavigationTab = ({ value, changeValue, isRegistered,challenge,isOwner }) => {
        
@@ -16,6 +17,18 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered,challenge,isO
     if (getDeadlineDifference(card?.deadline) === "0 Days 0 Hours 0 Minutes")
       return true;
     return false;
+  };
+
+  const [currentUrl, setCurrentUrl] = useState(window.location.href);
+
+  const copyUrlToClipboard = () => {
+    const textArea = document.createElement('textarea');
+    textArea.value = currentUrl;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    toast.success("Copied to clipboard");
   };
 
   return (
@@ -67,6 +80,26 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered,challenge,isO
               Choose Winner
             </button>
           )}
+          {isOwner  && (
+            <button
+              className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+                value === 4
+                  ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                  : "text-gray-500 border-gray-300 dark:text-gray-300 "
+              }`}
+              onClick={() => changeValue(4)}
+            >
+              Removed
+            </button>
+          )}
+          <button
+              className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${  
+              "bg-green-500 text-white dark:text-gray-200 border-green-500 ml-2"
+              }`}
+              onClick={copyUrlToClipboard}
+            >
+              Copy URL
+            </button>
         </div>
       </Card>
     </div>

@@ -93,7 +93,7 @@ const Banner = ({ changeValue, value }) => {
               <div className="text-white flex items-center">
                 <CalendarIcon />
                 <p className="text-sm font-medium text-white">
-                  {new Date(challenge?.deadline).toLocaleString()}
+                  {challenge?.deadline ? new Date(challenge?.deadline).toLocaleString() : "Open"}
                 </p>
               </div>
               <div className="text-white flex items-center gap-2">

@@ -84,12 +84,7 @@ export const useFindChallenges = (
 ) => {
   return useQuery({
     queryKey: [
-      "challenges",
-      minAmount,
-      maxAmount,
-      searchQuery,
-      skills,
-      categories,
+      "challenges"
     ],
     queryFn: async () => {
       let query = "";
@@ -227,11 +222,14 @@ export const useDeleteChallenge = () => {
 
   return useMutation({
     mutationFn: async (challengeId) => {
-      await axios.delete(`${url}/challenge/${challengeId}`);
+      return await axios.delete(`${url}/challenge/${challengeId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["challenges"] });
       toast.success("Challenge deleted successfully");
+    },
+    onError: () => {
+      toast.error("Error Deleting challenge");
     },
   });
 };
@@ -286,11 +284,32 @@ export const useBanUser = () => {
       await axios.put(`${url}/challenge/ban/${challengeId}`, data);
     },
     onSuccess: () => {
-      toast.success("User banned successfully");
-      queryClient.invalidateQueries(["challenges"]);
+      toast.success("User removed successfully");
+      queryClient.invalidateQueries([
+        "challenges"
+      ]);
     },
     onError: () => {
       toast.error("Error banning user");
+    },
+  });
+}
+
+export const useUnBanUser = () => {
+  const queryClient = useQueryClient();
+  const { id: challengeId } = useParams();
+  return useMutation({
+    mutationFn: async (data) => {
+      await axios.put(`${url}/challenge/unban/${challengeId}`, data);
+    },
+    onSuccess: () => {
+      toast.success("User Added successfully");
+      queryClient.invalidateQueries([
+        "challenges"
+      ]);
+    },
+    onError: () => {
+      toast.error("Error Unremoving user");
     },
   });
 }

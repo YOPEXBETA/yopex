@@ -6,11 +6,13 @@ import ReviewModel from "../../../../../../Components/shared/Modals/ReviewModel"
 import EditSubmitModal from "../../../../../../Components/shared/Modals/EditSubmit";
 import AvatarProfile from "../../../../../../assets/images/AvatarProfile.jpg";
 import { useBanUser } from "../../../../../../hooks/react-query/useChallenges";
+import RemoveParticipantPopup from "../../../../../../Components/Popup/RemoveParticipantPopup";
 
 const ParticipantRow = ({ user, index, challenge, isOwner }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [reviewisOpen, setreviewIsOpen] = useState(false);
   const [editisOpen, seteditIsOpen] = useState(false);
+  
   const {mutate} = useBanUser();
   const toggleedit = () => seteditIsOpen((prev) => !prev);
   const togglereview = () => setreviewIsOpen((prev) => !prev);
@@ -18,6 +20,8 @@ const ParticipantRow = ({ user, index, challenge, isOwner }) => {
     setIsOpen((prev) => !prev);
   };
   const { user: currentUser } = useSelector((state) => state.auth);
+  const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+
 
   function formatDate(dateString) {
     const options = {
@@ -28,7 +32,7 @@ const ParticipantRow = ({ user, index, challenge, isOwner }) => {
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
-  const canedit = user.user._id === currentUser._id;
+  const canedit = user?.user._id === currentUser._id && challenge?.start && new Date() < new Date(challenge.deadline);
 
   return (
     <tr
@@ -83,11 +87,11 @@ const ParticipantRow = ({ user, index, challenge, isOwner }) => {
           className="text-lg py-4 px-4 dark:text-white cursor-pointer text-right"
         >
           <button
-            className="bg-red-400 hover:bg-red-700 text-white px-4 py-2 rounded w-full"
+            className="bg-red-400 hover:bg-red-700 text-white px-2 py-2 rounded w-full"
             type="button"
-            onClick={() => {mutate({userId: user.user?._id })}}
+            onClick={() => {setConfirmationDialogOpen(true)}}
           >
-            Ban
+            Remove
           </button>
           
         </td>
@@ -119,6 +123,13 @@ const ParticipantRow = ({ user, index, challenge, isOwner }) => {
             participant={user}
           />
         </>
+      )}
+      {confirmationDialogOpen && (
+        <RemoveParticipantPopup
+          open={confirmationDialogOpen}
+          handleCancel={() => setConfirmationDialogOpen(false)}
+          handleConfirm={() => {mutate({userId: user.user?._id });setConfirmationDialogOpen(false)}}
+        />
       )}
     </tr>
   );

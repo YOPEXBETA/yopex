@@ -55,11 +55,6 @@ const CreateChallengeModal = ({ open, handleClose }) => {
       const companyId = selectedOption;
       mutate({ companyId, challengeData, paid: selectedOptionpaid });
     } else {
-      // const formData = new FormData();
-      // formData.append("file", challengeData.files[challengeData.files[0]]);
-      // formData.append("type", "posts");
-
-      // const result = await fileUploadMutation.mutateAsync(formData);
 
       mutate({ challengeData, paid: selectedOptionpaid });
     }

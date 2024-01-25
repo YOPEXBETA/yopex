@@ -90,7 +90,7 @@ const ClientCard = ({isRegistered,isOwner}) => {
         </div>
       </div>
 
-      {!isOwner && !challenge?.start && (
+      {!isOwner && (!challenge?.start | new Date() < new Date(challenge.deadline)) ? (
         <div className="flex flex-col gap-2">
           {user.role === "user" &&
           deadline !== "0 Days 0 Hours 0 Minutes" &&
@@ -137,7 +137,7 @@ const ClientCard = ({isRegistered,isOwner}) => {
             </div>
           ) : null}
         </div>
-      )}
+      ):""}
 
       <SubmitModal
         open={modalOpen}

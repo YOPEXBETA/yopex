@@ -72,29 +72,22 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
 
   const handleFileSelect = async (event) => {
     const files = event.target.files;
-    console.log("files",files);
     handleFiles(files);
-    console.log("validfiles",validFiles);
-    for (let i=0;i<validFiles.length;i++) {
-      if (!validFiles[i].url) {
-      const url  = await handleFileUpload(validFiles[i]);
+    for (const file of validFiles) {
+      const url = await handleFileUpload(file);
       console.log(url);
-      validFiles[i].url = url;
       setFilesSelected([...filesSelected, url]);
-    }  
+      
     }
-    console.log(filesSelected);
   };
 
   const handleFiles = (files) => {
-    console.log(files);
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
       if (file.size <= maxSize) {
-        
         validFiles.push(file);
-        setFilesSelected([...filesSelected, file]);
+        
       } else {
         invalidFiles.push(file);
       }

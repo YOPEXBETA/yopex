@@ -56,8 +56,13 @@ const Login = () => {
       dispatch(resetAuth());
       return navigate("/Dashboard");
     }
-
-    navigate("/projects");
+    // get the param from the url to redirect the user to the right page
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirect = urlParams.get("redirect");
+    if (redirect) {
+      return navigate(redirect);
+    }
+    navigate("/feed");
     dispatch(resetAuth());
   }, [dispatch, navigate, user]);
 

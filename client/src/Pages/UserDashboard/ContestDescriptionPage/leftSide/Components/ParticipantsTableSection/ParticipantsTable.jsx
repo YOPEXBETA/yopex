@@ -7,9 +7,9 @@ import ParticipantRow from "./ParticipantRow";
 const ParticipantsTable = ({isOwner}) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
+  console.log(challenge);
   const handleChangePage = (newPage) => {
     if (newPage >= 0 && newPage <= Math.ceil(challenge.length / rowsPerPage)) {
       setPage(newPage);
@@ -79,6 +79,7 @@ const ParticipantsTable = ({isOwner}) => {
                         />
                       );
                     })}
+                    
                 </tbody>
               </table>
             </div>

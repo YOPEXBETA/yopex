@@ -15,11 +15,9 @@ const ChallengeConversation = ({ conversationId, id }) => {
   const { user } = useSelector((state) => state.auth);
   const { data: messages } = useContestMessages(id);
   const { mutate } = useCreateMessage(id);
-
   const [message, setMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState([]);
   const [socket, setSocket] = useState(null);
-
   if (chatContainerRef.current !== null)
     chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
   const url = process.env.REACT_APP_API_ENDPOINT;

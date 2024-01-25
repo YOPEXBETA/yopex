@@ -10,11 +10,13 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
   const isOwner = user.companies.find(
-    (company) => company === challenge.company?._id
+    (company) => company === challenge?.company?._id
   )
     ? true
-    : challenge.owner === user._id ? true : false;
-
+    : challenge?.owner === user._id
+    ? true
+    : false;
+    console.log(isOwner);
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeRemaining(calculateTimeRemaining());
