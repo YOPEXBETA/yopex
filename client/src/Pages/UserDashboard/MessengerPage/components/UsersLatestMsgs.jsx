@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import {
   useConversations,
   useCreateConversation,
@@ -60,7 +61,7 @@ const UsersLatestMsgs = () => {
             <input
               type="search"
               name="q"
-              className="w-full py-2 pl-12 text-sm text-white bg-gray-200 border border-transparent appearance-none rounded-tg focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
+              className="w-full py-2 pl-12 text-sm text-white bg-gray-200 border border-transparent appearance-none rounded-tg focus:bg-white focus:outline-none focus:border-green-500 focus:text-gray-900 focus:shadow-outline-blue"
               placeholder="Search..."
               autocomplete="off"
               onChange={(event) => setQuery(event.target.value)}
@@ -85,14 +86,23 @@ const UsersLatestMsgs = () => {
                             <div key={conversation?.conversationId}>
                               <Link
                                 to={`/chat/${conversation?.conversationId}`}
-                                className=" hover:bg-gray-100  p-4 flex flex-col gap-2 w-full"
+                                className=" dark:hover:bg-zinc-500 p-4 flex flex-col gap-2 w-full"
                               >
                                 <div className="flex gap-4 items-center">
-                                  <img
-                                    src={otherUser?.picturePath}
-                                    alt="User Avatar"
-                                    className="w-12 h-12 rounded-full object-cover"
-                                  />
+                                  {otherUser?.picturePath ? (
+                                    <img
+                                      src={otherUser.picturePath}
+                                      alt="User Avatar"
+                                      className="w-12 h-12 rounded-full object-cover"
+                                    />
+                                  ) : (
+                                    <img
+                                      src={AvatarProfile}
+                                      alt="Default Avatar"
+                                      className="w-12 h-12 rounded-full object-cover"
+                                    />
+                                  )}
+
                                   <div>
                                     <div>
                                       <div className=" flex flex-row gap-1">
@@ -123,23 +133,31 @@ const UsersLatestMsgs = () => {
                     : users?.map((user) => (
                         <li
                           key={user._id}
-                          className="px-8 py-4 hover:bg-gray-100"
+                          className="px-4 py-4 hover:bg-gray-100"
                         >
                           <button
                             className="flex items-center w-full"
                             onClick={() => handleUserClick(user)}
                           >
                             <div className="flex items-center space-x-2">
-                              <img
-                                src={
-                                  user.companyName
-                                    ? user.companyLogo
-                                    : user.picturePath
-                                }
-                                alt="User Avatar"
-                                className="object-cover w-12 h-12 rounded-full border"
-                              />
-                              <div className="flex flex-col">
+                              {user?.picturePath || user.companyLogo ? (
+                                <img
+                                  src={
+                                    user.companyName
+                                      ? user.companyLogo
+                                      : user.picturePath
+                                  }
+                                  alt="User Avatar"
+                                  className="object-cover w-12 h-12 rounded-full border"
+                                />
+                              ) : (
+                                <img
+                                  src={AvatarProfile}
+                                  alt="Default Avatar"
+                                  className="object-cover w-12 h-12 rounded-full border"
+                                />
+                              )}
+                              <div className="flex flex-col dark:text-white">
                                 {user.companyName ? (
                                   <h6 className="text-[1rem]">
                                     {user.companyName}

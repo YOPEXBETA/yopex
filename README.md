@@ -18,11 +18,12 @@ This is a platform for developers, designers, artists, and other professionals t
 
 - React
 - Redux Toolkit
+- React query
 - Node.js
 - Express.js
 - MongoDB
 - Stripe
-- Material-UI
+- Tailwind css
 
 ## License
 

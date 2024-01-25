@@ -10,7 +10,7 @@ import Modal from ".";
 import CloseIcon from "../icons/CloseIcon";
 import CompanyIcon from "../icons/CompanyIcon";
 import UsersIcon from "../icons/UsersIcon";
-
+import InfoIcon from "../icons/InfoIcon";
 
 const CreateChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -23,7 +23,6 @@ const CreateChallengeModal = ({ open, handleClose }) => {
   const { data: Skills } = useSkills();
 
   const { data: categorys } = useCategories();
-
 
   const {
     handleSubmit,
@@ -90,7 +89,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
       className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}
     >
       <div class="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
-        <div class="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white">
+        <div class="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
           <div className="flex justify-between px-4 pt-4">
             <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
               Create Challenge
@@ -107,9 +106,14 @@ const CreateChallengeModal = ({ open, handleClose }) => {
           <hr />
           <div class="m-8  max-w-[550px] mx-auto space-y-6">
             <div className="space-y-6">
-              <h1 className="font-medium text-xl">
-                Are you posting as an individual, or as a company?
-              </h1>
+              <div className="flex items-center gap-2">
+                <span className="flex items-center justify-center w-10 h-10 shrink-0 border bg-blue-100 rounded-full text-blue-500 ">
+                  <InfoIcon />
+                </span>
+                <h1 className="font-medium text-xl dark:text-white">
+                  Are you posting as an individual, or as a company?
+                </h1>
+              </div>
               <div className="flex inset-y-0 right-0 items-center pr-0 h-14  bg-green-50 rounded-full">
                 <button
                   className={`flex items-center rounded-full h-14 dark:text-black transition-colors duration-300 ease-in focus:outline-none w-full hover:text-green-300 px-4 py-2 ${
@@ -117,9 +121,9 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   }`}
                   onClick={handleToggleUser}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 dark:text-white">
                     <UsersIcon />
-                    <span className="hidden sm:inline font-medium text-lg">
+                    <span className="hidden sm:inline font-medium text-lg dark:text-white">
                       Individual
                     </span>
                   </div>
@@ -130,9 +134,9 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   }`}
                   onClick={handleToggleCompanies}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 dark:text-white">
                     <CompanyIcon />
-                    <span className="hidden sm:inline font-medium text-lg">
+                    <span className="hidden sm:inline font-medium text-lg dark:text-white">
                       Company
                     </span>
                   </div>
@@ -217,147 +221,156 @@ const CreateChallengeModal = ({ open, handleClose }) => {
             <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-2">
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 space-y-4">
                 <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Challenge Title
                   </label>
-                  <input
-                    {...register("title", { required: true })}
-                    required={true}
-                    placeholder="challenge title"
-                    className="w-full h-10 p-2 border mt-1  rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                  />
+                  <div className="relative my-2">
+                    <input
+                      {...register("title", { required: true })}
+                      required={true}
+                      placeholder="challenge title"
+                      className="w-full h-10 p-2 border mt-1  rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                    />
+                  </div>
                 </div>
                 <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Challenge Description
                   </label>
-                  <textarea
-                    className="w-full h-40 p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                    {...register("description", { required: true })}
-                    required={true}
-                    placeholder="challenge description"
-                  />
+                  <div className="relative my-2">
+                    <textarea
+                      className="w-full h-40 p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                      {...register("description", { required: true })}
+                      required={true}
+                      placeholder="challenge description"
+                    />
+                  </div>
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Type
                   </label>
-
-                  <select
-                    id="selectFieldpaid"
-                    className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                    value={selectedOptionpaid}
-                    onChange={(e, value) => {
-                      setSelectedOptionpaid(e.target.value);
-                    }}
-                  >
-                    <option value={"false"}>Recrutement</option>
-                    <option value={"true"}>Freelance</option>
-                  </select>
+                  <div className="relative my-2">
+                    <select
+                      id="selectFieldpaid"
+                      className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                      value={selectedOptionpaid}
+                      onChange={(e, value) => {
+                        setSelectedOptionpaid(e.target.value);
+                      }}
+                    >
+                      <option value={"false"}>Recrutement</option>
+                      <option value={"true"}>Freelance</option>
+                    </select>
+                  </div>
                 </div>
                 <div className="md:col-span-3">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Challenge Prize
                   </label>
-
-                  <input
-                    className={`w-full p-2 border  rounded dark:text-white  ${
-                      selectedOptionpaid === "false"
-                        ? "bg-zinc-200 dark:bg-zinc-900"
-                        : "bg-white"
-                    }  dark:bg-zinc-700 focus:outline-none focus:border-green-500`}
-                    type="number"
-                    placeholder="challenge prize"
-                    {...register("price", { required: false })}
-                    disabled={selectedOptionpaid === "false"}
-                  />
+                  <div className="relative my-2">
+                    <input
+                      className={`w-full p-2 border  rounded dark:text-white  ${
+                        selectedOptionpaid === "false"
+                          ? "bg-zinc-200 dark:bg-zinc-900"
+                          : "bg-white"
+                      }  dark:bg-zinc-700 focus:outline-none focus:border-green-500`}
+                      type="number"
+                      placeholder="challenge prize"
+                      {...register("price", { required: false })}
+                      disabled={selectedOptionpaid === "false"}
+                    />
+                  </div>
                 </div>
 
                 <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Select Skills
                   </label>
-                  <Controller
-                    control={control}
-                    name="RecommendedSkills"
-                    defaultValue={"Any"}
-                    render={({ field }) =>
-                    Skills && (
-                        <Select
-                          isMulti
-                          className="my-react-select-container mt-2"
-                          classNamePrefix="my-react-select"
-                          id="tags-outlined"
-                          options={Skills.map((skill) => ({
-                            value: skill._id,
-                            label: skill.name,
-                          }))}
-                          
-                          onBlur={field.onBlur}
-                          onChange={(selectedOptions) => {
-                            const selectedValues = selectedOptions.map(
-                              (option) => option.value
-                            );
-                            field.onChange(selectedValues);
-                          }}
-                        />
-                      )
-                    }
-                  />
+                  <div className="relative my-2">
+                    <Controller
+                      control={control}
+                      name="RecommendedSkills"
+                      defaultValue={"Any"}
+                      render={({ field }) =>
+                        Skills && (
+                          <Select
+                            isMulti
+                            className="my-react-select-container mt-2"
+                            classNamePrefix="my-react-select"
+                            id="tags-outlined"
+                            options={Skills.map((skill) => ({
+                              value: skill._id,
+                              label: skill.name,
+                            }))}
+                            onBlur={field.onBlur}
+                            onChange={(selectedOptions) => {
+                              const selectedValues = selectedOptions.map(
+                                (option) => option.value
+                              );
+                              field.onChange(selectedValues);
+                            }}
+                          />
+                        )
+                      }
+                    />
+                  </div>
                 </div>
                 <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Select Categories
                   </label>
-                  <Controller
-                    control={control}
-                    name="category"
-                    defaultValue={"Any"}
-                    render={({ field }) =>
-                    categorys && (
-                        <Select
-                          isMulti
-                          className="my-react-select-container mt-2"
-                          classNamePrefix="my-react-select"
-                          id="tags-outlined"
-                          options={categorys.map((category) => ({
-                            value: category._id,
-                            label: category.name,
-                          }))}
-                          
-                          onBlur={field.onBlur}
-                          onChange={(selectedOptions) => {
-                            const selectedValues = selectedOptions.map(
-                              (option) => option.value
-                            );
-                            field.onChange(selectedValues);
-                          }}
-                        />
-                      )
-                    }
-                  />
+                  <div className="relative my-2">
+                    <Controller
+                      control={control}
+                      name="category"
+                      defaultValue={"Any"}
+                      render={({ field }) =>
+                        categorys && (
+                          <Select
+                            isMulti
+                            className="my-react-select-container mt-2"
+                            classNamePrefix="my-react-select"
+                            id="tags-outlined"
+                            options={categorys.map((category) => ({
+                              value: category._id,
+                              label: category.name,
+                            }))}
+                            onBlur={field.onBlur}
+                            onChange={(selectedOptions) => {
+                              const selectedValues = selectedOptions.map(
+                                (option) => option.value
+                              );
+                              field.onChange(selectedValues);
+                            }}
+                          />
+                        )
+                      }
+                    />
+                  </div>
                 </div>
 
                 <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Specify The Participants Number
                   </label>
-                  <input
-                    required
-                    className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
-                    type="number"
-                    placeholder="number of particiant"
-                    min={1}
-                    {...register("nbruser", { required: true })}
-                  />
+                  <div className="relative my-2">
+                    <input
+                      required
+                      className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
+                      type="number"
+                      placeholder="number of particiant"
+                      min={1}
+                      {...register("nbruser", { required: true })}
+                    />
+                  </div>
                 </div>
-                
 
                 <div className="md:col-span-5 text-right mt-4">
                   <div className="inline-flex items-end">
                     <button
-                      className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded"
+                      className="px-5 py-2.5 rounded-lg text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80"
                       type="submit"
                       disabled={isSubmitting}
                     >

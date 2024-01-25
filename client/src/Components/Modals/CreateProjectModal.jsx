@@ -158,7 +158,7 @@ const CreateProjectModal = ({ open, handleClose }) => {
                     )}
                   />
                 </div>
-                <div>
+                <div className="md:col-span-5">
                   <div className="space-y-4">
                     {uploadedFile && uploadedFile.length > 0 && (
                       <div className="mb-4">
@@ -176,7 +176,7 @@ const CreateProjectModal = ({ open, handleClose }) => {
                       </div>
                     )}
 
-                    <div className="md:col-span-5">
+                    <div>
                       <label className="text-sm text-black mb-2 block dark:text-white">
                         Upload Files
                       </label>

@@ -6,8 +6,9 @@ import {
   editProfileLinks,
 } from "../../../../../redux/auth/authSlice";
 import SocialMediaLinks from "../Links/components/SocialMediaLinks";
+import Card from "../../../../../Components/Cards";
 
-const Links = () => {
+const Links = ({ extra }) => {
   const { user, error, loading, success } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -51,13 +52,9 @@ const Links = () => {
     );
   };
   return (
-    <div>
-      <div className="py-4">
+    <Card extra={`p-8 ${extra}`}>
+      <div className="">
         <div className="space-y-6">
-          <p className="dark:text-white uppercase font-bold">
-            social media links
-          </p>
-
           <SocialMediaLinks
             label="Github"
             showInput={showGithubInput}
@@ -99,10 +96,11 @@ const Links = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 my-5">
-        <div className="col-span-1">
+
+      <div className="grid grid-cols-1 mt-10">
+        <div className="col-span-1 flex justify-end">
           <button
-            className={`${"bg-green-500 dark:hover:bg-green-600 hover:bg-green-600"} px-4 py-2 rounded-lg text-white w-40`}
+            className={`${"bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80"} text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-28`}
             type="button"
             onClick={editProfileLinksMutation}
           >
@@ -110,7 +108,7 @@ const Links = () => {
           </button>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
