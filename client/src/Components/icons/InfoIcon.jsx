@@ -8,7 +8,7 @@ const InfoIcon = () => {
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      className="w-6 h-6 dark:text-white"
+      className="w-6 h-6 text-blue-500"
     >
       <path
         stroke-linecap="round"

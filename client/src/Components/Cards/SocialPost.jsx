@@ -113,17 +113,13 @@ const SocialPostCard = ({
           <div>
             <Link
               key={post.userId}
-              to={
-                post?.companyName !== undefined
-                  ? `/company/${post.userId}`
-                  : `/profile/${post.userId}`
-              }
+              to={post ? `/profile/${post.userId}` : null}
               style={{ textDecoration: "none", color: "#000000" }}
             >
               <p className="text-md font-medium dark:text-gray-300 truncate w-52">
-                {post.companyName !== undefined
-                  ? `${post?.companyName}`
-                  : `${post?.firstname} ${post?.lastname}`}
+                {post.user
+                  ? `${post?.user?.firstname} ${post?.user?.lastname}`
+                  : "undefined"}
               </p>
             </Link>
           </div>

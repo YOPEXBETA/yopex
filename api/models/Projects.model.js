@@ -3,19 +3,6 @@ const CommentModel = require("./Comment.model");
 
 const ProjectsSchema = new mongoose.Schema(
   {
-    userId: {
-      type: String,
-      required: true,
-    },
-    firstname: {
-      type: String,
-      required: false,
-    },
-    lastname: {
-      type: String,
-      required: false,
-    },
-    companyName: { type: String, required: false },
     title: {
       type: String,
       max: 250,
@@ -29,9 +16,7 @@ const ProjectsSchema = new mongoose.Schema(
     postPicturePath: {
       type: Array,
     },
-    userPicturePath: {
-      type: String,
-    },
+
     likes: {
       type: Map,
       of: Boolean,
@@ -54,6 +39,7 @@ const ProjectsSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     skills: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -73,7 +59,6 @@ const ProjectsSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    user: { type: mongoose.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );

@@ -34,8 +34,7 @@ const CreateChallenge = async (req, res, next) => {
         user: user._id,
         _id: companyId,
       });
-      console.log("company:", owner);
-  
+
       if (!owner) {
         return res.status(400).json({ error: "Company not found" });
       }
@@ -50,7 +49,7 @@ const CreateChallenge = async (req, res, next) => {
       user.balance = user.balance - price;
       await user.save();
     }
-    
+
     const challenge = new ChallengeModel({
       title,
       description,
@@ -63,8 +62,7 @@ const CreateChallenge = async (req, res, next) => {
     });
     if (companyId) {
       challenge.company = owner._id;
-    }
-    else{
+    } else {
       challenge.owner = owner._id;
     }
 
@@ -77,13 +75,13 @@ const CreateChallenge = async (req, res, next) => {
     if (companyId) {
       owner.challenges.push(challenge._id);
       await owner.save();
-    }else{
+    } else {
       owner.createdChallenge.push(challenge._id);
       await owner.save();
     }
 
     res
-      .status(201) 
+      .status(201)
       .json({ message: "Challenge created successfully", challenge });
   } catch (error) {
     console.log(error);
@@ -248,12 +246,15 @@ const updateChallenge = async (req, res, next) => {
 };
 
 const startChallenge = async (req, res, next) => {
-  try{
+  try {
     const challengeId = req.params.challengeId;
     const challenge = await ChallengeModel.findById(challengeId);
     const userId = req.userId;
     const user = await UserModel.findById(userId);
-    if ((challenge.owner?.toString() !== userId.toString()) && (!user.companies.includes(challenge.company.toString()))) {
+    if (
+      challenge.owner?.toString() !== userId.toString() &&
+      !user.companies.includes(challenge.company.toString())
+    ) {
       return res.status(400).json({ message: "Not authorized" });
     }
     if (challenge.users.length === 0) {
@@ -317,13 +318,11 @@ const unBanUser = async (req, res) => {
     userBanned.challenges.push(challengeId);
     await userBanned.save();
     res.status(200).json({ message: "User banned" });
-
-  }catch(err){
+  } catch (err) {
     res.status(400).json({ message: "bad" });
     return console.log(err);
   }
-
-}
+};
 
 module.exports = {
   CreateChallenge,

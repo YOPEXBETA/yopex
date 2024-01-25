@@ -34,10 +34,6 @@ ProjectsRouter.patch(
   authenticateToken,
   BookmarkPost
 );
-ProjectsRouter.get(
-  "/bookmarks/:userId",
-  authenticateToken,
-  getBookmarks
-);
+ProjectsRouter.get("/bookmarks/:userId", authenticateToken, getBookmarks);
 
 module.exports = ProjectsRouter;
