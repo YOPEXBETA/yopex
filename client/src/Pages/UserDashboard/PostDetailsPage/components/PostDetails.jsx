@@ -31,17 +31,13 @@ const PostDetails = ({ post }) => {
             </div>
             <div className="flex-col justify-between">
               <Link
-                key={post?.userId}
-                to={
-                  post?.companyName !== undefined
-                    ? `/company/${post.userId}`
-                    : `/profile/${post.userId}`
-                }
+                key={post?.user?._id}
+                to={post ? `/profile/${post?.user?._id}` : null}
               >
                 <p className="text-sm md:text-md dark:text-white font-medium">
-                  {post.companyName !== undefined
-                    ? `${post?.companyName}`
-                    : `${post?.firstname} ${post?.lastname}`}
+                  {post.user
+                    ? `${post?.user?.firstname} ${post?.user?.lastname}`
+                    : "undefined"}
                 </p>
               </Link>
               <p className="text-sm text-zinc-400">

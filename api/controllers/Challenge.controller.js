@@ -17,18 +17,16 @@ const CreateChallenge = async (req, res, next) => {
       nbruser,
       paid,
     } = req.body;
-    console.log(req.body);
 
     const userId = req.userId;
     const user = await UserModel.findById(userId);
     let owner = user;
 
-      if (companyId === ""){
-        return res.status(400).json({ error: "Company not found" });
-      }
+    if (companyId === "") {
+      return res.status(400).json({ error: "Company not found" });
+    }
 
-    if (companyId){
-      
+    if (companyId) {
       console.log("company id:", companyId);
       owner = await CompanyModel.findOne({
         user: user._id,
@@ -42,7 +40,7 @@ const CreateChallenge = async (req, res, next) => {
       //   return res.status(400).json({ message: "Company not verified" });
       // }
     }
-    if (paid === "true" ) {
+    if (paid === "true") {
       if (user.balance < price) {
         return res.status(400).json({ message: "Not enough balance" });
       }
@@ -125,15 +123,14 @@ const getChallengeById = async (req, res) => {
 
 const deleteChallenge = async (req, res) => {
   try {
-
     const challenge = await ChallengeModel.findOneAndDelete({
       _id: req.params.id,
     });
-    if (challenge.company){
+    if (challenge.company) {
       const company = await CompanyModel.findOne({ _id: challenge.company });
       await company.challenges.pull(challenge._id);
       await company.save();
-    }else{
+    } else {
       const User = await UserModel.findOne({ _id: challenge.owner });
       await User.createdChallenge.pull(challenge._id);
       await User.save();
@@ -264,51 +261,58 @@ const startChallenge = async (req, res, next) => {
     challenge.deadline = req.body.deadline;
     await challenge.save();
     res.status(200).json({ message: "Challenge started" });
-  }catch(err){
-    
+  } catch (err) {
     res.status(400).json({ message: "bad" });
     return console.log(err);
   }
-
-}
+};
 
 const banUser = async (req, res) => {
-  try{
+  try {
     const challengeId = req.params.challengeId;
-    const {userId} = req.body;
-    const owner = req.userId
+    const { userId } = req.body;
+    const owner = req.userId;
     const user = await UserModel.findById(owner);
     const challenge = await ChallengeModel.findById(challengeId);
-    if ((challenge.owner?.toString() !== owner.toString()) && (!user.companies.includes(challenge.company.toString()))) {
+    if (
+      challenge.owner?.toString() !== owner.toString() &&
+      !user.companies.includes(challenge.company.toString())
+    ) {
       return res.status(400).json({ message: "Not authorized" });
     }
     challenge.banned.push(userId);
-    challenge.users = challenge.users.filter((user)=>user.user.toString() !== userId.toString());
+    challenge.users = challenge.users.filter(
+      (user) => user.user.toString() !== userId.toString()
+    );
     await challenge.save();
     const userBanned = await UserModel.findById(userId);
-    userBanned.challenges = userBanned.challenges.filter((challenge)=>challenge.toString() !== challengeId.toString());
+    userBanned.challenges = userBanned.challenges.filter(
+      (challenge) => challenge.toString() !== challengeId.toString()
+    );
     await userBanned.save();
     res.status(200).json({ message: "User banned" });
-
-  }catch(err){
+  } catch (err) {
     res.status(400).json({ message: "bad" });
     return console.log(err);
   }
-
-}
-
+};
 
 const unBanUser = async (req, res) => {
-  try{
+  try {
     const challengeId = req.params.challengeId;
-    const {userId} = req.body;
-    const owner = req.userId
+    const { userId } = req.body;
+    const owner = req.userId;
     const user = await UserModel.findById(owner);
     const challenge = await ChallengeModel.findById(challengeId);
-    if ((challenge.owner?.toString() !== owner.toString()) && (!user.companies.includes(challenge.company.toString()))) {
+    if (
+      challenge.owner?.toString() !== owner.toString() &&
+      !user.companies.includes(challenge.company.toString())
+    ) {
       return res.status(400).json({ message: "Not authorized" });
     }
-    challenge.banned = challenge.banned.filter((user)=>user.toString() !== userId);
+    challenge.banned = challenge.banned.filter(
+      (user) => user.toString() !== userId
+    );
     challenge.users.push({
       user: userId,
       registrationDate: Date.now(),
@@ -335,5 +339,5 @@ module.exports = {
   updateChallenge,
   startChallenge,
   banUser,
-  unBanUser
+  unBanUser,
 };

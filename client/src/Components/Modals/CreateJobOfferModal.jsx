@@ -165,7 +165,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                         </svg>
                       </button>
                     )}
-                    {userProfile?.companies.length > 0 &&
+                    {userProfile?.companies.length > 0 ? (
                       userProfile.companies
                         .slice(currentPage, currentPage + 1)
                         .map((option, index) => (
@@ -201,7 +201,10 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                               </div>
                             )}
                           </div>
-                        ))}
+                        ))
+                    ) : (
+                      <p className="dark:text-white">No company found.</p>
+                    )}
                     {userProfile?.companies.length > 1 && (
                       <button
                         onClick={handleNextPage}

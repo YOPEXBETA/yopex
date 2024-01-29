@@ -29,11 +29,11 @@ const Bookmarks = () => {
   const bookmarksId = posts?.map((book) => book._id);
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
+      <div>
         {isLoading ? (
-          <SocialPostSkeleton />
-        ) : bookmarksId.length === 0 ? (
+          <LoadingSpinner />
+        ) : posts?.length === 0 ? (
           <p className="dark:text-gray-200">No Favorites found.</p>
         ) : (
           posts?.map((post) => (
@@ -41,7 +41,7 @@ const Bookmarks = () => {
               className="xl:h-48 xl:w-96"
               height={"48"}
               width={"96"}
-              key={post._id}
+              key={post?._id}
               post={post}
               bookmarks={bookmarksId}
               openModal={() => openModal(post)}
@@ -49,6 +49,7 @@ const Bookmarks = () => {
           ))
         )}
       </div>
+
       {/* Render the SocialPostModal conditionally */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">

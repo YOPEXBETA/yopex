@@ -54,7 +54,6 @@ const CreateChallengeModal = ({ open, handleClose }) => {
       const companyId = selectedOption;
       mutate({ companyId, challengeData, paid: selectedOptionpaid });
     } else {
-
       mutate({ challengeData, paid: selectedOptionpaid });
     }
   };
@@ -161,7 +160,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                         </svg>
                       </button>
                     )}
-                    {userProfile?.companies.length > 0 &&
+                    {userProfile?.companies.length > 0 ? (
                       userProfile.companies
                         .slice(currentPage, currentPage + 1)
                         .map((option, index) => (
@@ -197,7 +196,11 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                               </div>
                             )}
                           </div>
-                        ))}
+                        ))
+                    ) : (
+                      <p className="dark:text-white">No company found.</p>
+                    )}
+
                     {userProfile?.companies.length > 1 && (
                       <button
                         onClick={handleNextPage}

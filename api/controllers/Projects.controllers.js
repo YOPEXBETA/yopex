@@ -1,32 +1,24 @@
 const Post = require("../models/Projects.model");
 const UserModel = require("../models/user.model");
-const CompanyModel = require("../models/company.model");
-const userModel = require("../models/user.model");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
 
 //create a post
 
-const CreatePost = async (req, res) => {
+const CreatePost = async ({ userId, body }, res) => {
   try {
-    const userId = req.userId;
-    console.log(userId, "bb");
     const user = await UserModel.findById(userId);
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const { ...projectDetails } = req.body;
-
     const newPost = new Post({
       user: user._id,
-      ...projectDetails,
+      ...body,
     });
 
     const savedPost = await newPost.save();
-    console.log(savedPost, "xs");
 
-    return res.status(200).json(savedPost);
+    return res.status(201).json(savedPost);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -230,7 +222,9 @@ const getBookmarks = async (req, res) => {
 const getpostById = async (req, res) => {
   try {
     const postId = req.params.postId;
-    const post = await Post.findById(postId).populate("skills");
+    const post = await Post.findById(postId)
+      .populate("skills")
+      .populate("user", "_id firstname lastname picturePath");
 
     return res.status(200).json(post);
   } catch (err) {
