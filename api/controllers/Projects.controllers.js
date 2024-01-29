@@ -61,14 +61,14 @@ const getFeedPosts = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    const thisuser = await UserModel.findById(req.userId);
+    if (!post) {
+      return res.status(404).send("Post not found");
+    }
 
-    if (
-      post.userId.toString() === req.userId ||
-      thisuser.companies.includes(post.userId)
-    ) {
+    if (post.user._id.toString() === req.userId) {
       await Post.findOneAndDelete({ _id: req.params.id });
-      return res.status(200).send("Post has been deleted");
+
+      return res.status(201).send("Post has been deleted");
     } else {
       return res.status(403).send("You are not authorized to delete this post");
     }
@@ -105,7 +105,7 @@ const likePost = async (req, res) => {
     const post = await Post.findById(id);
     const isLiked = post.likes.get(userId);
     let likesCount = post.likesCount;
-    const user = await userModel.findById(userId);
+    const user = await UserModel.findById(userId);
 
     if (isLiked) {
       post.likes.delete(userId);
@@ -121,8 +121,8 @@ const likePost = async (req, res) => {
       });
       notification.save();
       main.sendNotification(post.userId, notification);
-      const owner = await userModel.findById(post.userId);
-      owner.notifications.push(notification._id);
+      const owner = await UserModel.findById(post.user._id);
+      owner?.notifications?.push(notification._id);
       owner.save();
     }
     const updatedPost = await Post.findByIdAndUpdate(
