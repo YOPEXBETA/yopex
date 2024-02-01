@@ -10,7 +10,7 @@ import ChallengeConversation from "./Components/ChallengeConversation";
 import Start from "./Components/ChallengeDescription/Start";
 import Removed from "./Components/ParticipantsTableSection/Removed";
 
-const ContentSide = ({ value,isOwner,start,isRegistered }) => {
+const ContentSide = ({ value, isOwner, start, isRegistered }) => {
   const { id: challengeId } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { data: conversation } = useGetContestConversation(challengeId);
@@ -25,17 +25,14 @@ const ContentSide = ({ value,isOwner,start,isRegistered }) => {
                 <TasksDescription />
               </div>
               <div className="lg:block md:block lg:col-span-4 md:col-span-12 sm:col-span-12 col-span-12  mb-20">
-                <CompanyCard 
-                isRegistered={isRegistered}
-                isOwner={isOwner}
-                />
+                <CompanyCard isRegistered={isRegistered} isOwner={isOwner} />
                 {isOwner && !start && <Start />}
               </div>
             </div>
           )}
           {value === 1 && (
             <div className="lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
-              <MTable isOwner={isOwner}/>
+              <MTable isOwner={isOwner} />
             </div>
           )}
           {value === 2 && (

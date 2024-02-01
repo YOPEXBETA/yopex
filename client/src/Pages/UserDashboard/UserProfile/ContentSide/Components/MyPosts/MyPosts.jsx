@@ -4,17 +4,14 @@ import {
   useUserPosts,
   useBookmarkedPosts,
 } from "../../../../../../hooks/react-query/usePosts";
-import SocialPostCard from "../../../../../../Components/Cards/SocialPost";
 import { useSelector } from "react-redux";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
-import AddSocialPostCard from "../../../../../../Components/shared/CreatePost/AddSocialPostCard";
 import ProjectsProfile from "../../../../../../Components/Cards/ProjectsProfile";
 
-const MyPortfolio = () => {
+const MyPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
   const [selectedPost, setSelectedPost] = useState(null);
 
   const openModal = (post) => {
@@ -38,7 +35,6 @@ const MyPortfolio = () => {
 
   return (
     <div>
-      <AddSocialPostCard />
       <div className="gap-4 py-2 mb-12">
         {isLoading ? (
           <LoadingSpinner />
@@ -48,7 +44,6 @@ const MyPortfolio = () => {
               key={post._id}
               post={post}
               bookmarks={bookmarksId}
-              
               height={"48"}
               width={"96"}
               openModal={() => openModal(post)}
@@ -74,4 +69,4 @@ const MyPortfolio = () => {
   );
 };
 
-export default MyPortfolio;
+export default MyPosts;

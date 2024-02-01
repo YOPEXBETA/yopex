@@ -9,7 +9,7 @@ const PostDetails = ({ post }) => {
     <div className="">
       <div className="mb-4 md:mb-0 w-full mx-auto relative">
         <div className="px-4 lg:px-0 flex flex-col space-y-6">
-          <h2 className="text-4xl font-semibold text-gray-800 leading-tight">
+          <h2 className="text-4xl font-semibold dark:text-white leading-tight">
             {post?.title}
           </h2>
 
@@ -31,17 +31,13 @@ const PostDetails = ({ post }) => {
             </div>
             <div className="flex-col justify-between">
               <Link
-                key={post?.userId}
-                to={
-                  post?.companyName !== undefined
-                    ? `/company/${post.userId}`
-                    : `/profile/${post.userId}`
-                }
+                key={post?.user?._id}
+                to={post ? `/profile/${post?.user?._id}` : null}
               >
                 <p className="text-sm md:text-md dark:text-white font-medium">
-                  {post.companyName !== undefined
-                    ? `${post?.companyName}`
-                    : `${post?.firstname} ${post?.lastname}`}
+                  {post.user
+                    ? `${post?.user?.firstname} ${post?.user?.lastname}`
+                    : "undefined"}
                 </p>
               </Link>
               <p className="text-sm text-zinc-400">
@@ -66,15 +62,15 @@ const PostDetails = ({ post }) => {
           className="w-full object-cover md:rounded-xl"
         />
       </div>
+      <hr className="border-t  lg:px-0" />
       <div className="flex flex-col lg:flex-row lg:space-x-12">
-        <div className="px-4 lg:px-0 mt-6 text-gray-700 text-lg leading-relaxed w-full lg:w-full">
+        <div className="px-4 lg:px-0 mt-6 dark:text-white text-lg leading-relaxed w-full lg:w-full">
           <p
             className="pb-6"
             dangerouslySetInnerHTML={{ __html: post?.description }}
           ></p>
         </div>
       </div>
-      <hr className="border-t  my-4 lg:px-0" />
     </div>
   );
 };

@@ -1,32 +1,24 @@
 const Post = require("../models/Projects.model");
 const UserModel = require("../models/user.model");
-const CompanyModel = require("../models/company.model");
-const userModel = require("../models/user.model");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
 
 //create a post
 
-const CreatePost = async (req, res) => {
+const CreatePost = async ({ userId, body }, res) => {
   try {
-    const userId = req.userId;
-    console.log(userId, "bb");
     const user = await UserModel.findById(userId);
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const { ...projectDetails } = req.body;
-
     const newPost = new Post({
       user: user._id,
-      ...projectDetails,
+      ...body,
     });
 
     const savedPost = await newPost.save();
-    console.log(savedPost, "xs");
 
-    return res.status(200).json(savedPost);
+    return res.status(201).json(savedPost);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -69,14 +61,14 @@ const getFeedPosts = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    const thisuser = await UserModel.findById(req.userId);
+    if (!post) {
+      return res.status(404).send("Post not found");
+    }
 
-    if (
-      post.userId.toString() === req.userId ||
-      thisuser.companies.includes(post.userId)
-    ) {
+    if (post.user._id.toString() === req.userId) {
       await Post.findOneAndDelete({ _id: req.params.id });
-      return res.status(200).send("Post has been deleted");
+
+      return res.status(201).send("Post has been deleted");
     } else {
       return res.status(403).send("You are not authorized to delete this post");
     }
@@ -113,7 +105,7 @@ const likePost = async (req, res) => {
     const post = await Post.findById(id);
     const isLiked = post.likes.get(userId);
     let likesCount = post.likesCount;
-    const user = await userModel.findById(userId);
+    const user = await UserModel.findById(userId);
 
     if (isLiked) {
       post.likes.delete(userId);
@@ -129,8 +121,8 @@ const likePost = async (req, res) => {
       });
       notification.save();
       main.sendNotification(post.userId, notification);
-      const owner = await userModel.findById(post.userId);
-      owner.notifications.push(notification._id);
+      const owner = await UserModel.findById(post.user._id);
+      owner?.notifications?.push(notification._id);
       owner.save();
     }
     const updatedPost = await Post.findByIdAndUpdate(
@@ -230,7 +222,9 @@ const getBookmarks = async (req, res) => {
 const getpostById = async (req, res) => {
   try {
     const postId = req.params.postId;
-    const post = await Post.findById(postId).populate("skills");
+    const post = await Post.findById(postId)
+      .populate("skills")
+      .populate("user", "_id firstname lastname picturePath");
 
     return res.status(200).json(post);
   } catch (err) {

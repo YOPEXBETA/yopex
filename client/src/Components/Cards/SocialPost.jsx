@@ -39,10 +39,6 @@ const SocialPostCard = ({
     post._id,
     category
   );
-  let ownerId = user._id;
-  if (companyId) {
-    ownerId = companyId;
-  }
 
   const bookmark = async () => {
     BookmarkPost();
@@ -112,8 +108,8 @@ const SocialPostCard = ({
           )}
           <div>
             <Link
-              key={post.userId}
-              to={post ? `/profile/${post.userId}` : null}
+              key={post.user._id}
+              to={post ? `/profile/${post.user._id}` : null}
               style={{ textDecoration: "none", color: "#000000" }}
             >
               <p className="text-md font-medium dark:text-gray-300 truncate w-52">
@@ -128,8 +124,7 @@ const SocialPostCard = ({
           className="font-medium p-2 flex  rounded-full"
           onClick={(e) => e.stopPropagation()}
         >
-          {(post.userId === user._id ||
-            user.companies.includes(post.userId)) && (
+          {post.user._id === user._id && (
             <Dropdown
               button={
                 <p className="cursor-pointer py-6 pr-4">
@@ -250,7 +245,7 @@ const SocialPostCard = ({
           </div>
         </div>
         <div>
-          {ownerId == post.userId ? (
+          {user._id == post.userId ? (
             ""
           ) : (
             <div className="flex items-center">
