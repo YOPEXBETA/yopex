@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { useSubmitToChallenge } from "../../../hooks/react-query/useChallenges";
-import { useFileUpload } from "../../../hooks/react-query/useUsers";
+import LoadingSpinner from "../../LoadingSpinner";
 import { axios } from "../../../axios";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
@@ -17,7 +17,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
   const [platform, setPlatform] = useState("");
   const [link, setLink] = useState("");
   const [links, setLinks] = useState([]);
-  const fileUploadMutation = useFileUpload();
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleAddLink = () => {
     setLinks([...links, { platform, link }]);
@@ -72,16 +72,18 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
 
   const handleFileSelect = async (event) => {
     const files = event.target.files;
+    setIsUploading(true);
     handleFiles(files);
     for (const file of validFiles) {
       const url = await handleFileUpload(file);
-      console.log(url);
-      setFilesSelected([...filesSelected, url]);
       
+      setFilesSelected([...filesSelected, url]);
+      setIsUploading(false);
     }
   };
 
   const handleFiles = (files) => {
+    
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
@@ -137,13 +139,14 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
             <div className=" items-center space-y-2 ">
               <div>
                 <input
-                  accept=".jpg,.jpeg,.png,.gif,.mp4,.avi,.zip,application/*"
+                  accept=".jpg,.jpeg,.png,.gif,.avi,.zip,application/*"
                   type="file"
                   id="fileInput"
                   onChange={handleFileSelect}
                   multiple
                 />
               </div>
+              {isUploading && <LoadingSpinner />}
             </div>
             <div>
               <label className="block text-gray-600">Add Link</label>
@@ -182,16 +185,16 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                 );
               })}
             {filesSelected.length > 0 &&
-              filesSelected.map((file) => {
+              filesSelected.map((file,index) => {
                 return (
-                  <p key={file?.name}>
+                  <p key={index}>
                     {" "}
                     <a
-                      href={file?.url}
+                      href={file}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {file?.name}
+                      {"file "+index}
                     </a>
                   </p>
                 );

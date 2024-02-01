@@ -186,7 +186,8 @@ const getAllChallenges = async (req, res) => {
 
   try {
     const ChallengePosts =
-      await ChallengeModel.find(filters).populate("company");
+      await ChallengeModel.find(filters).populate("company")
+      
 
     res.status(200).json(ChallengePosts);
   } catch (err) {

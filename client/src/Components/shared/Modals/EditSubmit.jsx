@@ -8,6 +8,7 @@ import {
   useUserSubmission,
 } from "../../../hooks/react-query/useChallenges";
 import { axios } from "../../../axios";
+import LoadingSpinner from "../../LoadingSpinner";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
@@ -22,6 +23,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   const [links, setLinks] = useState([]);
   const { id } = useParams();
   const { data: submissions } = useUserSubmission(id, participant);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (submissions) {
@@ -83,11 +85,12 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   const handleFileSelect = async (event) => {
     const files = event.target.files;
     handleFiles(files);
+    setIsUploading(true);
     for (const file of validFiles) {
       const url = await handleFileUpload(file);
-      console.log(url);
-      setFilesSelected([...filesSelected, url]);
       
+      setFilesSelected([...filesSelected, url]);
+      setIsUploading(false);
     }
   };
 
@@ -148,12 +151,13 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
             <div className=" items-center space-y-2 ">
               <div>
                 <input
-                  accept=".jpg,.jpeg,.png,.gif,.mp4,.avi,.zip,application/*"
+                  accept=".jpg,.jpeg,.png,.gif,.mp4,.zip,application/*"
                   type="file"
                   id="fileInput"
                   onChange={handleFileSelect}
                   multiple
                 />
+                {isUploading && <LoadingSpinner />}
               </div>
             </div>
             <div>

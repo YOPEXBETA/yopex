@@ -84,7 +84,7 @@ export const useFindChallenges = (
 ) => {
   return useQuery({
     queryKey: [
-      "challenges"
+      "challenges",minAmount,maxAmount,searchQuery,skills,categories
     ],
     queryFn: async () => {
       let query = "";

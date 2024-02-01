@@ -18,7 +18,18 @@ const createReview = async (req, res) => {
     star: req.body.star,
     challengeId: req.body.challengeId,
   });
-
+  const challenge = await challengeModel.findById(req.body.challengeId);
+  if (!challenge) {
+    return res.status(404).json({ message: "Challenge not found" });
+  }
+  challenge.users.forEach((user) => {
+    console.log(user);
+    if (user.user.toString() === req.body.userId) {
+      console.log(user);
+      user.review = true;
+    }
+  });
+  challenge.save();
   const company = await companyModel.findById(req.body.companyId);
   if (!company) {
     newReview.companyId = null;
@@ -45,8 +56,9 @@ const getReviews = async (req, res) => {
       .find({
         userId: new ObjectId(req.params.id),
       })
+      
+      .populate({ path: "challengeOwnerId", model: "User" ,select:"firstname lastname picturePath"})
       .populate({ path: "companyId", model: "Company" ,select:"companyName companyLogo"})
-      .populate("challengeOwnerId","firstName lastName picturePath")
       .populate({ path: "challengeId", model: "Challenge",select:"title"});
 
     res.status(200).json(reviews);

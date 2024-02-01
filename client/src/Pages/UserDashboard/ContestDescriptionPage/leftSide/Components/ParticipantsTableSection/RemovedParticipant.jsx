@@ -5,7 +5,7 @@ import { useUnBanUser } from "../../../../../../hooks/react-query/useChallenges"
 
 const RemovedParticipant = ({ user, index, isOwner }) => {
   
-  const {mutate} = useUnBanUser();
+  const {mutate,isLoading} = useUnBanUser();
 
   return (
     <tr
@@ -54,6 +54,7 @@ const RemovedParticipant = ({ user, index, isOwner }) => {
           <button
             className="bg-red-400 hover:bg-red-700 text-white px-2 py-2 rounded"
             type="button"
+            disabled={isLoading}
             onClick={() => {mutate({userId: user?._id })}}
           >
             Unremove

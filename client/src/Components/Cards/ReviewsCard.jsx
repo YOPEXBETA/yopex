@@ -1,6 +1,8 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import Card from "./index";
+import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
+
 
 const ReviewsCard = ({ extra, review }) => {
   console.log(review);
@@ -107,7 +109,7 @@ const ReviewsCard = ({ extra, review }) => {
           <div className="mt-6 flex justify-start items-center flex-row space-x-2.5">
             <div>
               <img
-                src={review.companyId?.companyLogo ? review.companyId.companyLogo : review.challengeOwnerId.picturePath}
+                src={review.companyId?.companyLogo || review.challengeOwnerId?.picturePath || AvatarProfile}
                 
                 className="rounded-full h-11 w-11 object-cover"
               />

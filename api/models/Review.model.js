@@ -15,7 +15,10 @@ const ReviewSchema = new mongoose.Schema(
       ref: Company,
       required: false,
     },
-    challengeOwnerId: { type: mongoose.Schema.Types.ObjectId, ref: User },
+    challengeOwnerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     description: {
       type: String,
       required: true,
