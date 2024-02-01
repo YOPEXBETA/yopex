@@ -14,6 +14,7 @@ const CreateProjectModal = ({ open, handleClose }) => {
   // Global states |  @redux/toolkit
   const { user } = useSelector((state) => state.auth);
 
+
   // Data fetching | react-query
   const { data: userProfile, isLoading } = useUserById(user._id);
   const { data: skills } = useSkills();
@@ -38,12 +39,17 @@ const CreateProjectModal = ({ open, handleClose }) => {
   const uploadedFile = watch("files");
 
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.append("file", data.files[0]);
-    formData.append("type", "posts");
+    const result =[];
+    for (var i=0; i<data.files.length; i++) {
+      const formData = new FormData();
+      formData.append("file", data.files[i]);
+      formData.append("type", "posts");
 
-    const result = await fileUploadMutation.mutateAsync(formData);
-
+      const res = await fileUploadMutation.mutateAsync(formData);
+      result.push(res.data.downloadURL);
+      
+    }
+    console.log(result);
     const selectedSkills = data.skills.map((skill) => skill.value);
 
     mutate({
@@ -52,7 +58,7 @@ const CreateProjectModal = ({ open, handleClose }) => {
       title: data.title,
       description: data.description,
       skills: selectedSkills,
-      postPicturePath: [result.data.downloadURL],
+      postPicturePath: result,
     });
     reset();
   };

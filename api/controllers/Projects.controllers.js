@@ -7,6 +7,7 @@ const main = require("../server");
 
 const CreatePost = async ({ userId, body }, res) => {
   try {
+    console.log("body", body);
     const user = await UserModel.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
