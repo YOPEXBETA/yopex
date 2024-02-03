@@ -8,11 +8,12 @@ import {
 } from "../../../../hooks/react-query/useConversations";
 import { axios } from "../../../../axios";
 import { useQuery } from "react-query";
+import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const UsersLatestMsgs = () => {
   const url = process.env.REACT_APP_API_ENDPOINT;
   const { user } = useSelector((state) => state?.auth);
-  const { data: conversations } = useConversations(user?._id);
+  const { data: conversations, isLoading } = useConversations(user?._id);
   const [query, setQuery] = useState("");
   const { mutate, data } = useCreateConversation(user._id);
   const { data: users } = useQuery({
@@ -34,6 +35,7 @@ const UsersLatestMsgs = () => {
     }
     setQuery("");
   };
+
   return (
     <div>
       <div className="flex justify-between px-3 pt-1 text-white">

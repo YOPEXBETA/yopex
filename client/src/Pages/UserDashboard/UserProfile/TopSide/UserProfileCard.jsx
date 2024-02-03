@@ -155,7 +155,7 @@ const UserProfileCard = () => {
                   onClick={() =>
                     contact({ senderId: user._id, receiverId: userId })
                   }
-                  className="cursor-pointer capitalize hover:scale-105 bg-green-100 text-green-500 border-green-500 border-[1px] font-bold py-3 px-4 rounded-full w-full"
+                  className="cursor-pointer capitalize hover:scale-105 bg-green-100 text-green-500 border-green-500 border-[1px] font-medium py-3 px-4 rounded-full w-full"
                 >
                   Contact Me
                 </button>

@@ -18,12 +18,13 @@ const Messenger = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   useEffect(() => {
-    if (selectedConversationId===undefined && conversations?.length>0) {
+    if (selectedConversationId === undefined && conversations?.length > 0) {
       navigate(`/chat/${conversations[0]?.conversationId}`);
     }
-  }
-  , [selectedConversationId, conversations]);
-  const {data: currentConversation} = useGetConversationById(selectedConversationId);
+  }, [selectedConversationId, conversations]);
+  const { data: currentConversation } = useGetConversationById(
+    selectedConversationId
+  );
 
   // useEffect(() => {
   //   if (!conversations) return;

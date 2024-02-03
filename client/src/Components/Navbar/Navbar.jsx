@@ -6,6 +6,8 @@ import Dropdown from "../dropdown";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import NotificationMenu from "./components/NotificationMenu";
 import ProfileMenu from "./components/ProfileMenu";
+import LightIcon from "../icons/LightIcon";
+import MoonIcon from "../icons/MoonIcon";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
@@ -13,7 +15,7 @@ const Navbar = (props) => {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <nav class="sticky py-2 top-0 h-16 z-40 bg-white dark:bg-zinc-800 border-b-[1px] dark:border-zinc-700 w-full">
+    <nav class="sticky py-2 top-0 h-16 z-40 bg-white dark:bg-zinc-800 border-b-[1px] border-gray-200 dark:border-zinc-700 w-full">
       <div class="mx-auto  px-2 sm:px-6 lg:px-8">
         <div class="relative flex py-1 h-11 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -85,9 +87,9 @@ const Navbar = (props) => {
                 }}
               >
                 {darkmode ? (
-                  <RiSunFill className="h-6 w-6 text-gray-600 dark:text-white" />
+                  <LightIcon />
                 ) : (
-                  <RiMoonFill className="h-6 w-6 text-gray-600 dark:text-white" />
+                  <MoonIcon className="text-gray-600 dark:text-white" />
                 )}
               </div>
               <Dropdown
