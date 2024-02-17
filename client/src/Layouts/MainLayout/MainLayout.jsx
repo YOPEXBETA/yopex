@@ -95,8 +95,8 @@ const MainLayout = (props) => {
                 {...rest}
               />
               <div
-                className={`mb-auto h-full min-h-[100vh]${
-                  isChatRoute ? "" : " mt-4 md:mx-6 md:p-2"
+                className={`mb-auto h-full min-h-[100vh] ${
+                  isChatRoute ? "" : "mt-4 md:mx-6 md:p-2"
                 }`}
               >
                 <Outlet />
