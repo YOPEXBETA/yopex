@@ -6,8 +6,6 @@ import {
 } from "../../../../hooks/react-query/usePosts";
 import SocialPostCard from "../../../../Components/Cards/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
-import SocialPostSkeleton from "../../../../Components/SkeletonLoading/SocialPostSkeleton";
-import ProjectCard from "../../../../Components/Cards/ProjectCard";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const SocialPosts = () => {
@@ -29,7 +27,6 @@ const SocialPosts = () => {
   const { user } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.global);
   const { data: posts, isLoading } = usePostsByCategory(category);
-  console.log(posts, "rojla");
   const { data } = useBookmarkedPosts(user._id);
   let bookmarksId = [];
   data?.map((book) => {
@@ -45,16 +42,18 @@ const SocialPosts = () => {
           </div>
         ) : (
           posts?.map((post, index) => (
-            <SocialPostCard
-              key={post._id}
-              post={post}
-              bookmarks={bookmarksId}
-              posts={posts}
-              height={"48"}
-              width={"full"}
-              type="feed"
-              openModal={() => openModal(post)}
-            />
+            <div>
+              <SocialPostCard
+                key={post._id}
+                post={post}
+                bookmarks={bookmarksId}
+                posts={posts}
+                height={"48"}
+                width={"full"}
+                type="feed"
+                openModal={() => openModal(post)}
+              />
+            </div>
           ))
         )}
       </div>

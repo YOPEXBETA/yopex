@@ -21,6 +21,7 @@ const App = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={true} />
         <Toaster />
         {/*<ReactQueryDevtools />*/}
         <Helmet>
