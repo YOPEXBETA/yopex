@@ -16,8 +16,9 @@ const CreateChallenge = async (req, res, next) => {
       RecommendedSkills,
       nbruser,
       paid,
+      youtubeLink,
     } = req.body;
-
+    console.log(req.body);
     const userId = req.userId;
     const user = await UserModel.findById(userId);
     let owner = user;
@@ -47,6 +48,14 @@ const CreateChallenge = async (req, res, next) => {
       user.balance = user.balance - price;
       await user.save();
     }
+    if (youtubeLink) {
+      // verify youtube link
+      const youtubeRegex =
+        /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
+      if (!youtubeRegex.test(youtubeLink)) {
+        return res.status(400).json({ message: "Invalid youtube link" });
+      }
+    }
 
     const challenge = new ChallengeModel({
       title,
@@ -56,6 +65,7 @@ const CreateChallenge = async (req, res, next) => {
       price: paid === "true" ? price : 0,
       RecommendedSkills,
       nbruser,
+      YoutubeLink:youtubeLink,
       paid: paid === "true" ? true : false,
     });
     if (companyId) {
@@ -184,6 +194,8 @@ const getAllChallenges = async (req, res) => {
   try {
     const ChallengePosts =
       await ChallengeModel.find(filters).populate("company")
+      .populate("RecommendedSkills")
+      .populate("category");
       
 
     res.status(200).json(ChallengePosts);
@@ -234,8 +246,8 @@ const updateChallenge = async (req, res, next) => {
       description,
       nbruser,
       price,
-      category,
-      RecommendedSkills,
+      category:category.map((cat) => cat.value),
+      RecommendedSkills: RecommendedSkills.map((skill) => skill.value),
     });
     res.status(200).json({ Challenge });
   } catch (err) {
@@ -329,6 +341,46 @@ const unBanUser = async (req, res) => {
   }
 };
 
+const getChallengeSubmission = async (req, res) => {
+  try {
+    const challengeId = req.params.challengeId;
+    const challenge = await ChallengeModel.findById(challengeId);
+    if (!challenge) {
+      return res.status(404).json({ message: "Challenge not found" });
+    }
+    const userId = req.userId;
+    const user = await UserModel.findById(userId);
+    if (challenge.start === true && challenge.deadline < Date.now()) {
+      const submission = await submissionModel.find({
+        challengeId: challengeId,
+      })
+      .populate("userId", "firstname lastname picturePath _id");
+      return res.status(200).json(submission);
+    }
+    if (
+      challenge.owner?.toString() !== userId.toString() &&
+      !user.companies.includes(challenge.company?.toString())
+    ) {
+      const submission = await submissionModel.find({
+        challengeId: challengeId,
+        userId: userId,
+      })
+      .populate("userId", "firstname lastname picturePath _id");;
+      return res.status(200).json(submission);
+    }else{
+      const submission = await submissionModel.find({
+        challengeId: challengeId,
+      })
+      .populate("userId", "firstname lastname picturePath _id");;
+      return res.status(200).json(submission);
+    }
+    
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
+
 module.exports = {
   CreateChallenge,
   deleteChallenge,
@@ -341,4 +393,5 @@ module.exports = {
   startChallenge,
   banUser,
   unBanUser,
+  getChallengeSubmission,
 };

@@ -5,6 +5,8 @@ import { FaPlus } from "react-icons/fa";
 import { useSubmitToChallenge } from "../../../hooks/react-query/useChallenges";
 import LoadingSpinner from "../../LoadingSpinner";
 import { axios } from "../../../axios";
+import toast from "react-hot-toast";
+import Select from "react-select";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
@@ -29,6 +31,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
 
   const { user } = useSelector((state) => state.auth);
   const { mutate, isSuccess, isLoading } = useSubmitToChallenge(id);
+  const [validFiles, setValidFiles] = useState([]);
 
   const handleFileUpload = async (file) => {
     const formData = new FormData();
@@ -42,16 +45,23 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
 
     try {
       setFilesPaths((prev) => [...prev, data.data.downloadURL]);
-      
+
       return data.data.downloadURL;
     } catch (error) {
       console.log(error);
     }
   };
 
-  // const dispatch = useDispatch();
-
-  const handleSubmit = async () => {
+  const handleSubmit = async (data) => {
+    setIsUploading(true);
+    const filesPaths = [];
+    for (let i = 0; i < validFiles.length; i++) {
+      const file = validFiles[i];
+      const fileUrl = await handleFileUpload(file);
+      filesPaths.push(fileUrl);
+    }
+    console.log(filesPaths);
+    setIsUploading(false);
     mutate({
       challengeId: id,
       userId: user._id,
@@ -61,48 +71,33 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
       links: links,
     });
 
-    if (isSuccess) {
-      setIsSubmitted(true);
-      handleClose();
-    }
+    handleClose();
   };
 
-  const validFiles = [];
-  const invalidFiles = [];
-
-  const handleFileSelect = async (event) => {
+  const handleFileSelect = (event) => {
     const files = event.target.files;
-    setIsUploading(true);
+    setValidFiles([]);
     handleFiles(files);
-    for (const file of validFiles) {
-      const url = await handleFileUpload(file);
-      
-      setFilesSelected([...filesSelected, url]);
-      setIsUploading(false);
-    }
   };
-
   const handleFiles = (files) => {
-    
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
       if (file.size <= maxSize) {
-        validFiles.push(file);
-        
+        setValidFiles((prev) => [...prev, file]);
       } else {
-        invalidFiles.push(file);
+        setValidFiles([]);
+        toast.error("each File size should be less than 5MB");
       }
     }
   };
-  
 
   return (
     <div
-      className={`fixed inset-0 z-50 overflow-y-auto ${open ? "" : "hidden"}`}
+      className={`fixed inset-0 z-50 overflow-auto  ${open ? "" : "hidden"}`}
     >
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-white w-full md:max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden z-50">
+      <div className="flex items-center justify-center min-h-screen ">
+        <div className="bg-white md:min-w-[75vw] md:max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden z-50">
           <div className="bg-primary p-4 text-black">
             <h5 className="text-lg font-semibold">SUBMIT YOUR WORK</h5>
           </div>
@@ -142,23 +137,32 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                   accept=".jpg,.jpeg,.png,.gif,.avi,.zip,application/*"
                   type="file"
                   id="fileInput"
+                  name="file"
                   onChange={handleFileSelect}
                   multiple
                 />
               </div>
-              {isUploading && <LoadingSpinner />}
             </div>
+
             <div>
               <label className="block text-gray-600">Add Link</label>
               <div className="flex gap-2">
-                <input
+                <select
                   type="text"
                   name="platform"
                   placeholder="platform"
                   value={platform}
                   onChange={(e) => setPlatform(e.target.value)}
-                  className="w-[20%] border border-gray-300 rounded-md px-3 py-2 mt-1"
-                />
+                  className="w-[20%] border border-gray-300 text-gray-600 bg-white rounded-md px-3 py-2 mt-1"
+                >
+                  <option value="">Select...</option>
+                  <option value="Youtube">Youtube</option>
+                  
+                  <option value="github">Github</option>
+                  <option value="behance">behance</option>
+                  <option value="Dribbale">dribbale</option>
+                  <option value="others">others</option>
+                </select>
                 <input
                   type="text"
                   name="link"
@@ -184,21 +188,8 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                   </p>
                 );
               })}
-            {filesSelected.length > 0 &&
-              filesSelected.map((file,index) => {
-                return (
-                  <p key={index}>
-                    {" "}
-                    <a
-                      href={file}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {"file "+index}
-                    </a>
-                  </p>
-                );
-              })}
+
+            {isUploading && <LoadingSpinner />}
             <div className="flex justify-between space-x-2 mt-4">
               <button
                 type="button"
@@ -212,10 +203,11 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                 className="px-4 py-2  text-white rounded-md bg-black"
                 onClick={handleSubmit}
                 disabled={
-                  !isLoading &&
+                  isUploading ||
+                  (!isLoading &&
                   (SubmissionTitle === "" || SubmissionDescription === "")
                     ? true
-                    : false
+                    : false)
                 }
               >
                 Create a Submission

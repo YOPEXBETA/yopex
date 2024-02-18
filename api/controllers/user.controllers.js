@@ -174,7 +174,7 @@ const SearchUsers = async (req, res) => {
       .select("_id firstname lastname picturePath score country").limit(6);
     const companies = await companySchema
       .find(companyQuery)
-      .select("_id companyName companyLogo").limit(6);
+      .select("_id companyName companyLogo user").limit(6);
 
     const results = [...users, ...companies];
 

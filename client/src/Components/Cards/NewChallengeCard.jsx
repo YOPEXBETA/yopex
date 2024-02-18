@@ -16,7 +16,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
     : challenge?.owner === user._id
     ? true
     : false;
-    console.log(isOwner);
+    
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeRemaining(calculateTimeRemaining());

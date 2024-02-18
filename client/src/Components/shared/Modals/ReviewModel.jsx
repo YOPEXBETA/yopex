@@ -6,7 +6,7 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
   const [description, setDescription] = useState("");
   const { id: challengeId } = useParams();
   const [rating, setRating] = useState(1);
-  const { mutate, isError, isSuccess } = useAddReviews(participant.user._id);
+  const { mutate, isError, isSuccess } = useAddReviews(participant._id);
   
 
   const handleStarClick = (index) => {
@@ -86,7 +86,7 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
                     description,
                     star: rating,
                     companyId,
-                    userId: participant.user._id,
+                    userId: participant._id,
                     challengeId,
                   });
                 }}

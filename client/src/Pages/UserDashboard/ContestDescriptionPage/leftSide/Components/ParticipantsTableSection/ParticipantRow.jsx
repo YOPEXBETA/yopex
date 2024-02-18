@@ -41,7 +41,7 @@ const ParticipantRow = ({ user, index, challenge, isOwner }) => {
       onClick={isOwner || user.user._id === currentUser._id ? toggleOpen : null}
     >
       <td className=" py-4 px-4 font-bold text-md dark:text-white">
-        {index + 1}{" "}
+        {challenge.winner === user.user._id ? ( <span>🏆</span>) : index + 1}
       </td>
       <td className="py-4 px-4">
         <div className="flex items-center">
@@ -96,7 +96,7 @@ const ParticipantRow = ({ user, index, challenge, isOwner }) => {
           
         </td>
       )}
-      {user && (
+      {/* {user && (
         <>
           <ParticipantsDialogModal
             open={isOpen}
@@ -123,7 +123,7 @@ const ParticipantRow = ({ user, index, challenge, isOwner }) => {
             participant={user}
           />
         </>
-      )}
+      )} */}
       {confirmationDialogOpen && (
         <RemoveParticipantPopup
           open={confirmationDialogOpen}

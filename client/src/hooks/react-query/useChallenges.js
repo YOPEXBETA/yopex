@@ -24,6 +24,7 @@ export const useEditChallenge = (challengeId) => {
       await axios.put(`${url}/challenge/update/${challengeId}`, ChallengeData);
     },
     onSuccess: () => {
+      toast.success("Challenge edited successfully");
       queryClient.invalidateQueries(["challenges"]);
     },
   });
@@ -117,6 +118,7 @@ export const useSubmitToChallenge = ({ challengeId }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["challenges", challengeId]);
+      queryClient.invalidateQueries(["submissions", challengeId]);
       toast.success("You submited to the challenge!");
     },
   });
@@ -310,6 +312,18 @@ export const useUnBanUser = () => {
     },
     onError: () => {
       toast.error("Error Unremoving user");
+    },
+  });
+}
+
+export const useGetChallengeSubmissions = (challengeId) => {
+  return useQuery({
+    queryKey: ["submissions", challengeId],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${url}/challenge/getChallengeSubmission/${challengeId}`
+      );
+      return data;
     },
   });
 }

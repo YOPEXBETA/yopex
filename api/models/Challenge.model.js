@@ -49,6 +49,7 @@ const ChallengeSchema = new mongoose.Schema(
       ref: "User",
     },
     paid: { type: Boolean, default: false },
+    YoutubeLink: { type: String, required: false},
     users: [
       {
         user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
