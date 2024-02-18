@@ -1,4 +1,5 @@
 import React from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useUserReviews } from "../../hooks/react-query/useReviews";
 import { useUserById } from "../../hooks/react-query/useUsers";
@@ -32,7 +33,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           }`}
           onClick={() => changeValue(1)}
         >
-          Posts
+          {`Projects (${userProfile?.posts.length || 0})`}
         </button>
         <button
           className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${

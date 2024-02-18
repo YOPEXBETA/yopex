@@ -5,16 +5,15 @@ const main = require("../server");
 
 //create a post
 
-const CreatePost = async ({ userId, body }, res) => {
+const CreatePost = async (req, res) => {
   try {
-    console.log("body", body);
-    const user = await UserModel.findById(userId);
+    const user = await UserModel.findById(req.userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     const newPost = new Post({
       user: user._id,
-      ...body,
+      ...req.body,
     });
 
     const savedPost = await newPost.save();
@@ -88,9 +87,7 @@ const getUserPosts = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const posts = await Post.find({
-      $or: [{ userId: userId }, { _id: { $in: user.posts } }],
-    }).populate("skills");
+    const posts = await Post.find({ user: userId }).populate("skills");
 
     res.status(200).json(posts);
   } catch (err) {

@@ -27,10 +27,10 @@ const Sidebar = ({
         <HiX />
       </span>
 
-      <div className={`mx-20 mt-[50px] flex items-center`}>
+      <div className={`mx-20 mt-[40px] flex items-center`}>
         <div className="flex items-center justify-center ">
           {isRouteWithSpecificWidth ? (
-            <div className="absolute left-8 top-8 ">
+            <div className="absolute left-8 top-4 ">
               <img
                 src={YopexLogo}
                 alt="Yopex Logo"
@@ -44,7 +44,7 @@ const Sidebar = ({
           )}
         </div>
       </div>
-      <div className="mt-[44px] mb-7 h-px bg-zinc-300 dark:bg-white/30" />
+      <div className="mt-6 mb-7 h-[1px] bg-gray-100 dark:bg-zinc-700" />
       {/* Nav item */}
 
       <ul className="mb-auto pt-1">
@@ -54,7 +54,7 @@ const Sidebar = ({
         />
       </ul>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-4">
         <SidebarCard
           isRouteWithSpecificWidth={isRouteWithSpecificWidth}
           handleCreateClick={handleCreateClick}

@@ -44,6 +44,7 @@ export const useUserPosts = (userId) => {
     queryKey: ["posts", userId],
     queryFn: async () => {
       const { data } = await axios.get(`${url}/post/${userId}`);
+      console.log(data, "dfdf");
       return data;
     },
   });

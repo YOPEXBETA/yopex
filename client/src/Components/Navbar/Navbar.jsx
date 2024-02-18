@@ -6,6 +6,8 @@ import Dropdown from "../dropdown";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import NotificationMenu from "./components/NotificationMenu";
 import ProfileMenu from "./components/ProfileMenu";
+import LightIcon from "../icons/LightIcon";
+import MoonIcon from "../icons/MoonIcon";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
@@ -85,9 +87,9 @@ const Navbar = (props) => {
                 }}
               >
                 {darkmode ? (
-                  <RiSunFill className="h-6 w-6 text-gray-600 dark:text-white" />
+                  <LightIcon />
                 ) : (
-                  <RiMoonFill className="h-6 w-6 text-gray-600 dark:text-white" />
+                  <MoonIcon className="text-gray-600 dark:text-white" />
                 )}
               </div>
               <Dropdown

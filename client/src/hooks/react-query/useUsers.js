@@ -4,15 +4,14 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-export const useUsers = (page=1) => {
+export const useUsers = (page = 1) => {
   return useQuery("users", async () => {
-    console.log(page);
     const { data } = await axios.get(`${url}/allusers?page=${page}`, {});
     return data;
   });
 };
 
-export const useUpdatePassword = ()=>{
+export const useUpdatePassword = () => {
   return useMutation({
     mutationFn: async (data) => {
       await axios.put(`${url}/updatepassword`, data);
@@ -24,7 +23,7 @@ export const useUpdatePassword = ()=>{
       toast.success("Password updated successfully");
     },
   });
-}
+};
 
 export const useAdminUsers = () => {
   return useQuery({
@@ -182,7 +181,7 @@ export const useSearchUsers = () => {
   });
 };
 
-export const useSuggestedUsers = () => {
+/*export const useSuggestedUsers = () => {
   return useQuery({
     queryKey: ["suggestedUsers"],
     queryFn: async () => {
@@ -190,7 +189,7 @@ export const useSuggestedUsers = () => {
       return data;
     },
   });
-};
+};*/
 
 export const useUserChallenges = (userId) => {
   return useQuery({
