@@ -40,7 +40,9 @@ const CreateProjectModal = ({ open, handleClose }) => {
 
   const onSubmit = async (data) => {
     const result =[];
+    
     for (var i=0; i<data.files.length; i++) {
+
       const formData = new FormData();
       formData.append("file", data.files[i]);
       formData.append("type", "posts");

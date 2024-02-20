@@ -8,14 +8,17 @@ import {
 } from "../../../../hooks/react-query/useConversations";
 import { axios } from "../../../../axios";
 import { useQuery } from "react-query";
-import LoadingSpinner from "../../../../Components/LoadingSpinner";
+import Select from "react-select";
+import { useUserById } from "../../../../hooks/react-query/useUsers";
 
 const UsersLatestMsgs = () => {
   const url = process.env.REACT_APP_API_ENDPOINT;
   const { user } = useSelector((state) => state?.auth);
-  const { data: conversations, isLoading } = useConversations(user?._id);
+  const { data: userProfile } = useUserById(user._id);
+  const { data: conversations } = useConversations(user?._id);
   const [query, setQuery] = useState("");
-  const { mutate, data } = useCreateConversation(user._id);
+  const [selectedOption, setSelectedOption] = useState("");
+  const { mutate } = useCreateConversation(user._id);
   const { data: users } = useQuery({
     queryKey: ["users", query],
     queryFn: async () => {
@@ -24,6 +27,15 @@ const UsersLatestMsgs = () => {
     },
   });
   const handleUserClick = async (otherUser) => {
+    if (selectedOption!=""){
+      mutate({
+        receiverId: user._id,
+        senderId: otherUser._id,
+        company: selectedOption.value,
+      });
+      setQuery("");
+      return;
+    }
     if (otherUser.companyName) {
       mutate({
         senderId: user._id,
@@ -35,12 +47,12 @@ const UsersLatestMsgs = () => {
     }
     setQuery("");
   };
-
+  
   return (
     <div>
       <div className="flex justify-between px-3 pt-1 text-white">
         <div className="flex items-center w-full py-2 ">
-          <div className="relative flex items-center w-full pl-2 overflow-hidden text-gray-600 focus-within:text-gray-400">
+          <div className="relative flex items-center w-full  overflow-hidden text-gray-600 focus-within:text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center pl-4">
               <button
                 type="submit"
@@ -63,6 +75,7 @@ const UsersLatestMsgs = () => {
             <input
               type="search"
               name="q"
+              value={query}
               className="w-full py-2 pl-12 text-sm text-white bg-gray-200 border border-transparent appearance-none rounded-tg focus:bg-white focus:outline-none focus:border-green-500 focus:text-gray-900 focus:shadow-outline-blue"
               placeholder="Search..."
               autocomplete="off"
@@ -71,7 +84,18 @@ const UsersLatestMsgs = () => {
           </div>
         </div>
       </div>
-
+      {
+        userProfile?.companies.length > 0 &&
+      <Select 
+        className="px-3" 
+        classNamePrefix="my-react-select px-3"
+        options={[{value:"",label:"My Account"},...userProfile.companies?.map((company) => ({value: company._id, label: company.companyName}))]}
+        onChange={(selectedOption) => {
+          
+          setSelectedOption(selectedOption);
+        }}
+      />
+      }
       <div className="relative mt-2 mb-4 overflow-x-hidden overflow-y-auto scrolling-touch lg:max-h-sm scrollbar-w-2 scrollbar-track-gray-lighter scrollbar-thumb-rounded scrollbar-thumb-gray">
         <ul className="flex flex-col w-full h-screen px-2 select-none">
           <li className="flex flex-no-wrap items-center pr-3 text-black rounded-lg cursor-pointer mt-200 py-65">
@@ -112,7 +136,7 @@ const UsersLatestMsgs = () => {
                                           {otherUser?.firstname}
                                         </p>
                                         <p className="font-semibold dark:text-gray-200">
-                                          {otherUser?.lastname}
+                                          {otherUser?.lastname+" "}
                                           {otherUser?.companyName
                                             ? `(${otherUser?.companyName})`
                                             : ""}

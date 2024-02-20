@@ -90,13 +90,14 @@ const MainLayout = (props) => {
           >
             <div className="h-full">
               <Navbar
+                
                 onOpenSidenav={() => setOpen(true)}
                 brandText={currentRoute}
                 {...rest}
               />
               <div
-                className={`mb-auto h-full min-h-[100vh] ${
-                  isChatRoute ? "" : "mt-4 md:mx-6 md:p-2"
+                className={`mb-auto min-h-[90vh] ${
+                  isChatRoute ? "" : " mt-4 md:mx-6 md:p-2"
                 }`}
               >
                 <Outlet />

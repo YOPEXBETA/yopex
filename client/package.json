@@ -59,6 +59,7 @@
     "react-tsparticles": "^2.12.2",
     "react-type-animation": "^3.2.0",
     "react-window": "^1.8.8",
+    "react-youtube": "^10.1.0",
     "recharts": "^2.4.3",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",

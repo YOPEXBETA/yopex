@@ -9,29 +9,31 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
   const { mutate } = useEditChallenge(challenge._id);
   const { data: Skills } = useSkills();
   const { data: categorys } = useCategories();
+  
   const {
     handleSubmit,
     register,
     control,
+    setValue,
     formState: { isSubmitting },
   } = useForm({
     defaultValues: {
-      category: challenge.category,
-      RecommendedSkills: challenge.RecommendedSkills,
+      category: challenge.category.map((category) => ({value: category._id, label: category.name})),
+      RecommendedSkills: challenge.RecommendedSkills.map((skill) => ({value: skill._id, label: skill.name})),
       title: challenge.title,
       description: challenge.description,
       price: challenge.price,
       nbruser: challenge.nbruser,
-
     },
   });
+  
 
 
   const handleEdit = (data) => {
     console.log(data);
-    // mutate({
-    //   ...data
-    // });
+    mutate({
+    ...data
+    });
     handleClose();
   };
 
@@ -101,16 +103,17 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                 min={1}
                 
               />
-              {categorys && (
+              {Skills && (
                 <>
                   <label>Skills</label>
                   <Controller
                       control={control}
                       name="RecommendedSkills"
-                      defaultValue={challenge.RecommendedSkills.map((skill) => skill.name)}
+                      
                       render={({ field }) =>
                         Skills && (
                           <Select
+                            value={field.value}
                             isMulti
                             className="my-react-select-container mt-2"
                             classNamePrefix="my-react-select"
@@ -122,9 +125,10 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                             onBlur={field.onBlur}
                             onChange={(selectedOptions) => {
                               const selectedValues = selectedOptions.map(
-                                (option) => option.value
+                                (option) => ({value:option.value,label:option.label})
                               );
                               field.onChange(selectedValues);
+                              
                             }}
                           />
                         )
@@ -132,16 +136,17 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                     />
                 </>
               )}
-              {Skills && (
+              {categorys && (
                 <>
                   <label>Recommended Skills</label>
                   <Controller
                       control={control}
                       name="category"
-                      defaultValue={challenge.category.map((category) => category.name)}
+                        
                       render={({ field }) =>
                         categorys && (
                           <Select
+                            value={field.value}
                             isMulti
                             className="my-react-select-container mt-2"
                             classNamePrefix="my-react-select"
@@ -153,7 +158,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                             onBlur={field.onBlur}
                             onChange={(selectedOptions) => {
                               const selectedValues = selectedOptions.map(
-                                (option) => option.value
+                                (option) => ({value:option.value,label:option.label})
                               );
                               field.onChange(selectedValues);
                             }}

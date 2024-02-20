@@ -14,9 +14,10 @@ const createConversation = async (req, res) => {
 
     const existingConversation = await ConversationModel.findOne({
       members: { $all: [senderId, receiverId] },
+      company,
     });
 
-    if (existingConversation && !company) {
+    if (existingConversation) {
       return res.status(200).json(existingConversation);
     }
 
@@ -202,7 +203,7 @@ const getConversationById = async (req, res) => {
     const conversationId = new ObjectId(req.params.id);
     const userId = req.userId;
     const conversation = await ConversationModel.findById(conversationId).populate("members", "firstname lastname role picturePath userDescription phoneNumber email")
-    .populate("company","companyLogo companyName companyDescription PhoneNumber").lean();
+    .populate("company","companyLogo companyName companyDescription PhoneNumber user").lean();
     conversation.members = conversation.members.filter(member => member._id.toString() !== userId);
     res.status(200).json(conversation);
   } catch (error) {

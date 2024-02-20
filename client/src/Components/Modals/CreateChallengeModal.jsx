@@ -370,6 +370,22 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   </div>
                 </div>
 
+                <div className="md:col-span-5">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                    You can add here a youtube video link to explain the challenge (Optional)
+                  </label>
+                  <div className="relative my-2">
+                    <input
+                      required
+                      className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
+                      type="text"
+                      placeholder="https://www.youtube.com/watch?v=..."
+                      min={1}
+                      {...register("youtubeLink", { required: false })}
+                    />
+                  </div>
+                </div>
+
                 <div className="md:col-span-5 text-right mt-4">
                   <div className="inline-flex items-end">
                     <button

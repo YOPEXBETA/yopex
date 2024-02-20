@@ -9,6 +9,7 @@ import { useGetContestConversation } from "../../../../hooks/react-query/useCont
 import ChallengeConversation from "./Components/ChallengeConversation";
 import Start from "./Components/ChallengeDescription/Start";
 import Removed from "./Components/ParticipantsTableSection/Removed";
+import Submission from "./Components/ParticipantsTableSection/Submission";
 
 const ContentSide = ({ value, isOwner, start, isRegistered }) => {
   const { id: challengeId } = useParams();
@@ -51,6 +52,11 @@ const ContentSide = ({ value, isOwner, start, isRegistered }) => {
           {value === 4 && (
             <div className="lg:col-span-12 md:col-span-12">
               <Removed isOwner={isOwner} />
+            </div>
+          )}
+          {value === 5 && (
+            <div className="lg:col-span-12 md:col-span-12">
+              <Submission isOwner={isOwner} />
             </div>
           )}
         </div>

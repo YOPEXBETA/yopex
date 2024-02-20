@@ -19,8 +19,9 @@ const ParticipantsDialogModal = ({
       className={`fixed inset-0 z-50 flex items-center justify-center ${
         open ? "backdrop-blur-sm" : "hidden"
       }`}
+      onClick={(e) =>{e.stopPropagation()}}
     >
-      <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-96">
+      <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 md:min-w-[75vw] md:max-w-[75vw] min-w-full">
         <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Participant Submission
@@ -29,6 +30,7 @@ const ParticipantsDialogModal = ({
             type="button"
             className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-toggle="timeline-modal"
+            onClick={handleClose}
           >
             <svg
               className="w-3 h-3"
@@ -66,10 +68,11 @@ const ParticipantsDialogModal = ({
                     />
                   </svg>
                 </span>
-                <h3 className="flex items-start mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                <div className="flex justify-between ">
+                <h3 className=" block mb-1  text-lg  font-semibold text-gray-900 dark:text-white">
                   {submissions?.title}
                 </h3>
-                <time className="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
+                <time className="block mb-1  text-base mt-1 font-normal  text-gray-500 dark:text-gray-400">
                   {new Date(submissions?.createdAt).toLocaleString("en-US", {
                     day: "numeric",
                     month: "short",
@@ -79,6 +82,8 @@ const ParticipantsDialogModal = ({
                     second: "numeric",
                   })}
                 </time>
+                </div>
+                <p className="block mb-1  text-base font-normal  text-gray-500 dark:text-gray-400">{submissions?.description}</p>
                 <div className="inline-flex flex-col w-full text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-600">
                   {submissions.filesPaths &&
                     submissions.filesPaths.length > 0 && (

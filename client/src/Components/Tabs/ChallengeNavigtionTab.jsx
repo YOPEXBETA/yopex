@@ -67,6 +67,18 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered,challenge,isO
               Chat
             </button>
           ) : null}
+          {(
+            <button
+              className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+                value === 5
+                  ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
+                  : "text-gray-500 border-gray-300 dark:text-gray-300 "
+              }`}
+              onClick={() => changeValue(5)}
+            >
+              Submission
+            </button>
+          ) }
 
           {isOwner && handleProgress(challenge) && !challenge?.winner && (
             <button
