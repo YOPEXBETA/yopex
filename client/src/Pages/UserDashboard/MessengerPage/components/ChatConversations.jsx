@@ -182,6 +182,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
                 </svg>
               </button>
             </span>
+
             <input
               type="search"
               value={message}
