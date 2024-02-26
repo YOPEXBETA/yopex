@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
@@ -126,24 +126,33 @@ export const useSubmitToChallenge = ({ challengeId }) => {
 
 export const useCreateChallenge = () => {
   const queryClient = useQueryClient();
-
   return useMutation(
-    async ({ companyId, challengeData, paid }) => {
-      await axios.post(
+    async ({ companyId, challengeData, paid,objective }) => {
+      const res = await axios.post(
         `${url}/challenge/add`,
-        { companyId, ...challengeData, paid },
+        { companyId, ...challengeData, paid,objective },
         {}
       );
-    },
-    {
-      onSuccess: () => {
+      console.log(res);
+      if (res.status == 200){ 
+        console.log(res.data);
+        window.location.href = res.data;
+      };
+      if (res.status == 201) {
         toast.success("Challenge created successfully");
         queryClient.invalidateQueries(["challenges"]);
-      },
-      onError: () => {
-        toast.error("Error creating challenge");
-      },
-    }
+      }
+    },
+    // {
+    //   onSuccess: (res) => {
+        
+    //     toast.success("Challenge created successfully");
+    //     queryClient.invalidateQueries(["challenges"]);
+    //   },
+    //   onError: () => {
+        
+    //   },
+    // }
   );
 };
 

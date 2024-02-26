@@ -14,6 +14,7 @@ import InfoIcon from "../icons/InfoIcon";
 
 const CreateChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
+  const [objective, setObjective] = useState("");
   const handleCardClick = (companyId) => {
     setSelectedOption(companyId);
   };
@@ -52,9 +53,9 @@ const CreateChallengeModal = ({ open, handleClose }) => {
     console.log(challengeData);
     if (showCompanies) {
       const companyId = selectedOption;
-      mutate({ companyId, challengeData, paid: selectedOptionpaid });
+      mutate({ companyId, challengeData, paid: selectedOptionpaid,objective });
     } else {
-      mutate({ challengeData, paid: selectedOptionpaid });
+      mutate({ challengeData, paid: selectedOptionpaid,objective });
     }
   };
 
@@ -222,8 +223,8 @@ const CreateChallengeModal = ({ open, handleClose }) => {
               </div>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-2">
-              <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 space-y-4">
-                <div className="md:col-span-5">
+              <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-7 space-y-4">
+                <div className="md:col-span-7">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Challenge Title
                   </label>
@@ -236,7 +237,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                     />
                   </div>
                 </div>
-                <div className="md:col-span-5">
+                <div className="md:col-span-7">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Challenge Description
                   </label>
@@ -247,6 +248,25 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                       required={true}
                       placeholder="challenge description"
                     />
+                  </div>
+                </div><div className="md:col-span-2">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                  Objective
+                  </label>
+                  <div className="relative my-2">
+                    <select
+                      id="selectFieldpaid"
+                      className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                      value={objective}
+                      onChange={(e, value) => {
+                        setObjective(e.target.value);
+                      }}
+                    >
+                      <option value={"Recrutment"}>Recrutment</option>
+                      <option value={"Freelance"}>Freelance</option>
+                      <option value={"Internship"}>Internship</option>
+                    
+                    </select>
                   </div>
                 </div>
 
@@ -263,8 +283,8 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                         setSelectedOptionpaid(e.target.value);
                       }}
                     >
-                      <option value={"false"}>Recrutement</option>
-                      <option value={"true"}>Freelance</option>
+                      <option value={"false"}>Free</option>
+                      <option value={"true"}>Paid</option>
                     </select>
                   </div>
                 </div>
@@ -287,7 +307,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   </div>
                 </div>
 
-                <div className="md:col-span-5">
+                <div className="md:col-span-7">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Select Skills
                   </label>
@@ -320,7 +340,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                     />
                   </div>
                 </div>
-                <div className="md:col-span-5">
+                <div className="md:col-span-7">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Select Categories
                   </label>
@@ -354,7 +374,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   </div>
                 </div>
 
-                <div className="md:col-span-5">
+                <div className="md:col-span-7">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Specify The Participants Number
                   </label>
@@ -370,13 +390,13 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   </div>
                 </div>
 
-                <div className="md:col-span-5">
+                <div className="md:col-span-7">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     You can add here a youtube video link to explain the challenge (Optional)
                   </label>
                   <div className="relative my-2">
                     <input
-                      required
+                      
                       className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
                       type="text"
                       placeholder="https://www.youtube.com/watch?v=..."

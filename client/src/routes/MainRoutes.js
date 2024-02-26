@@ -203,21 +203,10 @@ const MainRoutes = {
       hideInSidebar: true,
       customWidth: false,
     },
-    {
-      name: "Store",
-      path: "store",
-      element: <Store />,
-      icon: <StoreIcon className="h-6 w-6" />,
-    },
 
     {
       path: "/paymentSuccess",
       element: <PaymentSuccess />,
-      hideInSidebar: true,
-    },
-    {
-      path: "/paymentFail",
-      element: <PaymentFail />,
       hideInSidebar: true,
     },
 

@@ -116,7 +116,7 @@ const ReviewsCard = ({ extra, review }) => {
             </div>
             <div className="flex flex-col justify-start items-start space-y-2">
               <p className="text-base font-medium leading-none text-gray-800 dark:text-white">
-                {review.companyId?.companyName}
+                {review.companyId?.companyName || (review.challengeOwnerId?.firstname+" "+review.challengeOwnerId?.lastname)}
               </p>
               <p className="text-sm leading-none text-gray-600 dark:text-white">
                 {new Date(review.createdAt).toLocaleDateString("en-US", {

@@ -75,7 +75,7 @@ const ClientCard = ({ isRegistered, isOwner }) => {
                     Contest Type
                   </h5>
                   <p className="text-3xl font-bold pb-6 dark:text-white">
-                    Recrutement
+                    {challenge?.objective}
                   </p>
                 </>
               )}

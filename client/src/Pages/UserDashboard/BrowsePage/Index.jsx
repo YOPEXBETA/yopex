@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContestsHeader from "./components/ContestsHeader";
 import { useFindChallenges } from "../../../hooks/react-query/useChallenges";
 import Challenges from "./components/Challenges";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const [contestQuery, setContestQuery] = useState("");
   const [selectedCategory, setCategoryQuery] = useState([]);
   const [selectedSkill, setSkillQuery] = useState([]);
+  //get the url param success 
+  const urlParams = new URLSearchParams(window.location.search);
+  const success = urlParams.get("success");
+  const error = urlParams.get("error");
+  
+  useEffect(() => {
+    if (success) {
+      toast.success("Payment successful");
+    }
+    if (error) {
+      toast.error("Payment failed");
+    }
+  }, []);
 
   const [minAmount, setMinAmount] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);

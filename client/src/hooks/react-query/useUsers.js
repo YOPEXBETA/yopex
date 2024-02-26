@@ -85,13 +85,12 @@ export const useVerifyPayment = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.post(`${url}/api/payment/${id}`, {
-        amount: 0,
-      });
+      const { data } = await axios.post(`${url}/api/payment/${id}`);
       return data;
     },
     onSuccess: (data) => {
-      console.log(data);
+      queryClient.invalidateQueries(["challenges"]);
+      window.location.href = data;
     },
   });
 };

@@ -164,7 +164,7 @@ const UserProfileCard = () => {
           </div>
 
           <div className="w-full">
-            <HighlightSection />
+            <HighlightSection challengesDone={userProfile?.challengesDone} />
           </div>
           <hr className="border w-full" />
 

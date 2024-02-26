@@ -95,8 +95,13 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
                         <p className="">{challenge.price} pts</p>
                       </div>
                     ) : (
-                      <p className="">Recrutement</p>
+                      <p>Free</p>
                     )}
+        
+                  </span>
+                  <span className="bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm">
+                    {challenge.objective}
+        
                   </span>
                 </div>
               </div>

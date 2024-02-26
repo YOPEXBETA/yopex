@@ -1,3 +1,4 @@
+const axios = require("axios");
 const ChallengeModel = require("../models/Challenge.model");
 const ContestConversationModel = require("../models/ContestConversation.model");
 const CompanyModel = require("../models/company.model");
@@ -17,6 +18,7 @@ const CreateChallenge = async (req, res, next) => {
       nbruser,
       paid,
       youtubeLink,
+      objective,
     } = req.body;
     console.log(req.body);
     const userId = req.userId;
@@ -37,17 +39,9 @@ const CreateChallenge = async (req, res, next) => {
       if (!owner) {
         return res.status(400).json({ error: "Company not found" });
       }
-      // if (owner.verified === false) {
-      //   return res.status(400).json({ message: "Company not verified" });
-      // }
+      
     }
-    if (paid === "true") {
-      if (user.balance < price) {
-        return res.status(400).json({ message: "Not enough balance" });
-      }
-      user.balance = user.balance - price;
-      await user.save();
-    }
+    
     if (youtubeLink) {
       // verify youtube link
       const youtubeRegex =
@@ -67,6 +61,8 @@ const CreateChallenge = async (req, res, next) => {
       nbruser,
       YoutubeLink:youtubeLink,
       paid: paid === "true" ? true : false,
+      verified: paid === "true" ? false : true,
+      objective
     });
     if (companyId) {
       challenge.company = owner._id;
@@ -87,7 +83,20 @@ const CreateChallenge = async (req, res, next) => {
       owner.createdChallenge.push(challenge._id);
       await owner.save();
     }
-
+    if (paid === "true") {
+      const response = await axios.post("http://localhost:8000/api/payment", {
+        amount: price*1000,
+        firstName: user.firstname,
+        lastName: user.lastname,
+        email: user.email,
+        challengeId: challenge._id,
+      }, {
+        headers: {
+          "Authorization": "token "+req.token
+        }
+    });
+    return res.status(200).json(response.data.payUrl);
+    }
     res
       .status(201)
       .json({ message: "Challenge created successfully", challenge });
@@ -132,6 +141,7 @@ const getChallengeById = async (req, res) => {
 // ...
 
 const deleteChallenge = async (req, res) => {
+  
   try {
     const challenge = await ChallengeModel.findOneAndDelete({
       _id: req.params.id,
@@ -176,8 +186,10 @@ const getCompanyChallenges = async (req, res) => {
 };
 
 const getAllChallenges = async (req, res) => {
+
   const q = req.query;
   const filters = {
+    verified: true,
     ...(q.userId && { userId: q.userId }),
     ...(q.category && { category: q.category }),
     ...((q.min || q.max) && {

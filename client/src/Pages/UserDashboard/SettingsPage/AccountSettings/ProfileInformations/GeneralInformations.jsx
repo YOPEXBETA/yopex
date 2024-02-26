@@ -58,7 +58,7 @@ const GeneralInformations = ({ extra }) => {
       const formData = new FormData();
       formData.append("file", file[0]);
       const data = await fileUploadMutation?.mutateAsync(formData);
-      const SkillsId = data.skills.map((skill) => skill.value);
+      const SkillsId = skills.map((skill) => skill.value);
 
       return dispatch(
         edit({

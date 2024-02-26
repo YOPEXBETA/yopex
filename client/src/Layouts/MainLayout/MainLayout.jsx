@@ -51,26 +51,22 @@ const MainLayout = (props) => {
   useEffect(() => {
     if (!user) {
       dispatch(getCurrentUser()).then((response) => {
-        // Check if fetching current user was successful
+        
         if (response.payload) {
-          // Successfully fetched user, continue rendering
+         
         } else {
-          // Fetching user failed, navigate to /login
+          
           navigate("/login?redirect=" + location.pathname);
         }
       });
     }
   }, [dispatch, user]);
 
-  // Render the loading state if user data is being fetched
   if (!user) {
-    return <Loader />; // Or you can render a loading component
+    return <Loader />; 
   }
 
-  // Render the main layout once user data is available
-
-  //I used this to not apply the margin paramter on the chat page
-  const isChatRoute = currentRoute.toLowerCase() === "chat";
+  const isChatRoute = currentRoute?.toLowerCase() === "chat"  || false;
 
   return (
     <div>

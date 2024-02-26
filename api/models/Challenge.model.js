@@ -5,13 +5,21 @@ const companyModel = require("./company.model");
 
 const ChallengeSchema = new mongoose.Schema(
   {
-    nbruser: { type: Number, default: 10 },
+    //nbruser: { type: Number, default: 10 },
     picturePath: { type: String },
     title: { type: String, required: true },
     description: { type: String, required: true },
     totalStars: { type: Number, default: 0 },
     starNumber: { type: Number, default: 0 },
     start:{type:Boolean,required:true,default:false},
+    verified: { type: Boolean, default: false },
+    paymentId: { type: String},
+    //enum objective
+    objective: {
+      type: String,
+      enum: ["Recrutment", "Freelance", "Internship"],
+      default: "Recrutment",
+    },
     category: {
       type: [
         {
@@ -31,7 +39,7 @@ const ChallengeSchema = new mongoose.Schema(
       default: [],
     },
     price: { type: Number, required: false },
-    cover: { type: String },
+    //cover: { type: String },
     images: { type: [String] }, //array that include string
     deliveryTime: { type: Number },
     features: { type: [String] },

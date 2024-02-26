@@ -13,10 +13,12 @@ const Start = () => {
     setValue,
   } = useForm();
   const deadline = watch("deadline");
-  const now = new Date().toISOString().slice(0, -8);
+  let now = new Date()
+  now.setHours(now.getHours() + 1);
+  now = now.toISOString().slice(0, -8);
 
   function onSubmit(data) {
-    console.log(data);
+    
     mutate(data);
   }
 
@@ -33,7 +35,7 @@ const Start = () => {
         <Controller
           control={control}
           name="deadline"
-          defaultValue={new Date().toISOString().slice(0, -8)}
+          defaultValue={now}
           render={({ field }) => (
             <input
               required
