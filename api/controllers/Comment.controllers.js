@@ -17,11 +17,11 @@ const addComment = async (req, res, next) => {
     const owner = await userModel.findById(post.userId);
     const notification = new notificationModel({
       type: "comment",
-      message: `${owner.firstname + " " + owner.lastname} comment your post`,
+      message: `${owner?.firstname + " " + owner?.lastname} comment your post`,
     });
     await notification.save();
     main.sendNotification(post.userId, notification);
-    
+
     owner.notifications.push(notification._id);
     await owner.save();
     res.status(200).send(savedComment);
@@ -34,16 +34,14 @@ const deleteComment = async (req, res, next) => {
   console.log(req.params);
   console.log(req.body);
 
-   
-      await Comment.findByIdAndDelete(req.params.id);
-      await SocialPost.findByIdAndUpdate( req.body.postId,
-        { $pull: { comments: req.params.id } });
-        await SocialPost.findByIdAndUpdate(
-          req.body.postId,
-          { $inc: { commentCount: -1 } }
-        );  
-      res.status(200).json("The comment has been deleted.");
- 
+  await Comment.findByIdAndDelete(req.params.id);
+  await SocialPost.findByIdAndUpdate(req.body.postId, {
+    $pull: { comments: req.params.id },
+  });
+  await SocialPost.findByIdAndUpdate(req.body.postId, {
+    $inc: { commentCount: -1 },
+  });
+  res.status(200).json("The comment has been deleted.");
 };
 const updateComment = async (req, res, next) => {
   const { desc } = req.body;
@@ -52,9 +50,8 @@ const updateComment = async (req, res, next) => {
   try {
     comment = await Comment.findByIdAndUpdate(CommentId, {
       desc,
-      
     });
-     res.status(200).json({ comment });
+    res.status(200).json({ comment });
   } catch (err) {
     return console.log(err);
   }
@@ -66,7 +63,7 @@ const getComments = async (req, res, next) => {
       {
         path: "userId",
         model: "User",
-      },
+      }
     );
     res.status(200).json(comments);
   } catch (err) {
