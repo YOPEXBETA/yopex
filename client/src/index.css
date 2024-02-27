@@ -39,7 +39,7 @@ input:checked.defaultCheckbox::before {
 
 @layer components {
   .my-react-select-container .my-react-select__control {
-    @apply bg-white border-neutral-200 rounded-xl p-1 dark:bg-zinc-800 border dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500;
+    @apply bg-white border-neutral-200  dark:bg-zinc-800 border dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500;
   }
 
   .my-react-select-container .my-react-select__control--is-focused {

@@ -6,18 +6,18 @@ import { useCreateChallenge } from "../../hooks/react-query/useChallenges";
 import { useFileUpload, useUserById } from "../../hooks/react-query/useUsers";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCategories } from "../../hooks/react-query/useCategories";
-import NotFound from "../../assets/images/NotFound.png";
 import Modal from ".";
 import CloseIcon from "../icons/CloseIcon";
 import CompanyIcon from "../icons/CompanyIcon";
 import UsersIcon from "../icons/UsersIcon";
 import InfoIcon from "../icons/InfoIcon";
-import InputField from "../fields/InputField";
-import TextField from "../fields/TextField";
 
-const CreateChallengeModal = ({ open, handleClose, extra }) => {
+const CreateChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [objective, setObjective] = useState("Recrutement");
+  const handleCardClick = (companyId) => {
+    setSelectedOption(companyId);
+  };
   const [selectedOptionpaid, setSelectedOptionpaid] = useState("false");
   const [showUser, setShowUser] = useState(true);
   const [showCompanies, setShowCompanies] = useState(false);
@@ -25,9 +25,6 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
 
   const { data: categorys } = useCategories();
 
-  const handleCardClick = (companyId) => {
-    setSelectedOption(companyId);
-  };
   const {
     handleSubmit,
     register,
@@ -39,9 +36,12 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
     defaultValues: {
       category: [],
       RecommendedSkills: [],
+      category: [],
       files: [],
     },
   });
+
+  const deadline = watch("deadline");
 
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
@@ -50,6 +50,7 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
   const { mutate, error, isError, isSuccess } = useCreateChallenge(user);
   //const fileUploadMutation = useFileUpload();
   const onSubmit = async (challengeData) => {
+    console.log(challengeData);
     if (showCompanies) {
       const companyId = selectedOption;
       mutate({ companyId, challengeData, paid: selectedOptionpaid, objective });
@@ -57,6 +58,8 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
       mutate({ challengeData, paid: selectedOptionpaid, objective });
     }
   };
+
+  const now = new Date().toISOString().slice(0, -8);
 
   const handleToggleUser = () => {
     setShowUser(true);
@@ -120,7 +123,7 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                 >
                   <div className="flex items-center gap-2 dark:text-white">
                     <UsersIcon />
-                    <span className="hidden sm:inline md:block  font-medium text-lg dark:text-white">
+                    <span className="hidden sm:inline font-medium text-lg dark:text-white">
                       Individual
                     </span>
                   </div>
@@ -133,7 +136,7 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                 >
                   <div className="flex items-center gap-2 dark:text-white">
                     <CompanyIcon />
-                    <span className="hidden md:block sm:inline font-medium text-lg dark:text-white">
+                    <span className="hidden sm:inline font-medium text-lg dark:text-white">
                       Company
                     </span>
                   </div>
@@ -147,7 +150,15 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                         onClick={handlePrevPage}
                         className="text-gray-500 hover:text-gray-700 focus:outline-none"
                       >
-                        <CompanyIcon />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                          className="w-6 h-6"
+                        >
+                          <path d="M15 18l-6-6 6-6v12z" fill="currentColor" />
+                        </svg>
                       </button>
                     )}
                     {userProfile?.companies.length > 0 ? (
@@ -171,13 +182,24 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                             />
                             {selectedOption === option._id && (
                               <div className="absolute top-2 left-1/2 transform -translate-x-1/2 mb-2">
-                                <UsersIcon />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 12"
+                                  width="24"
+                                  height="12"
+                                  className="text-green-500"
+                                >
+                                  <path
+                                    d="M0 0l12 12 12-12z"
+                                    fill="currentColor"
+                                  />
+                                </svg>
                               </div>
                             )}
                           </div>
                         ))
                     ) : (
-                      <img src={NotFound} className="h-80 w-80" />
+                      <p className="dark:text-white">No company found.</p>
                     )}
 
                     {userProfile?.companies.length > 1 && (
@@ -203,54 +225,59 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
             <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-2">
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-7 space-y-4">
                 <div className="md:col-span-7">
-                  <InputField
-                    label="Challenge Title"
-                    extra={extra}
-                    placeholder="Type your challenge title"
-                    type="text"
-                    register={register("title", { required: true })}
-                  />
-                </div>
-
-                <div className="md:col-span-7">
-                  <TextField
-                    label="Challenge Description"
-                    extra={extra}
-                    rows={6}
-                    placeholder="Type your challenge description"
-                    type="text"
-                    register={register("description", { required: true })}
-                  />
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                    Challenge Title
+                  </label>
+                  <div className="relative my-2">
+                    <input
+                      {...register("title", { required: true })}
+                      required={true}
+                      placeholder="challenge title"
+                      className="w-full h-10 p-2 border mt-1  rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                    />
+                  </div>
                 </div>
                 <div className="md:col-span-7">
-                  <label className="dark:text-white text-sm font-medium leading-tight tracking-normal">
-                    Challenge Objective
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                    Challenge Description
+                  </label>
+                  <div className="relative my-2">
+                    <textarea
+                      className="w-full h-40 p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                      {...register("description", { required: true })}
+                      required={true}
+                      placeholder="challenge description"
+                    />
+                  </div>
+                </div>
+                <div className="md:col-span-7">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                    Objective
                   </label>
                   <div className="relative my-2">
                     <select
-                      id="selectFieldObjective"
-                      className="w-full p-3 mt-1 rounded-xl border dark:border-neutral-700 dark:text-white focus:outline-none resize-none dark:bg-zinc-800"
+                      id="selectFieldpaid"
+                      className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                       value={objective}
-                      defaultValue={"Recrutement"}
-                      onChange={(e) => {
+                      onChange={(e, value) => {
                         setObjective(e.target.value);
                       }}
                     >
-                      <option value="Recrutement">Recrutement</option>
-                      <option value="Freelance">Freelance</option>
-                      <option value="Internship">Internship</option>
-                      <option value="Innovation">Innovation</option>
+                      <option value={"Recrutement"}>Recrutement</option>
+                      <option value={"Freelance"}>Freelance</option>
+                      <option value={"Internship"}>Internship</option>
                     </select>
                   </div>
                 </div>
+
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium dark:text-white mb-2">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Type
                   </label>
                   <div className="relative my-2">
                     <select
                       id="selectFieldpaid"
-                      className="w-full p-3 rounded-xl border dark:border-neutral-700 dark:text-white focus:outline-none resize-none dark:bg-zinc-800"
+                      className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                       value={selectedOptionpaid}
                       onChange={(e, value) => {
                         setSelectedOptionpaid(e.target.value);
@@ -262,18 +289,26 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                   </div>
                 </div>
                 <div className="md:col-span-5">
-                  <InputField
-                    label="Challenge Prize"
-                    extra={extra}
-                    placeholder="Type your challenge prize"
-                    type="text"
-                    disabled={selectedOptionpaid === "false"}
-                    register={register("price", { required: true })}
-                  />
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                    Challenge Prize
+                  </label>
+                  <div className="relative my-2">
+                    <input
+                      className={`w-full p-2 border  rounded dark:text-white  ${
+                        selectedOptionpaid === "false"
+                          ? "bg-zinc-200 dark:bg-zinc-900"
+                          : "bg-white"
+                      }  dark:bg-zinc-700 focus:outline-none focus:border-green-500`}
+                      type="number"
+                      placeholder="challenge prize"
+                      {...register("price", { required: false })}
+                      disabled={selectedOptionpaid === "false"}
+                    />
+                  </div>
                 </div>
 
                 <div className="md:col-span-7">
-                  <label className="block text-sm font-medium dark:text-white mb-2">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Select Skills
                   </label>
                   <div className="relative my-2">
@@ -306,10 +341,9 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                   </div>
                 </div>
                 <div className="md:col-span-7">
-                  <label className="block text-sm font-medium dark:text-white mb-2">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Select Categories
                   </label>
-
                   <div className="relative my-2">
                     <Controller
                       control={control}
@@ -341,25 +375,35 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                 </div>
 
                 <div className="md:col-span-7">
-                  <InputField
-                    label="Type The Participants Number"
-                    extra={extra}
-                    placeholder="Type your Participants Number"
-                    type="number"
-                    register={register("nbruser", { required: true })}
-                    min={0}
-                  />
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                    Specify The Participants Number
+                  </label>
+                  <div className="relative my-2">
+                    <input
+                      required
+                      className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
+                      type="number"
+                      placeholder="number of particiant"
+                      min={1}
+                      {...register("nbruser", { required: true })}
+                    />
+                  </div>
                 </div>
 
                 <div className="md:col-span-7">
-                  <InputField
-                    label="Add a youtube video link to explain the challenge details
-                    (Optional)"
-                    extra={extra}
-                    placeholder="https://www.youtube.com/"
-                    type="text"
-                    register={register("youtubeLink", { required: true })}
-                  />
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                    You can add here a youtube video link to explain the
+                    challenge (Optional)
+                  </label>
+                  <div className="relative my-2">
+                    <input
+                      className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
+                      type="text"
+                      placeholder="https://www.youtube.com/watch?v=..."
+                      min={1}
+                      {...register("youtubeLink", { required: false })}
+                    />
+                  </div>
                 </div>
 
                 <div className="md:col-span-7 text-right mt-4">
