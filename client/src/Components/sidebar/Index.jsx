@@ -16,7 +16,7 @@ const Sidebar = ({
 }) => {
   return (
     <div
-      className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 border-r-[1px] dark:border-zinc-700  ${
+      className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 border-r-[1px] border-gray-100 dark:border-zinc-700  ${
         open ? "translate-x-0" : "-translate-x-96"
       } ${isRouteWithSpecificWidth ? "w-[6.2rem]" : ""}`}
     >
@@ -47,7 +47,7 @@ const Sidebar = ({
       <div className="mt-6 mb-7 h-[1px] bg-gray-100 dark:bg-zinc-700" />
       {/* Nav item */}
 
-      <ul className="mb-auto pt-1">
+      <ul className="mb-auto pt-1 flex flex-col justify-center">
         <SidebarLinks
           routes={routes}
           isRouteWithSpecificWidth={isRouteWithSpecificWidth}

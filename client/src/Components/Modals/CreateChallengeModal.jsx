@@ -6,18 +6,17 @@ import { useCreateChallenge } from "../../hooks/react-query/useChallenges";
 import { useFileUpload, useUserById } from "../../hooks/react-query/useUsers";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCategories } from "../../hooks/react-query/useCategories";
+import NotFound from "../../assets/images/NotFound.png";
 import Modal from ".";
 import CloseIcon from "../icons/CloseIcon";
 import CompanyIcon from "../icons/CompanyIcon";
 import UsersIcon from "../icons/UsersIcon";
 import InfoIcon from "../icons/InfoIcon";
+import InputField from "../fields/InputField";
 
-const CreateChallengeModal = ({ open, handleClose }) => {
+const CreateChallengeModal = ({ open, handleClose, extra }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [objective, setObjective] = useState("");
-  const handleCardClick = (companyId) => {
-    setSelectedOption(companyId);
-  };
   const [selectedOptionpaid, setSelectedOptionpaid] = useState("false");
   const [showUser, setShowUser] = useState(true);
   const [showCompanies, setShowCompanies] = useState(false);
@@ -25,6 +24,9 @@ const CreateChallengeModal = ({ open, handleClose }) => {
 
   const { data: categorys } = useCategories();
 
+  const handleCardClick = (companyId) => {
+    setSelectedOption(companyId);
+  };
   const {
     handleSubmit,
     register,
@@ -36,12 +38,9 @@ const CreateChallengeModal = ({ open, handleClose }) => {
     defaultValues: {
       category: [],
       RecommendedSkills: [],
-      category: [],
       files: [],
     },
   });
-
-  const deadline = watch("deadline");
 
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
@@ -50,16 +49,13 @@ const CreateChallengeModal = ({ open, handleClose }) => {
   const { mutate, error, isError, isSuccess } = useCreateChallenge(user);
   //const fileUploadMutation = useFileUpload();
   const onSubmit = async (challengeData) => {
-    console.log(challengeData);
     if (showCompanies) {
       const companyId = selectedOption;
-      mutate({ companyId, challengeData, paid: selectedOptionpaid,objective });
+      mutate({ companyId, challengeData, paid: selectedOptionpaid, objective });
     } else {
-      mutate({ challengeData, paid: selectedOptionpaid,objective });
+      mutate({ challengeData, paid: selectedOptionpaid, objective });
     }
   };
-
-  const now = new Date().toISOString().slice(0, -8);
 
   const handleToggleUser = () => {
     setShowUser(true);
@@ -123,7 +119,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                 >
                   <div className="flex items-center gap-2 dark:text-white">
                     <UsersIcon />
-                    <span className="hidden sm:inline font-medium text-lg dark:text-white">
+                    <span className="hidden sm:inline md:block  font-medium text-lg dark:text-white">
                       Individual
                     </span>
                   </div>
@@ -136,7 +132,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                 >
                   <div className="flex items-center gap-2 dark:text-white">
                     <CompanyIcon />
-                    <span className="hidden sm:inline font-medium text-lg dark:text-white">
+                    <span className="hidden md:block sm:inline font-medium text-lg dark:text-white">
                       Company
                     </span>
                   </div>
@@ -150,15 +146,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                         onClick={handlePrevPage}
                         className="text-gray-500 hover:text-gray-700 focus:outline-none"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          height="24"
-                          className="w-6 h-6"
-                        >
-                          <path d="M15 18l-6-6 6-6v12z" fill="currentColor" />
-                        </svg>
+                        <CompanyIcon />
                       </button>
                     )}
                     {userProfile?.companies.length > 0 ? (
@@ -182,24 +170,13 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                             />
                             {selectedOption === option._id && (
                               <div className="absolute top-2 left-1/2 transform -translate-x-1/2 mb-2">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 24 12"
-                                  width="24"
-                                  height="12"
-                                  className="text-green-500"
-                                >
-                                  <path
-                                    d="M0 0l12 12 12-12z"
-                                    fill="currentColor"
-                                  />
-                                </svg>
+                                <UsersIcon />
                               </div>
                             )}
                           </div>
                         ))
                     ) : (
-                      <p className="dark:text-white">No company found.</p>
+                      <img src={NotFound} className="h-80 w-80" />
                     )}
 
                     {userProfile?.companies.length > 1 && (
@@ -237,6 +214,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                     />
                   </div>
                 </div>
+
                 <div className="md:col-span-7">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Challenge Description
@@ -249,27 +227,28 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                       placeholder="challenge description"
                     />
                   </div>
-                </div><div className="md:col-span-2">
+                </div>
+                <div className="md:col-span-7">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
-                  Objective
+                    Challenge Objective
                   </label>
                   <div className="relative my-2">
                     <select
-                      id="selectFieldpaid"
+                      id="selectFieldObjective"
                       className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                       value={objective}
-                      onChange={(e, value) => {
+                      defaultValue={"Recrutement"}
+                      onChange={(e) => {
                         setObjective(e.target.value);
                       }}
                     >
-                      <option value={"Recrutment"}>Recrutment</option>
-                      <option value={"Freelance"}>Freelance</option>
-                      <option value={"Internship"}>Internship</option>
-                    
+                      <option value="Recrutement">Recrutement</option>
+                      <option value="Freelance">Freelance</option>
+                      <option value="Internship">Internship</option>
+                      <option value="Innovation">Innovation</option>
                     </select>
                   </div>
                 </div>
-
                 <div className="md:col-span-2">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Type
@@ -288,7 +267,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                     </select>
                   </div>
                 </div>
-                <div className="md:col-span-3">
+                <div className="md:col-span-5">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Challenge Prize
                   </label>
@@ -392,11 +371,11 @@ const CreateChallengeModal = ({ open, handleClose }) => {
 
                 <div className="md:col-span-7">
                   <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
-                    You can add here a youtube video link to explain the challenge (Optional)
+                    Add a youtube video link to explain the challenge details
+                    (Optional)
                   </label>
                   <div className="relative my-2">
                     <input
-                      
                       className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
                       type="text"
                       placeholder="https://www.youtube.com/watch?v=..."
@@ -406,7 +385,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   </div>
                 </div>
 
-                <div className="md:col-span-5 text-right mt-4">
+                <div className="md:col-span-7 text-right mt-4">
                   <div className="inline-flex items-end">
                     <button
                       className="px-5 py-2.5 rounded-lg text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80"

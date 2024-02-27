@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const submissionModel = require("./submission.model");
 const companyModel = require("./company.model");
 
-
 const ChallengeSchema = new mongoose.Schema(
   {
     //nbruser: { type: Number, default: 10 },
@@ -11,14 +10,14 @@ const ChallengeSchema = new mongoose.Schema(
     description: { type: String, required: true },
     totalStars: { type: Number, default: 0 },
     starNumber: { type: Number, default: 0 },
-    start:{type:Boolean,required:true,default:false},
+    start: { type: Boolean, required: true, default: false },
     verified: { type: Boolean, default: false },
-    paymentId: { type: String},
+    paymentId: { type: String },
     //enum objective
     objective: {
       type: String,
-      enum: ["Recrutment", "Freelance", "Internship"],
-      default: "Recrutment",
+      enum: ["Recrutement", "Freelance", "Internship", "Innovation"],
+      default: "Recrutement",
     },
     category: {
       type: [
@@ -57,7 +56,7 @@ const ChallengeSchema = new mongoose.Schema(
       ref: "User",
     },
     paid: { type: Boolean, default: false },
-    YoutubeLink: { type: String, required: false},
+    YoutubeLink: { type: String, required: false },
     users: [
       {
         user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
@@ -67,10 +66,10 @@ const ChallengeSchema = new mongoose.Schema(
       },
     ],
     banned: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-        }
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
     ],
     submissions: {
       type: [

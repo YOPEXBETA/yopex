@@ -13,12 +13,11 @@ const Start = () => {
     setValue,
   } = useForm();
   const deadline = watch("deadline");
-  let now = new Date()
+  let now = new Date();
   now.setHours(now.getHours() + 1);
   now = now.toISOString().slice(0, -8);
 
   function onSubmit(data) {
-    
     mutate(data);
   }
 
@@ -28,8 +27,8 @@ const Start = () => {
         className="md:col-span-5 text-center"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <label className="text-base text-black mt-4 block dark:text-white">
-          Deadline
+        <label className="text-left text-black mt-4 block dark:text-white">
+          Set the Deadline
         </label>
 
         <Controller
@@ -40,7 +39,7 @@ const Start = () => {
             <input
               required
               type="datetime-local"
-              className="w-full py-2 px-3 dark:bg-zinc-700 mt-2 dark:text-white rounded border focus:outline-none focus:border-green-500 mb-2"
+              className="w-full py-2 px-3 rounded-lg dark:bg-zinc-700 mt-2 dark:text-white border focus:outline-none focus:border-green-500 mb-2"
               {...field}
               onChange={(e) => {
                 const now = moment();
@@ -60,11 +59,11 @@ const Start = () => {
         <div className="text-center mt-4 ">
           <div className="inline-flex items-center w-full">
             <button
-              className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded w-full"
+              className="bg-green-500 px-5 py-3 rounded-full w-full h-16 hover:bg-green-700 text-white"
               type="submit"
               disabled={isSubmitting}
             >
-              Start
+              Start the challenge
             </button>
           </div>
         </div>

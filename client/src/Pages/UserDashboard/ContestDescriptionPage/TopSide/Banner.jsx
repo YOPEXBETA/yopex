@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import challengeBanner from "../../../../assets/images/challengeBanner.jpg";
 import {
   useChallengeById,
@@ -20,7 +20,6 @@ const Banner = ({ changeValue, value }) => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [deadline, setDeadline] = useState(null);
-  
 
   const { user } = useSelector((state) => state.auth);
 
@@ -59,7 +58,7 @@ const Banner = ({ changeValue, value }) => {
     registerMutate();
     join({ contestId: challenge._id, userId: user._id });
   };
-  
+
   return (
     <div className="w-full" key={challenge._id}>
       <div className="relative z-20 mb-4 h-[300px] overflow-hidden  md:h-[400px]">
@@ -70,30 +69,43 @@ const Banner = ({ changeValue, value }) => {
         />
         <div className="absolute top-0 left-0 z-10 flex h-full w-full items-end bg-gradient-to-t from-dark-700 to-transparent">
           <div className="flex flex-wrap items-center p-4 pb-4 md:px-8">
-            <div className="mb-4 mr-5 flex items-center md:mr-10">
-              <div className="mr-4 h-10 w-10 overflow-hidden rounded-full">
+            <Link
+              className="mb-4 mr-5 flex items-center md:mr-10 hover:opacity-70"
+              to={
+                challenge?.company?.companyLogo
+                  ? `/company/${challenge?.company?._id}`
+                  : `/profile/${challenge?.owner?._id}`
+              }
+            >
+              <div className="mr-4 overflow-hidden rounded-full">
                 <img
-                  src={challenge?.company?.companyLogo ? challenge?.company.companyLogo : challenge?.owner?.picturePath}
+                  src={
+                    challenge?.company?.companyLogo
+                      ? challenge?.company.companyLogo
+                      : challenge?.owner?.picturePath
+                  }
                   alt="image"
-                  className="w-full object-cover"
+                  className="object-cover h-10 w-10"
                 />
               </div>
-              <p className="text-base font-medium text-white">
-                By
-                <a
-                  href={challenge?.company?.companyLogo ? `/company/${challenge?.company?._id}`: `/profile/${challenge?.owner?._id}`}
-                  className="text-white hover:opacity-70"
-                >
-                  {" "}
-                  {challenge?.company?.companyName ? challenge?.company?.companyName : challenge?.owner?.firstname + " " + challenge?.owner?.lastname}
-                </a>
-              </p>
-            </div>
+              <div className="flex flex-col">
+                <p className="text-white">
+                  By{" "}
+                  {challenge?.company?.companyName
+                    ? challenge?.company?.companyName
+                    : challenge?.owner?.firstname +
+                      " " +
+                      challenge?.owner?.lastname}
+                </p>
+              </div>
+            </Link>
             <div className="mb-4 flex items-center gap-4">
               <div className="text-white flex items-center">
                 <CalendarIcon />
                 <p className="text-sm font-medium text-white">
-                  {challenge?.deadline ? new Date(challenge?.deadline).toLocaleString() : "Open"}
+                  {challenge?.deadline
+                    ? new Date(challenge?.deadline).toLocaleString()
+                    : "Open"}
                 </p>
               </div>
               <div className="text-white flex items-center gap-2">
@@ -108,8 +120,6 @@ const Banner = ({ changeValue, value }) => {
                   {challenge?.users?.length}
                 </p>
               </div>
-
-
             </div>
           </div>
         </div>
