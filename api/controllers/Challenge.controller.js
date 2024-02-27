@@ -39,13 +39,12 @@ const CreateChallenge = async (req, res, next) => {
       if (!owner) {
         return res.status(400).json({ error: "Company not found" });
       }
-      
     }
-    
+
     if (youtubeLink) {
       // verify youtube link
       const youtubeRegex =
-        /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
+        /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
       if (!youtubeRegex.test(youtubeLink)) {
         return res.status(400).json({ message: "Invalid youtube link" });
       }
@@ -59,10 +58,10 @@ const CreateChallenge = async (req, res, next) => {
       price: paid === "true" ? price : 0,
       RecommendedSkills,
       nbruser,
-      YoutubeLink:youtubeLink,
+      YoutubeLink: youtubeLink,
       paid: paid === "true" ? true : false,
       verified: paid === "true" ? false : true,
-      objective
+      objective,
     });
     if (companyId) {
       challenge.company = owner._id;
@@ -84,18 +83,22 @@ const CreateChallenge = async (req, res, next) => {
       await owner.save();
     }
     if (paid === "true") {
-      const response = await axios.post("http://localhost:8000/api/payment", {
-        amount: price*1000,
-        firstName: user.firstname,
-        lastName: user.lastname,
-        email: user.email,
-        challengeId: challenge._id,
-      }, {
-        headers: {
-          "Authorization": "token "+req.token
+      const response = await axios.post(
+        "http://localhost:8000/api/payment",
+        {
+          amount: price * 1000,
+          firstName: user.firstname,
+          lastName: user.lastname,
+          email: user.email,
+          challengeId: challenge._id,
+        },
+        {
+          headers: {
+            Authorization: "token " + req.token,
+          },
         }
-    });
-    return res.status(200).json(response.data.payUrl);
+      );
+      return res.status(200).json(response.data.payUrl);
     }
     res
       .status(201)
@@ -141,7 +144,6 @@ const getChallengeById = async (req, res) => {
 // ...
 
 const deleteChallenge = async (req, res) => {
-  
   try {
     const challenge = await ChallengeModel.findOneAndDelete({
       _id: req.params.id,
@@ -186,7 +188,6 @@ const getCompanyChallenges = async (req, res) => {
 };
 
 const getAllChallenges = async (req, res) => {
-
   const q = req.query;
   const filters = {
     verified: true,
@@ -204,11 +205,10 @@ const getAllChallenges = async (req, res) => {
   };
 
   try {
-    const ChallengePosts =
-      await ChallengeModel.find(filters).populate("company")
+    const ChallengePosts = await ChallengeModel.find(filters)
+      .populate("company")
       .populate("RecommendedSkills")
       .populate("category");
-      
 
     res.status(200).json(ChallengePosts);
   } catch (err) {
@@ -258,7 +258,7 @@ const updateChallenge = async (req, res, next) => {
       description,
       nbruser,
       price,
-      category:category.map((cat) => cat.value),
+      category: category.map((cat) => cat.value),
       RecommendedSkills: RecommendedSkills.map((skill) => skill.value),
     });
     res.status(200).json({ Challenge });
@@ -363,35 +363,36 @@ const getChallengeSubmission = async (req, res) => {
     const userId = req.userId;
     const user = await UserModel.findById(userId);
     if (challenge.start === true && challenge.deadline < Date.now()) {
-      const submission = await submissionModel.find({
-        challengeId: challengeId,
-      })
-      .populate("userId", "firstname lastname picturePath _id");
+      const submission = await submissionModel
+        .find({
+          challengeId: challengeId,
+        })
+        .populate("userId", "firstname lastname picturePath _id");
       return res.status(200).json(submission);
     }
     if (
       challenge.owner?.toString() !== userId.toString() &&
       !user.companies.includes(challenge.company?.toString())
     ) {
-      const submission = await submissionModel.find({
-        challengeId: challengeId,
-        userId: userId,
-      })
-      .populate("userId", "firstname lastname picturePath _id");;
+      const submission = await submissionModel
+        .find({
+          challengeId: challengeId,
+          userId: userId,
+        })
+        .populate("userId", "firstname lastname picturePath _id");
       return res.status(200).json(submission);
-    }else{
-      const submission = await submissionModel.find({
-        challengeId: challengeId,
-      })
-      .populate("userId", "firstname lastname picturePath _id");;
+    } else {
+      const submission = await submissionModel
+        .find({
+          challengeId: challengeId,
+        })
+        .populate("userId", "firstname lastname picturePath _id");
       return res.status(200).json(submission);
     }
-    
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-}
-
+};
 
 module.exports = {
   CreateChallenge,

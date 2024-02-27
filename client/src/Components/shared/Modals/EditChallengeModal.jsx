@@ -9,7 +9,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
   const { mutate } = useEditChallenge(challenge._id);
   const { data: Skills } = useSkills();
   const { data: categorys } = useCategories();
-  
+
   const {
     handleSubmit,
     register,
@@ -18,21 +18,27 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
     formState: { isSubmitting },
   } = useForm({
     defaultValues: {
-      category: challenge.category.map((category) => ({value: category._id, label: category.name})),
-      RecommendedSkills: challenge.RecommendedSkills.map((skill) => ({value: skill._id, label: skill.name})),
+      category: challenge.category.map((category) => ({
+        value: category._id,
+        label: category.name,
+      })),
+
+      RecommendedSkills: challenge.RecommendedSkills.map((skill) => ({
+        value: skill._id,
+        label: skill.name,
+      })),
+
       title: challenge.title,
       description: challenge.description,
       price: challenge.price,
       nbruser: challenge.nbruser,
     },
   });
-  
-
 
   const handleEdit = (data) => {
     console.log(data);
     mutate({
-    ...data
+      ...data,
     });
     handleClose();
   };
@@ -42,7 +48,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
       open={open}
       className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"} `}
     >
-      <form  className="flex justify-center items-center min-h-screen">
+      <form className="flex justify-center items-center min-h-screen">
         <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl md:w-[40rem] p-4 h-[40rem] border  w-screen overflow-y-auto max-h-full">
           <div>
             <button
@@ -74,14 +80,12 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                 className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                 placeholder="Challenge name"
                 {...register("title", { required: true })}
-        
               />
 
               <label>Challenge Description</label>
               <textarea
                 className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
                 name="description"
-                
                 placeholder="Challenge Description"
                 {...register("description", { required: true })}
               />
@@ -101,76 +105,77 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                 placeholder="Max Challenger"
                 {...register("nbruser", { required: true })}
                 min={1}
-                
               />
               {Skills && (
                 <>
                   <label>Skills</label>
                   <Controller
-                      control={control}
-                      name="RecommendedSkills"
-                      
-                      render={({ field }) =>
-                        Skills && (
-                          <Select
-                            value={field.value}
-                            isMulti
-                            className="my-react-select-container mt-2"
-                            classNamePrefix="my-react-select"
-                            id="tags-outlined"
-                            options={Skills.map((skill) => ({
-                              value: skill._id,
-                              label: skill.name,
-                            }))}
-                            onBlur={field.onBlur}
-                            onChange={(selectedOptions) => {
-                              const selectedValues = selectedOptions.map(
-                                (option) => ({value:option.value,label:option.label})
-                              );
-                              field.onChange(selectedValues);
-                              
-                            }}
-                          />
-                        )
-                      }
-                    />
+                    control={control}
+                    name="RecommendedSkills"
+                    render={({ field }) =>
+                      Skills && (
+                        <Select
+                          value={field.value}
+                          isMulti
+                          className="my-react-select-container mt-2"
+                          classNamePrefix="my-react-select"
+                          id="tags-outlined"
+                          options={Skills.map((skill) => ({
+                            value: skill._id,
+                            label: skill.name,
+                          }))}
+                          onBlur={field.onBlur}
+                          onChange={(selectedOptions) => {
+                            const selectedValues = selectedOptions.map(
+                              (option) => ({
+                                value: option.value,
+                                label: option.label,
+                              })
+                            );
+                            field.onChange(selectedValues);
+                          }}
+                        />
+                      )
+                    }
+                  />
                 </>
               )}
               {categorys && (
                 <>
                   <label>Recommended Skills</label>
                   <Controller
-                      control={control}
-                      name="category"
-                        
-                      render={({ field }) =>
-                        categorys && (
-                          <Select
-                            value={field.value}
-                            isMulti
-                            className="my-react-select-container mt-2"
-                            classNamePrefix="my-react-select"
-                            id="tags-outlined"
-                            options={categorys.map((category) => ({
-                              value: category._id,
-                              label: category.name,
-                            }))}
-                            onBlur={field.onBlur}
-                            onChange={(selectedOptions) => {
-                              const selectedValues = selectedOptions.map(
-                                (option) => ({value:option.value,label:option.label})
-                              );
-                              field.onChange(selectedValues);
-                            }}
-                          />
-                        )
-                      }
-                    />
+                    control={control}
+                    name="category"
+                    render={({ field }) =>
+                      categorys && (
+                        <Select
+                          value={field.value}
+                          isMulti
+                          className="my-react-select-container mt-2"
+                          classNamePrefix="my-react-select"
+                          id="tags-outlined"
+                          options={categorys.map((category) => ({
+                            value: category._id,
+                            label: category.name,
+                          }))}
+                          onBlur={field.onBlur}
+                          onChange={(selectedOptions) => {
+                            const selectedValues = selectedOptions.map(
+                              (option) => ({
+                                value: option.value,
+                                label: option.label,
+                              })
+                            );
+                            field.onChange(selectedValues);
+                          }}
+                        />
+                      )
+                    }
+                  />
                 </>
               )}
               <div className="mt-4">
                 <button
-                  
                   className="px-6 py-2 text-white rounded-md w-full border-2 bg-green-500 hover:bg-green-600"
                   type="submit"
                   disabled={isSubmitting}

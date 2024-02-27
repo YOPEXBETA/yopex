@@ -13,10 +13,11 @@ import CompanyIcon from "../icons/CompanyIcon";
 import UsersIcon from "../icons/UsersIcon";
 import InfoIcon from "../icons/InfoIcon";
 import InputField from "../fields/InputField";
+import TextField from "../fields/TextField";
 
 const CreateChallengeModal = ({ open, handleClose, extra }) => {
   const [selectedOption, setSelectedOption] = useState("");
-  const [objective, setObjective] = useState("");
+  const [objective, setObjective] = useState("Recrutement");
   const [selectedOptionpaid, setSelectedOptionpaid] = useState("false");
   const [showUser, setShowUser] = useState(true);
   const [showCompanies, setShowCompanies] = useState(false);
@@ -202,40 +203,33 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
             <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-2">
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-7 space-y-4">
                 <div className="md:col-span-7">
-                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
-                    Challenge Title
-                  </label>
-                  <div className="relative my-2">
-                    <input
-                      {...register("title", { required: true })}
-                      required={true}
-                      placeholder="challenge title"
-                      className="w-full h-10 p-2 border mt-1  rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                    />
-                  </div>
+                  <InputField
+                    label="Challenge Title"
+                    extra={extra}
+                    placeholder="Type your challenge title"
+                    type="text"
+                    register={register("title", { required: true })}
+                  />
                 </div>
 
                 <div className="md:col-span-7">
-                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
-                    Challenge Description
-                  </label>
-                  <div className="relative my-2">
-                    <textarea
-                      className="w-full h-40 p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                      {...register("description", { required: true })}
-                      required={true}
-                      placeholder="challenge description"
-                    />
-                  </div>
+                  <TextField
+                    label="Challenge Description"
+                    extra={extra}
+                    rows={6}
+                    placeholder="Type your challenge description"
+                    type="text"
+                    register={register("description", { required: true })}
+                  />
                 </div>
                 <div className="md:col-span-7">
-                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                  <label className="dark:text-white text-sm font-medium leading-tight tracking-normal">
                     Challenge Objective
                   </label>
                   <div className="relative my-2">
                     <select
                       id="selectFieldObjective"
-                      className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                      className="w-full p-3 mt-1 rounded-xl border dark:border-neutral-700 dark:text-white focus:outline-none resize-none dark:bg-zinc-800"
                       value={objective}
                       defaultValue={"Recrutement"}
                       onChange={(e) => {
@@ -250,13 +244,13 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                   </div>
                 </div>
                 <div className="md:col-span-2">
-                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                  <label className="block text-sm font-medium dark:text-white mb-2">
                     Type
                   </label>
                   <div className="relative my-2">
                     <select
                       id="selectFieldpaid"
-                      className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                      className="w-full p-3 rounded-xl border dark:border-neutral-700 dark:text-white focus:outline-none resize-none dark:bg-zinc-800"
                       value={selectedOptionpaid}
                       onChange={(e, value) => {
                         setSelectedOptionpaid(e.target.value);
@@ -268,26 +262,18 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                   </div>
                 </div>
                 <div className="md:col-span-5">
-                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
-                    Challenge Prize
-                  </label>
-                  <div className="relative my-2">
-                    <input
-                      className={`w-full p-2 border  rounded dark:text-white  ${
-                        selectedOptionpaid === "false"
-                          ? "bg-zinc-200 dark:bg-zinc-900"
-                          : "bg-white"
-                      }  dark:bg-zinc-700 focus:outline-none focus:border-green-500`}
-                      type="number"
-                      placeholder="challenge prize"
-                      {...register("price", { required: false })}
-                      disabled={selectedOptionpaid === "false"}
-                    />
-                  </div>
+                  <InputField
+                    label="Challenge Prize"
+                    extra={extra}
+                    placeholder="Type your challenge prize"
+                    type="text"
+                    disabled={selectedOptionpaid === "false"}
+                    register={register("price", { required: true })}
+                  />
                 </div>
 
                 <div className="md:col-span-7">
-                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                  <label className="block text-sm font-medium dark:text-white mb-2">
                     Select Skills
                   </label>
                   <div className="relative my-2">
@@ -320,9 +306,10 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                   </div>
                 </div>
                 <div className="md:col-span-7">
-                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
+                  <label className="block text-sm font-medium dark:text-white mb-2">
                     Select Categories
                   </label>
+
                   <div className="relative my-2">
                     <Controller
                       control={control}
@@ -354,35 +341,25 @@ const CreateChallengeModal = ({ open, handleClose, extra }) => {
                 </div>
 
                 <div className="md:col-span-7">
-                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
-                    Specify The Participants Number
-                  </label>
-                  <div className="relative my-2">
-                    <input
-                      required
-                      className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
-                      type="number"
-                      placeholder="number of particiant"
-                      min={1}
-                      {...register("nbruser", { required: true })}
-                    />
-                  </div>
+                  <InputField
+                    label="Type The Participants Number"
+                    extra={extra}
+                    placeholder="Type your Participants Number"
+                    type="number"
+                    register={register("nbruser", { required: true })}
+                    min={0}
+                  />
                 </div>
 
                 <div className="md:col-span-7">
-                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
-                    Add a youtube video link to explain the challenge details
-                    (Optional)
-                  </label>
-                  <div className="relative my-2">
-                    <input
-                      className="w-full py-2 px-3 mt-2 dark:bg-zinc-700  dark:text-white rounded border focus:outline-none focus:border-green-500"
-                      type="text"
-                      placeholder="https://www.youtube.com/watch?v=..."
-                      min={1}
-                      {...register("youtubeLink", { required: false })}
-                    />
-                  </div>
+                  <InputField
+                    label="Add a youtube video link to explain the challenge details
+                    (Optional)"
+                    extra={extra}
+                    placeholder="https://www.youtube.com/"
+                    type="text"
+                    register={register("youtubeLink", { required: true })}
+                  />
                 </div>
 
                 <div className="md:col-span-7 text-right mt-4">

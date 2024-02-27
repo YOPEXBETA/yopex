@@ -13,6 +13,7 @@ import {
   useJobTypes,
   useOfferTypes,
 } from "../../hooks/react-query/useJobs";
+import NotFound from "../../assets/images/NotFound.png";
 import Modal from ".";
 import CloseIcon from "../icons/CloseIcon";
 import CompanyIcon from "../icons/CompanyIcon";
@@ -203,7 +204,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                           </div>
                         ))
                     ) : (
-                      <p className="dark:text-white">No company found.</p>
+                      <img src={NotFound} className="h-80 w-80" />
                     )}
                     {userProfile?.companies.length > 1 && (
                       <button

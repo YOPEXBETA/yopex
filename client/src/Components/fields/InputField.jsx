@@ -9,12 +9,13 @@ function InputField({
   state,
   disabled,
   register,
+  min,
 }) {
   return (
     <div className={`${extra}`}>
       <label
         htmlFor={id}
-        className="block text-sm font-medium text-gray-400 dark:text-white mb-2"
+        className="block text-sm font-medium dark:text-white mb-2"
       >
         {label}
       </label>
@@ -35,6 +36,7 @@ function InputField({
             : "border-gray-200 dark:!border-white/10 dark:text-white"
         }`}
         {...register}
+        min={min}
       />
     </div>
   );
