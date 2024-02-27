@@ -23,7 +23,7 @@ const Challenges = ({ challenges, isLoading }) => {
           </div>
         ))
       ) : (
-        <p className="dark:text-white text-lg">No Challenges found</p>
+        <p className="dark:text-white">No Challenges found</p>
       )}
     </div>
   );

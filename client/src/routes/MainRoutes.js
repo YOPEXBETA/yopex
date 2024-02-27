@@ -22,14 +22,9 @@ const HomeLayout = Loadable(
 const DiscoverTalentsLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/DiscoverTalentsPage/Index"))
 );
-
 //CreateCompany
 const CreateCompany = Loadable(
   lazy(() => import("../Pages/UserDashboard/CreateCompanyPage/index"))
-);
-//CreateProject
-const CreatePost = Loadable(
-  lazy(() => import("../Pages/UserDashboard/CreatePostPage/index"))
 );
 //CreateProject
 const PostDetails = Loadable(
@@ -200,12 +195,7 @@ const MainRoutes = {
       element: <CreateCompany />,
       hideInSidebar: true,
     },
-    {
-      name: "Create Post",
-      path: "create-post",
-      element: <CreatePost />,
-      hideInSidebar: true,
-    },
+
     {
       name: "post Details",
       path: "/postDetails",
@@ -213,21 +203,10 @@ const MainRoutes = {
       hideInSidebar: true,
       customWidth: false,
     },
-    {
-      name: "Store",
-      path: "store",
-      element: <Store />,
-      icon: <StoreIcon className="h-6 w-6" />,
-    },
 
     {
       path: "/paymentSuccess",
       element: <PaymentSuccess />,
-      hideInSidebar: true,
-    },
-    {
-      path: "/paymentFail",
-      element: <PaymentFail />,
       hideInSidebar: true,
     },
 

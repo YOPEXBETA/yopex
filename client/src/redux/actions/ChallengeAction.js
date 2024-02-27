@@ -314,8 +314,7 @@ export const getUserChallenges = (userId) => async (dispatch, getState) => {
 
 export const chooseWinner = (challengeData) => async (dispatch, getState) => {
   try {
-    const myData = JSON.parse(localStorage.getItem("user"));
-    console.log(challengeData);
+
 
     const { data } = await axios.post(
       "https://yopex-api.tabaani.co/company/challengeWinner",

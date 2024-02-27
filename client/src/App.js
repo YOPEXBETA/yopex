@@ -9,19 +9,19 @@ import { Helmet } from "react-helmet";
 const queryClient = new QueryClient();
 
 const App = () => {
-  {
-    useEffect(() => {
-      const queryParams = new URLSearchParams(window.location.search);
-      if (queryParams.has("token")) {
-        const accessToken = queryParams.get("token");
-        localStorage.setItem("accessToken", accessToken);
-        window.history.replaceState({}, document.title, "/");
-      }
-    }, []);
-  }
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    if (queryParams.has("token")) {
+      const accessToken = queryParams.get("token");
+      localStorage.setItem("accessToken", accessToken);
+      window.history.replaceState({}, document.title, "/");
+    }
+  }, []);
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={true} />
         <Toaster />
         {/*<ReactQueryDevtools />*/}
         <Helmet>

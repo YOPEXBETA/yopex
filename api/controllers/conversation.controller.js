@@ -2,6 +2,7 @@ const ConversationModel = require("../models/Conversation.model");
 const MessageModel = require("../models/Message.model");
 const Company = require("../models/company.model");
 const UserModel = require("../models/user.model");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 const createConversation = async (req, res) => {
   try {
@@ -13,9 +14,10 @@ const createConversation = async (req, res) => {
 
     const existingConversation = await ConversationModel.findOne({
       members: { $all: [senderId, receiverId] },
+      company,
     });
 
-    if (existingConversation && !company) {
+    if (existingConversation) {
       return res.status(200).json(existingConversation);
     }
 
@@ -92,7 +94,8 @@ const createConversation = async (req, res) => {
 
 const getConversations = async (req, res) => {
   try {
-    const userId = req.params.userId;
+    
+    const userId = req.userId;
     
     const conversations = await ConversationModel.find({
       members: { $in: [userId] },
@@ -194,9 +197,25 @@ const getConversations = async (req, res) => {
   }
 };
 
+const getConversationById = async (req, res) => {
+  try { 
+    
+    const conversationId = new ObjectId(req.params.id);
+    const userId = req.userId;
+    const conversation = await ConversationModel.findById(conversationId).populate("members", "firstname lastname role picturePath userDescription phoneNumber email")
+    .populate("company","companyLogo companyName companyDescription PhoneNumber user").lean();
+    conversation.members = conversation.members.filter(member => member._id.toString() !== userId);
+    res.status(200).json(conversation);
+  } catch (error) {
+    console.log(error, "Error");
+    res.status(500).json({ error: error.message });
+  }
+}
+
 
 
 module.exports = {
   createConversation,
   getConversations,
+  getConversationById
 };

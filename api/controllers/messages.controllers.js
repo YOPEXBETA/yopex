@@ -34,24 +34,25 @@ const getMessages = async (req, res) => {
       .populate("sender", "firstname picturePath") // join sender information
       .exec();
 
-    const ownerUserId = conversation.company?.user.toString(); // Get the owner user ID
+    const ownerUserId = conversation.company?.user.toString() || ""; // Get the owner user ID
 
-    const messagesWithDetails = messages.map((message) => {
+    const messagesWithDetails =  messages.map((message) => {
       let senderDetails = {
         _id: message.sender._id,
         firstname: message.sender.firstname,
         picturePath: message.sender.picturePath,
       };
-
+      
       // Check if the sender is the owner of the company
       if (ownerUserId && message.sender._id.toString() === ownerUserId) {
-        senderDetails.companyLogo = conversation.company.companyLogo;
+        
+        senderDetails["picturePath"] = conversation.company.companyLogo;
       }
 
       return {
         _id: message._id,
         sender: senderDetails,
-        conversationId: message.conversationId,
+        
         message: message.message,
         createdAt: message.createdAt,
       };

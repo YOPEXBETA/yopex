@@ -40,7 +40,6 @@ const Jobs = ({
             {sortedJobs?.length > 0 ? (
               sortedJobs?.map((job) => (
                 <div key={job._id} onClick={() => handleClickOpenModalJob(job)}>
-                  {/*<JobCard job={job} />*/}
                   <WorkCard job={job} />
                 </div>
               ))

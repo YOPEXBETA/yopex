@@ -6,6 +6,8 @@ import Dropdown from "../dropdown";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import NotificationMenu from "./components/NotificationMenu";
 import ProfileMenu from "./components/ProfileMenu";
+import LightIcon from "../icons/LightIcon";
+import MoonIcon from "../icons/MoonIcon";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
@@ -13,9 +15,9 @@ const Navbar = (props) => {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <nav class="sticky py-2 top-0 z-40 bg-white dark:bg-zinc-800 border-b-[1px] dark:border-zinc-700 w-full">
+    <nav class="sticky py-2 top-0 h-[9vh] z-40 bg-white dark:bg-zinc-800 border-gray-100 border-b-[1px] dark:border-zinc-700 w-full">
       <div class="mx-auto  px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-between">
+        <div class="relative flex py-1 h-11 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <button
               type="button"
@@ -60,10 +62,10 @@ const Navbar = (props) => {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:block">
-              <p className="shrink text-3xl capitalize text-zinc-700 dark:text-white">
+              <p className="shrink text-2xl capitalize text-zinc-700 dark:text-white">
                 <Link
                   to="#"
-                  className="font-bold capitalize hover:text-zinc-700 dark:hover:text-white hidden md:block"
+                  className="font-semibold capitalize hover:text-zinc-700 dark:hover:text-white hidden md:block"
                 >
                   {brandText}
                 </Link>
@@ -73,7 +75,7 @@ const Navbar = (props) => {
           <div class="absolute  inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <div className="flex items-center gap-3">
               <div
-                className="cursor-pointer text-gray-600 border-gray-200 border p-2 rounded-full "
+                className="cursor-pointer text-gray-600 rounded-full "
                 onClick={() => {
                   if (darkmode) {
                     document.body.classList.remove("dark");
@@ -85,16 +87,16 @@ const Navbar = (props) => {
                 }}
               >
                 {darkmode ? (
-                  <RiSunFill className="h-6 w-6 text-gray-600 dark:text-white" />
+                  <LightIcon />
                 ) : (
-                  <RiMoonFill className="h-6 w-6 text-gray-600 dark:text-white" />
+                  <MoonIcon className="text-gray-600 dark:text-white" />
                 )}
               </div>
               <Dropdown
                 button={
                   <button
                     type="button"
-                    class="relative rounded-full border-gray-200 border p-2 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-zinc-800"
+                    class="relative rounded-full border-gray-200  text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-zinc-800"
                   >
                     <svg
                       class="h-6 w-6"
@@ -130,13 +132,13 @@ const Navbar = (props) => {
                       <img
                         alt="picture"
                         src={user.picturePath}
-                        className="rounded-full  object-cover w-11 h-11 border-gray-200 border "
+                        className="rounded-full  object-cover w-9 h-9 border-gray-200 border "
                       />
                     ) : (
                       <img
                         alt="default"
                         src={AvatarProfile}
-                        className="rounded-full object-cover w-11 h-11border-gray-200 border"
+                        className="rounded-full object-cover w-9 h-9 border-gray-200 border"
                       />
                     )}
                   </button>

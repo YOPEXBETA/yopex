@@ -249,7 +249,7 @@ const CreateCompanyForm = ({ extra }) => {
                 type="text"
                 className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                 placeholder="Website"
-                {...register("websiteURL", { required: true })}
+                {...register("websiteURL", { required: false })}
               />
             </div>
 

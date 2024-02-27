@@ -3,19 +3,8 @@ const CommentModel = require("./Comment.model");
 
 const SocialMediaPostSchema = new mongoose.Schema(
   {
-    userId: {
-      type: String,
-      required: true,
-    },
-    firstname: {
-      type: String,
-      required: false,
-    },
-    lastname: {
-      type: String,
-      required: false,
-    },
-    companyName: { type: String, required: false },
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
+
     title: {
       type: String,
       max: 250,
@@ -73,7 +62,6 @@ const SocialMediaPostSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    user: { type: mongoose.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );

@@ -52,6 +52,13 @@ const CreateSubmission = async (req, res, next) => {
 const editsubmission = async (req, res) => {
   const { challengeId, userId, title, description, filesPaths, links } = req.body;
   try {
+    const challenge = await ChallengeModel.findById(challengeId);
+    if (!challenge) {
+      return res.status(400).json({ message: "Challenge not found" });
+    }
+    if (challenge.deadline < Date.now()) {
+      return res.status(400).json({ message: "Challenge is closed" });
+    }
     const submission = await Submission.findOneAndUpdate(
       { challengeId, userId },
       { title, description, filesPaths, links }

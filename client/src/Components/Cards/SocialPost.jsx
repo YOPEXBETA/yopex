@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import { EditPostModal } from "../shared/Modals/EditPostModal";
+import { useDeletePost } from "../../hooks/react-query/usePosts";
 import { useLikePost, useBookmarkPost } from "../../hooks/react-query/usePosts";
 import { BsThreeDots } from "react-icons/bs";
 import CommentButton from "../shared/comments/CommentButton";
@@ -11,8 +14,8 @@ import PostMenuIcon from "../MenuIcons/PostMenuIcon";
 import Card from "./index";
 import Dropdown from "../dropdown";
 import DeletePostPopup from "../Popup/DeletePostPopup";
-import { EditPostModal } from "../shared/Modals/EditPostModal";
-import { useDeletePost } from "../../hooks/react-query/usePosts";
+import HeartFilled from "../icons/HeartFilled";
+import HeartOutlined from "../icons/HeartOutlined";
 
 const SocialPostCard = ({
   post,
@@ -39,10 +42,6 @@ const SocialPostCard = ({
     post._id,
     category
   );
-  let ownerId = user._id;
-  if (companyId) {
-    ownerId = companyId;
-  }
 
   const bookmark = async () => {
     BookmarkPost();
@@ -95,74 +94,6 @@ const SocialPostCard = ({
     <Card
       extra={`transition  cursor-pointer hover:scale-102 duration-500 ${extra}`}
     >
-      <div className=" flex justify-between items-start">
-        <div className=" flex items-center py-4 pl-4 gap-2">
-          {post.userPicturePath ? (
-            <img
-              alt="post"
-              src={post.userPicturePath}
-              className="w-11 h-11 rounded-full object-cover bg-white border-2"
-            />
-          ) : (
-            <img
-              alt="default"
-              src={AvatarProfile}
-              className="w-11 h-11 rounded-full object-cover bg-white border-2"
-            />
-          )}
-          <div>
-            <Link
-              key={post.userId}
-              to={
-                post?.companyName !== undefined
-                  ? `/company/${post.userId}`
-                  : `/profile/${post.userId}`
-              }
-              style={{ textDecoration: "none", color: "#000000" }}
-            >
-              <p className="text-md font-medium dark:text-gray-300 truncate w-52">
-                {post.companyName !== undefined
-                  ? `${post?.companyName}`
-                  : `${post?.firstname} ${post?.lastname}`}
-              </p>
-            </Link>
-          </div>
-        </div>
-        <button
-          className="font-medium p-2 flex  rounded-full"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {(post.userId === user._id ||
-            user.companies.includes(post.userId)) && (
-            <Dropdown
-              button={
-                <p className="cursor-pointer py-6 pr-4">
-                  <BsThreeDots />
-                </p>
-              }
-              animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
-              children={
-                <PostMenuIcon
-                  post={post}
-                  handleClickEdit={handleClickEdit}
-                  handleDeleteClick={handleDeleteClick}
-                />
-              }
-              classNames={"py-2 top-8 right-4"}
-            />
-          )}
-        </button>
-      </div>
-      <div className="col-span-1 md:col-span-1 px-4">
-        {type === "profile" ? null : (
-          <div className="mb-4">
-            <div
-              className="text-md dark:text-white"
-              dangerouslySetInnerHTML={{ __html: post?.description }}
-            />
-          </div>
-        )}
-      </div>
       <div className="mx-auto relative">
         <div className="flex items-center">
           <div className="object-cover static">
@@ -198,52 +129,97 @@ const SocialPostCard = ({
           {renderPaginationDots()}
         </div>
       </div>
-      <div className="flex items-center justify-between px-4">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <button
-              aria-label="add to favorites"
-              onClick={() => {
-                likePost(post._id);
-                //setIsLiked(!isliked);
-              }}
-              className="focus:outline-none"
-            >
-              {likeLoading ? (
-                <div>
-                  <LoadingSpinner />
-                </div> // Show a loader while liking
-              ) : /*isliked*/ user._id in post.likes ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-6 h-6 text-red-500"
-                >
-                  <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                  />
-                </svg>
-              )}
-            </button>
-            <>
-              <p className="text-zinc-800 dark:text-white">{post.likesCount}</p>
-            </>
+      <div className="col-span-1 md:col-span-1 px-4 mt-3">
+        <h1 className="text-lg font-semibold leading-6 tracking-wide hover:text-green-500 cursor-pointer">
+          {post?.title}
+        </h1>
+      </div>
+      <div class="flex flex-row items-end h-full w-full px-4 mt-4">
+        <div class="flex border-t border-gray-300 w-full py-4">
+          <div class="flex items-center space-x-3 border-r border-gray-300 w-full">
+            {post.userPicturePath ? (
+              <img
+                alt="post"
+                src={post.userPicturePath}
+                className="w-11 h-11 rounded-full object-cover bg-white border-2"
+              />
+            ) : (
+              <img
+                alt="default"
+                src={AvatarProfile}
+                className="w-11 h-11 rounded-full object-cover bg-white border-2"
+              />
+            )}
+            <div class="">
+              <Link
+                key={post.user._id}
+                to={post ? `/profile/${post.user._id}` : null}
+              >
+                <p className="text-sm font-semibold tracking-wide">
+                  {post.user
+                    ? `${post?.user?.firstname} ${post?.user?.lastname}`
+                    : "undefined"}
+                </p>
+              </Link>
+              <p class="text-xs font-light tracking-wider text-gray-500">
+                {format(new Date(post?.createdAt), "dd MMMM yyyy")}
+              </p>
+            </div>
           </div>
+          <div class="flex items-center flex-shrink-0 px-2">
+            <div class="flex items-center space-x-1 text-gray-400">
+              <button
+                aria-label="add to favorites"
+                onClick={() => {
+                  likePost(post._id);
+                  //setIsLiked(!isliked);
+                }}
+                className="focus:outline-none"
+              >
+                {likeLoading ? (
+                  <div>
+                    <LoadingSpinner />
+                  </div> // Show a loader while liking
+                ) : user._id in post.likes ? (
+                  <HeartFilled />
+                ) : (
+                  <HeartOutlined />
+                )}
+              </button>
+              <p class="font-medium">{post.likesCount}</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div className="absolute right-4 top-4 hover:bg-white dark:hover:bg-zinc-600 bg-white/40 rounded-full">
+        <button
+          className="font-medium p-2 flex  rounded-full"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {post.user._id === user._id && (
+            <Dropdown
+              button={
+                <p className="cursor-pointer">
+                  <BsThreeDots />
+                </p>
+              }
+              animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
+              children={
+                <PostMenuIcon
+                  post={post}
+                  handleClickEdit={handleClickEdit}
+                  handleDeleteClick={handleDeleteClick}
+                />
+              }
+              classNames={"py-2 top-4 right-0"}
+            />
+          )}
+        </button>
+      </div>
+
+      {/*<div className="flex items-center justify-between px-4">
+        <div className="flex items-center gap-6">
           <div className="flex items-center p-2">
             <CommentButton
               post={post}
@@ -254,7 +230,7 @@ const SocialPostCard = ({
           </div>
         </div>
         <div>
-          {ownerId == post.userId ? (
+          {user._id == post.userId ? (
             ""
           ) : (
             <div className="flex items-center">
@@ -300,7 +276,7 @@ const SocialPostCard = ({
             </div>
           )}
         </div>
-      </div>
+                </div>*/}
       {openEdit && (
         <EditPostModal
           open={openEdit}

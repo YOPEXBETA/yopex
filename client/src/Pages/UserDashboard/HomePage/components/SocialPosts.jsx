@@ -6,8 +6,6 @@ import {
 } from "../../../../hooks/react-query/usePosts";
 import SocialPostCard from "../../../../Components/Cards/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
-import SocialPostSkeleton from "../../../../Components/SkeletonLoading/SocialPostSkeleton";
-import ProjectCard from "../../../../Components/Cards/ProjectCard";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const SocialPosts = () => {
@@ -44,16 +42,18 @@ const SocialPosts = () => {
           </div>
         ) : (
           posts?.map((post, index) => (
-            <SocialPostCard
-              key={post._id}
-              post={post}
-              bookmarks={bookmarksId}
-              posts={posts}
-              height={"48"}
-              width={"full"}
-              type="feed"
-              openModal={() => openModal(post)}
-            />
+            <div>
+              <SocialPostCard
+                key={post._id}
+                post={post}
+                bookmarks={bookmarksId}
+                posts={posts}
+                height={"48"}
+                width={"full"}
+                type="feed"
+                openModal={() => openModal(post)}
+              />
+            </div>
           ))
         )}
       </div>

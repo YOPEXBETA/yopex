@@ -21,6 +21,7 @@ const MainLayout = (props) => {
   const [open, setOpen] = useState(true);
   const [currentRoute, setCurrentRoute] = useState("feed");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // log the url of the current page
 
   const handleCreateClick = () => {
     setIsModalOpen(true);
@@ -50,23 +51,23 @@ const MainLayout = (props) => {
   useEffect(() => {
     if (!user) {
       dispatch(getCurrentUser()).then((response) => {
-        // Check if fetching current user was successful
+        
         if (response.payload) {
-          // Successfully fetched user, continue rendering
+         
         } else {
-          // Fetching user failed, navigate to /login
-          navigate("/login");
+          
+          navigate("/login?redirect=" + location.pathname);
         }
       });
     }
   }, [dispatch, user]);
 
-  // Render the loading state if user data is being fetched
   if (!user) {
-    return <Loader />; // Or you can render a loading component
+    return <Loader />; 
   }
 
-  // Render the main layout once user data is available
+  const isChatRoute = currentRoute?.toLowerCase() === "chat"  || false;
+
   return (
     <div>
       <div className="flex h-full w-full">
@@ -77,7 +78,7 @@ const MainLayout = (props) => {
           handleCreateClick={handleCreateClick}
           closeCreateMenuModal={closeCreateMenuModal}
         />
-        <div className="h-full w-full bg-lightPrimary dark:!bg-zinc-900">
+        <div className="h-full w-full bg-white dark:!bg-zinc-900">
           <main
             className={`h-full flex-none transition-all  ${
               matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[313px]"
@@ -85,11 +86,16 @@ const MainLayout = (props) => {
           >
             <div className="h-full">
               <Navbar
+                
                 onOpenSidenav={() => setOpen(true)}
                 brandText={currentRoute}
                 {...rest}
               />
-              <div className="pt-10 md:mx-6 mx-0 mb-auto h-full min-h-[100vh] p-2">
+              <div
+                className={`mb-auto min-h-[90vh] ${
+                  isChatRoute ? "" : " mt-4 md:mx-6 md:p-2"
+                }`}
+              >
                 <Outlet />
               </div>
             </div>

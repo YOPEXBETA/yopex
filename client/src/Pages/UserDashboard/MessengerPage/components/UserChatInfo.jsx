@@ -1,6 +1,9 @@
 import React from "react";
+import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
+import { useNavigate } from "react-router-dom";
 
 const UserChatInfo = ({ otherUser }) => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="flex items-center justify-between w-full p-3">
@@ -61,18 +64,34 @@ const UserChatInfo = ({ otherUser }) => {
           <button
             type="button"
             className="content-center block w-32 h-32 p-1 overflow-hidden text-center rounded-full focus:outline-none"
+            onclick={() => {
+              navigate(`/profile/${otherUser._id}`);
+            }}
           >
-            <img
-              className="content-center object-cover w-full h-full border-2 border-gray-200 rounded-full"
-              src={otherUser.picturePath}
-              alt=""
-            />
+            {otherUser?.companyLogo || otherUser.picturePath ? (
+              <img
+                src={
+                  otherUser.companyLogo
+                    ? otherUser.companyLogo
+                    : otherUser.picturePath
+                }
+                alt="User Avatar"
+                className="content-center object-cover w-full h-full border-2 border-gray-200 rounded-full"
+              />
+            ) : (
+              <img
+                src={AvatarProfile}
+                alt="Default Avatar"
+                className="content-center object-cover w-full h-full border-2 border-gray-200 rounded-full"
+              />
+            )}
           </button>
         </div>
         <p className="text-lg font-semibold text-center text-gray-800 dark:text-white">
-          {otherUser.firstname}
+          {otherUser.companyName
+            ? otherUser.companyName
+            : otherUser.firstname + " " + otherUser.lastname}
         </p>
-        <p className="text-sm font-medium text-center text-blue-500">online</p>
       </div>
       <div className="flex items-center w-full px-3 mt-6">
         <div className="px-2 text-gray-500 rounded-full hover:text-gray-600">
@@ -90,39 +109,43 @@ const UserChatInfo = ({ otherUser }) => {
           </svg>
         </div>
         <div className="ml-4">
-          <div className="mr-auto text-sm font-semibold text-gray-800">
-            25 y.o traveler
-          </div>
           <div className="mt-1 mr-auto text-sm font-semibold leading-none text-gray-600">
             Bio
+          </div>
+          <div className="mr-auto text-sm font-semibold dark:text-white">
+            {otherUser.companyDescription || "N/A"
+              ? otherUser.companyDescription || "N/A"
+              : otherUser.userDescription || "N/A"}
           </div>
         </div>
       </div>
       <div>
-        <div className="flex items-center w-full px-3 mt-4">
-          <div className="px-2 text-gray-500 rounded-full hover:text-gray-600">
-            <svg
-              className="w-6 h-6 text-gray-600 fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill-rule="nonzero"
-                d="M12,1 C18.0751322,1 23,5.92486775 23,12 C23,15.2534621 21.3575416,17.4078375 19.0415827,17.5042247 C17.5448049,17.5665187 16.2418767,16.729824 15.5433162,15.3661459 C14.6550197,16.3039294 13.3958222,16.8888889 12,16.8888889 C9.29994122,16.8888889 7.11111111,14.7000588 7.11111111,12 C7.11111111,9.29994122 9.29994122,7.11111111 12,7.11111111 C13.1311057,7.11111111 14.1724943,7.49523561 15.000833,8.14015176 L15,8 C15,7.44771525 15.4477153,7 16,7 C16.5128358,7 16.9355072,7.38604019 16.9932723,7.88337887 L17,8 L17,13 C17,14.5880914 17.9057778,15.5497641 18.9584173,15.5059546 C20.0913022,15.4588053 21,14.2668872 21,12 C21,7.02943725 16.9705627,3 12,3 C7.02943725,3 3,7.02943725 3,12 C3,16.9705627 7.02943725,21 12,21 C12.7993259,21 13.583948,20.8960375 14.3403366,20.6929627 C14.8737319,20.549757 15.4222254,20.8660682 15.5654311,21.3994635 C15.7086368,21.9328588 15.3923256,22.4813523 14.8589303,22.624558 C13.9337959,22.8729377 12.9748353,23 12,23 C5.92486775,23 1,18.0751322 1,12 C1,5.92486775 5.92486775,1 12,1 Z M12,9.11111111 C10.4045107,9.11111111 9.11111111,10.4045107 9.11111111,12 C9.11111111,13.5954893 10.4045107,14.8888889 12,14.8888889 C13.5954893,14.8888889 14.8888889,13.5954893 14.8888889,12 C14.8888889,10.4045107 13.5954893,9.11111111 12,9.11111111 Z"
-              />
-            </svg>
-          </div>
-          <div>
-            <div className="ml-4 mr-auto text-sm font-semibold text-gray-800">
-              {otherUser.email}
+        {otherUser.email && (
+          <div className="flex items-center w-full px-3 mt-4">
+            <div className="px-2 text-gray-500 rounded-full hover:text-gray-600">
+              <svg
+                className="w-6 h-6 text-gray-600 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill-rule="nonzero"
+                  d="M12,1 C18.0751322,1 23,5.92486775 23,12 C23,15.2534621 21.3575416,17.4078375 19.0415827,17.5042247 C17.5448049,17.5665187 16.2418767,16.729824 15.5433162,15.3661459 C14.6550197,16.3039294 13.3958222,16.8888889 12,16.8888889 C9.29994122,16.8888889 7.11111111,14.7000588 7.11111111,12 C7.11111111,9.29994122 9.29994122,7.11111111 12,7.11111111 C13.1311057,7.11111111 14.1724943,7.49523561 15.000833,8.14015176 L15,8 C15,7.44771525 15.4477153,7 16,7 C16.5128358,7 16.9355072,7.38604019 16.9932723,7.88337887 L17,8 L17,13 C17,14.5880914 17.9057778,15.5497641 18.9584173,15.5059546 C20.0913022,15.4588053 21,14.2668872 21,12 C21,7.02943725 16.9705627,3 12,3 C7.02943725,3 3,7.02943725 3,12 C3,16.9705627 7.02943725,21 12,21 C12.7993259,21 13.583948,20.8960375 14.3403366,20.6929627 C14.8737319,20.549757 15.4222254,20.8660682 15.5654311,21.3994635 C15.7086368,21.9328588 15.3923256,22.4813523 14.8589303,22.624558 C13.9337959,22.8729377 12.9748353,23 12,23 C5.92486775,23 1,18.0751322 1,12 C1,5.92486775 5.92486775,1 12,1 Z M12,9.11111111 C10.4045107,9.11111111 9.11111111,10.4045107 9.11111111,12 C9.11111111,13.5954893 10.4045107,14.8888889 12,14.8888889 C13.5954893,14.8888889 14.8888889,13.5954893 14.8888889,12 C14.8888889,10.4045107 13.5954893,9.11111111 12,9.11111111 Z"
+                />
+              </svg>
             </div>
-            <div className="mt-1 ml-4 mr-auto text-sm font-semibold leading-none text-gray-600">
-              Email
+            <div>
+              <div className="mt-1 ml-4 mr-auto text-sm font-semibold leading-none text-gray-600">
+                Email
+              </div>
+              <div className="ml-4 mr-auto text-sm font-semibold  dark:text-white">
+                {otherUser?.email}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
       <div>
         <div className="flex items-center w-full px-3 my-4">
@@ -141,17 +164,17 @@ const UserChatInfo = ({ otherUser }) => {
             </svg>
           </div>
           <div className="ml-4">
-            <div className="mr-auto text-sm font-semibold text-gray-800">
-              +1 38594 38538
-            </div>
             <div className="mt-1 mr-auto text-sm font-semibold leading-none text-gray-600">
               Phone
+            </div>
+            <div className="mr-auto text-sm font-semibold dark:text-white">
+              {otherUser?.phoneNumber || "N/A"}
             </div>
           </div>
         </div>
       </div>
 
-      <ul className="flex flex-row items-center justify-around px-3 mb-1 list-none border-b select-none dark:text-white">
+      {/**<ul className="flex flex-row items-center justify-around px-3 mb-1 list-none border-b select-none dark:text-white">
         <li className="flex-auto px-4 mx-1 -mb-px text-center rounded-t-lg cursor-pointer last:mr-0 hover:bg-gray-200">
           <a className="block py-3 text-xs font-bold leading-normal text-blue-500 uppercase border-b-4 border-blue-500">
             Media
@@ -172,7 +195,7 @@ const UserChatInfo = ({ otherUser }) => {
             Audio
           </a>
         </li>
-      </ul>
+  </ul>*/}
     </div>
   );
 };

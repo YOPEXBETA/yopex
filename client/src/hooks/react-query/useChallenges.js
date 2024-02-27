@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
@@ -23,6 +24,7 @@ export const useEditChallenge = (challengeId) => {
       await axios.put(`${url}/challenge/update/${challengeId}`, ChallengeData);
     },
     onSuccess: () => {
+      toast.success("Challenge edited successfully");
       queryClient.invalidateQueries(["challenges"]);
     },
   });
@@ -83,12 +85,7 @@ export const useFindChallenges = (
 ) => {
   return useQuery({
     queryKey: [
-      "challenges",
-      minAmount,
-      maxAmount,
-      searchQuery,
-      skills,
-      categories,
+      "challenges",minAmount,maxAmount,searchQuery,skills,categories
     ],
     queryFn: async () => {
       let query = "";
@@ -121,6 +118,7 @@ export const useSubmitToChallenge = ({ challengeId }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["challenges", challengeId]);
+      queryClient.invalidateQueries(["submissions", challengeId]);
       toast.success("You submited to the challenge!");
     },
   });
@@ -128,24 +126,33 @@ export const useSubmitToChallenge = ({ challengeId }) => {
 
 export const useCreateChallenge = () => {
   const queryClient = useQueryClient();
-
   return useMutation(
-    async ({ companyId, challengeData, paid }) => {
-      await axios.post(
+    async ({ companyId, challengeData, paid,objective }) => {
+      const res = await axios.post(
         `${url}/challenge/add`,
-        { companyId, ...challengeData, paid },
+        { companyId, ...challengeData, paid,objective },
         {}
       );
-    },
-    {
-      onSuccess: () => {
+      console.log(res);
+      if (res.status == 200){ 
+        console.log(res.data);
+        window.location.href = res.data;
+      };
+      if (res.status == 201) {
         toast.success("Challenge created successfully");
         queryClient.invalidateQueries(["challenges"]);
-      },
-      onError: () => {
-        toast.error("Error creating challenge");
-      },
-    }
+      }
+    },
+    // {
+    //   onSuccess: (res) => {
+        
+    //     toast.success("Challenge created successfully");
+    //     queryClient.invalidateQueries(["challenges"]);
+    //   },
+    //   onError: () => {
+        
+    //   },
+    // }
   );
 };
 
@@ -226,11 +233,14 @@ export const useDeleteChallenge = () => {
 
   return useMutation({
     mutationFn: async (challengeId) => {
-      await axios.delete(`${url}/challenge/${challengeId}`);
+      return await axios.delete(`${url}/challenge/${challengeId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["challenges"] });
       toast.success("Challenge deleted successfully");
+    },
+    onError: () => {
+      toast.error("Error Deleting challenge");
     },
   });
 };
@@ -254,3 +264,75 @@ export const useEditSubmission = (challengeId, participant) => {
     },
   });
 };
+
+
+export const useStartChallenge = () => {
+  const queryClient = useQueryClient();
+  const { id: challengeId } = useParams();
+  return useMutation({
+    mutationFn: async (data) => {
+      await axios.put(`${url}/challenge/start/${challengeId}`, data);
+    },
+    onSuccess: () => {
+      toast.success("Challenge started successfully");
+      queryClient.invalidateQueries(["challenges"]);
+    },
+    onError: (data) => {
+      console.log(data);
+      if (data.response.data.message === "No users registered"){
+        toast.error("No users registered");
+      }else toast.error("Error starting challenge");
+      
+    },
+  });
+}
+
+export const useBanUser = () => {
+  const queryClient = useQueryClient();
+  const { id: challengeId } = useParams();
+  return useMutation({
+    mutationFn: async (data) => {
+      await axios.put(`${url}/challenge/ban/${challengeId}`, data);
+    },
+    onSuccess: () => {
+      toast.success("User removed successfully");
+      queryClient.invalidateQueries([
+        "challenges"
+      ]);
+    },
+    onError: () => {
+      toast.error("Error banning user");
+    },
+  });
+}
+
+export const useUnBanUser = () => {
+  const queryClient = useQueryClient();
+  const { id: challengeId } = useParams();
+  return useMutation({
+    mutationFn: async (data) => {
+      await axios.put(`${url}/challenge/unban/${challengeId}`, data);
+    },
+    onSuccess: () => {
+      toast.success("User Added successfully");
+      queryClient.invalidateQueries([
+        "challenges"
+      ]);
+    },
+    onError: () => {
+      toast.error("Error Unremoving user");
+    },
+  });
+}
+
+export const useGetChallengeSubmissions = (challengeId) => {
+  return useQuery({
+    queryKey: ["submissions", challengeId],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${url}/challenge/getChallengeSubmission/${challengeId}`
+      );
+      return data;
+    },
+  });
+}

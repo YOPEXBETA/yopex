@@ -21,9 +21,7 @@ const addBadgeType = async (req, res, next) => {
 const getBadgeType = async (req, res, next) => {
   try {
     const btype = await BadgeType.find();
-    if (!btype || btype.length === 0) {
-      throw new Error("btype not found!");
-    }
+    
     res.status(200).json(btype);
   } catch (error) {
     res.status(500).json({ message: error.message });

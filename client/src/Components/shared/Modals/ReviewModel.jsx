@@ -6,8 +6,8 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
   const [description, setDescription] = useState("");
   const { id: challengeId } = useParams();
   const [rating, setRating] = useState(1);
-  const { mutate, isError, isSuccess } = useAddReviews(participant.user._id);
-  console.log(companyId);
+  const { mutate, isError, isSuccess } = useAddReviews(participant._id);
+  
 
   const handleStarClick = (index) => {
     setRating(index + 1);
@@ -19,6 +19,7 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
       className={`absolute top-0 left-0 right-0 z-50 ${
         open ? "" : "hidden"
       } w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
+      onClick={(e)=>{e.stopPropagation()}}
     >
       
       <div className="relative m-auto mt-[10%] min-h-screen max-w-3xl z-50">
@@ -85,7 +86,7 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
                     description,
                     star: rating,
                     companyId,
-                    userId: participant.user._id,
+                    userId: participant._id,
                     challengeId,
                   });
                 }}

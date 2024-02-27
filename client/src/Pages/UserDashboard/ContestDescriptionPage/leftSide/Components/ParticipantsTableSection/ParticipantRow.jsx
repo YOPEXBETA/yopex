@@ -5,22 +5,23 @@ import ParticipantsDialogModal from "../../../../../../Components/shared/Modals/
 import ReviewModel from "../../../../../../Components/shared/Modals/ReviewModel";
 import EditSubmitModal from "../../../../../../Components/shared/Modals/EditSubmit";
 import AvatarProfile from "../../../../../../assets/images/AvatarProfile.jpg";
+import { useBanUser } from "../../../../../../hooks/react-query/useChallenges";
+import RemoveParticipantPopup from "../../../../../../Components/Popup/RemoveParticipantPopup";
 
-const ParticipantRow = ({ user, index, challenge }) => {
+const ParticipantRow = ({ user, index, challenge, isOwner }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [reviewisOpen, setreviewIsOpen] = useState(false);
   const [editisOpen, seteditIsOpen] = useState(false);
+  
+  const {mutate} = useBanUser();
   const toggleedit = () => seteditIsOpen((prev) => !prev);
   const togglereview = () => setreviewIsOpen((prev) => !prev);
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
   };
   const { user: currentUser } = useSelector((state) => state.auth);
-  const isOwner = currentUser.companies.find(
-    (company) => company === challenge.company._id
-  )
-    ? true
-    : false;
+  const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+
 
   function formatDate(dateString) {
     const options = {
@@ -31,7 +32,7 @@ const ParticipantRow = ({ user, index, challenge }) => {
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
-  const canedit = user.user._id === currentUser._id;
+  const canedit = user?.user._id === currentUser._id && challenge?.start && new Date() < new Date(challenge.deadline);
 
   return (
     <tr
@@ -40,7 +41,7 @@ const ParticipantRow = ({ user, index, challenge }) => {
       onClick={isOwner || user.user._id === currentUser._id ? toggleOpen : null}
     >
       <td className=" py-4 px-4 font-bold text-md dark:text-white">
-        {index + 1}{" "}
+        {challenge.winner === user.user._id ? ( <span>🏆</span>) : index + 1}
       </td>
       <td className="py-4 px-4">
         <div className="flex items-center">
@@ -75,10 +76,27 @@ const ParticipantRow = ({ user, index, challenge }) => {
         {" "}
         {formatDate(user?.registrationDate)}
       </td>
-      <td className="text-sm text-right py-4 px-4 dark:text-white">
+      <td className="text-sm py-4 px-4 text-center dark:text-white">
         <div>{formatDate(user?.submissionDate)}</div>
       </td>
-      {user && (
+      {isOwner && (
+        <td
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="text-lg py-4 px-4 dark:text-white cursor-pointer text-right"
+        >
+          <button
+            className="bg-red-400 hover:bg-red-700 text-white px-2 py-2 rounded w-full"
+            type="button"
+            onClick={() => {setConfirmationDialogOpen(true)}}
+          >
+            Remove
+          </button>
+          
+        </td>
+      )}
+      {/* {user && (
         <>
           <ParticipantsDialogModal
             open={isOpen}
@@ -93,7 +111,11 @@ const ParticipantRow = ({ user, index, challenge }) => {
             open={reviewisOpen}
             participant={user}
             handleClose={togglereview}
-            companyId={challenge.company._id}
+            companyId={
+              challenge?.company?._id
+                ? challenge?.company?._id
+                : challenge?.owner?._id
+            }
           />
           <EditSubmitModal
             open={editisOpen}
@@ -101,6 +123,13 @@ const ParticipantRow = ({ user, index, challenge }) => {
             participant={user}
           />
         </>
+      )} */}
+      {confirmationDialogOpen && (
+        <RemoveParticipantPopup
+          open={confirmationDialogOpen}
+          handleCancel={() => setConfirmationDialogOpen(false)}
+          handleConfirm={() => {mutate({userId: user.user?._id });setConfirmationDialogOpen(false)}}
+        />
       )}
     </tr>
   );

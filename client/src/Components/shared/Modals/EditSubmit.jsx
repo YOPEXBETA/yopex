@@ -8,6 +8,7 @@ import {
   useUserSubmission,
 } from "../../../hooks/react-query/useChallenges";
 import { axios } from "../../../axios";
+import LoadingSpinner from "../../LoadingSpinner";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
@@ -22,6 +23,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   const [links, setLinks] = useState([]);
   const { id } = useParams();
   const { data: submissions } = useUserSubmission(id, participant);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (submissions) {
@@ -74,9 +76,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
       links: links,
     });
 
-    if (isSuccess) {
-      handleClose();
-    }
+    handleClose();
   };
 
   const validFiles = [];
@@ -85,11 +85,12 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   const handleFileSelect = async (event) => {
     const files = event.target.files;
     handleFiles(files);
+    setIsUploading(true);
     for (const file of validFiles) {
       const url = await handleFileUpload(file);
-      console.log(url);
-      setFilesSelected([...filesSelected, url]);
       
+      setFilesSelected([...filesSelected, url]);
+      setIsUploading(false);
     }
   };
 
@@ -109,9 +110,10 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   return (
     <div
       className={`fixed inset-0 z-50 overflow-y-auto ${open ? "" : "hidden"}`}
+      onClick={(e) =>{e.stopPropagation()}}
     >
       <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-white w-full md:max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden z-50">
+        <div className="bg-white md:min-w-[75vw] md:max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden z-50">
           <div className="bg-primary p-4 text-black">
             <h5 className="text-lg font-semibold">EDIT YOUR WORK</h5>
           </div>
@@ -150,25 +152,34 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
             <div className=" items-center space-y-2 ">
               <div>
                 <input
-                  accept=".jpg,.jpeg,.png,.gif,.mp4,.avi,.zip,application/*"
+                  accept=".jpg,.jpeg,.png,.gif,.mp4,.zip,application/*"
                   type="file"
                   id="fileInput"
                   onChange={handleFileSelect}
                   multiple
                 />
+                {isUploading && <LoadingSpinner />}
               </div>
             </div>
             <div>
               <label className="block text-gray-600">Add Link</label>
               <div className="flex gap-2">
-                <input
+              <select
                   type="text"
                   name="platform"
                   placeholder="platform"
                   value={platform}
                   onChange={(e) => setPlatform(e.target.value)}
-                  className="w-[20%] border border-gray-300 rounded-md px-3 py-2 mt-1"
-                />
+                  className="w-[20%] border border-gray-300 text-gray-600 bg-white rounded-md px-3 py-2 mt-1"
+                >
+                  <option value="">Select...</option>
+                  <option value="Youtube">Youtube</option>
+                  
+                  <option value="github">Github</option>
+                  <option value="behance">behance</option>
+                  <option value="Dribbale">dribbale</option>
+                  <option value="others">others</option>
+                </select>
                 <input
                   type="text"
                   name="link"

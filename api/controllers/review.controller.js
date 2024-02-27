@@ -2,15 +2,15 @@ const reviewModel = require("../models/Review.model");
 const userModel = require("../models/user.model");
 
 const challengeModel = require("../models/Challenge.model");
+const companyModel = require("../models/company.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 const createReview = async (req, res) => {
   if (req.body.star > 10) {
     return res
       .status(400)
-      .json({ message: "Star value must be between 1 and 5" });
+      .json({ message: "Star value must be between 1 and 10" });
   }
-
   const newReview = new reviewModel({
     companyId: req.body.companyId,
     userId: req.body.userId,
@@ -18,10 +18,27 @@ const createReview = async (req, res) => {
     star: req.body.star,
     challengeId: req.body.challengeId,
   });
+  const challenge = await challengeModel.findById(req.body.challengeId);
+  if (!challenge) {
+    return res.status(404).json({ message: "Challenge not found" });
+  }
+  challenge.users.forEach((user) => {
+    console.log(user);
+    if (user.user.toString() === req.body.userId) {
+      console.log(user);
+      user.review = true;
+    }
+  });
+  challenge.save();
+  const company = await companyModel.findById(req.body.companyId);
+  if (!company) {
+    newReview.companyId = null;
+    newReview.challengeOwnerId = req.body.companyId;
+  }
+  
 
   try {
     const savedReview = await newReview.save();
-    console.log(newReview);
 
     const user = await userModel.findById(req.body.userId);
     user.score = user.score + req.body.star * 10;
@@ -39,10 +56,11 @@ const getReviews = async (req, res) => {
       .find({
         userId: new ObjectId(req.params.id),
       })
-      .populate({ path: "companyId", model: "Company" })
-      .populate({ path: "challengeId", model: "Challenge" });
+      
+      .populate({ path: "challengeOwnerId", model: "User" ,select:"firstname lastname picturePath"})
+      .populate({ path: "companyId", model: "Company" ,select:"companyName companyLogo"})
+      .populate({ path: "challengeId", model: "Challenge",select:"title"});
 
-    console.log(new ObjectId(req.params.id));
     res.status(200).json(reviews);
   } catch (error) {
     console.log(error);
@@ -55,10 +73,6 @@ const deleteReview = async (req, res) => {
       _id: req.params.id,
       userId: req.userId,
     });
-
-    console.log(req.params.id);
-    console.log(req.userId);
-    console.log(review);
 
     if (!review) {
       return res.status(404).json({ message: "Review not found" });

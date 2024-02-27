@@ -25,6 +25,7 @@ const JobSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+
     offerType: {
       type: Array,
       default: [],
@@ -36,7 +37,6 @@ const JobSchema = new mongoose.Schema(
       ref: "Company",
       required: true,
     },
-
     skills: [
       {
         type: mongoose.Schema.Types.ObjectId,

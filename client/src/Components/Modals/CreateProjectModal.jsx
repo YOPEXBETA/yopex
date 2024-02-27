@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { FaImage } from "react-icons/fa";
 import Select from "react-select";
 import { useSelector } from "react-redux";
 import { useSkills } from "../../hooks/react-query/useSkills";
@@ -14,6 +13,7 @@ import CloseIcon from "../icons/CloseIcon";
 const CreateProjectModal = ({ open, handleClose }) => {
   // Global states |  @redux/toolkit
   const { user } = useSelector((state) => state.auth);
+
 
   // Data fetching | react-query
   const { data: userProfile, isLoading } = useUserById(user._id);
@@ -39,21 +39,28 @@ const CreateProjectModal = ({ open, handleClose }) => {
   const uploadedFile = watch("files");
 
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.append("file", data.files[0]);
-    formData.append("type", "posts");
+    const result =[];
+    
+    for (var i=0; i<data.files.length; i++) {
 
-    const result = await fileUploadMutation.mutateAsync(formData);
+      const formData = new FormData();
+      formData.append("file", data.files[i]);
+      formData.append("type", "posts");
 
+      const res = await fileUploadMutation.mutateAsync(formData);
+      result.push(res.data.downloadURL);
+      
+    }
+    console.log(result);
     const selectedSkills = data.skills.map((skill) => skill.value);
 
     mutate({
       //userId: user._id,
-      userId: selectedOption,
+      //userId: selectedOption,
       title: data.title,
       description: data.description,
       skills: selectedSkills,
-      postPicturePath: [result.data.downloadURL],
+      postPicturePath: result,
     });
     reset();
   };
@@ -83,82 +90,90 @@ const CreateProjectModal = ({ open, handleClose }) => {
           <div class="m-8 max-w-[550px] mx-auto space-y-6">
             <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-2">
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 space-y-4">
-                <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                {/*<div className="md:col-span-5">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Post As
                   </label>
-                  <select
-                    id="selectField"
-                    className="block w-full p-2 mb-4 border dark:text-white dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500"
-                    value={selectedOption}
-                    onChange={handleSelectChange}
-                  >
-                    <option value="">Share a Post as</option>
-                    <option value={user._id}>
-                      {user?.firstname} {user?.lastname}
-                    </option>
-                    {userProfile?.companies.map((option) => (
-                      <option key={option._id} value={option._id}>
-                        {option.companyName}
+                  <div className="relative my-2">
+                    <select
+                      id="selectField"
+                      className="block w-full p-2 mb-4 border dark:text-white dark:bg-zinc-700 rounded-md focus:ring focus:ring-green-500"
+                      value={selectedOption}
+                      onChange={handleSelectChange}
+                    >
+                      <option value="">Share a Post as</option>
+                      <option value={user._id}>
+                        {user?.firstname} {user?.lastname}
                       </option>
-                    ))}
-                  </select>
-                </div>
+                      {userProfile?.companies.map((option) => (
+                        <option key={option._id} value={option._id}>
+                          {option.companyName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                      </div>*/}
                 <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Project Title
                   </label>
-                  <input
-                    {...register("title", { required: true })}
-                    required={true}
-                    placeholder="Project Title"
-                    className="w-full h-10 p-2 border mt-1  rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                  />
+                  <div className="relative my-2">
+                    <input
+                      {...register("title", { required: true })}
+                      required={true}
+                      placeholder="Project Title"
+                      className="w-full h-10 p-2 border mt-1  rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                    />
+                  </div>
                 </div>
                 <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Project Description
                   </label>
-                  <textarea
-                    className="w-full h-40 p-2 border bg-white dark:text-white dark:bg-zinc-700 rounded focus:outline-none resize-none"
-                    {...register("description", { required: false })}
-                    placeholder="Tap here and start typing your project description"
-                  />
+                  <div className="relative my-2">
+                    <textarea
+                      className="w-full h-40 p-2 border bg-white dark:text-white dark:bg-zinc-700 rounded focus:outline-none resize-none"
+                      {...register("description", { required: false })}
+                      placeholder="Tap here and start typing your project description"
+                    />
+                  </div>
                 </div>
                 <div className="md:col-span-5">
-                  <label className="text-sm text-black mb-2 block dark:text-white">
+                  <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                     Select Skills
                   </label>
-                  <Controller
-                    name="skills"
-                    control={control}
-                    render={({ field: { onChange, value } }) => (
-                      <div className="w-full dark:bg-zinc-700 mt-2">
-                        <Select
-                          isMulti
-                          className="my-react-select-container"
-                          classNamePrefix="my-react-select"
-                          required={true}
-                          id="tags-outlined"
-                          options={
-                            skills
-                              ? skills?.map((skill) => ({
-                                  label: skill?.name,
-                                  value: skill,
-                                }))
-                              : []
-                          }
-                          onChange={(selectedOptions) =>
-                            onChange(selectedOptions)
-                          }
-                          value={value}
-                          placeholder="Select Skills"
-                        />
-                      </div>
-                    )}
-                  />
+                  <div className="relative my-2">
+                    <Controller
+                      name="skills"
+                      control={control}
+                      render={({ field: { onChange, value } }) => (
+                        <div className="w-full dark:bg-zinc-700 mt-2">
+                          <Select
+                            isMulti
+                            className="my-react-select-container"
+                            classNamePrefix="my-react-select"
+                            required={true}
+                            id="tags-outlined"
+                            options={
+                              skills
+                                ? skills?.map((skill) => ({
+                                    label: skill?.name,
+                                    value: skill,
+                                  }))
+                                : []
+                            }
+                            onChange={(selectedOptions) =>
+                              onChange(selectedOptions)
+                            }
+                            value={value}
+                            placeholder="Select Skills"
+                          />
+                        </div>
+                      )}
+                    />
+                  </div>
                 </div>
-                <div>
+                <div className="md:col-span-5">
                   <div className="space-y-4">
                     {uploadedFile && uploadedFile.length > 0 && (
                       <div className="mb-4">
@@ -176,61 +191,63 @@ const CreateProjectModal = ({ open, handleClose }) => {
                       </div>
                     )}
 
-                    <div className="md:col-span-5">
-                      <label className="text-sm text-black mb-2 block dark:text-white">
+                    <div>
+                      <label className="dark:text-white text-sm font-bold leading-tight tracking-normal">
                         Upload Files
                       </label>
-                      <Controller
-                        name="files"
-                        control={control}
-                        rules={{ required: false }}
-                        onChange={(value) => setValue("picture", value)}
-                        render={({ field }) => (
-                          <div className="mt-4">
-                            <div className="flex items-center justify-center w-full">
-                              <label
-                                htmlFor="dropzone-file"
-                                className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                              >
-                                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                  <svg
-                                    className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 20 16"
-                                  >
-                                    <path
-                                      stroke="currentColor"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth="2"
-                                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                    />
-                                  </svg>
-                                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                    <span className="font-semibold">
-                                      Click to upload
-                                    </span>
-                                  </p>
-                                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                                    PNG, JPG or GIF
-                                  </p>
-                                </div>
-                                <input
-                                  id="dropzone-file"
-                                  type="file"
-                                  className="hidden"
-                                  multiple
-                                  onChange={(e) =>
-                                    field.onChange(e.target.files)
-                                  }
-                                />
-                              </label>
+                      <div className="relative my-2">
+                        <Controller
+                          name="files"
+                          control={control}
+                          rules={{ required: false }}
+                          onChange={(value) => setValue("picture", value)}
+                          render={({ field }) => (
+                            <div className="mt-4">
+                              <div className="flex items-center justify-center w-full">
+                                <label
+                                  htmlFor="dropzone-file"
+                                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                                >
+                                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg
+                                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 20 16"
+                                    >
+                                      <path
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                      />
+                                    </svg>
+                                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                      <span className="font-semibold">
+                                        Click to upload
+                                      </span>
+                                    </p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                                      PNG, JPG or GIF
+                                    </p>
+                                  </div>
+                                  <input
+                                    id="dropzone-file"
+                                    type="file"
+                                    className="hidden"
+                                    multiple
+                                    onChange={(e) =>
+                                      field.onChange(e.target.files)
+                                    }
+                                  />
+                                </label>
+                              </div>
                             </div>
-                          </div>
-                        )}
-                      />
+                          )}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

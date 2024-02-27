@@ -2,12 +2,10 @@ import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
+import { FaStar, FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
-
 import LoadingSkeleton from "react-loading-skeleton";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
-
 import {
   useFollowUser,
   useUserById,
@@ -18,6 +16,7 @@ import HighlightSection from "./HighlightSection/HighlightSection";
 import getIconByPlatform from "../../../../utils/getIconByPlatform";
 import Card from "../../../../Components/Cards";
 import Tag from "../../../../Components/tags/Index";
+import { useCreateConversation } from "../../../../hooks/react-query/useConversations";
 
 const UserProfileCard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -26,6 +25,7 @@ const UserProfileCard = () => {
   const { data: userProfile, isLoading: userLoading } = useUserById(userId);
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
+  const { mutate: contact } = useCreateConversation(user._id);
   const selectedPlatforms = userProfile?.socialMediaLinks?.filter(
     (link) => link?.url
   );
@@ -122,7 +122,7 @@ const UserProfileCard = () => {
             </button>
           </div>
 
-          <div className="w-full">
+          <div className="w-full ">
             {userId === user._id ? (
               <a href="/settings" className="block">
                 <button className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-3 px-4 rounded-full w-full text-white">
@@ -130,31 +130,41 @@ const UserProfileCard = () => {
                 </button>
               </a>
             ) : (
-              <button
-                className={
-                  userProfile.followers.includes(user._id)
-                    ? "cursor-pointer capitalize font-medium hover:scale-105 border border-zinc-600 py-3 px-4 rounded-full w-full text-zinc-600 dark:text-white dark:border-white"
-                    : "cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-3 px-4 rounded-full w-full text-white"
-                }
-                onClick={mutate}
-                sx={{ height: "2rem" }}
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <div>
-                    <LoadingSpinner />
-                  </div>
-                ) : userProfile.followers.includes(user._id) ? (
-                  "Unfollow"
-                ) : (
-                  "Follow"
-                )}
-              </button>
+              <div className="flex flex-col items-center gap-2">
+                <button
+                  className={
+                    userProfile.followers.includes(user._id)
+                      ? "cursor-pointer capitalize font-medium hover:scale-105 border border-zinc-600 py-3 px-4 rounded-full w-full text-zinc-600 dark:text-white dark:border-white"
+                      : "cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-3 px-4 rounded-full w-full text-white"
+                  }
+                  onClick={mutate}
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <div>
+                      <LoadingSpinner />
+                    </div>
+                  ) : userProfile.followers.includes(user._id) ? (
+                    "Unfollow"
+                  ) : (
+                    "Follow"
+                  )}
+                </button>
+
+                <button
+                  onClick={() =>
+                    contact({ senderId: user._id, receiverId: userId })
+                  }
+                  className="cursor-pointer capitalize hover:scale-105 bg-green-100 text-green-500 border-green-500 border-[1px] font-medium py-3 px-4 rounded-full w-full"
+                >
+                  Contact Me
+                </button>
+              </div>
             )}
           </div>
 
           <div className="w-full">
-            <HighlightSection />
+            <HighlightSection challengesDone={userProfile?.challengesDone} />
           </div>
           <hr className="border w-full" />
 
