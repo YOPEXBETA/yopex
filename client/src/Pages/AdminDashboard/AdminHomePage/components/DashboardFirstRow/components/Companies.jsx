@@ -4,15 +4,12 @@ import { MdBusiness } from "react-icons/md";
 import { useQuery } from "react-query";
 
 const Companies = () => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
+
   const { data } = useQuery({
     queryKey: ["companies"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "https://yopex-api.tabaani.co/admin/Companies",
-        {
-          
-        }
-      );
+      const { data } = await axios.get(`${url}/admin/Companies`);
       return data;
     },
   });

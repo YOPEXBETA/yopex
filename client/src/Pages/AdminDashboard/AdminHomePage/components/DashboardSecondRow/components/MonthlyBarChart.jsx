@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { useQuery } from "react-query";
 
+const url = process.env.REACT_APP_API_ENDPOINT;
+
 const MONTHS = [
   "Jan",
   "Feb",
@@ -57,9 +59,7 @@ const MonthlyBarChart = () => {
   const { data } = useQuery({
     queryKey: ["challenges"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "https://yopex-api.tabaani.co/challenge/challenges",
-      );
+      const { data } = await axios.get(`${url}/challenge/challenges`);
       return data;
     },
   });

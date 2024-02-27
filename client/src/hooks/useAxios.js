@@ -3,7 +3,7 @@ import axios from "axios";
 axios.interceptors.request.use(
   (config) => {
     // add base url
-    config.baseURL = "https://yopex-api.tabaani.co";
+    config.baseURL = "https://api.yopexhub.com";
     const token = localStorage.getItem("accessToken");
     if (token) {
       config.headers["Authorization"] = "token " + token;

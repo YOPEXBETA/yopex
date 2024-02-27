@@ -17,7 +17,7 @@ passport.use(
       callbackURL:
         process.env.NODE_ENV === "development"
           ? "http://localhost:8000/auth/google/callback"
-          : "https://yopex-api.tabaani.co/auth/google/callback",
+          : "https://api.yopexhub.com/auth/google/callback",
     },
 
     async (accessToken, refreshToken, profile, cb) => {

@@ -25,64 +25,9 @@ import {
 } from "../../../../../../hooks/react-query/useJobs";
 
 const Appliers = ({ toggleOpen, job, open }) => {
-  // const [appliers, setAppliers] = useState([]);
-  // const [acceptedAppliers, setAcceptedAppliers] = useState([]);
-  // const [sort, setSort] = useState(false);
-
   const { data: appliers } = useAppliers(job);
   const { data: acceptedAppliers } = useAcceptedAppliers(job);
   const { mutate } = useAcceptApplier(job);
-  // const { mutate: sortAppliers } = useSortAppliers(job);
-
-  // useEffect(() => {
-  //   const fetchAppliers = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `https://yopex-api.tabaani.co/job/jobs/${job._id}/appliers`
-  //       );
-  //       setAppliers(response.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchAppliers();
-  // }, [jobId]);
-
-  // useEffect(() => {
-  //   // Load accepted appliers from local storage or from a server API
-  //   const loadAcceptedAppliers = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `https://yopex-api.tabaani.co/job/jobs/${jobId}/accepted-appliers`
-  //       );
-  //       setAcceptedAppliers(response.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   loadAcceptedAppliers();
-  // }, [jobId]);
-
-  // const acceptApplier = async (userId) => {
-  //   try {
-  //     const response = await axios.put(
-  //       `https://yopex-api.tabaani.co/job/jobs/${jobId}/appliers/${userId}/accept`
-  //     );
-  //     console.log(response.data.message);
-  //     setAcceptedAppliers([...acceptedAppliers, userId]);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // const isApplierAccepted = (userId) => {
-  //   return acceptedAppliers.includes(userId);
-  // };
-
-  // const handleClick = () => {
-  //   setSort(true);
-  //   // sortAppliers();
-  // };
 
   return (
     <Dialog open={open} onClose={toggleOpen} fullWidth="lg">
