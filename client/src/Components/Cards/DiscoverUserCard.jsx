@@ -97,7 +97,7 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                     {option?.followings?.length || 0} Followings
                   </p>
                 </div>
-                <button
+                {/*<button
                   onClick={() =>
                     contact({
                       senderId: user._id,
@@ -107,7 +107,7 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                   className="flex-no-shrink bg-gradient-to-r from-green-400 via-green-500 to-green-600  px-5 ml-4 py-2 shadow-sm hover:shadow-lgborder-2 border-green-300 hover:border-green-500 text-white rounded-lg transition ease-in duration-300"
                 >
                   Contact me
-                </button>
+                </button>*/}
               </div>
             </div>
           </div>
