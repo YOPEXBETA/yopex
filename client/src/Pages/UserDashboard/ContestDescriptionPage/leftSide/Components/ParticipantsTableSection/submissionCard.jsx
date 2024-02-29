@@ -44,10 +44,10 @@ const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
               <h5 className="text-md font-semibold dark:text-white">
                 {item?.userId.firstname} {item?.userId.lastname}
               </h5>
-              <p className=" font-semibold text-xl text-green-500 ">{item?.title}</p>
+              <p className=" font-semibold text-xl text-green-500 ">
+                {item?.title}
+              </p>
             </div>
-
-            
 
             <div className="flex flex-wrap justify-between pb-8">
               <div className="flex items-center justify-start gap-2">

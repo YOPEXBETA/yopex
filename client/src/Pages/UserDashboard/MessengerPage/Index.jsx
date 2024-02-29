@@ -26,27 +26,13 @@ const Messenger = () => {
     selectedConversationId
   );
 
-  // useEffect(() => {
-  //   if (!conversations) return;
-  //   else {
-  //     const conn = conversations.find(
-  //       (item) => item?.conversationId === selectedConversationId
-  //     );
-
-  //     if (!conn);
-  //     else {
-  //       if (conn?.members[0]?.role === "company") {
-  //         setOtherUser(conn?.members[1]);
-  //       } else {
-  //         setOtherUser(conn?.members[0]);
-  //       }
-  //     }
-  //   }
-  // }, [selectedConversationId, conversations]);
   useEffect(() => {
     if (!currentConversation) return;
     else {
-      if (!currentConversation?.company || currentConversation?.company.user===user?._id) {
+      if (
+        !currentConversation?.company ||
+        currentConversation?.company.user === user?._id
+      ) {
         setOtherUser(currentConversation?.members[0]);
       } else {
         setOtherUser(currentConversation?.company);
@@ -63,7 +49,7 @@ const Messenger = () => {
 
   return (
     <div>
-      <div class="relative flex w-full max-h-[92vh]  overflow-hidden antialiased bg-gray-200">
+      <div class="relative flex w-full h-screen overflow-hidden antialiased bg-gray-200">
         <div class="relative flex-col hidden w-[24rem] h-full bg-white dark:bg-zinc-800 dark:text-white border-r border-gray-300 shadow-xl md:block transform transition-all duration-500 ease-in-out">
           <UsersLatestMsgs />
         </div>

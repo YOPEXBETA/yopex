@@ -6,6 +6,8 @@ import { useSubmitToChallenge } from "../../../hooks/react-query/useChallenges";
 import LoadingSpinner from "../../LoadingSpinner";
 import { axios } from "../../../axios";
 import toast from "react-hot-toast";
+import Modal from "../../Modals/index";
+import CloseIcon from "../../icons/CloseIcon";
 import Select from "react-select";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
@@ -93,114 +95,119 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
   };
 
   return (
-    <div
-      className={`fixed inset-0 z-50 overflow-auto  ${open ? "" : "hidden"}`}
+    <Modal
+      open={open}
+      onClose={handleClose}
+      className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}
     >
-      <div className="flex items-center justify-center min-h-screen ">
-        <div className="bg-white md:min-w-[75vw] md:max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden z-50">
-          <div className="bg-primary p-4 text-black">
-            <h5 className="text-lg font-semibold">SUBMIT YOUR WORK</h5>
-          </div>
-
-          <div className="p-4 md:p-6 space-y-4">
-            <div>
-              <form onSubmit={handleSubmit}>
-                <label className="block text-gray-600 mb-2">
-                  submission Title
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="submission Title"
-                  onChange={(e) => setSubmissionTitle(e.target.value)}
-                  className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 text-[#000000] bg-gray-100 mb-2"
-                  required
-                />
-
-                <label className="block text-gray-600 mb-2">
-                  Submission Description
-                </label>
-                <textarea
-                  name="description"
-                  type="text"
-                  placeholder="Submission Description"
-                  onChange={(e) => setSubmissionDescription(e.target.value)}
-                  className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 text-[#000000] bg-gray-100"
-                  required
-                  rows={6}
-                />
-              </form>
-            </div>
-            <div className=" items-center space-y-2 ">
-              <div>
-                <input
-                  accept=".jpg,.jpeg,.png,.gif,.avi,.zip,application/*"
-                  type="file"
-                  id="fileInput"
-                  name="file"
-                  onChange={handleFileSelect}
-                  multiple
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-gray-600">Add Link</label>
-              <div className="flex gap-2">
-                <select
-                  type="text"
-                  name="platform"
-                  placeholder="platform"
-                  value={platform}
-                  onChange={(e) => setPlatform(e.target.value)}
-                  className="w-[20%] border border-gray-300 text-gray-600 bg-white rounded-md px-3 py-2 mt-1"
-                >
-                  <option value="">Select...</option>
-                  <option value="Youtube">Youtube</option>
-                  
-                  <option value="github">Github</option>
-                  <option value="behance">behance</option>
-                  <option value="Dribbale">dribbale</option>
-                  <option value="others">others</option>
-                </select>
-                <input
-                  type="text"
-                  name="link"
-                  placeholder="link"
-                  value={link}
-                  onChange={(e) => setLink(e.target.value)}
-                  className="w-[70%] border border-gray-300 rounded-md px-3 py-2 mt-1"
-                />
-                <button
-                  onClick={handleAddLink}
-                  className="bg-black text-white rounded-full w-[10%] flex items-center justify-center hover:bg-green-500 hover:scale-105"
-                >
-                  <FaPlus />
-                </button>
-              </div>
-            </div>
-            {links.length > 0 &&
-              links.map((link) => {
-                return (
-                  <p key={link.link}>
-                    {" "}
-                    {link.platform} : {link.link}
-                  </p>
-                );
-              })}
-
-            {isUploading && <LoadingSpinner />}
-            <div className="flex justify-between space-x-2 mt-4">
+      <div className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}>
+        <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
+          <div className="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
+            <div className="flex justify-between px-4 pt-4">
+              <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
+                Create a submission
+              </h4>
               <button
-                type="button"
                 onClick={handleClose}
-                className="px-4 py-2 border border-gray-300 rounded-md"
+                type="button"
+                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="defaultModal"
               >
-                Cancel
+                <CloseIcon />
               </button>
+            </div>
+            <hr />
+            <div className="p-4 md:p-6 space-y-4">
+              <div>
+                <form onSubmit={handleSubmit}>
+                  <label className="block dark:text-white mb-2">
+                    submission Title
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="submission Title"
+                    onChange={(e) => setSubmissionTitle(e.target.value)}
+                    className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 dark:bg-zinc-700 bg-gray-100 mb-4 dark:text-white"
+                    required
+                  />
+
+                  <label className="block dark:text-white mb-2">
+                    Submission Description
+                  </label>
+                  <textarea
+                    name="description"
+                    type="text"
+                    placeholder="Submission Description"
+                    onChange={(e) => setSubmissionDescription(e.target.value)}
+                    className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 dark:bg-zinc-700 bg-gray-100 dark:text-white"
+                    required
+                    rows={6}
+                  />
+                </form>
+              </div>
+              <div className=" items-center space-y-2 ">
+                <div>
+                  <input
+                    accept=".jpg,.jpeg,.png,.gif,.avi,.zip,application/*"
+                    type="file"
+                    id="fileInput"
+                    name="file"
+                    onChange={handleFileSelect}
+                    multiple
+                    className="dark:text-white"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block dark:text-white mb-2">Add Link</label>
+                <div className="flex gap-2">
+                  <select
+                    type="text"
+                    name="platform"
+                    placeholder="platform"
+                    value={platform}
+                    onChange={(e) => setPlatform(e.target.value)}
+                    className="w-[20%] border border-gray-300 dark:text-white dark:bg-zinc-700 rounded-md px-3 py-2 mt-1"
+                  >
+                    <option value="">Select...</option>
+                    <option value="Youtube">Youtube</option>
+                    <option value="github">Github</option>
+                    <option value="behance">behance</option>
+                    <option value="Dribbale">dribbale</option>
+                    <option value="others">others</option>
+                  </select>
+                  <input
+                    type="text"
+                    name="link"
+                    placeholder="link"
+                    value={link}
+                    onChange={(e) => setLink(e.target.value)}
+                    className="w-[70%] border border-gray-300 rounded-md px-3 py-2 mt-1 dark:bg-zinc-700 dark:text-white"
+                  />
+                  <button
+                    onClick={handleAddLink}
+                    className="bg-black text-white rounded-lg w-[10%] flex items-center justify-center hover:bg-green-500 hover:scale-105"
+                  >
+                    <FaPlus />
+                  </button>
+                </div>
+              </div>
+              <div>
+                {links.length > 0 &&
+                  links.map((link) => {
+                    return (
+                      <p key={link.link} className="dark:text-white">
+                        {link.platform} : {link.link}
+                      </p>
+                    );
+                  })}
+              </div>
+              {isUploading && <LoadingSpinner />}
               <button
                 type="submit"
-                className="px-4 py-2  text-white rounded-md bg-black"
+                className="bg-green-500 px-5 py-3 rounded-lg w-full hover:bg-green-700 text-white"
                 onClick={handleSubmit}
                 disabled={
                   isUploading ||
@@ -210,16 +217,13 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                     : false)
                 }
               >
-                Create a Submission
+                Submit
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div
-        className={`fixed inset-0 bg-black opacity-30 ${open ? "" : "hidden"}`}
-      />
-    </div>
+    </Modal>
   );
 };
 

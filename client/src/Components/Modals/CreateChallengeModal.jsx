@@ -266,6 +266,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                       <option value={"Recrutement"}>Recrutement</option>
                       <option value={"Freelance"}>Freelance</option>
                       <option value={"Internship"}>Internship</option>
+                      <option value={"Innovation"}>Innovation</option>
                     </select>
                   </div>
                 </div>

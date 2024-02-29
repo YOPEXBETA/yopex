@@ -27,7 +27,7 @@ const UsersLatestMsgs = () => {
     },
   });
   const handleUserClick = async (otherUser) => {
-    if (selectedOption!=""){
+    if (selectedOption != "") {
       mutate({
         receiverId: user._id,
         senderId: otherUser._id,
@@ -47,7 +47,7 @@ const UsersLatestMsgs = () => {
     }
     setQuery("");
   };
-  
+
   return (
     <div>
       <div className="flex justify-between px-3 pt-1 text-white">
@@ -76,7 +76,7 @@ const UsersLatestMsgs = () => {
               type="search"
               name="q"
               value={query}
-              className="w-full py-2 pl-12 text-sm text-white bg-gray-200 border border-transparent appearance-none rounded-tg focus:bg-white focus:outline-none focus:border-green-500 focus:text-gray-900 focus:shadow-outline-blue"
+              className="w-full rounded-full py-2 pl-12 text-sm text-white bg-gray-200 border border-transparent appearance-none rounded-tg focus:bg-white focus:outline-none focus:border-green-500 focus:text-gray-900 focus:shadow-outline-blue"
               placeholder="Search..."
               autocomplete="off"
               onChange={(event) => setQuery(event.target.value)}
@@ -84,18 +84,22 @@ const UsersLatestMsgs = () => {
           </div>
         </div>
       </div>
-      {
-        userProfile?.companies.length > 0 &&
-      <Select 
-        className="px-3" 
-        classNamePrefix="my-react-select px-3"
-        options={[{value:"",label:"My Account"},...userProfile.companies?.map((company) => ({value: company._id, label: company.companyName}))]}
-        onChange={(selectedOption) => {
-          
-          setSelectedOption(selectedOption);
-        }}
-      />
-      }
+      {userProfile?.companies.length > 0 && (
+        <Select
+          className="px-3"
+          classNamePrefix="my-react-select px-3"
+          options={[
+            { value: "", label: "My Account" },
+            ...userProfile.companies?.map((company) => ({
+              value: company._id,
+              label: company.companyName,
+            })),
+          ]}
+          onChange={(selectedOption) => {
+            setSelectedOption(selectedOption);
+          }}
+        />
+      )}
       <div className="relative mt-2 mb-4 overflow-x-hidden overflow-y-auto scrolling-touch lg:max-h-sm scrollbar-w-2 scrollbar-track-gray-lighter scrollbar-thumb-rounded scrollbar-thumb-gray">
         <ul className="flex flex-col w-full h-screen px-2 select-none">
           <li className="flex flex-no-wrap items-center pr-3 text-black rounded-lg cursor-pointer mt-200 py-65">
@@ -136,7 +140,7 @@ const UsersLatestMsgs = () => {
                                           {otherUser?.firstname}
                                         </p>
                                         <p className="font-semibold dark:text-gray-200">
-                                          {otherUser?.lastname+" "}
+                                          {otherUser?.lastname + " "}
                                           {otherUser?.companyName
                                             ? `(${otherUser?.companyName})`
                                             : ""}

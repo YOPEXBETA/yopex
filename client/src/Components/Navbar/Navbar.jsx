@@ -15,7 +15,7 @@ const Navbar = (props) => {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <nav class="sticky py-2 top-0 h-[9vh] z-40 bg-white dark:bg-zinc-800 border-gray-100 border-b-[1px] dark:border-zinc-700 w-full">
+    <nav class="sticky py-[0.6rem] top-0 z-40 bg-white dark:bg-zinc-800 border-gray-100 border-b-[1px] dark:border-zinc-700 w-full">
       <div class="mx-auto  px-2 sm:px-6 lg:px-8">
         <div class="relative flex py-1 h-11 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">

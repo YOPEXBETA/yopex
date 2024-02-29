@@ -45,7 +45,7 @@ const ContentSide = ({ value, isOwner, start, isRegistered }) => {
             <div className="lg:col-span-12 md:col-span-12">
               <ChallengeConversation
                 conversationId={challengeId}
-                id={conversation.id}
+                id={conversation?.id}
               />
             </div>
           )}
