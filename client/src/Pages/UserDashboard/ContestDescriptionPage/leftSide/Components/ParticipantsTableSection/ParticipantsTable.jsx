@@ -4,12 +4,12 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useChallengeById } from "../../../../../../hooks/react-query/useChallenges";
 import ParticipantRow from "./ParticipantRow";
 
-const ParticipantsTable = () => {
+const ParticipantsTable = ({isOwner}) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
+  console.log(challenge);
   const handleChangePage = (newPage) => {
     if (newPage >= 0 && newPage <= Math.ceil(challenge.length / rowsPerPage)) {
       setPage(newPage);
@@ -53,10 +53,16 @@ const ParticipantsTable = () => {
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal  rtl:text-right text-zinc-500 dark:text-zinc-400 text-right"
+                      className="px-4 py-3.5 text-sm font-normal   text-zinc-500 dark:text-zinc-400"
                     >
                       Submission Date
                     </th>
+                    {isOwner && (<th
+                      scope="col"
+                      className="px-4 py-3.5 text-sm font-normal  rtl:text-right text-zinc-500 dark:text-zinc-400 text-right"
+                    >
+                      Status
+                    </th>)}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -69,9 +75,11 @@ const ParticipantsTable = () => {
                           index={index}
                           user={user}
                           challenge={challenge}
+                          isOwner={isOwner}
                         />
                       );
                     })}
+                    
                 </tbody>
               </table>
             </div>

@@ -30,10 +30,7 @@ export const useCreateBadge = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (badgeData) => {
-      const { data } = await axios.post(
-        "https://yopex-api.tabaani.co/badgeType/add",
-        badgeData
-      );
+      const { data } = await axios.post(`${url}/badgeType/add`, badgeData);
       return data;
     },
     onSuccess: () => {

@@ -69,12 +69,14 @@ const getCompanyChallenges = async (req, res) => {
 
 const ChallengeWinner = async (req, res) => {
   try {
-    console.log(req.body);
-    const idCompany = req.body.idCompany; // Get idChallenge from the query parameter
     const idChallenge = req.body.idChallenge; // Get idChallenge from the query parameter
     const idUser = req.body.idUser; // Get idUser from the query parameter
     const Challenge = await ChallengeModel.findById(idChallenge);
-    const company = await Company.findById(idCompany).select("-password");
+    const owner = req.userId;
+    const requestOwner = await userModel.findById(owner);
+    if ((Challenge.owner?.toString() !== owner.toString()) && (!requestOwner.companies.includes(Challenge.company.toString()))) {
+      return res.status(400).json({ message: "Not authorized" });
+    }
     const User = await userModel.findById(idUser);
     const review = await ReviewModel.findOne({
       challengeId: idChallenge,
@@ -86,16 +88,12 @@ const ChallengeWinner = async (req, res) => {
           "To be able to select this participant as the winner, you should add a review.",
       });
     }
-
-    console.log(Challenge);
-
     // get Admin account
     const AdminUser = await userModel.findOne({ role: "admin" });
     User.balance = (User.balance ? User.balance : 0) + Challenge.price * 0.9;
     AdminUser.balance =
       (AdminUser.balance ? AdminUser.balance : 0) + Challenge.price * 0.1;
 
-    company.balance = company.balance - Challenge.price;
     Challenge.winner = User._id;
     User.challengesWon = (User.challengesWon ? User.challengesWon : 0) + 1;
 
@@ -114,9 +112,7 @@ const ChallengeWinner = async (req, res) => {
     User.save();
     console.log(User);
     AdminUser.save();
-    const newCompany = await company.save();
-    console.log(newCompany);
-    res.status(200).json({ newCompany, newChallenge });
+    res.status(200).json({ newChallenge });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

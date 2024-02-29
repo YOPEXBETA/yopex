@@ -1,50 +1,44 @@
 import { useEditChallenge } from "../../../hooks/react-query/useChallenges";
 import React, { useState } from "react";
-import { Autocomplete, TextField } from "@mui/material";
 import { useCategories } from "../../../hooks/react-query/useCategories";
 import { useSkills } from "../../../hooks/react-query/useSkills";
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
 
 export const EditChallengeModal = ({ open, handleClose, challenge }) => {
   const { mutate } = useEditChallenge(challenge._id);
   const { data: Skills } = useSkills();
-  const itSkills = Skills?.map((skill) => skill.name);
   const { data: categorys } = useCategories();
-  const itCategory = categorys?.map((category) => category.name);
 
-  const [formData, setFormData] = useState({ ...challenge });
+  const {
+    handleSubmit,
+    register,
+    control,
+    setValue,
+    formState: { isSubmitting },
+  } = useForm({
+    defaultValues: {
+      category: challenge.category.map((category) => ({
+        value: category._id,
+        label: category.name,
+      })),
 
-  const handleCategoryChange = (_, value) => {
-    setFormData({
-      ...formData,
-      category: value,
-    });
-  };
+      RecommendedSkills: challenge.RecommendedSkills.map((skill) => ({
+        value: skill._id,
+        label: skill.name,
+      })),
 
-  const handleInputChange = (e, fieldName) => {
-    const { value } = e.target;
+      title: challenge.title,
+      description: challenge.description,
+      price: challenge.price,
+      nbruser: challenge.nbruser,
+    },
+  });
 
-    // Update the corresponding field in formData based on fieldName
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [fieldName]: value,
-    }));
-  };
-
-  const handleSkillsChange = (_, value) => {
-    setFormData({
-      ...formData,
-      RecommendedSkills: value,
-    });
-  };
-
-  const handleEdit = () => {
+  const handleEdit = (data) => {
+    console.log(data);
     mutate({
-      title: formData.title,
-      description: formData.description,
-      price: formData.price,
-      nbruser: formData.nbruser,
-      category: formData.category,
-      RecommendedSkills: formData.RecommendedSkills,
+      ...data,
     });
     handleClose();
   };
@@ -54,7 +48,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
       open={open}
       className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"} `}
     >
-      <div className="flex justify-center items-center min-h-screen">
+      <form className="flex justify-center items-center min-h-screen">
         <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl md:w-[40rem] p-4 h-[40rem] border  w-screen overflow-y-auto max-h-full">
           <div>
             <button
@@ -84,20 +78,16 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
               <label>Challenge Name</label>
               <input
                 className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
-                type="text"
                 placeholder="Challenge name"
-                name="title"
-                value={formData.title}
-                onChange={(e) => handleInputChange(e, "title")}
-                required
+                {...register("title", { required: true })}
               />
 
               <label>Challenge Description</label>
               <textarea
                 className="w-full h-40 p-2 border bg-white rounded focus:outline-none resize-none mb-2"
                 name="description"
-                value="Challenge description"
-                onChange={(e) => handleInputChange(e, "description")}
+                placeholder="Challenge Description"
+                {...register("description", { required: true })}
               />
 
               <label>Challenge Prize</label>
@@ -105,10 +95,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                 className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                 type="text"
                 placeholder="Challenge Prize"
-                name="price"
-                value={formData.price}
-                onChange={(e) => handleInputChange(e, "price")}
-                required
+                {...register("price", { required: true })}
               />
 
               <label>Max Challenger</label>
@@ -116,70 +103,83 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                 className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-green-500 mb-2"
                 type="text"
                 placeholder="Max Challenger"
-                name="nbruser"
-                value={formData.nbruser}
-                onChange={(e) => handleInputChange(e, "nbruser")}
+                {...register("nbruser", { required: true })}
+                min={1}
               />
-              {itCategory && (
+              {Skills && (
                 <>
-                  <label>Categories</label>
-                  <Autocomplete
-                    multiple
-                    id="tags-outlined"
-                    options={itCategory}
-                    getOptionLabel={(option) => option}
-                    value={formData.category}
-                    onChange={(_, value) => handleCategoryChange(_, value)}
-                    filterOptions={(options, state) =>
-                      options.filter((option) =>
-                        option
-                          .toLowerCase()
-                          .includes(state.inputValue.toLowerCase())
+                  <label>Skills</label>
+                  <Controller
+                    control={control}
+                    name="RecommendedSkills"
+                    render={({ field }) =>
+                      Skills && (
+                        <Select
+                          value={field.value}
+                          isMulti
+                          className="my-react-select-container mt-2"
+                          classNamePrefix="my-react-select"
+                          id="tags-outlined"
+                          options={Skills.map((skill) => ({
+                            value: skill._id,
+                            label: skill.name,
+                          }))}
+                          onBlur={field.onBlur}
+                          onChange={(selectedOptions) => {
+                            const selectedValues = selectedOptions.map(
+                              (option) => ({
+                                value: option.value,
+                                label: option.label,
+                              })
+                            );
+                            field.onChange(selectedValues);
+                          }}
+                        />
                       )
                     }
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        variant="outlined"
-                        placeholder="Update Categories"
-                      />
-                    )}
                   />
                 </>
               )}
-              {itSkills && (
+              {categorys && (
                 <>
                   <label>Recommended Skills</label>
-                  <Autocomplete
-                    className="mt-2"
-                    multiple
-                    id="tags-outlined"
-                    options={itSkills}
-                    getOptionLabel={(option) => option}
-                    value={formData.RecommendedSkills}
-                    onChange={(_, value) => handleSkillsChange(_, value)}
-                    filterOptions={(options, state) =>
-                      options.filter((option) =>
-                        option
-                          .toLowerCase()
-                          .includes(state.inputValue.toLowerCase())
+                  <Controller
+                    control={control}
+                    name="category"
+                    render={({ field }) =>
+                      categorys && (
+                        <Select
+                          value={field.value}
+                          isMulti
+                          className="my-react-select-container mt-2"
+                          classNamePrefix="my-react-select"
+                          id="tags-outlined"
+                          options={categorys.map((category) => ({
+                            value: category._id,
+                            label: category.name,
+                          }))}
+                          onBlur={field.onBlur}
+                          onChange={(selectedOptions) => {
+                            const selectedValues = selectedOptions.map(
+                              (option) => ({
+                                value: option.value,
+                                label: option.label,
+                              })
+                            );
+                            field.onChange(selectedValues);
+                          }}
+                        />
                       )
                     }
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        variant="outlined"
-                        placeholder="Update Recommended Skills"
-                      />
-                    )}
                   />
                 </>
               )}
               <div className="mt-4">
                 <button
-                  id="btn1"
                   className="px-6 py-2 text-white rounded-md w-full border-2 bg-green-500 hover:bg-green-600"
-                  onClick={handleEdit}
+                  type="submit"
+                  disabled={isSubmitting}
+                  onClick={handleSubmit(handleEdit)}
                 >
                   Edit your Challenge
                 </button>
@@ -187,7 +187,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

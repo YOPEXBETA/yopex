@@ -17,13 +17,13 @@ const Challenges = ({ challenges, isLoading }) => {
           <LoadingSpinner />
         </div>
       ) : sortedChallenges.length > 0 ? (
-        sortedChallenges.map((item) => (
+        sortedChallenges?.map((item) => (
           <div>
             <NewChallengeCard key={item._id} challenge={item} />
           </div>
         ))
       ) : (
-        <p className="dark:text-white text-lg">No Challenges found</p>
+        <p className="dark:text-white">No Challenges found</p>
       )}
     </div>
   );

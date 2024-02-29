@@ -30,6 +30,7 @@ export default function Editor({ value, onChange, height }) {
         onChange={onChange}
         modules={modules}
         style={{ height: "100%" }}
+        className="dark:text-white dark:border-white"
       />
     </div>
   );

@@ -17,10 +17,9 @@ const ChooseWinner = () => {
   const { mutate: chooseWinner} = useChooseWinner();
 
   const handleSubmit = async () => {
-    const companyId = data.company._id;
     const winnerId = selectedUser;
     
-    chooseWinner({ idChallenge: id, idCompany: companyId, idUser: winnerId })
+    chooseWinner({ idChallenge: id, idUser: winnerId })
 
     
   };

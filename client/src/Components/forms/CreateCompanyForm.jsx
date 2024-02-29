@@ -47,31 +47,47 @@ const CreateCompanyForm = ({ extra }) => {
 
     reset();
   };
+
+  const bannersData = uploadedFiledoc
+    ? Array.from(uploadedFiledoc).map((file, index) => ({
+        name: file.name,
+      }))
+    : [];
+
+  const imageData = uploadedFile
+    ? Array.from(uploadedFile).map((file, index) => ({
+        name: file.name,
+      }))
+    : [];
+
   return (
     <Card extra={`p-4 px-4 md:p-8 mb-6 ${extra}`}>
       <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-        <div className="dark:text-white">
+        <div className="dark:text-white hidden md:block">
           <p className="font-medium text-lg">Company Details</p>
           <p>Please fill out all the fields.</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-2">
-          <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+          <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 space-y-4">
             <div className="md:col-span-5">
-              <label for="Company_Name">Company Name</label>
+              <label className="text-sm text-black mb-2 block dark:text-white">
+                Company Name
+              </label>
               <input
                 {...register("name", { required: true })}
                 required={true}
                 placeholder="Company Name"
-                className="w-full h-10 p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                className="w-full h-10 p-2 border mt-1  rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
               />
             </div>
 
             <div className="md:col-span-5">
-              <label for="Company_Description">Company Description</label>
-
+              <label className="text-sm text-black mb-2 block dark:text-white">
+                Company Description
+              </label>
               <textarea
-                className="w-full h-40 p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                className="w-full h-40 p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                 {...register("description", { required: true })}
                 required={true}
                 placeholder="Company Description"
@@ -79,8 +95,6 @@ const CreateCompanyForm = ({ extra }) => {
             </div>
 
             <div className="md:col-span-5">
-              <label for="Company_Logo">Company Logo</label>
-
               <Controller
                 className="w-full"
                 name="picture"
@@ -89,14 +103,20 @@ const CreateCompanyForm = ({ extra }) => {
                 rules={{ required: true }}
                 render={({ field }) => (
                   <div>
-                    <input
-                      className="w-full p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                      aria-describedby="file_input_help"
-                      id="file_input"
-                      type="file"
-                      required={true}
-                      onChange={(e) => field.onChange(e.target.files)}
-                    />
+                    <div className="font-[sans-serif]">
+                      <label className="text-sm text-black mb-2 block dark:text-white">
+                        Company Logo
+                      </label>
+                      <input
+                        required={true}
+                        onChange={(e) => field.onChange(e.target.files)}
+                        type="file"
+                        className="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black rounded dark:bg-zinc-700 dark:text-white"
+                      />
+                      <p className="text-xs text-gray-400 mt-2">
+                        PNG, JPG SVG, and GIF are Allowed.
+                      </p>
+                    </div>
                     {uploadedFile && uploadedFile.length > 0 && (
                       <div className="mb-4">
                         {fileUploadMutation.isLoading ? (
@@ -104,24 +124,15 @@ const CreateCompanyForm = ({ extra }) => {
                             <LoadingSpinner />
                           </>
                         ) : (
-                          <p className="text-left mt-2">
-                            {uploadedFile.length}{" "}
-                            {uploadedFile.length === 1 ? "file" : "files"}{" "}
-                            selected for company logo
-                          </p>
+                          <p className="text-xs text-gray-400 mt-2"></p>
                         )}
                       </div>
-                    )}
+                    )}{" "}
                   </div>
                 )}
               />
             </div>
             <div className="md:col-span-5">
-              <label for="Company_Document">
-                Please provide company documents to verify your account
-                (optional)
-              </label>
-
               <Controller
                 name="document"
                 control={control}
@@ -129,73 +140,85 @@ const CreateCompanyForm = ({ extra }) => {
                 onChange={(value) => setValue("document", value)}
                 render={({ field }) => (
                   <div>
-                    <div className="flex items-center justify-center w-full">
+                    <div>
+                      <label className="text-sm text-black mb-2 block dark:text-white">
+                        Please provide company documents to verify your account
+                      </label>
+
+                      <input
+                        type="file"
+                        name="file"
+                        id="file"
+                        className="sr-only"
+                        onChange={(e) => field.onChange(e.target.files)}
+                      />
                       <label
-                        htmlFor="dropzone-file"
-                        title="Upload company legal document"
-                        className="w-full p-2 border mt-1 bg-gray-50 hover:bg-gray-100 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                        htmlFor="file"
+                        className="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
                       >
-                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                          <svg
-                            className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 20 16"
-                          >
-                            <path
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                            />
-                          </svg>
-                          <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                            <span className="font-semibold">
-                              Click to upload
-                            </span>
-                          </p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
-                            PDF, WORD, SVG, PNG, JPG
-                          </p>
+                        <div>
+                          <span className="mb-2 block text-xl font-semibold  dark:text-white">
+                            Drop files here
+                          </span>
+                          <span className="mb-2 block text-base font-medium text-[#6B7280]">
+                            Or
+                          </span>
+                          <span className="inline-flex rounded border hover:bg-zinc-200 dark:text-white border-[#e0e0e0] py-2 px-7 text-base font-medium">
+                            Browse
+                          </span>
                         </div>
-                        <input
-                          id="dropzone-file"
-                          type="file"
-                          className="hidden"
-                          multiple
-                          onChange={(e) => field.onChange(e.target.files)}
-                        />
                       </label>
                     </div>
-                    {uploadedFiledoc && uploadedFiledoc.length > 0 && (
-                      <div className="mb-4">
-                        {fileUploadMutation.isLoading ? (
-                          <>
-                            <LoadingSpinner />
-                          </>
-                        ) : (
-                          <p className="text-left mt-2">
-                            {uploadedFiledoc.length}{" "}
-                            {uploadedFiledoc.length === 1 ? "file" : "files"}{" "}
-                            selected for company document
-                          </p>
-                        )}
-                      </div>
-                    )}
+                    <div>
+                      {uploadedFiledoc && uploadedFiledoc.length > 0 && (
+                        <div className="mb-4">
+                          {fileUploadMutation.isLoading ? (
+                            <>
+                              <LoadingSpinner />
+                            </>
+                          ) : (
+                            <p className="text-green-600 text-left"></p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      {bannersData?.map((banner, index) => (
+                        <div
+                          key={index}
+                          className="my-5 rounded-md bg-[#F5F7FB] py-4 px-4"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="truncate pr-3 text-base font-medium text-[#07074D]">
+                              {banner.name}
+                            </span>
+                            <button className="text-[#07074D]">
+                              <svg
+                                width="10"
+                                height="10"
+                                viewBox="0 0 10 10"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              ></svg>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               />
             </div>
 
             <div className="md:col-span-2">
-              <label for="country">Country / region</label>
+              <label className="text-sm text-black mb-2 block dark:text-white">
+                Country
+              </label>
               <select
                 id="country"
                 name="country"
+                className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                 {...register("country", { required: true })}
-                className="bg-gray-50 border border-gray-300 mt-1 text-sm rounded block w-full p-2 dark:text-white dark:bg-zinc-700"
               >
                 <option value="">Choose your country</option>
                 {countryList.map((country) => (
@@ -206,30 +229,37 @@ const CreateCompanyForm = ({ extra }) => {
               </select>
             </div>
             <div className="md:col-span-3">
-              <label for="address">Address / Street</label>
+              <label className="text-sm text-black mb-2 block dark:text-white">
+                Address / Street
+              </label>
+
               <input
                 type="text"
-                className="w-full h-10 p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                 placeholder="Address"
                 {...register("address", { required: true })}
               />
             </div>
 
             <div className="md:col-span-3">
-              <label for="zipcode">Website</label>
+              <label className="text-sm text-black mb-2 dark:text-white block">
+                Website url
+              </label>
               <input
                 type="text"
-                className="w-full p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                 placeholder="Website"
-                {...register("websiteURL", { required: true })}
+                {...register("websiteURL", { required: false })}
               />
             </div>
 
             <div className="md:col-span-2">
-              <label for="zipcode">Phone Number</label>
+              <label className="text-sm text-black dark:text-white mb-2 block">
+                Phone Number
+              </label>
               <input
                 type="text"
-                className="w-full p-2 border mt-1 bg-gray-50 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
+                className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
                 placeholder="Phone Number"
                 {...register("PhoneNumber", { required: false })}
               />

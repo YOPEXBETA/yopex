@@ -28,6 +28,7 @@ const ChallengeMenuIcon = ({ challenge }) => {
   const handleConfirmDelete = () => {
     deleteChallenge(challenge._id);
     setConfirmationDialogOpen(false);
+    setIsOpen(false);
   };
 
   const handleCancelDelete = () => {

@@ -20,7 +20,6 @@ const initializeSocketIO = (httpServer) => {
   };
 
   io.on("connection", (socket) => {
-    console.log("a user connected.");
     socket.on("joinRoom", (data) => {
       socket.join(data.roomid);
     });

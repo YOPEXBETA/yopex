@@ -9,7 +9,7 @@ const Index = () => {
   const [selectedOfferType, setSelectedOfferType] = useState([]);
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-6">
       <JobSearchFilter
         setJobQuery={setJobQuery}
         setSkillQuery={setSkillQuery}

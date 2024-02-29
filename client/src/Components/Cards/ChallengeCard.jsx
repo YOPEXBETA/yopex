@@ -5,6 +5,7 @@ import getDeadlineDifference from "../getDeadlineDifference";
 import { useSelector } from "react-redux";
 import Card from "./index";
 import ChallengeMenuIcon from "../MenuIcons/ChallengeMenuIcon";
+import challengeBanner from "../../assets/images/challengeBanner.jpg";
 
 const ChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);
@@ -24,7 +25,7 @@ const ChallengeCard = ({ challenge, type, extra }) => {
           <div className="w-full xl:w-[30%]">
             <img
               className={`h-full xl:h-30 md:h-40 w-screen md:rounded-l-lg object-cover lg:block`}
-              src={challenge.company?.companyLogo}
+              src={challenge?.company?.companyLogo ? challenge?.company.companyLogo : challengeBanner}
               alt="picture"
             />
           </div>
@@ -34,7 +35,7 @@ const ChallengeCard = ({ challenge, type, extra }) => {
                 {challenge.title}
               </h5>
 
-              {user?.companies?.includes(challenge?.company._id) ? (
+              {user?.companies?.includes(challenge?.company?._id) ? (
                 <div onClick={(e) => e.preventDefault()}>
                   <ChallengeMenuIcon challenge={challenge} />
                 </div>

@@ -1,8 +1,11 @@
 import React from "react";
 import Card from "./index";
+import { format } from "date-fns";
 
 const UserInfoCard = ({ userProfile, extra }) => {
-  console.log(userProfile);
+  const isValidDate = (date) => {
+    return date instanceof Date && !isNaN(date);
+  };
   return (
     <Card extra={`w-full h-full p-6 ${extra}`}>
       {/* Header */}
@@ -41,7 +44,9 @@ const UserInfoCard = ({ userProfile, extra }) => {
         <div className="flex flex-col justify-center rounded-2xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-zinc-700 dark:shadow-none">
           <p className="text-base font-bold dark:text-white">BirthDate </p>
           <p className="text-base font-medium text-zinc-700 dark:text-white">
-            {userProfile?.birthDate || "N/A"}
+            {isValidDate(userProfile?.birthDate)
+              ? format(new Date(userProfile?.birthDate), "dd MMMM yyyy")
+              : "N/A"}
           </p>
         </div>
       </div>

@@ -4,23 +4,41 @@ const companyModel = require("./company.model");
 
 const ChallengeSchema = new mongoose.Schema(
   {
-    nbruser: { type: Number, default: 10 },
-
+    //nbruser: { type: Number, default: 10 },
+    picturePath: { type: String },
     title: { type: String, required: true },
     description: { type: String, required: true },
     totalStars: { type: Number, default: 0 },
     starNumber: { type: Number, default: 0 },
+    start: { type: Boolean, required: true, default: false },
+    verified: { type: Boolean, default: false },
+    paymentId: { type: String },
+    //enum objective
+    objective: {
+      type: String,
+      enum: ["Recrutement", "Freelance", "Internship", "Innovation"],
+      default: "Recrutement",
+    },
     category: {
-      type: Array,
-
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Category",
+        },
+      ],
       default: [],
     },
     RecommendedSkills: {
-      type: Array,
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Skill",
+        },
+      ],
       default: [],
     },
     price: { type: Number, required: false },
-    cover: { type: String },
+    //cover: { type: String },
     images: { type: [String] }, //array that include string
     deliveryTime: { type: Number },
     features: { type: [String] },
@@ -29,16 +47,28 @@ const ChallengeSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
     },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     winner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
     paid: { type: Boolean, default: false },
+    YoutubeLink: { type: String, required: false },
     users: [
       {
         user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         registrationDate: { type: Date, default: Date.now },
         submissionDate: { type: Date },
+        review: { type: Boolean, default: false },
+      },
+    ],
+    banned: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
       },
     ],
     submissions: {

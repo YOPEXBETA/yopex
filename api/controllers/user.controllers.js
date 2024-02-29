@@ -171,10 +171,13 @@ const SearchUsers = async (req, res) => {
 
     const users = await userSchema
       .find(userQuery)
-      .select("_id firstname lastname picturePath score country").limit(6);
+      .select(
+        "_id firstname lastname picturePath score country followers reviews"
+      )
+      .limit(6);
     const companies = await companySchema
       .find(companyQuery)
-      .select("_id companyName companyLogo").limit(6);
+      .select("_id companyName companyLogo user").limit(6);
 
     const results = [...users, ...companies];
 
@@ -423,6 +426,7 @@ const getsuggestedUsers = async (req, res) => {
     const users = await userSchema
       .find({ role: { $ne: "admin" } })
       .select("-password");
+
     const companies = await companySchema.find().select("-password");
 
     let suggestedUsers = [...users, ...companies].slice(0, 10);
@@ -479,13 +483,16 @@ const JoinChallenge = async (req, res) => {
   try {
     const user = await userSchema.findById(req.userId).select("-password");
     const challenge = await challengeSchema.findById(req.body.idChallenge);
-    if (challenge.users.length > challenge.nbruser) {
+    if (
+      challenge.users.length > challenge.nbruser ||
+      challenge.banned.includes(user._id.toString())
+    ) {
       return res
-        .status(400)
+        .status(200)
         .json({ message: "you cannot join this challenge" });
     }
     if (challenge.users.includes(user._id)) {
-      return res.status(400).json({ message: "User already joined challenge" });
+      return res.status(200).json({ message: "User already joined challenge" });
     }
     // Add challenge to user's challenges array
     user.challenges.push(challenge._id);
@@ -689,7 +696,7 @@ const getCurrentUser = async (req, res) => {
 
 const seeNotification = async (req, res) => {
   try {
-    userId = req.userId;
+    const userId = req.userId;
     const user = await userSchema.findById(userId).select("notifications");
     const unseenNotifications = await notificationModel.find({
       seen: false,

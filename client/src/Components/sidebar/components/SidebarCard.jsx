@@ -1,26 +1,31 @@
 import { useState } from "react";
 import PlusIcon from "../../icons/PlusIcon";
+import CustomButton from "../../CustomButton";
 
-const SidebarCard = ({ isRouteWithSpecificWidth, handleCreateClick }) => {
+const SidebarCard = ({
+  isRouteWithSpecificWidth,
+  handleCreateClick,
+  extra,
+}) => {
   return (
     <div>
       <div>
         {isRouteWithSpecificWidth ? (
-          <button
+          <CustomButton
             onClick={handleCreateClick}
             type="button"
-            className="text-white bg-gradient-to-br from-[#868CFF] via-[#432CF3] to-brand-500 focus:ring-4 focus:outline-none  hover:bg-gradient-to-b font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 "
+            extra={`p-4 ${extra}`}
           >
             <PlusIcon />
             <span className="sr-only">Create</span>
-          </button>
+          </CustomButton>
         ) : (
-          <button
+          <CustomButton
+            extra={`w-[256px] px-5 py-3 ${extra}`}
             onClick={handleCreateClick}
-            className="text-medium mt-7 block w-[256px] rounded-full bg-gradient-to-br from-[#868CFF] via-[#432CF3] to-brand-500 py-[12px] px-11 text-center text-base text-white hover:bg-gradient-to-b"
           >
             Create
-          </button>
+          </CustomButton>
         )}
       </div>
     </div>

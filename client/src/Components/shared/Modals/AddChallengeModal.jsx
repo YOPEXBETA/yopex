@@ -104,7 +104,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                 <div className="mb-2">
                   <Controller
                     control={control}
-                    name="RecommendedSkills"
+                    name="Skills"
                     defaultValue={"Any"}
                     render={({ field }) =>
                       itSkills && (
@@ -115,9 +115,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
                           getOptionLabel={(option) => option}
                           value={field.value}
                           onBlur={field.onBlur}
-                          onChange={(e, value) =>
-                            setValue("RecommendedSkills", value)
-                          }
+                          onChange={(e, value) => setValue("Skills", value)}
                           renderInput={(params) => (
                             <TextField
                               {...params}

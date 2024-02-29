@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContestsHeader from "./components/ContestsHeader";
 import { useFindChallenges } from "../../../hooks/react-query/useChallenges";
 import Challenges from "./components/Challenges";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const [contestQuery, setContestQuery] = useState("");
   const [selectedCategory, setCategoryQuery] = useState([]);
   const [selectedSkill, setSkillQuery] = useState([]);
+  //get the url param success
+  const urlParams = new URLSearchParams(window.location.search);
+  const success = urlParams.get("success");
+  const error = urlParams.get("error");
+
+  useEffect(() => {
+    if (success) {
+      toast.success("Payment successful");
+    }
+    if (error) {
+      toast.error("Payment failed");
+    }
+  }, []);
 
   const [minAmount, setMinAmount] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
@@ -21,7 +35,7 @@ const Index = () => {
   );
 
   return (
-    <div className="md:space-y-6 space-y-10">
+    <div className="flex flex-col gap-6">
       <ContestsHeader
         setContestQuery={setContestQuery}
         selectedSkill={selectedSkill}
@@ -32,19 +46,17 @@ const Index = () => {
         setCategoryQuery={setCategoryQuery}
       />
 
-      <div className="mx-auto container">
-        <div className="grid grid-cols-2 md:grid-cols-12 gap-2">
-          <div className="lg:col-span-12  col-span-12">
-            <Challenges
-              minAmount={minAmount}
-              maxAmount={maxAmount}
-              searchQuery={contestQuery}
-              selectedSkill={selectedSkill}
-              selectedCategory={selectedCategory}
-              challenges={challenges}
-              isLoading={isLoading}
-            />
-          </div>
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-2">
+        <div className="lg:col-span-12  col-span-12">
+          <Challenges
+            minAmount={minAmount}
+            maxAmount={maxAmount}
+            searchQuery={contestQuery}
+            selectedSkill={selectedSkill}
+            selectedCategory={selectedCategory}
+            challenges={challenges}
+            isLoading={isLoading}
+          />
         </div>
       </div>
     </div>

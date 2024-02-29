@@ -9,7 +9,7 @@ const Company = () => {
   };
 
   return (
-    <div>
+    <div className="mx-auto container">
       <CompanyProfileInformations changeValue={changeValue} value={value} />
       <CompanyPageContent value={value} changeValue={changeValue} />
     </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import CreateCompanyForm from "../../../Components/forms/CreateCompanyForm";
-import CreateCompanyHeader from "./components/CreateCompanyHeader";
 
 const index = () => {
   return (

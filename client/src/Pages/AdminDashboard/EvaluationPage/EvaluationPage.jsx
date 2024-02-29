@@ -9,6 +9,7 @@ const EvaluationPage = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const { data: levelsData , isloading } = useGetLevels();
+  console.log(levelsData)
 
 
   const handleChangePage = (newPage) => {
@@ -56,7 +57,7 @@ const EvaluationPage = () => {
                   </div>
                 </td>
                 <td className="py-4 px-4">
-                {levelsData?.find((level) => level.minScore <= user?.score && level.maxScore >= user?.score).name}
+                
                 </td>
                 <td className="py-4 px-4">{user.challengesDone}</td>
                 <td className="py-4 px-4">{user.challengesWon}</td>

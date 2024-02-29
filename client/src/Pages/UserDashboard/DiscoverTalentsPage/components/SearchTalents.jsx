@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import { FiSearch } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
 import {
   useSearchUsers,
   useSetquery,
 } from "../../../../hooks/react-query/useUsers";
-import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
+import { useSelector } from "react-redux";
 import SearchIcon from "../../../../Components/icons/SearchIcon";
 import CompanyIcon from "../../../../Components/icons/CompanyIcon";
 import UsersIcon from "../../../../Components/icons/UsersIcon";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
-import Card from "../../../../Components/Cards";
+import DiscoverUserCard from "../../../../Components/Cards/DiscoverUserCard";
 
 const SearchTalents = ({ extra }) => {
   const [query, setQuery] = useState("");
   const { mutate, isSuccess } = useSetquery();
+  const { user } = useSelector((state) => state.auth);
+
   const { data: suggestedUsers, isLoading } = useSearchUsers();
-  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [showTalents, setShowTalents] = useState(true);
   const [showCompanies, setShowCompanies] = useState(false);
@@ -87,48 +86,15 @@ const SearchTalents = ({ extra }) => {
           <LoadingSpinner />
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 mt-6 md:grid-cols-3 lg:grid-cols-2">
           {filteredUsers?.map((option, index) => (
-            <Card
-              extra={`p-4 ${extra}`}
-              key={option._id || index}
-              onClick={() => {
-                if (option.firstname && option.lastname) {
-                  navigate(`/profile/${option._id}`);
-                  setOpen(false);
-                } else {
-                  navigate(`/company/${option._id}`);
-                  setOpen(false);
-                }
-              }}
-            >
-              <div className="flex items-center space-x-4">
-                <img
-                  src={
-                    option.picturePath || option.companyLogo || AvatarProfile
-                  }
-                  alt={
-                    option.firstname
-                      ? `${option.firstname} ${option.lastname}`
-                      : option.companyName
-                  }
-                  className="w-12 h-12 rounded-full object-cover border"
-                />
-                <div>
-                  <span className="text-[#000000] dark:text-gray-100 font-semibold">
-                    {option.firstname
-                      ? `${option.firstname} ${option.lastname}`
-                      : option.companyName}
-                  </span>
-                </div>
-              </div>
-            </Card>
+            <DiscoverUserCard option={option} user={user} />
           ))}
         </div>
       )}
 
       {!isLoading && filteredUsers && filteredUsers.length === 0 && (
-        <div className="mt-4">
+        <div className="mt-2">
           <p className=" dark:text-white">
             {showTalents ? "No talents found." : "No companies found."}
           </p>

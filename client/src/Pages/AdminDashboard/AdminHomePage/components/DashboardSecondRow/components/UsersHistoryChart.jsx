@@ -4,15 +4,12 @@ import { useQuery } from "react-query";
 import Chart from "../../../../../../Components/Charts/Chart";
 import splineAreaChartOptions from "../../../../../../variables/splineAreaChartOptions";
 const UsersHistoryChart = () => {
+  const url = process.env.REACT_APP_API_ENDPOINT;
+
   const { data } = useQuery({
     queryKey: ["stats"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "https://yopex-api.tabaani.co/users/stats",
-        {
-          
-        }
-      );
+      const { data } = await axios.get(`${url}/users/stats`, {});
       return data;
     },
   });

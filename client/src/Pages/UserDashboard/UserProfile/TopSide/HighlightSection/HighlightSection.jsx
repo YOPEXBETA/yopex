@@ -6,7 +6,7 @@ import { useUserFollowings } from "../../../../../hooks/react-query/useUsers";
 import { useUserChallenges } from "../../../../../hooks/react-query/useUsers";
 import LoadingSpinner from "../../../../../Components/LoadingSpinner";
 
-const HighlightSection = () => {
+const HighlightSection = ({challengesDone}) => {
   const { userId } = useParams();
   const { data: followers, isLoading: followersLoading } =
     useUserFollowers(userId);
@@ -57,11 +57,11 @@ const HighlightSection = () => {
         )}
       </div>
       <div className="flex items-center gap-2 justify-between">
-        <p className="dark:text-gray-200">Completed Challenges</p>
+        <p className="dark:text-gray-200">Participated Challenges</p>
         {challengesLoading ? (
           <LoadingSpinner />
         ) : (
-          <p className="text-lg dark:text-gray-200 font-bold">{completed}</p>
+          <p className="text-lg dark:text-gray-200 font-bold">{challengesDone}</p>
         )}
       </div>
     </div>

@@ -3,10 +3,18 @@ import { useSelector } from "react-redux";
 import Card from ".";
 import { Link } from "react-router-dom";
 import ChallengeMenuIcon from "../MenuIcons/ChallengeMenuIcon";
+import challengeBanner from "../../assets/images/challengeBanner.jpg";
 
 const NewChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
+  const isOwner = user?.companies?.find(
+    (company) => company === challenge?.company?._id
+  )
+    ? true
+    : challenge?.owner === user._id
+    ? true
+    : false;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -37,16 +45,20 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
             <div className="flex justify-between">
               <div className="flex items-center gap-4">
                 <img
-                  src={challenge?.company?.companyLogo}
+                  src={
+                    challenge?.company?.companyLogo
+                      ? challenge?.company.companyLogo
+                      : challengeBanner
+                  }
                   alt="Icon"
                   className="w-16 h-16 rounded-lg object-cover border hidden md:block lg:block"
                 />
                 <p className="mt-1 font-medium dark:text-zinc-400 md:mt-2">
-                  {challenge.company.companyName}
+                  {challenge.company?.companyName}
                 </p>
               </div>
               <div className="flex items-center justify-start gap-2">
-                {user?.companies?.includes(challenge?.company._id) ? (
+                {isOwner ? (
                   <div onClick={(e) => e.preventDefault()}>
                     <ChallengeMenuIcon challenge={challenge} />
                   </div>
@@ -83,11 +95,14 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
                   <span className="bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm">
                     {challenge.price > 0 ? (
                       <div className="flex gap-1">
-                        <p className="">{challenge.price}</p>
+                        <p className="">{challenge.price} pts</p>
                       </div>
                     ) : (
-                      <p className="">Free Price</p>
+                      <p>Free</p>
                     )}
+                  </span>
+                  <span className="bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm">
+                    {challenge.objective}
                   </span>
                 </div>
               </div>
@@ -95,7 +110,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
 
             <div className="border px-4 py-3 rounded-2xl dark:bg-zinc-700">
               <p className="text-center font-bold text-lg dark:text-green-500">
-                {timeRemaining}
+                {challenge?.start ? timeRemaining : "Open"}
               </p>
             </div>
           </div>

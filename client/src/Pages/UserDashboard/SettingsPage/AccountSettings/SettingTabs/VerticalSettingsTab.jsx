@@ -7,10 +7,10 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
   return (
     <div className="flex md:flex-col">
       <button
-        className={`md:col-span-5 group relative flex items-left gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-indigo-50 ${
+        className={`md:col-span-5 group relative flex items-left gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-green-50 ${
           value === 0
-            ? "bg-indigo-300  border border-indigo-500 rounded-lg"
-            : " dark:text-indigo-500 "
+            ? "bg-green-300  border border-green-500 rounded-lg"
+            : " dark:text-green-500"
         }`}
         onClick={() => changeValue(0)}
       >
@@ -23,10 +23,10 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
       </button>
 
       <button
-        className={`md:col-span-5 group relative flex items-left gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-indigo-50 ${
+        className={`md:col-span-5 group relative flex items-left gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-green-50 ${
           value === 1
-            ? "bg-indigo-300  border border-indigo-500 rounded-lg"
-            : " dark:text-indigo-500 "
+            ? "bg-green-300  border border-green-500 rounded-lg"
+            : " dark:text-green-500"
         }`}
         onClick={() => changeValue(1)}
       >
@@ -39,10 +39,10 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
       </button>
 
       <button
-        className={`md:col-span-5 group relative flex items-left gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-indigo-50 ${
+        className={`md:col-span-5 group relative flex items-left gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-green-50 ${
           value === 2
-            ? "bg-indigo-300  border border-indigo-500 rounded-lg"
-            : " dark:text-indigo-500 "
+            ? "bg-green-300  border border-green-500 rounded-lg"
+            : " dark:text-green-500"
         }`}
         onClick={() => changeValue(2)}
       >

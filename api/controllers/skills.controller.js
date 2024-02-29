@@ -1,5 +1,5 @@
 const skills = require("../models/skill.model");
-const SocialMediaPost = require("../models/SocialMediaPost.model");
+const SocialMediaPost = require("../models/Projects.model");
 
 const createskill = async (req, res) => {
   try {

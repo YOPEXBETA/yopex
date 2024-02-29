@@ -13,7 +13,11 @@ const ReviewSchema = new mongoose.Schema(
     companyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: Company,
-      required: true,
+      required: false,
+    },
+    challengeOwnerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     description: {
       type: String,

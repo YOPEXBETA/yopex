@@ -8,6 +8,9 @@ import {
   useUserSubmission,
 } from "../../../hooks/react-query/useChallenges";
 import { axios } from "../../../axios";
+import LoadingSpinner from "../../LoadingSpinner";
+import CloseIcon from "../../icons/CloseIcon";
+import Modal from "../../Modals";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
@@ -22,6 +25,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   const [links, setLinks] = useState([]);
   const { id } = useParams();
   const { data: submissions } = useUserSubmission(id, participant);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (submissions) {
@@ -55,7 +59,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
 
     try {
       setFilesPaths((prev) => [...prev, data.data.downloadURL]);
-      
+
       return data.data.downloadURL;
     } catch (error) {
       console.log(error);
@@ -74,9 +78,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
       links: links,
     });
 
-    if (isSuccess) {
-      handleClose();
-    }
+    handleClose();
   };
 
   const validFiles = [];
@@ -85,11 +87,12 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   const handleFileSelect = async (event) => {
     const files = event.target.files;
     handleFiles(files);
+    setIsUploading(true);
     for (const file of validFiles) {
       const url = await handleFileUpload(file);
-      console.log(url);
+
       setFilesSelected([...filesSelected, url]);
-      
+      setIsUploading(false);
     }
   };
 
@@ -99,7 +102,6 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
 
       if (file.size <= maxSize) {
         validFiles.push(file);
-        
       } else {
         invalidFiles.push(file);
       }
@@ -107,19 +109,30 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   };
 
   return (
-    <div
-      className={`fixed inset-0 z-50 overflow-y-auto ${open ? "" : "hidden"}`}
+    <Modal
+      open={open}
+      className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}
     >
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-white w-full md:max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden z-50">
-          <div className="bg-primary p-4 text-black">
-            <h5 className="text-lg font-semibold">EDIT YOUR WORK</h5>
+      <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
+        <div className="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
+          <div className="flex justify-between px-4 pt-4">
+            <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
+              Edit your submission
+            </h4>
+            <button
+              onClick={handleClose}
+              type="button"
+              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              data-modal-hide="defaultModal"
+            >
+              <CloseIcon />
+            </button>
           </div>
-
+          <hr />
           <div className="p-4 md:p-6 space-y-4">
             <div>
               <form onSubmit={handleSubmit}>
-                <label className="block text-gray-600 mb-2">
+                <label className="block dark:text-white mb-2">
                   submission Title
                 </label>
                 <input
@@ -128,11 +141,11 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
                   placeholder="submission Title"
                   value={SubmissionTitle}
                   onChange={(e) => setSubmissionTitle(e.target.value)}
-                  className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 text-[#000000] bg-gray-100 mb-2"
+                  className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 text-[#000000] bg-gray-100 dark:bg-zinc-700 dark:text-white mb-4"
                   required
                 />
 
-                <label className="block text-gray-600 mb-2">
+                <label className="block dark:text-white mb-2">
                   Submission Description
                 </label>
                 <textarea
@@ -141,81 +154,91 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
                   placeholder="Submission Description"
                   value={SubmissionDescription}
                   onChange={(e) => setSubmissionDescription(e.target.value)}
-                  className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 text-[#000000] bg-gray-100"
+                  className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 text-[#000000] bg-gray-100 dark:bg-zinc-700 dark:text-white"
                   required
                   rows={6}
                 />
               </form>
             </div>
-            <div className=" items-center space-y-2 ">
+            <div className="items-center space-y-2 ">
               <div>
                 <input
-                  accept=".jpg,.jpeg,.png,.gif,.mp4,.avi,.zip,application/*"
+                  className="dark:text-white"
+                  accept=".jpg,.jpeg,.png,.gif,.mp4,.zip,application/*"
                   type="file"
                   id="fileInput"
                   onChange={handleFileSelect}
                   multiple
                 />
+                {isUploading && <LoadingSpinner />}
               </div>
             </div>
             <div>
-              <label className="block text-gray-600">Add Link</label>
+              <label className="block dark:text-white">Add Link</label>
               <div className="flex gap-2">
-                <input
+                <select
                   type="text"
                   name="platform"
                   placeholder="platform"
                   value={platform}
                   onChange={(e) => setPlatform(e.target.value)}
-                  className="w-[20%] border border-gray-300 rounded-md px-3 py-2 mt-1"
-                />
+                  className="w-[20%] border border-gray-300 dark:text-white dark:bg-zinc-700 rounded-md px-3 py-2 mt-1"
+                >
+                  <option value="">Select</option>
+                  <option value="Youtube">Youtube</option>
+                  <option value="github">Github</option>
+                  <option value="behance">behance</option>
+                  <option value="Dribbale">dribbale</option>
+                  <option value="others">others</option>
+                </select>
                 <input
                   type="text"
                   name="link"
                   placeholder="link"
                   value={link}
                   onChange={(e) => setLink(e.target.value)}
-                  className="w-[70%] border border-gray-300 rounded-md px-3 py-2 mt-1"
+                  className="w-[70%] border border-gray-300 dark:bg-zinc-700 dark:text-white rounded-md px-3 py-2 mt-1"
                 />
                 <button
                   onClick={handleAddLink}
-                  className="bg-black text-white rounded-full w-[10%] flex items-center justify-center hover:bg-green-500 hover:scale-105"
+                  className="bg-black text-white rounded-lg w-[10%] flex items-center justify-center hover:bg-green-500 hover:scale-105"
                 >
                   <FaPlus />
                 </button>
               </div>
             </div>
-            {links.length > 0 &&
-              links.map((link) => {
-                return (
-                  <p key={link.link}>
-                    {" "}
-                    {link.platform} : {link.link}
-                  </p>
-                );
-              })}
-            {filesSelected.length > 0 &&
-              filesSelected.map((file, index) => {
-                return (
-                  <p key={index}>
-                    {" "}
-                    <a href={file} target="_blank" rel="noopener noreferrer">
-                      {"file " + index}
-                    </a>
-                  </p>
-                );
-              })}
+            <p className="dark:text-white">
+              {links.length > 0 &&
+                links.map((link) => {
+                  return (
+                    <p key={link.link}>
+                      <>
+                        {link.platform} :{" "}
+                        <a className=" hover:underline" href={link.link}>
+                          {link.link}
+                        </a>
+                      </>
+                    </p>
+                  );
+                })}
+            </p>
+            <p className="dark:text-white">
+              {filesSelected.length > 0 &&
+                filesSelected.map((file, index) => {
+                  return (
+                    <p key={index}>
+                      {" "}
+                      <a href={file} target="_blank" rel="noopener noreferrer">
+                        {"file " + index}
+                      </a>
+                    </p>
+                  );
+                })}
+            </p>
             <div className="flex justify-between space-x-2 mt-4">
               <button
-                type="button"
-                onClick={handleClose}
-                className="px-4 py-2 border border-gray-300 rounded-md"
-              >
-                Cancel
-              </button>
-              <button
                 type="submit"
-                className="px-4 py-2  text-white rounded-md bg-black"
+                className="bg-green-500 px-5 py-3 rounded-lg w-full hover:bg-green-700 text-white"
                 onClick={handleSubmit}
               >
                 Edit Submission
@@ -224,10 +247,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
           </div>
         </div>
       </div>
-      <div
-        className={`fixed inset-0 bg-black opacity-30 ${open ? "" : "hidden"}`}
-      />
-    </div>
+    </Modal>
   );
 };
 

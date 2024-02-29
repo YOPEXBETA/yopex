@@ -6,7 +6,7 @@ import MyChallenges from "./Components/MyChallenges/MyChallenges";
 import Bookmarks from "./Components/Bookmarks/bookmarks";
 import UserProfileInformations from "./Components/UserInformations/UserProfileInformations";
 import BadgesPage from "./Components/Badges/BadgesPage";
-import MyPortfolio from "./Components/MyPosts/MyPortfolio";
+import MyPosts from "./Components/MyPosts/MyPosts";
 
 const ProfilePageContent = ({ changeValue, value }) => {
   return (
@@ -21,7 +21,7 @@ const ProfilePageContent = ({ changeValue, value }) => {
       {value === 1 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full pb-16 md:pb-4 ">
-            <MyPortfolio />
+            <MyPosts />
           </div>
         </div>
       )}
