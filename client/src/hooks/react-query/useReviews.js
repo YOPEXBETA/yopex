@@ -25,7 +25,7 @@ export const useAddReviews = (userId) => {
       toast.success("Review added successfully");
     },
     onError: () => {
-      toast.error("Error adding review");
+      toast.error("review already exists");
     },
   });
 };

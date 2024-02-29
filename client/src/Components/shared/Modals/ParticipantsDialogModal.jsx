@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUserSubmission } from "../../../hooks/react-query/useChallenges";
-import { FaInstagram, FaFacebook, FaYoutube, FaGithub } from "react-icons/fa";
+import { FaInstagram, FaFacebook, FaYoutube, FaGithub,FaBehance, FaDribbble } from "react-icons/fa";
 import Modal from "../../Modals";
 import CloseIcon from "../../icons/CloseIcon";
 import DocumentIcon from "../../icons/DocumentIcon";
@@ -23,14 +23,17 @@ const ParticipantsDialogModal = ({
       open={open}
       className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}
     >
-      <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
+      <div
+      onClick={(e) => {
+        e.stopPropagation();
+    }} className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
         <div className="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
           <div className="flex justify-between px-4 pt-4">
             <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
               Participant Submission
             </h4>
             <button
-              onClose={handleClose}
+              onClick={handleClose}
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="defaultModal"
@@ -62,12 +65,12 @@ const ParticipantsDialogModal = ({
                   {submissions?.description}
                 </p>
                 <div className="inline-flex flex-col w-full text-sm font-medium text-gray-900 focus:outline-none 0">
-                  {submissions.filesPaths &&
-                    submissions.filesPaths.length > 0 && (
-                      <>
+                  
                         <div className="mt-6 space-y-4">
                           <div className="flex flex-col space-y-4">
-                            <div className="flex items-center gap-4">
+                          {submissions.filesPaths.length > 0 && (
+                            <>
+                            <div className="grid items-center grid-cols-4 gap-4">
                               {submissions.filesPaths &&
                                 submissions.filesPaths.map((file, i) => (
                                   <a
@@ -75,7 +78,7 @@ const ParticipantsDialogModal = ({
                                     href={file}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-green-700 text-white px-4 py-3 hover:bg-green-900 transition duration-300 rounded-lg inline-block"
+                                    className="bg-green-700 grid-cols-1 text-white px-4 py-3 hover:bg-green-900 transition duration-300 rounded-lg inline-block"
                                   >
                                     <div className="flex items-center gap-2">
                                       <DocumentIcon />
@@ -84,9 +87,10 @@ const ParticipantsDialogModal = ({
                                   </a>
                                 ))}
                             </div>
+                            </>)}
 
-                            <div className="flex items-center gap-4">
-                              {submissions.links &&
+                            <div className="grid grid-cols-4 items-center gap-4">
+                              {
                                 submissions.links.length > 0 && (
                                   <>
                                     {submissions?.links?.map((item, i) => {
@@ -94,21 +98,21 @@ const ParticipantsDialogModal = ({
                                       let iconColor;
                                       let bgColorClass;
                                       let textColorClass;
-                                      switch (item.platform) {
-                                        case "instagram":
-                                          IconComponent = FaInstagram;
+                                      switch (item.platform.toLowerCase()) {
+                                        case "dribbble":
+                                          IconComponent = FaDribbble;
                                           iconColor = "#E1306C";
                                           bgColorClass = "bg-instagram";
                                           textColorClass =
                                             "text-instagram-text";
                                           break;
-                                        case "facebook":
-                                          IconComponent = FaFacebook;
+                                        case "behance":
+                                          IconComponent = FaBehance;
                                           iconColor = "#1877F2";
-                                          bgColorClass = "bg-facebook";
+                                          bgColorClass = "bg-behance";
                                           textColorClass = "text-facebook-text";
                                           break;
-                                        case "Youtube":
+                                        case "youtube":
                                           IconComponent = FaYoutube;
                                           iconColor = "#FF0000";
                                           bgColorClass = "bg-youtube";
@@ -120,6 +124,7 @@ const ParticipantsDialogModal = ({
                                           bgColorClass = "bg-github";
                                           textColorClass = "text-github-text";
                                           break;
+                                        
                                         default:
                                           IconComponent = null;
                                           iconColor = "#000000";
@@ -151,8 +156,7 @@ const ParticipantsDialogModal = ({
                             </div>
                           </div>
                         </div>
-                      </>
-                    )}
+                      
                 </div>
               </div>
             ) : (

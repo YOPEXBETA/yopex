@@ -47,7 +47,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
   const userId = user._id;
   const { data: userProfile, isLoading } = useUserById(userId);
 
-  const { mutate, error, isError, isSuccess } = useCreateChallenge(user);
+  const { mutate, isSuccess } = useCreateChallenge(user);
   //const fileUploadMutation = useFileUpload();
   const onSubmit = async (challengeData) => {
     console.log(challengeData);
@@ -57,6 +57,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
     } else {
       mutate({ challengeData, paid: selectedOptionpaid, objective });
     }
+    handleClose();
   };
 
   const now = new Date().toISOString().slice(0, -8);

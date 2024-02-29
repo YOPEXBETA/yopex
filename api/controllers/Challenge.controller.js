@@ -65,6 +65,7 @@ const CreateChallenge = async (req, res, next) => {
     });
     if (companyId) {
       challenge.company = owner._id;
+      challenge.owner = user._id;
     } else {
       challenge.owner = owner._id;
     }
@@ -233,8 +234,12 @@ const getChallengeUsers = async (req, res) => {
 const getChallengeUserSubmit = async (req, res) => {
   try {
     const challengeId = req.query.challengeId; // Get idChallenge from the query parameter
+    const challenge = await ChallengeModel.findById(challengeId);
     const userId = req.query.userId; // Get idUser from the query parameter
+    if (req.userId !== userId && req.userId !== challenge.owner.toString()) {
+      return res.status(400).json({ message: "Not authorized" });
 
+    }
     const submit = await submissionModel.findOne({
       challengeId: challengeId,
       userId: userId,

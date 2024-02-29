@@ -11,6 +11,7 @@ import { axios } from "../../../axios";
 import LoadingSpinner from "../../LoadingSpinner";
 import CloseIcon from "../../icons/CloseIcon";
 import Modal from "../../Modals";
+import { MdDelete } from "react-icons/md";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
@@ -45,7 +46,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   };
 
   const { user } = useSelector((state) => state.auth);
-  const { mutate, isSuccess, isLoading } = useEditSubmission(id, participant);
+  const { mutate} = useEditSubmission(id, participant);
 
   const handleFileUpload = async (file) => {
     const formData = new FormData();
@@ -107,13 +108,23 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
       }
     }
   };
+  const handelClickDeleteFile = (filex) => {
+      const newFiles = filesSelected.filter((file, i) => file !== filex);
+      setFilesSelected(newFiles);
+      const newFilesPaths = filesPaths.filter((file, i) => file !== filex);
+      setFilesPaths(newFilesPaths);
+    
+  };
 
   return (
     <Modal
       open={open}
       className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}
+
     >
-      <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
+      <div onClick={(e) => {
+            e.stopPropagation();
+        }} className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
         <div className="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
           <div className="flex justify-between px-4 pt-4">
             <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
@@ -188,7 +199,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
                   <option value="Youtube">Youtube</option>
                   <option value="github">Github</option>
                   <option value="behance">behance</option>
-                  <option value="Dribbale">dribbale</option>
+                  <option value="dribbble">dribbble</option>
                   <option value="others">others</option>
                 </select>
                 <input
@@ -231,6 +242,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
                       <a href={file} target="_blank" rel="noopener noreferrer">
                         {"file " + index}
                       </a>
+                      <MdDelete className="inline-block" onClick={()=>{handelClickDeleteFile(file)}} />
                     </p>
                   );
                 })}

@@ -27,7 +27,8 @@ const ReviewSchema = new mongoose.Schema(
     star: {
       type: Number,
       required: true,
-      enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      min: 1,
+      max: 10,
     },
     challengeId: {
       type: mongoose.Schema.Types.ObjectId,

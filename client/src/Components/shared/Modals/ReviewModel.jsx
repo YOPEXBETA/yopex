@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useAddReviews } from "../../../hooks/react-query/useReviews";
 import { useParams } from "react-router-dom";
+import Slider from "../../slider/Slider";
+import { FaStar } from "react-icons/fa";
 
 export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
   const [description, setDescription] = useState("");
   const { id: challengeId } = useParams();
   const [rating, setRating] = useState(1);
-  const { mutate, isError, isSuccess } = useAddReviews(participant._id);
+  const { mutate,isLoading } = useAddReviews(participant._id);
   
 
-  const handleStarClick = (index) => {
-    setRating(index + 1);
+  const handleStarClick = (e) => {
+    console.log(e);
+    setRating(e.target.value);
   };
 
   return (
@@ -63,7 +66,7 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
                 className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1"
               />
               <label className="block text-gray-600">Rating</label>
-              <div className="flex items-center space-x-2">
+              {/* <div className="flex items-center space-x-2">
                 {[...Array(10)].map((_, index) => (
                   <span
                     key={index}
@@ -76,7 +79,10 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
                   </span>
                 ))}
                 <p>{rating}</p>
-              </div>
+              </div> */}
+              
+              <Slider onChange={handleStarClick} rating={rating} />
+              <p className="py-1">{rating/10} <FaStar className="text-yellow-400 mb-1 inline-block  dark:text-yellow-300 w-[1.125rem] h-[1.125rem]" /></p>
             </form>
             <div className="flex items-center pt-3 border-t border-gray-200 rounded-b dark:border-gray-600">
               <button
@@ -84,13 +90,14 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
                 onClick={() => {
                   mutate({
                     description,
-                    star: rating,
+                    star: rating/10,
                     companyId,
                     userId: participant._id,
                     challengeId,
                   });
                 }}
                 className="text-white bg-green-400 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  "
+                disabled={isLoading}
               >
                 send review
               </button>

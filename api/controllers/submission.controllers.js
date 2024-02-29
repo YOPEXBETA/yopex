@@ -17,11 +17,23 @@ const CreateSubmission = async (req, res, next) => {
   });
 
   try {
+    // check if challenge is started
+    const challenge  = await ChallengeModel.findById(challengeId);
+    if (!challenge) {
+      return res.status(400).json({ message: "Challenge not found" });
+    }
+
+    if (!challenge.start){
+      return res.status(400).json({ message: "Challenge not started" });
+    }
+    if (challenge.deadline < Date.now()) {
+      return res.status(400).json({ message: "Challenge is closed" });
+    }
+    
     // Save submission to database
     const savedSubmission = await submission.save();
 
     // Add submission to challenge
-    const challenge = await ChallengeModel.findById(challengeId);
     
     const user = await User.findById(userId)
       .select("-password")

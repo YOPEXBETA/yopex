@@ -11,6 +11,13 @@ const createReview = async (req, res) => {
       .status(400)
       .json({ message: "Star value must be between 1 and 10" });
   }
+  const review = await reviewModel.findOne({
+    userId: req.body.userId,
+    challengeId: req.body.challengeId,  
+  });
+  if (review) {
+    return res.status(400).json({ message: "Review already exists" });
+  }
   const newReview = new reviewModel({
     companyId: req.body.companyId,
     userId: req.body.userId,

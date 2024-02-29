@@ -126,7 +126,7 @@ const ClientCard = ({ isRegistered, isOwner }) => {
                     )}
                   </div>
                 )}
-                <button
+                {challenge.start && (<button
                   className={`px-5 py-3 rounded-full w-full h-16 ${
                     isRegistered
                       ? "bg-green-500 text-white"
@@ -134,9 +134,10 @@ const ClientCard = ({ isRegistered, isOwner }) => {
                   }`}
                   disabled={!isRegistered}
                   onClick={toggleModal}
+
                 >
                   {isRegistered ? "Submit" : "Not Registered"}
-                </button>
+                </button>)}
               </div>
             ) : null}
           </div>
