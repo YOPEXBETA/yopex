@@ -36,6 +36,11 @@ const createReview = async (req, res) => {
       user.review = true;
     }
   });
+  challenge.users.forEach((user) => {
+    if (user.user.toString() === req.body.userId) {
+      user.star = req.body.star;
+    }
+  });
   challenge.save();
   const company = await companyModel.findById(req.body.companyId);
   if (!company) {
@@ -46,6 +51,7 @@ const createReview = async (req, res) => {
 
   try {
     const savedReview = await newReview.save();
+
 
     const user = await userModel.findById(req.body.userId);
     user.score = user.score + req.body.star * 10;

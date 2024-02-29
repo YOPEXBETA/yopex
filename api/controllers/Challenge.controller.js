@@ -131,6 +131,11 @@ const getChallengeById = async (req, res) => {
           select: "picturePath firstname lastname",
         },
       });
+      const ChallengeUsers =  challenge.users.sort((a, b) => {
+        return b.star - a.star;
+      } 
+      );
+      challenge.users = ChallengeUsers;
 
     if (!challenge) {
       return res.status(404).json({ message: "Challenge not found" });
@@ -222,9 +227,16 @@ const getChallengeUsers = async (req, res) => {
     const idChallenge = req.query.idChallenge; // Get idChallenge from the query parameter
     const ChallengePost = await ChallengeModel.findById(idChallenge).populate({
       path: "users",
-      select: "-password",
+        populate: {
+          path: "user",
+          select: "picturePath firstname lastname",
+        },
     });
-    const ChallengeUsers = ChallengePost.users;
+    // sort users with star
+    const ChallengeUsers =  ChallengePost.users.sort((a, b) => {
+      return b.star - a.star;
+    } 
+    );
     res.status(200).json(ChallengeUsers);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -398,6 +410,8 @@ const getChallengeSubmission = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+
 
 module.exports = {
   CreateChallenge,

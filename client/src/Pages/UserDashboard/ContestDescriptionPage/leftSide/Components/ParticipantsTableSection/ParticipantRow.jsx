@@ -14,8 +14,6 @@ const ParticipantRow = ({ user, index, challenge, isOwner }) => {
   const [editisOpen, seteditIsOpen] = useState(false);
   
   const {mutate} = useBanUser();
-  const toggleedit = () => seteditIsOpen((prev) => !prev);
-  const togglereview = () => setreviewIsOpen((prev) => !prev);
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
   };
@@ -41,7 +39,7 @@ const ParticipantRow = ({ user, index, challenge, isOwner }) => {
       onClick={isOwner || user.user._id === currentUser._id ? toggleOpen : null}
     >
       <td className=" py-4 px-4 font-bold text-md dark:text-white">
-        {challenge.winner === user.user._id ? ( <span>🏆</span>) : index + 1}
+        {challenge.winner === user._id ? ( <span>🏆</span>) : index + 1}
       </td>
       <td className="py-4 px-4">
         <div className="flex items-center">

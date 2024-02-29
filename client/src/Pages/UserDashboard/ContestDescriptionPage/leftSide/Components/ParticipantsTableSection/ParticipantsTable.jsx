@@ -1,24 +1,15 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useChallengeById } from "../../../../../../hooks/react-query/useChallenges";
+import { useChallengeById, useChallengeUsers } from "../../../../../../hooks/react-query/useChallenges";
 import ParticipantRow from "./ParticipantRow";
 
 const ParticipantsTable = ({isOwner}) => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
-  console.log(challenge);
-  const handleChangePage = (newPage) => {
-    if (newPage >= 0 && newPage <= Math.ceil(challenge.length / rowsPerPage)) {
-      setPage(newPage);
-    }
-  };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  
+  
+  
 
   if (challenge)
     return (
@@ -67,7 +58,6 @@ const ParticipantsTable = ({isOwner}) => {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {challenge.users
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((user, index) => {
                       return (
                         <ParticipantRow

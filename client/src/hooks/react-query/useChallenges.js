@@ -76,6 +76,21 @@ export const useUserSubmission = (challengeId, participant) => {
   });
 };
 
+export const useChallengeUsers = (challengeId) => {
+  return useQuery({
+    queryKey: ["challengeUsers", challengeId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/challenge/getChallengeUsers`, {
+        params: {
+          idChallenge: challengeId,
+        },
+      });
+      return data;
+    },
+  });
+};
+
+
 export const useFindChallenges = (
   minAmount,
   maxAmount,

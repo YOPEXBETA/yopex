@@ -63,6 +63,8 @@ const ChallengeSchema = new mongoose.Schema(
         registrationDate: { type: Date, default: Date.now },
         submissionDate: { type: Date },
         review: { type: Boolean, default: false },
+        star: { type: Number, default: 0 },
+
       },
     ],
     banned: [
