@@ -247,9 +247,9 @@ const getChallengeUserSubmit = async (req, res) => {
     const challenge = await ChallengeModel.findById(challengeId);
     const userId = req.query.userId; // Get idUser from the query parameter
 
-    if (req.userId !== userId && req.userId !== challenge.owner.toString()) {
+    /* if (req.userId !== userId && req.userId !== challenge.owner.toString()) {
       return res.status(400).json({ message: "Not authorized" });
-    }
+    }*/
 
     const submit = await submissionModel.findOne({
       challengeId: challengeId,
