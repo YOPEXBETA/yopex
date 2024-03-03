@@ -8,8 +8,7 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
   const [description, setDescription] = useState("");
   const { id: challengeId } = useParams();
   const [rating, setRating] = useState(1);
-  const { mutate,isLoading } = useAddReviews(participant._id);
-  
+  const { mutate, isLoading } = useAddReviews(participant?._id);
 
   const handleStarClick = (e) => {
     console.log(e);
@@ -22,9 +21,10 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
       className={`absolute top-0 left-0 right-0 z-50 ${
         open ? "" : "hidden"
       } w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
-      onClick={(e)=>{e.stopPropagation()}}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
     >
-      
       <div className="relative m-auto mt-[10%] min-h-screen max-w-3xl z-50">
         <div className="relative bg-white rounded-lg shadow-lg dark:bg-gray-700">
           <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
@@ -80,9 +80,12 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
                 ))}
                 <p>{rating}</p>
               </div> */}
-              
+
               <Slider onChange={handleStarClick} rating={rating} />
-              <p className="py-1">{rating/10} <FaStar className="text-yellow-400 mb-1 inline-block  dark:text-yellow-300 w-[1.125rem] h-[1.125rem]" /></p>
+              <p className="py-1">
+                {rating / 10}{" "}
+                <FaStar className="text-yellow-400 mb-1 inline-block  dark:text-yellow-300 w-[1.125rem] h-[1.125rem]" />
+              </p>
             </form>
             <div className="flex items-center pt-3 border-t border-gray-200 rounded-b dark:border-gray-600">
               <button
@@ -90,7 +93,7 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
                 onClick={() => {
                   mutate({
                     description,
-                    star: rating/10,
+                    star: rating / 10,
                     companyId,
                     userId: participant._id,
                     challengeId,

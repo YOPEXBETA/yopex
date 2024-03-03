@@ -131,11 +131,10 @@ const getChallengeById = async (req, res) => {
           select: "picturePath firstname lastname",
         },
       });
-      const ChallengeUsers =  challenge.users.sort((a, b) => {
-        return b.star - a.star;
-      } 
-      );
-      challenge.users = ChallengeUsers;
+    const ChallengeUsers = challenge.users.sort((a, b) => {
+      return b.star - a.star;
+    });
+    challenge.users = ChallengeUsers;
 
     if (!challenge) {
       return res.status(404).json({ message: "Challenge not found" });
@@ -227,16 +226,15 @@ const getChallengeUsers = async (req, res) => {
     const idChallenge = req.query.idChallenge; // Get idChallenge from the query parameter
     const ChallengePost = await ChallengeModel.findById(idChallenge).populate({
       path: "users",
-        populate: {
-          path: "user",
-          select: "picturePath firstname lastname",
-        },
+      populate: {
+        path: "user",
+        select: "picturePath firstname lastname",
+      },
     });
     // sort users with star
-    const ChallengeUsers =  ChallengePost.users.sort((a, b) => {
+    const ChallengeUsers = ChallengePost.users.sort((a, b) => {
       return b.star - a.star;
-    } 
-    );
+    });
     res.status(200).json(ChallengeUsers);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -248,10 +246,11 @@ const getChallengeUserSubmit = async (req, res) => {
     const challengeId = req.query.challengeId; // Get idChallenge from the query parameter
     const challenge = await ChallengeModel.findById(challengeId);
     const userId = req.query.userId; // Get idUser from the query parameter
+
     if (req.userId !== userId && req.userId !== challenge.owner.toString()) {
       return res.status(400).json({ message: "Not authorized" });
-
     }
+
     const submit = await submissionModel.findOne({
       challengeId: challengeId,
       userId: userId,
@@ -410,8 +409,6 @@ const getChallengeSubmission = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
-
 
 module.exports = {
   CreateChallenge,

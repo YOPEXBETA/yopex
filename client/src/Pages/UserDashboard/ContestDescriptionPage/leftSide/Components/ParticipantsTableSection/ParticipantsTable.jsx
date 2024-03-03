@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useChallengeById, useChallengeUsers } from "../../../../../../hooks/react-query/useChallenges";
+import {
+  useChallengeById,
+  useChallengeUsers,
+} from "../../../../../../hooks/react-query/useChallenges";
 import ParticipantRow from "./ParticipantRow";
 
-const ParticipantsTable = ({isOwner}) => {
+const ParticipantsTable = ({ isOwner }) => {
   const { id: challengeId } = useParams();
   const { data: challenge } = useChallengeById(challengeId);
-  
-  
-  
 
   if (challenge)
     return (
@@ -48,28 +48,28 @@ const ParticipantsTable = ({isOwner}) => {
                     >
                       Submission Date
                     </th>
-                    {isOwner && (<th
-                      scope="col"
-                      className="px-4 py-3.5 text-sm font-normal  rtl:text-right text-zinc-500 dark:text-zinc-400 text-right"
-                    >
-                      Status
-                    </th>)}
+                    {isOwner && (
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-sm font-normal  rtl:text-right text-zinc-500 dark:text-zinc-400 text-right"
+                      >
+                        Status
+                      </th>
+                    )}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {challenge.users
-                    .map((user, index) => {
-                      return (
-                        <ParticipantRow
-                          key={user._id}
-                          index={index}
-                          user={user}
-                          challenge={challenge}
-                          isOwner={isOwner}
-                        />
-                      );
-                    })}
-                    
+                  {challenge?.users?.map((user, index) => {
+                    return (
+                      <ParticipantRow
+                        key={user?._id}
+                        index={index}
+                        user={user}
+                        challenge={challenge}
+                        isOwner={isOwner}
+                      />
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

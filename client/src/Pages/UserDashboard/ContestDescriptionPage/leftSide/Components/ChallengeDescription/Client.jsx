@@ -111,7 +111,7 @@ const ClientCard = ({ isRegistered, isOwner }) => {
                   </button>
                 ) : (
                   <div>
-                    {challenge.users.length < challenge.nbruser ? (
+                    {challenge?.users?.length < challenge?.nbruser ? (
                       <button
                         onClick={handleregiser}
                         className={`px-5 py-3 rounded-full bg-green-500 h-16 text-white w-full  ${
@@ -126,18 +126,19 @@ const ClientCard = ({ isRegistered, isOwner }) => {
                     )}
                   </div>
                 )}
-                {challenge.start && (<button
-                  className={`px-5 py-3 rounded-full w-full h-16 ${
-                    isRegistered
-                      ? "bg-green-500 text-white"
-                      : "bg-gray-300 cursor-not-allowed pointer-events-none text-white truncate w-8"
-                  }`}
-                  disabled={!isRegistered}
-                  onClick={toggleModal}
-
-                >
-                  {isRegistered ? "Submit" : "Not Registered"}
-                </button>)}
+                {challenge?.start && (
+                  <button
+                    className={`px-5 py-3 rounded-full w-full h-16 ${
+                      isRegistered
+                        ? "bg-green-500 text-white"
+                        : "bg-gray-300 cursor-not-allowed pointer-events-none text-white truncate w-8"
+                    }`}
+                    disabled={!isRegistered}
+                    onClick={toggleModal}
+                  >
+                    {isRegistered ? "Submit" : "Not Registered"}
+                  </button>
+                )}
               </div>
             ) : null}
           </div>

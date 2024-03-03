@@ -20,7 +20,7 @@ const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
   const toggleedit = () => seteditIsOpen((prev) => !prev);
   const togglereview = () => setreviewIsOpen((prev) => !prev);
   const canedit =
-    user?._id === currentUser._id &&
+    user?._id === currentUser?._id &&
     challenge?.start &&
     new Date() < new Date(challenge.deadline);
 
@@ -35,14 +35,16 @@ const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
           <div className="w-full xl:w-[30%]">
             <img
               className={`h-full xl:h-30 md:h-40 w-screen md:rounded-l-lg object-cover lg:block`}
-              src={item?.userId.picturePath ? item?.userId.picturePath : Avatar}
+              src={
+                item?.userId.picturePath ? item?.userId?.picturePath : Avatar
+              }
               alt="picture"
             />
           </div>
           <div className="flex w-full flex-col justify-between xl:w-[70%] lg:px-0 px-4">
             <div className="py-4   items-center">
               <h5 className="text-md font-semibold dark:text-white">
-                {item?.userId.firstname} {item?.userId.lastname}
+                {item?.userId?.firstname} {item?.userId?.lastname}
               </h5>
               <p className=" font-semibold text-xl text-green-500 ">
                 {item?.title}
@@ -56,7 +58,7 @@ const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
                 </div>
                 <div className="flex gap-1">
                   <p className="font-bold dark:text-white">
-                    {item.filesPaths.length}
+                    {item?.filesPaths?.length}
                   </p>
                   <p className="dark:text-white">Attachment</p>
                 </div>
@@ -67,7 +69,7 @@ const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
                 </div>
                 <div className="flex gap-1">
                   <p className="font-bold dark:text-white">
-                    {item.links.length}
+                    {item?.links?.length}
                   </p>
                   <p className="dark:text-white">Links</p>
                 </div>

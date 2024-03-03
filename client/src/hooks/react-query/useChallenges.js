@@ -57,11 +57,11 @@ export const useChallengesById = (companyId) => {
 
 export const useUserSubmission = (challengeId, participant) => {
   return useQuery({
-    queryKey: ["submissions", participant._id, challengeId],
+    queryKey: ["submissions", participant?._id, challengeId],
     queryFn: async () => {
       let participantId;
-      if (participant.user === undefined) participantId = participant._id;
-      else participantId = participant.user._id;
+      if (participant?.user === undefined) participantId = participant?._id;
+      else participantId = participant?.user?._id;
       const { data } = await axios.get(
         `${url}/challenge/getChallengeUserSubmit`,
         {
@@ -90,7 +90,6 @@ export const useChallengeUsers = (challengeId) => {
   });
 };
 
-
 export const useFindChallenges = (
   minAmount,
   maxAmount,
@@ -100,7 +99,12 @@ export const useFindChallenges = (
 ) => {
   return useQuery({
     queryKey: [
-      "challenges",minAmount,maxAmount,searchQuery,skills,categories
+      "challenges",
+      minAmount,
+      maxAmount,
+      searchQuery,
+      skills,
+      categories,
     ],
     queryFn: async () => {
       let query = "";
@@ -142,30 +146,30 @@ export const useSubmitToChallenge = ({ challengeId }) => {
 export const useCreateChallenge = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async ({ companyId, challengeData, paid,objective }) => {
+    async ({ companyId, challengeData, paid, objective }) => {
       const res = await axios.post(
         `${url}/challenge/add`,
-        { companyId, ...challengeData, paid,objective },
+        { companyId, ...challengeData, paid, objective },
         {}
       );
       console.log(res);
-      if (res.status == 200){ 
+      if (res.status == 200) {
         console.log(res.data);
         window.location.href = res.data;
-      };
+      }
       if (res.status == 201) {
         toast.success("Challenge created successfully");
         queryClient.invalidateQueries(["challenges"]);
       }
-    },
+    }
     // {
     //   onSuccess: (res) => {
-        
+
     //     toast.success("Challenge created successfully");
     //     queryClient.invalidateQueries(["challenges"]);
     //   },
     //   onError: () => {
-        
+
     //   },
     // }
   );
@@ -280,7 +284,6 @@ export const useEditSubmission = (challengeId, participant) => {
   });
 };
 
-
 export const useStartChallenge = () => {
   const queryClient = useQueryClient();
   const { id: challengeId } = useParams();
@@ -294,13 +297,12 @@ export const useStartChallenge = () => {
     },
     onError: (data) => {
       console.log(data);
-      if (data.response.data.message === "No users registered"){
+      if (data.response.data.message === "No users registered") {
         toast.error("No users registered");
-      }else toast.error("Error starting challenge");
-      
+      } else toast.error("Error starting challenge");
     },
   });
-}
+};
 
 export const useBanUser = () => {
   const queryClient = useQueryClient();
@@ -311,15 +313,13 @@ export const useBanUser = () => {
     },
     onSuccess: () => {
       toast.success("User removed successfully");
-      queryClient.invalidateQueries([
-        "challenges"
-      ]);
+      queryClient.invalidateQueries(["challenges"]);
     },
     onError: () => {
       toast.error("Error banning user");
     },
   });
-}
+};
 
 export const useUnBanUser = () => {
   const queryClient = useQueryClient();
@@ -330,15 +330,13 @@ export const useUnBanUser = () => {
     },
     onSuccess: () => {
       toast.success("User Added successfully");
-      queryClient.invalidateQueries([
-        "challenges"
-      ]);
+      queryClient.invalidateQueries(["challenges"]);
     },
     onError: () => {
       toast.error("Error Unremoving user");
     },
   });
-}
+};
 
 export const useGetChallengeSubmissions = (challengeId) => {
   return useQuery({
@@ -350,4 +348,4 @@ export const useGetChallengeSubmissions = (challengeId) => {
       return data;
     },
   });
-}
+};

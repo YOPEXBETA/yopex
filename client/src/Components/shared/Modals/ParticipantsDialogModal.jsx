@@ -1,7 +1,14 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUserSubmission } from "../../../hooks/react-query/useChallenges";
-import { FaInstagram, FaFacebook, FaYoutube, FaGithub,FaBehance, FaDribbble } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebook,
+  FaYoutube,
+  FaGithub,
+  FaBehance,
+  FaDribbble,
+} from "react-icons/fa";
 import Modal from "../../Modals";
 import CloseIcon from "../../icons/CloseIcon";
 import DocumentIcon from "../../icons/DocumentIcon";
@@ -18,15 +25,18 @@ const ParticipantsDialogModal = ({
 }) => {
   const { id: challengeId } = useParams();
   const { data: submissions } = useUserSubmission(challengeId, participant);
+
   return (
     <Modal
       open={open}
       className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}
     >
       <div
-      onClick={(e) => {
-        e.stopPropagation();
-    }} className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10"
+      >
         <div className="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
           <div className="flex justify-between px-4 pt-4">
             <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
@@ -65,98 +75,95 @@ const ParticipantsDialogModal = ({
                   {submissions?.description}
                 </p>
                 <div className="inline-flex flex-col w-full text-sm font-medium text-gray-900 focus:outline-none 0">
-                  
-                        <div className="mt-6 space-y-4">
-                          <div className="flex flex-col space-y-4">
-                          {submissions.filesPaths.length > 0 && (
-                            <>
-                            <div className="grid items-center grid-cols-4 gap-4">
-                              {submissions.filesPaths &&
-                                submissions.filesPaths.map((file, i) => (
-                                  <a
-                                    key={i}
-                                    href={file}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-green-700 grid-cols-1 text-white px-4 py-3 hover:bg-green-900 transition duration-300 rounded-lg inline-block"
-                                  >
-                                    <div className="flex items-center gap-2">
-                                      <DocumentIcon />
-                                      <p>{`File ${i}`}</p>
-                                    </div>
-                                  </a>
-                                ))}
-                            </div>
-                            </>)}
-
-                            <div className="grid grid-cols-4 items-center gap-4">
-                              {
-                                submissions.links.length > 0 && (
-                                  <>
-                                    {submissions?.links?.map((item, i) => {
-                                      let IconComponent;
-                                      let iconColor;
-                                      let bgColorClass;
-                                      let textColorClass;
-                                      switch (item.platform.toLowerCase()) {
-                                        case "dribbble":
-                                          IconComponent = FaDribbble;
-                                          iconColor = "#E1306C";
-                                          bgColorClass = "bg-instagram";
-                                          textColorClass =
-                                            "text-instagram-text";
-                                          break;
-                                        case "behance":
-                                          IconComponent = FaBehance;
-                                          iconColor = "#1877F2";
-                                          bgColorClass = "bg-behance";
-                                          textColorClass = "text-facebook-text";
-                                          break;
-                                        case "youtube":
-                                          IconComponent = FaYoutube;
-                                          iconColor = "#FF0000";
-                                          bgColorClass = "bg-youtube";
-                                          textColorClass = "text-youtube-text";
-                                          break;
-                                        case "github":
-                                          IconComponent = FaGithub;
-                                          iconColor = "#181717";
-                                          bgColorClass = "bg-github";
-                                          textColorClass = "text-github-text";
-                                          break;
-                                        
-                                        default:
-                                          IconComponent = null;
-                                          iconColor = "#000000";
-                                          bgColorClass = "bg-zinc-800"; // Default background color
-                                          textColorClass = "text-white"; // Default text color
-                                      }
-                                      const linkClassName = `${bgColorClass} ${textColorClass} px-4 py-3 hover:bg-zinc-200 transition duration-300 rounded-lg inline-block`;
-                                      return (
-                                        <a
-                                          key={i}
-                                          href={item.link}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className={linkClassName}
-                                        >
-                                          <div className="flex items-center gap-2">
-                                            {IconComponent && (
-                                              <IconComponent
-                                                style={{ color: iconColor }}
-                                              />
-                                            )}
-                                            <p>{item.platform} link</p>
-                                          </div>
-                                        </a>
-                                      );
-                                    })}
-                                  </>
-                                )}
-                            </div>
+                  <div className="mt-6 space-y-4">
+                    <div className="flex flex-col space-y-4">
+                      {submissions?.filesPaths?.length > 0 && (
+                        <>
+                          <div className="grid items-center grid-cols-4 gap-4">
+                            {submissions?.filesPaths &&
+                              submissions?.filesPaths?.map((file, i) => (
+                                <a
+                                  key={i}
+                                  href={file}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="bg-green-700 grid-cols-1 text-white px-4 py-3 hover:bg-green-900 transition duration-300 rounded-lg inline-block"
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <DocumentIcon />
+                                    <p>{`File ${i}`}</p>
+                                  </div>
+                                </a>
+                              ))}
                           </div>
-                        </div>
-                      
+                        </>
+                      )}
+
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        {submissions?.links?.length > 0 && (
+                          <>
+                            {submissions?.links?.map((item, i) => {
+                              let IconComponent;
+                              let iconColor;
+                              let bgColorClass;
+                              let textColorClass;
+                              switch (item?.platform?.toLowerCase()) {
+                                case "dribbble":
+                                  IconComponent = FaDribbble;
+                                  iconColor = "#E1306C";
+                                  bgColorClass = "bg-instagram";
+                                  textColorClass = "text-instagram-text";
+                                  break;
+                                case "behance":
+                                  IconComponent = FaBehance;
+                                  iconColor = "#1877F2";
+                                  bgColorClass = "bg-behance";
+                                  textColorClass = "text-facebook-text";
+                                  break;
+                                case "youtube":
+                                  IconComponent = FaYoutube;
+                                  iconColor = "#FF0000";
+                                  bgColorClass = "bg-youtube";
+                                  textColorClass = "text-youtube-text";
+                                  break;
+                                case "github":
+                                  IconComponent = FaGithub;
+                                  iconColor = "#181717";
+                                  bgColorClass = "bg-github";
+                                  textColorClass = "text-github-text";
+                                  break;
+
+                                default:
+                                  IconComponent = null;
+                                  iconColor = "#000000";
+                                  bgColorClass = "bg-zinc-800"; // Default background color
+                                  textColorClass = "text-white"; // Default text color
+                              }
+                              const linkClassName = `${bgColorClass} ${textColorClass} px-4 py-3 hover:bg-zinc-200 transition duration-300 rounded-lg inline-block`;
+                              return (
+                                <a
+                                  key={i}
+                                  href={item?.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={linkClassName}
+                                >
+                                  <div className="flex items-center gap-2">
+                                    {IconComponent && (
+                                      <IconComponent
+                                        style={{ color: iconColor }}
+                                      />
+                                    )}
+                                    <p>{item?.platform} link</p>
+                                  </div>
+                                </a>
+                              );
+                            })}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (

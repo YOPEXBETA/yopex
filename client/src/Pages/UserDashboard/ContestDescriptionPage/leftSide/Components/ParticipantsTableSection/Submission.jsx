@@ -1,5 +1,8 @@
 import React from "react";
-import { useChallengeById, useGetChallengeSubmissions } from "../../../../../../hooks/react-query/useChallenges";
+import {
+  useChallengeById,
+  useGetChallengeSubmissions,
+} from "../../../../../../hooks/react-query/useChallenges";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import { useParams } from "react-router-dom";
 import SubmissionCard from "./submissionCard";
@@ -17,13 +20,13 @@ const Submission = ({ isOwner }) => {
         <div>
           <LoadingSpinner />
         </div>
-      ) : data.length > 0 ? (
-        data.map((item) => (
+      ) : data?.length > 0 ? (
+        data?.map((item) => (
           <SubmissionCard
-            key={item._id}
+            key={item?._id}
             item={item}
             isOwner={isOwner}
-            user={item.userId}
+            user={item?.userId}
             challenge={challenge}
           />
         ))

@@ -29,7 +29,7 @@ const ContestDetails = () => {
   useEffect(() => {
     if (!challenge) return;
     const registered = challenge.users.find(
-      (item) => item.user._id === user._id
+      (item) => item?.user?._id === user?._id
     );
     setIsRegistered(registered ? true : false);
   }, [challenge]);
@@ -63,7 +63,7 @@ const ContestDetails = () => {
               <ContentSide
                 value={value}
                 isOwner={isOwner}
-                start={challenge.start}
+                start={challenge?.start}
                 isRegistered={isRegistered}
               />
             </div>
