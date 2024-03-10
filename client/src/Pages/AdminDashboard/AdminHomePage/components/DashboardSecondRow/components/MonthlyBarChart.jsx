@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { useQuery } from "react-query";
+import Card from "../../../../../../Components/Cards";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
@@ -55,7 +56,7 @@ const BAR_CHART_OPTIONS = {
   },
 };
 
-const MonthlyBarChart = () => {
+const MonthlyBarChart = ({ extra }) => {
   const { data } = useQuery({
     queryKey: ["challenges"],
     queryFn: async () => {
@@ -94,6 +95,8 @@ const MonthlyBarChart = () => {
   const [options, setOptions] = useState(BAR_CHART_OPTIONS);
 
   useEffect(() => {
+    if (!data) return; // Check for null or undefined data
+
     setOptions((prevState) => ({
       ...prevState,
       colors: [info],
@@ -140,6 +143,7 @@ const MonthlyBarChart = () => {
       },
     }));
   }, [
+    data,
     primary,
     info,
     secondary,
@@ -149,9 +153,19 @@ const MonthlyBarChart = () => {
     monthlyEarnings,
   ]);
 
-  return {
-    /*<ReactApexChart options={options} series={series} type="bar" height={365} />*/
-  };
+  return (
+    <Card extra={`p-4 shadow-xl bg-white border-none ${extra}`}>
+      <div className="p-4">
+        <h6 className="text-lg font-semibold">User Analytics</h6>
+      </div>
+      <ReactApexChart
+        options={options}
+        series={series}
+        type="bar"
+        height={365}
+      />
+    </Card>
+  );
 };
 
 export default MonthlyBarChart;

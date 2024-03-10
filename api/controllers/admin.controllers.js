@@ -8,13 +8,32 @@ const Level = require("../models/Level.model");
 
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find({
-      role: "user",
-    }).select("-password");
-    res.json(users);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json(error);
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = 6;
+
+    const query = { role: { $ne: "admin" } };
+    if (req.query.name) {
+      const searchRegex = new RegExp(req.query.name, "i");
+      query.$or = [
+        { firstname: { $regex: searchRegex } },
+        { lastname: { $regex: searchRegex } },
+      ];
+    }
+
+    const users = await userSchema
+      .find(query)
+      .sort({ score: -1, createdAt: 1 })
+      .skip(pageSize * (page - 1))
+      .limit(pageSize)
+      .exec();
+
+    const totalCount = await userSchema.countDocuments({
+      role: { $ne: "admin" },
+    });
+
+    res.status(200).json({ users, userCount: totalCount });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
   }
 };
 

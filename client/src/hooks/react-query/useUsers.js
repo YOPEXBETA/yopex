@@ -25,11 +25,13 @@ export const useUpdatePassword = () => {
   });
 };
 
-export const useAdminUsers = () => {
+export const useAdminUsers = (page, query) => {
   return useQuery({
-    queryKey: ["admin/users"],
+    queryKey: ["AdminUsers", page, query],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/admin/Users`);
+      const { data } = await axios.get(
+        `${url}/admin/Users?page=${page}&name=${query}`
+      );
       return data;
     },
   });
@@ -305,4 +307,16 @@ export const useFileUpload = () => {
       },
     }
   );
+};
+
+export const useUsersData = (page, query) => {
+  return useQuery({
+    queryKey: ["users", page, query],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${url}/allusers?page=${page}&name=${query}`
+      );
+      return data;
+    },
+  });
 };

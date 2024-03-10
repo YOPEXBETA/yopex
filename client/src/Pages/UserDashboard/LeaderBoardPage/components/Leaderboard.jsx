@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import TableSkeleton from "../../../../Components/SkeletonLoading/TableSkeleton";
-import { useUsers } from "../../../../hooks/react-query/useUsers";
+import { useUsers, useUsersData } from "../../../../hooks/react-query/useUsers";
 import { axios } from "../../../../axios";
 import { useQuery } from "react-query";
 
@@ -16,15 +16,7 @@ const Leaderboard = ({ query, onSelect }) => {
     }
   };
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["users", page, query],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `${url}/allusers?page=${page}&name=${query}`
-      );
-      return data;
-    },
-  });
+  const { data, isLoading } = useUsersData(page, query);
 
   const totalPages = Math?.ceil(data?.userCount / 8);
   const displayedPages = Math?.min(10, totalPages);

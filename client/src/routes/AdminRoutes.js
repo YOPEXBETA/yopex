@@ -21,8 +21,8 @@ import SkillsIcon from "../Components/icons/SkillsIcon";
 const AdminDashboard = Loadable(
   lazy(() => import("../Pages/AdminDashboard/AdminHomePage/AdminDashboard"))
 );
-const UsersPage2 = Loadable(
-  lazy(() => import("../Pages/AdminDashboard/UsersPage/UsersPage2"))
+const AdminUsersTable = Loadable(
+  lazy(() => import("../Pages/AdminDashboard/UsersPage/AdminUsersTable"))
 );
 const CompanyPage = Loadable(
   lazy(() => import("../Pages/AdminDashboard/CompanyPage/CompanyPage"))
@@ -52,7 +52,7 @@ const AdminRoutes = {
       name: "Users",
       icon: <UsersIcon className="h-6 w-6" />,
       path: "Users",
-      element: <UsersPage2 />,
+      element: <AdminUsersTable />,
     },
     {
       name: "Companies",
