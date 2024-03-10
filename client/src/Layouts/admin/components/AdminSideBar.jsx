@@ -2,6 +2,8 @@ import { HiX } from "react-icons/hi";
 import routes from "../../../routes/AdminRoutes";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
+import AdminSideBarLinks from "./AdminSideBarLinks";
 
 const AdminSidebar = ({ open, onClose }) => {
   const { user } = useSelector((state) => state.auth);
@@ -18,35 +20,15 @@ const AdminSidebar = ({ open, onClose }) => {
       >
         <HiX />
       </span>
-      <div className="mt-7 justify-center flex items-center space-x-1 dark:text-white">
-        <div className=" dark:text-white flex flex-col items-center justify-center">
-          <img
-            src={user.picturePath}
-            className=" w-28 h-28 bg-gray-500 rounded-full"
-          />
-          <div className="flex-grow text-white mt-4">
-            <div>
-              <p className="text-lg">{user.firstname + " " + user.lastname}</p>
-            </div>
-          </div>
+      <div className="mt-[40px] mx-16 flex items-center">
+        <div className="mt-1 ml-1  font-poppins text-[26px] font-bold uppercase text-white dark:text-white">
+          YOPEX <span className="font-medium">HUB</span>
         </div>
       </div>
-      <hr className="w-full border-t-1 border-gray-200 mt-4" />
+      <hr className="w-full border-t-1 border-gray-400 my-10" />
 
-      <div className="h-px  dark:bg-white/30" />
-
-      <ul className="mb-auto pt-1 overflow-y-scroll h-[30rem] overflow-hidden no-scrollbar">
-        {routes.children.map((route, index) => (
-          <li key={index} className="hover:bg-green-500">
-            <NavLink
-              to={route.path}
-              className="flex items-center py-4 px-[40px] space-x-3 text-gray-500 font-medium transition-colors duration-150 hover:text-white dark:hover:text-gray-300"
-            >
-              <span className="text-lg">{route.icon}</span>
-              <span className="text-lg">{route.path}</span>
-            </NavLink>
-          </li>
-        ))}
+      <ul className="mb-auto pt-1 flex flex-col justify-center">
+        <AdminSideBarLinks routes={routes} />
       </ul>
     </div>
   );

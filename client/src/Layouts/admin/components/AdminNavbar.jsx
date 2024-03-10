@@ -1,30 +1,21 @@
 import React, { useState } from "react";
 import { FiAlignJustify } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
-import { RiMoonFill, RiSunFill } from "react-icons/ri";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../redux/auth/authSlice";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
+import MoonIcon from "../../../Components/icons/MoonIcon";
+import LightIcon from "../../../Components/icons/LightIcon";
+import Dropdown from "../../../Components/dropdown";
+import ProfileMenu from "../../../Components/ProfileMenu/ProfileMenu";
 
 const AdminNavbar = (props) => {
-  const { onOpenSidenav, brandText } = props;
-  const [open, setOpen] = useState(false);
-  const handleClick = (event) => setOpen(!open);
-
   const [darkmode, setDarkmode] = useState(false);
 
-  const navigate = useNavigate();
+  const { onOpenSidenav, brandText } = props;
   const { user } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
-  };
-
   return (
-    <nav className="0 sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl p-2 backdrop-blur-xl ">
+    <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl p-2 backdrop-blur-xl ">
       <div className="ml-[6px]">
         <div className="h-6 w-[224px] pt-1">
           <a
@@ -54,7 +45,7 @@ const AdminNavbar = (props) => {
         </p>
       </div>
 
-      <div className="rounded-fullshadow-shadow-500 relative mt-[3px] flex h-[61px] w-[355px] flex-grow items-center justify-around gap-2 dark:!bg-zinc-800 dark:shadow-none md:w-[365px] md:flex-grow-0 md:gap-1 xl:w-[365px] xl:gap-2">
+      <div className="relative mt-[3px] flex h-[61px] w-[355px] flex-grow items-center justify-around gap-2  md:w-[365px] md:flex-grow-0 md:gap-1 xl:w-[365px] xl:gap-2">
         <div className="flex h-full items-center rounded-full xl:w-[225px]"></div>
         <span
           className="flex cursor-pointer text-xl text-gray-600 dark:text-white xl:hidden"
@@ -76,95 +67,39 @@ const AdminNavbar = (props) => {
           }}
         >
           {darkmode ? (
-            <RiSunFill className="h-4 w-4 text-gray-600 dark:text-white" />
+            <LightIcon className="h-4 w-4 text-gray-600 dark:text-white" />
           ) : (
-            <RiMoonFill className="h-4 w-4 text-gray-600 dark:text-white" />
+            <MoonIcon className="h-4 w-4 text-gray-600 dark:text-white" />
           )}
         </div>
 
         <div>
-          <div className="relative z-10">
-            <button
-              onClick={handleClick}
-              className="flex items-center justify-center  text-gray-600 rounded-full"
-            >
-              <img
-                src={user.picturePath}
-                alt="picture"
-                className="rounded-full w-8 h-8 object-contain border"
-              />
-            </button>
-          </div>
-          <div>
-            {open && (
-              <div className="absolute right-0 z-20 w-60 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
-                <a
-                  href={`/profile/${user?._id}`}
-                  className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  {user.picturePath ? (
+          <div className="relative focus:ring-offset-2 focus:ring-offset-zinc-800">
+            <Dropdown
+              button={
+                <button>
+                  {user?.picturePath ? (
                     <img
                       alt="picture"
-                      src={user.picturePath}
-                      className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9 border"
+                      src={user?.picturePath}
+                      className="rounded-full  object-cover w-9 h-9 border-gray-200 border "
                     />
                   ) : (
                     <img
                       alt="default"
                       src={AvatarProfile}
-                      className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9 border"
+                      className="rounded-full object-cover w-9 h-9 border-gray-200 border"
                     />
                   )}
-                  <div className="mx-1">
-                    <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                      {user?.firstname + " " + user?.lastname}
-                    </h1>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {user?.country}
-                    </p>
-                  </div>
-                </a>
-                <hr className="border-gray-200 dark:border-gray-700 " />
-
-                <a
-                  href={`/profile/${user._id}`}
-                  className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  View Profile
-                </a>
-                {user.role === "admin" && (
-                  <a
-                    href="/Dashboard"
-                    className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    Dashboard
-                  </a>
-                )}
-
-                <a
-                  href="/"
-                  className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  Home
-                </a>
-                <a
-                  href="/settings"
-                  className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  Settings
-                </a>
-
-                <hr className="border-gray-200 dark:border-gray-700 " />
-
-                <a
-                  href="/"
-                  onClick={handleLogout}
-                  className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  Sign Out
-                </a>
-              </div>
-            )}
+                </button>
+              }
+              children={
+                <div>
+                  <ProfileMenu />
+                </div>
+              }
+              classNames={"py-2 top-10 -left-[180px] w-max"}
+            />
           </div>
         </div>
       </div>

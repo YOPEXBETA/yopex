@@ -1,12 +1,8 @@
-/* eslint-disable */
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import DashIcon from "../../icons/DashIcon";
-// chakra imports
 
 export function SidebarLinks(props) {
-  // Chakra color mode
   let location = useLocation();
 
   const { routes, isRouteWithSpecificWidth } = props;

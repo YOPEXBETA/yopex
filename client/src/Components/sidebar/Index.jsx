@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { HiX } from "react-icons/hi";
 import routes from "../../routes/MainRoutes";
-import { NavLink, useLocation } from "react-router-dom";
 import YopexLogo from "../../assets/images/LogoYopex.png";
 import SidebarLinks from "./components/Links";
 import SidebarCard from "./components/SidebarCard";
-import CreateMenuModal from "../Modals/CreateMenuModal";
 
 const Sidebar = ({
   open,

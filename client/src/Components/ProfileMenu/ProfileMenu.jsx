@@ -1,8 +1,8 @@
 import React from "react";
-import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
+import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../redux/auth/authSlice";
+import { logout } from "../../redux/auth/authSlice";
 
 // ==============================|| CODE ||============================== //
 
@@ -25,10 +25,10 @@ const ProfileMenu = () => {
         href={`/profile/${user?._id}`}
         className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
       >
-        {user.picturePath ? (
+        {user?.picturePath ? (
           <img
             alt="picture"
-            src={user.picturePath}
+            src={user?.picturePath}
             className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9 border"
           />
         ) : (
@@ -44,15 +44,15 @@ const ProfileMenu = () => {
           </h1>
         </div>
       </a>
-      <hr className="border-gray-200 dark:border-gray-700 " />
+      <hr className="border-gray-200 dark:border-gray-400 " />
 
       <a
-        href={`/profile/${user._id}`}
+        href={`/profile/${user?._id}`}
         className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
       >
         View Profile
       </a>
-      {user.role === "admin" && (
+      {user?.role === "admin" && (
         <a
           href="/Dashboard"
           className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -61,7 +61,7 @@ const ProfileMenu = () => {
         </a>
       )}
 
-      <hr className="border-gray-200 dark:border-gray-700 " />
+      <hr className="border-gray-200 dark:border-gray-400" />
 
       <a
         href="/"

@@ -3,20 +3,18 @@ import { lazy } from "react";
 // project import
 import Loadable from "../Components/PageLoading/Loadable";
 import AdminLayout from "../Layouts/admin";
-import {
-  MdDashboard,
-  MdBusiness,
-  MdPeople,
-  MdCategory,
-  MdAssessment,
-  MdStar,
-  MdTrendingUp,
-  MdCode,
-} from "react-icons/md";
-
 import LevelPage from "../Pages/AdminDashboard/LevelPage/LevelPage";
 import SkillsPage from "../Pages/AdminDashboard/SkillsPage/SkillsPage";
 import PaymentsPage from "../Pages/AdminDashboard/PaymentsPage/PaymentsPage";
+import DashboardIcon from "../Components/icons/DashboardIcon";
+import UsersIcon from "../Components/icons/UsersIcon";
+import CategoryIcon from "../Components/icons/CategoryIcon";
+import CompanyIcon from "../Components/icons/CompanyIcon";
+import CreditCardIcon from "../Components/icons/CreditCardIcon";
+import StarIcon from "../Components/icons/StarIcon";
+import EvaluationIcon from "../Components/icons/EvaluationIcon";
+import LevelIcon from "../Components/icons/LevelIcon";
+import SkillsIcon from "../Components/icons/SkillsIcon";
 
 // render -
 
@@ -45,51 +43,59 @@ const AdminRoutes = {
   element: <AdminLayout />,
   children: [
     {
-      icon: <MdDashboard className="h-6 w-6" />,
+      name: "Dashboard",
+      icon: <DashboardIcon className="h-6 w-6" />,
       path: "Dashboard",
       element: <AdminDashboard />,
     },
     {
-      icon: <MdPeople className="h-6 w-6" />,
+      name: "Users",
+      icon: <UsersIcon className="h-6 w-6" />,
       path: "Users",
       element: <UsersPage2 />,
     },
     {
-      icon: <MdBusiness className="h-6 w-6" />,
+      name: "Companies",
+      icon: <CompanyIcon className="h-6 w-6" />,
       path: "Companies",
       element: <CompanyPage />,
     },
     {
-      icon: <MdCategory className="h-6 w-6" />,
+      name: "Categories",
+      icon: <CategoryIcon className="h-6 w-6" />,
       path: "Categories",
       element: <Categories />,
     },
     {
-      icon: <MdCode className="h-6 w-6" />,
+      name: "Skills",
+      icon: <SkillsIcon className="h-6 w-6" />,
       path: "skills",
       element: <SkillsPage />,
     },
     {
-      icon: <MdTrendingUp className="h-6 w-6" />,
+      name: "Levels",
+      icon: <LevelIcon className="h-6 w-6" />,
       path: "Level",
       element: <LevelPage />,
     },
     {
-      icon: <MdStar className="h-6 w-6" />,
+      name: "Badges",
+      icon: <StarIcon className="h-6 w-6" />,
       path: "Badges",
       element: <BadgesPage />,
     },
     {
-      icon: <MdAssessment className="h-6 w-6" />,
+      name: "Evaluation",
+      icon: <EvaluationIcon className="h-6 w-6" />,
       path: "Evaluation",
       element: <EvaluationPage />,
     },
     {
-      icon: <MdAssessment className="h-6 w-6" />,
+      name: "Payments",
+      icon: <CreditCardIcon className="h-6 w-6" />,
       path: "Payments",
       element: <PaymentsPage />,
-
-    }
+    },
   ],
 };
 

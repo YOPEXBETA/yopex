@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { RiMoonFill, RiSunFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import Dropdown from "../dropdown";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import NotificationMenu from "./components/NotificationMenu";
-import ProfileMenu from "./components/ProfileMenu";
+import ProfileMenu from "../ProfileMenu/ProfileMenu";
 import LightIcon from "../icons/LightIcon";
 import MoonIcon from "../icons/MoonIcon";
 
@@ -124,14 +123,14 @@ const Navbar = (props) => {
               />
             </div>
 
-            <div class="relative ml-6 focus:ring-offset-2 focus:ring-offset-zinc-800">
+            <div className="relative ml-6 focus:ring-offset-2 focus:ring-offset-zinc-800">
               <Dropdown
                 button={
                   <button>
                     {user?.picturePath ? (
                       <img
                         alt="picture"
-                        src={user.picturePath}
+                        src={user?.picturePath}
                         className="rounded-full  object-cover w-9 h-9 border-gray-200 border "
                       />
                     ) : (

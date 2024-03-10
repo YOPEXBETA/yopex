@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
-import YopexLogo from "../../../src/assets/images/LogoYopex.png";
-import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../redux/auth/authSlice";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
+import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
+import YopexLogo from "../../../src/assets/images/LogoYopex.png";
+import MoonIcon from "../icons/MoonIcon";
+import LightIcon from "../icons/LightIcon";
+import CloseIcon from "../icons/CloseIcon";
+import BurgerMenu from "../icons/BurgerMenu";
+import Dropdown from "../dropdown";
+import ProfileMenu from "../ProfileMenu/ProfileMenu";
 
 const HomeHeader = () => {
   const [nav, setNav] = useState(false);
+  const [color, setColor] = useState(false);
   const { user, error } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,77 +41,136 @@ const HomeHeader = () => {
     }
   }, [dispatch, user]);
 
-  return (
-    <div className="container">
-      <div className="flex justify-between dark:bg-zinc-800 fixed   items-center w-full h-20 px-4 lg:px-24 md:px-24 text-white  z-10 ">
-        <div className="flex items-center gap-8">
-          <img src={YopexLogo} width={35} alt="Yopex Logo" />
-          <ul className="hidden md:flex">
-            <li className="px-4 cursor-pointer capitalize dark:text-white  text-zinc-500 hover:scale-105 duration-200">
-              <Link to="home" smooth duration={500}>
-                Home
-              </Link>
-            </li>
-            <li className="px-4 cursor-pointer capitalize dark:text-white text-zinc-500 hover:scale-105 duration-200">
-              <Link to="about" smooth duration={500}>
-                Features
-              </Link>
-            </li>
-            <li className="px-4 cursor-pointer capitalize dark:text-white text-zinc-500 hover:scale-105 duration-200">
-              <Link to="contact" smooth duration={500}>
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
+  //change nav color when scrolling
+  useEffect(() => {
+    const changeColor = () => {
+      if (window.scrollY >= 50) {
+        setColor(true);
+      } else {
+        setColor(false);
+      }
+    };
 
-        <div className="hidden md:flex gap-4 items-center">
-          {!user && (
+    window.addEventListener("scroll", changeColor);
+
+    return () => {
+      window.removeEventListener("scroll", changeColor);
+    };
+  }, []);
+
+  return (
+    <div className="fixed top-0 left-0 w-full z-10">
+      <div
+        className={
+          color
+            ? "border-b-[1px] dark:border-zinc-600 transition-all duration-300 bg-white dark:bg-zinc-800"
+            : " bg-transparent dark:bg-zinc-800"
+        }
+      >
+        <div className="flex justify-between items-center w-full h-20 px-4 lg:px-24 md:px-24 z-10">
+          <div className="flex items-center gap-8">
+            <img src={YopexLogo} width={35} alt="Yopex Logo" />
+            <ul className="hidden md:flex">
+              <li className="px-4 cursor-pointer capitalize dark:text-white  text-gray-600 hover:scale-105 duration-200">
+                <Link to="home" smooth duration={500}>
+                  Home
+                </Link>
+              </li>
+              <li className="px-4 cursor-pointer capitalize dark:text-white text-gray-600 hover:scale-105 duration-200">
+                <Link to="about" smooth duration={500}>
+                  Features
+                </Link>
+              </li>
+              <li className="px-4 cursor-pointer capitalize dark:text-white text-gray-600 hover:scale-105 duration-200">
+                <Link to="contact" smooth duration={500}>
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="hidden md:flex gap-4 items-center">
             <a
               onClick={toggleTheme}
               className="px-3 py-2  space-x-2   flex items-center cursor-pointer"
             >
               {isDark ? (
-                <LightModeIcon className="w-6 h-6 dark:hover:text-green-500 text-gray-600 dark:text-white" />
+                <LightIcon className="w-6 h-6 dark:hover:text-green-500 text-gray-600 dark:text-white" />
               ) : (
-                <DarkModeIcon className="w-6 h-6 text-gray-600 hover:text-green-500 dark:text-white" />
+                <MoonIcon className="w-6 h-6 text-gray-600 hover:text-green-500 dark:text-white" />
               )}
             </a>
-          )}
 
-          {user && (
-            <p className="flex items-center ">
-              <p className=" px-3 z-50 cursor-pointer capitalize dark:text-white font-medium text-gray-500  duration-200">
-                Welcome, {user.firstname}
+            {user && (
+              <p className="flex items-center gap-2">
+                <p className="px-2 cursor-pointer capitalize dark:text-white  text-gray-600  duration-200">
+                  Welcome, {user?.firstname}
+                </p>
+                <div className="relative focus:ring-offset-2 focus:ring-offset-zinc-800">
+                  <Dropdown
+                    button={
+                      <button>
+                        {user?.picturePath ? (
+                          <img
+                            alt="picture"
+                            src={user?.picturePath}
+                            className="rounded-full  object-cover w-9 h-9 border-gray-200 border "
+                          />
+                        ) : (
+                          <img
+                            alt="default"
+                            src={AvatarProfile}
+                            className="rounded-full object-cover w-9 h-9 border-gray-200 border"
+                          />
+                        )}
+                      </button>
+                    }
+                    children={
+                      <div>
+                        <ProfileMenu />
+                      </div>
+                    }
+                    classNames={"py-2 top-10 -left-[180px] w-max z-50"}
+                  />
+                </div>
               </p>
-              {/*<ProfileMenu />*/}
-            </p>
-          )}
-          {!user && (
-            <a href="/login" className="block">
-              <button className="cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 dark:text-white dark:hover:text-green-500 hover:text-green-500 duration-200">
-                Login
-              </button>
-            </a>
-          )}
-          {!user && (
-            <a href="/register" className="block">
-              <button className="bg-black dark:bg-green-500 dark:hover:bg-green-600 text-white rounded-3xl px-4 py-2 font-medium hover:scale-105 duration-200">
-                Sign up
-              </button>
-            </a>
-          )}
-        </div>
+            )}
+            {!user && (
+              <a href="/login" className="block">
+                <button className="cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 dark:text-white dark:hover:text-green-500 hover:text-green-500 duration-200">
+                  Login
+                </button>
+              </a>
+            )}
+            {!user && (
+              <a href="/register" className="block">
+                <button className="bg-black dark:bg-green-500 dark:hover:bg-green-600 text-white rounded-3xl px-4 py-2 font-medium hover:scale-105 duration-200">
+                  Sign up
+                </button>
+              </a>
+            )}
+          </div>
 
-        <div
-          onClick={() => setNav(!nav)}
-          className="cursor-pointer pr-4 z-10 text-gray-500 md:hidden"
-        >
-          {nav ? <FaTimes size={30} /> : <FaBars size={30} />}
+          <div
+            onClick={() => setNav(!nav)}
+            className="cursor-pointer z-10 text-gray-500 md:hidden"
+          >
+            {nav ? (
+              <CloseIcon width={6} height={6} />
+            ) : (
+              <BurgerMenu width={10} height={10} />
+            )}
+          </div>
         </div>
+      </div>
 
+      <div>
         {nav && (
-          <ul className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-white dark:bg-zinc-800 text-gray-500">
+          <ul
+            className={`flex flex-col justify-center items-center fixed top-0 left-0 w-full h-screen ${
+              color ? "bg-white" : "bg-white"
+            } dark:bg-zinc-800 text-gray-500`}
+          >
             <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
               <Link
                 onClick={() => setNav(!nav)}
