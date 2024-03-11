@@ -111,7 +111,7 @@ const SocialPostCard = ({
                       openModal={openModal}
                     />
                     <Link to={`/postDetails/${post._id}`}>
-                      <div className="invisible group-hover:visible absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                      <div className="invisible group-hover:visible absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:rounded-full">
                         <p
                           className="text-white cursor-pointer"
                           //onClick={() => openModal()}

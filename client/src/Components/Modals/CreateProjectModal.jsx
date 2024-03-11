@@ -14,7 +14,6 @@ const CreateProjectModal = ({ open, handleClose }) => {
   // Global states |  @redux/toolkit
   const { user } = useSelector((state) => state.auth);
 
-
   // Data fetching | react-query
   const { data: userProfile, isLoading } = useUserById(user._id);
   const { data: skills } = useSkills();
@@ -39,17 +38,15 @@ const CreateProjectModal = ({ open, handleClose }) => {
   const uploadedFile = watch("files");
 
   const onSubmit = async (data) => {
-    const result =[];
-    
-    for (var i=0; i<data.files.length; i++) {
+    const result = [];
 
+    for (var i = 0; i < data.files.length; i++) {
       const formData = new FormData();
       formData.append("file", data.files[i]);
       formData.append("type", "posts");
 
       const res = await fileUploadMutation.mutateAsync(formData);
       result.push(res.data.downloadURL);
-      
     }
     console.log(result);
     const selectedSkills = data.skills.map((skill) => skill.value);
@@ -83,7 +80,7 @@ const CreateProjectModal = ({ open, handleClose }) => {
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="defaultModal"
             >
-              <CloseIcon />
+              <CloseIcon width={4} height={4} />
             </button>
           </div>
           <hr />

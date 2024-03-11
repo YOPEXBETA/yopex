@@ -43,7 +43,6 @@ export const useDeleteSkill = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (name) => {
-      console.log(name);
       await axios.delete(`${url}/skill/deleteskill/${name}`);
     },
     onSuccess: () => {

@@ -51,24 +51,28 @@ const getFeedPosts = async (req, res) => {
     const posts = await Post.find()
       .populate("user", "_id firstname lastname picturePath")
       .sort({ createdAt: "desc" });
-    res.status(200).json(posts);
+    return res.status(200).json(posts);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 };
 
 //delete a post
 const deletePost = async (req, res) => {
   try {
+    if (!req.userId) {
+      return res.status(403).send("You are not authorized to delete this post");
+    }
+
     const post = await Post.findById(req.params.id);
     if (!post) {
-      return res.status(404).send("Post not found");
+      return res.status(404).json({ message: "Post not found" });
     }
 
     if (post.user._id.toString() === req.userId) {
-      await Post.findOneAndDelete({ _id: req.params.id });
+      const deletedPost = await Post.findOneAndDelete({ _id: req.params.id });
 
-      return res.status(201).send("Post has been deleted");
+      return res.status(200).json(deletedPost);
     } else {
       return res.status(403).send("You are not authorized to delete this post");
     }
@@ -89,9 +93,9 @@ const getUserPosts = async (req, res) => {
 
     const posts = await Post.find({ user: userId }).populate("skills");
 
-    res.status(200).json(posts);
+    return res.status(200).json(posts);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 };
 

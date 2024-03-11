@@ -105,7 +105,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="defaultModal"
             >
-              <CloseIcon />
+              <CloseIcon width={4} height={4} />
             </button>
           </div>
           <hr />
