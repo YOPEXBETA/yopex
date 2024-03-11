@@ -2,77 +2,134 @@ import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useAdminCompanies } from "../../../hooks/react-query/useCompany";
 import CompanyRow from "./CompanyRow";
+import TableSkeleton from "../../../Components/SkeletonLoading/TableSkeleton";
 
 const CompanyPage = () => {
-  const { data } = useAdminCompanies();
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(1);
 
-  // TODO: Move this logic to useCompany
   const handleChangePage = (newPage) => {
-    if (newPage >= 0 && newPage <= Math.ceil(data.length / rowsPerPage)) {
+    if (newPage <= totalPages && newPage > 0) {
       setPage(newPage);
     }
   };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+
+  const { data, isLoading } = useAdminCompanies(page);
+  const totalPages = Math?.ceil(data?.companyCount / 6);
+  const displayedPages = Math?.min(10, totalPages);
+
+  if (isLoading) {
+    return <TableSkeleton />;
+  }
 
   return (
-    <div>
-      <div className="rounded-xl shadow-lg">
-        <table className="w-full">
-          <thead className="text-white">
-            <tr className="bg-zinc-800 h-11">
-              <th className="py-2 px-4 text-left">COMPANY</th>
-              <th className="py-2 text-left">JOBS</th>
-              <th className="py-2  text-left">CHALLENGES</th>
-              <th className="py-2 text-left">STATUS</th>
-              <th className="py-2 px-4 text-right">ACTION</th>
-            </tr>
-          </thead>
-          <tbody className="w-full">
-            {data
-              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((company) => (
-                <CompanyRow key={company._id} company={company} />
-              ))}
-          </tbody>
-        </table>
-        <div className="flex items-center justify-between py-2 px-4 text-white bg-zinc-800">
-          <div className="flex items-center gap-3">
-            <span className="text-sm">Rows per page:</span>
-            <select
-              className="mx-2 px-2 py-1 border rounded-md text-black "
-              value={rowsPerPage}
-              onChange={handleChangeRowsPerPage}
+    <div className="h-screen">
+      <table className="w-full">
+        <thead className="bg-gray-50 dark:bg-zinc-900">
+          <tr>
+            <div className="flex items-center gap-x-3">
+              <th
+                scope="col"
+                className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+              >
+                Company
+              </th>
+            </div>
+
+            <th
+              scope="col"
+              className="py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
             >
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-            </select>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-sm">
-              {page * rowsPerPage + 1} -{" "}
-              {Math.min((page + 1) * rowsPerPage, data?.length || 0)} of{" "}
-              {data?.length || 0}
-            </span>
-            <button
-              className="px-2 py-1 rounded-full hover:bg-gray-700 transition-colors duration-200"
-              onClick={() => handleChangePage(page - 1)}
+              Jobs
+            </th>
+            <th
+              scope="col"
+              className="py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
             >
-              <FaChevronLeft />
-            </button>
-            <button
-              className="px-2 py-1 rounded-full hover:bg-gray-700 transition-colors duration-200"
-              onClick={() => handleChangePage(page + 1)}
+              Challenges
+            </th>
+
+            <th
+              scope="col"
+              className="py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
             >
-              <FaChevronRight />
-            </button>
-          </div>
+              Status
+            </th>
+            <th
+              scope="col"
+              className="px-4 py-3.5 text-sm font-normal  rtl:text-right text-gray-500 dark:text-gray-400 text-right"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody className="w-full">
+          {data?.companies?.map((company) => (
+            <CompanyRow key={company._id} company={company} />
+          ))}
+        </tbody>
+      </table>
+      <div className="flex items-center justify-between mt-6">
+        <button
+          onClick={() => handleChangePage(page - 1)}
+          className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
+          disabled={page === 1}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-5 h-5 rtl:-scale-x-100"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+            />
+          </svg>
+          <span>Previous</span>
+        </button>
+
+        <div className="items-center hidden md:flex gap-x-3">
+          {Array.from({ length: displayedPages }, (_, index) => page + index)
+            .filter((pageNumber) => pageNumber <= totalPages)
+            .map((pageNumber) => (
+              <button
+                key={pageNumber}
+                onClick={() => handleChangePage(pageNumber)}
+                className={`px-2 py-1 text-sm rounded-md ${
+                  pageNumber === page
+                    ? "text-green-500 bg-green-100"
+                    : "text-gray-500 dark:hover:bg-zinc-800 dark:text-gray-100 hover:bg-gray-100"
+                }`}
+              >
+                {pageNumber}
+              </button>
+            ))}
         </div>
+
+        <button
+          onClick={() => handleChangePage(page + 1)}
+          className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
+          disabled={page === totalPages}
+        >
+          <span>Next</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-5 h-5 rtl:-scale-x-100"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );

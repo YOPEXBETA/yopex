@@ -39,11 +39,20 @@ const getUsers = async (req, res) => {
 
 const getCompanies = async (req, res) => {
   try {
-    const companies = await Company.find().select("-password");
-    res.json(companies);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json(error);
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = 6;
+
+    const companies = await Company.find()
+      .sort({ score: -1, createdAt: 1 })
+      .skip(pageSize * (page - 1))
+      .limit(pageSize)
+      .exec();
+
+    const totalCount = await Company.countDocuments();
+
+    res.status(200).json({ companies, companyCount: totalCount });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
   }
 };
 

@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import TableSkeleton from "../../../../Components/SkeletonLoading/TableSkeleton";
-import { useUsers, useUsersData } from "../../../../hooks/react-query/useUsers";
-import { axios } from "../../../../axios";
-import { useQuery } from "react-query";
-
-const url = process.env.REACT_APP_API_ENDPOINT;
+import { useUsersData } from "../../../../hooks/react-query/useUsers";
 
 const Leaderboard = ({ query, onSelect }) => {
   const [page, setPage] = useState(1);
+  const { data, isLoading } = useUsersData(page, query);
 
   const handleChangePage = (newPage) => {
     if (newPage <= totalPages && newPage > 0) {
       setPage(newPage);
     }
   };
-
-  const { data, isLoading } = useUsersData(page, query);
 
   const totalPages = Math?.ceil(data?.userCount / 8);
   const displayedPages = Math?.min(10, totalPages);

@@ -4,11 +4,11 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-export const useAdminCompanies = () => {
+export const useAdminCompanies = (page) => {
   return useQuery({
-    queryKey: ["companies"],
+    queryKey: ["companies", page],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/admin/Companies`);
+      const { data } = await axios.get(`${url}/admin/Companies?page=${page}`);
       return data;
     },
   });

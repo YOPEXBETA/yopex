@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import CompanyTableMenuItem from "./CompanyTableMenuItem";
+import Dropdown from "../../../Components/dropdown";
+import HorizontalDotsIcon from "../../../Components/icons/HorizontalDotsIcon";
+import AdminCompanyTableMenuItem from "../../../Components/MenuIcons/AdminCompanyTableMenuItem";
 
 const CompanyRow = ({ company }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +11,7 @@ const CompanyRow = ({ company }) => {
   return (
     <tr
       key={company._id}
-      className="hover:bg-gray-50 bg-white"
+      className="hover:bg-zinc-200 dark:hover:bg-zinc-700"
       onClick={(event) => {
         if (
           !(
@@ -32,14 +34,18 @@ const CompanyRow = ({ company }) => {
             />
           </div>
           <div className="flex items-center gap-1">
-            <span className="text-sm font-bold"> {company.companyName}</span>
+            <span className="text-sm dark:text-gray-200">
+              {company.companyName}
+            </span>
           </div>
         </Link>
       </td>
 
-      <td className="text-sm text-left"> {company.jobs.length}</td>
+      <td className="text-sm dark:text-gray-200"> {company.jobs.length}</td>
 
-      <td className="text-sm text-left"> {company.challenges.length}</td>
+      <td className="text-sm dark:text-gray-200">
+        {company.challenges.length}
+      </td>
 
       <td
         className={`font-bold text-white text-xs mt-5 py-2 px-3 rounded-full inline-block ${
@@ -53,8 +59,22 @@ const CompanyRow = ({ company }) => {
         {company.verified ? "Verified" : "Not Verified"}
       </td>
 
-      <td className="py-4 px-4 text-right">
-        <CompanyTableMenuItem companyId={company._id} company={company} />
+      <td className="px-4 py-3.5 text-sm font-normal text-gray-500 dark:text-gray-400 text-right">
+        <Dropdown
+          button={
+            <div className="absolute right-0 top-0 bottom-0">
+              <HorizontalDotsIcon className="cursor-pointer text-center" />
+            </div>
+          }
+          animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
+          children={
+            <AdminCompanyTableMenuItem
+              companyId={company._id}
+              company={company}
+            />
+          }
+          classNames={"py-2 top-4 right-0"}
+        />
       </td>
     </tr>
   );

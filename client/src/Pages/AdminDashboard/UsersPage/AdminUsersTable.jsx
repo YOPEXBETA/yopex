@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useAdminUsers } from "../../../hooks/react-query/useUsers";
 import UserRow2 from "./UserRow2";
 import TableSkeleton from "../../../Components/SkeletonLoading/TableSkeleton";
@@ -22,7 +21,7 @@ const AdminUsersTable = () => {
     return <TableSkeleton />;
   }
   return (
-    <div>
+    <div className="h-screen">
       <table className="w-full">
         <thead className="bg-gray-50 dark:bg-zinc-900">
           <tr>
@@ -37,13 +36,13 @@ const AdminUsersTable = () => {
 
             <th
               scope="col"
-              className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+              className="py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
             >
               Email
             </th>
             <th
               scope="col"
-              className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+              className="py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
             >
               Status
             </th>

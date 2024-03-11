@@ -1,5 +1,6 @@
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import toast from "react-hot-toast";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
@@ -7,7 +8,7 @@ export const useCategories = () => {
   return useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/category/getCategories`, );
+      const { data } = await axios.get(`${url}/category/getCategories`);
       return data;
     },
   });
@@ -17,14 +18,18 @@ export const useCreateCategory = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (name) => {
-      const { data } = await axios.post(
-        `${url}/category/addCategory`,
-        { name },
-      );
+      const { data } = await axios.post(`${url}/category/addCategory`, {
+        name,
+      });
       return data;
     },
+
     onSuccess: () => {
+      toast.success("Category Added successfully");
       queryClient.invalidateQueries({ queryKey: ["categories"] });
+    },
+    onError: () => {
+      toast.error("Error Adding Category ");
     },
   });
 };
@@ -33,10 +38,14 @@ export const useDeleteCategory = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id) => {
-      await axios.delete(`${url}/category/deleteCategory/${id}`, );
+      await axios.delete(`${url}/category/deleteCategory/${id}`);
     },
     onSuccess: () => {
+      toast.success("Category Deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["categories"] });
+    },
+    onError: () => {
+      toast.error("Error Deleting Category ");
     },
   });
 };
@@ -45,13 +54,16 @@ export const useUpdateCategory = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data) => {
-      await axios.put(
-        `${url}/category/updateCategory/${data.id}`,
-        { name: data.name },
-      );
+      await axios.put(`${url}/category/updateCategory/${data.id}`, {
+        name: data.name,
+      });
     },
     onSuccess: () => {
+      toast.success("Category Updated successfully");
       queryClient.invalidateQueries({ queryKey: ["categories"] });
+    },
+    onError: () => {
+      toast.error("Error Updating Category");
     },
   });
 };
@@ -62,7 +74,7 @@ export const usePostsByCategory = (category) => {
     queryFn: async () => {
       let url = `${url}/post/posts`;
       if (category !== "") url += `?categories=${category}`;
-      const { data } = await axios.get(url, );
+      const { data } = await axios.get(url);
       return data;
     },
   });
@@ -73,10 +85,7 @@ export const useLikePost = (currentPost, posts, userId, category) => {
 
   return useMutation({
     mutationFn: async () => {
-      await axios.patch(
-        `${url}/post/${currentPost._id}/like`,
-        { userId },
-      );
+      await axios.patch(`${url}/post/${currentPost._id}/like`, { userId });
     },
     onMutate: async (status) => {
       await queryClient.cancelQueries({
@@ -138,10 +147,10 @@ export const useSharePost = (currentPost, userId, category) => {
 
   return useMutation({
     mutationFn: async () => {
-      await axios.patch(
-        `${url}/post/share`,
-        { postId: currentPost._id, userId },
-      );
+      await axios.patch(`${url}/post/share`, {
+        postId: currentPost._id,
+        userId,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

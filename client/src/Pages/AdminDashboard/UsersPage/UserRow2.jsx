@@ -1,15 +1,17 @@
 import React from "react";
-import UserTableMenuItem from "./components/UserTableMenuItem";
 import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
+import AdminUserTableMenuItem from "../../../Components/MenuIcons/AdminUserTableMenuItem";
+import Dropdown from "../../../Components/dropdown";
 import { Link } from "react-router-dom";
 import { cn } from "../../../utils/utils";
+import HorizontalDotsIcon from "../../../Components/icons/HorizontalDotsIcon";
 
 const UserRow2 = ({ user }) => {
   return (
     <tr key={user?._id} className="hover:bg-zinc-200 dark:hover:bg-zinc-700">
       <td className="py-4 px-4">
-        <Link to={`/profile/${user?._id}`} className="flex items-center">
-          <div className="lg:w-1/6">
+        <Link to={`/profile/${user?._id}`} className="flex items-center gap-2">
+          <div>
             {user?.picturePath ? (
               <img
                 alt="picture"
@@ -45,8 +47,22 @@ const UserRow2 = ({ user }) => {
         {user?.status}
       </td>
 
-      <td className="py-4 px-4 text-right dark:text-gray-200">
-        <UserTableMenuItem userId={user?._id} accountStatus={user?.status} />
+      <td className="px-4 py-3.5 text-sm font-normal text-gray-500 dark:text-gray-400 text-right">
+        <Dropdown
+          button={
+            <div className="absolute right-0">
+              <HorizontalDotsIcon className="cursor-pointer text-center" />
+            </div>
+          }
+          animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
+          children={
+            <AdminUserTableMenuItem
+              userId={user?._id}
+              accountStatus={user?.status}
+            />
+          }
+          classNames={"py-2 top-4 right-0"}
+        />
       </td>
     </tr>
   );

@@ -2,8 +2,11 @@ import React from "react";
 import TotalUsers from "./components/TotalUsers";
 import TotalEarning from "./components/TotalEarning";
 import Companies from "./components/Companies";
+import { useStat } from "../../../../../hooks/react-query/useUsers";
 
 const DashboardFirstRow = () => {
+  const { data, isLoading } = useStat();
+
   return (
     <div className="flex-grow">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
@@ -11,10 +14,10 @@ const DashboardFirstRow = () => {
           <TotalEarning />
         </div>
         <div className="w-full">
-          <TotalUsers />
+          <TotalUsers data={data} isLoading={isLoading} />
         </div>
         <div className="w-full">
-          <Companies />
+          <Companies data={data} isLoading={isLoading} />
         </div>
       </div>
     </div>

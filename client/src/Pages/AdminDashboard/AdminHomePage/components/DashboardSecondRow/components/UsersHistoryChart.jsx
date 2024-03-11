@@ -33,7 +33,7 @@ const UsersHistoryChart = ({ extra }) => {
 
       setOptions((prevState) => ({
         ...prevState,
-        labels: data.map((data) => `${data._id.month}/${data._id.year}`),
+        labels: data?.map((data) => `${data._id.month}/${data._id.year}`),
       }));
     }
   }, [data]);
