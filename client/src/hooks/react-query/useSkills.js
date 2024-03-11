@@ -1,5 +1,6 @@
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import toast from "react-hot-toast";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
@@ -27,8 +28,13 @@ export const useCreateSkill = () => {
       const { data } = await axios.post(`${url}/skill/addskill`, { name });
       return data;
     },
+
     onSuccess: () => {
+      toast.success("Skill Added successfully");
       queryClient.invalidateQueries({ queryKey: ["skills"] });
+    },
+    onError: () => {
+      toast.error("Error Adding Skill");
     },
   });
 };
@@ -41,7 +47,11 @@ export const useDeleteSkill = () => {
       await axios.delete(`${url}/skill/deleteskill/${name}`);
     },
     onSuccess: () => {
+      toast.success("Skill Deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["skills"] });
+    },
+    onError: () => {
+      toast.error("Error Deleting Skill");
     },
   });
 };
@@ -55,7 +65,11 @@ export const useUpdateSkill = () => {
       });
     },
     onSuccess: () => {
+      toast.success("Skill Updated successfully");
       queryClient.invalidateQueries({ queryKey: ["skills"] });
+    },
+    onError: () => {
+      toast.error("Error Updating Skill");
     },
   });
 };

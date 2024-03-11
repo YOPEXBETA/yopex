@@ -3,14 +3,12 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useAdminUsers } from "../../../hooks/react-query/useUsers";
 import { useGetLevels } from "../../../hooks/react-query/useLevels";
 
-
 const EvaluationPage = () => {
   const { data } = useAdminUsers();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const { data: levelsData , isloading } = useGetLevels();
-  console.log(levelsData)
-
+  const { data: levelsData, isloading } = useGetLevels();
+  console.log(levelsData);
 
   const handleChangePage = (newPage) => {
     if (newPage >= 0 && newPage <= Math.ceil(data.length / rowsPerPage)) {
@@ -56,9 +54,7 @@ const EvaluationPage = () => {
                     </div>
                   </div>
                 </td>
-                <td className="py-4 px-4">
-                
-                </td>
+                <td className="py-4 px-4"></td>
                 <td className="py-4 px-4">{user.challengesDone}</td>
                 <td className="py-4 px-4">{user.challengesWon}</td>
                 <td className="py-4 px-4">{user.score}</td>

@@ -85,10 +85,12 @@ const AdminRoutes = {
       element: <BadgesPage />,
     },
     {
+      /*
       name: "Evaluation",
       icon: <EvaluationIcon className="h-6 w-6" />,
       path: "Evaluation",
       element: <EvaluationPage />,
+  */
     },
     {
       name: "Payments",

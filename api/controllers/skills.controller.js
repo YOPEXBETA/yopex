@@ -11,6 +11,7 @@ const createskill = async (req, res) => {
     const newskill = new skills({ name });
 
     await newskill.save();
+    res.json({ msg: "Created a skill" });
   } catch (error) {
     return res.status(500).json({ msg: err.message });
   }
