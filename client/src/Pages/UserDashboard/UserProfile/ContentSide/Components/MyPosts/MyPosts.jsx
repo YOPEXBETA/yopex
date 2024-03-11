@@ -26,7 +26,6 @@ const MyPosts = () => {
   const { user } = useSelector((state) => state.auth);
   const { userId } = useParams();
   const { data: posts, isLoading } = useUserPosts(userId);
-  console.log(posts, "rrgg");
   const { data } = useBookmarkedPosts(user._id);
   let bookmarksId = [];
   data?.map((book) => {
@@ -35,7 +34,7 @@ const MyPosts = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 py-2 mb-12">
         {isLoading ? (
           <LoadingSpinner />
         ) : posts?.length > 0 ? (
