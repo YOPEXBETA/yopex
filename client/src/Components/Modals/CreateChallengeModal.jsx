@@ -57,7 +57,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
     } else {
       mutate({ challengeData, paid: selectedOptionpaid, objective });
     }
-    handleClose();
+    //handleClose();
   };
 
   const now = new Date().toISOString().slice(0, -8);
