@@ -103,7 +103,7 @@ const updateJob = async (req, res, next) => {
       paid,
       skills,
     });
-    res.status(200).json({ job });
+    res.status(201).json({ message: "Job updated successfully", job });
   } catch (err) {
     res
       .status(500)
@@ -137,20 +137,34 @@ const geJobById = async (req, res, next) => {
 
 const deleteJob = async (req, res, next) => {
   const id = req.params.id;
+  const ownerId = req.userId;
 
   let job;
   try {
     job = await Job.findById(id);
-    const company = await Company.findById(job.company);
-    await company.jobs.pull(job);
-    await company.save();
-    await Job.findByIdAndDelete({ _id: id });
-    return res.status(200).json({ message: "Successfully Delete" });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ message: "Unable To Delete" });
+
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    if (job.company) {
+      const company = await Company.findById(job.company);
+      await company.jobs.pull(job);
+      await company.save();
+      await Job.findByIdAndDelete(id);
+    } else {
+      const user = await User.findById(job.owner._id);
+      await user.jobs.pull(id);
+      await user.save();
+      await Job.findByIdAndDelete(id);
+    }
+    return res.status(200).json({ message: "Job Successfully Deleted" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Unable To Delete Job" });
   }
 };
+
 //// get compnay jobs
 const getByUserId = async (req, res, next) => {
   const companyId = req.params.id;

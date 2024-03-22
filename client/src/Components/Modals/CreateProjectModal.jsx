@@ -68,8 +68,8 @@ const CreateProjectModal = ({ open, handleClose }) => {
       onClose={handleClose}
       className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}
     >
-      <div class="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
-        <div class="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
+      <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
+        <div className="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
           <div className="flex justify-between px-4 pt-4">
             <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
               Create Project
@@ -84,7 +84,7 @@ const CreateProjectModal = ({ open, handleClose }) => {
             </button>
           </div>
           <hr />
-          <div class="m-8 max-w-[550px] mx-auto space-y-6">
+          <div className="m-8 max-w-[550px] mx-auto space-y-6">
             <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-2">
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 space-y-4">
                 {/*<div className="md:col-span-5">

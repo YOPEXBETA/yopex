@@ -11,6 +11,7 @@ import Card from "./index";
 import Dropdown from "../dropdown";
 import DeletePostPopup from "../Popup/DeletePostPopup";
 import Tag from "../tags/Index";
+import { Link } from "react-router-dom";
 
 const ProjectsProfile = ({
   post,
@@ -77,18 +78,18 @@ const ProjectsProfile = ({
     <Card>
       <div className="lg:flex">
         <img
-          className="object-cover w-full md:h-56 rounded-tl-2xl rounded-bl-2xl lg:w-64"
+          className="object-cover w-full md:h-56 rounded-tl-2xl rounded-bl-2xl lg:w-96"
           src={post.postPicturePath ? post.postPicturePath : ImagePlaceholder}
           alt="thumbnail"
         />
 
-        <div className="flex flex-col justify-between py-6 lg:mx-6">
-          <a
-            href={`/postDetails/${post._id}`}
+        <div className="flex flex-col justify-between py-6 lg:mx-6 w-full">
+          <Link
+            to={`/postDetails/${post._id}`}
             className="text-xl font-semibold text-gray-800 hover:underline dark:text-white "
           >
             {post?.title}
-          </a>
+          </Link>
 
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-500 dark:text-gray-300">

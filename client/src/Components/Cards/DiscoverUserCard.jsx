@@ -60,7 +60,7 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                 </div>
               </div>
               {/* <div className="flex flex-row items-center">
-                <div class="flex">
+                <div className="flex">
                   <StarReviewIcon />
                   <StarReviewIcon />
                   <StarReviewIcon />

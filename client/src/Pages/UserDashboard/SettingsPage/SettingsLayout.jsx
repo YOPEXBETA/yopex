@@ -26,12 +26,12 @@ const SettingsLayout = () => {
           </div>
         )}
         {value === 1 && (
-          <div className="col-span-12  lg:col-span-9 md:col-span-12">
+          <div className="col-span-12 lg:col-span-9 md:col-span-12 mt-4 md:mt-0">
             <Links />
           </div>
         )}
         {value === 2 && (
-          <div className="col-span-12  lg:col-span-9 md:col-span-12">
+          <div className="col-span-12 lg:col-span-9 md:col-span-12 mt-4 md:mt-0">
             <Privacy />
           </div>
         )}

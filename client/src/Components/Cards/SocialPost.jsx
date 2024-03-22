@@ -150,7 +150,7 @@ const SocialPostCard = ({
                 className="w-11 h-11 rounded-full object-cover bg-white border-2"
               />
             )}
-            <div class="">
+            <div className="">
               <Link
                 key={post.user._id}
                 to={post ? `/profile/${post.user._id}` : null}
@@ -161,13 +161,13 @@ const SocialPostCard = ({
                     : "undefined"}
                 </p>
               </Link>
-              <p class="text-xs font-light tracking-wider text-gray-500">
+              <p className="text-xs font-light tracking-wider text-gray-500">
                 {format(new Date(post?.createdAt), "dd MMMM yyyy")}
               </p>
             </div>
           </div>
-          <div class="flex items-center flex-shrink-0 px-2">
-            <div class="flex items-center space-x-1 text-gray-400">
+          <div className="flex items-center flex-shrink-0 px-2">
+            <div className="flex items-center space-x-1 text-gray-400">
               <button
                 aria-label="add to favorites"
                 onClick={() => {
@@ -186,7 +186,7 @@ const SocialPostCard = ({
                   <HeartOutlined />
                 )}
               </button>
-              <p class="font-medium">{post.likesCount}</p>
+              <p className="font-medium">{post.likesCount}</p>
             </div>
           </div>
         </div>

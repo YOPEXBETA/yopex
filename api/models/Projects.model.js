@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const CommentModel = require("./Comment.model");
 
-const SocialMediaPostSchema = new mongoose.Schema(
+const ProjectSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Types.ObjectId, ref: "User" },
 
@@ -66,7 +66,7 @@ const SocialMediaPostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-SocialMediaPostSchema.pre(
+ProjectSchema.pre(
   "findOneAndDelete",
   { document: false, query: true },
   async function (next) {
@@ -86,4 +86,4 @@ SocialMediaPostSchema.pre(
   }
 );
 
-module.exports = mongoose.model("SocialMediaPost", SocialMediaPostSchema);
+module.exports = mongoose.model("Project", ProjectSchema);
