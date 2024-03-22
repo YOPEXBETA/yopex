@@ -17,7 +17,7 @@ const CompanyInfos = () => {
   }
 
   return (
-    <div className="my-4  dark:divide-gray-700 overflow-hidden  dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+    <div className="dark:divide-gray-700 overflow-hidden  dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
       <GeneralCompanyInfo company={company} />
     </div>
   );

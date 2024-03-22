@@ -18,7 +18,7 @@ const MyCompanyJobs = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1  gap-4 py-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 gap-4">
         {companyJobs?.length > 0 ? (
           companyJobs?.map((job) => (
             <WorkCard key={job?._id} companyJobs={companyJobs} job={job} />

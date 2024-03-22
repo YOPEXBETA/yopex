@@ -111,7 +111,7 @@ const SocialPostCard = ({
                       openModal={openModal}
                     />
                     <Link to={`/postDetails/${post._id}`}>
-                      <div className="invisible group-hover:visible absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:rounded-full">
+                      <div className="invisible group-hover:visible absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-t-2xl">
                         <p
                           className="text-white cursor-pointer"
                           //onClick={() => openModal()}
@@ -192,12 +192,12 @@ const SocialPostCard = ({
         </div>
       </div>
 
-      <div className="absolute right-4 top-4 hover:bg-white dark:hover:bg-zinc-600 bg-white/40 rounded-full">
-        <button
-          className="font-medium p-2 flex  rounded-full"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {post.user._id === user._id && (
+      {post.user._id === user._id && (
+        <div className="absolute right-4 top-4 hover:bg-white dark:hover:bg-zinc-600 bg-white/40 rounded-full">
+          <button
+            className="font-medium p-2 flex  rounded-full"
+            onClick={(e) => e.stopPropagation()}
+          >
             <Dropdown
               button={
                 <p className="cursor-pointer">
@@ -214,10 +214,9 @@ const SocialPostCard = ({
               }
               classNames={"py-2 top-4 right-0"}
             />
-          )}
-        </button>
-      </div>
-
+          </button>
+        </div>
+      )}
       {/*<div className="flex items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <div className="flex items-center p-2">

@@ -39,16 +39,6 @@ const companySchema = new mongoose.Schema(
 
     balance: { type: Number, default: 0.0 },
     dateofFoundation: { type: Date },
-
-    posts: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "SocialMediaPost",
-        },
-      ],
-      default: [],
-    },
     notificationsCompany: [
       {
         type: mongoose.Schema.Types.ObjectId,
