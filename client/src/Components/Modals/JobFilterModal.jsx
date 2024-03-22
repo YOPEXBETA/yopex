@@ -202,7 +202,7 @@ const JobFilterModal = ({
                         <input
                           type="checkbox"
                           className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                          value={skill.name}
+                          value={skill?.name}
                           checked={selectedSkill.includes(skill.name)}
                           onChange={() => handleCheckboxChange(skill.name)}
                         />
@@ -210,7 +210,7 @@ const JobFilterModal = ({
                           htmlFor="green-checkbox"
                           className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                          {skill.name}
+                          {skill?.name}
                         </label>
                       </div>
                     ))}
@@ -219,7 +219,15 @@ const JobFilterModal = ({
               )}
               {selectedTab === 1 && (
                 <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 bg-gray-50 p-6 rounded-lg">
-                  {JobTypeEnum?.map((jobTypeName) => (
+                  {[
+                    "Full-time",
+                    "Part-time",
+                    "Contract",
+                    "Freelance",
+                    "Internship",
+                    "Volunteering",
+                    "Scholarship",
+                  ].map((jobTypeName) => (
                     <div key={jobTypeName} className="flex items-center mb-4">
                       <input
                         type="checkbox"
@@ -241,7 +249,7 @@ const JobFilterModal = ({
               {selectedTab === 2 && (
                 <>
                   <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-5 gap-4 dark:bg-zinc-800 bg-gray-50 p-6 rounded-lg">
-                    {OfferTypeEnum?.map((offerTypeName) => (
+                    {["On-site", "Hybrid", "Remote"].map((offerTypeName) => (
                       <div
                         key={offerTypeName}
                         className="flex items-center mb-4"

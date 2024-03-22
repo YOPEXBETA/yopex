@@ -11,30 +11,39 @@ const main = require("../server");
 
 const addJob = async (req, res, next) => {
   try {
-    const { companyId, ...jobDetails } = req.body;
+    const { ownerId, ...jobDetails } = req.body;
 
-    const userId = req.userId;
-    const user = await User.findById(userId);
-
-    const company = await Company.findOne({ user: user._id, _id: companyId });
-
-    if (!company) {
-      return res.status(400).json({ error: "Company not found" });
+    if (!ownerId) {
+      return res.status(400).json({ error: "OwnerId must be provided" });
     }
 
-    if (company.verified === false) {
-      return res.status(400).json({ message: "Company not verified" });
+    const user = await User.findById(ownerId);
+    if (!user) {
+      const company = await Company.findById(ownerId);
+      if (!company) {
+        return res.status(400).json({ error: "Owner not found" });
+      }
+      /*if (company.verified === false) {
+        return res.status(400).json({ message: "Company not verified" });
+      }*/
+      const jobOffer = new Job({
+        company: ownerId,
+        ...jobDetails,
+      });
+
+      await jobOffer.save();
+
+      return res
+        .status(201)
+        .json({ message: "Job offer created successfully", jobOffer });
     }
 
     const jobOffer = new Job({
-      company: company._id,
+      owner: ownerId,
       ...jobDetails,
     });
 
     await jobOffer.save();
-
-    company.jobs.push(jobOffer._id);
-    await company.save();
 
     res
       .status(201)
@@ -65,6 +74,7 @@ const getAllJobs = async (req, res) => {
     const jobs = await Job.find(filters)
       .select("-acceptedAppliers")
       .populate("company", "companyName companyLogo")
+      .populate("owner", "firstname lastname picturePath")
       .populate("skills");
 
     return res.status(200).json(jobs);

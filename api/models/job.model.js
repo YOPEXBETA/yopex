@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 
 const JobSchema = new mongoose.Schema(
   {
-    companyId: {
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    company: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
     },
@@ -14,29 +18,28 @@ const JobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
-    image: {
-      type: String,
-      required: false,
-    },
     salary: { type: Number, required: false },
-
     jobType: {
-      type: Array,
-      default: [],
+      type: String,
+      enum: [
+        "Full-time",
+        "Part-time",
+        "Contract",
+        "Freelance",
+        "Internship",
+        "Volunteering",
+        "Scholarship",
+      ],
+      default: "Full-time",
     },
 
     offerType: {
-      type: Array,
-      default: [],
+      type: String,
+      enum: ["On-site", "Hybrid", "Remote"],
+      default: "On-site",
     },
     paid: { type: Boolean, required: false },
 
-    company: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Company",
-      required: true,
-    },
     skills: [
       {
         type: mongoose.Schema.Types.ObjectId,

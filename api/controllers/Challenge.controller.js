@@ -20,7 +20,6 @@ const CreateChallenge = async (req, res, next) => {
       youtubeLink,
       objective,
     } = req.body;
-    console.log(req.body);
     const userId = req.userId;
     const user = await UserModel.findById(userId);
     let owner = user;
@@ -30,7 +29,6 @@ const CreateChallenge = async (req, res, next) => {
     }
 
     if (companyId) {
-      console.log("company id:", companyId);
       owner = await CompanyModel.findOne({
         user: user._id,
         _id: companyId,
@@ -84,8 +82,12 @@ const CreateChallenge = async (req, res, next) => {
       await owner.save();
     }
     if (paid === "true") {
+      const url =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:8000/api/payment"
+          : "https://yopexhub.com/api/payment";
       const response = await axios.post(
-        "http://localhost:8000/api/payment",
+        url,
         {
           amount: price * 1000,
           firstName: user.firstname,

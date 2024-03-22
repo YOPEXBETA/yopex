@@ -5,6 +5,14 @@ const companyModel = require("./company.model");
 const ChallengeSchema = new mongoose.Schema(
   {
     //nbruser: { type: Number, default: 10 },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
     picturePath: { type: String },
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -38,19 +46,10 @@ const ChallengeSchema = new mongoose.Schema(
       default: [],
     },
     price: { type: Number, required: false },
-    //cover: { type: String },
     images: { type: [String] }, //array that include string
     deliveryTime: { type: Number },
     features: { type: [String] },
     deadline: { type: Date },
-    company: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Company",
-    },
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
     winner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -64,7 +63,6 @@ const ChallengeSchema = new mongoose.Schema(
         submissionDate: { type: Date },
         review: { type: Boolean, default: false },
         star: { type: Number, default: 0 },
-
       },
     ],
     banned: [

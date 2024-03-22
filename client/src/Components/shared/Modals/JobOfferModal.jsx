@@ -49,7 +49,11 @@ const JobOfferModal = ({ open, handleClose, job }) => {
               <div className="col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-12">
                 <div className="flex flex-col items-center justify-center gap-4 mt-8">
                   <img
-                    src={job?.company?.companyLogo}
+                    src={
+                      job?.company
+                        ? job?.company?.companyLogo
+                        : job?.owner?.picturePath
+                    }
                     alt="Icon"
                     className="w-24 h-24 rounded-lg object-contain"
                   />
@@ -58,21 +62,30 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                       {job.title}
                     </p>
                     <p className="dark:text-gray-200">
-                      By {job?.company?.companyName}
+                      By{" "}
+                      {job?.company
+                        ? job?.company?.companyName
+                        : job?.owner?.firstname + " " + job?.owner?.lastname}
                     </p>
                   </div>
                   <div
                     className={`flex ${
-                      user && !user.companies.includes(job.company._id)
+                      user && !user.companies.includes(job.company?._id)
                         ? "dark:bg-zinc-800 gap-2"
                         : ""
                     } items-center bg-white`}
                   >
-                    <Link to={`/company/${job.company._id}`}>
+                    <Link
+                      to={
+                        job?.company
+                          ? `/company/${job?.company?._id}`
+                          : `/profile/${job?.owner?._id}`
+                      }
+                    >
                       <button
                         className={`${
                           !user ||
-                          (user && !user.companies.includes(job.company._id))
+                          (user && !user.companies.includes(job.company?._id))
                             ? "w-full"
                             : "flex-1"
                         } bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded`}
@@ -83,17 +96,20 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                         </div>
                       </button>
                     </Link>
-                    {user && !user.companies.includes(job.company._id) && (
-                      <button
-                        className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded"
-                        onClick={onclick}
-                      >
-                        <div className="flex items-center justify-center">
-                          <p className="mr-2">Apply Now</p>
-                          <IoIosArrowForward />
-                        </div>
-                      </button>
-                    )}
+
+                    {user &&
+                      !user.companies.includes(job.company?._id) &&
+                      !user?._id === job?.owner?._id && (
+                        <button
+                          className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded"
+                          onClick={onclick}
+                        >
+                          <div className="flex items-center justify-center">
+                            <p className="mr-2">Apply Now</p>
+                            <IoIosArrowForward />
+                          </div>
+                        </button>
+                      )}
                   </div>
                 </div>
 
@@ -131,7 +147,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   </div>
 
                   <div className="flex md:block lg:hidden w-full dark:bg-zinc-800 justify-between px-4 py-2 bg-white">
-                    {user && !user.companies.includes(job.company._id) && (
+                    {user && !user.companies.includes(job.company?._id) && (
                       <button
                         className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded  w-full"
                         onClick={onclick}
@@ -150,11 +166,9 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                         JOB TYPE
                       </h2>
                       <p className="dark:text-white font-bold text-lg">
-                        {job?.jobType?.map((jobType, index) => (
-                          <span key={index} className="py-1 dark:text-white">
-                            {jobType}
-                          </span>
-                        ))}
+                        <span className="py-1 dark:text-white">
+                          {job?.jobType}
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -164,11 +178,9 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                         OFFER TYPE
                       </h2>
                       <p className="dark:text-white font-bold text-lg">
-                        {job?.offerType?.map((offerType, index) => (
-                          <span key={index} className="py-1 dark:text-white">
-                            {offerType}
-                          </span>
-                        ))}
+                        <span className="py-1 dark:text-white">
+                          {job?.offerType}
+                        </span>
                       </p>
                     </div>
                   </div>

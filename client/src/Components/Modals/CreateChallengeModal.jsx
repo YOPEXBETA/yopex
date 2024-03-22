@@ -41,7 +41,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
     },
   });
 
-  const deadline = watch("deadline");
+  //const deadline = watch("deadline");
 
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
@@ -50,7 +50,6 @@ const CreateChallengeModal = ({ open, handleClose }) => {
   const { mutate, isSuccess } = useCreateChallenge(user);
   //const fileUploadMutation = useFileUpload();
   const onSubmit = async (challengeData) => {
-    console.log(challengeData);
     if (showCompanies) {
       const companyId = selectedOption;
       mutate({ companyId, challengeData, paid: selectedOptionpaid, objective });

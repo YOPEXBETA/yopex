@@ -68,8 +68,8 @@ export const useCreateJob = (user) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ companyId, JobData }) => {
-      await axios.post(`${url}/job/add`, { companyId, ...JobData }, {});
+    mutationFn: async ({ ownerId, JobData }) => {
+      await axios.post(`${url}/job/add`, { ownerId, ...JobData }, {});
     },
     onSuccess: () => {
       toast.success("Job added successfully");

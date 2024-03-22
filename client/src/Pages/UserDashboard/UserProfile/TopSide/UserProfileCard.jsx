@@ -48,8 +48,6 @@ const UserProfileCard = () => {
     return <LoadingSpinner />;
   }
 
-  console.log(userProfile);
-
   if (userProfile)
     return (
       <Card>

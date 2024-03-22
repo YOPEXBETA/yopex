@@ -27,7 +27,6 @@ jobRouter.put("/update/:id", authenticateToken, updateJob);
 jobRouter.get("/:companyId", authenticateToken, geJobById);
 jobRouter.delete("/:id", authenticateToken, deleteJob);
 jobRouter.get("/user/:id", authenticateToken, getByUserId);
-//
 jobRouter.put("/jobs/:jobId/apply/:userId", applyJob);
 jobRouter.put("/jobs/:jobId/unapply/:userId", unapplyJob);
 jobRouter.get("/jobs/:jobId/appliers", getAppliers);

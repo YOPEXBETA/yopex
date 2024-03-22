@@ -28,13 +28,12 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
   const handleCardClick = (companyId) => {
     setSelectedOption(companyId);
   };
+
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
   const { data: userProfile, isLoading } = useUserById(userId);
 
   const { data: skills } = useSkills();
-  const { data: JobTypes } = useJobTypes();
-  const { data: OfferTypes } = useOfferTypes();
   const [content, setContent] = useState("");
 
   const {
@@ -53,8 +52,13 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
   const { mutate } = useCreateJob(user);
 
   const onSubmit = (JobData) => {
-    const companyId = selectedOption;
+    let ownerId = "";
 
+    if (showUser) {
+      ownerId = userId;
+    } else {
+      ownerId = selectedOption;
+    }
     const modifiedJobData = {
       ...JobData,
       description: content,
@@ -62,7 +66,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
       skills: JobData?.skills.map((skill) => skill.value),
     };
 
-    mutate({ companyId, JobData: modifiedJobData });
+    mutate({ ownerId: ownerId, JobData: modifiedJobData });
   };
 
   const handleToggleUser = () => {
@@ -249,18 +253,20 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                   <div className="relative my-2">
                     <select
                       id="jobType"
-                      required={true}
+                      required={false}
                       className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                      {...register("jobType", { required: true })}
+                      {...register("jobType", { required: false })}
                     >
                       <option value="" defaultValue>
                         Choose a job type
                       </option>
-                      {JobTypes?.map((jobType) => (
-                        <option key={jobType._id} value={jobType.name}>
-                          {jobType.name}
-                        </option>
-                      ))}
+                      <option value="Full-time">Full-time</option>
+                      <option value="Part-time">Part-time</option>
+                      <option value="Contract">Contract</option>
+                      <option value="Freelance">Freelance</option>
+                      <option value="Internship">Internship</option>
+                      <option value="Volunteering">Volunteering</option>
+                      <option value="Scholarship">Scholarship</option>
                     </select>
                   </div>
                 </div>
@@ -271,18 +277,14 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                   <div className="relative my-2">
                     <select
                       id="offerType"
-                      required={true}
+                      required={false}
                       className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                      {...register("offerType", { required: true })}
+                      {...register("offerType", { required: false })}
                     >
-                      <option value="" defaultValue>
-                        Choose an offer type
-                      </option>
-                      {OfferTypes?.map((offerType) => (
-                        <option key={offerType._id} value={offerType.name}>
-                          {offerType.name}
-                        </option>
-                      ))}
+                      <option value="">Choose an offer type</option>
+                      <option value="On-site">On-site</option>
+                      <option value="Hybrid">Hybrid</option>
+                      <option value="Remote">Remote</option>
                     </select>
                   </div>
                 </div>

@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useJobById } from "../../../../../../hooks/react-query/useJobs";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
-import JobCard from "../../../../../../Components/Cards/JobCard";
 import WorkCard from "../../../../../../Components/Cards/WorkCard";
 
 const MyCompanyJobs = () => {
