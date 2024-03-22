@@ -99,7 +99,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
 
                     {user &&
                       !user.companies.includes(job.company?._id) &&
-                      !user?._id === job?.owner?._id && (
+                      user?._id !== job?.owner?._id && (
                         <button
                           className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded"
                           onClick={onclick}
