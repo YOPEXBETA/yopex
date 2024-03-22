@@ -24,7 +24,7 @@ const ScoreLeaderboard = ({ extra }) => {
                 <img
                   alt="picture"
                   src={user?.picturePath}
-                  className="rounded-full border h-12 w-12 object-contain"
+                  className="rounded-full border h-12 w-12 object-cover"
                 />
               ) : (
                 <img

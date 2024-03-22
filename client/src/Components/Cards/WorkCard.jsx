@@ -51,7 +51,7 @@ const WorkCard = ({ job, extra }) => {
               job?.company ? job?.company?.companyLogo : job?.owner?.picturePath
             }
             alt="Icon"
-            className="w-16 h-16 rounded-lg object-contain hidden md:block lg:block"
+            className="w-16 h-16 rounded-lg object-cover hidden md:block lg:block"
           />
           <div>
             <h3 className="font-bold mt-px">{job?.title}</h3>
