@@ -36,7 +36,6 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
   });
 
   const handleEdit = (data) => {
-    console.log(data);
     mutate({
       ...data,
     });

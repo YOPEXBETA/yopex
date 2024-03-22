@@ -195,6 +195,11 @@ export const useEditJob = (jobId) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["jobs"]);
+      toast.success("Job Updated successfully!");
+    },
+
+    onError: (error) => {
+      toast.error(`can't update a job ${error.response.data.message}`);
     },
   });
 };

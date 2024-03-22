@@ -253,9 +253,9 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                   <div className="relative my-2">
                     <select
                       id="jobType"
-                      required={false}
+                      required={true}
                       className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                      {...register("jobType", { required: false })}
+                      {...register("jobType", { required: true })}
                     >
                       <option value="" defaultValue>
                         Choose a job type
@@ -277,9 +277,9 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                   <div className="relative my-2">
                     <select
                       id="offerType"
-                      required={false}
+                      required={true}
                       className="w-full p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700"
-                      {...register("offerType", { required: false })}
+                      {...register("offerType", { required: true })}
                     >
                       <option value="">Choose an offer type</option>
                       <option value="On-site">On-site</option>

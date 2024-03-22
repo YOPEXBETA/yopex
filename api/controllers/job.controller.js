@@ -88,23 +88,16 @@ const getAllJobs = async (req, res) => {
 };
 
 const updateJob = async (req, res, next) => {
-  const { title, description, salary, skills, job_type, offer_type, paid } =
-    req.body;
+  const { ...jobDetails } = req.body;
   const jobId = req.params.id;
   let job;
   try {
     job = await Job.findByIdAndUpdate(jobId, {
-      title,
-      description,
-      salary,
-      skills,
-      job_type,
-      offer_type,
-      paid,
-      skills,
+      ...jobDetails,
     });
     res.status(201).json({ message: "Job updated successfully", job });
-  } catch (err) {
+  } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ error: `Failed to update job offers: ${error.message}` });
