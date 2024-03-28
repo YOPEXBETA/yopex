@@ -4,6 +4,7 @@ const ContestConversationModel = require("../models/ContestConversation.model");
 const CompanyModel = require("../models/company.model");
 const submissionModel = require("../models/submission.model");
 const UserModel = require("../models/user.model");
+const Skill = require("../models/skill.model");
 
 const CreateChallenge = async (req, res, next) => {
   try {
@@ -14,7 +15,7 @@ const CreateChallenge = async (req, res, next) => {
       price,
       companyId,
       deadline,
-      RecommendedSkills,
+      skills,
       nbruser,
       paid,
       youtubeLink,
@@ -54,7 +55,7 @@ const CreateChallenge = async (req, res, next) => {
       category,
       deadline,
       price: paid === "true" ? price : 0,
-      RecommendedSkills,
+      skills,
       nbruser,
       YoutubeLink: youtubeLink,
       paid: paid === "true" ? true : false,
@@ -121,7 +122,7 @@ const getChallengeById = async (req, res) => {
     const challenge = await ChallengeModel.findById(challengeId)
       .populate("company")
       .populate("owner", "firstname lastname picturePath _id")
-      .populate("RecommendedSkills", "name _id")
+      .populate("skills", "name _id")
       .populate({
         path: "banned",
         select: "firstname lastname picturePath _id",
@@ -207,14 +208,20 @@ const getAllChallenges = async (req, res) => {
       },
     }),
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
-    ...(q.skills && { RecommendedSkills: { $in: q.skills } }),
+    ...(q.skills && {
+      skills: {
+        $in: (await Skill.find({ name: { $in: q.skills.split(",") } })).map(
+          (skill) => skill._id
+        ),
+      },
+    }),
     ...(q.categories && { category: { $in: q.categories } }),
   };
 
   try {
     const ChallengePosts = await ChallengeModel.find(filters)
       .populate("company")
-      .populate("RecommendedSkills")
+      .populate("skills")
       .populate("category");
 
     res.status(200).json(ChallengePosts);
@@ -265,8 +272,7 @@ const getChallengeUserSubmit = async (req, res) => {
 };
 
 const updateChallenge = async (req, res, next) => {
-  const { description, title, nbruser, price, category, RecommendedSkills } =
-    req.body;
+  const { description, title, nbruser, price, category, skills } = req.body;
   const challengeId = req.params.challengeId;
 
   let Challenge;
@@ -277,7 +283,7 @@ const updateChallenge = async (req, res, next) => {
       nbruser,
       price,
       category: category.map((cat) => cat.value),
-      RecommendedSkills: RecommendedSkills.map((skill) => skill.value),
+      skills: skills.map((skill) => skill.value),
     });
     res.status(200).json({ Challenge });
   } catch (err) {

@@ -113,7 +113,7 @@ export const useFindChallenges = (
       if (searchQuery) query += `&search=${searchQuery}`;
 
       if (skills && skills.length > 0) {
-        query += skills.map((skill) => `&skills=${skill}`).join(""); // Use "|" as OR operator
+        query += skills.map((skill) => `&skills=${skill}`).join("");
       }
       if (categories && categories.length > 0) {
         query += categories

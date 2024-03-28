@@ -10,7 +10,7 @@ const challengeSchemaValidator = yup.object().shape({
     .required("Price is required")
     .positive("Price must be a positive number"),
   deadline: yup.date(),
-  RecommendedSkills: yup.array().of(yup.string()),
+  skills: yup.array().of(yup.string()),
   paid: yup.string().required("paid is required"),
   nbruser: yup
     .number("")
