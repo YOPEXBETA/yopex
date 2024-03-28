@@ -27,7 +27,7 @@ const ChallengeSchema = new mongoose.Schema(
       enum: ["Recrutement", "Freelance", "Internship", "Innovation"],
       default: "Recrutement",
     },
-    category: {
+    categories: {
       type: [
         {
           type: mongoose.Schema.Types.ObjectId,
@@ -36,7 +36,6 @@ const ChallengeSchema = new mongoose.Schema(
       ],
       default: [],
     },
-
     skills: [
       {
         type: mongoose.Schema.Types.ObjectId,

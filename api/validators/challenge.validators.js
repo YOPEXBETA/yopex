@@ -3,7 +3,7 @@ const yup = require("yup");
 const challengeSchemaValidator = yup.object().shape({
   title: yup.string().required("Title is required"),
   description: yup.string().required("Description is required"),
-  category: yup.array().of(yup.string()),
+  categories: yup.array().of(yup.string()),
   price: yup
     .number("")
     .typeError("Price must be a number")

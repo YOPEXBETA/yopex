@@ -64,7 +64,7 @@ const getAllJobs = async (req, res) => {
       ...(q.offerType && { offerType: q.offerType }),
       ...(q.skills && {
         skills: {
-          $in: (await Skill.find({ name: { $in: q.skills.split(",") } })).map(
+          $in: (await Skill.find({ name: { $in: q.skills } })).map(
             (skill) => skill._id
           ),
         },

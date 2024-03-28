@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCategories } from "../../hooks/react-query/useCategories";
 import CloseIcon from "../icons/CloseIcon";
+import SearchIcon from "../icons/SearchIcon";
 
 const ChallengeFilterModal = ({
   open,
@@ -15,14 +16,17 @@ const ChallengeFilterModal = ({
   selectedSkill,
 }) => {
   const { register, watch } = useForm();
+  const [skillSearchQuery, setSkillSearchQuery] = useState("");
+  const [categorySearchQuery, setCategorySearchQuery] = useState("");
   const [isPriceRangeOpen, setIsPriceRangeOpen] = useState(false);
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const minAmount = watch("minAmount");
   const maxAmount = watch("maxAmount");
-  const { data: Skills } = useSkills();
-  const { data: categorys } = useCategories();
-  const itCategory = categorys?.map((category) => category.name);
+  const { data: Skills } = useSkills(skillSearchQuery);
+  const { data: Categories } = useCategories(categorySearchQuery);
+
+  console.log(Categories, "category");
 
   const handleCheckboxChange = (skillName) => {
     const updatedSkill = selectedSkill.includes(skillName)
@@ -174,26 +178,43 @@ const ChallengeFilterModal = ({
                 </button>
               </h2>
               {isSkillsOpen && (
-                <div className="mt-3 max-h-96 overflow-y-auto scroll-smooth scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700   rounded-lg  pb-4 text-left overflow-hidden transform transition-all">
-                  {Skills?.map((skill, index) => (
-                    <label
-                      key={skill._id}
-                      className="block text-sm  hover:bg-gray-100 hover:text-gray-900"
-                    >
-                      <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input
-                          type="checkbox"
-                          value={skill?.name}
-                          checked={selectedSkill.includes(skill.name)}
-                          onChange={() => handleCheckboxChange(skill.name)}
-                          className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                        />
-                        <label className="w-full ml-2 text-sm font-medium  rounded dark:text-gray-300">
-                          {skill?.name}
-                        </label>
+                <div className="mt-6">
+                  <div>
+                    <div className="relative w-full">
+                      <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        <SearchIcon />
                       </div>
-                    </label>
-                  ))}
+                      <input
+                        type="text"
+                        onChange={(e) =>
+                          setSkillSearchQuery(e.currentTarget.value)
+                        }
+                        className="border rounded-lg border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
+                        placeholder="Search for skills"
+                      />
+                    </div>
+                    <div className="mt-3 max-h-96 overflow-y-auto scroll-smooth scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700   rounded-lg  pb-4 text-left overflow-hidden transform transition-all">
+                      {Skills?.map((skill, index) => (
+                        <label
+                          key={index}
+                          className="block text-sm  hover:bg-gray-100 hover:text-gray-900"
+                        >
+                          <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input
+                              type="checkbox"
+                              value={skill?._id}
+                              checked={selectedSkill.includes(skill.name)}
+                              onChange={() => handleCheckboxChange(skill.name)}
+                              className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                            />
+                            <label className="w-full ml-2 text-sm font-medium  rounded dark:text-gray-300">
+                              {skill?.name}
+                            </label>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
               <h2 id="accordion-flush-heading-3">
@@ -224,28 +245,43 @@ const ChallengeFilterModal = ({
                 </button>
               </h2>
               {isCategoriesOpen && (
-                <div className="mt-3 max-h-96 overflow-y-auto scroll-smooth  scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700   rounded-lg  pb-4 text-left overflow-hidden transform transition-all">
-                  {itCategory?.map((CategoryName) => (
-                    <label
-                      key={CategoryName}
-                      className="block text-sm hover:bg-gray-100 hover:text-gray-900"
-                    >
-                      <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input
-                          type="checkbox"
-                          value={CategoryName}
-                          checked={selectedCategory?.includes(CategoryName)}
-                          onChange={() =>
-                            handleCheckboxChangeCategory(CategoryName)
-                          }
-                          className="w-4 h-4 text-green-600  rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                        />
-                        <label className="w-full ml-2 text-sm font-medium  rounded dark:text-gray-300">
-                          {CategoryName}
-                        </label>
-                      </div>
-                    </label>
-                  ))}
+                <div className="mt-6">
+                  <div className="relative w-full">
+                    <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                      <SearchIcon />
+                    </div>
+                    <input
+                      type="text"
+                      onChange={(e) =>
+                        setCategorySearchQuery(e.currentTarget.value)
+                      }
+                      className="border rounded-lg border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
+                      placeholder="Search for categories"
+                    />
+                  </div>
+                  <div className="mt-3 max-h-96 overflow-y-auto scroll-smooth  scrollbar-thin scrollbar-thumb-green-500 dark:scrollbar-track-slate-700   rounded-lg  pb-4 text-left overflow-hidden transform transition-all">
+                    {Categories?.map((Category, index) => (
+                      <label
+                        key={index}
+                        className="block text-sm hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        <div className="flex items-center py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                          <input
+                            type="checkbox"
+                            value={Category._id}
+                            checked={selectedCategory?.includes(Category.name)}
+                            onChange={() =>
+                              handleCheckboxChangeCategory(Category.name)
+                            }
+                            className="w-4 h-4 text-green-600  rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                          />
+                          <label className="w-full ml-2 text-sm font-medium  rounded dark:text-gray-300">
+                            {Category.name}
+                          </label>
+                        </div>
+                      </label>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

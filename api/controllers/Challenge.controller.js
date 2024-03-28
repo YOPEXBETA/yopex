@@ -5,13 +5,14 @@ const CompanyModel = require("../models/company.model");
 const submissionModel = require("../models/submission.model");
 const UserModel = require("../models/user.model");
 const Skill = require("../models/skill.model");
+const Category = require("../models/Category.model");
 
 const CreateChallenge = async (req, res, next) => {
   try {
     const {
       title,
       description,
-      category,
+      categories,
       price,
       companyId,
       deadline,
@@ -52,7 +53,7 @@ const CreateChallenge = async (req, res, next) => {
     const challenge = new ChallengeModel({
       title,
       description,
-      category,
+      categories,
       deadline,
       price: paid === "true" ? price : 0,
       skills,
@@ -197,32 +198,39 @@ const getCompanyChallenges = async (req, res) => {
 
 const getAllChallenges = async (req, res) => {
   const q = req.query;
+
   const filters = {
     verified: true,
     ...(q.userId && { userId: q.userId }),
-    ...(q.category && { category: q.category }),
     ...((q.min || q.max) && {
       price: {
         ...(q.min && { $gte: q.min }),
         ...(q.max && { $lte: q.max }),
       },
     }),
+
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+    ...(q.categories && {
+      categories: {
+        $in: (await Category.find({ name: { $in: q.categories } })).map(
+          (category) => category._id
+        ),
+      },
+    }),
     ...(q.skills && {
       skills: {
-        $in: (await Skill.find({ name: { $in: q.skills.split(",") } })).map(
+        $in: (await Skill.find({ name: { $in: q.skills } })).map(
           (skill) => skill._id
         ),
       },
     }),
-    ...(q.categories && { category: { $in: q.categories } }),
   };
 
   try {
     const ChallengePosts = await ChallengeModel.find(filters)
       .populate("company")
       .populate("skills")
-      .populate("category");
+      .populate("categories");
 
     res.status(200).json(ChallengePosts);
   } catch (err) {
@@ -272,7 +280,7 @@ const getChallengeUserSubmit = async (req, res) => {
 };
 
 const updateChallenge = async (req, res, next) => {
-  const { description, title, nbruser, price, category, skills } = req.body;
+  const { description, title, nbruser, price, categories, skills } = req.body;
   const challengeId = req.params.challengeId;
 
   let Challenge;
@@ -282,7 +290,7 @@ const updateChallenge = async (req, res, next) => {
       description,
       nbruser,
       price,
-      category: category.map((cat) => cat.value),
+      categories: categories.map((cat) => cat.value),
       skills: skills.map((skill) => skill.value),
     });
     res.status(200).json({ Challenge });
