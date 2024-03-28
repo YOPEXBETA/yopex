@@ -78,7 +78,7 @@ const ProjectsProfile = ({
     <Card>
       <div className="lg:flex">
         <img
-          className="object-cover w-full md:h-56 rounded-tl-2xl rounded-bl-2xl lg:w-96"
+          className="object-cover w-full md:h-56 rounded-tl-2xl rounded-bl-2xl lg:w-80"
           src={post.postPicturePath ? post.postPicturePath : ImagePlaceholder}
           alt="thumbnail"
         />

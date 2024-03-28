@@ -24,7 +24,6 @@ const Comments = ({ post, postId, userId }) => {
   const { data: comments } = useCommentsByPosts(postId);
   const { register, handleSubmit, reset } = useForm();
   const { mutate, isLoading } = useAddComment(postId, post.userId);
-
   const { mutate: likePost, isLoading: likeLoading } = useLikePost(
     user._id,
     post.userId
@@ -46,10 +45,10 @@ const Comments = ({ post, postId, userId }) => {
             to={post ? `/profile/${post?.user?._id}` : null}
             className="cursor-pointer pb-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
           >
-            {post?.userPicturePath ? (
+            {post?.user?.picturePath ? (
               <img
                 alt="post"
-                src={post?.userPicturePath}
+                src={post?.user?.picturePath}
                 className="h-9 w-9 rounded-full border"
               />
             ) : (

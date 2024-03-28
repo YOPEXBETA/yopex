@@ -5,6 +5,7 @@ import SocialPostCard from "../../../../../../Components/Cards/SocialPost";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import SocialPostSkeleton from "../../../../../../Components/SkeletonLoading/SocialPostSkeleton";
+import ProjectsProfile from "../../../../../../Components/Cards/ProjectsProfile";
 
 const Bookmarks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +30,7 @@ const Bookmarks = () => {
   const bookmarksId = posts?.map((book) => book._id);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
+    <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 py-2 mb-12">
       <div>
         {isLoading ? (
           <LoadingSpinner />
@@ -37,10 +38,7 @@ const Bookmarks = () => {
           <p className="dark:text-gray-200">No Favorites found.</p>
         ) : (
           posts?.map((post) => (
-            <SocialPostCard
-              className="xl:h-48 xl:w-96"
-              height={"48"}
-              width={"96"}
+            <ProjectsProfile
               key={post?._id}
               post={post}
               bookmarks={bookmarksId}
@@ -51,7 +49,7 @@ const Bookmarks = () => {
       </div>
 
       {/* Render the SocialPostModal conditionally */}
-      {isModalOpen && (
+      {/*isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <SocialPostModal
             image={selectedImage}
@@ -59,7 +57,7 @@ const Bookmarks = () => {
             post={selectedPost}
           />
         </div>
-      )}
+      )*/}
     </div>
   );
 };

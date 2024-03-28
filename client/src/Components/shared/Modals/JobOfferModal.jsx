@@ -7,6 +7,7 @@ import { FaEye } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaCalendarAlt, FaUsers } from "react-icons/fa";
 import Tag from "../../tags/Index";
+import ImagePlaceholder from "../../../assets/images/ImagePlaceholder.jpg";
 
 const JobOfferModal = ({ open, handleClose, job }) => {
   // Global states |  @redux/toolkit
@@ -50,13 +51,16 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                 <div className="flex flex-col items-center justify-center gap-4 mt-8">
                   <img
                     src={
-                      job?.company
+                      job?.company?.companyLogo
                         ? job?.company?.companyLogo
                         : job?.owner?.picturePath
+                        ? job?.owner?.picturePath
+                        : ImagePlaceholder
                     }
                     alt="Icon"
                     className="w-24 h-24 rounded-lg object-cover"
                   />
+
                   <div className="flex flex-col justify-center items-center">
                     <p className="text-2xl font-bold dark:text-gray-200 mb-2">
                       {job.title}
