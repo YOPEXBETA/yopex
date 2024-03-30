@@ -218,7 +218,7 @@ const getUsers = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const pageSize = 6;
 
-    const query = { role: { $ne: "admin" } };
+    const query = {};
     if (req.query.name) {
       const searchRegex = new RegExp(req.query.name, "i");
       query.$or = [

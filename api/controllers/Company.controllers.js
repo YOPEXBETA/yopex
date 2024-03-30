@@ -29,13 +29,21 @@ const editProfile = async (req, res) => {
 
 const getAllCompanies = async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = 6;
+
     const companies = await companySchema
       .find()
-      .select("companyName companyLogo createdAt");
-    res.status(200).json(companies);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ error: "Server Error" });
+      .sort({ score: -1, createdAt: 1 })
+      .skip(pageSize * (page - 1))
+      .limit(pageSize)
+      .exec();
+
+    const totalCount = await companySchema.countDocuments();
+
+    res.status(200).json({ companies, companyCount: totalCount });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
   }
 };
 
@@ -74,7 +82,10 @@ const ChallengeWinner = async (req, res) => {
     const Challenge = await ChallengeModel.findById(idChallenge);
     const owner = req.userId;
     const requestOwner = await userModel.findById(owner);
-    if ((Challenge.owner?.toString() !== owner.toString()) && (!requestOwner.companies.includes(Challenge.company.toString()))) {
+    if (
+      Challenge.owner?.toString() !== owner.toString() &&
+      !requestOwner.companies.includes(Challenge.company.toString())
+    ) {
       return res.status(400).json({ message: "Not authorized" });
     }
     const User = await userModel.findById(idUser);

@@ -13,13 +13,13 @@ const DiscoverTalents = ({
   totalPages,
   displayedPages,
   page,
+  user,
 }) => {
   //const { mutate, isSuccess } = useSetquery();
-  const { user } = useSelector((state) => state.auth);
 
   return (
     <div>
-      <h5 className="my-5 text-xl text-left">
+      <h5 className="my-5 text-xl text-left dark:text-white">
         Talents ({suggestedUsers?.userCount})
       </h5>
       <hr />

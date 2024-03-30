@@ -14,6 +14,16 @@ export const useAdminCompanies = (page) => {
   });
 };
 
+export const useCompanies = (page) => {
+  return useQuery({
+    queryKey: ["companies", page],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/company/all?page=${page}`);
+      return data;
+    },
+  });
+};
+
 export const useApproveCompany = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -63,7 +73,7 @@ export const useEditCompany = (companyId) => {
   });
 };
 
-export const useCompanies = () => {
+/*export const useCompanies = () => {
   return useQuery({
     queryKey: ["companies"],
     queryFn: async () => {
@@ -72,7 +82,7 @@ export const useCompanies = () => {
       return data;
     },
   });
-};
+};*/
 
 export const useDeleteCompany = (companyId) => {
   const queryClient = useQueryClient();

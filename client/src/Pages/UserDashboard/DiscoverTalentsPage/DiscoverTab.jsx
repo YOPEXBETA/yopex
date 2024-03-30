@@ -3,7 +3,14 @@ import SearchIcon from "../../../Components/icons/SearchIcon";
 import UsersIcon from "../../../Components/icons/UsersIcon";
 import CompanyIcon from "../../../Components/icons/CompanyIcon";
 
-const DiscoverTab = ({ changeValue, value, handleSearchUsers, query }) => {
+const DiscoverTab = ({
+  changeValue,
+  value,
+  handleSearchUsers,
+  handleSearchCompanies,
+  companyQuery,
+  query,
+}) => {
   return (
     <div className="flex flex-col items-center sm:flex-row sm:items-center rounded-full text-zinc-700 dark:bg-zinc-900 dark:text-white">
       <div className="relative w-full">
@@ -26,6 +33,8 @@ const DiscoverTab = ({ changeValue, value, handleSearchUsers, query }) => {
             type="text"
             className="bg-lightPrimary border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
             placeholder="Search for companies..."
+            value={companyQuery}
+            onChange={handleSearchCompanies}
           />
         )}
         <div className="flex absolute inset-y-0 right-0 items-center pr-0  bg-zinc-200 rounded-full">

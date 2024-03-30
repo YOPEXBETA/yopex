@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import DiscoverTalents from "./components/DiscoverTalents";
-import {
-  useSearchUsers,
-  useSetquery,
-  useUsersData,
-} from "../../../hooks/react-query/useUsers";
+import { useSetquery, useUsersData } from "../../../hooks/react-query/useUsers";
+import { useCompanies } from "../../../hooks/react-query/useCompany";
+
 import { useSelector } from "react-redux";
-import SearchIcon from "../../../Components/icons/SearchIcon";
-import CompanyIcon from "../../../Components/icons/CompanyIcon";
-import UsersIcon from "../../../Components/icons/UsersIcon";
-import LoadingSpinner from "../../../Components/LoadingSpinner";
-import DiscoverUserCard from "../../../Components/Cards/DiscoverUserCard";
 import DiscoverTab from "./DiscoverTab";
 import DiscoverCompanies from "./components/DiscoverCompanies";
 
@@ -22,11 +15,17 @@ const Index = () => {
 
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [companyQuery, setCompanyQuery] = useState("");
   const { mutate, isSuccess } = useSetquery();
   const { user } = useSelector((state) => state.auth);
 
   //const { data: suggestedUsers, isLoading } = useSearchUsers();
-  const { data: suggestedUsers, isLoading } = useUsersData(page, query);
+  const { data: suggestedUsers, isLoading: usersLoading } = useUsersData(
+    page,
+    query
+  );
+  const { data: suggestedCompanies, isLoading: companiesLoading } =
+    useCompanies(page, companyQuery);
 
   const handleChangePage = (newPage) => {
     if (newPage <= totalPages && newPage > 0) {
@@ -41,6 +40,10 @@ const Index = () => {
     setQuery(event.target.value);
     mutate(event.target.value);
   };
+  const handleSearchCompanies = (event) => {
+    setCompanyQuery(event.target.value);
+    mutate(event.target.value);
+  };
 
   return (
     <div className="mx-auto container">
@@ -48,7 +51,9 @@ const Index = () => {
         <div className="col-span-12 lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
           <DiscoverTab
             query={query}
+            companyQuery={companyQuery}
             handleSearchUsers={handleSearchUsers}
+            handleSearchCompanies={handleSearchCompanies}
             changeValue={changeValue}
             value={value}
           />
@@ -57,19 +62,26 @@ const Index = () => {
           <div className="col-span-12 lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
             <DiscoverTalents
               suggestedUsers={suggestedUsers}
-              isLoading={isLoading}
+              isLoading={usersLoading}
               query={query}
               setQuery={setQuery}
               handleChangePage={handleChangePage}
               totalPages={totalPages}
               displayedPages={displayedPages}
               page={page}
+              user={user}
             />
           </div>
         )}
         {value === 1 && (
           <div className="col-span-12 lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
-            <DiscoverCompanies />
+            <DiscoverCompanies
+              user={user}
+              companyQuery={companyQuery}
+              setCompanyQuer={setCompanyQuery}
+              suggestedCompanies={suggestedCompanies}
+              isLoading={companiesLoading}
+            />
           </div>
         )}
       </div>
