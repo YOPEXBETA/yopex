@@ -26,8 +26,6 @@ const ChallengeFilterModal = ({
   const { data: Skills } = useSkills(skillSearchQuery);
   const { data: Categories } = useCategories(categorySearchQuery);
 
-  console.log(Categories, "category");
-
   const handleCheckboxChange = (skillName) => {
     const updatedSkill = selectedSkill.includes(skillName)
       ? selectedSkill.filter((selected) => selected !== skillName)
@@ -59,7 +57,7 @@ const ChallengeFilterModal = ({
     >
       <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50"></div>
       <div className="fixed top-0 right-0 h-full flex items-center">
-        <div className="bg-white dark:bg-zinc-800 md:w-[40rem] w-full h-full px-8 py-4  shadow-md overflow-auto">
+        <div className="bg-white dark:bg-zinc-800 md:w-[40rem] w-screen h-full px-8 py-4  shadow-md overflow-auto">
           <div className="">
             <div className="flex justify-between items-center">
               <h5 className="text-xl dark:text-white font-semibold">
