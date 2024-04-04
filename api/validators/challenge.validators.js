@@ -3,14 +3,14 @@ const yup = require("yup");
 const challengeSchemaValidator = yup.object().shape({
   title: yup.string().required("Title is required"),
   description: yup.string().required("Description is required"),
-  category: yup.array().of(yup.string()),
+  categories: yup.array().of(yup.string()),
   price: yup
     .number("")
     .typeError("Price must be a number")
     .required("Price is required")
     .positive("Price must be a positive number"),
   deadline: yup.date(),
-  RecommendedSkills: yup.array().of(yup.string()),
+  skills: yup.array().of(yup.string()),
   paid: yup.string().required("paid is required"),
   nbruser: yup
     .number("")

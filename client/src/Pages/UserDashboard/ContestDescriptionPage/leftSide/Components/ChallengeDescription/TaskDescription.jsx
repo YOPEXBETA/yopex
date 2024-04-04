@@ -52,7 +52,7 @@ const TasksDescription = () => {
           <hr className="my-4" />
           <div className="mb-4">
             <div className="flex flex-wrap gap-2">
-              {challenge.RecommendedSkills.map((skill, index) => (
+              {challenge.skills.map((skill, index) => (
                 <Tag key={index}>{skill.name}</Tag>
               ))}
             </div>

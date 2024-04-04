@@ -4,12 +4,21 @@ import StarReviewIcon from "../icons/StarReviewIcon";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import { useCreateConversation } from "../../hooks/react-query/useConversations";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpinner";
+import { useGetLevels } from "../../hooks/react-query/useLevels";
 
 const DiscoverUserCard = ({ option, extra, user }) => {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
+  const { data: levelsData, isLoading: levelsLoading } = useGetLevels();
   const { mutate: contact } = useCreateConversation(user._id);
 
+  const userLevel = levelsData
+    ? levelsData.find(
+        (level) =>
+          level.minScore <= user?.score && level.maxScore >= user?.score
+      )
+    : null;
   return (
     <div>
       <Card
@@ -19,26 +28,36 @@ const DiscoverUserCard = ({ option, extra, user }) => {
           if (option.firstname && option.lastname) {
             navigate(`/profile/${option._id}`);
             setOpen(false);
-          } else {
-            navigate(`/company/${option._id}`);
-            setOpen(false);
           }
         }}
       >
         <div className="flex flex-col">
           <div className="flex-none sm:flex">
-            <div className=" relative h-32 w-32   sm:mb-0 mb-3">
-              <img
-                src={
-                  option?.picturePath || option?.companyLogo || AvatarProfile
-                }
-                alt={
-                  option.firstname
-                    ? `${option.firstname} ${option.lastname}`
-                    : option.companyName
-                }
-                className="w-32 h-32 object-cover rounded-2xl border"
-              />
+            <div class=" relative h-32 w-32   sm:mb-0 mb-3">
+              <div>
+                {option?.picturePath ? (
+                  <img
+                    alt="picture"
+                    src={option?.picturePath}
+                    className="object-cover rounded-full w-32 h-32 border-4 border-green-500"
+                  />
+                ) : (
+                  <img
+                    alt="default"
+                    src={AvatarProfile}
+                    className="object-cover rounded-full w-32 h-32 border-4 border-green-500"
+                  />
+                )}
+              </div>
+              <a className="absolute -right-1 bottom-2   -ml-3 text-white p-2 text-xs bg-green-500 hover:bg-green-600 font-medium tracking-wider rounded-full transition ease-in duration-300">
+                {userLevel ? (
+                  <p className="dark:text-white text-sm">
+                    {"LV " + parseInt(userLevel?.name.replace("Level ", ""))}
+                  </p>
+                ) : (
+                  <LoadingSpinner />
+                )}
+              </a>
             </div>
             <div className="flex-auto sm:ml-5 justify-evenly">
               <div className="flex items-center justify-between sm:mt-2">
@@ -59,7 +78,7 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                   </div>
                 </div>
               </div>
-              {/* <div className="flex flex-row items-center">
+              <div className="flex flex-row items-center">
                 <div className="flex">
                   <StarReviewIcon />
                   <StarReviewIcon />
@@ -67,8 +86,8 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                   <StarReviewIcon />
                   <StarReviewIcon />
                 </div>
-                      </div>*/}
-              <div className="flex pt-2  text-sm text-gray-500">
+              </div>
+              <div className="flex pt-4  text-sm text-gray-500">
                 <div className="flex-1 inline-flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -94,10 +113,10 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                     ></path>
                   </svg>
                   <p className="">
-                    {option?.followings?.length || 0} Followings
+                    {option?.challengesDone || 0} challenges Done
                   </p>
                 </div>
-                {/*<button
+                <button
                   onClick={() =>
                     contact({
                       senderId: user._id,
@@ -107,7 +126,7 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                   className="flex-no-shrink bg-gradient-to-r from-green-400 via-green-500 to-green-600  px-5 ml-4 py-2 shadow-sm hover:shadow-lgborder-2 border-green-300 hover:border-green-500 text-white rounded-lg transition ease-in duration-300"
                 >
                   Contact me
-                </button>*/}
+                </button>
               </div>
             </div>
           </div>

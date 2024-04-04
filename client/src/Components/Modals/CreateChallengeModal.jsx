@@ -35,7 +35,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
   } = useForm({
     defaultValues: {
       category: [],
-      RecommendedSkills: [],
+      skills: [],
       category: [],
       files: [],
     },
@@ -315,7 +315,7 @@ const CreateChallengeModal = ({ open, handleClose }) => {
                   <div className="relative my-2">
                     <Controller
                       control={control}
-                      name="RecommendedSkills"
+                      name="skills"
                       defaultValue={"Any"}
                       render={({ field }) =>
                         Skills && (

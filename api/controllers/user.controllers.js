@@ -174,12 +174,10 @@ const SearchUsers = async (req, res) => {
       .find(userQuery)
       .select(
         "_id firstname lastname picturePath score country followers reviews"
-      )
-      .limit(6);
+      );
     const companies = await companySchema
       .find(companyQuery)
-      .select("_id companyName companyLogo user")
-      .limit(6);
+      .select("_id companyName companyLogo user");
 
     const results = [...users, ...companies];
 
@@ -219,9 +217,9 @@ const getUser = async (req, res) => {
 const getUsers = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const pageSize = 8;
+    const pageSize = 6;
 
-    const query = { role: { $ne: "admin" } };
+    const query = {};
     if (req.query.name) {
       const searchRegex = new RegExp(req.query.name, "i");
       query.$or = [
@@ -244,9 +242,7 @@ const getUsers = async (req, res) => {
       user.rank = index + 1 + pageSize * (page - 1);
     });
 
-    const totalCount = await userSchema.countDocuments({
-      role: { $ne: "admin" },
-    });
+    const totalCount = await userSchema.countDocuments(query);
 
     res.status(200).json({ users, userCount: totalCount });
   } catch (err) {

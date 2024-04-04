@@ -4,11 +4,20 @@ import toast from "react-hot-toast";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-export const useCategories = () => {
+export const useCategories = (categorySearchQuery) => {
   return useQuery({
-    queryKey: ["categories"],
+    queryKey: ["categories", categorySearchQuery],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/category/getCategories`);
+      let query = "";
+
+      if (categorySearchQuery) {
+        query += `&search=${categorySearchQuery}`;
+      }
+
+      const { data } = await axios.get(
+        `${url}/category/getCategories?${query}`
+      );
+
       return data;
     },
   });

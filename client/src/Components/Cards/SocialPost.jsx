@@ -16,6 +16,8 @@ import Dropdown from "../dropdown";
 import DeletePostPopup from "../Popup/DeletePostPopup";
 import HeartFilled from "../icons/HeartFilled";
 import HeartOutlined from "../icons/HeartOutlined";
+import BookMarkFilled from "../icons/BookMarkFilled";
+import BookMarkOutlined from "../icons/BookMarkOutlined";
 
 const SocialPostCard = ({
   post,
@@ -136,11 +138,11 @@ const SocialPostCard = ({
       </div>
       <div class="flex flex-row items-end h-full w-full px-4 mt-4">
         <div class="flex border-t border-gray-300 w-full py-4">
-          <div class="flex items-center space-x-3 border-r border-gray-300 w-full">
-            {post.userPicturePath ? (
+          <div class="flex items-center space-x-3  w-full">
+            {post?.user?.picturePath ? (
               <img
                 alt="post"
-                src={post.userPicturePath}
+                src={post?.user?.picturePath}
                 className="w-11 h-11 rounded-full object-cover bg-white border-2"
               />
             ) : (
@@ -166,27 +168,53 @@ const SocialPostCard = ({
               </p>
             </div>
           </div>
+
           <div className="flex items-center flex-shrink-0 px-2">
-            <div className="flex items-center space-x-1 text-gray-400">
-              <button
-                aria-label="add to favorites"
-                onClick={() => {
-                  likePost(post._id);
-                  //setIsLiked(!isliked);
-                }}
-                className="focus:outline-none"
-              >
-                {likeLoading ? (
-                  <div>
-                    <LoadingSpinner />
-                  </div> // Show a loader while liking
-                ) : user._id in post.likes ? (
-                  <HeartFilled />
+            <div className="flex items-center space-x-3 text-gray-400">
+              <div className="flex gap-1">
+                <button
+                  aria-label="add to favorites"
+                  onClick={() => {
+                    likePost(post._id);
+                    //setIsLiked(!isliked);
+                  }}
+                  className="focus:outline-none"
+                >
+                  {likeLoading ? (
+                    <div>
+                      <LoadingSpinner />
+                    </div> // Show a loader while liking
+                  ) : user._id in post.likes ? (
+                    <HeartFilled />
+                  ) : (
+                    <HeartOutlined />
+                  )}
+                </button>
+                <p className="font-medium">{post.likesCount}</p>
+              </div>
+              <div className="border-l border-gray-300 pl-2">
+                {user._id == post.userId ? (
+                  ""
                 ) : (
-                  <HeartOutlined />
+                  <div className="flex items-center">
+                    <button
+                      aria-label="bookmark"
+                      onClick={() => bookmark(post._id)}
+                      className="focus:outline-none"
+                    >
+                      {bookmarkLoading ? (
+                        <div>
+                          <LoadingSpinner />
+                        </div>
+                      ) : bookmarks.includes(post._id) ? (
+                        <BookMarkFilled />
+                      ) : (
+                        <BookMarkOutlined />
+                      )}
+                    </button>
+                  </div>
                 )}
-              </button>
-              <p className="font-medium">{post.likesCount}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -217,8 +245,8 @@ const SocialPostCard = ({
           </button>
         </div>
       )}
-      {/*<div className="flex items-center justify-between px-4">
-        <div className="flex items-center gap-6">
+      <div className="flex items-center justify-between px-4">
+        {/*<div className="flex items-center gap-6">
           <div className="flex items-center p-2">
             <CommentButton
               post={post}
@@ -226,56 +254,9 @@ const SocialPostCard = ({
               commentCount={post.commentCount}
               type={type}
             />
-          </div>
-        </div>
-        <div>
-          {user._id == post.userId ? (
-            ""
-          ) : (
-            <div className="flex items-center">
-              <button
-                aria-label="bookmark"
-                onClick={() => bookmark(post._id)}
-                className="focus:outline-none"
-              >
-                {bookmarkLoading ? (
-                  <div>
-                    <LoadingSpinner />
-                  </div>
-                ) : bookmarks.includes(post._id) ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                    />
-                  </svg>
-                )}
-              </button>
             </div>
-          )}
-        </div>
-                </div>*/}
+        </div>*/}
+      </div>
       {openEdit && (
         <EditPostModal
           open={openEdit}

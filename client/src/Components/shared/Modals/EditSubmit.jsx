@@ -46,7 +46,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   };
 
   const { user } = useSelector((state) => state.auth);
-  const { mutate} = useEditSubmission(id, participant);
+  const { mutate } = useEditSubmission(id, participant);
 
   const handleFileUpload = async (file) => {
     const formData = new FormData();
@@ -109,22 +109,23 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
     }
   };
   const handelClickDeleteFile = (filex) => {
-      const newFiles = filesSelected.filter((file, i) => file !== filex);
-      setFilesSelected(newFiles);
-      const newFilesPaths = filesPaths.filter((file, i) => file !== filex);
-      setFilesPaths(newFilesPaths);
-    
+    const newFiles = filesSelected.filter((file, i) => file !== filex);
+    setFilesSelected(newFiles);
+    const newFilesPaths = filesPaths.filter((file, i) => file !== filex);
+    setFilesPaths(newFilesPaths);
   };
 
   return (
     <Modal
       open={open}
       className={`fixed inset-0 z-50 ${open ? "" : "hidden"} `}
-
     >
-      <div onClick={(e) => {
-            e.stopPropagation();
-        }} className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10"
+      >
         <div className="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
           <div className="flex justify-between px-4 pt-4">
             <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
@@ -136,7 +137,7 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs md:text-sm w-7 h-7 md:w-8 md:h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="defaultModal"
             >
-              <CloseIcon />
+              <CloseIcon width={4} height={4} />
             </button>
           </div>
           <hr />
@@ -242,7 +243,12 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
                       <a href={file} target="_blank" rel="noopener noreferrer">
                         {"file " + index}
                       </a>
-                      <MdDelete className="inline-block" onClick={()=>{handelClickDeleteFile(file)}} />
+                      <MdDelete
+                        className="inline-block"
+                        onClick={() => {
+                          handelClickDeleteFile(file);
+                        }}
+                      />
                     </p>
                   );
                 })}

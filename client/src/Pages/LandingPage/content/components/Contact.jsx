@@ -4,7 +4,7 @@ const Contact = () => {
   return (
     <div
       name="contact"
-      className="w-full px-4 bg-white lg:px-24 md:px-11  border-b-2 dark:bg-zinc-800"
+      className="w-full px-4 bg-white lg:px-24 md:px-11  dark:bg-zinc-800"
     >
       <section className="relative  overflow-hidden bg-white dark:bg-zinc-800 py-20 lg:py-[120px]">
         <div className="container mx-auto">
@@ -93,6 +93,7 @@ const Contact = () => {
                 >
                   <div className="mb-6">
                     <input
+                      required={true}
                       type="text"
                       name="name"
                       placeholder="Enter your name"
@@ -101,6 +102,7 @@ const Contact = () => {
                   </div>
                   <div className="mb-6">
                     <input
+                      required={true}
                       type="text"
                       name="email"
                       placeholder="Enter your email"
@@ -109,6 +111,7 @@ const Contact = () => {
                   </div>
                   <div className="mb-6">
                     <textarea
+                      required={true}
                       rows="6"
                       name="message"
                       placeholder="Enter your message"

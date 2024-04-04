@@ -8,6 +8,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { EditJobModal } from "../shared/Modals/EditJobModal";
 import DeleteJobPopup from "../Popup/DeleteJobPopup";
 import { useDeleteJob } from "../../hooks/react-query/useJobs";
+import ImagePlaceholder from "../../assets/images/ImagePlaceholder.jpg";
 
 const WorkCard = ({ job, extra }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,11 +49,16 @@ const WorkCard = ({ job, extra }) => {
         <div className="flex gap-4">
           <img
             src={
-              job?.company ? job?.company?.companyLogo : job?.owner?.picturePath
+              job?.company?.companyLogo
+                ? job?.company?.companyLogo
+                : job?.owner?.picturePath
+                ? job?.owner?.picturePath
+                : ImagePlaceholder
             }
             alt="Icon"
             className="w-16 h-16 rounded-lg object-cover hidden md:block lg:block"
           />
+
           <div>
             <h3 className="font-bold mt-px">{job?.title}</h3>
 

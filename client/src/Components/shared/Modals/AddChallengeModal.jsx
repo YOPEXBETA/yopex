@@ -32,7 +32,7 @@ export const AddChallengeModal = ({ open, handleClose }) => {
     setValue,
   } = useForm({
     defaultValues: {
-      RecommendedSkills: [],
+      skills: [],
     },
   });
 

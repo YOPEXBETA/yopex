@@ -27,7 +27,7 @@ const ChallengeSchema = new mongoose.Schema(
       enum: ["Recrutement", "Freelance", "Internship", "Innovation"],
       default: "Recrutement",
     },
-    category: {
+    categories: {
       type: [
         {
           type: mongoose.Schema.Types.ObjectId,
@@ -36,15 +36,12 @@ const ChallengeSchema = new mongoose.Schema(
       ],
       default: [],
     },
-    RecommendedSkills: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Skill",
-        },
-      ],
-      default: [],
-    },
+    skills: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skill",
+      },
+    ],
     price: { type: Number, required: false },
     images: { type: [String] }, //array that include string
     deliveryTime: { type: Number },

@@ -4,8 +4,12 @@ const SocialMediaPost = require("../models/Projects.model");
 const categoryController = {
   getCategories: async (req, res) => {
     try {
-      const categories = await Category.find();
-      res.json(categories);
+      const q = req.query;
+      const filters = {
+        ...(q.search && { name: { $regex: q.search, $options: "i" } }),
+      };
+      const categories = await Category.find(filters);
+      await res.status(200).json(categories);
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

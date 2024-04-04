@@ -23,7 +23,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
         label: category.name,
       })),
 
-      RecommendedSkills: challenge.RecommendedSkills.map((skill) => ({
+      skills: challenge.skills.map((skill) => ({
         value: skill._id,
         label: skill.name,
       })),
@@ -110,7 +110,7 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                   <label>Skills</label>
                   <Controller
                     control={control}
-                    name="RecommendedSkills"
+                    name="skills"
                     render={({ field }) =>
                       Skills && (
                         <Select

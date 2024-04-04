@@ -3,21 +3,16 @@ import { useCompanies } from "../../../../hooks/react-query/useCompany";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
 const Companies = () => {
-  const { data: companies, isLoading } = useCompanies();
+  const { data: suggestedCompanies, isLoading: companiesLoading } =
+    useCompanies();
 
-  if (isLoading) {
+  if (companiesLoading) {
     return (
       <div className="flex items-center justify-center">
         <LoadingSpinner />
       </div>
     );
   }
-
-  const recentCompanies = companies
-    ? companies
-        .slice()
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    : [];
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
@@ -32,8 +27,8 @@ const Companies = () => {
       </div>
 
       <div className="flex flex-wrap justify-center">
-        {recentCompanies.length > 0 ? (
-          recentCompanies?.slice(0, 6)?.map((company) => (
+        {suggestedCompanies.companies.length > 0 ? (
+          suggestedCompanies?.companies.map((company) => (
             <div key={company?.id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
               <div>
                 <div className="flex gap-3 items-center mb-4 flex-col">
