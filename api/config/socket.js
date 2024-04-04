@@ -1,10 +1,11 @@
 const { Server } = require("socket.io");
 const { sendNotification } = require("../server");
+const { log } = require("@tensorflow/tfjs");
 
 const initializeSocketIO = (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
-      origin: ["https://yopexhub.com", "http://localhost:3000"],
+      origin: ["https://yopexhub.com", "http://localhost:3006"],
       methods: ["GET", "POST","PUT", "DELETE"],
     },
   });
@@ -16,14 +17,16 @@ const initializeSocketIO = (httpServer) => {
   };
 
   const sendNotification = (userId, notification) => {
+    
     io.to(userId).emit("notification", notification);
   };
 
   io.on("connection", (socket) => {
     socket.on("joinRoom", (data) => {
+      console.log(data);
       socket.join(data.roomid);
     });
-
+    
     socket.on("disconnect", () => {
       removeUser(socket.id);
     });

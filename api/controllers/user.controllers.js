@@ -9,6 +9,7 @@ const { pick } = require("lodash");
 const ChallengeModel = require("../models/Challenge.model");
 const notificationModel = require("../models/notification.model");
 const { uploadFileToFirebase } = require("./firebase.controllers");
+const userModel = require("../models/user.model");
 
 // ==============================|| EditProfile ||============================== //
 
@@ -558,89 +559,21 @@ const getUserChallenges = async (req, res) => {
 };
 const getUserNotifications = async (req, res) => {
   try {
-    userId = req.userId;
-    const user = await userSchema
-      .findById(userId)
-      .populate("notifications")
-      .populate({
-        path: "notifications",
-        populate: {
-          path: "job",
-          populate: {
-            path: "company",
-            select: "companyName",
-          },
-        },
-      })
-      .populate({
-        path: "notifications",
-        populate: {
-          path: "challenge",
-          populate: {
-            path: "company",
-            select: "companyName",
-          },
-        },
-      });
+    const userId = req.userId;
+    
+    const user = await userModel.findById(userId);
     if (!user) throw new Error("User not found");
-    //const processedJobs = new Set();
-    // const notifications = await Promise.all(
-    //   user.notifications.map(async (notification) => {
-    //     if (
-    //       notification.job &&
-    //       !processedJobs.has(notification.job.toString())
-    //     ) {
-    //       processedJobs.add(notification.job.toString());
-    //       const job = await Job.findById(notification.job).populate("company");
-    //       console.log(job);
-
-    //       if (job) {
-    //         notification.job = job;
-    //         return {
-    //           message: notification.message,
-    //           createdAt: notification.createdAt,
-    //           job: job,
-    //           challenge: null,
-    //         };
-    //       }
-    //     } else if (notification.challenge) {
-    //       const challenge = await ChallengeModel.findById(
-    //         notification.challenge
-    //       ).populate("company");
-    //       if (challenge) {
-    //         return {
-    //           message: notification.message,
-    //           createdAt: notification.createdAt,
-    //           job: null,
-    //           challenge: challenge,
-    //         };
-    //       }
-    //     }
-    //   })
-    // );
-
     const companies = user.companies;
-    let notifications = user.notifications;
+    let notifications = await notificationModel.find({ user: userId }).populate("job").populate("challenge").sort({ createdAt: -1 });
     for (const companyId of companies) {
-      const company = await companySchema
-        .findById(companyId)
-        .populate("notificationsCompany")
-        .populate({
-          path: "notificationsCompany",
-          match: { seen: false },
-          populate: {
-            path: "user",
-            select: "firstname lastname picturePath",
-          },
-        });
+      const notif = await notificationModel.find({ company: companyId }).populate("job").populate("challenge").sort({ createdAt: -1 });
 
-      notifications = notifications.concat(company?.notificationsCompany);
+      notifications = notifications.concat(notif);
     }
-    notifications.sort((a, b) => b.createdAt - a.createdAt);
-    notseen = notifications?.filter(
-      (notification) => notification?.seen === false
-    );
-    res.status(200).json({ notification: notifications, nbr: notseen?.length });
+    
+    const countNotSeenNotifications = await notificationModel.countDocuments({ user: userId, seen: false });
+    
+    res.status(200).json({ notification: notifications, countNotSeenNotifications });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Server Error" });
@@ -701,7 +634,7 @@ const seeNotification = async (req, res) => {
     const user = await userSchema.findById(userId).select("notifications");
     const unseenNotifications = await notificationModel.find({
       seen: false,
-      _id: { $in: user.notifications },
+      user: userId,
     });
 
     // Update each notification to set seen=true

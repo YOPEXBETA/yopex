@@ -1,5 +1,9 @@
+const ContestConversationModel = require("../models/ContestConversation.model");
 const ConversationModel = require("../models/Conversation.model");
 const MessageModel = require("../models/Message.model");
+const notificationModel = require("../models/notification.model");
+const main = require("../server");
+
 
 const createMessage = async (req, res) => {
   if (!req.body.message) {
@@ -13,6 +17,16 @@ const createMessage = async (req, res) => {
   console.log(req.body);
 
   try {
+    const contestConversation = await ContestConversationModel.findById(newMessage.conversationId);
+    if (contestConversation) {
+      // const notification = new notificationModel({
+      //   type: "message",
+      //   message: `new message from in the contest `,
+      //   user: contestConversation.company.user,
+      //   picture: newMessage.sender.picturePath,
+      // });
+      // main.sendNotification(contestConversation._id.toString(), newMessage);
+    }
     const savedMessage = await newMessage.save();
     res.status(200).json(savedMessage);
   } catch (err) {

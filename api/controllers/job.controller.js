@@ -203,18 +203,15 @@ const applyJob = async (req, res) => {
       type: "applied for a job",
       message: `Applied for your job of : ${job.title}`,
       job: job._id,
-      user: user._id,
+      company : company._id,
+      picture: user.picturePath,
       createdAt: new Date(),
     });
     notification.save();
     //use socket io to send notification to company
-    notification = await notification.populate(
-      "user",
-      "firstname lastname picturePath _id"
-    );
     main.sendNotification(company.user.toString(), notification);
-    company.notificationsCompany.push(notification._id);
-    await company.save();
+    //company.notificationsCompany.push(notification._id);
+    //await company.save();
     return res.status(200).json("Applied successfully");
   } catch (err) {
     return res.status(500).json({ error: err.message });

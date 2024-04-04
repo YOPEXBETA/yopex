@@ -26,7 +26,7 @@ const createReview = async (req, res) => {
     challengeId: req.body.challengeId,
   });
   const challenge = await challengeModel.findById(req.body.challengeId);
-  if (!challenge) {
+  if (!challenge) {cre
     return res.status(404).json({ message: "Challenge not found" });
   }
   challenge.users.forEach((user) => {

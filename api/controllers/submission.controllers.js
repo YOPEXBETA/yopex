@@ -1,7 +1,9 @@
 const ChallengeModel = require("../models/Challenge.model");
+const notificationModel = require("../models/notification.model");
 const Submission = require("../models/submission.model");
 const User = require("../models/user.model");
 const { updateUserSubmissionsBadges } = require("../utils/utilities");
+const main = require("../server");
 
 const CreateSubmission = async (req, res, next) => {
   const { challengeId, userId, title, description, filesPaths, links } = req.body;
@@ -18,7 +20,7 @@ const CreateSubmission = async (req, res, next) => {
 
   try {
     // check if challenge is started
-    const challenge  = await ChallengeModel.findById(challengeId);
+    const challenge  = await ChallengeModel.findById(challengeId).populate("company");
     if (!challenge) {
       return res.status(400).json({ message: "Challenge not found" });
     }
@@ -52,6 +54,25 @@ const CreateSubmission = async (req, res, next) => {
     );
     await challenge.save();
     await user.save();
+    // cretae notification
+    const notification = new notificationModel({
+      type: "submission",
+      message: `You have submitted a solution for ${challenge.title}`,
+      user: userId,
+      picture: user.profilePicture,
+    });
+    await notification.save();
+    main.sendNotification(userId.toString(), notification);
+    const notification2 = new notificationModel({
+      type: "submission",
+      message: `A user (${user.firstname} ${user.lastname}) has submitted a solution for ${challenge.title}`,
+      user: challenge.owner,
+      picture: user.picturePath,
+    });
+    await notification2.save();
+    main.sendNotification(challenge.owner.toString(), notification2);
+    main.sendNotification(challenge.company.user.toString(), notification2);
+
 
     res.status(201).json(user);
   } catch (error) {

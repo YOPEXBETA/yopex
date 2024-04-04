@@ -103,14 +103,16 @@ const ChallengeWinner = async (req, res) => {
     const notification = new notificationModel({
       type: "won a challenge",
       message: `You won the challenge ${Challenge.title}`,
+      picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
+      user: User._id,
     });
     notification.save();
-    User.notifications.push(notification._id);
+    //User.notifications.push(notification._id);
     main.sendNotification(User._id.toString(), notification);
     //sendEmail(User.email, `You won the challenge ${Challenge.title}`);
     const newChallenge = await Challenge.save();
     User.save();
-    console.log(User);
+    //console.log(User);
     AdminUser.save();
     res.status(200).json({ newChallenge });
   } catch (err) {

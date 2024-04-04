@@ -8,7 +8,7 @@ const addComment = async (req, res, next) => {
   try {
     const newComment = new Comment({ ...req.body, userId: req.userId });
     const savedComment = await newComment.save();
-
+    const user = await userModel.findById(req.userId);
     const postId = req.body.postId;
     const post = await SocialPost.findById(postId);
     post.comments.push(savedComment._id);
@@ -18,12 +18,14 @@ const addComment = async (req, res, next) => {
     const notification = new notificationModel({
       type: "comment",
       message: `${owner?.firstname + " " + owner?.lastname} comment your post`,
+      user: post.userId,
+      picture: user?.profilePicture,
     });
     await notification.save();
-    main.sendNotification(post.userId, notification);
+    main.sendNotification(post.userId.toString(), notification);
 
-    owner.notifications.push(notification._id);
-    await owner.save();
+    //owner.notifications.push(notification._id);
+    //await owner.save();
     res.status(200).send(savedComment);
   } catch (err) {
     next(err);

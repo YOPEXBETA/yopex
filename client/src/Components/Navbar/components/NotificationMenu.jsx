@@ -32,6 +32,7 @@ const NotificationMenu = () => {
   useEffect(() => {
     if (!socket) return;
     socket.on("notification", (notification) => {
+      
       setNotifications((prev) => [notification, ...prev]);
       setNbrNotifications((prev) => prev + 1);
     });
@@ -47,11 +48,11 @@ const NotificationMenu = () => {
 
       <ul>
         {notifications?.slice(0, 4).map((notification) => (
-          <div key={notification?._id}>
+          <div key={notification?._id} onClick={() => mutate(notification?._id)}>
             <li>
               <button
                 className="flex items-center p-4 space-x-4  hover:bg-gray-100 dark:hover:bg-zinc-800 w-full text-left"
-                onClick={() => mutate(notification?._id)}
+                
               >
                 {notification?.user?.picturePath ||
                 (notification?.job
@@ -76,15 +77,7 @@ const NotificationMenu = () => {
                 )}
                 <div className="flex-grow">
                   <div className="flex items-center">
-                    <h5 className="text-sm dark:text-gray-200 text-gray-500">
-                      {notification?.user
-                        ? notification?.user?.firstname +
-                          " " +
-                          notification?.user?.lastname
-                        : notification?.job
-                        ? notification?.job.company?.companyName
-                        : ""}
-                    </h5>
+                  
                     <p className="text-sm text-gray-500 dark:text-gray-200 truncate w-60">
                       {notification?.message}
                       <span className="font-bold">

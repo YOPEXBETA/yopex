@@ -120,12 +120,14 @@ const likePost = async (req, res) => {
       const notification = new notificationModel({
         type: "like",
         message: `${user.firstname + " " + user.lastname} liked your post`,
+        user: post.user,
       });
       notification.save();
-      main.sendNotification(post.userId, notification);
-      const owner = await UserModel.findById(post.user._id);
-      owner?.notifications?.push(notification._id);
-      owner.save();
+      main.sendNotification(post.user.toString(), notification);
+      
+      // const owner = await UserModel.findById(post.user._id);
+      // owner?.notifications?.push(notification._id);
+      // owner.save();
     }
     const updatedPost = await Post.findByIdAndUpdate(
       id,

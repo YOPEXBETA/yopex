@@ -184,6 +184,7 @@ const getCompanyChallenges = async (req, res) => {
 
     const challenges = await ChallengeModel.find({
       company: companyId,
+      verified: true,
     }).populate("company");
 
     res.status(200).json(challenges);
