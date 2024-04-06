@@ -32,14 +32,21 @@ const getAllCompanies = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const pageSize = 6;
 
+    let companyQuery = {};
+    if (req.query.name) {
+      const searchRegex = new RegExp(req.query.name, "i");
+      companyQuery = { companyName: { $regex: searchRegex } };
+    }
+
     const companies = await companySchema
-      .find()
-      .sort({ score: -1, createdAt: 1 })
+      .find(companyQuery)
+      .select("_id companyName companyLogo country address challenges jobs")
+      .sort({ createdAt: -1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize)
       .exec();
 
-    const totalCount = await companySchema.countDocuments();
+    const totalCount = await companySchema.countDocuments(companyQuery);
 
     res.status(200).json({ companies, companyCount: totalCount });
   } catch (err) {
@@ -114,7 +121,8 @@ const ChallengeWinner = async (req, res) => {
     const notification = new notificationModel({
       type: "won a challenge",
       message: `You won the challenge ${Challenge.title}`,
-      picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
+      picture:
+        "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
       user: User._id,
     });
     notification.save();

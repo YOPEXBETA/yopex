@@ -64,7 +64,6 @@ const Index = () => {
               suggestedUsers={suggestedUsers}
               isLoading={usersLoading}
               query={query}
-              setQuery={setQuery}
               handleChangePage={handleChangePage}
               totalPages={totalPages}
               displayedPages={displayedPages}
@@ -78,9 +77,12 @@ const Index = () => {
             <DiscoverCompanies
               user={user}
               companyQuery={companyQuery}
-              setCompanyQuer={setCompanyQuery}
               suggestedCompanies={suggestedCompanies}
               isLoading={companiesLoading}
+              handleChangePage={handleChangePage}
+              totalPages={totalPages}
+              displayedPages={displayedPages}
+              page={page}
             />
           </div>
         )}

@@ -4,11 +4,9 @@ import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import DiscoverUserCard from "../../../../Components/Cards/DiscoverUserCard";
 
 const DiscoverTalents = ({
-  extra,
   suggestedUsers,
   isLoading,
   query,
-  setQuery,
   handleChangePage,
   totalPages,
   displayedPages,

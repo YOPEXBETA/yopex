@@ -14,7 +14,7 @@ const companySchema = new mongoose.Schema(
     country: { type: String },
     PhoneNumber: { type: String },
     address: { type: String },
-    picturePath: { type: String },
+    //picturePath: { type: String },
     websiteURL: { type: String, required: false },
     companyDocument: { type: String },
     verified: { type: Boolean, default: false },

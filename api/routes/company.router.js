@@ -28,7 +28,7 @@ companyRouter.put("/approve/:id/", authenticateToken, approveCompany);
 companyRouter.put;
 companyRouter.put("/:id/", authenticateToken, editProfile);
 companyRouter.get("/get/:companyId/", authenticateToken, getCompany);
-companyRouter.get("/all", getAllCompanies);
+companyRouter.get("/allcompanies", getAllCompanies);
 companyRouter.post("/challengeWinner", authenticateToken, ChallengeWinner);
 companyRouter.get(
   "/company/:userId/notifications",

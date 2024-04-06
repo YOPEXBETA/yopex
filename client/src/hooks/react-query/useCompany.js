@@ -14,11 +14,15 @@ export const useAdminCompanies = (page) => {
   });
 };
 
-export const useCompanies = (page) => {
+export const useCompanies = (page, companyQuery) => {
   return useQuery({
-    queryKey: ["companies", page],
+    queryKey: ["companies", page, companyQuery],
     queryFn: async () => {
-      const { data } = await axios.get(`${url}/company/all?page=${page}`);
+      const { data } = await axios.get(
+        `${url}/company/allcompanies?page=${page}&name=${companyQuery}`,
+        {}
+      );
+
       return data;
     },
   });
