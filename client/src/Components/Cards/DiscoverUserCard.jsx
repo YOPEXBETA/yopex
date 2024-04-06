@@ -82,12 +82,12 @@ const DiscoverUserCard = ({ option, extra, user }) => {
               <div className="flex flex-row items-center mt-1">
                 {option?.reviews?.length > 0 ? (
                   option?.reviews?.map((review, index) => (
-                    <p
-                      key={index}
-                      className="text-lg font-bold dark:text-white me-1"
-                    >
-                      {review?.star}
-                    </p>
+                    <div className="flex items-center">
+                      <p className="ms-2 text-sm font-bold text-gray-900 dark:text-white">
+                        {review?.star}
+                      </p>
+                      <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                    </div>
                   ))
                 ) : (
                   <p className="text-lg font-bold dark:text-white me-1">0</p>

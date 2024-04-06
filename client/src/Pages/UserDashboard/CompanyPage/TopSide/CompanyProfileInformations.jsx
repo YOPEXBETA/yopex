@@ -108,15 +108,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     />
                   </button>
                 </div>
-                <div className="hidden xl:flex lg:flex md:flex flex-row sm:flex-row justify-between gap-2 sm:gap-4 w-full sm:w-72">
-                  <div className="flex items-center gap-1 sm:gap-2 justify-between">
-                    <p className="text-base font-bold dark:text-gray-200">
-                      {company?.posts?.length}
-                    </p>
-                    <p className="text-zinc-500 text-md dark:text-gray-400">
-                      Posts
-                    </p>
-                  </div>
+                <div className="hidden xl:flex lg:flex md:flex flex-row sm:flex-row gap-6 sm:gap-4 w-full sm:w-72">
                   <div className="flex items-center gap-1 sm:gap-2 justify-between">
                     <p className="text-base font-bold dark:text-gray-200">
                       {company?.challenges?.length}
@@ -197,12 +189,6 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           </div>
           {/*mobile version*/}
           <div className="flex xl:hidden lg:hidden md:hidden flex-row sm:flex-row justify-between px-16 py-4 border-y-2 border-gray">
-            <div className="flex-col items-center">
-              <p className="text-base font-bold text-center dark:text-gray-200">
-                {company?.posts?.length}
-              </p>
-              <p className="text-zinc-500 text-md dark:text-gray-400">Posts</p>
-            </div>
             <div className="flex-col items-center">
               <p className="text-base font-bold text-center dark:text-gray-200">
                 {company?.challenges?.length}
