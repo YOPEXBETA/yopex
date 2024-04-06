@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Dropdown from "../dropdown";
@@ -7,11 +7,45 @@ import NotificationMenu from "./components/NotificationMenu";
 import ProfileMenu from "../ProfileMenu/ProfileMenu";
 import LightIcon from "../icons/LightIcon";
 import MoonIcon from "../icons/MoonIcon";
+import NotificationBellIcon from "../icons/NotificationBellIcon";
+import {
+  useSeeNotification,
+  useUserNotifications,
+} from "../../hooks/react-query/useUsers";
+import { io } from "socket.io-client";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = useState(false);
   const { user } = useSelector((state) => state.auth);
+
+  const { data: notification } = useUserNotifications(user?._id);
+  const [notifications, setNotifications] = useState([]);
+  const [socket, setSocket] = useState(null);
+  const { mutate } = useSeeNotification(user?._id);
+  const [nbrNotifications, setNbrNotifications] = useState(0);
+  const url = process.env.REACT_APP_API_ENDPOINT;
+  useEffect(() => {
+    const newSocket = io(`${url}`);
+    setSocket(newSocket);
+    newSocket.emit("joinRoom", { roomid: user?._id });
+    return () => newSocket.close();
+  }, [user]);
+
+  useEffect(() => {
+    if (!notification) return;
+    setNotifications(notification.notification);
+    setNbrNotifications(notification.nbr);
+  }, [notification]);
+
+  useEffect(() => {
+    if (!socket) return;
+    socket.on("notification", (notification) => {
+      setNotifications((prev) => [notification, ...prev]);
+      setNbrNotifications((prev) => prev + 1);
+    });
+    return () => socket.off("notification");
+  }, [socket]);
 
   return (
     <nav className="sticky py-[0.6rem] top-0 z-40 bg-white dark:bg-zinc-800 border-gray-100 border-b-[1px] dark:border-zinc-700 w-full">
@@ -93,30 +127,18 @@ const Navbar = (props) => {
               </div>
               <Dropdown
                 button={
-                  <button
-                    type="button"
-                    className="relative rounded-full border-gray-200  text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-zinc-800"
-                  >
-                    <svg
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-                      />
-                    </svg>
-                  </button>
+                  <NotificationBellIcon
+                    notificationNumber={notification?.countNotSeenNotifications}
+                  />
                 }
                 animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
                 children={
                   <div>
-                    <NotificationMenu />
+                    <NotificationMenu
+                      notifications={notification}
+                      user={user}
+                      mutate={mutate}
+                    />
                   </div>
                 }
                 classNames={"py-2 top-10 -left-[230px] md:-left-[420px] w-max"}

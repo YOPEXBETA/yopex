@@ -108,7 +108,7 @@ const Appliers = ({ toggleOpen, job, open }) => {
             </TableHead>
             <TableBody>
               {appliers?.length > 0 ? (
-                appliers.map((applier) => (
+                appliers?.map((applier) => (
                   <TableRow key={applier._id}>
                     <Link
                       to={`/profile/${applier._id}`}
