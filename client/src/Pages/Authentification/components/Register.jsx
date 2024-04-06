@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import countries from "../../../countries.json";
-import AlertContainer from "../../../Components/alerts";
 import Copyright from "../../../Components/shared/Copyright";
 import GoogleSignIn from "../Google";
 import { register as registerUser } from "../../../redux/auth/authSlice";
@@ -48,8 +47,6 @@ const Register = () => {
         className="md:w-[35rem] w-80 h-full "
         onSubmit={handleSubmit(onSubmit)}
       >
-        {error && <AlertContainer error={error} />}
-
         <div className="grid grid-cols-1 mb-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-2 items-center">

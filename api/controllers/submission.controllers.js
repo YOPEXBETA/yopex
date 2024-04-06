@@ -6,37 +6,39 @@ const { updateUserSubmissionsBadges } = require("../utils/utilities");
 const main = require("../server");
 
 const CreateSubmission = async (req, res, next) => {
-  const { challengeId, userId, title, description, filesPaths, links } = req.body;
-
-  // Create submission object
-  const submission = new Submission({
-    challengeId,
-    userId,
-    title,
-    description,
-    filesPaths,
-    links,
-  });
-
   try {
+    const { challengeId, userId, title, description, filesPaths, links } =
+      req.body;
+
+    // Create submission object
+    const submission = new Submission({
+      challengeId,
+      userId,
+      title,
+      description,
+      filesPaths,
+      links,
+    });
+
     // check if challenge is started
-    const challenge  = await ChallengeModel.findById(challengeId).populate("company");
+    const challenge =
+      await ChallengeModel.findById(challengeId).populate("company");
     if (!challenge) {
       return res.status(400).json({ message: "Challenge not found" });
     }
 
-    if (!challenge.start){
+    if (!challenge.start) {
       return res.status(400).json({ message: "Challenge not started" });
     }
     if (challenge.deadline < Date.now()) {
       return res.status(400).json({ message: "Challenge is closed" });
     }
-    
+
     // Save submission to database
     const savedSubmission = await submission.save();
 
     // Add submission to challenge
-    
+
     const user = await User.findById(userId)
       .select("-password")
       .populate("submissions");
@@ -46,12 +48,11 @@ const CreateSubmission = async (req, res, next) => {
 
     updateUserSubmissionsBadges(user);
 
-    challenge.users.map((user,index)=>{
-      if(user.user == userId){
-        challenge.users[index].submissionDate=new Date();
+    challenge.users.map((user, index) => {
+      if (user.user == userId) {
+        challenge.users[index].submissionDate = new Date();
       }
-    }
-    );
+    });
     await challenge.save();
     await user.save();
     // cretae notification
@@ -73,7 +74,6 @@ const CreateSubmission = async (req, res, next) => {
     main.sendNotification(challenge.owner.toString(), notification2);
     main.sendNotification(challenge.company.user.toString(), notification2);
 
-
     res.status(201).json(user);
   } catch (error) {
     console.log(error);
@@ -81,9 +81,9 @@ const CreateSubmission = async (req, res, next) => {
   }
 };
 
-
 const editsubmission = async (req, res) => {
-  const { challengeId, userId, title, description, filesPaths, links } = req.body;
+  const { challengeId, userId, title, description, filesPaths, links } =
+    req.body;
   try {
     const challenge = await ChallengeModel.findById(challengeId);
     if (!challenge) {
@@ -102,8 +102,6 @@ const editsubmission = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-
 
 module.exports = {
   CreateSubmission,

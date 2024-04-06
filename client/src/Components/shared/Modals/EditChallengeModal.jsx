@@ -18,12 +18,12 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
     formState: { isSubmitting },
   } = useForm({
     defaultValues: {
-      category: challenge.category.map((category) => ({
+      category: challenge?.category?.map((category) => ({
         value: category._id,
         label: category.name,
       })),
 
-      skills: challenge.skills.map((skill) => ({
+      skills: challenge?.skills?.map((skill) => ({
         value: skill._id,
         label: skill.name,
       })),
@@ -119,13 +119,13 @@ export const EditChallengeModal = ({ open, handleClose, challenge }) => {
                           className="my-react-select-container mt-2"
                           classNamePrefix="my-react-select"
                           id="tags-outlined"
-                          options={Skills.map((skill) => ({
-                            value: skill._id,
-                            label: skill.name,
+                          options={Skills?.map((skill) => ({
+                            value: skill?._id,
+                            label: skill?.name,
                           }))}
                           onBlur={field.onBlur}
                           onChange={(selectedOptions) => {
-                            const selectedValues = selectedOptions.map(
+                            const selectedValues = selectedOptions?.map(
                               (option) => ({
                                 value: option.value,
                                 label: option.label,

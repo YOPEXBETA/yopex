@@ -21,8 +21,6 @@ const contestConversationRouter = require("./contestConversation.router");
 const FirebaseRouter = require("./firebase.router");
 const ExperienceRouter = require("./experience.router");
 const EducationRouter = require("./education.router");
-const JobTypeRouter = require("./JobType.router");
-const OfferTypeRouter = require("./OfferType.router");
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -44,7 +42,5 @@ router.use("/contestconversation", contestConversationRouter);
 router.use("/firebase", FirebaseRouter);
 router.use("/experience", ExperienceRouter);
 router.use("/education", EducationRouter);
-router.use("/JobType", JobTypeRouter);
-router.use("/OfferType", OfferTypeRouter);
 
 module.exports = router;

@@ -16,7 +16,6 @@ EducationSchema.pre(
   "findOneAndDelete",
   { document: false, query: true },
   async function (next) {
-    console.log(this._conditions._id, "mmmmm");
     const education = await this.model.findById(this._conditions._id);
 
     const userId = education.user;

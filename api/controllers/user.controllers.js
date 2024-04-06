@@ -233,6 +233,7 @@ const getUsers = async (req, res) => {
       .select(
         "_id firstname lastname picturePath score country occupation followers reviews challengesDone"
       )
+      .populate("reviews")
       .sort({ score: -1, createdAt: 1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize)
@@ -556,20 +557,33 @@ const getUserChallenges = async (req, res) => {
 const getUserNotifications = async (req, res) => {
   try {
     const userId = req.userId;
-    
+
     const user = await userModel.findById(userId);
     if (!user) throw new Error("User not found");
     const companies = user.companies;
-    let notifications = await notificationModel.find({ user: userId }).populate("job").populate("challenge").sort({ createdAt: -1 });
+    let notifications = await notificationModel
+      .find({ user: userId })
+      .populate("job")
+      .populate("challenge")
+      .sort({ createdAt: -1 });
     for (const companyId of companies) {
-      const notif = await notificationModel.find({ company: companyId }).populate("job").populate("challenge").sort({ createdAt: -1 });
+      const notif = await notificationModel
+        .find({ company: companyId })
+        .populate("job")
+        .populate("challenge")
+        .sort({ createdAt: -1 });
 
       notifications = notifications.concat(notif);
     }
-    
-    const countNotSeenNotifications = await notificationModel.countDocuments({ user: userId, seen: false });
-    
-    res.status(200).json({ notification: notifications, countNotSeenNotifications });
+
+    const countNotSeenNotifications = await notificationModel.countDocuments({
+      user: userId,
+      seen: false,
+    });
+
+    res
+      .status(200)
+      .json({ notification: notifications, countNotSeenNotifications });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Server Error" });

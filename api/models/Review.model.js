@@ -27,6 +27,7 @@ const ReviewSchema = new mongoose.Schema(
     star: {
       type: Number,
       required: true,
+      default: 0,
       min: 1,
       max: 10,
     },

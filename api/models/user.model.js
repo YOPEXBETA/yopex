@@ -36,7 +36,6 @@ const UserSchema = new mongoose.Schema(
     yearsRegistered: { type: Number, default: 0 },
     challengesDone: { type: Number, default: 0 },
     challengesWon: { type: Number, default: 0 },
-    reviews: { type: Number, default: 0 },
     viewedProfile: { type: Number },
     impressions: { type: Number },
     phoneNumber: {
@@ -52,6 +51,15 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    reviews: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Review",
+        },
+      ],
+      default: [],
+    },
     historyPayment: {
       type: Array,
       default: [
@@ -61,7 +69,6 @@ const UserSchema = new mongoose.Schema(
         },
       ],
     },
-
     skills: {
       type: [
         {

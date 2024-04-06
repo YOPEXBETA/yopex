@@ -12,13 +12,14 @@ const DiscoverUserCard = ({ option, extra, user }) => {
   const navigate = useNavigate();
   const { data: levelsData, isLoading: levelsLoading } = useGetLevels();
   const { mutate: contact } = useCreateConversation(user._id);
-
+  console.log(option, "option");
   const userLevel = levelsData
     ? levelsData.find(
         (level) =>
           level.minScore <= user?.score && level.maxScore >= user?.score
       )
     : null;
+
   return (
     <div>
       <Card
@@ -78,16 +79,23 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-row items-center">
-                <div className="flex">
-                  <StarReviewIcon />
-                  <StarReviewIcon />
-                  <StarReviewIcon />
-                  <StarReviewIcon />
-                  <StarReviewIcon />
-                </div>
+              <div className="flex flex-row items-center mt-1">
+                {option?.reviews?.length > 0 ? (
+                  option?.reviews?.map((review, index) => (
+                    <p
+                      key={index}
+                      className="text-lg font-bold dark:text-white me-1"
+                    >
+                      {review?.star}
+                    </p>
+                  ))
+                ) : (
+                  <p className="text-lg font-bold dark:text-white me-1">0</p>
+                )}
+
+                <StarReviewIcon />
               </div>
-              <div className="flex pt-4  text-sm text-gray-500">
+              <div className="flex pt-1  text-sm text-gray-500">
                 <div className="flex-1 inline-flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

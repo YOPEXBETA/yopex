@@ -14,7 +14,6 @@ const DiscoverTalents = ({
   user,
 }) => {
   //const { mutate, isSuccess } = useSetquery();
-
   return (
     <div>
       <h5 className="my-5 text-xl text-left dark:text-white">

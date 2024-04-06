@@ -6,73 +6,94 @@ const companyModel = require("../models/company.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 const createReview = async (req, res) => {
-  if (req.body.star > 10) {
-    return res
-      .status(400)
-      .json({ message: "Star value must be between 1 and 10" });
-  }
-  const review = await reviewModel.findOne({
-    userId: req.body.userId,
-    challengeId: req.body.challengeId,  
-  });
-  if (review) {
-    return res.status(400).json({ message: "Review already exists" });
-  }
-  const newReview = new reviewModel({
-    companyId: req.body.companyId,
-    userId: req.body.userId,
-    description: req.body.description,
-    star: req.body.star,
-    challengeId: req.body.challengeId,
-  });
-  const challenge = await challengeModel.findById(req.body.challengeId);
-  if (!challenge) {cre
-    return res.status(404).json({ message: "Challenge not found" });
-  }
-  challenge.users.forEach((user) => {
-    console.log(user);
-    if (user.user.toString() === req.body.userId) {
-      console.log(user);
-      user.review = true;
-    }
-  });
-  challenge.users.forEach((user) => {
-    if (user.user.toString() === req.body.userId) {
-      user.star = req.body.star;
-    }
-  });
-  challenge.save();
-  const company = await companyModel.findById(req.body.companyId);
-  if (!company) {
-    newReview.companyId = null;
-    newReview.challengeOwnerId = req.body.companyId;
-  }
-  
-
   try {
+    if (req.body.star > 10 || req.body.star < 1) {
+      return res
+        .status(400)
+        .json({ message: "Star value must be between 1 and 10" });
+    }
+
+    const review = await reviewModel.findOne({
+      userId: req.body.userId,
+      challengeId: req.body.challengeId,
+    });
+
+    if (review) {
+      return res.status(400).json({ message: "Review already exists" });
+    }
+
+    const newReview = new reviewModel({
+      companyId: req.body.companyId,
+      userId: req.body.userId,
+      description: req.body.description,
+      star: req.body.star,
+      challengeId: req.body.challengeId,
+    });
+
+    const challenge = await challengeModel.findById(req.body.challengeId);
+    if (!challenge) {
+      return res.status(404).json({ message: "Challenge not found" });
+    }
+
+    let userFound = false;
+    challenge.users.forEach((user) => {
+      if (user.user.toString() === req.body.userId) {
+        userFound = true;
+        user.review = true;
+        user.star = req.body.star;
+      }
+    });
+
+    if (!userFound) {
+      return res.status(404).json({ message: "User not found in challenge" });
+    }
+
+    await challenge.save();
+
+    const company = await companyModel.findById(req.body.companyId);
+    if (!company) {
+      newReview.companyId = null;
+      newReview.challengeOwnerId = req.body.companyId;
+    }
+
     const savedReview = await newReview.save();
 
-
     const user = await userModel.findById(req.body.userId);
-    user.score = user.score + req.body.star * 10;
-    user.save();
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    await res.status(200).json(savedReview);
+    // Associate review with user
+    user.reviews.push(savedReview._id);
+    user.score = user.score + req.body.star * 10;
+    await user.save();
+    console.log("User updated with review:", user);
+
+    return res.status(200).json(savedReview);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
   }
 };
+
 const getReviews = async (req, res) => {
   try {
     const reviews = await reviewModel
       .find({
         userId: new ObjectId(req.params.id),
       })
-      
-      .populate({ path: "challengeOwnerId", model: "User" ,select:"firstname lastname picturePath"})
-      .populate({ path: "companyId", model: "Company" ,select:"companyName companyLogo"})
-      .populate({ path: "challengeId", model: "Challenge",select:"title"});
+
+      .populate({
+        path: "challengeOwnerId",
+        model: "User",
+        select: "firstname lastname picturePath",
+      })
+      .populate({
+        path: "companyId",
+        model: "Company",
+        select: "companyName companyLogo",
+      })
+      .populate({ path: "challengeId", model: "Challenge", select: "title" });
 
     res.status(200).json(reviews);
   } catch (error) {
