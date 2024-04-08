@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const levelSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    //default: 1,
   },
   minScore: {
     type: Number,
@@ -15,6 +16,6 @@ const levelSchema = new mongoose.Schema({
   },
 });
 
-const Level = mongoose.model('Level', levelSchema);
+const Level = mongoose.model("Level", levelSchema);
 
 module.exports = Level;

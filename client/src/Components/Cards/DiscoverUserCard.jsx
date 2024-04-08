@@ -12,7 +12,6 @@ const DiscoverUserCard = ({ option, extra, user }) => {
   const navigate = useNavigate();
   const { data: levelsData, isLoading: levelsLoading } = useGetLevels();
   const { mutate: contact } = useCreateConversation(user._id);
-  console.log(option, "option");
   const userLevel = levelsData
     ? levelsData.find(
         (level) =>
@@ -82,19 +81,22 @@ const DiscoverUserCard = ({ option, extra, user }) => {
               <div className="flex flex-row items-center mt-1">
                 {option?.reviews?.length > 0 ? (
                   option?.reviews?.map((review, index) => (
-                    <div className="flex items-center">
-                      <p className="ms-2 text-sm font-bold text-gray-900 dark:text-white">
+                    <div className="flex items-center" key={index}>
+                      <p className="ms-2 text-md font-bold dark:text-white">
                         {review?.star}
                       </p>
+                      <StarReviewIcon />
                       <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
                     </div>
                   ))
                 ) : (
-                  <p className="text-lg font-bold dark:text-white me-1">0</p>
+                  <div className="flex items-center">
+                    <p className="text-lg font-bold dark:text-white me-1">0</p>
+                    <StarReviewIcon />
+                  </div>
                 )}
-
-                <StarReviewIcon />
               </div>
+
               <div className="flex pt-1  text-sm text-gray-500">
                 <div className="flex-1 inline-flex items-center">
                   <svg
@@ -120,9 +122,7 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                  <p className="">
-                    {option?.challengesDone || 0} challenges Done
-                  </p>
+                  <p className="">{option?.challengesDone || 0} challenges</p>
                 </div>
                 <button
                   onClick={() =>

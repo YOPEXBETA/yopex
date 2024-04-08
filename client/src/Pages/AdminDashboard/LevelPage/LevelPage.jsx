@@ -11,6 +11,7 @@ const LevelPage = () => {
   const { mutate: createLevelMutate } = useCreateLevel(adminDefinedPoints);
 
   const { data, isLoading } = useGetLevels();
+  console.log(data, "levels");
   const [showAlert, setShowAlert] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState("");
 
