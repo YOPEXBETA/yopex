@@ -40,7 +40,9 @@ const getAllCompanies = async (req, res) => {
 
     const companies = await companySchema
       .find(companyQuery)
-      .select("_id companyName companyLogo country address challenges jobs")
+      .select(
+        "_id companyName companyLogo country address challenges jobs verified"
+      )
       .sort({ createdAt: -1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize)

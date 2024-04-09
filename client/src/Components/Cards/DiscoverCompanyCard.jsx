@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 import { useNavigate, useParams } from "react-router-dom";
 import Card from ".";
+import { FaCheckCircle } from "react-icons/fa";
 
 const DiscoverCompanyCard = ({ option, extra, user, companyQuery }) => {
   const [open, setOpen] = useState(true);
@@ -35,26 +36,41 @@ const DiscoverCompanyCard = ({ option, extra, user, companyQuery }) => {
               )}
             </div>
           </div>
-          <div className="flex-auto sm:ml-5 justify-evenly">
+          <div className="flex-auto sm:ml-5 justify-between">
             <div className="flex items-center justify-between sm:mt-2">
-              <div className="flex items-center">
+              <div className="flex flex-col items-start gap-4">
                 <div className="flex flex-col">
-                  <div className="w-full flex-none text-lg dark:text-gray-200 font-bold leading-none">
-                    {option?.companyName}
+                  <div className="flex items-center gap-2">
+                    <div className="text-lg dark:text-gray-200 font-bold leading-none">
+                      {option?.companyName}
+                    </div>
+                    <button
+                      className="flex items-center gap-1"
+                      aria-label="verification badge"
+                      disabled={!option?.verified}
+                    >
+                      <FaCheckCircle
+                        className={`text-${
+                          option?.verified ? "green" : "gray"
+                        }-500 w-4 h-4 sm:w-5 sm:h-5 mb-[0.1rem] ${
+                          !option?.verified
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
+                        }`}
+                      />
+                    </button>
                   </div>
-                  <div className="flex-auto text-gray-400 my-1">
-                    <span className="mr-3 ">
-                      <span>{option?.country || "unknown"}</span>
-                    </span>
-                    <span className="mr-3 border-r border-gray-600 max-h-0"></span>
-                    {option?.address || "unknown"}
-                  </div>
+                </div>
+                <div className="flex-auto text-gray-400 my-1">
+                  <span className="mr-3 ">
+                    <span>{option?.country || "unknown"}</span>
+                  </span>
+                  <span className="mr-3 border-r border-gray-600 max-h-0"></span>
+                  {option?.address || "unknown"}
                 </div>
               </div>
             </div>
-            <div className="flex flex-row items-center">
-              {/*<p className="flex text-gray-500">{option?.companyDescription}</p>*/}
-            </div>
+
             <div className="flex pt-4 text-sm text-gray-500">
               <div className="flex-1 inline-flex items-center">
                 <svg

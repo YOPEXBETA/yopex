@@ -19,14 +19,14 @@ const LevelPage = () => {
 
   const handleAddLevel = () => {
     if (lastLevel) {
-      const newLevelNumber = parseInt(lastLevel.name.replace("Level ", "")) + 1;
+      const newLevelNumber = lastLevel.level + 1;
       const message = `A new Level ${newLevelNumber} will be created. Do you want to continue?`;
 
       setConfirmationMessage(message);
 
       setShowAlert(true);
     } else {
-      const newLevelNumber = "1";
+      const newLevelNumber = 1;
       const message = `A new Level ${newLevelNumber} will be created. Do you want to continue?`;
 
       setConfirmationMessage(message);
@@ -38,7 +38,7 @@ const LevelPage = () => {
   const handleAlertOK = () => {
     createLevelMutate(adminDefinedPoints);
     setShowAlert(false);
-    setAdminDefinedPoints("");
+    setAdminDefinedPoints(0);
   };
 
   const handleAlertCancel = () => {

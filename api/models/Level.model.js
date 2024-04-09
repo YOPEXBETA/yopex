@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
 const levelSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    //default: 1,
+  level: {
+    type: Number,
+    default: 1,
   },
   minScore: {
     type: Number,
+    default: 0,
     required: true,
   },
   maxScore: {

@@ -56,7 +56,7 @@ const LevelLoading = () => {
       <div className="cursor-pointer text-sm leading-5 w-full ">
         <LinearProgressWithLabel
           value={userProfile?.score}
-          level={userLevel?.name.replace("Level ", "")}
+          level={userLevel?.level}
           difference={userLevel?.maxScore}
         />
       </div>

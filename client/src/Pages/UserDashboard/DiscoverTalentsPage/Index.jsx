@@ -16,6 +16,7 @@ const Index = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
   const [companyQuery, setCompanyQuery] = useState("");
+  const [companypage, setCompanypage] = useState(1);
   const { mutate, isSuccess } = useSetquery();
   const { user } = useSelector((state) => state.auth);
 
@@ -25,7 +26,7 @@ const Index = () => {
     query
   );
   const { data: suggestedCompanies, isLoading: companiesLoading } =
-    useCompanies(page, companyQuery);
+    useCompanies(companypage, companyQuery);
 
   const handleChangePage = (newPage) => {
     if (newPage <= totalPages && newPage > 0) {
@@ -33,8 +34,17 @@ const Index = () => {
     }
   };
 
+  const handleChangeCompanyPage = (newPage) => {
+    if (newPage <= totalPages && newPage > 0) {
+      setCompanypage(newPage);
+    }
+  };
+
   const totalPages = Math?.ceil(suggestedUsers?.userCount / 6);
   const displayedPages = Math?.min(10, totalPages);
+
+  const companytotalPages = Math?.ceil(suggestedCompanies?.companyCount / 6);
+  const displayedCompanyPages = Math?.min(10, companytotalPages);
 
   const handleSearchUsers = (event) => {
     setQuery(event.target.value);
@@ -79,10 +89,10 @@ const Index = () => {
               companyQuery={companyQuery}
               suggestedCompanies={suggestedCompanies}
               isLoading={companiesLoading}
-              handleChangePage={handleChangePage}
-              totalPages={totalPages}
-              displayedPages={displayedPages}
-              page={page}
+              handleChangePage={handleChangeCompanyPage}
+              companytotalPages={companytotalPages}
+              displayedCompanyPages={displayedCompanyPages}
+              page={companypage}
             />
           </div>
         )}

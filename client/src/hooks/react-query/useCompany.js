@@ -14,12 +14,12 @@ export const useAdminCompanies = (page) => {
   });
 };
 
-export const useCompanies = (page, companyQuery) => {
+export const useCompanies = (companypage, companyQuery) => {
   return useQuery({
-    queryKey: ["companies", page, companyQuery],
+    queryKey: ["companies", companypage, companyQuery],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${url}/company/allcompanies?page=${page}&name=${companyQuery}`,
+        `${url}/company/allcompanies?page=${companypage}&name=${companyQuery}`,
         {}
       );
 

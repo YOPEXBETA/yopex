@@ -12,7 +12,7 @@ const LevelCard = ({ badgeData, extra }) => {
         <div className="flex justify-between items-center flex-col">
           <div className="border-4 border-green-500 bg-green-700  text-green-500 rounded-full p-3 w-24 h-24 flex items-center justify-center">
             <h5 className="text-4xl text-white  font-semibold truncate">
-              {badgeData.name.match(/\d+/)}{" "}
+              {badgeData.level}
             </h5>
           </div>
           <div className="flex mb-2 items-center justify-between">

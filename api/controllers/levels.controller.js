@@ -5,24 +5,24 @@ const createLevel = async (req, res) => {
   try {
     // Find the highest existing level
     const highestLevel = await levels.findOne().sort({ maxScore: -1 });
-    console.log(highestLevel);
+
     // Calculate the min and max scores for the new level
     const newMinScore = highestLevel ? highestLevel.maxScore : 0;
     const newMaxScore = newMinScore + parseInt(req.body.adminDefinedPoints); // For example, each level coast 1000 points
 
-    const levelName = highestLevel
-      ? `${parseInt(highestLevel.name.replace("Level ", "")) + 1}`
-      : "1";
+    const levelNumber = highestLevel ? highestLevel.level + 1 : 1;
 
     const level = new levels({
-      name: `Level ${levelName}`,
+      level: levelNumber,
       minScore: newMinScore,
       maxScore: newMaxScore,
     });
+
     await level.save();
     res.status(201).json(level);
   } catch (error) {
     console.error(`Error creating level: ${error.message}`);
+    res.status(500).json({ error: "Server error" });
   }
 };
 

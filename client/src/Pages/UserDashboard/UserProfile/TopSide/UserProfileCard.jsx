@@ -71,9 +71,7 @@ const UserProfileCard = () => {
             <div className="absolute bottom-0 right-0">
               <div className="flex items-center justify-center rounded-full bg-green-500 w-11 h-11 text-white">
                 {userLevel ? (
-                  <p className="dark:text-white">
-                    {"LV " + parseInt(userLevel?.name.replace("Level ", ""))}
-                  </p>
+                  <p className="dark:text-white">{"LV " + userLevel?.level}</p>
                 ) : (
                   <LoadingSpinner />
                 )}

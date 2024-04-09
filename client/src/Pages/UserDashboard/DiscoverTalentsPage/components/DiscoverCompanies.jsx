@@ -9,8 +9,8 @@ const DiscoverCompanies = ({
   setCompanyQuery,
   user,
   handleChangePage,
-  totalPages,
-  displayedPages,
+  companytotalPages,
+  displayedCompanyPages,
   page,
 }) => {
   return (
@@ -65,8 +65,11 @@ const DiscoverCompanies = ({
         </button>
 
         <div className="items-center hidden md:flex gap-x-3">
-          {Array.from({ length: displayedPages }, (_, index) => page + index)
-            .filter((pageNumber) => pageNumber <= totalPages)
+          {Array.from(
+            { length: displayedCompanyPages },
+            (_, index) => page + index
+          )
+            .filter((pageNumber) => pageNumber <= companytotalPages)
             .map((pageNumber) => (
               <button
                 key={pageNumber}
@@ -85,7 +88,7 @@ const DiscoverCompanies = ({
         <button
           onClick={() => handleChangePage(page + 1)}
           className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
-          disabled={page === totalPages}
+          disabled={page === companytotalPages}
         >
           <span>Next</span>
           <svg

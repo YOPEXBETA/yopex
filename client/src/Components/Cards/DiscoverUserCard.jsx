@@ -15,7 +15,7 @@ const DiscoverUserCard = ({ option, extra, user }) => {
   const userLevel = levelsData
     ? levelsData.find(
         (level) =>
-          level.minScore <= user?.score && level.maxScore >= user?.score
+          level.minScore <= option?.score && level.maxScore >= option?.score
       )
     : null;
 
@@ -52,7 +52,7 @@ const DiscoverUserCard = ({ option, extra, user }) => {
               <a className="absolute -right-1 bottom-2   -ml-3 text-white p-2 text-xs bg-green-500 hover:bg-green-600 font-medium tracking-wider rounded-full transition ease-in duration-300">
                 {userLevel ? (
                   <p className="dark:text-white text-sm">
-                    {"LV " + parseInt(userLevel?.name.replace("Level ", ""))}
+                    {"LV " + userLevel?.level}
                   </p>
                 ) : (
                   <LoadingSpinner />
@@ -82,11 +82,10 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                 {option?.reviews?.length > 0 ? (
                   option?.reviews?.map((review, index) => (
                     <div className="flex items-center" key={index}>
-                      <p className="ms-2 text-md font-bold dark:text-white">
+                      <p className="text-lg font-bold dark:text-white">
                         {review?.star}
                       </p>
                       <StarReviewIcon />
-                      <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
                     </div>
                   ))
                 ) : (

@@ -51,7 +51,7 @@ const LeaderboardDetailCard = ({ data }) => {
           </Link>
           <div className="absolute bottom-0 right-0">
             <div className="flex items-center justify-center rounded-full bg-green-500 w-11 h-11 text-white">
-              {"LV " + parseInt(userLevel?.name.replace("Level ", ""))}
+              {"LV " + userLevel?.level}
             </div>
           </div>
         </div>
