@@ -30,11 +30,6 @@ const JobAppliersCard = ({ job, onCardClick, extra }) => {
             </div>
           </div>
         </div>
-        {/*<div className="mr-4 flex items-center justify-center text-gray-600 dark:text-white">
-                  <div onClick={(e) => e.preventDefault()}>
-                    <ApplierMenuIcon Applier={Applier} job={jobId} />
-                  </div>
-              </div>*/}
       </div>
     </Card>
   );

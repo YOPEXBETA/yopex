@@ -52,13 +52,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
   const { mutate } = useCreateJob(user);
 
   const onSubmit = (JobData) => {
-    let ownerId = "";
-
-    if (showUser) {
-      ownerId = userId;
-    } else {
-      ownerId = selectedOption;
-    }
+    const companyId = selectedOption;
     const modifiedJobData = {
       ...JobData,
       description: content,
@@ -66,17 +60,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
       skills: JobData?.skills.map((skill) => skill.value),
     };
 
-    mutate({ ownerId: ownerId, JobData: modifiedJobData });
-  };
-
-  const handleToggleUser = () => {
-    setShowUser(true);
-    setShowCompanies(false);
-  };
-
-  const handleToggleCompanies = () => {
-    setShowUser(false);
-    setShowCompanies(true);
+    mutate({ companyId: companyId, JobData: modifiedJobData });
   };
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -120,114 +104,85 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                   <InfoIcon />
                 </span>
                 <h1 className="font-medium text-xl dark:text-white">
-                  Are you posting as an individual, or as a company?
+                  Select a company to start posting job offers
                 </h1>
               </div>
-              <div className="flex inset-y-0 right-0 items-center pr-0 h-14  bg-green-50 rounded-full">
-                <button
-                  className={`flex items-center rounded-full h-14 dark:text-black transition-colors duration-300 ease-in focus:outline-none w-full hover:text-green-300 px-4 py-2 ${
-                    showUser ? "bg-green-500 text-white shadow" : ""
-                  }`}
-                  onClick={handleToggleUser}
-                >
-                  <div className="flex items-center gap-2 dark:text-white">
-                    <UsersIcon />
-                    <span className="hidden sm:inline font-medium text-lg dark:text-white">
-                      Individual
-                    </span>
-                  </div>
-                </button>
-                <button
-                  className={`flex items-center rounded-full h-14 dark:text-black transition-colors duration-300 ease-in focus:outline-none w-full hover:text-green-300  px-4 py-2 ${
-                    showCompanies ? "bg-green-500 text-white shadow" : ""
-                  }`}
-                  onClick={handleToggleCompanies}
-                >
-                  <div className="flex items-center gap-2 dark:text-white">
-                    <CompanyIcon />
-                    <span className="hidden sm:inline font-medium text-lg dark:text-white">
-                      Company
-                    </span>
-                  </div>
-                </button>
-              </div>
+
               <div>
-                {showCompanies && (
-                  <div className="flex items-center justify-center">
-                    {userProfile?.companies.length > 1 && (
-                      <button
-                        onClick={handlePrevPage}
-                        className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                <div className="flex items-center justify-center">
+                  {userProfile?.companies.length > 1 && (
+                    <button
+                      onClick={handlePrevPage}
+                      className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                        className="w-6 h-6"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          height="24"
-                          className="w-6 h-6"
+                        <path d="M15 18l-6-6 6-6v12z" fill="currentColor" />
+                      </svg>
+                    </button>
+                  )}
+                  {userProfile?.companies.length > 0 ? (
+                    userProfile.companies
+                      .slice(currentPage, currentPage + 1)
+                      .map((option, index) => (
+                        <div
+                          key={option._id}
+                          className={`border-2 p-2 rounded-lg mb-2 cursor-pointer relative ${
+                            selectedOption === option._id
+                              ? "border-green-500"
+                              : "border-gray-300 "
+                          }`}
+                          onClick={() => handleCardClick(option._id)}
                         >
-                          <path d="M15 18l-6-6 6-6v12z" fill="currentColor" />
-                        </svg>
-                      </button>
-                    )}
-                    {userProfile?.companies.length > 0 ? (
-                      userProfile.companies
-                        .slice(currentPage, currentPage + 1)
-                        .map((option, index) => (
-                          <div
-                            key={option._id}
-                            className={`border-2 p-2 rounded-lg mb-2 cursor-pointer relative ${
-                              selectedOption === option._id
-                                ? "border-green-500"
-                                : "border-gray-300 "
-                            }`}
-                            onClick={() => handleCardClick(option._id)}
-                          >
-                            {/* Company image */}
-                            <img
-                              src={option.companyLogo}
-                              alt={option.companyName}
-                              className={`w-32 h-32 object-cover border rounded-lg transition-transform transform hover:scale-110 `}
-                            />
-                            {selectedOption === option._id && (
-                              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 mb-2">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 24 12"
-                                  width="24"
-                                  height="12"
-                                  className="text-green-500"
-                                >
-                                  <path
-                                    d="M0 0l12 12 12-12z"
-                                    fill="currentColor"
-                                  />
-                                </svg>
-                              </div>
-                            )}
-                          </div>
-                        ))
-                    ) : (
-                      <img src={NotFound} className="h-80 w-80" />
-                    )}
-                    {userProfile?.companies.length > 1 && (
-                      <button
-                        onClick={handleNextPage}
-                        className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                          {/* Company image */}
+                          <img
+                            src={option.companyLogo}
+                            alt={option.companyName}
+                            className={`w-32 h-32 object-cover border rounded-lg transition-transform transform hover:scale-110 `}
+                          />
+                          {selectedOption === option._id && (
+                            <div className="absolute top-2 left-1/2 transform -translate-x-1/2 mb-2">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 12"
+                                width="24"
+                                height="12"
+                                className="text-green-500"
+                              >
+                                <path
+                                  d="M0 0l12 12 12-12z"
+                                  fill="currentColor"
+                                />
+                              </svg>
+                            </div>
+                          )}
+                        </div>
+                      ))
+                  ) : (
+                    <img src={NotFound} className="h-80 w-80" />
+                  )}
+                  {userProfile?.companies.length > 1 && (
+                    <button
+                      onClick={handleNextPage}
+                      className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                        className="w-6 h-6"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          height="24"
-                          className="w-6 h-6"
-                        >
-                          <path d="M9 18l6-6-6-6v12z" fill="currentColor" />
-                        </svg>
-                      </button>
-                    )}
-                  </div>
-                )}
+                        <path d="M9 18l6-6-6-6v12z" fill="currentColor" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-2">

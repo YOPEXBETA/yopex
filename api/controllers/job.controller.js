@@ -11,44 +11,39 @@ const main = require("../server");
 
 const addJob = async (req, res, next) => {
   try {
-    const { ownerId, ...jobDetails } = req.body;
+    console.log("Starting addJob function");
 
-    if (!ownerId) {
-      return res.status(400).json({ error: "OwnerId must be provided" });
+    const { companyId, ...jobDetails } = req.body;
+    console.log("Received request body:", req.body);
+
+    if (!companyId) {
+      console.log("No companyId provided, returning 400 error");
+      return res.status(400).json({ error: "CompanyId must be provided" });
     }
 
-    const user = await User.findById(ownerId);
-    if (!user) {
-      const company = await Company.findById(ownerId);
-      if (!company) {
-        return res.status(400).json({ error: "Owner not found" });
-      }
-      /*if (company.verified === false) {
-        return res.status(400).json({ message: "Company not verified" });
-      }*/
-      const jobOffer = new Job({
-        company: ownerId,
-        ...jobDetails,
-      });
+    console.log("Attempting to find company with ID:", companyId);
+    const company = await Company.findById(companyId);
+    console.log("Company found:", company);
 
-      await jobOffer.save();
-
-      return res
-        .status(201)
-        .json({ message: "Job offer created successfully", jobOffer });
+    if (!company) {
+      console.log("Company not found, returning 400 error");
+      return res.status(400).json({ error: "Company not found" });
     }
 
     const jobOffer = new Job({
-      owner: ownerId,
+      company: companyId,
       ...jobDetails,
     });
 
+    console.log("Attempting to save job offer:", jobOffer);
     await jobOffer.save();
 
+    console.log("Job offer saved successfully");
     res
       .status(201)
       .json({ message: "Job offer created successfully", jobOffer });
   } catch (error) {
+    console.log("Error occurred:", error.message);
     res
       .status(500)
       .json({ error: `Failed to create job offer: ${error.message}` });
@@ -74,7 +69,6 @@ const getAllJobs = async (req, res) => {
     const jobs = await Job.find(filters)
       .select("-acceptedAppliers")
       .populate("company", "companyName companyLogo")
-      .populate("owner", "firstname lastname picturePath")
       .populate("skills");
 
     return res.status(200).json(jobs);
@@ -203,7 +197,7 @@ const applyJob = async (req, res) => {
       type: "applied for a job",
       message: `Applied for your job of : ${job.title}`,
       job: job._id,
-      company : company._id,
+      company: company._id,
       picture: user.picturePath,
       createdAt: new Date(),
     });

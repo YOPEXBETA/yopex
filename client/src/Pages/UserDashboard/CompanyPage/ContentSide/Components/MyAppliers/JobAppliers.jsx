@@ -34,7 +34,7 @@ const JobAppliers = () => {
       {jobData?.length > 0 ? (
         jobData?.map((job) => (
           <JobAppliersCard
-            key={job._id}
+            key={job?._id}
             job={job}
             onCardClick={handleCardClick}
           />

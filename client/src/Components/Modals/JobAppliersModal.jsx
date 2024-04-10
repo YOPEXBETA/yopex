@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAppliers } from "../../hooks/react-query/useJobs";
 import ApplierMenuIcon from "../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyAppliers/ApplierMenuIcon";
 import LoadingSpinner from "../LoadingSpinner";
+import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 
 const JobAppliersModal = ({ jobId, onClose, isModalOpen }) => {
   const { data: appliers, isLoading: appliersLoading } = useAppliers(jobId);
@@ -48,20 +49,26 @@ const JobAppliersModal = ({ jobId, onClose, isModalOpen }) => {
           </div>
           <div className="p-4">
             {appliersLoading ? (
-              // Display a loading spinner while the data is being fetched
               <LoadingSpinner />
-            ) : (
-              // Render the appliers list when data is available
+            ) : appliers ? (
               <ul>
                 {appliers?.map((applier, index) => (
-                  <Link to={`/profile/${applier._id}`} key={index}>
+                  <Link to={`/profile/${applier?._id}`} key={index}>
                     <li className="flex items-center justify-between my-6">
                       <div className="flex items-center">
-                        <img
-                          src={applier.picturePath}
-                          alt="applier"
-                          className="h-12 w-12 rounded-full mr-3 object-cover"
-                        />
+                        {applier?.picturePath ? (
+                          <img
+                            alt="picture"
+                            src={applier?.picturePath}
+                            className="h-12 w-12 rounded-full mr-3 object-cover border"
+                          />
+                        ) : (
+                          <img
+                            alt="default"
+                            src={AvatarProfile}
+                            className="h-12 w-12 rounded-full mr-3 object-cover border"
+                          />
+                        )}
                         <div className="flex gap-1">
                           <p className="text-gray-700 dark:text-white">
                             {applier?.firstname}
@@ -80,6 +87,8 @@ const JobAppliersModal = ({ jobId, onClose, isModalOpen }) => {
                   </Link>
                 ))}
               </ul>
+            ) : (
+              <p>No appliers found.</p>
             )}
           </div>
         </div>
