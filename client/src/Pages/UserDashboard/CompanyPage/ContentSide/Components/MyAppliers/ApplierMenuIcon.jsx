@@ -7,9 +7,12 @@ import {
   useUnapplyJob,
 } from "../../../../../../hooks/react-query/useJobs";
 
-const ApplierMenuIcon = ({ Applier, job }) => {
-  const { mutate: accepteMutate } = useAcceptApplier(job);
-  const { mutate: deleteMutate } = useUnapplyJob(job, Applier._id);
+const ApplierMenuIcon = ({ Applier, jobId }) => {
+  const { mutate: accepteMutate, isLoading } = useAcceptApplier(
+    jobId,
+    Applier._id
+  );
+  const { mutate: deleteMutate } = useUnapplyJob(jobId, Applier._id);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -33,7 +36,7 @@ const ApplierMenuIcon = ({ Applier, job }) => {
             <ul>
               <li>
                 <button
-                  onClick={() => accepteMutate(Applier._id)}
+                  onClick={() => accepteMutate(Applier._id, jobId)}
                   className="flex items-center px-4 py-2 hover:bg-gray-100 w-full dark:text-white"
                 >
                   <VerifiedIcon className="text-gray-500 mr-2" />

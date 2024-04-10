@@ -132,20 +132,29 @@ export const useAcceptedAppliers = (job) => {
       );
       return data;
     },
+
     onError: (error) => {
       toast.error(`${error.response.data.message}`);
     },
   });
 };
 
-export const useAcceptApplier = (job) => {
+export const useAcceptApplier = (jobId) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (userId) => {
-      await axios.put(`${url}/job/jobs/${job._id}/appliers/${userId}/accept`);
+      await axios.put(`${url}/job/jobs/${jobId}/appliers/${userId}/accept`);
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries(["appliers"]);
+      queryClient.invalidateQueries({
+        queryKey: ["accepted/appliers"],
+      });
+    },
+    onSuccess: () => {
+      toast.success("Applier accepted successfully");
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
       queryClient.invalidateQueries(["appliers"]);
       queryClient.invalidateQueries({

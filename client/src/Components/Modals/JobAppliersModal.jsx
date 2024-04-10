@@ -6,7 +6,6 @@ import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 
 const JobAppliersModal = ({ jobId, onClose, isModalOpen }) => {
   const { data: appliers, isLoading: appliersLoading } = useAppliers(jobId);
-
   return (
     <div
       className={`fixed inset-0 z-50 ${
@@ -80,7 +79,7 @@ const JobAppliersModal = ({ jobId, onClose, isModalOpen }) => {
                       </div>
                       <div className="mr-4 flex items-center justify-center text-gray-600 dark:text-white">
                         <div onClick={(e) => e.preventDefault()}>
-                          <ApplierMenuIcon Applier={applier} job={jobId} />
+                          <ApplierMenuIcon Applier={applier} jobId={jobId} />
                         </div>
                       </div>
                     </li>

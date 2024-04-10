@@ -31,7 +31,11 @@ jobRouter.put("/jobs/:jobId/apply/:userId", applyJob);
 jobRouter.put("/jobs/:jobId/unapply/:userId", unapplyJob);
 jobRouter.get("/jobs/:jobId/appliers", getAppliers);
 jobRouter.get("/jobs/:jobId/sortedappliers", getSortedAppliers);
-jobRouter.put("/jobs/:jobId/appliers/:userId/accept", acceptApplier);
+jobRouter.put(
+  "/jobs/:jobId/appliers/:userId/accept",
+  authenticateToken,
+  acceptApplier
+);
 
 jobRouter.get("/jobs/:jobId/accepted-appliers", getAcceptedAppliers);
 

@@ -11,22 +11,15 @@ const main = require("../server");
 
 const addJob = async (req, res, next) => {
   try {
-    console.log("Starting addJob function");
-
     const { companyId, ...jobDetails } = req.body;
-    console.log("Received request body:", req.body);
 
     if (!companyId) {
-      console.log("No companyId provided, returning 400 error");
       return res.status(400).json({ error: "CompanyId must be provided" });
     }
 
-    console.log("Attempting to find company with ID:", companyId);
     const company = await Company.findById(companyId);
-    console.log("Company found:", company);
 
     if (!company) {
-      console.log("Company not found, returning 400 error");
       return res.status(400).json({ error: "Company not found" });
     }
 
@@ -35,15 +28,12 @@ const addJob = async (req, res, next) => {
       ...jobDetails,
     });
 
-    console.log("Attempting to save job offer:", jobOffer);
     await jobOffer.save();
 
-    console.log("Job offer saved successfully");
     res
       .status(201)
       .json({ message: "Job offer created successfully", jobOffer });
   } catch (error) {
-    console.log("Error occurred:", error.message);
     res
       .status(500)
       .json({ error: `Failed to create job offer: ${error.message}` });
@@ -59,8 +49,8 @@ const getAllJobs = async (req, res) => {
       ...(q.offerType && { offerType: q.offerType }),
       ...(q.skills && {
         skills: {
-          $in: (await Skill.find({ name: { $in: q.skills } })).map(
-            (skill) => skill._id
+          $in: (await Skill?.find({ name: { $in: q.skills } }))?.map(
+            (skill) => skill?._id
           ),
         },
       }),
@@ -317,7 +307,7 @@ const acceptApplier = async (req, res) => {
       .json({ message: "User has been accepted for this job" });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ error: error.message });
   }
 };
 const getAcceptedAppliers = async (req, res) => {
