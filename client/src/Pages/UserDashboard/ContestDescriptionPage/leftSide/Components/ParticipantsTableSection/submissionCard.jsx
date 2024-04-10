@@ -30,49 +30,56 @@ const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
         setIsOpen((prev) => !prev);
       }}
     >
-      <Card extra={`lg:pr-11 overflow-hidden lg:h-40   ${extra}`}>
-        <div className={`flex-col gap-6 md:flex-row flex`}>
-          <div className="w-full xl:w-[30%]">
-            <img
-              className={`h-full xl:h-30 md:h-40 w-screen md:rounded-l-lg object-cover lg:block`}
-              src={
-                item?.userId.picturePath ? item?.userId?.picturePath : Avatar
-              }
-              alt="picture"
-            />
-          </div>
-          <div className="flex w-full flex-col justify-between xl:w-[70%] lg:px-0 px-4">
-            <div className="py-4   items-center">
-              <h5 className="text-md font-semibold dark:text-white">
-                {item?.userId?.firstname} {item?.userId?.lastname}
-              </h5>
-              <p className=" font-semibold text-xl text-green-500 ">
+      <Card extra={`lg:pr-11 overflow-hidden p-4 lg:h-40   ${extra}`}>
+        <div className="w-full">
+          <div className="flex flex-col justify-between ">
+            <div className="mb-8">
+              <div className="dark:text-white font-bold text-xl mb-2">
                 {item?.title}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap justify-between pb-8">
-              <div className="flex items-center justify-start gap-2">
-                <div>
-                  <CgAttachment size={20} className="dark:text-white" />
+              </div>
+              <div className="flex flex-wrap gap-8">
+                <div className="flex items-center justify-start gap-2">
+                  <div>
+                    <CgAttachment size={20} className="dark:text-white" />
+                  </div>
+                  <div className="flex gap-1">
+                    <p className="font-bold dark:text-white">
+                      {item?.filesPaths?.length}
+                    </p>
+                    <p className="dark:text-white">Files</p>
+                  </div>
                 </div>
-                <div className="flex gap-1">
-                  <p className="font-bold dark:text-white">
-                    {item?.filesPaths?.length}
-                  </p>
-                  <p className="dark:text-white">Attachment</p>
+                <div className="flex items-center justify-start gap-2">
+                  <div>
+                    <IoLinkSharp size={20} className="dark:text-white" />
+                  </div>
+                  <div className="flex gap-1">
+                    <p className="font-bold dark:text-white">
+                      {item?.links?.length}
+                    </p>
+                    <p className="dark:text-white">Links</p>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-center justify-start gap-2">
-                <div>
-                  <IoLinkSharp size={20} className="dark:text-white" />
-                </div>
-                <div className="flex gap-1">
-                  <p className="font-bold dark:text-white">
-                    {item?.links?.length}
-                  </p>
-                  <p className="dark:text-white">Links</p>
-                </div>
+            </div>
+            <div className="flex items-center">
+              {item?.userId.picturePath ? (
+                <img
+                  alt="picture"
+                  src={item?.userId.picturePath}
+                  className="w-10 h-10 rounded-full mr-4 object-cover"
+                />
+              ) : (
+                <img
+                  alt="default"
+                  src={Avatar}
+                  className="w-10 h-10 rounded-full mr-4 object-cover border"
+                />
+              )}
+              <div className="text-sm">
+                <p className=" leading-none dark:text-white">
+                  {item?.userId?.firstname} {item?.userId?.lastname}
+                </p>
               </div>
             </div>
           </div>

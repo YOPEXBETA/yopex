@@ -57,7 +57,7 @@ const ParticipantsDialogModal = ({
             {submissions ? (
               <div className="w-full">
                 <div className="flex justify-between ">
-                  <h3 className=" block mb-1  text-lg  font-semibold text-gray-900 dark:text-white">
+                  <h3 className=" block mb-1 text-lg font-semibold dark:text-white">
                     {submissions?.title}
                   </h3>
                   <time className="block mb-1  text-base mt-1 font-normal  text-gray-500 dark:text-gray-400">
@@ -67,19 +67,21 @@ const ParticipantsDialogModal = ({
                       year: "numeric",
                       hour: "numeric",
                       minute: "numeric",
-                      second: "numeric",
                     })}
                   </time>
                 </div>
-                <p className="block mb-1  text-base font-normal  text-gray-500 dark:text-gray-400">
+                <p className="block mb-1  text-base font-normal dark:text-white">
                   {submissions?.description}
                 </p>
-                <div className="inline-flex flex-col w-full text-sm font-medium text-gray-900 focus:outline-none 0">
-                  <div className="mt-6 space-y-4">
+                <div className="inline-flex flex-col w-full text-sm font-medium dark:text-white focus:outline-none 0">
+                  <div className="mt-6 space-y-2">
+                    <h3 className=" block mb-1 text-lg font-semibold dark:text-white">
+                      Files
+                    </h3>
                     <div className="flex flex-col space-y-4">
                       {submissions?.filesPaths?.length > 0 && (
                         <>
-                          <div className="grid items-center grid-cols-4 gap-4">
+                          <div className="grid items-center md:grid-cols-3 grid-cols-1 gap-2">
                             {submissions?.filesPaths &&
                               submissions?.filesPaths?.map((file, i) => (
                                 <a
@@ -87,19 +89,32 @@ const ParticipantsDialogModal = ({
                                   href={file}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="bg-green-700 grid-cols-1 text-white px-4 py-3 hover:bg-green-900 transition duration-300 rounded-lg inline-block"
+                                  className="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8 hover:bg-green-500 hover:text-white"
                                 >
-                                  <div className="flex items-center gap-2">
-                                    <DocumentIcon />
-                                    <p>{`File ${i}`}</p>
+                                  <div className="flex items-center justify-between">
+                                    <span className="truncate  text-base font-medium ">
+                                      {`File ${i}`}{" "}
+                                    </span>
+                                    <button className="text-[#07074D]">
+                                      <svg
+                                        width="10"
+                                        height="10"
+                                        viewBox="0 0 10 10"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      ></svg>
+                                    </button>
                                   </div>
                                 </a>
                               ))}
                           </div>
                         </>
                       )}
-
-                      <div className="grid grid-cols-4 items-center gap-4">
+                      <hr />
+                      <h3 className=" block mb-1 text-lg font-semibold dark:text-white">
+                        Links
+                      </h3>
+                      <div className="grid items-center md:grid-cols-3 grid-cols-1 gap-2">
                         {submissions?.links?.length > 0 && (
                           <>
                             {submissions?.links?.map((item, i) => {
