@@ -13,13 +13,11 @@ const HomeContent = () => {
       <div className="dark:bg-zinc-800 bg-white">
         <HomeSection />
       </div>
-      <div className="dark:bg-zinc-800 bg-white">
-        <HighlightSection />
-      </div>
+
       <div className="dark:bg-zinc-800 bg-white">
         <Features />
       </div>
-      <div className="pb-16 dark:bg-zinc-800 bg-white">
+      <div className="dark:bg-zinc-800 bg-white">
         <Companies />
       </div>
       <div className="pb-16 dark:bg-zinc-800 bg-white">

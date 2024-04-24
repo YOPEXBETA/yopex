@@ -15,7 +15,7 @@ const Companies = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
+    <div className="bg-green-50 pb-8 pt-20 dark:bg-dark-2 lg:pb-[70px]">
       <div className="mb-12 space-y-2 text-center">
         <h2 className="text-3xl font-bold md:text-4xl dark:text-white">
           Recent Companies

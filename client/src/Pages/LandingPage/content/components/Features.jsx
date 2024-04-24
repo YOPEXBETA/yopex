@@ -7,7 +7,7 @@ import JobIcon from "../../../../Components/icons/JobIcon";
 const Features = () => {
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
-      <div className="dark:bg-zinc-800 pt-8" id="about">
+      <div className="dark:bg-zinc-800" id="about">
         <section class="pb-8 pt-20 dark:bg-dark lg:pb-[70px] lg:pt-20">
           <div class="container">
             <div class="-mx-4 flex flex-wrap">
