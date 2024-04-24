@@ -19,7 +19,7 @@ const Features = () => {
                   <h2 class="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
                     Our Main Features
                   </h2>
-                  <p class="text-base text-body-color dark:text-dark-6">
+                  <p class="text-base text-body-color dark:text-white">
                     Discover the powerful features that set our platform apart
                   </p>
                 </div>
@@ -35,7 +35,7 @@ const Features = () => {
                   <h4 class="mb-3 text-xl font-bold text-dark dark:text-white">
                     Apply To Jobs
                   </h4>
-                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
+                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9 dark:text-white">
                     Apply to job postings and advance your career
                   </p>
                   <a
@@ -55,7 +55,7 @@ const Features = () => {
                   <h4 class="mb-3 text-xl font-bold text-dark dark:text-white">
                     Participate In Challenges
                   </h4>
-                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
+                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9 dark:text-white">
                     Participate in challenges to showcase your skill and get
                     experience points
                   </p>
@@ -76,7 +76,7 @@ const Features = () => {
                   <h4 class="mb-3 text-xl font-bold text-dark dark:text-white">
                     Digital Resume
                   </h4>
-                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
+                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9 dark:text-white">
                     The platform build your resume, showcasing your achievements
                     and experiences seamlessly
                   </p>
@@ -97,7 +97,7 @@ const Features = () => {
                   <h4 class="mb-3 text-xl font-bold text-dark dark:text-white">
                     Connect With Freelancers
                   </h4>
-                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
+                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9 dark:text-white">
                     Connect with other freelancers in your industry
                   </p>
                   <a
