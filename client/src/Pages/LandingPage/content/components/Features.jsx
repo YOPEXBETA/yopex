@@ -1,161 +1,116 @@
 import React from "react";
-import { FaBriefcase } from "react-icons/fa";
 import { RiLightbulbLine } from "react-icons/ri";
 import { AiOutlineFileText } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
+import JobIcon from "../../../../Components/icons/JobIcon";
 
 const Features = () => {
   return (
-    <div className="dark:bg-zinc-800 pt-8" id="about">
-      <div>
-        <div className="max-w-7xl   mx-auto px-6 md:px-12 xl:px-6">
-          <div className="md:w-2/3 lg:w-1/2">
-            <h2 className=" text-2xl font-bold  dark:text-white md:text-4xl mb-2">
-              A social media platform designed exclusively for connecting
-              freelancers with startups.
-            </h2>
-            <p className=" dark:text-gray-300">
-              Discover the powerful features that set our platform apart,
-              empowering freelancers and startups to connect, collaborate, and
-              succeed. Explore the tools that make your freelance journey
-              smoother and help startups find the talent they need.
-            </p>
-          </div>
-          <div className=" cursor-pointer mt-16 grid divide-x divide-y divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-3xl border border-gray-100  dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
-            <div className="group relative bg-white dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-              <div className="relative space-y-8 py-12 p-8">
-                <FaBriefcase className="w-10 h-10 dark:text-white" />
-
-                <div className="space-y-2">
-                  <h5 className="text-xl font-semibold  dark:text-white transition group-hover:text-secondary">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
+      <div className="dark:bg-zinc-800 pt-8" id="about">
+        <section class="pb-8 pt-20 dark:bg-dark lg:pb-[70px] lg:pt-20">
+          <div class="container">
+            <div class="-mx-4 flex flex-wrap">
+              <div class="w-full px-4">
+                <div class="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
+                  <span class="mb-2 block text-xl font-semibold text-indigo-600">
+                    Features
+                  </span>
+                  <h2 class="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
+                    Our Main Features
+                  </h2>
+                  <p class="text-base text-body-color dark:text-dark-6">
+                    Discover the powerful features that set our platform apart
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="-mx-4 flex flex-wrap">
+              <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+                <div class="wow fadeInUp group mb-12" data-wow-delay=".1s">
+                  <div class="relative z-10 mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-[14px] bg-green-500">
+                    <span class="absolute left-0 top-0 -z-[1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-green-500 bg-opacity-20 duration-300 group-hover:rotate-45"></span>
+                    <JobIcon width={10} height={10} color={"white"} />
+                  </div>
+                  <h4 class="mb-3 text-xl font-bold text-dark dark:text-white">
                     Apply To Jobs
-                  </h5>
-                  <p className=" dark:text-gray-200">
+                  </h4>
+                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
                     Apply to job postings and advance your career
                   </p>
-                </div>
-                <a
-                  href="#"
-                  className="flex items-center justify-between group-hover:text-secondary"
-                >
-                  <span className="text-sm dark:text-gray-200">Read more</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-5 h-5 dark:text-gray-200 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                  <a
+                    href="javascript:void(0)"
+                    class="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                   >
-                    <path
-                      filRule="evenodd"
-                      d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
+                    Learn More
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="group relative bg-white dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-              <div className="relative space-y-8 py-12 p-8">
-                <RiLightbulbLine className="w-10 h-10 dark:text-white" />
-
-                <div className="space-y-2">
-                  <h5 className="text-xl font-semibold  dark:text-white transition group-hover:text-secondary">
-                    Challenge yourself
-                  </h5>
-                  <p className=" dark:text-gray-200">
-                    Participate in freelance challenges to showcase your skill
-                    and get experience points
+              <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+                <div class="wow fadeInUp group mb-12" data-wow-delay=".15s">
+                  <div class="relative z-10 mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-[14px] bg-green-500">
+                    <span class="absolute left-0 top-0 -z-[1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-green-500 bg-opacity-20 duration-300 group-hover:rotate-45"></span>
+                    <RiLightbulbLine className="w-10 h-10 text-white" />
+                  </div>
+                  <h4 class="mb-3 text-xl font-bold text-dark dark:text-white">
+                    Participate In Challenges
+                  </h4>
+                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
+                    Participate in challenges to showcase your skill and get
+                    experience points
                   </p>
-                </div>
-
-                <a
-                  href="#"
-                  className="flex items-center justify-between group-hover:text-secondary"
-                >
-                  <span className="text-sm dark:text-gray-200">Read more</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-5 h-5 dark:text-gray-200 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                  <a
+                    href="javascript:void(0)"
+                    class="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
+                    Learn More
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="group relative bg-white dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-              <div className="relative space-y-8 py-12 p-8">
-                <AiOutlineFileText className="w-10 h-10 dark:text-white" />
-
-                <div className="space-y-2">
-                  <h5 className="text-xl font-semibold dark:text-white transition group-hover:text-secondary">
-                    Automatic Resume Build
-                  </h5>
-                  <p className=" dark:text-gray-200">
+              <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+                <div class="wow fadeInUp group mb-12" data-wow-delay=".2s">
+                  <div class="relative z-10 mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-[14px] bg-green-500">
+                    <span class="absolute left-0 top-0 -z-[1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-green-500 bg-opacity-20 duration-300 group-hover:rotate-45"></span>
+                    <AiOutlineFileText className="w-10 h-10 text-white" />
+                  </div>
+                  <h4 class="mb-3 text-xl font-bold text-dark dark:text-white">
+                    Digital Resume
+                  </h4>
+                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
                     The platform build your resume, showcasing your achievements
                     and experiences seamlessly
                   </p>
-                </div>
-
-                <a
-                  href="#"
-                  className="flex items-center justify-between group-hover:text-secondary"
-                >
-                  <span className="text-sm dark:text-gray-200">Read more</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-5 h-5 dark:text-gray-200 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                  <a
+                    href="javascript:void(0)"
+                    class="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
+                    Learn More
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="group relative bg-gray-50 dark:bg-zinc-700 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-              <div className="relative space-y-8 py-12 p-8 transition duration-300 group-hover:bg-white dark:group-hover:bg-green-600">
-                <FiUsers className="w-10 h-10 dark:text-white" />
-
-                <div className="space-y-2">
-                  <h5 className="text-xl font-semibold  dark:text-white transition group-hover:text-secondary">
+              <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+                <div class="wow fadeInUp group mb-12" data-wow-delay=".25s">
+                  <div class="relative z-10 mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-[14px] bg-green-500">
+                    <span class="absolute left-0 top-0 -z-[1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-green-500 bg-opacity-20 duration-300 group-hover:rotate-45"></span>
+                    <FiUsers className="w-10 h-10 text-white" />
+                  </div>
+                  <h4 class="mb-3 text-xl font-bold text-dark dark:text-white">
                     Connect With Freelancers
-                  </h5>
-                  <p className=" dark:text-gray-200">
+                  </h4>
+                  <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
                     Connect with other freelancers in your industry
                   </p>
-                </div>
-                <a
-                  href="#"
-                  className="flex items-center justify-between group-hover:text-secondary"
-                >
-                  <span className="text-sm dark:text-gray-200">Read more</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-5 h-5 dark:text-gray-200 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                  <a
+                    href="javascript:void(0)"
+                    class="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
+                    Learn More
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

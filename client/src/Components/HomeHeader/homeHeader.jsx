@@ -64,24 +64,45 @@ const HomeHeader = () => {
         className={
           color
             ? "border-b-[1px] dark:border-zinc-600 transition-all duration-300 bg-white dark:bg-zinc-800"
-            : " bg-transparent dark:bg-zinc-800"
+            : " bg-transparent dark:bg-transparent"
         }
       >
         <div className="flex justify-between items-center w-full h-20 px-4 lg:px-24 md:px-24 z-10">
           <div className="flex items-center gap-8">
-            <img src={YopexLogo} width={35} alt="Yopex Logo" />
+            <div className="flex items-center gap-4">
+              <img src={YopexLogo} width={30} alt="Yopex Logo" />
+              <h1 className="text-green-500 text-2xl font-semibold">YOPEX</h1>
+            </div>
             <ul className="hidden md:flex">
-              <li className="px-4 cursor-pointer capitalize dark:text-white  text-gray-600 hover:scale-105 duration-200">
+              <li
+                className={
+                  color
+                    ? "px-4 cursor-pointer capitalize dark:text-white  text-slate-500 hover:scale-105 duration-200"
+                    : "px-4 cursor-pointer capitalize dark:text-white  text-white hover:scale-105 duration-200"
+                }
+              >
                 <Link to="home" smooth duration={500}>
                   Home
                 </Link>
               </li>
-              <li className="px-4 cursor-pointer capitalize dark:text-white text-gray-600 hover:scale-105 duration-200">
+              <li
+                className={
+                  color
+                    ? "px-4 cursor-pointer capitalize dark:text-white  text-slate-500 hover:scale-105 duration-200"
+                    : "px-4 cursor-pointer capitalize dark:text-white  text-white hover:scale-105 duration-200"
+                }
+              >
                 <Link to="about" smooth duration={500}>
                   Features
                 </Link>
               </li>
-              <li className="px-4 cursor-pointer capitalize dark:text-white text-gray-600 hover:scale-105 duration-200">
+              <li
+                className={
+                  color
+                    ? "px-4 cursor-pointer capitalize dark:text-white  text-slate-500 hover:scale-105 duration-200"
+                    : "px-4 cursor-pointer capitalize dark:text-white  text-white hover:scale-105 duration-200"
+                }
+              >
                 <Link to="contact" smooth duration={500}>
                   Contact
                 </Link>
@@ -95,15 +116,15 @@ const HomeHeader = () => {
               className="px-3 py-2  space-x-2   flex items-center cursor-pointer"
             >
               {isDark ? (
-                <LightIcon className="w-6 h-6 dark:hover:text-green-500 text-gray-600 dark:text-white" />
+                <LightIcon className="w-6 h-6 dark:hover:text-green-500 text-slate-500 dark:text-white" />
               ) : (
-                <MoonIcon className="w-6 h-6 text-gray-600 hover:text-green-500 dark:text-white" />
+                <MoonIcon className="w-6 h-6 text-slate-500 hover:text-green-500 dark:text-white" />
               )}
             </a>
 
             {user && (
               <p className="flex items-center gap-2">
-                <p className="px-2 cursor-pointer capitalize dark:text-white  text-gray-600  duration-200">
+                <p className="px-2 cursor-pointer capitalize dark:text-white text-slate-500  duration-200">
                   Welcome, {user?.firstname}
                 </p>
                 <div className="relative focus:ring-offset-2 focus:ring-offset-zinc-800">
@@ -137,7 +158,13 @@ const HomeHeader = () => {
             )}
             {!user && (
               <a href="/login" className="block">
-                <button className="cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 dark:text-white dark:hover:text-green-500 hover:text-green-500 duration-200">
+                <button
+                  className={
+                    color
+                      ? "cursor-pointer capitalize font-medium text-slate-500 hover:scale-105 dark:text-white dark:hover:text-green-500 hover:text-green-500 duration-200"
+                      : "pcursor-pointer capitalize font-medium text-white hover:scale-105 dark:hover:text-green-500 hover:text-green-500 duration-200"
+                  }
+                >
                   Login
                 </button>
               </a>
