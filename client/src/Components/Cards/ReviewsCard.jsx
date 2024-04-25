@@ -6,7 +6,6 @@ import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 
 const ReviewsCard = ({ extra, review }) => {
   const navigate = useNavigate();
-  console.log(review);
   return (
     <Card
       extra={`p-8 ${extra}`}
