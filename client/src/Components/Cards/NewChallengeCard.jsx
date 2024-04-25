@@ -8,13 +8,6 @@ import challengeBanner from "../../assets/images/challengeBanner.jpg";
 const NewChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
-  const isOwner = user?.companies?.find(
-    (company) => company === challenge?.company?._id
-  )
-    ? true
-    : challenge?.owner === user._id
-    ? true
-    : false;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -37,17 +30,22 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
       "0"
     )} : ${String(seconds).padStart(2, "0")}`;
   }
+
   return (
     <div>
       <Card extra={`p-4 h-full ${extra}`}>
-        <Link to={`/challenges/challengeDetails/${challenge._id}`}>
+        <Link
+          to={
+            challenge ? `/challenges/challengeDetails/${challenge?._id}` : "#"
+          }
+        >
           <div className="flex flex-col gap-4">
             <div className="flex justify-between">
               <div className="flex items-center gap-4">
                 <img
                   src={
                     challenge?.company?.companyLogo
-                      ? challenge?.company.companyLogo
+                      ? challenge?.company?.companyLogo
                       : challengeBanner
                   }
                   alt="Icon"
@@ -58,12 +56,11 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
                 </p>
               </div>
               <div className="flex items-center justify-start gap-2">
-                {isOwner ? (
+                {(user?.companies?.includes(challenge?.company?._id) ||
+                  challenge?.owner === user?._id) && (
                   <div onClick={(e) => e.preventDefault()}>
                     <ChallengeMenuIcon challenge={challenge} />
                   </div>
-                ) : (
-                  <p></p>
                 )}
               </div>
             </div>
@@ -92,7 +89,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
                     <div className="">/</div>
                     <p className=" ">{challenge.nbruser}</p>
                   </span>
-                  <span className="bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm">
+                  <span className="bg-amber-100 text-amber-600 rounded-full px-3 py-1 text-sm">
                     {challenge.price > 0 ? (
                       <div className="flex gap-1">
                         <p className="">{challenge.price} pts</p>
@@ -101,7 +98,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
                       <p>Free</p>
                     )}
                   </span>
-                  <span className="bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm">
+                  <span className="bg-green-100 text-emerald-700 rounded-full px-3 py-1 text-sm">
                     {challenge.objective}
                   </span>
                 </div>
@@ -109,7 +106,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
             </div>
 
             <div className="border px-4 py-3 rounded-2xl dark:bg-zinc-700">
-              <p className="text-center font-bold text-lg dark:text-green-500">
+              <p className="text-center font-bold text-lg dark:text-emerald-400">
                 {challenge?.start ? timeRemaining : "Open"}
               </p>
             </div>

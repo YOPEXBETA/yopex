@@ -103,7 +103,7 @@ const MainRoutes = {
       name: "Feed",
       path: "feed",
       icon: <DashIcon className="h-6 w-6" />,
-      element: <HomeLayout />,
+      element: <HomeLayout width={6} height={6} color={"grey-100"} />,
     },
     {
       name: "Discover",
@@ -113,14 +113,16 @@ const MainRoutes = {
       children: [
         {
           index: true,
-          element: <DiscoverTalentsLayout />,
+          element: (
+            <DiscoverTalentsLayout width={6} height={6} color={"grey-100"} />
+          ),
           customWidth: true,
         },
       ],
     },
     {
       name: "Jobs",
-      icon: <JobIcon className="h-6 w-6" />,
+      icon: <JobIcon width={6} height={6} color={"grey-100"} />,
       path: "/jobs",
       element: <JobLayout />,
       customWidth: true,
@@ -155,7 +157,12 @@ const MainRoutes = {
     {
       name: "Company",
       path: "/company",
-      children: [{ path: ":companyId", element: <Company /> }],
+      children: [
+        {
+          path: ":companyId",
+          element: <Company width={6} height={6} color={"grey-100"} />,
+        },
+      ],
       hideInSidebar: true,
       customWidth: false,
     },
@@ -163,13 +170,13 @@ const MainRoutes = {
       name: "Leaderboard",
       path: "leaderboard",
       element: <LeaderBoardLayout />,
-      icon: <LeaderboardIcon />,
+      icon: <LeaderboardIcon width={6} height={6} color={"grey-100"} />,
       customWidth: true,
     },
     {
       name: "Chat",
       path: "chat",
-      icon: <ChatIcon />,
+      icon: <ChatIcon width={6} height={6} color={"grey-100"} />,
       customWidth: true,
       hideInSidebar: false,
       children: [
@@ -186,7 +193,7 @@ const MainRoutes = {
     {
       name: "Settings",
       path: "settings",
-      element: <SettingsLayout />,
+      element: <SettingsLayout width={6} height={6} color={"grey-100"} />,
       icon: <SettingsIcon />,
     },
     {

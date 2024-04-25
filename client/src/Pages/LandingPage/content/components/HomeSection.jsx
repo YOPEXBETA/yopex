@@ -26,7 +26,7 @@ const HomeSection = () => {
               data-wow-delay=".2s"
             >
               <h1 className="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]">
-                Matching Top Talents With Business Owners
+                Where Talent Meets Opportunity
               </h1>
               <p className="mx-auto mb-9 max-w-[600px] text-base text-white sm:text-lg sm:leading-[1.44]">
                 Tackle exciting challenges, apply for numerous job openings, and
@@ -97,39 +97,39 @@ const HomeSection = () => {
                 </svg>
               </span>
             </div>
-            <div class="py-6 sm:py-6">
-              <div class="mx-auto max-w-7xl px-6 lg:px-8">
-                <div class="mx-auto max-w-2xl lg:max-w-none">
-                  <dl class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-                    <div class="flex flex-col bg-white/5 p-8">
-                      <dt class=" text-md font-medium leading-6 text-gray-300">
+            <div className="py-6 sm:py-6">
+              <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                <div className="mx-auto max-w-2xl lg:max-w-none">
+                  <dl className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+                    <div className="flex flex-col bg-white/5 p-8">
+                      <dt className=" text-md font-medium leading-6 text-gray-300">
                         Registered users
                       </dt>
-                      <dd class="order-first text-3xl font-semibold tracking-tight text-white">
+                      <dd className="order-first text-3xl font-semibold tracking-tight text-white">
                         {data?.countusers}
                       </dd>
                     </div>
-                    <div class="flex flex-col bg-white/5 p-8">
-                      <dt class=" text-md font-medium leading-6 text-gray-300">
+                    <div className="flex flex-col bg-white/5 p-8">
+                      <dt className=" text-md font-medium leading-6 text-gray-300">
                         Registered companies
                       </dt>
-                      <dd class="order-first text-3xl font-semibold tracking-tight text-white">
+                      <dd className="order-first text-3xl font-semibold tracking-tight text-white">
                         {data?.countcompanies}
                       </dd>
                     </div>
-                    <div class="flex flex-col bg-white/5 p-8">
-                      <dt class=" text-md font-medium leading-6 text-gray-300">
+                    <div className="flex flex-col bg-white/5 p-8">
+                      <dt className=" text-md font-medium leading-6 text-gray-300">
                         Posted Jobs
                       </dt>
-                      <dd class="order-first text-3xl font-semibold tracking-tight text-white">
+                      <dd className="order-first text-3xl font-semibold tracking-tight text-white">
                         {data?.countjobs}
                       </dd>
                     </div>
-                    <div class="flex flex-col bg-white/5 p-8">
-                      <dt class=" text-md font-medium leading-6 text-gray-300">
+                    <div className="flex flex-col bg-white/5 p-8">
+                      <dt className=" text-md font-medium leading-6 text-gray-300">
                         Posted Challenges
                       </dt>
-                      <dd class="order-first text-3xl font-semibold tracking-tight text-white">
+                      <dd className="order-first text-3xl font-semibold tracking-tight text-white">
                         {data?.countchallenges}
                       </dd>
                     </div>

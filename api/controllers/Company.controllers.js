@@ -182,6 +182,19 @@ const deleteCompany = async (req, res) => {
   }
 };
 
+const getRecentCompanies = async (req, res) => {
+  try {
+    const companies = await companySchema
+      .find()
+      .select("_id companyName companyLogo")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(companies);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
 module.exports = {
   editProfile,
   getCompany,
@@ -190,4 +203,5 @@ module.exports = {
   getCompanyNotifications,
   deleteCompany,
   getAllCompanies,
+  getRecentCompanies,
 };

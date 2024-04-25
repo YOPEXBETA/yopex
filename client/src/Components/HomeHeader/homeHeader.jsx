@@ -44,7 +44,7 @@ const HomeHeader = () => {
   //change nav color when scrolling
   useEffect(() => {
     const changeColor = () => {
-      if (window.scrollY >= 50) {
+      if (window.scrollY >= 100) {
         setColor(true);
       } else {
         setColor(false);
@@ -71,7 +71,15 @@ const HomeHeader = () => {
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-4">
               {/*<img src={YopexLogo} width={30} alt="Yopex Logo" />*/}
-              <h1 className="text-emerald-300 text-2xl font-semibold">YOPEX</h1>
+              <h1
+                className={
+                  color
+                    ? "text-emerald-500 text-2xl font-semibold"
+                    : "text-white text-2xl font-semibold"
+                }
+              >
+                YOPEX
+              </h1>
             </div>
             <ul className="hidden md:flex">
               <li
@@ -92,8 +100,41 @@ const HomeHeader = () => {
                     : "px-4 cursor-pointer capitalize dark:text-white  text-white hover:scale-105 duration-200"
                 }
               >
-                <Link to="about" smooth duration={500}>
+                <Link to="features" smooth duration={500}>
                   Features
+                </Link>
+              </li>
+              <li
+                className={
+                  color
+                    ? "px-4 cursor-pointer capitalize dark:text-white  text-slate-500 hover:scale-105 duration-200"
+                    : "px-4 cursor-pointer capitalize dark:text-white  text-white hover:scale-105 duration-200"
+                }
+              >
+                <Link to="companies" smooth duration={500}>
+                  Companies
+                </Link>
+              </li>
+              <li
+                className={
+                  color
+                    ? "px-4 cursor-pointer capitalize dark:text-white  text-slate-500 hover:scale-105 duration-200"
+                    : "px-4 cursor-pointer capitalize dark:text-white  text-white hover:scale-105 duration-200"
+                }
+              >
+                <Link to="challenges" smooth duration={500}>
+                  Challenges
+                </Link>
+              </li>
+              <li
+                className={
+                  color
+                    ? "px-4 cursor-pointer capitalize dark:text-white  text-slate-500 hover:scale-105 duration-200"
+                    : "px-4 cursor-pointer capitalize dark:text-white  text-white hover:scale-105 duration-200"
+                }
+              >
+                <Link to="jobs" smooth duration={500}>
+                  Jobs
                 </Link>
               </li>
               <li
@@ -116,15 +157,21 @@ const HomeHeader = () => {
               className="px-3 py-2  space-x-2   flex items-center cursor-pointer"
             >
               {isDark ? (
-                <LightIcon className="w-6 h-6 dark:hover:text-green-500 text-slate-500 dark:text-white" />
+                <LightIcon className="w-6 h-6 dark:hover:text-green-500 text-white dark:text-white" />
               ) : (
-                <MoonIcon className="w-6 h-6 text-slate-500 hover:text-green-500 dark:text-white" />
+                <MoonIcon className="w-6 h-6  hover:text-green-500 text-white dark:text-white" />
               )}
             </a>
 
             {user && (
               <p className="flex items-center gap-2">
-                <p className="px-2 cursor-pointer capitalize dark:text-white text-slate-500  duration-200">
+                <p
+                  className={
+                    color
+                      ? "px-2 cursor-pointer capitalize dark:text-white text-slate-500 duration-200 lg:block md:hidden"
+                      : "px-2 cursor-pointer capitalize dark:text-white text-white lg:block duration-200 md:hidden"
+                  }
+                >
                   Welcome, {user?.firstname}
                 </p>
                 <div className="relative focus:ring-offset-2 focus:ring-offset-zinc-800">
@@ -135,13 +182,13 @@ const HomeHeader = () => {
                           <img
                             alt="picture"
                             src={user?.picturePath}
-                            className="rounded-full  object-cover w-9 h-9 border-gray-200 border "
+                            className="rounded-full  object-cover w-9 h-9"
                           />
                         ) : (
                           <img
                             alt="default"
                             src={AvatarProfile}
-                            className="rounded-full object-cover w-9 h-9 border-gray-200 border"
+                            className="rounded-full object-cover w-9 h-9"
                           />
                         )}
                       </button>
@@ -161,8 +208,8 @@ const HomeHeader = () => {
                 <button
                   className={
                     color
-                      ? "cursor-pointer capitalize font-medium text-slate-500 hover:scale-105 dark:text-white dark:hover:text-green-500 hover:text-green-500 duration-200"
-                      : "pcursor-pointer capitalize font-medium text-white hover:scale-105 dark:hover:text-green-500 hover:text-green-500 duration-200"
+                      ? "cursor-pointer capitalize font-medium text-slate-500 hover:scale-105 dark:text-white dark:hover:text-amber-400 hover:text-amber-400 duration-200"
+                      : "pcursor-pointer capitalize font-medium text-white hover:scale-105 dark:hover:text-amber-400 hover:text-amber-400 duration-200"
                   }
                 >
                   Login
@@ -211,11 +258,41 @@ const HomeHeader = () => {
             <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
               <Link
                 onClick={() => setNav(!nav)}
-                to="about"
+                to="features"
                 smooth
                 duration={500}
               >
-                About
+                Features
+              </Link>
+            </li>
+            <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
+              <Link
+                onClick={() => setNav(!nav)}
+                to="companies"
+                smooth
+                duration={500}
+              >
+                Companies
+              </Link>
+            </li>
+            <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
+              <Link
+                onClick={() => setNav(!nav)}
+                to="challenges"
+                smooth
+                duration={500}
+              >
+                Challenges
+              </Link>
+            </li>
+            <li className="px-4 cursor-pointer capitalize py-6 text-4xl">
+              <Link
+                onClick={() => setNav(!nav)}
+                to="jobs"
+                smooth
+                duration={500}
+              >
+                Jobs
               </Link>
             </li>
             <li className="px-4 cursor-pointer capitalize py-6 text-4xl">

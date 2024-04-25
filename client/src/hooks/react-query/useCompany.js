@@ -114,3 +114,13 @@ export const useCompanyById = (companyId) => {
     }
   );
 };
+
+export const useRecentCompanies = () => {
+  return useQuery({
+    queryKey: ["companies"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/company/Recentcompanies`, {});
+      return data;
+    },
+  });
+};

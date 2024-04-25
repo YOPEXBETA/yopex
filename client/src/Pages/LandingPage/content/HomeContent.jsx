@@ -6,6 +6,8 @@ import RecentJobs from "./components/RecentJobs";
 import Companies from "./components/Companies";
 import Contact from "./components/Contact";
 import GetStartedNow from "./components/GetStartedNow";
+import RecentChallenges from "./components/RecentChallenges";
+import Partners from "./components/Partners";
 
 const HomeContent = () => {
   return (
@@ -13,13 +15,19 @@ const HomeContent = () => {
       <div className="dark:bg-zinc-800 bg-white">
         <HomeSection />
       </div>
-
+      {/*<div className="dark:bg-zinc-800 bg-white">
+        <Partners />
+  </div>*/}
       <div className="dark:bg-zinc-800 bg-white">
         <Features />
       </div>
       <div className="dark:bg-zinc-800 bg-white">
         <Companies />
       </div>
+      <div className="dark:bg-zinc-800 bg-white">
+        <RecentChallenges />
+      </div>
+
       <div className="pb-16 dark:bg-zinc-800 bg-white">
         <GetStartedNow />
       </div>

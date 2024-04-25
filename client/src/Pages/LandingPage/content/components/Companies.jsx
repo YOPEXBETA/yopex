@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useCompanies } from "../../../../hooks/react-query/useCompany";
+import { useRecentCompanies } from "../../../../hooks/react-query/useCompany";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const Companies = () => {
-  const { data: suggestedCompanies, isLoading: companiesLoading } =
-    useCompanies();
+  const { data: RecentCompanies, isLoading: companiesLoading } =
+    useRecentCompanies();
 
   if (companiesLoading) {
     return (
@@ -15,43 +16,42 @@ const Companies = () => {
   }
 
   return (
-    <div className="bg-emerald-50 pb-8 pt-20 dark:bg-dark-2 lg:pb-[70px]">
+    <div id="companies" className="pb-8 pt-20 lg:pb-[70px] bg-emerald-50">
       <div className="mb-12 space-y-2 text-center">
         <div class="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
-          <span class="mb-2 block text-xl font-semibold text-indigo-600">
+          <span class="mb-2 block text-xl font-semibold text-amber-500">
             Companies
           </span>
-          <h2 class="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
+          <h2 class="mb-3 text-3xl font-bold text-dark sm:text-4xl md:text-[40px] md:leading-[1.2">
             Recent Companies
           </h2>
-          <p class="text-base text-body-color dark:text-white">
+          <p class="text-base text-body-color">
             Discover our Newly Registered Companies
           </p>
         </div>
       </div>
-
-      <div className="flex flex-wrap justify-center">
-        {suggestedCompanies?.companies?.length > 0 ? (
-          suggestedCompanies?.companies.map((company) => (
-            <div key={company?.id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
-              <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
+        {RecentCompanies?.length > 0 ? (
+          RecentCompanies?.map((company) => (
+            <div key={company?.id} className="p-4">
+              <Link to={`/company/${company?._id}`}>
                 <div className="flex gap-3 items-center mb-4 flex-col">
                   <img
                     src={company?.companyLogo}
                     alt="Icon"
-                    className="w-20 h-20 rounded-lg object-contain"
+                    className="w-20 h-20 rounded-lg object-cover"
                   />
                   <div>
-                    <h2 className="text-2xl font-medium dark:text-gray-200">
+                    <h2 className="text-lg font-medium hover:text-amber-500">
                       {company?.companyName}
                     </h2>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))
         ) : (
-          <p className="dark:text-white">No companies available.</p>
+          <p className="">No companies available.</p>
         )}
       </div>
     </div>

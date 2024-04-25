@@ -10,6 +10,7 @@ const {
   getCompanyNotifications,
   deleteCompany,
   getAllCompanies,
+  getRecentCompanies,
 } = require("../controllers/Company.controllers");
 const { getCompany } = require("../controllers/Company.controllers");
 
@@ -36,5 +37,6 @@ companyRouter.get(
   getCompanyNotifications
 );
 companyRouter.delete("/:id", authenticateToken, deleteCompany);
+companyRouter.get("/Recentcompanies", getRecentCompanies);
 
 module.exports = companyRouter;
