@@ -171,20 +171,6 @@ const UserProfileCard = () => {
           <div className="w-full">
             <HighlightSection challengesDone={userProfile?.challengesDone} />
           </div>
-          <hr className="border w-full" />
-
-          {userProfile?.skills && userProfile.skills.length > 0 && (
-            <div className="w-full flex flex-col">
-              <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
-                SKILLS
-              </h5>
-              <div className="flex flex-wrap gap-2">
-                {userProfile.skills.map((skill, index) => (
-                  <Tag key={index}>{skill?.name}</Tag>
-                ))}
-              </div>
-            </div>
-          )}
 
           {selectedPlatforms && selectedPlatforms.length > 0 && (
             <div className="w-full flex flex-col">

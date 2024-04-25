@@ -6,12 +6,16 @@ import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 
 const ReviewsCard = ({ extra, review }) => {
   const navigate = useNavigate();
-
+  console.log(review);
   return (
     <Card
       extra={`p-8 ${extra}`}
       onClick={() => {
-        navigate(`/company/${review?.companyId?._id}`);
+        if (review && review.companyId && review.companyId._id) {
+          navigate(`/company/${review.companyId._id}`);
+        } else {
+          navigate(`/profile/${review.challengeOwnerId._id}`);
+        }
       }}
     >
       <div className="w-full flex justify-start items-start flex-col">

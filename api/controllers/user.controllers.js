@@ -539,7 +539,6 @@ const unjoinChallenge = async (req, res) => {
 const getUserChallenges = async (req, res) => {
   try {
     const userId = req.query.userId; // Get userId from the query parameter
-    console.log(userId);
     const challenges = await userSchema.findById(userId).populate({
       path: "challenges",
       model: "Challenge",
@@ -549,6 +548,7 @@ const getUserChallenges = async (req, res) => {
         select: "-password",
       },
     });
+
     res.status(200).json(challenges);
   } catch (err) {
     res.status(500).json({ message: err.message });

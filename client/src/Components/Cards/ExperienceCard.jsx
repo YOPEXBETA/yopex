@@ -1,32 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import getDeadlineDifference from "../getDeadlineDifference";
 import challengeBanner from "../../assets/images/challengeBanner.jpg";
 
-const ExperienceCard = ({ challenge, type, extra }) => {
-  const { user } = useSelector((state) => state.auth);
-  console.log(challenge);
-  const isChallengeInProgress = (challenge) => {
-    if (
-      getDeadlineDifference(challenge?.deadline) === "0 Days 0 Hours 0 Minutes"
-    )
-      return false;
-    return true;
-  };
+const ExperienceCard = ({ challenge }) => {
+  function formatDate(dateString) {
+    const options = { day: "numeric", month: "long", year: "numeric" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", options);
+  }
+
+  console.log(challenge, "challenge");
   return (
     <div>
-      <a href="#">
-        <div className="justify-between sm:flex">
-          <div>
-            <h5 className="text-xl font-bold text-slate-900 dark:text-white">
-              {challenge?.title}
-            </h5>
-            <p className="mt-1 text-xs font-medium text-slate-600">
-              By Ana Doe
-            </p>
-          </div>
-
-          <div className="flex-shrink-0 hidden ml-3 sm:block">
+      <a href="#" className="flex justify-between items-center">
+        <div className="flex gap-4 items-center sm:flex">
+          <div className="flex-shrink-0 hidden sm:block">
             <img
               className="object-cover w-16 h-16 rounded-lg shadow-sm border"
               src={
@@ -37,17 +24,21 @@ const ExperienceCard = ({ challenge, type, extra }) => {
               alt=""
             />
           </div>
+          <div>
+            <h5 className="text-md font-bold dark:text-white">
+              {challenge?.title}
+            </h5>
+            <p className="mt-1 text-xs font-medium text-zinc-600 dark:text-zinc-200">
+              By {challenge?.company?.companyName}
+            </p>
+          </div>
         </div>
 
         <dl className="flex mt-6">
           <div className="flex flex-col-reverse">
-            <dt className="text-sm font-medium text-slate-600">Published</dt>
-            <dd className="text-xs text-slate-500">31st June, 2022</dd>
-          </div>
-
-          <div className="flex flex-col-reverse ml-3 sm:ml-6">
-            <dt className="text-sm font-medium text-slate-600">Reading time</dt>
-            <dd className="text-xs text-slate-500">5 minutes</dd>
+            <dt className="text-sm font-medium text-zinc-600">
+              {challenge?.deadline && formatDate(challenge?.deadline)}
+            </dt>
           </div>
         </dl>
       </a>

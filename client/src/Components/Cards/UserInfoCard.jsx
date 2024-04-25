@@ -11,7 +11,6 @@ import ExperienceCard from "./ExperienceCard";
 const UserInfoCard = ({ userProfile, extra }) => {
   const { userId } = useParams();
   const { data, isLoading } = useUserChallenges(userId);
-
   if (isLoading) {
     return <ChallengeCardSkeleton />;
   }
@@ -28,7 +27,7 @@ const UserInfoCard = ({ userProfile, extra }) => {
         </p>
       </div>
       <div className="mt-4">
-        <h3 className="text-lg font-semibold mb-2">Experience</h3>
+        <h3 className="text-lg font-semibold mb-2">Projects</h3>
         <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 py-2">
           {data.challenges.length > 0 ? (
             data.challenges?.map((challenge) => (
