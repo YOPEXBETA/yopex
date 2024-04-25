@@ -16,7 +16,7 @@ const HomeSection = () => {
   return (
     <div
       id="home"
-      className="relative overflow-hidden bg-indigo-600 pt-[120px] md:pt-[130px] lg:pt-[160px]"
+      className="relative overflow-hidden bg-gradient-to-r from-emerald-600  to-emerald-800 pt-[120px] md:pt-[130px] lg:pt-[160px]"
     >
       <div className="container">
         <div className="-mx-4 flex flex-wrap items-center">
@@ -37,7 +37,7 @@ const HomeSection = () => {
                 <li>
                   <a
                     href="/login"
-                    className="inline-flex items-center justify-center rounded-md hover:bg-green-600 bg-green-500 text-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2 hover:text-body-color"
+                    className="inline-flex items-center justify-center rounded-md hover:bg-amber-700 bg-amber-500 text-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2 hover:text-body-color"
                   >
                     REGISTER TODAY
                   </a>

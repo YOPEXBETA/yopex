@@ -15,7 +15,7 @@ const Companies = () => {
   }
 
   return (
-    <div className="bg-green-50 pb-8 pt-20 dark:bg-dark-2 lg:pb-[70px]">
+    <div className="bg-emerald-50 pb-8 pt-20 dark:bg-dark-2 lg:pb-[70px]">
       <div className="mb-12 space-y-2 text-center">
         <div class="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
           <span class="mb-2 block text-xl font-semibold text-indigo-600">

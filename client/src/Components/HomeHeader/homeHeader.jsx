@@ -70,8 +70,8 @@ const HomeHeader = () => {
         <div className="flex justify-between items-center w-full h-20 px-4 lg:px-24 md:px-24 z-10">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-4">
-              <img src={YopexLogo} width={30} alt="Yopex Logo" />
-              <h1 className="text-green-500 text-2xl font-semibold">YOPEX</h1>
+              {/*<img src={YopexLogo} width={30} alt="Yopex Logo" />*/}
+              <h1 className="text-emerald-300 text-2xl font-semibold">YOPEX</h1>
             </div>
             <ul className="hidden md:flex">
               <li

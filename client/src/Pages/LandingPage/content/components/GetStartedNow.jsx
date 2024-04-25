@@ -2,7 +2,7 @@ import React from "react";
 
 const GetStartedNow = () => {
   return (
-    <section class="relative overflow-hidden py-20 lg:py-[115px] bg-indigo-600">
+    <section class="relative overflow-hidden py-20 lg:py-[115px] bg-gradient-to-r from-emerald-600  to-emerald-800">
       <div class="container mx-auto">
         <div class="relative overflow-hidden">
           <div class="-mx-4 flex flex-wrap items-stretch">
@@ -19,7 +19,7 @@ const GetStartedNow = () => {
                 </p>
                 <a
                   href="/login"
-                  class="inline-block rounded-md border border-transparent bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-green-600 bg-green-500"
+                  class="inline-block rounded-md border border-transparent bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-amber-700 bg-amber-500"
                 >
                   REGISTER TODAY
                 </a>

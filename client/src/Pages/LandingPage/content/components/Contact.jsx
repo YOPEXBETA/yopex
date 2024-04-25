@@ -121,7 +121,7 @@ const Contact = () => {
                   <div>
                     <button
                       type="submit"
-                      className="w-full rounded border border-primary bg-green-500 p-3 text-white transition hover:bg-opacity-90"
+                      className="w-full rounded border border-primary bg-gradient-to-r from-emerald-600  to-emerald-800 hover:bg-emerald-400 p-3 text-white transition hover:bg-opacity-90"
                     >
                       Send Message
                     </button>
