@@ -83,7 +83,7 @@ const CreateMenuModal = ({ onClose }) => {
                 <Link onClick={toggleJobModal}>
                   <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100 hover:bg-black hover:text-green-500">
                     <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white hover:bg-zinc-700">
-                      <JobIcon />
+                      <JobIcon width={6} height={6} />
                     </span>
 
                     <div className="flex items-center flex-1 justify-between">
