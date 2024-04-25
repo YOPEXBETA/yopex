@@ -39,7 +39,7 @@ const HomeSection = () => {
                     href="/login"
                     className="inline-flex items-center justify-center rounded-md hover:bg-green-600 bg-green-500 text-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2 hover:text-body-color"
                   >
-                    Get Started
+                    REGISTER TODAY
                   </a>
                 </li>
               </ul>
@@ -57,14 +57,6 @@ const HomeSection = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <circle
-                    cx="55"
-                    cy="442"
-                    r="138"
-                    stroke="white"
-                    stroke-opacity="0.04"
-                    stroke-width="50"
-                  />
-                  <circle
                     cx="446"
                     r="39"
                     stroke="white"
@@ -79,6 +71,7 @@ const HomeSection = () => {
                   />
                 </svg>
               </span>
+              <span className="absolute left-0 bottom-0"></span>
               <span className="absolute bottom-0 right-0">
                 <svg
                   width="493"
@@ -87,14 +80,6 @@ const HomeSection = () => {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <circle
-                    cx="462"
-                    cy="5"
-                    r="138"
-                    stroke="white"
-                    stroke-opacity="0.04"
-                    stroke-width="50"
-                  />
                   <circle
                     cx="49"
                     cy="470"
@@ -112,31 +97,43 @@ const HomeSection = () => {
                 </svg>
               </span>
             </div>
-            <div className=" max-w-7xl mx-auto px-6 md:px-12 xl:px-6 pt-24 ">
-              <div className="py-8  border-y border-gray-100 dark:border-transparent sm:flex justify-between flex-wrap">
-                <div className="text-left w-full sm:w-1/2 md:w-1/4">
-                  <h6 className="text-2xl font-semibold text-white">
-                    {data?.countusers}
-                  </h6>
-                  <p className="mt-2 text-white">Registered users</p>
-                </div>
-                <div className="text-left w-full sm:w-1/2 md:w-1/4">
-                  <h6 className="text-2xl font-semibold text-white">
-                    {data?.countcompanies}
-                  </h6>
-                  <p className="mt-2  text-white">Registered companies</p>
-                </div>
-                <div className="text-left w-full sm:w-1/2 md:w-1/4">
-                  <h6 className="text-2xl font-semibold  text-white">
-                    {data?.countjobs}
-                  </h6>
-                  <p className="mt-2 text-white">Posted Jobs</p>
-                </div>
-                <div className="text-left w-full sm:w-1/2 md:w-1/4">
-                  <h6 className="text-2xl font-semibold text-white">
-                    {data?.countchallenges}
-                  </h6>
-                  <p className="mt-2 text-white">Posted Challenges</p>
+            <div class="py-6 sm:py-6">
+              <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                <div class="mx-auto max-w-2xl lg:max-w-none">
+                  <dl class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="flex flex-col bg-white/5 p-8">
+                      <dt class=" text-md font-medium leading-6 text-gray-300">
+                        Registered users
+                      </dt>
+                      <dd class="order-first text-3xl font-semibold tracking-tight text-white">
+                        {data?.countusers}
+                      </dd>
+                    </div>
+                    <div class="flex flex-col bg-white/5 p-8">
+                      <dt class=" text-md font-medium leading-6 text-gray-300">
+                        Registered companies
+                      </dt>
+                      <dd class="order-first text-3xl font-semibold tracking-tight text-white">
+                        {data?.countcompanies}
+                      </dd>
+                    </div>
+                    <div class="flex flex-col bg-white/5 p-8">
+                      <dt class=" text-md font-medium leading-6 text-gray-300">
+                        Posted Jobs
+                      </dt>
+                      <dd class="order-first text-3xl font-semibold tracking-tight text-white">
+                        {data?.countjobs}
+                      </dd>
+                    </div>
+                    <div class="flex flex-col bg-white/5 p-8">
+                      <dt class=" text-md font-medium leading-6 text-gray-300">
+                        Posted Challenges
+                      </dt>
+                      <dd class="order-first text-3xl font-semibold tracking-tight text-white">
+                        {data?.countchallenges}
+                      </dd>
+                    </div>
+                  </dl>
                 </div>
               </div>
             </div>

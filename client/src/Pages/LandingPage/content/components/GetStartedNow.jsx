@@ -21,7 +21,7 @@ const GetStartedNow = () => {
                   href="/login"
                   class="inline-block rounded-md border border-transparent bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-green-600 bg-green-500"
                 >
-                  Get Started
+                  REGISTER TODAY
                 </a>
               </div>
             </div>
