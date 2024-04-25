@@ -8,7 +8,6 @@ const ExperienceCard = ({ challenge }) => {
     return date.toLocaleDateString("en-GB", options);
   }
 
-  console.log(challenge, "challenge");
   return (
     <div>
       <a href="#" className="flex justify-between items-center">

@@ -14,7 +14,6 @@ const FeedbacksPage = () => {
   const { user } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
-  console.log(reviews);
 
   if (userLoading || reviewsLoading) {
     return <LoadingSpinner />;
