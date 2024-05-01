@@ -12,7 +12,7 @@ const Payment = async (req, res) => {
   const url =
     "https://api.preprod.konnect.network/api/v2/payments/init-payment";
   const payload = {
-    receiverWalletId: "65d77771a95d70622d8e752b",
+    receiverWalletId: "6632650da0d11b10ddb8f9ae",
     token: "TND",
     amount: req.body.amount,
     type: "immediate",
@@ -34,13 +34,13 @@ const Payment = async (req, res) => {
     console.log(payload);
     const result = await axios.post(url, payload, {
       headers: {
-        "x-api-key": "65d77771a95d70622d8e7527:0lsHduILshHQoOfssPcru",
+        "x-api-key": "6632650da0d11b10ddb8f9aa:RuqDvjUYCEu6QlnqvPXtJhM2",
       },
     });
 
     const payment = new paymentModel({
       user: req.userId,
-      balanace: req.body.amount,
+      balance: req.body.amount,
       payment_id: result.data.paymentRef,
       state: "in progress",
     });
