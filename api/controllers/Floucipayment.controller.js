@@ -8,7 +8,7 @@ const Payment = async (req, res) => {
   const baseUrl =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3006"
-      : process.env.CLIENT8SERVER;
+      : "https://yopexhub.com";
   const url =
     "https://api.preprod.konnect.network/api/v2/payments/init-payment";
   const payload = {
