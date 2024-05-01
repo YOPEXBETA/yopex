@@ -6,10 +6,10 @@ import CloseIcon from "../icons/CloseIcon";
 import ContestIcon from "../icons/ContestIcon";
 import JobIcon from "../icons/JobIcon";
 import CompanyIcon from "../icons/CompanyIcon";
-import CreateProjectModal from "./CreateProjectModal";
 import CreateChallengeModal from "./CreateChallengeModal";
 import CreateJobOfferModal from "./CreateJobOfferModal";
 import ArrowIcon from "../icons/ArrowIcon";
+import CreatePostModal from "./CreatePostModal";
 
 const CreateMenuModal = ({ onClose }) => {
   const [openPostModal, setOpenPostModal] = useState(false);
@@ -52,7 +52,7 @@ const CreateMenuModal = ({ onClose }) => {
                       <PlusIcon />
                     </span>
                     <div className="flex items-center flex-1 justify-between">
-                      <h3 className="text-lg font-medium ">Create Project</h3>
+                      <h3 className="text-lg font-medium ">Create Post</h3>
                       <ArrowIcon />
                     </div>
                   </div>
@@ -97,7 +97,7 @@ const CreateMenuModal = ({ onClose }) => {
           </div>
         </div>
       </Modal>
-      <CreateProjectModal open={openPostModal} handleClose={toggleModal} />
+      <CreatePostModal open={openPostModal} handleClose={toggleModal} />
       <CreateChallengeModal
         open={openChallengeModal}
         handleClose={toggleChallengeModal}

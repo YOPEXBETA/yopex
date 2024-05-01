@@ -1,5 +1,5 @@
 const Comment = require("../models/Comment.model");
-const SocialPost = require("../models/Projects.model");
+const SocialPost = require("../models/Post.model");
 const notificationModel = require("../models/notification.model");
 const userModel = require("../models/user.model");
 const main = require("../server");

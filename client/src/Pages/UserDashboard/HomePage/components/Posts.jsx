@@ -8,11 +8,9 @@ import SocialPostCard from "../../../../Components/Cards/SocialPost";
 import SocialPostModal from "../../../../Components/shared/Modals/SocialPostModal";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
-const Projects = () => {
+const Posts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [selectedImage, setSelectedImage] = useState(null);
-
   const [selectedPost, setSelectedPost] = useState(null);
 
   const openModal = (post) => {
@@ -72,4 +70,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Posts;

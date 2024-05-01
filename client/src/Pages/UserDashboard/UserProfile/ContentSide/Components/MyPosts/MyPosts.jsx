@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import SocialPostModal from "../../../../../../Components/shared/Modals/SocialPostModal";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import ProjectsProfile from "../../../../../../Components/Cards/ProjectsProfile";
+import SocialPostCard from "../../../../../../Components/Cards/SocialPost";
 
 const MyPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,12 +35,12 @@ const MyPosts = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 py-2 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 py-2 mb-12">
         {isLoading ? (
           <LoadingSpinner />
         ) : posts?.length > 0 ? (
           posts.map((post, index) => (
-            <ProjectsProfile
+            <SocialPostCard
               key={post._id}
               post={post}
               bookmarks={bookmarksId}
@@ -50,7 +51,7 @@ const MyPosts = () => {
             />
           ))
         ) : (
-          <p className="dark:text-gray-200 text-md">No project added.</p>
+          <p className="dark:text-gray-200 text-md">No post added.</p>
         )}
       </div>
 

@@ -1,5 +1,5 @@
 const Category = require("../models/Category.model");
-const SocialMediaPost = require("../models/Projects.model");
+const SocialMediaPost = require("../models/Post.model");
 
 const categoryController = {
   getCategories: async (req, res) => {

@@ -1,4 +1,4 @@
-const Post = require("../models/Projects.model");
+const Post = require("../models/Post.model");
 const UserModel = require("../models/user.model");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
@@ -91,7 +91,9 @@ const getUserPosts = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const posts = await Post.find({ user: userId }).populate("skills");
+    const posts = await Post.find({ user: userId })
+      .populate("user", "_id firstname lastname picturePath")
+      .sort({ createdAt: "desc" });
 
     return res.status(200).json(posts);
   } catch (err) {
@@ -124,7 +126,7 @@ const likePost = async (req, res) => {
       });
       notification.save();
       main.sendNotification(post.user.toString(), notification);
-      
+
       // const owner = await UserModel.findById(post.user._id);
       // owner?.notifications?.push(notification._id);
       // owner.save();
@@ -226,9 +228,10 @@ const getBookmarks = async (req, res) => {
 const getpostById = async (req, res) => {
   try {
     const postId = req.params.postId;
-    const post = await Post.findById(postId)
-      .populate("skills")
-      .populate("user", "_id firstname lastname picturePath");
+    const post = await Post.findById(postId).populate(
+      "user",
+      "_id firstname lastname picturePath"
+    );
 
     return res.status(200).json(post);
   } catch (err) {

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const SocialMediaPost = require("./Projects.model");
+const SocialMediaPost = require("./Post.model");
 const Company = require("./company.model");
 const submissionModel = require("./submission.model");
 const notificationModel = require("./notification.model");
@@ -121,7 +121,7 @@ const UserSchema = new mongoose.Schema(
       type: [
         {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Project",
+          ref: "Post",
         },
       ],
       default: [],
@@ -130,7 +130,7 @@ const UserSchema = new mongoose.Schema(
       type: [
         {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Project",
+          ref: "Post",
         },
       ],
       default: [],

@@ -131,14 +131,9 @@ const SocialPostCard = ({
           {renderPaginationDots()}
         </div>
       </div>
-      <div className="col-span-1 md:col-span-1 px-4 mt-3">
-        <h1 className="text-lg font-semibold leading-6 tracking-wide hover:text-green-500 cursor-pointer">
-          {post?.title}
-        </h1>
-      </div>
-      <div class="flex flex-row items-end h-full w-full px-4 mt-4">
-        <div class="flex border-t border-gray-300 w-full py-4">
-          <div class="flex items-center space-x-3  w-full">
+      <div className="flex flex-row items-end h-full w-full px-4">
+        <div className="flex w-full py-4">
+          <div className="flex items-center space-x-3  w-full">
             {post?.user?.picturePath ? (
               <img
                 alt="post"

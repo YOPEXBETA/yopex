@@ -1,15 +1,9 @@
 const mongoose = require("mongoose");
 const CommentModel = require("./Comment.model");
 
-const ProjectSchema = new mongoose.Schema(
+const PostSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Types.ObjectId, ref: "User" },
-
-    title: {
-      type: String,
-      max: 250,
-      required: false,
-    },
     description: {
       type: String,
       max: 500,
@@ -17,6 +11,7 @@ const ProjectSchema = new mongoose.Schema(
     },
     postPicturePath: {
       type: Array,
+      required: true,
     },
     userPicturePath: {
       type: String,
@@ -43,12 +38,6 @@ const ProjectSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    skills: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Skill",
-      },
-    ],
     comments: {
       type: [
         {
@@ -66,7 +55,7 @@ const ProjectSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-ProjectSchema.pre(
+PostSchema.pre(
   "findOneAndDelete",
   { document: false, query: true },
   async function (next) {
@@ -86,4 +75,4 @@ ProjectSchema.pre(
   }
 );
 
-module.exports = mongoose.model("Project", ProjectSchema);
+module.exports = mongoose.model("Post", PostSchema);

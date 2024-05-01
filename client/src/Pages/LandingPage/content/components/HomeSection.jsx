@@ -18,7 +18,7 @@ const HomeSection = () => {
       id="home"
       className="relative overflow-hidden bg-gradient-to-r from-emerald-600  to-emerald-800 pt-[120px] md:pt-[130px] lg:pt-[160px]"
     >
-      <div className="container">
+      <div>
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4">
             <div

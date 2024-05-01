@@ -34,13 +34,6 @@ const PostDetails = ({ post }) => {
   return (
     <div>
       <div className="mb-4 md:mb-0 w-full mx-auto relative">
-        <div className="px-4 lg:px-0 flex flex-col mb-4">
-          <h2 className="text-3xl font-semibold dark:text-white leading-tight">
-            {post?.title}
-          </h2>
-        </div>
-        <hr className="border-t my-4 lg:px-0" />
-
         <div className="mx-auto relative">
           <div className="flex items-center">
             <div className="object-cover static">
@@ -85,12 +78,6 @@ const PostDetails = ({ post }) => {
           <div className="mt-6 dark:text-white text-md leading-relaxed w-full lg:w-full">
             <p dangerouslySetInnerHTML={{ __html: post?.description }}></p>
           </div>
-        </div>
-        <hr className="border-t my-4 lg:px-0" />
-        <div className="flex flex-wrap gap-2 mb-4">
-          {post?.skills?.map((skill, index) => (
-            <Tag key={index}>{skill?.name}</Tag>
-          ))}
         </div>
       </div>
     </div>
