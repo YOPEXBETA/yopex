@@ -12,7 +12,10 @@ const Payment = async (req, res) => {
   const url =
     "https://api.preprod.konnect.network/api/v2/payments/init-payment";
   const payload = {
-    receiverWalletId: "6632650da0d11b10ddb8f9ae",
+    receiverWalletId:
+      process.env.NODE_ENV === "development"
+        ? "65d77771a95d70622d8e752b"
+        : "6632650da0d11b10ddb8f9ae",
     token: "TND",
     amount: req.body.amount,
     type: "immediate",
@@ -25,8 +28,8 @@ const Payment = async (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     silentWebhook: true,
-    successUrl: `${baseUrl}/paymentSuccess`,
-    failUrl: `${baseUrl}/challenges?error=payment_failed`,
+    successUrl: baseUrl + "/paymentSuccess",
+    failUrl: baseUrl + "/challenges?error=payment_failed",
     theme: "light",
   };
 
@@ -34,7 +37,10 @@ const Payment = async (req, res) => {
     console.log(payload);
     const result = await axios.post(url, payload, {
       headers: {
-        "x-api-key": "6632650da0d11b10ddb8f9aa:RuqDvjUYCEu6QlnqvPXtJhM2",
+        "x-api-key":
+          process.env.NODE_ENV === "development"
+            ? "65d77771a95d70622d8e7527:0lsHduILshHQoOfssPcru"
+            : "6632650da0d11b10ddb8f9aa:SiqKOa86oiu0njEEp",
       },
     });
 
@@ -50,7 +56,9 @@ const Payment = async (req, res) => {
 
     await payment.save();
     await userModel.findByIdAndUpdate(req.userId, {
-      $push: { historyPayment: payment._id },
+      $push: {
+        historyPayment: payment._id,
+      },
     });
 
     return res.status(200).json(result.data);
@@ -80,7 +88,9 @@ const Verify = async (req, res) => {
         payment.state = "success";
         await payment.save();
         ChallengeModel.findOneAndUpdate(
-          { paymentId: id_payment },
+          {
+            paymentId: id_payment,
+          },
           { verified: true }
         ).exec();
 
