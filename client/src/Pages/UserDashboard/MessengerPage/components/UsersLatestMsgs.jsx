@@ -76,15 +76,15 @@ const UsersLatestMsgs = () => {
               type="search"
               name="q"
               value={query}
-              className="w-full rounded-full py-2 pl-12 text-sm text-white bg-gray-200 border border-transparent appearance-none rounded-tg focus:bg-white focus:outline-none focus:border-green-500 focus:text-gray-900 focus:shadow-outline-blue"
-              placeholder="Search..."
+              className="w-full rounded-full py-3 pl-12 text-sm  border border-zinc-200 appearance-none rounded-tg focus:bg-white focus:outline-none focus:border-green-500 focus:text-gray-900 focus:shadow-outline-blue"
+              placeholder="Search by name"
               autocomplete="off"
               onChange={(event) => setQuery(event.target.value)}
             />
           </div>
         </div>
       </div>
-      {userProfile?.companies.length > 0 && (
+      {/*userProfile?.companies.length > 0 && (
         <Select
           className="px-3"
           classNamePrefix="my-react-select px-3"
@@ -99,8 +99,8 @@ const UsersLatestMsgs = () => {
             setSelectedOption(selectedOption);
           }}
         />
-      )}
-      <div className="relative mt-2 mb-4 overflow-x-hidden overflow-y-auto scrolling-touch lg:max-h-sm scrollbar-w-2 scrollbar-track-gray-lighter scrollbar-thumb-rounded scrollbar-thumb-gray">
+      )*/}
+      <div className="relative mt-2 mb-4 overflow-x-hidden overflow-y-auto max-h-screen scrolling-touch lg:max-h-sm scrollbar-w-2 scrollbar-track-gray-lighter scrollbar-thumb-rounded scrollbar-thumb-gray">
         <ul className="flex flex-col w-full h-screen px-2 select-none">
           <li className="flex flex-no-wrap items-center pr-3 text-black rounded-lg cursor-pointer mt-200 py-65">
             <div className="flex justify-between w-full focus:outline-none">

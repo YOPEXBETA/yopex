@@ -3,12 +3,10 @@ import Card from "./index";
 
 const GeneralCompanyInfo = ({ company }) => {
   return (
-    <Card extra={"w-full h-full p-3"}>
+    <Card extra={"w-full p-3"}>
       {/* Header */}
       <div className="mt-2 mb-8 w-full">
-        <h4 className="px-2 text-xl font-bold text-zinc-700 dark:text-white">
-          General Information
-        </h4>
+        <h4 className="px-2 text-lg font-bold dark:text-white">Overview</h4>
         <p className="mt-2 px-2 text-base dark:text-white">
           {company?.companyDescription}
         </p>

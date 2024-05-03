@@ -95,7 +95,7 @@ const Navbar = (props) => {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:block">
-              <p className="shrink text-2xl capitalize text-zinc-700 dark:text-white">
+              <p className="shrink text-2xl capitalize  dark:text-white">
                 <Link
                   to="#"
                   className="font-semibold capitalize hover:text-zinc-700 dark:hover:text-white hidden md:block"

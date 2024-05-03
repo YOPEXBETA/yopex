@@ -5,6 +5,7 @@ export const CompanyProfileNavigationTab = ({
   value,
   companyId,
   userPassed,
+  company,
 }) => {
   return (
     <div>
@@ -17,7 +18,7 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(0)}
         >
-          About
+          Overview
         </button>
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
@@ -27,7 +28,7 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(1)}
         >
-          Jobs
+          Jobs ({company?.jobs?.length})
         </button>
         <button
           className={`w-1/2 sm:w-auto py-2 px-4  ${
@@ -37,7 +38,7 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(2)}
         >
-          Challenges
+          Challenges ({company?.challenges?.length})
         </button>
         {userPassed?.companies?.includes(companyId) && (
           <button
@@ -51,6 +52,16 @@ export const CompanyProfileNavigationTab = ({
             Appliers
           </button>
         )}
+        <button
+          className={`w-1/2 sm:w-auto py-2 px-4  ${
+            value === 4
+              ? "inline-block p-4 text-black border-b-2 border-black rounded-t-lg active dark:text-purple-400 dark:border-purple-400"
+              : "text-gray-500 dark:text-gray-200 border-gray-300"
+          }`}
+          onClick={() => changeValue(4)}
+        >
+          Team ({company?.user?.length})
+        </button>
       </div>
     </div>
   );

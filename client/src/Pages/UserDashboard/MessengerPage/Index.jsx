@@ -62,9 +62,9 @@ const Messenger = () => {
           />
         </div>
 
-        <nav class="right-0 lg:flex flex-col w-[24rem] hidden pb-2 bg-white dark:bg-zinc-800 border-l border-gray-300 xl:block">
+        {/* <nav class="right-0 lg:flex flex-col w-[24rem] hidden pb-2 bg-white dark:bg-zinc-800 border-l border-gray-300 xl:block">
           <UserChatInfo otherUser={otherUser} />
-        </nav>
+  </nav>*/}
       </div>
     </div>
   );

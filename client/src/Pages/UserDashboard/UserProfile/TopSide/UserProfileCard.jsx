@@ -206,7 +206,7 @@ const UserProfileCard = () => {
               )}
             </div>
             <div>
-              <h5 className="mb-3 text-left font-medium text-xs dark:text-white uppercase2">
+              <h5 className="mb-3 text-left font-medium text-xs dark:text-white uppercase">
                 ABOUT
               </h5>
               <p className="text-sm leading-relaxed">
@@ -215,7 +215,7 @@ const UserProfileCard = () => {
             </div>
             {userProfile?.companies?.length !== 0 && (
               <div className="w-full ">
-                <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
+                <h5 className="mb-3 text-left font-medium text-xs dark:text-white uppercase">
                   Companies
                 </h5>
                 <ul className="flex justify-start gap-2">

@@ -11,6 +11,7 @@ import { FaUserMinus, FaTrash, FaEdit, FaUserPlus } from "react-icons/fa";
 import { CompanyProfileNavigationTab } from "../../../../Components/Tabs/CompanyProfileNavigationTab";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import DeletePagePopup from "../../../../Components/Popup/DeletePagePopup";
+import GlobeIcon from "../../../../Components/icons/GlobeIcon";
 
 const CompanyProfileInformations = ({ changeValue, value }) => {
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
@@ -88,7 +89,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
 
               <div className="space-y-2 sm:space-y-5 xl:block md:flex lg:block  flex flex-col ">
                 <div className="flex items-center gap-2">
-                  <p className="text-lg font-semibold dark:text-gray-200">
+                  <p className="text-2xl font-semibold dark:text-gray-200">
                     {company?.companyName}
                   </p>
 
@@ -109,22 +110,17 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                   </button>
                 </div>
                 <div className="hidden xl:flex lg:flex md:flex flex-row sm:flex-row gap-6 sm:gap-4 w-full sm:w-72">
-                  <div className="flex items-center gap-1 sm:gap-2 justify-between">
-                    <p className="text-base font-bold dark:text-gray-200">
-                      {company?.challenges?.length}
-                    </p>
-                    <p className="text-zinc-500 text-md dark:text-gray-400">
-                      Challenges
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1 sm:gap-2 justify-between">
-                    <p className="text-base font-bold dark:text-gray-200">
-                      {company?.jobs?.length}
-                    </p>
-                    <p className="text-zinc-500 text-md dark:text-gray-400">
-                      Jobs
-                    </p>
-                  </div>
+                  <a
+                    className="text-base font-medium text-zinc-700 dark:text-white hover:text-green-500 dark:hover:text-  -500"
+                    href={company?.websiteURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="flex gap-2">
+                      <GlobeIcon className="w-6 h-6 mr-2" />
+                      <p>{company?.websiteURL}</p>
+                    </div>
+                  </a>
                 </div>
                 {/*mobile version*/}
                 <div className="flex gap-2 xl:hidden lg:hidden md:hidden">
@@ -215,6 +211,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
             value={value}
             companyId={companyId}
             userPassed={user}
+            company={company}
           />
         </div>
       </div>
