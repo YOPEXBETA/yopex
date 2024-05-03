@@ -50,7 +50,7 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
           <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white mx-auto md:mx-0">
             <SecurityIcon />
           </div>
-          <p className="flex-auto hidden md:block">Security</p>
+          <p className="flex-auto hidden md:block">Password</p>
         </div>
       </button>
 

@@ -82,35 +82,62 @@ const GeneralInformations = ({ extra }) => {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 gap-3"
       >
-        <div className="relative mb-4">
-          <div className="relative w-24 h-24">
-            {user?.picturePath ? (
-              <img
-                alt="picture"
-                src={user?.picturePath}
-                className="rounded-full object-cover w-24 h-24 border-2"
-              />
-            ) : (
-              <img
-                alt="default"
-                src={AvatarProfile}
-                className="rounded-full object-cover w-24 h-24 border-2"
-              />
-            )}
-            <label
-              htmlFor="fileInput"
-              className="absolute bottom-0 right-0 p-2 bg-green-500 rounded-full text-white cursor-pointer"
-            >
-              <input
-                id="fileInput"
-                hidden
-                accept="image/*"
-                type="file"
-                {...register("file")}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-2"
-              />
-              <FaCamera className="w-4 h-4" />
-            </label>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="relative mb-4">
+              <div className="relative  w-28 h-28">
+                {user?.picturePath ? (
+                  <img
+                    alt="picture"
+                    src={user?.picturePath}
+                    className="rounded-full object-cover border-2 w-28 h-28"
+                  />
+                ) : (
+                  <img
+                    alt="default"
+                    src={AvatarProfile}
+                    className="rounded-full object-cover w-28 h-28 border-2"
+                  />
+                )}
+                <label
+                  htmlFor="fileInput"
+                  className="absolute bottom-0 right-0 p-2 bg-green-500 rounded-full text-white cursor-pointer"
+                >
+                  <input
+                    id="fileInput"
+                    hidden
+                    accept="image/*"
+                    type="file"
+                    {...register("file")}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-2"
+                  />
+                  <FaCamera className="w-4 h-4" />
+                </label>
+              </div>
+            </div>
+            <div className="">
+              <h1 className="text-2xl font-semibold md:block hidden">
+                Profile
+              </h1>
+              <p className="md:block hidden">
+                Update your photo and personal details
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 my-5">
+            <div className="col-span-1 flex justify-end">
+              <button
+                className={`${
+                  isSubmitting
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80"
+                } text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-28`}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting" : "Save"}
+              </button>
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -282,22 +309,6 @@ const GeneralInformations = ({ extra }) => {
                 </div>
               )}
             />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 my-5">
-          <div className="col-span-1 flex justify-end">
-            <button
-              className={`${
-                isSubmitting
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80"
-              } text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-28`}
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Submitting" : "Save"}
-            </button>
           </div>
         </div>
       </form>

@@ -6,44 +6,44 @@ import { useUserById } from "../../hooks/react-query/useUsers";
 import { useSelector } from "react-redux";
 import Card from "../Cards";
 
-export const ProfileNavigationTab = ({ changeValue, value }) => {
+export const ProfileNavigationTab = ({ changeValue, value, extra }) => {
   const { user } = useSelector((state) => state.auth);
   const { userId } = useParams();
   const { data: userProfile } = useUserById(userId);
   const { data: reviews } = useUserReviews(userId);
 
   return (
-    <Card>
+    <Card extra={`${extra}`}>
       <div className="p-2 overflow-hidden sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
         <button
           className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
             value === 0
               ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-              : "text-gray-500 border-gray-300 dark:text-gray-300 "
-          }`}
-          onClick={() => changeValue(0)}
-        >
-          About
-        </button>
-        <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 1
-              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
               : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
-          onClick={() => changeValue(1)}
+          onClick={() => changeValue(0)}
         >
           Posts
         </button>
         <button
           className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 2
+            value === 1
               ? "bg-green-500 text-white dark:text-gray-200  border-green-500"
+              : "text-gray-500 border-gray-300 dark:text-gray-300"
+          }`}
+          onClick={() => changeValue(1)}
+        >
+          Challenges
+        </button>
+        <button
+          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+            value === 2
+              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
               : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
           onClick={() => changeValue(2)}
         >
-          Challenges
+          Followers
         </button>
         <button
           className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
@@ -53,7 +53,7 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           }`}
           onClick={() => changeValue(3)}
         >
-          Followers
+          Followings
         </button>
         <button
           className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
@@ -63,36 +63,26 @@ export const ProfileNavigationTab = ({ changeValue, value }) => {
           }`}
           onClick={() => changeValue(4)}
         >
-          Followings
-        </button>
-        <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 5
-              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-              : "text-gray-500 border-gray-300 dark:text-gray-300"
-          }`}
-          onClick={() => changeValue(5)}
-        >
           Badges
         </button>
         <button
           className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 6
+            value === 5
               ? "bg-green-500 text-white "
               : "text-gray-500 border-gray-300 dark:text-gray-300"
           }`}
-          onClick={() => changeValue(6)}
+          onClick={() => changeValue(5)}
         >
           {`Reviews (${reviews?.length || 0})`}
         </button>
         {userId == user._id ? (
           <button
             className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-              value === 7
+              value === 6
                 ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
                 : "text-gray-500 border-gray-300 dark:text-gray-300"
             }`}
-            onClick={() => changeValue(7)}
+            onClick={() => changeValue(6)}
           >
             {`Favorites (${userProfile?.bookmarks.length || 0})`}
           </button>

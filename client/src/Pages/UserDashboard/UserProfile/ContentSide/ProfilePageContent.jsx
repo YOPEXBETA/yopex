@@ -13,26 +13,19 @@ const ProfilePageContent = ({ changeValue, value }) => {
     <div>
       {value === 0 && (
         <div className="flex justify-center">
-          <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full pb-16 md:pb-4">
-            <UserProfileInformations />
-          </div>
-        </div>
-      )}
-      {value === 1 && (
-        <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full pb-16 md:pb-4 ">
             <MyPosts />
           </div>
         </div>
       )}
-      {value === 2 && (
+      {value === 1 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <MyChallenges />
           </div>
         </div>
       )}
-      {value === 3 && (
+      {value === 2 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <Followers />
@@ -40,7 +33,7 @@ const ProfilePageContent = ({ changeValue, value }) => {
         </div>
       )}
 
-      {value === 4 && (
+      {value === 3 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <Followings />
@@ -48,7 +41,7 @@ const ProfilePageContent = ({ changeValue, value }) => {
         </div>
       )}
 
-      {value === 5 && (
+      {value === 4 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <BadgesPage />
@@ -56,7 +49,7 @@ const ProfilePageContent = ({ changeValue, value }) => {
         </div>
       )}
 
-      {value === 6 && (
+      {value === 5 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <FeedbacksPage />
@@ -64,7 +57,7 @@ const ProfilePageContent = ({ changeValue, value }) => {
         </div>
       )}
 
-      {value === 7 && (
+      {value === 6 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full  pb-16 md:pb-4">
             <Bookmarks />

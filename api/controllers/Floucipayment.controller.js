@@ -10,7 +10,9 @@ const Payment = async (req, res) => {
       ? "http://localhost:3006"
       : "https://yopexhub.com";
   const url =
-    "https://api.preprod.konnect.network/api/v2/payments/init-payment";
+    process.env.NODE_ENV === "development"
+      ? "https://api.preprod.konnect.network/api/v2/payments/init-payment"
+      : "https://api.konnect.network/api/v2/payments/init-payment";
   const payload = {
     receiverWalletId:
       process.env.NODE_ENV === "development"

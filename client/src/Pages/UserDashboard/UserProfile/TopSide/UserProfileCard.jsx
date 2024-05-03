@@ -82,7 +82,7 @@ const UserProfileCard = () => {
           <div className="flex flex-col items-center justify-center gap-2 truncate w-80">
             <div className="flex items-center justify-center gap-2 truncate w-80">
               {userProfile ? (
-                <p className="text-2xl font-semibold  truncate dark:text-zinc-200">
+                <p className="text-2xl font-bold truncate dark:text-zinc-200">
                   {`${userProfile.firstname} ${userProfile.lastname}`}
                 </p>
               ) : (
@@ -168,47 +168,74 @@ const UserProfileCard = () => {
             )}
           </div>
 
-          <div className="w-full">
+          {/* <div className="w-full">
             <HighlightSection challengesDone={userProfile?.challengesDone} />
-          </div>
-
-          {selectedPlatforms && selectedPlatforms.length > 0 && (
-            <div className="w-full flex flex-col">
-              <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
-                Social Links
-              </h5>
-              <div className="flex gap-2">
-                {selectedPlatforms.map((link, index) => (
-                  <a key={index} href={link?.url} target="_blank">
-                    {getIconByPlatform(link?.platform)}
-                  </a>
-                ))}
+          </div>*/}
+          <div className="space-y-4 w-full">
+            {selectedPlatforms && selectedPlatforms.length > 0 && (
+              <div className="w-full flex flex-col">
+                <h5 className="mb-3 text-left font-medium text-xs dark:text-white uppercase">
+                  Social Links
+                </h5>
+                <div className="flex gap-2">
+                  {selectedPlatforms.map((link, index) => (
+                    <a key={index} href={link?.url} target="_blank">
+                      {getIconByPlatform(link?.platform)}
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {userProfile?.companies?.length !== 0 && (
-            <div className="w-full ">
-              <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
-                Companies
+            <div>
+              <h5 className="mb-3 text-left font-medium text-xs dark:text-white uppercase">
+                Skills
               </h5>
-              <ul className="flex justify-start gap-2">
-                {userProfile?.companies?.map((company, index) => (
-                  <Link key={index} to={`/company/${company?._id}`}>
-                    {company?.companyLogo ? (
-                      <img
-                        src={company?.companyLogo}
-                        alt={`Company ${index + 1}`}
-                        className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
-                      />
-                    ) : (
-                      <div>No company logo available</div>
-                    )}
-                  </Link>
-                ))}
-              </ul>
+              {userProfile?.skills && userProfile.skills.length > 0 ? (
+                <div className="w-full flex flex-col">
+                  <div className="flex flex-wrap gap-2">
+                    {userProfile?.skills?.map((skill, index) => (
+                      <Tag key={index}>{skill?.name}</Tag>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <p className="text-sm leading-relaxed dark:text-white">
+                  No Skills Found.
+                </p>
+              )}
             </div>
-          )}
+            <div>
+              <h5 className="mb-3 text-left font-medium text-xs dark:text-white uppercase2">
+                ABOUT
+              </h5>
+              <p className="text-sm leading-relaxed">
+                {userProfile?.userDescription || "No Description."}
+              </p>
+            </div>
+            {userProfile?.companies?.length !== 0 && (
+              <div className="w-full ">
+                <h5 className="mb-3 text-left font-medium text-sm dark:text-white uppercase">
+                  Companies
+                </h5>
+                <ul className="flex justify-start gap-2">
+                  {userProfile?.companies?.map((company, index) => (
+                    <Link key={index} to={`/company/${company?._id}`}>
+                      {company?.companyLogo ? (
+                        <img
+                          src={company?.companyLogo}
+                          alt={`Company ${index + 1}`}
+                          className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
+                        />
+                      ) : (
+                        <div>No company logo available</div>
+                      )}
+                    </Link>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </Card>
     );
