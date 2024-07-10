@@ -1,8 +1,8 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 
-const Company = require("../models/company.model");
-const companySchema = require("../models/company.model");
+const Company = require("../models/Organization.model");
+const companySchema = require("../models/Organization.model");
 const userSchema = require("../models/user.model");
 const Level = require("../models/Level.model");
 

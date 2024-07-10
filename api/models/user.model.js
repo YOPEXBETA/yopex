@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const SocialMediaPost = require("./Post.model");
-const Company = require("./company.model");
+const Organization = require("./Organization.model");
 const submissionModel = require("./submission.model");
 const notificationModel = require("./notification.model");
 //const experiences = require("./Experience.model");
@@ -172,11 +172,11 @@ const UserSchema = new mongoose.Schema(
         ref: "Notification",
       },
     ],
-    companies: {
+    organizations: {
       type: [
         {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Company",
+          ref: "Organization",
         },
       ],
       default: [],
@@ -213,7 +213,7 @@ UserSchema.pre(
 
       SocialMediaPost.deleteMany({ userId: userId }).exec();
 
-      Company.deleteMany({ user: userId }).exec();
+      Organization.deleteMany({ user: userId }).exec();
 
       submissionModel.deleteMany({ userId: userId }).exec();
 

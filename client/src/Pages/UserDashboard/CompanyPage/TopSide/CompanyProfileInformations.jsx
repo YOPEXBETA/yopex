@@ -82,7 +82,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <div className="w-24 h-24 sm:w-40 sm:h-40">
                 <img
                   alt="Profile picture"
-                  src={company?.companyLogo}
+                  src={company?.organizationLogo}
                   className="object-cover w-full h-full rounded-lg"
                 />
               </div>
@@ -90,7 +90,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <div className="space-y-2 sm:space-y-5 xl:block md:flex lg:block  flex flex-col ">
                 <div className="flex items-center gap-2">
                   <p className="text-2xl font-semibold dark:text-gray-200">
-                    {company?.companyName}
+                    {company?.organizationName}
                   </p>
 
                   <button

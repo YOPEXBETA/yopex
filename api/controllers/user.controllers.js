@@ -1,7 +1,7 @@
 const userSchema = require("../models/user.model");
-const companySchema = require("../models/company.model");
+const companySchema = require("../models/Organization.model");
 const challengeSchema = require("../models/Challenge.model");
-const roleSchema = require("../models/CompanyRoles.model");
+const roleSchema = require("../models/OrganizationRoles.model");
 const bcrypt = require("bcryptjs");
 const Job = require("../models/job.model");
 
@@ -177,7 +177,7 @@ const SearchUsers = async (req, res) => {
       );
     const companies = await companySchema
       .find(companyQuery)
-      .select("_id companyName companyLogo user");
+      .select("_id organizationName organizationLogo user");
 
     const results = [...users, ...companies];
 
@@ -197,7 +197,7 @@ const getUser = async (req, res) => {
       .populate("badgesEarned")
       .populate("jobs")
       .populate("challenges")
-      .populate("companies")
+      .populate("organizations")
       .populate("educations")
       .populate("experiences")
       .populate("skills");
@@ -476,6 +476,7 @@ const getUserStats = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
 //-------------------------------------------CHALLENGES-----------------------------------------------//
 
 const JoinChallenge = async (req, res) => {
@@ -560,13 +561,13 @@ const getUserNotifications = async (req, res) => {
 
     const user = await userModel.findById(userId);
     if (!user) throw new Error("User not found");
-    const companies = user.companies;
+    const organizations = user.organizations;
     let notifications = await notificationModel
       .find({ user: userId })
       .populate("job")
       .populate("challenge")
       .sort({ createdAt: -1 });
-    for (const companyId of companies) {
+    for (const companyId of organizations) {
       const notif = await notificationModel
         .find({ company: companyId })
         .populate("job")
@@ -602,22 +603,23 @@ const CreateCompany = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const company = new companySchema({
+    const organization = new companySchema({
       ...req.body,
       user: user._id,
     });
+    await organization.save();
 
-    const adminRole = await roleSchema.findOne({ name: "admin" });
-    if (adminRole) {
-      company.roles.push({ role: adminRole._id, users: [user._id] });
+    // Check if user is defined before pushing organization._id
+    if (user.organizations) {
+      user.organizations.push(organization._id);
+      await user.save();
+    } else {
+      console.error("User object does not have 'organizations' property.");
+      return res.status(500).json({ message: "Internal server error" });
     }
 
-    await company.save();
+    return res.status(200).json({ message: "Company created successfully", organizationId: organization._id });
 
-    user.companies.push(company._id);
-    await user.save();
-
-    return res.status(200).json({ message: "Company created successfully" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });

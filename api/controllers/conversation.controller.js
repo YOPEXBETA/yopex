@@ -1,6 +1,6 @@
 const ConversationModel = require("../models/Conversation.model");
 const MessageModel = require("../models/Message.model");
-const Company = require("../models/company.model");
+const Company = require("../models/Organization.model");
 const UserModel = require("../models/user.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 

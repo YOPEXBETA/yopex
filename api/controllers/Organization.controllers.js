@@ -1,10 +1,11 @@
 const userSchema = require("../models/user.model");
-const companySchema = require("../models/company.model");
+const companySchema = require("../models/Organization.model");
 const jwt = require("jsonwebtoken");
 const { pick } = require("lodash");
 const ChallengeModel = require("../models/Challenge.model");
-const Company = require("../models/company.model");
+const Organization = require("../models/Organization.model");
 const userModel = require("../models/user.model");
+const roleModel = require("../models/OrganizationRoles.model");
 const bcrypt = require("bcryptjs");
 const { sendEmail } = require("../middlewares/mail.middleware");
 const { updateUserChallengesBadges } = require("../utils/utilities");
@@ -12,73 +13,76 @@ const notificationModel = require("../models/notification.model");
 const main = require("../server");
 const ReviewModel = require("../models/Review.model");
 const { response } = require("express");
+const Invitation = require('../models/organizationInvitations.model');
+
+
 const editProfile = async (req, res) => {
   try {
     const updateFields = req.body;
 
-    const updatedCompany = await companySchema
+    const updatedOrganization = await Organization
       .findByIdAndUpdate(req.params.id, updateFields, { new: true })
       .select("-password");
 
-    res.status(200).json(updatedCompany);
+    res.status(200).json(updatedOrganization);
   } catch (error) {
     console.error("Error in editProfile:", error);
     return res.status(500).json(error);
   }
 };
 
-const getAllCompanies = async (req, res) => {
+const getAllOrganizations = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = 6;
 
-    let companyQuery = {};
+    let organizationQuery = {};
     if (req.query.name) {
       const searchRegex = new RegExp(req.query.name, "i");
-      companyQuery = { companyName: { $regex: searchRegex } };
+      organizationQuery = { organizationName: { $regex: searchRegex } };
     }
 
-    const companies = await companySchema
-      .find(companyQuery)
+    const organizations = await Organization
+      .find(organizationQuery)
       .select(
-        "_id companyName companyLogo country address challenges jobs verified"
+        "_id organizationName organizationLogo country address challenges jobs verified"
       )
       .sort({ createdAt: -1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize)
       .exec();
 
-    const totalCount = await companySchema.countDocuments(companyQuery);
+    const totalCount = await Organization.countDocuments(organizationQuery);
 
-    res.status(200).json({ companies, companyCount: totalCount });
+    res.status(200).json({ organizations, companyCount: totalCount });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
 
-const getCompany = async (req, res) => {
+const getOrganization = async (req, res) => {
   try {
-    const { companyId } = req.params;
-    const company = await companySchema.findById(companyId);
+    const { organizationId } = req.params;
+    const organization = await Organization.findById(organizationId);
 
-    if (!company) {
-      return res.status(404).json({ message: "Company not found" });
+    if (!organization) {
+      return res.status(404).json({ message: "Organization not found" });
     }
 
-    res.status(200).json(company);
+    res.status(200).json(organization);
   } catch (err) {
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
-const getCompanyChallenges = async (req, res) => {
+const getOrganizationChallenges = async (req, res) => {
   try {
     const idCompany = req.query.idCompany; // Get idChallenge from the query parameter
-    const Company = await CompanyModel.findById(idCompany).populate({
+    const organization = await Organization.findById(idCompany).populate({
       path: "challenges",
       select: "-password",
     });
-    res.status(200).json(Company);
+    res.status(200).json(organization);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -166,42 +170,101 @@ const getCompanyNotifications = async (req, res) => {
   // }
 };
 
-const deleteCompany = async (req, res) => {
+const deleteOrganization = async (req, res) => {
   try {
-    const company = await Company.findById(req.params.id);
+    const organization = await Organization.findById(req.params.id);
 
-    const user = await userModel.findById(company.user);
+    const user = await userModel.findById(organization.user);
     user.companies = user.companies.filter(
       (companyId) => companyId.toString() !== req.params.id
     );
     await user.save();
-    await Company.findOneAndDelete({ _id: req.params.id });
-    res.status(200).send("Company has been deleted");
+    await Organization.findOneAndDelete({ _id: req.params.id });
+    res.status(200).send("Organization has been deleted");
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-const getRecentCompanies = async (req, res) => {
+const getRecentOrganizations = async (req, res) => {
   try {
-    const companies = await companySchema
+    const organizations = await Organization
       .find()
-      .select("_id companyName companyLogo")
+      .select("_id organizationName organizationLogo")
       .sort({ createdAt: -1 });
 
-    res.status(200).json(companies);
+    res.status(200).json(organizations);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
 
+const inviteUserToOrganization = async (req, res) => {
+  const { organizationId, userId, roleName } = req.body;
+
+  try {
+    const organization = await Organization.findById(organizationId);
+    if (!organization) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(400).json({ message: `User not found: ${userId}` });
+    }
+
+    const role = await roleModel.findOne({ name: roleName });
+    if (!role) {
+      return res.status(400).json({ message: `Role not found: ${roleName}` });
+    }
+
+    const newInvitation = new Invitation({ organization: organizationId, user: userId, role: role.name });
+    await newInvitation.save();
+
+    res.status(201).json({ message: "Invitation sent successfully", invitation: newInvitation });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred", error: error.message });
+  }
+};
+
+const acceptInvitation = async (req, res) => {
+  const { invitationId } = req.params;
+
+  try {
+
+    const invitation = await Invitation.findById(invitationId);
+    if (!invitation) {
+      return res.status(404).json({ message: "Invitation not found" });
+    }
+
+    if (invitation.status !== 'pending') {
+      return res.status(400).json({ message: "Invitation is not pending" });
+    }
+
+
+    const organization = await Organization.findById(invitation.organization);
+    organization.organizationMembers.push({ userId: invitation.user, role: invitation.role });
+    await organization.save();
+
+
+    invitation.status = 'accepted';
+    await invitation.save();
+
+    res.status(200).json({ message: "Invitation accepted", organization });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred", error: error.message });
+  }
+};
+
 module.exports = {
   editProfile,
-  getCompany,
-  getCompanyChallenges,
+  getOrganization,
+  getOrganizationChallenges,
   ChallengeWinner,
   getCompanyNotifications,
-  deleteCompany,
-  getAllCompanies,
-  getRecentCompanies,
+  deleteOrganization,
+  getAllOrganizations,
+  getRecentOrganizations,
+  inviteUserToOrganization,
+  acceptInvitation
 };

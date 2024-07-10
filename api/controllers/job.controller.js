@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../models/user.model");
 const Job = require("../models/job.model");
-const Company = require("../models/company.model");
+const Company = require("../models/Organization.model");
 const Skill = require("../models/skill.model");
 const { sendEmail } = require("../middlewares/mail.middleware");
 const notificationModel = require("../models/notification.model");

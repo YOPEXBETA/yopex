@@ -2,7 +2,7 @@ const reviewModel = require("../models/Review.model");
 const userModel = require("../models/user.model");
 
 const challengeModel = require("../models/Challenge.model");
-const companyModel = require("../models/company.model");
+const companyModel = require("../models/Organization.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 const createReview = async (req, res) => {

@@ -65,7 +65,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
 
   const [currentPage, setCurrentPage] = useState(0);
 
-  const totalPages = userProfile?.companies.length || 0;
+  const totalPages = userProfile?.organizations.length || 0;
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => (prevPage + 1) % totalPages);
@@ -110,7 +110,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
 
               <div>
                 <div className="flex items-center justify-center">
-                  {userProfile?.companies.length > 1 && (
+                  {userProfile?.organizations.length > 1 && (
                     <button
                       onClick={handlePrevPage}
                       className="text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -126,8 +126,8 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                       </svg>
                     </button>
                   )}
-                  {userProfile?.companies.length > 0 ? (
-                    userProfile.companies
+                  {userProfile?.organizations.length > 0 ? (
+                    userProfile.organizations
                       .slice(currentPage, currentPage + 1)
                       .map((option, index) => (
                         <div
@@ -141,8 +141,8 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                         >
                           {/* Company image */}
                           <img
-                            src={option.companyLogo}
-                            alt={option.companyName}
+                            src={option.organizationLogo}
+                            alt={option.organizationName}
                             className={`w-32 h-32 object-cover border rounded-lg transition-transform transform hover:scale-110 `}
                           />
                           {selectedOption === option._id && (
@@ -166,7 +166,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                   ) : (
                     <img src={NotFound} className="h-80 w-80" />
                   )}
-                  {userProfile?.companies.length > 1 && (
+                  {userProfile?.organizations.length > 1 && (
                     <button
                       onClick={handleNextPage}
                       className="text-gray-500 hover:text-gray-700 focus:outline-none"
