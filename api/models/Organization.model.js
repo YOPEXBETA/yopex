@@ -39,12 +39,12 @@ const organizationSchema = new mongoose.Schema(
         ],
         organizationType: {
             type: String,
-            enum: ['company', 'university', 'club', 'NGO'],
+            enum: ['Company', 'University', 'Club', 'Non-Governmental Organization'],
             required: true
         },
         sectorOfActivity: {
             type: String
-        }, //data dynamique
+        },
         organizationMembers: [
             {
                 userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

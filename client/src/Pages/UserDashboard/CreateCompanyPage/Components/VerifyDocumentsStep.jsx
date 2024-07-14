@@ -34,15 +34,13 @@ const VerifyDocumentsStep = ({ control, formData, updateFormData }) => {
 
     return (
         <div>
-            <label className="text-sm text-black mb-2 block dark:text-white">
-                Please provide company document to verify your account
-            </label>
+            <h2 className="text-xl font-bold mb-4">If you’d like, you can provide your organization document to verify your account.</h2>
             <div>
                 <Controller
                     name="organizationDocument"
                     control={control}
                     defaultValue={formData.organizationDocument || ''}
-                    render={({ field }) => (
+                    render={({field}) => (
                         <>
                             <input
                                 type="file"
@@ -65,7 +63,8 @@ const VerifyDocumentsStep = ({ control, formData, updateFormData }) => {
                                     <span className="mb-2 block text-base font-medium text-[#6B7280]">
                                         Single file allowed
                                     </span>
-                                    <span className="inline-flex rounded border hover:bg-zinc-200 dark:text-white border-[#e0e0e0] py-2 px-7 text-base font-medium">
+                                    <span
+                                        className="inline-flex rounded border hover:bg-zinc-200 dark:text-white border-[#e0e0e0] py-2 px-7 text-base font-medium">
                                         Browse
                                     </span>
                                 </div>

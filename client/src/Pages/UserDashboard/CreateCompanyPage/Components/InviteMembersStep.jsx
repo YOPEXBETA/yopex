@@ -64,7 +64,7 @@ const InvitationsStep = ({ formData, updateFormData }) => {
 
     return (
         <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">Invite Members to Join Your Organization</h2>
+            <h2 className="text-xl font-bold mb-4">Let's invite some awesome members to join your organization!</h2>
             <div className="mb-4 relative">
                 {selectedUser === null ? (
                     <div>
@@ -149,7 +149,7 @@ const InvitationsStep = ({ formData, updateFormData }) => {
             <button
                 type="button"
                 onClick={addInvitation}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 hover:bg-blue-600"
+                className="bg-green-500 text-white px-4 py-2 rounded-md mb-4 hover:bg-green-600"
                 disabled={!selectedUser || !selectedRole}
             >
                 Add Invitation
@@ -157,7 +157,7 @@ const InvitationsStep = ({ formData, updateFormData }) => {
             <div className="grid gap-4">
                 {formData.invitations.map((invitation, index) => (
                     <div key={index} className="bg-gray-100 p-4 rounded-md">
-                        <p className="text-lg font-bold mb-2">Invitation {index + 1}</p>
+                        <p className="text-lg font-bold mb-2">Member {index + 1}</p>
                         <div className="flex justify-between items-center">
                             <div className="flex items-center">
                                 <img

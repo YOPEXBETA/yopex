@@ -38,11 +38,12 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   const { mutate, isLoadinge } = useFollowCompany(user._id, companyId);
   const { mutate: deleteCompanyMutation, isSuccess } = useDeleteCompany();
   const handleDeleteCompany = async () => {
+    console.log('id',company)
     await deleteCompanyMutation(company._id);
   };
 
   if (isSuccess) {
-    window.location = "/feed";
+    window.location = `/profile/${user._id}`;
   }
 
   const [isfollow, setIsFollow] = useState(false);

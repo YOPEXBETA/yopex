@@ -169,22 +169,46 @@ const getCompanyNotifications = async (req, res) => {
   //   res.status(500).json({ error: "Server Error" });
   // }
 };
-
 const deleteOrganization = async (req, res) => {
   try {
+    console.log('id', req.params.id);
     const organization = await Organization.findById(req.params.id);
+    if (!organization) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+    console.log('user', organization.user);
 
     const user = await userModel.findById(organization.user);
-    user.companies = user.companies.filter(
-      (companyId) => companyId.toString() !== req.params.id
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Remove organization from user's list
+    user.organizations = user.organizations.filter(
+        (companyId) => companyId.toString() !== req.params.id
     );
     await user.save();
+
+    // Find and delete all invitations related to the organization
+    const invitations = await Invitation.find({ organization: req.params.id });
+    const invitationIds = invitations.map(invite => invite._id);
+
+    await Invitation.deleteMany({ organization: req.params.id });
+
+    // Find and delete all notifications related to these invitations
+    await notificationModel.deleteMany({ invitation: { $in: invitationIds } });
+
+    // Delete the organization
     await Organization.findOneAndDelete({ _id: req.params.id });
+
+    console.log("Organization, related invitations, and notifications have been deleted");
     res.status(200).send("Organization has been deleted");
   } catch (err) {
+    console.error("Error deleting organization:", err);
     res.status(500).json(err);
   }
 };
+
 
 const getRecentOrganizations = async (req, res) => {
   try {
@@ -203,26 +227,60 @@ const inviteUserToOrganization = async (req, res) => {
   const { organizationId, userId, roleName } = req.body;
 
   try {
+    console.log("Request received:", { organizationId, userId, roleName });
+
     const organization = await Organization.findById(organizationId);
     if (!organization) {
+      console.log("Organization not found:", organizationId);
       return res.status(404).json({ message: "Organization not found" });
     }
 
     const user = await userModel.findById(userId);
     if (!user) {
+      console.log("User not found:", userId);
       return res.status(400).json({ message: `User not found: ${userId}` });
     }
 
     const role = await roleModel.findOne({ name: roleName });
     if (!role) {
+      console.log("Role not found:", roleName);
       return res.status(400).json({ message: `Role not found: ${roleName}` });
     }
 
     const newInvitation = new Invitation({ organization: organizationId, user: userId, role: role.name });
     await newInvitation.save();
 
+    const notification = new notificationModel({
+      type: 'invitation',
+      message: `You have been invited to join ${organization.organizationName} as a ${role.name}`,
+      picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
+      user: userId,
+      invitation: newInvitation._id
+    });
+    await notification.save();
+
+    console.log("Invitation and notification created successfully");
+
     res.status(201).json({ message: "Invitation sent successfully", invitation: newInvitation });
   } catch (error) {
+    console.error("Error occurred:", error);
+    res.status(500).json({ message: "An error occurred", error: error.message });
+  }
+};
+
+
+const getInvitationById = async (req, res) => {
+  try {
+    const { id } = req.params;
+console.log('id', id)
+    const invitation = await Invitation.findById(id);
+    if (!invitation) {
+      return res.status(404).json({ message: "Invitation not found" });
+    }
+
+    res.status(200).json(invitation);
+  } catch (error) {
+    console.error("Error fetching invitation:", error);
     res.status(500).json({ message: "An error occurred", error: error.message });
   }
 };
@@ -231,7 +289,6 @@ const acceptInvitation = async (req, res) => {
   const { invitationId } = req.params;
 
   try {
-
     const invitation = await Invitation.findById(invitationId);
     if (!invitation) {
       return res.status(404).json({ message: "Invitation not found" });
@@ -241,10 +298,39 @@ const acceptInvitation = async (req, res) => {
       return res.status(400).json({ message: "Invitation is not pending" });
     }
 
-
     const organization = await Organization.findById(invitation.organization);
-    organization.organizationMembers.push({ userId: invitation.user, role: invitation.role });
+    if (!organization) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+
+    // Update organizationMembers in Organization
+    organization.organizationMembers.push({ userId: invitation.user, roleName: invitation.role });
     await organization.save();
+
+    const user = await userModel.findById(invitation.user);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if organization is already in user's organizations array
+    if (!user.organizations.includes(invitation.organization)) {
+      user.organizations.push(invitation.organization);
+      await user.save(); // Save user after modifying organizations array
+    }
+
+    const organizationOwner = await userModel.findOne({ _id: organization.user });
+    if (organizationOwner) {
+      const notification = new notificationModel({
+        type: 'invitation_accepted',
+        message: `User ${user.firstname} ${user.lastname} accepted the invitation to join ${organization.organizationName} as a ${invitation.role}`,
+        picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
+        user: organization.user,
+      });
+      await notification.save();
+    }
+
+    // Delete original invitation notification
+    await notificationModel.deleteOne({ invitation: invitation._id });
 
 
     invitation.status = 'accepted';
@@ -252,9 +338,11 @@ const acceptInvitation = async (req, res) => {
 
     res.status(200).json({ message: "Invitation accepted", organization });
   } catch (error) {
+    console.error("Error accepting invitation:", error);
     res.status(500).json({ message: "An error occurred", error: error.message });
   }
 };
+
 
 module.exports = {
   editProfile,
@@ -266,5 +354,6 @@ module.exports = {
   getAllOrganizations,
   getRecentOrganizations,
   inviteUserToOrganization,
+  getInvitationById,
   acceptInvitation
 };

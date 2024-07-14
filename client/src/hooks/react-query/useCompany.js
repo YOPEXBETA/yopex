@@ -28,6 +28,17 @@ export const useCompanies = (companypage, companyQuery) => {
   });
 };
 
+export const useGetAllSectors = () => {
+  return useQuery({
+    queryKey: ["sectors"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/sector/getAll`);
+      return data;
+    },
+  });
+};
+
+
 export const useApproveCompany = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -152,7 +163,6 @@ export const useSendInvitation = () => {
   });
 };
 
-// Function to accept invitation to join organization
 export const useAcceptInvitation = () => {
   const queryClient = useQueryClient();
 
@@ -175,3 +185,18 @@ export const useAcceptInvitation = () => {
     },
   });
 };
+
+export const useInvitationById = (invitationId) => {
+  return useQuery(
+      ["invitation", invitationId],
+      async () => {
+        const { data } = await axios.get(`${url}/company/getInvitationById/${invitationId}`);
+        console.log('inv', data)
+        return data;
+      },
+      {
+        enabled: !!invitationId,
+      }
+  );
+};
+

@@ -23,6 +23,7 @@ const ExperienceRouter = require("./experience.router");
 const EducationRouter = require("./education.router");
 const levelRouter = require("./level.router");
 const roleRouter = require("./OrganizationRole.router");
+const sectorRouter = require("./sector.router");
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -46,5 +47,7 @@ router.use("/experience", ExperienceRouter);
 router.use("/education", EducationRouter);
 router.use("/level", levelRouter);
 router.use("/oganizationRole", roleRouter);
+router.use("/sector", sectorRouter);
+
 
 module.exports = router;

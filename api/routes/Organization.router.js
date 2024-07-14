@@ -12,7 +12,7 @@ const {
   getAllOrganizations,
   getRecentOrganizations,
   inviteUserToOrganization,
-  acceptInvitation
+  acceptInvitation, getInvitationById
 } = require("../controllers/Organization.controllers");
 const { getOrganization } = require("../controllers/Organization.controllers");
 
@@ -41,6 +41,7 @@ organizationRouter.get(
 organizationRouter.delete("/:id", authenticateToken, deleteOrganization);
 organizationRouter.get("/Recentcompanies", getRecentOrganizations);
 organizationRouter.post('/invite', authenticateToken, inviteUserToOrganization);
+organizationRouter.get('/getInvitationById/:id',authenticateToken, getInvitationById);
 organizationRouter.post('/accept-invitation/:invitationId', authenticateToken , acceptInvitation);
 
 
