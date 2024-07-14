@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="Company Creation and Invitation" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="Baha-Eddine" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;BahaEddinDridi&quot;
+  }
+}</component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="695a2979-8daa-442b-bfc2-7b2d1177e29f" />
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ApplicationTestMode/YopexInternshipproject.git&quot;,
+    &quot;accountId&quot;: &quot;695a2979-8daa-442b-bfc2-7b2d1177e29f&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2iksyY5rfw4z66MhIeCwyi8lHPc" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "YOPEX-INTERNSHIP-REPO",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.1.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="" />
+      <created>1720046164317</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1720046164317</updated>
+      <workItem from="1720046165404" duration="5165000" />
+      <workItem from="1720096893802" duration="2057000" />
+      <workItem from="1720112912833" duration="527000" />
+      <workItem from="1720119786036" duration="2267000" />
+      <workItem from="1720122642056" duration="762000" />
+      <workItem from="1720185626691" duration="5300000" />
+      <workItem from="1720244637539" duration="6083000" />
+      <workItem from="1720261104701" duration="3737000" />
+      <workItem from="1720323716003" duration="3408000" />
+      <workItem from="1720339987244" duration="9775000" />
+      <workItem from="1720440161291" duration="1841000" />
+      <workItem from="1720465427515" duration="1282000" />
+      <workItem from="1720471811377" duration="1906000" />
+      <workItem from="1720587998189" duration="10110000" />
+      <workItem from="1720604208493" duration="4183000" />
+      <workItem from="1720610021237" duration="987000" />
+      <workItem from="1720612273570" duration="433000" />
+      <workItem from="1720624655137" duration="3897000" />
+      <workItem from="1720634938204" duration="930000" />
+      <workItem from="1720701581760" duration="1185000" />
+      <workItem from="1720702855575" duration="5420000" />
+      <workItem from="1720708478464" duration="1125000" />
+      <workItem from="1720712945805" duration="2248000" />
+      <workItem from="1720783352016" duration="3476000" />
+      <workItem from="1720790268368" duration="2704000" />
+      <workItem from="1720814449762" duration="1791000" />
+      <workItem from="1720864384971" duration="1442000" />
+      <workItem from="1720944372255" duration="381000" />
+      <workItem from="1720944782139" duration="7000" />
+    </task>
+    <task id="LOCAL-00001" summary="Company Creation and Invitation">
+      <option name="closed" value="true" />
+      <created>1720944721585</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1720944721585</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Company Creation and Invitation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Company Creation and Invitation" />
+  </component>
+</project>
