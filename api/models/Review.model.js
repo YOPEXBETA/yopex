@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("./user.model");
-const Company = require("./company.model");
+const Organization = require("./Organization.model");
 const ChallengeModel = require("./Challenge.model");
 
 const ReviewSchema = new mongoose.Schema(
@@ -12,7 +12,7 @@ const ReviewSchema = new mongoose.Schema(
     },
     companyId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: Company,
+      ref: Organization,
       required: false,
     },
     challengeOwnerId: {

@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static("public"));
 const bodyParser = require("body-parser");
 const User = require("../models/user.model");
-const Company = require("../models/company.model");
+const Company = require("../models/Organization.model");
 const { sendEmail } = require("../middlewares/mail.middleware");
 const notificationModel = require("../models/notification.model");
 

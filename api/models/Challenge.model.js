@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const submissionModel = require("./submission.model");
-const companyModel = require("./company.model");
+const organizationModel = require("./Organization.model");
 
 const ChallengeSchema = new mongoose.Schema(
   {
@@ -11,7 +11,7 @@ const ChallengeSchema = new mongoose.Schema(
     },
     company: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Company",
+      ref: "Organization",
     },
     picturePath: { type: String },
     title: { type: String, required: true },

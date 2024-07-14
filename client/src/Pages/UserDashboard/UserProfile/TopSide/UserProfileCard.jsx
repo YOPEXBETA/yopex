@@ -213,18 +213,18 @@ const UserProfileCard = () => {
                 {userProfile?.userDescription || "No Description."}
               </p>
             </div>
-            {userProfile?.companies?.length !== 0 && (
+            {userProfile?.organizations?.length !== 0 && (
               <div className="w-full ">
                 <h5 className="mb-3 text-left font-medium text-xs dark:text-white uppercase">
-                  Companies
+                  Organizations
                 </h5>
                 <ul className="flex justify-start gap-2">
-                  {userProfile?.companies?.map((company, index) => (
-                    <Link key={index} to={`/company/${company?._id}`}>
-                      {company?.companyLogo ? (
+                  {userProfile?.organizations?.map((organization, index) => (
+                    <Link key={index} to={`/company/${organization?._id}`}>
+                      {organization?.organizationLogo ? (
                         <img
-                          src={company?.companyLogo}
-                          alt={`Company ${index + 1}`}
+                          src={organization?.organizationLogo}
+                          alt={`Organization ${index + 1}`}
                           className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
                         />
                       ) : (

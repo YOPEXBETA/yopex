@@ -1,5 +1,5 @@
 const userSchema = require("../models/user.model");
-const companySchema = require("../models/company.model");
+const companySchema = require("../models/Organization.model");
 const badgeSchema = require("../models/BadgeType.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");

@@ -197,13 +197,6 @@ const MainRoutes = {
       icon: <SettingsIcon />,
     },
     {
-      name: "Create company",
-      path: "create-company",
-      element: <CreateCompany />,
-      hideInSidebar: true,
-    },
-
-    {
       name: "post Details",
       path: "/postDetails",
       children: [{ path: ":id", element: <PostDetails /> }],

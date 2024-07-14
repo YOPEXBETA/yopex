@@ -28,6 +28,17 @@ export const useCompanies = (companypage, companyQuery) => {
   });
 };
 
+export const useGetAllSectors = () => {
+  return useQuery({
+    queryKey: ["sectors"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/sector/getAll`);
+      return data;
+    },
+  });
+};
+
+
 export const useApproveCompany = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -47,15 +58,17 @@ export const useCreateCompany = () => {
 
   return useMutation({
     mutationFn: async (companyData) => {
-      await axios.post(`${url}/create/`, companyData);
+      const response = await axios.post(`${url}/create/`, companyData);
+      console.log('response' ,response.data)
+      return response.data; // Return the response data
     },
-
     onSuccess: () => {
       toast.success("Company created successfully");
       queryClient.invalidateQueries("companies");
     },
     onError: (error) => {
       toast.error(`Error creating company: ${error.response.data.error.msg}`);
+      throw new Error(error.response.data.error.msg); // Throw error to handle it in components if needed
     },
   });
 };
@@ -124,3 +137,66 @@ export const useRecentCompanies = () => {
     },
   });
 };
+
+export const useSendInvitation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ organizationId, userId, roleName }) => {
+      try {
+        const { data } = await axios.post(`${url}/company/invite`, {
+          organizationId,
+          userId,
+          roleName,
+        });
+
+        toast.success("Invitation sent successfully");
+        return data;
+      } catch (error) {
+        toast.error(`Error sending invitation: ${error.response.data.message}`);
+        throw new Error(error.response.data.message);
+      }
+    },
+    onError: (error) => {
+      console.error("Error sending invitation:", error);
+    },
+  });
+};
+
+export const useAcceptInvitation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (invitationId) => {
+      try {
+        const { data } = await axios.post(`${url}/company/accept-invitation/${invitationId}`);
+
+        toast.success("Invitation accepted successfully");
+        // Optionally invalidate relevant queries if needed
+        // queryClient.invalidateQueries([...]);
+        return data;
+      } catch (error) {
+        toast.error(`Error accepting invitation: ${error.response.data.message}`);
+        throw new Error(error.response.data.message);
+      }
+    },
+    onError: (error) => {
+      console.error("Error accepting invitation:", error);
+    },
+  });
+};
+
+export const useInvitationById = (invitationId) => {
+  return useQuery(
+      ["invitation", invitationId],
+      async () => {
+        const { data } = await axios.get(`${url}/company/getInvitationById/${invitationId}`);
+        console.log('inv', data)
+        return data;
+      },
+      {
+        enabled: !!invitationId,
+      }
+  );
+};
+

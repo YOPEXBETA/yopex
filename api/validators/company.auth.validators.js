@@ -10,7 +10,7 @@ const companyRegisterValidator = yup.object().shape({
     .string()
     .required("Last name is required")
     .matches(/^[a-zA-Z]+$/, "Last name must only contain letters"),
-  companyName: yup.string().required("companyName is required"),
+  organizationName: yup.string().required("organizationName is required"),
   password: yup
     .string()
     .required()
@@ -21,7 +21,7 @@ const companyRegisterValidator = yup.object().shape({
 });
 
 const companyEditProfileValidator = yup.object().shape({
-  companyName: yup.string().required("Company name is required"),
+  organizationName: yup.string().required("organizationName is required"),
   password: yup
     .string()
     .min(8, "Password must be at least 8 characters long")
@@ -38,8 +38,8 @@ const companyEditProfileValidator = yup.object().shape({
     ),
   country: yup.string(),
   dateoffoundation: yup.string(),
-  companyLogo: yup.string(),
-  companyDescription: yup.string(),
+  organizationLogo: yup.string(),
+  organizationDescription: yup.string(),
 });
 
 module.exports = {

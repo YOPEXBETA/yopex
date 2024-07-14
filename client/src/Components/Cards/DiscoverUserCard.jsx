@@ -66,7 +66,7 @@ const DiscoverUserCard = ({ option, extra, user }) => {
                     <div className="w-full flex-none text-lg dark:text-gray-200 font-bold leading-none">
                       {option.firstname
                         ? `${option.firstname} ${option.lastname}`
-                        : option.companyName}{" "}
+                        : option.organizationName}{" "}
                     </div>
                     <div className="flex-auto text-gray-400 my-1">
                       <span className="mr-3 ">

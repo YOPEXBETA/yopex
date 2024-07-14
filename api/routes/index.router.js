@@ -7,7 +7,7 @@ const swaggerRouter = require("./swagger.router");
 const adminRouter = require("./admin.router");
 const PostsRouter = require("./Posts.router");
 const ChallengeRouter = require("./Challenge.router");
-const companyRouter = require("./company.router");
+const companyRouter = require("./Organization.router");
 const jobRouter = require("./job.router");
 const conversationRouter = require("./conversation.router");
 const MessageRouter = require("./messages.router");
@@ -22,6 +22,8 @@ const FirebaseRouter = require("./firebase.router");
 const ExperienceRouter = require("./experience.router");
 const EducationRouter = require("./education.router");
 const levelRouter = require("./level.router");
+const roleRouter = require("./OrganizationRole.router");
+const sectorRouter = require("./sector.router");
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -44,5 +46,8 @@ router.use("/firebase", FirebaseRouter);
 router.use("/experience", ExperienceRouter);
 router.use("/education", EducationRouter);
 router.use("/level", levelRouter);
+router.use("/oganizationRole", roleRouter);
+router.use("/sector", sectorRouter);
+
 
 module.exports = router;
