@@ -287,7 +287,7 @@ const CreateCompanyForm = () => {
                 )}
                 {step === 6 && (
                   <button
-                    type="button"
+                    type="submit"
                     className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white transition bg-green-500 rounded-full shadow ripple hover:shadow-lg hover:bg-green-200 focus:outline-none"
                   >
                     <div className="flex items-center justify-between flex-1 gap-4">
