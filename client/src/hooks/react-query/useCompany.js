@@ -127,7 +127,22 @@ export const useCompanyById = (companyId) => {
     }
   );
 };
-
+export const useFetchOrganizations = (organizationIds) => {
+  return useQuery(
+      ["organizations", organizationIds],
+      async () => {
+        const fetchPromises = organizationIds.map(async (orgId) => {
+          const { data } = await axios.get(`${url}/${orgId}`);
+          return data;
+        });
+        const fetchedOrganizations = await Promise.all(fetchPromises);
+        return fetchedOrganizations;
+      },
+      {
+        enabled: !!organizationIds.length,
+      }
+  );
+};
 export const useRecentCompanies = () => {
   return useQuery({
     queryKey: ["companies"],
@@ -142,11 +157,12 @@ export const useSendInvitation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ organizationId, userId, roleName }) => {
+    mutationFn: async ({ organizationId, userId, email, roleName }) => {
       try {
         const { data } = await axios.post(`${url}/company/invite`, {
           organizationId,
           userId,
+          email,
           roleName,
         });
 
@@ -200,3 +216,17 @@ export const useInvitationById = (invitationId) => {
   );
 };
 
+export const useCurrentOrganization = (organizationId) => {
+  return useQuery(
+      ["organization", organizationId],
+      async () => {
+        console.log('fetching org')
+        const { data } = await axios.get(`${url}/company/getCurrentOrganization/${organizationId}`);
+        console.log('org2', data)
+        return data;
+      },
+      {
+        enabled: !!organizationId,
+      }
+  );
+};

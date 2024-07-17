@@ -5,6 +5,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const moment = require("moment");
+const Organization = require("../models/Organization.model");
+const Invitation = require('../models/organizationInvitations.model');
+const notificationModel = require("../models/notification.model");
 
 // ==============================|| Register ||============================== //
 
@@ -39,6 +42,24 @@ const signUp = async (req, res) => {
     }
 
     const user = await newUser.save();
+
+    const invitation = await Invitation.findOne({ email: req.body.email });
+    if (invitation) {
+
+      invitation.user = user._id;
+      await invitation.save();
+      const organization = await Organization.findById(invitation.organization);
+      const notification = new notificationModel({
+        type: 'invitation',
+        message: `You have been invited to join ${organization.organizationName} as a ${invitation.role}`,
+        picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
+        user: user._id,
+        invitation: invitation._id,
+      });
+      await notification.save();
+
+      console.log("User invitation and notification created successfully");
+    }
 
     const newBadge = new badgeSchema({
       userId: req.userId,

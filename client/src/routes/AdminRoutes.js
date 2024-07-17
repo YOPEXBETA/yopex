@@ -43,9 +43,9 @@ const AdminRoutes = {
   element: <AdminLayout />,
   children: [
     {
-      name: "Dashboard",
+      name: "DashboardPage",
       icon: <DashboardIcon className="h-6 w-6" />,
-      path: "Dashboard",
+      path: "DashboardPage",
       element: <AdminDashboard />,
     },
     {
