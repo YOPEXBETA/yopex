@@ -122,11 +122,20 @@ const CreateCompanyForm = () => {
                 // Send invitations
                 console.log('roles', formData.invitations)
                 formData.invitations.forEach(invitation => {
-                    sendInvitationMutation.mutate({
-                        organizationId: organizationId,
-                        userId: invitation.userId,
-                        roleName: invitation.roleName,
-                    });
+                    const { userId, email, roleName } = invitation;
+                    if (userId) {
+                        sendInvitationMutation.mutate({
+                            organizationId: organizationId,
+                            userId: userId,
+                            roleName: roleName,
+                        });
+                    } else if (email) {
+                        sendInvitationMutation.mutate({
+                            organizationId: organizationId,
+                            email: email,
+                            roleName: roleName,
+                        });
+                    }
                 });
                 setTimeout(() => {
                     navigate(`/company/${organizationId}`);
