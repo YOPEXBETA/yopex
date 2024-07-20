@@ -261,8 +261,8 @@ const inviteUserToOrganization = async (req, res) => {
       // Attempt to send email and handle success/failure
       try {
         const message = `
-          <p>You have been invited to join ${organization.organizationName} as a ${role.name}. Please click the link below to sign up and accept the invitation.</p>
-          <a href="http://localhost:3006/register">Join ${organization.organizationName}</a>
+          You have been invited to join ${organization.organizationName} as a ${role.name}. Please click the link below to sign up and accept the invitation.
+          "http://localhost:3006/register" Join ${organization.organizationName}
         `;
         await sendEmail(email, message);
 
