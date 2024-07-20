@@ -1,70 +1,76 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import {useFetchOrganizations} from "../../../hooks/react-query/useCompany";
-import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import { useFetchOrganizations } from "../../../hooks/react-query/useCompany";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const WorkspaceSwitch = ({currentLayout, currentWorkspace, organizations, onSwitch }) => {
-    const { data: fetchedOrganizations } = useFetchOrganizations(organizations);
-    const navigate = useNavigate();
-    const { user, error } = useSelector((state) => state.auth);
+const WorkspaceSwitch = ({
+  currentLayout,
+  currentWorkspace,
+  organizations,
+  onSwitch,
+}) => {
+  const { data: fetchedOrganizations } = useFetchOrganizations(organizations);
+  const navigate = useNavigate();
+  const { user, error } = useSelector((state) => state.auth);
+  const [open, setOpen] = useState(false);
 
-    console.log('orgs', fetchedOrganizations)
-    const [orgCategories, setOrgCategories] = useState({
+  console.log("orgs", fetchedOrganizations);
+  const [orgCategories, setOrgCategories] = useState({
+    Company: [],
+    University: [],
+    Club: [],
+    NGO: [],
+  });
+  console.log("pic", currentWorkspace.picturePath);
+  console.log("user", user);
+
+  // Fetch organizations based on IDs
+  useEffect(() => {
+    // Categorize organizations when fetchedOrganizations changes
+    if (fetchedOrganizations) {
+      const categorizedOrgs = {
         Company: [],
         University: [],
         Club: [],
         NGO: [],
-    });
-    console.log('pic',currentWorkspace.picturePath)
+      };
 
-    // Fetch organizations based on IDs
-    useEffect(() => {
-        // Categorize organizations when fetchedOrganizations changes
-        if (fetchedOrganizations) {
-            const categorizedOrgs = {
-                Company: [],
-                University: [],
-                Club: [],
-                NGO: [],
-            };
-
-            fetchedOrganizations.forEach((org) => {
-                switch (org?.organizationType) {
-                    case "Company":
-                        categorizedOrgs.Company.push(org);
-                        break;
-                    case "University":
-                        categorizedOrgs.University.push(org);
-                        break;
-                    case "Club":
-                        categorizedOrgs.Club.push(org);
-                        break;
-                    case "Non-Governmental Organization":
-                        categorizedOrgs.NGO.push(org);
-                        break;
-                    default:
-                        break;
-                }
-            });
-
-            setOrgCategories(categorizedOrgs);
+      fetchedOrganizations.forEach((org) => {
+        switch (org?.organizationType) {
+          case "Company":
+            categorizedOrgs.Company.push(org);
+            break;
+          case "University":
+            categorizedOrgs.University.push(org);
+            break;
+          case "Club":
+            categorizedOrgs.Club.push(org);
+            break;
+          case "Non-Governmental Organization":
+            categorizedOrgs.NGO.push(org);
+            break;
+          default:
+            break;
         }
-    }, [fetchedOrganizations]);
+      });
 
-    const handleOrganizationSwitch = async (organization) => {
-        navigate(`/organization/${organization._id}/dashboard`);
-        onSwitch({
-            organizationName: organization.organizationName,
-            organizationLogo: organization.organizationLogo,
-        });
-        
-    };
-    const handleUserWorkspaceSwitch = () => {
-        navigate("/feed");
-    };
+      setOrgCategories(categorizedOrgs);
+    }
+  }, [fetchedOrganizations]);
+
+  const handleOrganizationSwitch = async (organization) => {
+    navigate(`/organization/${organization._id}/dashboard`);
+    onSwitch({
+      organizationName: organization.organizationName,
+      organizationLogo: organization.organizationLogo,
+    });
+  };
+  const handleUserWorkspaceSwitch = () => {
+    navigate("/feed");
+  };
 
     return (
         <Menu as="div" className="relative inline-block text-left">
