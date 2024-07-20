@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Organization Creation with the stepper">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +96,7 @@
       <workItem from="1721404505657" duration="1990000" />
       <workItem from="1721410900603" duration="3904000" />
       <workItem from="1721471327378" duration="1072000" />
-      <workItem from="1721495533211" duration="2231000" />
+      <workItem from="1721495533211" duration="3151000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -108,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720612225008</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Organization Creation with the stepper">
+      <option name="closed" value="true" />
+      <created>1721501091792</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1721501091792</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

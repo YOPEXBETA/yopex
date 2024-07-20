@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="Organization navbar">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/Organization.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Organization.controllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/mail.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/mail.middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +125,7 @@
       <workItem from="1721470634289" duration="125000" />
       <workItem from="1721470886635" duration="2300000" />
       <workItem from="1721495486249" duration="1306000" />
-      <workItem from="1721500266010" duration="625000" />
+      <workItem from="1721500266010" duration="1398000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />
