@@ -82,7 +82,7 @@ const UserProfileCard = () => {
           <div className="flex flex-col items-center justify-center gap-2 truncate w-80">
             <div className="flex items-center justify-center gap-2 truncate w-80">
               {userProfile ? (
-                <p className="text-2xl font-bold truncate dark:text-zinc-200">
+                <p className="text-2xl font-bold truncate dark:text-gray-200">
                   {`${userProfile.firstname} ${userProfile.lastname}`}
                 </p>
               ) : (
@@ -99,7 +99,7 @@ const UserProfileCard = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <p className="text-base text-zinc-700 dark:text-white flex items-center">
+            <p className="text-base text-gray-700 dark:text-white flex items-center">
               <FaMapMarkerAlt className="inline-block mr-2 text-green-500" />
               {userProfile ? (
                 <p className="text-md whitespace-normal dark:text-gray-200">
@@ -139,7 +139,7 @@ const UserProfileCard = () => {
                 <button
                   className={
                     userProfile.followers.includes(user._id)
-                      ? "cursor-pointer capitalize font-medium hover:scale-105 border border-zinc-600 py-3 px-4 rounded-full w-full text-zinc-600 dark:text-white dark:border-white"
+                      ? "cursor-pointer capitalize font-medium hover:scale-105 border border-zinc-600 py-3 px-4 rounded-full w-full text-gray-600 dark:text-white dark:border-white"
                       : "cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-3 px-4 rounded-full w-full text-white"
                   }
                   onClick={mutate}

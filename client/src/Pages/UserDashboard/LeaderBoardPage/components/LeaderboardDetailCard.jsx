@@ -60,7 +60,7 @@ const LeaderboardDetailCard = ({ data }) => {
             <h1 className="text-lg  dark:text-white font-bold">
               {data?.firstname} {data?.lastname}
             </h1>
-            <p className="whitespace-normal dark:text-zinc-500 text-zinc-500">
+            <p className="whitespace-normal dark:text-gray-500 text-gray-500">
               {data?.occupation || "No occupation selected"}
             </p>
           </div>

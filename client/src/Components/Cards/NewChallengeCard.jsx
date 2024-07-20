@@ -51,7 +51,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
                   alt="Icon"
                   className="w-16 h-16 rounded-lg object-cover border hidden md:block lg:block"
                 />
-                <p className="mt-1 font-medium dark:text-zinc-400 md:mt-2">
+                <p className="mt-1 font-medium dark:text-gray-400 md:mt-2">
                   {challenge.company?.companyName}
                 </p>
               </div>

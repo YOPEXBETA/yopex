@@ -23,14 +23,14 @@ const SearchInput = () => {
   const displayedUsers = suggestedUsers?.slice(0, 5);
   return (
     <div>
-      <div className="flex h-full items-center rounded-full  text-zinc-700 dark:bg-zinc-900 dark:text-white xl:w-[225px]">
+      <div className="flex h-full items-center rounded-full  text-gray-700 dark:bg-zinc-900 dark:text-white xl:w-[225px]">
         <p className="pl-3 pr-2 text-xl">
           <FiSearch className="h-4 w-4 text-gray-400 dark:text-white" />
         </p>
         <input
           type="text"
           placeholder="Search..."
-          className="block h-full w-full  rounded-full text-sm font-medium text-zinc-700 outline-none placeholder:!text-gray-400 dark:bg-zinc-900 dark:text-white dark:placeholder:!text-white sm:w-fit"
+          className="block h-full w-full  rounded-full text-sm font-medium text-gray-700 outline-none placeholder:!text-gray-400 dark:bg-zinc-900 dark:text-white dark:placeholder:!text-white sm:w-fit"
           value={query}
           onChange={handleSearchUsers}
         />

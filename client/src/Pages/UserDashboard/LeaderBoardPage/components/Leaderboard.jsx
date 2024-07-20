@@ -92,11 +92,11 @@ const Leaderboard = ({ query, onSelect }) => {
                           </span>
                         </div>
                       </td>
-                      <td className="px-4 py-4 text-sm text-zinc-500 dark:text-gray-300 whitespace-nowrap">
+                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                         {item?.country || "N/A"}
                       </td>
 
-                      <td className="px-4 py-4 text-sm font-medium text-zinc-500 whitespace-nowrap text-right">
+                      <td className="px-4 py-4 text-sm font-medium text-gray-500 whitespace-nowrap text-right">
                         <div
                           className={`inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-green-500 bg-green-100/60 dark:bg-gray-800`}
                         >

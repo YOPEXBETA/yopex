@@ -7,7 +7,7 @@ const AccessDenied = () => {
         <h2 className="text-3xl font-semibold mb-4 text-center dark:text-white">
           Access Denied
         </h2>
-        <p className="text-zinc-500">
+        <p className="text-gray-500">
           Sorry, you don't have permission to access this page. Please contact
           the administrator for assistance.
         </p>

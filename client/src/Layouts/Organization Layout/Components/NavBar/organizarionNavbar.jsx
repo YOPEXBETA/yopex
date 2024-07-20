@@ -105,7 +105,7 @@ const OrganizationNavbar = (props) => {
                             <p className="shrink text-2xl capitalize  dark:text-white">
                                 <Link
                                     to="#"
-                                    className="font-semibold capitalize hover:text-zinc-700 dark:hover:text-white hidden md:block"
+                                    className="font-semibold capitalize hover:text-gray-700 dark:hover:text-white hidden md:block"
                                 >
                                     {brandText}
                                 </Link>

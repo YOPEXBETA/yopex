@@ -27,7 +27,7 @@ const ExperienceCard = ({ challenge }) => {
             <h5 className="text-md font-bold dark:text-white">
               {challenge?.title}
             </h5>
-            <p className="mt-1 text-xs font-medium text-zinc-600 dark:text-zinc-200">
+            <p className="mt-1 text-xs font-medium text-gray-600 dark:text-gray-200">
               By {challenge?.company?.companyName}
             </p>
           </div>
@@ -35,7 +35,7 @@ const ExperienceCard = ({ challenge }) => {
 
         <dl className="flex mt-6">
           <div className="flex flex-col-reverse">
-            <dt className="text-sm font-medium text-zinc-600">
+            <dt className="text-sm font-medium text-gray-600">
               {challenge?.deadline && formatDate(challenge?.deadline)}
             </dt>
           </div>

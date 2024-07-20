@@ -60,7 +60,7 @@ const ClientCard = ({ isRegistered, isOwner }) => {
             <div className="flex flex-col items-center">
               {challenge.price > 0 ? (
                 <>
-                  <h5 className="text-xl text-zinc-500 font-medium pb-2">
+                  <h5 className="text-xl text-gray-500 font-medium pb-2">
                     Contest Price
                   </h5>
                   <div className="flex gap-1">
@@ -71,7 +71,7 @@ const ClientCard = ({ isRegistered, isOwner }) => {
                 </>
               ) : (
                 <>
-                  <h5 className="text-xl text-zinc-500 font-medium pb-2">
+                  <h5 className="text-xl text-gray-500 font-medium pb-2">
                     Contest Type
                   </h5>
                   <p className="text-3xl font-bold pb-6 dark:text-white">
@@ -81,7 +81,7 @@ const ClientCard = ({ isRegistered, isOwner }) => {
               )}
             </div>
             <div className="flex flex-col items-center">
-              <p className="text-xl text-zinc-500 font-medium pb-4">
+              <p className="text-xl text-gray-500 font-medium pb-4">
                 Contest ending in
               </p>
               <p className="text-xl font-bold text-black dark:text-white">

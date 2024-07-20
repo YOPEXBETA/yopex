@@ -47,12 +47,12 @@ const ScoreLeaderboard = ({ extra }) => {
           <div className="mx-auto">
             <div className="rounded-lg py-4">
               <div className="flex justify-between items-center mb-4">
-                <h3 className=" text-zinc-900 dark:text-white font-bold">
+                <h3 className=" text-gray-900 dark:text-white font-bold">
                   Leaders
                 </h3>
 
                 <Link to="/leaderboard">
-                  <a className="text-sm text-zinc-500 hover:underline dark:text-green-500">
+                  <a className="text-sm text-gray-500 hover:underline dark:text-green-500">
                     View all
                   </a>
                 </Link>

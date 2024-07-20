@@ -78,7 +78,7 @@ const MainLayout = (props) => {
           handleCreateClick={handleCreateClick}
           closeCreateMenuModal={closeCreateMenuModal}
         />
-        <div className="h-full w-full bg-white dark:!bg-zinc-900">
+        <div className="h-full w-full bg-lightPrimary dark:!bg-zinc-900">
           <main
             className={`h-full flex-none transition-all  ${
               matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[313px]"

@@ -5,14 +5,15 @@ const SwitchCardWorkspace = ({ user }) => {
     <div className="flex items-center justify-between">
       <img
         className="w-12 h-12 rounded-full mr-4"
-        src="https://via.placeholder.com/150"
+        src={user?.picturePath}
         alt="Profile Image"
       />
+      <div className="flex items-center gap-8">
       <div>
         <h2 className="text-md font-medium">
-          {`${user.firstname} ${user.lastname}`}
+          {`${user?.firstname} ${user?.lastname}`}
         </h2>
-        <p className="text-gray-600">Hiring • 1 member</p>
+        <p className="text-gray-600">Current Workspace</p>
       </div>
       <svg
         className="w-5 h-5 ml-auto text-gray-400"
@@ -28,6 +29,7 @@ const SwitchCardWorkspace = ({ user }) => {
           d="M9 5l7 7-7 7"
         ></path>
       </svg>
+      </div>
     </div>
   );
 };

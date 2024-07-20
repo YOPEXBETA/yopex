@@ -19,26 +19,26 @@ const AdminNavbar = (props) => {
       <div className="ml-[6px]">
         <div className="h-6 w-[224px] pt-1">
           <a
-            className="text-sm font-normal text-zinc-700 hover:underline dark:text-white dark:hover:text-white"
+            className="text-sm font-normal text-gray-700 hover:underline dark:text-white dark:hover:text-white"
             href=" "
           >
             Pages
-            <span className="mx-1 text-sm text-zinc-700 hover:text-zinc-700 dark:text-white">
+            <span className="mx-1 text-sm text-gray-700 hover:text-gray-700 dark:text-white">
               {" "}
               /{" "}
             </span>
           </a>
           <Link
-            className="text-sm font-normal capitalize text-zinc-700 hover:underline dark:text-white dark:hover:text-white"
+            className="text-sm font-normal capitalize text-gray-700 hover:underline dark:text-white dark:hover:text-white"
             to="#"
           >
             {brandText}
           </Link>
         </div>
-        <p className="shrink text-[33px] capitalize text-zinc-700 dark:text-white">
+        <p className="shrink text-[33px] capitalize text-gray-700 dark:text-white">
           <Link
             to="#"
-            className="font-bold capitalize hover:text-zinc-700 dark:hover:text-white"
+            className="font-bold capitalize hover:text-gray-700 dark:hover:text-white"
           >
             {brandText}
           </Link>

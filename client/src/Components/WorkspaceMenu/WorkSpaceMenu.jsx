@@ -70,11 +70,11 @@ const WorkSpaceMenu = ({
             onClick={handleUserWorkspaceSwitch}
           >
             <img
-              src={user.picturePath}
-              alt={`${user.firstname} ${user.lastname}`}
+              src={user?.picturePath}
+              alt={`${user?.firstname} ${user?.lastname}`}
               className="h-8 w-8 rounded-full mr-2"
             />
-            <span>{`${user.firstname} ${user.lastname}`}</span>
+            <span>{`${user?.firstname} ${user?.lastname}`}</span>
           </div>
         </div>
       )}

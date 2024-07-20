@@ -54,12 +54,14 @@ const Sidebar = ({
               />
             </div>
           ) : (
-            <div className="mt-1 ml-1  font-poppins text-[26px] font-bold uppercase text-zinc-700 dark:text-white">
+            <div className="mt-1 ml-1  font-poppins text-[26px] font-bold uppercase dark:text-white">
               YOPEX <span className="font-medium">HUB</span>
             </div>
           )}
         </div>
       </div>
+      <div className="mt-6 h-[1px] bg-gray-100 dark:bg-gray-700" />
+
       <div className="relative ml-6 focus:ring-offset-2 focus:ring-offset-zinc-800 mt-4">
         <Dropdown
           button={<SwitchCardWorkspace user={user} />}
@@ -70,19 +72,20 @@ const Sidebar = ({
                 currentWorkspace={currentWorkspace}
                 organizations={organizations}
                 onSwitch={handleSwitch}
-              />
+              />  
             </div>
           }
-          classNames={"py-2 top-10 -right-[120px] w-max"}
+          classNames={"py-0 top-10 -right-[12 0px] w-max"}
         />
       </div>
+
       {/*<WorkspaceSwitch
           currentLayout="UserLayout"
           currentWorkspace={currentWorkspace}
           organizations={organizations}
           onSwitch={handleSwitch}
         />*/}
-      <div className="mt-6 mb-7 h-[1px] bg-gray-100 dark:bg-zinc-700" />
+      <div className="mt-6 mb-7 h-[1px] bg-gray-100 dark:bg-gray-700" />
       {/* Nav item */}
 
       <ul className="mb-auto pt-1 flex flex-col justify-center">
