@@ -230,3 +230,32 @@ export const useCurrentOrganization = (organizationId) => {
       }
   );
 };
+
+export const useGetOrganizationNotifications = (organizationId) => {
+  return useQuery({
+    queryKey: ["organizationNotifications", organizationId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/company/notifications/${organizationId}`);
+      return data;
+    },
+    enabled: !!organizationId,
+  });
+};
+
+export const useSeeOrganizationNotifications = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (organizationId) => {
+      const { data } = await axios.post(`${url}/company/notifications/see/${organizationId}`);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("organizationNotifications");
+    },
+    onError: (error) => {
+      toast.error(`Error marking notifications as seen: ${error.response.data.message}`);
+      throw new Error(error.response.data.message);
+    },
+  });
+};

@@ -12,7 +12,7 @@ const NotificationSchema = new mongoose.Schema(
         challenge: {type: mongoose.Schema.Types.ObjectId, ref: "Challenge"},
         job: {type: mongoose.Schema.Types.ObjectId, ref: "Job"},
         user: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
-        company: {type: mongoose.Schema.Types.ObjectId, ref: "Company"},
+        organization: {type: mongoose.Schema.Types.ObjectId, ref: "Organization"},
         invitation: {type: mongoose.Schema.Types.ObjectId, ref: "Invitation"},
         createdAt: {type: Date, default: Date.now},
         seen: {type: Boolean, default: false},

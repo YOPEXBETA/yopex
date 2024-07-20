@@ -6,6 +6,7 @@ import routes from "../../routes/OrganizationRoutes";
 import {useCurrentOrganization} from "../../hooks/react-query/useCompany";
 import {fetchCurrentOrganization} from "../../redux/organization/organizationSlice";
 import {useSelector, useDispatch} from "react-redux";
+import OrganizationNavbar from "./Components/NavBar/organizarionNavbar";
 
 const OrganizationLayout = (props) => {
     const location = useLocation();
@@ -65,7 +66,7 @@ const OrganizationLayout = (props) => {
                             }`}
                         >
                             <div className="h-full">
-                                <Navbar
+                                <OrganizationNavbar
 
                                     onOpenSidenav={() => setOpen(true)}
                                     brandText={currentRoute}

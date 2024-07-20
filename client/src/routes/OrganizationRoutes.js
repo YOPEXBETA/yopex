@@ -22,6 +22,9 @@ const Applicants = Loadable(
 const OrganizationSettings = Loadable(
     lazy(() => import("../Pages/OrganizationPages/SettingsPage/SettingsPage"))
 );
+const OrganizationProfile = Loadable(
+    lazy(() => import("../Pages/OrganizationPages/OrganizationProfile/OrganizationProfile"))
+);
 //NotFoundPage
 const NotFoundPage = Loadable(
     lazy(() => import("../Pages/UserDashboard/NotFoundPage/NotFoundPage"))
@@ -55,6 +58,13 @@ const OrganizationRoutes = {
             icon: <SettingsIcon className="h-6 w-6" />,
             path: "settings",
             element: <OrganizationSettings />,
+        },
+        {
+            name: "Organization Profile",
+            path: "organizationProfile",
+            element: <OrganizationProfile />,
+            hideInSidebar: true,
+            customWidth: true,
         },
         {
             path: "*",

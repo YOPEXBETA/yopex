@@ -44,7 +44,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Baha-Eddine",
+    "git-widget-placeholder": "YOPEX-INTERNSHIP-REPO",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject",
     "node.js.detected.package.eslint": "true",
@@ -55,6 +55,21 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="YopexInternshipproject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="YopexInternshipproject" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

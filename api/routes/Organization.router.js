@@ -12,7 +12,7 @@ const {
   getAllOrganizations,
   getRecentOrganizations,
   inviteUserToOrganization,
-  acceptInvitation, getInvitationById, getCurrentOrganization
+  acceptInvitation, getInvitationById, getCurrentOrganization, getOrganizationNotifications, seeOrganizationNotification
 } = require("../controllers/Organization.controllers");
 const { getOrganization } = require("../controllers/Organization.controllers");
 
@@ -26,6 +26,7 @@ const {
 const {
   companyEditProfileValidator,
 } = require("../validators/company.auth.validators");
+const {getUserNotifications} = require("../controllers/user.controllers");
 
 organizationRouter.put("/approve/:id/", authenticateToken, approveCompany);
 organizationRouter.put;
@@ -39,6 +40,9 @@ organizationRouter.get(
   getCompanyNotifications
 );
 organizationRouter.delete("/:id", authenticateToken, deleteOrganization);
+organizationRouter.get("/notifications/:organizationId", authenticateToken, getOrganizationNotifications);
+organizationRouter.patch('/notifications/see/:organizationId', authenticateToken, seeOrganizationNotification);
+
 organizationRouter.get("/Recentcompanies", getRecentOrganizations);
 organizationRouter.post('/invite', inviteUserToOrganization);
 organizationRouter.get('/getInvitationById/:id',authenticateToken, getInvitationById);

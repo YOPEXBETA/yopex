@@ -227,23 +227,20 @@ const inviteUserToOrganization = async (req, res) => {
   const { organizationId, userId, email, roleName } = req.body;
 
   try {
-    console.log("Full request body:", req.body);
-    console.log("Parsed values:", { organizationId, userId, email, roleName });
 
     if (!organizationId) {
-      console.log("Organization ID is missing");
       return res.status(400).json({ message: "Organization ID is required" });
     }
 
     const organization = await Organization.findById(organizationId);
     if (!organization) {
-      console.log("Organization not found:", organizationId);
+
       return res.status(404).json({ message: "Organization not found" });
     }
 
     const role = await roleModel.findOne({ name: roleName });
     if (!role) {
-      console.log("Role not found:", roleName);
+
       return res.status(400).json({ message: `Role not found: ${roleName}` });
     }
 
@@ -251,7 +248,7 @@ const inviteUserToOrganization = async (req, res) => {
       // Check if there's already an invitation with the same email for the same organization
       const existingInvitation = await Invitation.findOne({ organization: organizationId, email });
       if (existingInvitation) {
-        console.log("Duplicate invitation found for email:", email);
+
         return res.status(400).json({ message: "User has already been invited to this organization" });
       }
 
@@ -271,7 +268,7 @@ const inviteUserToOrganization = async (req, res) => {
 
         // If email sent successfully, save the invitation
         await newInvitation.save();
-        console.log("Email invitation sent successfully");
+
 
         return res.status(201).json({ message: "Email invitation sent successfully", invitation: newInvitation });
       } catch (error) {
@@ -282,13 +279,13 @@ const inviteUserToOrganization = async (req, res) => {
       // Check if there's already an invitation with the same user ID for the same organization
       const existingInvitation = await Invitation.findOne({ organization: organizationId, user: userId });
       if (existingInvitation) {
-        console.log("Duplicate invitation found for user ID:", userId);
+
         return res.status(400).json({ message: "User has already been invited to this organization" });
       }
 
       const user = await userModel.findById(userId);
       if (!user) {
-        console.log("User not found:", userId);
+
         return res.status(400).json({ message: `User not found: ${userId}` });
       }
 
@@ -307,8 +304,6 @@ const inviteUserToOrganization = async (req, res) => {
         invitation: newInvitation._id
       });
       await notification.save();
-
-      console.log("User invitation and notification created successfully");
 
       return res.status(201).json({ message: "User invitation sent successfully", invitation: newInvitation });
     } else {
@@ -374,11 +369,15 @@ const acceptInvitation = async (req, res) => {
     if (organizationOwner) {
       const notification = new notificationModel({
         type: 'invitation_accepted',
-        message: `User ${user.firstname} ${user.lastname} accepted the invitation to join ${organization.organizationName} as a ${invitation.role}`,
+        message: `${user.firstname} ${user.lastname} accepted the invitation to join ${organization.organizationName} as a ${invitation.role}`,
         picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
-        user: organization.user,
+        organization: organization._id,
       });
       await notification.save();
+
+      organization.notificationsOrganization.push(notification._id);
+      await organization.save();
+
     }
 
     // Delete original invitation notification
@@ -411,6 +410,57 @@ const getCurrentOrganization = async (req, res) => {
   }
 };
 
+const seeOrganizationNotification = async (req, res) => {
+  try {
+    const { organizationId } = req.params;
+    const organization = await Organization.findById(organizationId).select("notificationsOrganization");
+
+    if (!organization) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+
+    const unseenNotifications = await notificationModel.find({
+      seen: false,
+      organization: organizationId,
+    });
+    for (const notification of unseenNotifications) {
+      notification.seen = true;
+      await notification.save();
+    }
+
+    res.status(200).json({ message: "Organization notifications seen" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const getOrganizationNotifications = async (req, res) => {
+  try {
+    const { organizationId } = req.params;
+    console.log('id', organizationId)
+    const organization = await Organization.findById(organizationId);
+    if (!organization) throw new Error("Organization not found");
+
+    let notifications = await notificationModel
+        .find({ organization: organizationId })
+        .populate("job")
+        .populate("challenge")
+        .sort({ createdAt: -1 });
+
+    const countNotSeenNotifications = await notificationModel.countDocuments({
+      organization: organizationId,
+      seen: false,
+    });
+
+    res.status(200).json({ notifications, countNotSeenNotifications });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+
 
 module.exports = {
   editProfile,
@@ -424,5 +474,7 @@ module.exports = {
   inviteUserToOrganization,
   getInvitationById,
   acceptInvitation,
-  getCurrentOrganization
+  getCurrentOrganization,
+  getOrganizationNotifications,
+  seeOrganizationNotification
 };

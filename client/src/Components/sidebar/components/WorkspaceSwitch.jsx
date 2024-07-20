@@ -32,7 +32,7 @@ const WorkspaceSwitch = ({currentLayout, currentWorkspace, organizations, onSwit
             };
 
             fetchedOrganizations.forEach((org) => {
-                switch (org.organizationType) {
+                switch (org?.organizationType) {
                     case "Company":
                         categorizedOrgs.Company.push(org);
                         break;
