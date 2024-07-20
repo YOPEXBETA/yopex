@@ -112,7 +112,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 </div>
                 <div className="hidden xl:flex lg:flex md:flex flex-row sm:flex-row gap-6 sm:gap-4 w-full sm:w-72">
                   <a
-                    className="text-base font-medium text-zinc-700 dark:text-white hover:text-green-500 dark:hover:text-  -500"
+                    className="text-base font-medium text-gray-700 dark:text-white hover:text-green-500 dark:hover:text-  -500"
                     href={company?.websiteURL}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -190,7 +190,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <p className="text-base font-bold text-center dark:text-gray-200">
                 {company?.challenges?.length}
               </p>
-              <p className="text-zinc-500 text-md dark:text-gray-400">
+              <p className="text-gray-500 text-md dark:text-gray-400">
                 Challenges
               </p>
             </div>
@@ -198,7 +198,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <p className="text-base font-bold text-center dark:text-gray-200">
                 {company?.jobs?.length}
               </p>
-              <p className="text-zinc-500 text-md dark:text-gray-400">Jobs</p>
+              <p className="text-gray-500 text-md dark:text-gray-400">Jobs</p>
             </div>
           </div>
           {/*mobile version*/}

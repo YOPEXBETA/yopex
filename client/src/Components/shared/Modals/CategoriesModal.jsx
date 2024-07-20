@@ -46,7 +46,7 @@ const CategoriesModal = ({
                   className={`bg-white bg-opacity-10 py-2 text-lg border-2 w-full font-medium text-green-500 hover:bg-opacity-20 focus:outline-none rounded-md transition duration-300 transform hover:scale-105 ${
                     selectedCategory === tab.name
                       ? "text-green-500 border-2 border-green-500"
-                      : "text-zinc-300 dark:text-gray-300"
+                      : "text-gray-300 dark:text-gray-300"
                   }`}
                 >
                   {tab.name}

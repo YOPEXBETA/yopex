@@ -36,7 +36,7 @@ const AddSocialPostCard = () => {
 
           {/* Content */}
           <div>
-            <span className="text-md mb-0 font-semibold text-zinc-900 dark:text-white sm:mb-1.5 sm:text-xl">
+            <span className="text-md mb-0 font-semibold text-gray-900 dark:text-white sm:mb-1.5 sm:text-xl">
               Share your work {user?.firstname}
             </span>
             <span className="text-sm leading-normal text-gray-400 sm:block">

@@ -52,7 +52,7 @@ const OrganizationSidebar = ({
               />
             </div>
           ) : (
-            <div className="mt-1 ml-1  font-poppins text-[26px] font-bold uppercase text-zinc-700 dark:text-white">
+            <div className="mt-1 ml-1  font-poppins text-[26px] font-bold uppercase text-gray-700 dark:text-white">
               YOPEX <span className="font-medium">HUB</span>
             </div>
           )}

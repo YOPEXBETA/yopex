@@ -73,7 +73,7 @@ const CommentModal = ({
                                     )}
                                   </p>
                                 </div>
-                                <p className="text-md dark:text-gray-200 text-zinc-700 whitespace-nowrap max-w-[70px]">
+                                <p className="text-md dark:text-gray-200 text-gray-700 whitespace-nowrap max-w-[70px]">
                                   {comment.desc}
                                 </p>
                               </div>

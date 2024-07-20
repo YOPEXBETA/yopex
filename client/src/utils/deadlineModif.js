@@ -15,15 +15,15 @@ function getDeadlineDifference(deadline) {
         <div className="flex items-center gap-11">
           <div className="flex flex-col justify-center items-center">
             <div className="text-2xl font-bold">00</div>
-            <div className="text-[1rem] font-normal text-zinc-500">Day</div>
+            <div className="text-[1rem] font-normal text-gray-500">Day</div>
           </div>
           <div className="flex flex-col justify-center items-center">
             <div className="text-2xl font-bold">00</div>
-            <div className="text-[1rem] font-normal text-zinc-500">Hours</div>
+            <div className="text-[1rem] font-normal text-gray-500">Hours</div>
           </div>
           <div className="flex flex-col justify-center items-center">
             <div className="text-2xl font-bold">00</div>
-            <div className="text-[1rem] font-normal text-zinc-500">Minutes</div>
+            <div className="text-[1rem] font-normal text-gray-500">Minutes</div>
           </div>
         </div>
       ) : (
@@ -31,15 +31,15 @@ function getDeadlineDifference(deadline) {
           <div className="flex items-center gap-8">
             <div className="flex flex-col justify-center items-center">
               <div className="text-2xl font-bold">{days}</div>
-              <div className="text-[1rem] font-normal text-zinc-400">Days</div>
+              <div className="text-[1rem] font-normal text-gray-400">Days</div>
             </div>
             <div className="flex flex-col justify-center items-center">
               <div className="text-2xl font-bold">{hours}</div>
-              <div className="text-[1rem] font-normal text-zinc-400">Hours</div>
+              <div className="text-[1rem] font-normal text-gray-400">Hours</div>
             </div>
             <div className="flex flex-col justify-center items-center">
               <div className="text-2xl font-bold">{minutes}</div>
-              <div className="text-[1rem] font-normal text-zinc-400">
+              <div className="text-[1rem] font-normal text-gray-400">
                 Minutes
               </div>
             </div>

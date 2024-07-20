@@ -166,7 +166,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                 <div className="border mx-8 rounded-lg  px-8 py-6 flex flex-col gap-4">
                   <div className="flex gap-2">
                     <div className="mb-2">
-                      <h2 className="text-left dark:text-white text-sm text-zinc-500">
+                      <h2 className="text-left dark:text-white text-sm text-gray-500">
                         JOB TYPE
                       </h2>
                       <p className="dark:text-white font-bold text-lg">
@@ -178,7 +178,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   </div>
                   <div className="flex gap-2">
                     <div className="mb-2">
-                      <h2 className="text-left dark:text-white text-sm text-zinc-500">
+                      <h2 className="text-left dark:text-white text-sm text-gray-500">
                         OFFER TYPE
                       </h2>
                       <p className="dark:text-white font-bold text-lg">
@@ -190,7 +190,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   </div>
                   <div className="flex gap-2">
                     <div className="mb-2">
-                      <h2 className="text-left dark:text-white text-sm text-zinc-500">
+                      <h2 className="text-left dark:text-white text-sm text-gray-500">
                         APPLIERS
                       </h2>
                       <p className="dark:text-white font-bold text-lg">
@@ -200,7 +200,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   </div>
                   <div className="flex gap-2">
                     <div className="mb-2">
-                      <h2 className="text-left dark:text-white text-sm text-zinc-500">
+                      <h2 className="text-left dark:text-white text-sm text-gray-500">
                         POSTED TIME
                       </h2>
                       <p className="dark:text-white font-bold text-lg">

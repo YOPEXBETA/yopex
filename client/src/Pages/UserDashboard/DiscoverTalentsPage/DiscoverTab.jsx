@@ -12,7 +12,7 @@ const DiscoverTab = ({
   query,
 }) => {
   return (
-    <div className="flex flex-col items-center sm:flex-row sm:items-center rounded-full text-zinc-700 dark:bg-zinc-900 dark:text-white">
+    <div className="flex flex-col items-center sm:flex-row sm:items-center rounded-full text-gray-700 dark:bg-zinc-900 dark:text-white">
       <div className="relative w-full">
         <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
           <div className="pointer-events-none">

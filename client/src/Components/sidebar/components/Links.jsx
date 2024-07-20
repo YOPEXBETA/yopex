@@ -27,7 +27,7 @@ export function SidebarLinks(props) {
                     className={`${
                       activeRoute(route.path) === true
                         ? "font-bold text-green-500 dark:text-white"
-                        : "font-medium text-zinc-400"
+                        : "font-medium text-gray-400"
                     }`}
                   >
                     {route.icon ? route.icon : <DashIcon />}{" "}
@@ -39,7 +39,7 @@ export function SidebarLinks(props) {
                     className={`leading-1 ml-4 flex ${
                       activeRoute(route.path) === true
                         ? " font-medium dark:text-white text-green-500"
-                        : "font-medium text-zinc-400"
+                        : "font-medium text-gray-400"
                     }`}
                   >
                     {route?.name}

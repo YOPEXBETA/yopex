@@ -99,7 +99,7 @@ const Login = () => {
             <div className="relative mb-6">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                 <svg
-                  className="w-4 h-4 text-gray-400 dark:text-zinc-800"
+                  className="w-4 h-4 text-gray-400 dark:text-gray-800"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -133,7 +133,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 flex items-center pr-2 dark:text-zinc-800"
+                className="absolute inset-y-0 right-0 flex items-center pr-2 dark:text-gray-800"
               >
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
