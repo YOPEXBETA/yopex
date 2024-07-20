@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Organization Creation with the stepper">
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/Organization.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/Organization.controllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/models/notification.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/notification.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/routes/Organization.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/Organization.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/sidebar/components/WorkspaceSwitch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/sidebar/components/WorkspaceSwitch.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useCompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/OrganizationRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/OrganizationRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +97,8 @@
       <workItem from="1720975753013" duration="20000" />
       <workItem from="1721404505657" duration="1990000" />
       <workItem from="1721410900603" duration="3904000" />
+      <workItem from="1721471327378" duration="1072000" />
+      <workItem from="1721495533211" duration="2231000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />

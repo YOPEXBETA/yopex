@@ -5,23 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="Organization navbar">
-      <change afterPath="$PROJECT_DIR$/../client/src/Layouts/Organization Layout/Components/NavBar/organizarionNavbar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/Layouts/Organization Layout/Components/NavBar/organizationMenu.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/Layouts/Organization Layout/Components/NavBar/organizationNotificationMenu.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/Pages/OrganizationPages/OrganizationProfile/OrganizationProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/Organization.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Organization.controllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/notification.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/notification.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/Organization.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/Organization.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/mail.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/mail.middleware.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/sidebar/components/WorkspaceSwitch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/sidebar/components/WorkspaceSwitch.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/assets/images/NeatDM_setup.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/assets/images/winrar-x64-701.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/hooks/react-query/useCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/hooks/react-query/useCompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/routes/OrganizationRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/routes/OrganizationRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,6 +126,9 @@
       <workItem from="1721410607572" duration="3052000" />
       <workItem from="1721469976263" duration="632000" />
       <workItem from="1721470634289" duration="125000" />
+      <workItem from="1721470886635" duration="2300000" />
+      <workItem from="1721495486249" duration="1306000" />
+      <workItem from="1721500266010" duration="625000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />
