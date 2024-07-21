@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="Organization navbar">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Organization.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Organization.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/Cards/OrganizationProfileCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Cards/OrganizationProfileCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/AdditionalDetailsStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/AdditionalDetailsStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/NameDescriptionStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/NameDescriptionStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/OrganizationTypeStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/OrganizationTypeStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/PreviewCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/PreviewCard.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +64,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;YOPEX-INTERNSHIP-REPO&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Baha-Eddine&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -126,6 +131,7 @@
       <workItem from="1721470886635" duration="2300000" />
       <workItem from="1721495486249" duration="1306000" />
       <workItem from="1721500266010" duration="1398000" />
+      <workItem from="1721593122573" duration="4698000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />

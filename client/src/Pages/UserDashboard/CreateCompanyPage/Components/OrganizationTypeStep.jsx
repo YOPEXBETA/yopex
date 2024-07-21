@@ -1,17 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import OrganizationTypeCard from "../../../../Components/Cards/OrganizationTypeCard";
 
 const OrganizationTypeStep = ({ onNext }) => {
   const handleCardClick = (type) => {
     onNext(type);
   };
-
   return (
     <div>
       <div className="text-center mb-10">
         <h2 className="text-2xl mt-6 font-bold text-left dark:text-white">
           What kind of organization do you want to create?
         </h2>
+
       </div>
       <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
         <OrganizationTypeCard onClick={() => handleCardClick("Company")}>
@@ -56,6 +56,7 @@ const OrganizationTypeStep = ({ onNext }) => {
         </OrganizationTypeCard>
       </div>
     </div>
+
   );
 };
 

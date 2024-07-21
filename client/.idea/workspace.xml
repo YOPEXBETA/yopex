@@ -6,8 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Organization Creation with the stepper">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/models/Organization.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/Organization.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/OrganizationProfileCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/OrganizationProfileCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/AdditionalDetailsStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/AdditionalDetailsStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/NameDescriptionStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/NameDescriptionStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/OrganizationTypeStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/OrganizationTypeStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/PreviewCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/PreviewCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/VerifyDocumentsStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/VerifyDocumentsStep.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +33,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "BahaEddinDridi"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ApplicationTestMode/YopexInternshipproject.git",
+    "accountId": "695a2979-8daa-442b-bfc2-7b2d1177e29f"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -39,7 +59,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;YOPEX-INTERNSHIP-REPO&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Baha-Eddine&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -97,6 +117,7 @@
       <workItem from="1721410900603" duration="3904000" />
       <workItem from="1721471327378" duration="1072000" />
       <workItem from="1721495533211" duration="3151000" />
+      <workItem from="1721593357102" duration="8381000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -119,6 +140,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Organization Creation with the stepper" />

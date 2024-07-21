@@ -75,8 +75,13 @@ const InvitationsStep = ({ formData, updateFormData }) => {
   };
 
   return (
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">Let's invite some awesome members to join your organization!</h2>
+      <div className="">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl mt-6 font-bold text-left dark:text-white">
+            Members Invitation
+          </h2>
+        </div>
+        <h2 className="text-lg mb-4">Let's invite some awesome members to join your organization!</h2>
         <div className="flex mb-4">
           {/* Left side: User ID input */}
           <div className="flex-1 mr-2">
