@@ -39,35 +39,29 @@ const WorkSpaceMenu = ({
   };
 
   return (
-    <div className="flex w-56 flex-col rounded-[20px] bg-white py-2 shadow-xl shadow-shadow-500 dark:!bg-zinc-700 dark:text-white dark:shadow-none">
-      <hr className="border-gray-200 dark:border-gray-400" />
 
-      <div className="px-4 py-2">
-        <h2 className="text-sm font-semibold">Switch to an organization</h2>
-        {orgList?.map((organization) => (
+    <div className="absolute left-4 z-10 w-56 origin-top-right dark:bg-zinc-700 divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+      <div className="py-1" role="none">
+        <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-1">
+          {orgList?.map((organization) => (
           <div
             key={organization._id}
-            className="flex items-center px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100"
+            className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 dark:text-white"
             onClick={() => handleOrganizationSwitch(organization)}
           >
             <img
-              src={organization.organizationLogo}
-              alt={organization.organizationName}
+              src={organization?.organizationLogo}
+              alt={organization?.organizationName}
               className="h-5 w-5 mr-2"
             />
-            <span>{organization.organizationName}</span>
+            <span>{organization?.organizationName}</span>
           </div>
-        ))}
+        ))}</a>
       </div>
-
-      {currentLayout !== "UserLayout" && (
-        <div className="px-4 py-2">
-          <h2 className="text-sm font-semibold">
-            Switch to individual workspace:
-          </h2>
+      <div className="py-1" role="none">
+        <a href="#" className="block px-4 py-2 text-sm dark:text-white" role="menuitem" tabindex="-1" id="menu-item-3"  onClick={handleUserWorkspaceSwitch}> {currentLayout !== "UserLayout" && (
           <div
-            className="flex items-center px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100"
-            onClick={handleUserWorkspaceSwitch}
+            className="flex items-center px-4 py-2 text-sm  cursor-pointer hover:bg-gray-100"
           >
             <img
               src={user?.picturePath}
@@ -76,10 +70,12 @@ const WorkSpaceMenu = ({
             />
             <span>{`${user?.firstname} ${user?.lastname}`}</span>
           </div>
-        </div>
-      )}
-    </div>
+      )}</a>
+      </div>   
+  </div>
+    
   );
 };
 
 export default WorkSpaceMenu;
+

@@ -50,7 +50,7 @@ const Messenger = () => {
   return (
     <div>
       <div class="relative flex w-full h-screen overflow-hidden antialiased bg-gray-200">
-        <div class="relative flex-col hidden w-[24rem] h-full bg-white dark:bg-zinc-800 dark:text-white border-r border-gray-300 shadow-xl md:block transform transition-all duration-500 ease-in-out">
+        <div class="relative flex-col hidden w-[24rem] h-full bg-white dark:bg-zinc-800 dark:text-white border-r border-gray-100 shadow-xl md:block transform transition-all duration-500 ease-in-out">
           <UsersLatestMsgs />
         </div>
 

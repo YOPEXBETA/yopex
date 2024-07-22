@@ -146,7 +146,6 @@ const MainRoutes = {
         },
       ],
     },
-
     {
       name: "Profile",
       path: "/profile",
@@ -175,18 +174,20 @@ const MainRoutes = {
     },
     {
       name: "Chat",
-      path: "chat",
       icon: <ChatIcon width={6} height={6} color={"grey-100"} />,
+      path: "chat",
       customWidth: true,
-      hideInSidebar: false,
       children: [
         {
           index: true,
           element: <Messenger />,
+          customWidth: true,
         },
         {
           path: ":selectedConversationId",
           element: <Messenger />,
+          hideInSidebar: true,
+          customWidth: false,
         },
       ],
     },

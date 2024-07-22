@@ -38,9 +38,10 @@ const MainLayout = (props) => {
   }, []);
 
   const currentPath = location?.pathname || "";
-  const matchedRoute = routes.children.find((route) =>
-    currentPath.includes(route.path)
+  const matchedRoute = routes?.children?.find((route) =>
+    currentPath?.includes(route?.path)
   );
+
 
   React.useEffect(() => {
     if (matchedRoute) {
@@ -78,22 +79,21 @@ const MainLayout = (props) => {
           handleCreateClick={handleCreateClick}
           closeCreateMenuModal={closeCreateMenuModal}
         />
-        <div className="h-full w-full bg-lightPrimary dark:!bg-zinc-900">
+        <div className="h-full w-full bg-white dark:!bg-zinc-900">
           <main
             className={`h-full flex-none transition-all  ${
-              matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[313px]"
+              matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[296px]"
             }`}
           >
             <div className="h-full">
-              <Navbar
-                
+              <Navbar  
                 onOpenSidenav={() => setOpen(true)}
                 brandText={currentRoute}
                 {...rest}
               />
               <div
                 className={`mb-auto min-h-[90vh] ${
-                  isChatRoute ? "" : " mt-4 md:mx-6 md:p-2"
+                  isChatRoute ? "": "mt-4 md:mx-6 md:p-2"
                 }`}
               >
                 <Outlet />

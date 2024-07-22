@@ -7,7 +7,7 @@ const OrganizationNotificationMenu = ({ notifications, organization }) => {
     return (
         <div className="flex w-[360px] flex-col gap-3 rounded-[20px] bg-white p-4 shadow-xl shadow-shadow-500 dark:!bg-zinc-700 dark:text-white dark:shadow-none sm:w-[460px]">
             <div className="flex items-center justify-between">
-                <p className="text-xl font-bold text-gray-700 dark:text-white">
+                <p className="text-xl font-bold dark:text-white">
                     Notifications
                 </p>
             </div>

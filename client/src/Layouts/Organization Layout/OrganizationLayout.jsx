@@ -64,7 +64,7 @@ const OrganizationLayout = (props) => {
           <div className="h-full w-full bg-white dark:!bg-zinc-900">
             <main
               className={`h-full flex-none transition-all  ${
-                matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[313px]"
+                matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[296px]"
               }`}
             >
               <div className="h-full">
