@@ -4,18 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Organization Creation with the stepper">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Updated the organization Form">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/models/Organization.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/Organization.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/Organization.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/Organization.controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/routes/Organization.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/Organization.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/OrganizationProfileCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/OrganizationProfileCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/AdditionalDetailsStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/AdditionalDetailsStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/CompanyTeamCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/CompanyTeamCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/DiscoverCompanyCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/DiscoverCompanyCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/GeneralCompanyInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/GeneralCompanyInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Tabs/CompanyProfileNavigationTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Tabs/CompanyProfileNavigationTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/sidebar/Index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/sidebar/Index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/sidebar/components/WorkspaceSwitch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/sidebar/components/WorkspaceSwitch.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationSideBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationSideBar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/SettingTabs/VerticalSettingsTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/SettingTabs/VerticalSettingsTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/CompanyInfos/CompanyInfos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/CompanyInfos/CompanyInfos.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/Team/Team.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/Team/Team.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/TopSide/CompanyProfileInformations.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/TopSide/CompanyProfileInformations.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/NameDescriptionStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/NameDescriptionStep.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/OrganizationTypeStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/OrganizationTypeStep.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/PreviewCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/PreviewCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/VerifyDocumentsStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/VerifyDocumentsStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/SocialMediaInfoStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/SocialMediaInfoStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/DiscoverTalentsPage/Index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/DiscoverTalentsPage/Index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/DiscoverTalentsPage/components/DiscoverCompanies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/DiscoverTalentsPage/components/DiscoverCompanies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/UserProfile/TopSide/UserProfileCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/UserProfile/TopSide/UserProfileCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useCompany.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/MainRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/MainRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,18 +49,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "BahaEddinDridi"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;BahaEddinDridi&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ApplicationTestMode/YopexInternshipproject.git",
-    "accountId": "695a2979-8daa-442b-bfc2-7b2d1177e29f"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ApplicationTestMode/YopexInternshipproject.git&quot;,
+    &quot;accountId&quot;: &quot;695a2979-8daa-442b-bfc2-7b2d1177e29f&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -117,7 +133,10 @@
       <workItem from="1721410900603" duration="3904000" />
       <workItem from="1721471327378" duration="1072000" />
       <workItem from="1721495533211" duration="3151000" />
-      <workItem from="1721593357102" duration="8381000" />
+      <workItem from="1721593357102" duration="8478000" />
+      <workItem from="1721653054159" duration="17750000" />
+      <workItem from="1721749403187" duration="9023000" />
+      <workItem from="1721773059402" duration="5993000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -135,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721501091792</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated the organization Form">
+      <option name="closed" value="true" />
+      <created>1721602254191</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1721602254191</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +181,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Organization Creation with the stepper" />
-    <option name="LAST_COMMIT_MESSAGE" value="Organization Creation with the stepper" />
+    <MESSAGE value="Updated the organization Form" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the organization Form" />
   </component>
 </project>

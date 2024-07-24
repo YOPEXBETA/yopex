@@ -18,7 +18,10 @@ const OrganizationSidebar = ({
   closeCreateMenuModal,
 }) => {
   const { currentOrganization } = useSelector((state) => state.organization);
+  console.log('current org', currentOrganization)
   const { user, error } = useSelector((state) => state.auth);
+  console.log('current user', user)
+
   const organizations = user?.organizations || [];
   const [currentWorkspace, setCurrentWorkspace] = useState({
     organizationName: currentOrganization?.organizationName,

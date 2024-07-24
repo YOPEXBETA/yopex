@@ -6,14 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="Organization navbar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Organization.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Organization.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/Organization.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Organization.controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/Organization.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/Organization.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/Cards/OrganizationProfileCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Cards/OrganizationProfileCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/AdditionalDetailsStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/AdditionalDetailsStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/Cards/CompanyTeamCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Cards/CompanyTeamCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/Cards/DiscoverCompanyCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Cards/DiscoverCompanyCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/Cards/GeneralCompanyInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Cards/GeneralCompanyInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/Navbar/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Navbar/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/Tabs/CompanyProfileNavigationTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Tabs/CompanyProfileNavigationTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/sidebar/components/WorkspaceSwitch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/sidebar/components/WorkspaceSwitch.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/OrganizationPages/SettingsPage/Components/SettingTabs/VerticalSettingsTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/OrganizationPages/SettingsPage/Components/SettingTabs/VerticalSettingsTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/OrganizationPages/SettingsPage/Index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/OrganizationPages/SettingsPage/Index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/CompanyInfos/CompanyInfos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/CompanyInfos/CompanyInfos.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/Team/Team.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/Team/Team.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CompanyPage/TopSide/CompanyProfileInformations.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CompanyPage/TopSide/CompanyProfileInformations.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/CreateCompanyForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/NameDescriptionStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/NameDescriptionStep.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/OrganizationTypeStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/OrganizationTypeStep.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/PreviewCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/PreviewCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/SocialMediaInfoStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/CreateCompanyPage/Components/SocialMediaInfoStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/DiscoverTalentsPage/Index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/DiscoverTalentsPage/Index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/DiscoverTalentsPage/components/DiscoverCompanies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/DiscoverTalentsPage/components/DiscoverCompanies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/UserProfile/TopSide/UserProfileCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/UserProfile/TopSide/UserProfileCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/hooks/react-query/useCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/hooks/react-query/useCompany.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/routes/MainRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/routes/MainRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +145,10 @@
       <workItem from="1721470886635" duration="2300000" />
       <workItem from="1721495486249" duration="1306000" />
       <workItem from="1721500266010" duration="1398000" />
-      <workItem from="1721593122573" duration="4698000" />
+      <workItem from="1721593122573" duration="4783000" />
+      <workItem from="1721652959688" duration="12478000" />
+      <workItem from="1721749334821" duration="8017000" />
+      <workItem from="1721772955771" duration="4073000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />

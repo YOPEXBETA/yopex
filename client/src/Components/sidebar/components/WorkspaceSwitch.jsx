@@ -147,11 +147,11 @@ const WorkspaceSwitch = ({
                                             }
                                         >
                                             <img
-                                                src={organization.organizationLogo}
-                                                alt={organization.organizationName}
+                                                src={organization?.organizationLogo}
+                                                alt={organization?.organizationName}
                                                 className="h-5 w-5 mr-2"
                                             />
-                                            <span>{organization.organizationName}</span>
+                                            <span>{organization?.organizationName}</span>
                                         </div>
                                     </Menu.Item>
                                 ))}

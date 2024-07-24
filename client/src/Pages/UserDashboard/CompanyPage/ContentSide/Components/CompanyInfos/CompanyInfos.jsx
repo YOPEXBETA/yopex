@@ -1,12 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
-import { useCompanyById } from "../../../../../../hooks/react-query/useCompany";
+import { useOrganizationById } from "../../../../../../hooks/react-query/useCompany";
 import GeneralCompanyInfo from "../../../../../../Components/Cards/GeneralCompanyInfo";
 
 const CompanyInfos = () => {
   const { companyId } = useParams();
-  const { data: company, isLoading, isError } = useCompanyById(companyId);
+  const { data: company, isLoading, isError } = useOrganizationById(companyId);
 
   if (isLoading) {
     return (

@@ -14,15 +14,15 @@ export const useAdminCompanies = (page) => {
   });
 };
 
-export const useCompanies = (companypage, companyQuery) => {
+export const useOrganizations = (organizationpage, organizationQuery) => {
   return useQuery({
-    queryKey: ["companies", companypage, companyQuery],
+    queryKey: ["organizations", organizationpage, organizationQuery],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${url}/company/allcompanies?page=${companypage}&name=${companyQuery}`,
+        `${url}/company/getAllOrganizations?page=${organizationpage}&name=${organizationQuery}`,
         {}
       );
-
+console.log('orgs', data)
       return data;
     },
   });
@@ -115,18 +115,20 @@ export const useDeleteCompany = (companyId) => {
   });
 };
 
-export const useCompanyById = (companyId) => {
+export const useOrganizationById = (organizationId) => {
   return useQuery(
-    ["company", companyId],
+    ["organization", organizationId],
     async () => {
-      const { data } = await axios.get(`${url}/${companyId}`);
+      const { data } = await axios.get(`${url}/company/get/${organizationId}`);
+      console.log('org', data)
       return data;
     },
     {
-      enabled: !!companyId,
+      enabled: !!organizationId,
     }
   );
 };
+
 export const useFetchOrganizations = (organizationIds) => {
   return useQuery(
       ["organizations", organizationIds],
@@ -256,6 +258,64 @@ export const useSeeOrganizationNotifications = () => {
     onError: (error) => {
       toast.error(`Error marking notifications as seen: ${error.response.data.message}`);
       throw new Error(error.response.data.message);
+    },
+  });
+};
+
+export const useEditMemberRole = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ organizationId, memberId, newRole }) => {
+      await axios.put(`${url}/company/${organizationId}/${memberId}`, { role: newRole });
+    },
+
+  });
+};
+
+export const useDeleteMember = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ organizationId, memberId }) => {
+      await axios.delete(`${url}/company/${organizationId}/${memberId}`);
+    },
+  });
+};
+
+export const useEditOrganization = (organizationId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (organizationData) => {
+      const { data } = await axios.put(`${url}/company/update/${organizationId}`, organizationData);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Organization updated successfully");
+      queryClient.invalidateQueries(["organization", organizationId]);
+    },
+    onError: (error) => {
+      toast.error(`Error updating organization: ${error.response.data.message}`);
+    },
+  });
+};
+
+export const useEditSocialMediaLinks = (organizationId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (socialMediaLinks) => {
+      console.log('data', socialMediaLinks)
+      const { data } = await axios.put(`${url}/company/update-social-links/${organizationId}`, { socialMediaLinks });
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Social media links updated successfully");
+      queryClient.invalidateQueries(["organization", organizationId]);
+    },
+    onError: (error) => {
+      toast.error(`Error updating social media links: ${error.response.data.message}`);
     },
   });
 };

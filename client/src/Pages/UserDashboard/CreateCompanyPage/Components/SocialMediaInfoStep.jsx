@@ -21,7 +21,7 @@ const SocialMediaInfoStep = ({ control, formData, updateFormData }) => {
                 message: "Invalid Instagram URL, must start with https://instagram.com/"
             }
         },
-        LinkedIn: {
+        Linkedin: {
             pattern: {
                 value: /^https?:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9(_)?-]/,
                 message: "Invalid LinkedIn URL, must start with https://linkedin.com/in/"

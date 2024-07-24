@@ -13,7 +13,7 @@ const DiscoverCompanyCard = ({ option, extra, user, companyQuery }) => {
       extra={`p-4 ${extra}`}
       key={option._id}
       onClick={() => {
-        navigate(`/company/${option._id}`);
+        navigate(`/organization/${option._id}`);
         setOpen(false);
       }}
     >
@@ -21,10 +21,10 @@ const DiscoverCompanyCard = ({ option, extra, user, companyQuery }) => {
         <div className="flex-none sm:flex">
           <div className="relative h-32 w-32 sm:mb-0 mb-3">
             <div>
-              {option?.companyLogo ? (
+              {option?.organizationLogo ? (
                 <img
                   alt="picture"
-                  src={option?.companyLogo}
+                  src={option?.organizationLogo}
                   className="object-cover w-32 h-32 rounded-2xl"
                 />
               ) : (
@@ -42,7 +42,7 @@ const DiscoverCompanyCard = ({ option, extra, user, companyQuery }) => {
                 <div className="flex flex-col">
                   <div className="flex items-center gap-2">
                     <div className="text-lg dark:text-gray-200 font-bold leading-none">
-                      {option?.companyName}
+                      {option?.organizationName}
                     </div>
                     <button
                       className="flex items-center gap-1"

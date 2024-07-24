@@ -172,7 +172,7 @@ const CreateCompanyForm = () => {
           }
         });
         setTimeout(() => {
-          navigate(`/company/${organizationId}`);
+          navigate(`/organization/${organizationId}`);
         }, 1000);
       } else {
         console.error("Create company response is undefined.");

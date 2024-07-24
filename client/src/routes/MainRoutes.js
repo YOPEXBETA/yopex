@@ -155,8 +155,8 @@ const MainRoutes = {
       customWidth: true,
     },
     {
-      name: "Company",
-      path: "/company",
+      name: "Organization",
+      path: "/organization",
       children: [
         {
           path: ":companyId",

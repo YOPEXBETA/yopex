@@ -31,6 +31,29 @@ const editProfile = async (req, res) => {
   }
 };
 
+const updateOrganization = async (req, res) => {
+  const { organizationId } = req.params;
+  const updateData = req.body;
+
+  try {
+
+    const updatedOrganization = await Organization.findByIdAndUpdate(
+        organizationId,
+        updateData,
+        { new: true, runValidators: true }
+    );
+
+    if (!updatedOrganization) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+    res.status(200).json({ message: "Organization updated successfully", organization: updatedOrganization });
+  } catch (error) {
+    console.error("Error updating organization:", error);
+    res.status(500).json({ message: "An error occurred", error: error.message });
+  }
+};
+
+
 const getAllOrganizations = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -51,10 +74,9 @@ const getAllOrganizations = async (req, res) => {
       .skip(pageSize * (page - 1))
       .limit(pageSize)
       .exec();
-
     const totalCount = await Organization.countDocuments(organizationQuery);
 
-    res.status(200).json({ organizations, companyCount: totalCount });
+    res.status(200).json({ organizations, organizationCount: totalCount });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -63,12 +85,15 @@ const getAllOrganizations = async (req, res) => {
 const getOrganization = async (req, res) => {
   try {
     const { organizationId } = req.params;
-    const organization = await Organization.findById(organizationId);
+    const organization = await Organization.findById(organizationId).populate({
+      path: 'organizationMembers.userId',
+      select: 'firstname lastname picturePath _id',
+    });
 
     if (!organization) {
       return res.status(404).json({ message: "Organization not found" });
     }
-
+console.log('org', organization)
     res.status(200).json(organization);
   } catch (err) {
     res.status(500).json({ message: "Internal server error" });
@@ -227,67 +252,97 @@ const inviteUserToOrganization = async (req, res) => {
   const { organizationId, userId, email, roleName } = req.body;
 
   try {
-
     if (!organizationId) {
       return res.status(400).json({ message: "Organization ID is required" });
     }
 
     const organization = await Organization.findById(organizationId);
     if (!organization) {
-
       return res.status(404).json({ message: "Organization not found" });
     }
 
     const role = await roleModel.findOne({ name: roleName });
     if (!role) {
-
       return res.status(400).json({ message: `Role not found: ${roleName}` });
     }
 
-    if (!userId && email) {
-      // Check if there's already an invitation with the same email for the same organization
-      const existingInvitation = await Invitation.findOne({ organization: organizationId, email });
-      if (existingInvitation) {
+    if (email) {
+      const existingUser = await userModel.findOne({ email });
+      if (existingUser) {
+        const isMember = organization.organizationMembers.some(member => member.userId.toString() === existingUser._id.toString());
+        const isOwner = organization.user.toString() === existingUser._id.toString();
 
-        return res.status(400).json({ message: "User has already been invited to this organization" });
-      }
-
-      const newInvitation = new Invitation({
-        organization: organizationId,
-        email,
-        role: role.name
-      });
-
-      // Attempt to send email and handle success/failure
-      try {
-        const message = `
-          You have been invited to join ${organization.organizationName} as a ${role.name}. Please click the link below to sign up and accept the invitation.
-          "http://localhost:3006/register" Join ${organization.organizationName}
-        `;
-        await sendEmail(email, message);
-
-        // If email sent successfully, save the invitation
+        if (isMember || isOwner) {
+          return res.status(400).json({ message: "User is already a member or owner of this organization" });
+        }
+        const newInvitation = new Invitation({
+          organization: organizationId,
+          user: existingUser._id,
+          role: role.name
+        });
         await newInvitation.save();
 
+        const notification = new notificationModel({
+          type: 'invitation',
+          message: `You have been invited to join ${organization.organizationName} as a ${role.name}`,
+          picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
+          user: existingUser._id,
+          invitation: newInvitation._id
+        });
+        await notification.save();
 
-        return res.status(201).json({ message: "Email invitation sent successfully", invitation: newInvitation });
-      } catch (error) {
-        console.error("Error sending email:", error);
-        return res.status(500).json({ message: "Failed to send email", error: error.message });
+        return res.status(201).json({ message: "User invitation sent successfully", invitation: newInvitation });
+      } else {
+
+        const existingInvitation = await Invitation.findOne({ organization: organizationId, email });
+        if (existingInvitation) {
+          return res.status(400).json({ message: "Email has already been invited to this organization" });
+        }
+
+
+        const newInvitation = new Invitation({
+          organization: organizationId,
+          email,
+          role: role.name
+        });
+
+
+        try {
+          const message = `
+            You have been invited to join ${organization.organizationName} as a ${role.name}. Please click the link below to sign up and accept the invitation.
+            "http://localhost:3006/register" Join ${organization.organizationName}
+          `;
+          await sendEmail(email, message);
+
+
+          await newInvitation.save();
+
+          return res.status(201).json({ message: "Email invitation sent successfully", invitation: newInvitation });
+        } catch (error) {
+          console.error("Error sending email:", error);
+          return res.status(500).json({ message: "Failed to send email", error: error.message });
+        }
       }
     } else if (userId) {
-      // Check if there's already an invitation with the same user ID for the same organization
-      const existingInvitation = await Invitation.findOne({ organization: organizationId, user: userId });
-      if (existingInvitation) {
 
-        return res.status(400).json({ message: "User has already been invited to this organization" });
+      const isMember = organization.organizationMembers.some(member => member.userId.toString() === userId);
+      const isOwner = organization.user.toString() === userId;
+
+      if (isMember || isOwner) {
+        return res.status(400).json({ message: "User is already a member or owner of this organization" });
       }
 
       const user = await userModel.findById(userId);
       if (!user) {
-
         return res.status(400).json({ message: `User not found: ${userId}` });
       }
+
+
+      const existingInvitation = await Invitation.findOne({ organization: organizationId, user: userId });
+      if (existingInvitation) {
+        return res.status(400).json({ message: "User has already been invited to this organization" });
+      }
+
 
       const newInvitation = new Invitation({
         organization: organizationId,
@@ -295,6 +350,7 @@ const inviteUserToOrganization = async (req, res) => {
         role: role.name
       });
       await newInvitation.save();
+
 
       const notification = new notificationModel({
         type: 'invitation',
@@ -314,6 +370,7 @@ const inviteUserToOrganization = async (req, res) => {
     res.status(500).json({ message: "An error occurred", error: error.message });
   }
 };
+
 
 
 const getInvitationById = async (req, res) => {
@@ -397,7 +454,10 @@ const acceptInvitation = async (req, res) => {
 const getCurrentOrganization = async (req, res) => {
   try {
     const { organizationId } = req.params; // Assuming organization ID is passed as a URL parameter
-    const organization = await Organization.findById(organizationId);
+    const organization = await Organization.findById(organizationId).populate({
+      path: 'organizationMembers.userId',
+      select: 'firstname lastname picturePath _id',
+    });
 
     if (!organization) {
       return res.status(404).json({ message: "Organization not found" });
@@ -460,10 +520,102 @@ const getOrganizationNotifications = async (req, res) => {
   }
 };
 
+const updateMemberRole = async (req, res) => {
+  const { organizationId, memberId } = req.params;
+  const { role } = req.body;
+  try {
+    const organization = await Organization.findById(organizationId);
+
+    if (!organization) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+
+
+    const member = organization.organizationMembers.find(
+        (member) => member.userId.toString() === memberId
+    );
+
+    if (!member) {
+      return res.status(404).json({ message: "Member not found" });
+    }
+
+    member.roleName = role;
+
+    await organization.save();
+
+    res.status(200).json({ message: "Member role updated successfully", organization });
+  } catch (error) {
+    console.error("Error updating member role:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const deleteMember = async (req, res) => {
+  const { organizationId, memberId } = req.params; // Extract organization ID and member ID from request parameters
+
+  try {
+
+    const organization = await Organization.findById(organizationId);
+
+    if (!organization) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+
+    const memberIndex = organization.organizationMembers.findIndex(
+        (member) => member.userId.toString() === memberId
+    );
+
+    if (memberIndex === -1) {
+      return res.status(404).json({ message: "Member not found" });
+    }
+
+
+    organization.organizationMembers.splice(memberIndex, 1);
+
+
+    await organization.save();
+
+    await userModel.findByIdAndUpdate(
+        memberId,
+        { $pull: { organizations: organizationId } },
+        { new: true }
+    );
+
+    res.status(200).json({ message: "Member removed successfully", organization });
+  } catch (error) {
+    console.error("Error removing member:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const updateSocialMediaLinks = async (req, res) => {
+  try {
+    const { organizationId } = req.params;
+    const { socialMediaLinks } = req.body.socialMediaLinks;
+    console.log('Received socialMediaLinks:', socialMediaLinks);
+
+    const updateResult = await Organization.findByIdAndUpdate(
+        organizationId,
+        { $set: { socialMediaLinks } },
+        { new: true, runValidators: true }
+    );
+
+    if (!updateResult) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+
+    res.status(200).json(updateResult);
+  } catch (error) {
+    console.error("Error updating social media links:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 
 
 module.exports = {
   editProfile,
+  updateOrganization,
   getOrganization,
   getOrganizationChallenges,
   ChallengeWinner,
@@ -476,5 +628,8 @@ module.exports = {
   acceptInvitation,
   getCurrentOrganization,
   getOrganizationNotifications,
-  seeOrganizationNotification
+  seeOrganizationNotification,
+  updateMemberRole,
+  deleteMember,
+  updateSocialMediaLinks
 };

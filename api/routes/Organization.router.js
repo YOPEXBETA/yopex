@@ -12,7 +12,8 @@ const {
   getAllOrganizations,
   getRecentOrganizations,
   inviteUserToOrganization,
-  acceptInvitation, getInvitationById, getCurrentOrganization, getOrganizationNotifications, seeOrganizationNotification
+  acceptInvitation, getInvitationById, getCurrentOrganization, getOrganizationNotifications, seeOrganizationNotification,
+  updateMemberRole, deleteMember, updateOrganization, updateSocialMediaLinks
 } = require("../controllers/Organization.controllers");
 const { getOrganization } = require("../controllers/Organization.controllers");
 
@@ -31,8 +32,8 @@ const {getUserNotifications} = require("../controllers/user.controllers");
 organizationRouter.put("/approve/:id/", authenticateToken, approveCompany);
 organizationRouter.put;
 organizationRouter.put("/:id/", authenticateToken, editProfile);
-organizationRouter.get("/get/:companyId/", authenticateToken, getOrganization);
-organizationRouter.get("/allcompanies", getAllOrganizations);
+organizationRouter.get("/get/:organizationId", authenticateToken, getOrganization);
+organizationRouter.get("/getAllOrganizations", getAllOrganizations);
 organizationRouter.post("/challengeWinner", authenticateToken, ChallengeWinner);
 organizationRouter.get(
   "/company/:userId/notifications",
@@ -41,12 +42,14 @@ organizationRouter.get(
 );
 organizationRouter.delete("/:id", authenticateToken, deleteOrganization);
 organizationRouter.get("/notifications/:organizationId", authenticateToken, getOrganizationNotifications);
+organizationRouter.put("/update/:organizationId",authenticateToken, updateOrganization);
 organizationRouter.patch('/notifications/see/:organizationId', authenticateToken, seeOrganizationNotification);
-
 organizationRouter.get("/Recentcompanies", getRecentOrganizations);
 organizationRouter.post('/invite', inviteUserToOrganization);
 organizationRouter.get('/getInvitationById/:id',authenticateToken, getInvitationById);
 organizationRouter.post('/accept-invitation/:invitationId', authenticateToken , acceptInvitation);
 organizationRouter.get("/getCurrentOrganization/:organizationId", authenticateToken, getCurrentOrganization);
-
+organizationRouter.put('/update-social-links/:organizationId', authenticateToken , updateSocialMediaLinks);
+organizationRouter.put("/:organizationId/:memberId", authenticateToken , updateMemberRole);
+organizationRouter.delete("/:organizationId/:memberId", authenticateToken , deleteMember);
 module.exports = organizationRouter;

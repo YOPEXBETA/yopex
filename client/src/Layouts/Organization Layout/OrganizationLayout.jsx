@@ -7,9 +7,12 @@ import { useCurrentOrganization } from "../../hooks/react-query/useCompany";
 import { fetchCurrentOrganization } from "../../redux/organization/organizationSlice";
 import { useSelector, useDispatch } from "react-redux";
 import OrganizationNavbar from "./Components/NavBar/organizarionNavbar";
+import {getCurrentUser} from "../../redux/auth/authSlice";
 
 const OrganizationLayout = (props) => {
   const location = useLocation();
+  const { user } = useSelector((state) => state.auth);
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [currentRoute, setCurrentRoute] = useState("dashboard");
@@ -24,8 +27,27 @@ const OrganizationLayout = (props) => {
     (state) => state.organization.currentOrganization
   );
   const isLoading = useSelector((state) => state.organization.loading);
+  const error = useSelector((state) => state.organization.error);
 
-  console.log("org1", currentOrganization);
+  useEffect(() => {
+    if (!currentOrganization || currentOrganization._id !== organizationId) {
+      dispatch(fetchCurrentOrganization(organizationId));
+    }
+  }, [dispatch, organizationId, currentOrganization]);
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(getCurrentUser()).then((response) => {
+
+        if (response.payload) {
+
+        } else {
+
+          navigate("/login?redirect=" + location.pathname);
+        }
+      });
+    }
+  }, [dispatch, user]);
 
   const handleNavigation = (route) => {
     setCurrentRoute(route);

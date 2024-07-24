@@ -19,6 +19,7 @@ const Sidebar = ({
   closeCreateMenuModal,
 }) => {
   const { user, error } = useSelector((state) => state.auth);
+
   const organizations = user?.organizations || [];
   const [currentWorkspace, setCurrentWorkspace] = useState({
     firstname: user?.firstname,
