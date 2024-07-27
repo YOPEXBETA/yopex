@@ -77,7 +77,7 @@ const UserProfileInfoCard = ({extra }) => {
           </div>
           <div className="flex flex-col sm:flex-row max-sm:gap-5 items-center justify-between mb-5">
             <div className="block">
-              <h3 className="font-manrope font-bold text-2xl dark:text-white mb-1">Emma Smith</h3>
+              <h3 className="font-manrope font-bold text-2xl dark:text-white mb-1">{`${userProfile.firstname} ${userProfile.lastname}`}</h3>
               <div className="flex items-center gap-4">
                 <p className="leading-7 text-gray-600  text-base">{userProfile?.country || "N/A"}</p>
                 <div className="flex items-center gap-2">

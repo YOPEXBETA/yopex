@@ -17,7 +17,7 @@ export function SidebarLinks(props) {
       if (!route.hideInSidebar) {
         return (
           <Link key={index} to={route.path}>
-            <ul className="relative mb-3 flex items-center hover:cursor-pointer">
+            <ul className="relative mb-2 flex items-center hover:cursor-pointer">
               <li
                 className="my-[6px] flex cursor-pointer items-center px-6"
                 key={index}

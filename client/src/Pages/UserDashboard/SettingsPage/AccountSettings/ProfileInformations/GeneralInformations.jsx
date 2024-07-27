@@ -193,7 +193,6 @@ const GeneralInformations = ({ extra }) => {
         <div className="grid grid-cols-1">
           <div className="col-span-1">
             <label className="dark:text-gray-300">Description</label>
-
             <textarea
               id="userDescription"
               placeholder="Description"

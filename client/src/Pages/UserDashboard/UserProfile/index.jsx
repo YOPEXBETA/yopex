@@ -12,7 +12,7 @@ const UserProfileLayout = () => {
   };
 
   return (
-    <div className="grid grid-cols-12 xl:gap-8 lg:gap-2 md:gap-2 md:space-y-0">
+    <div className="grid grid-cols-12 xl:gap-8 lg:gap-2 md:gap-2 md:space-y-0 space-y-4">
       <div className="xl:col-span-12 lg:col-span-12 md:col-span-12 col-span-12">
         <UserProfileInfoCard/>
       </div>

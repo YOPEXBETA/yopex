@@ -42,14 +42,14 @@ const Sidebar = ({
 
       <div className={`py-[0.6rem] flex items-center justify-center justify-between pr-6`}>
       <NavLink to="/overview">
-      <div className={`mx-[56px] flex items-center`}>
+      <div className={`mx-6 flex items-center`}>
         <div className="text-2xl capitalize font-bold  dark:text-white flex items-center gap-2 mt-2 hover:text-green-500">
           <img
               src={YopexLogo}
               alt="Yopex Logo"
               className="h-9 w-9 object-fill px-2 py-2 rounded-md bg-black"
               />
-              YOPEX<span className="font-medium">HUB</span>
+              YOPEXHUB
           </div>      
         </div>
         </NavLink>
@@ -63,7 +63,7 @@ const Sidebar = ({
 
       <div class="h-px bg-gray-100 dark:bg-white/30" />
 
-      <div className="relative px-6 focus:ring-offset-2 focus:ring-offset-zinc-800 mt-4 w-full my-6">
+      <div className="relative px-6 focus:ring-offset-2 focus:ring-offset-zinc-800 w-full my-6">
         <Dropdown
           button={<SwitchCardWorkspace user={user}  
           isRouteWithSpecificWidth={isRouteWithSpecificWidth}/>}
@@ -89,7 +89,7 @@ const Sidebar = ({
         />*/}
       {/* Nav item */}
 
-      <ul className="mb-auto pt-1 flex flex-col justify-center">
+      <ul className="mb-auto flex flex-col justify-center">
         <SidebarLinks
           routes={routes}
           isRouteWithSpecificWidth={isRouteWithSpecificWidth}

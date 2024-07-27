@@ -79,7 +79,7 @@ const MainLayout = (props) => {
           closeCreateMenuModal={closeCreateMenuModal}
         />
         <div className="h-full w-full bg-white dark:!bg-zinc-900">
-          <main className="h-full flex-none transition-all xl:ml-[296px]">
+          <main className="h-full flex-none transition-all xl:ml-[309px]">
             <div className="h-full">
               <Navbar  
                 onOpenSidenav={() => setOpen(true)}
