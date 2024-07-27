@@ -8,9 +8,7 @@ const DiscoverOrganizations = ({
   companyQuery,
   setCompanyQuery,
   user,
-  handleChangePage,
-  companytotalPages,
-  displayedCompanyPages,
+  handleChangePage, organizationtotalPages, displayedOrganizationPages,
   page,
 }) => {
   return (

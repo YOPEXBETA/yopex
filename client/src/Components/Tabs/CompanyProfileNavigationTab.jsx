@@ -40,7 +40,7 @@ export const CompanyProfileNavigationTab = ({
         >
           Challenges ({organization?.challenges?.length})
         </button>
-        {userPassed?.organizations?.includes(companyId) && (
+        {userPassed?.organizations?.includes(organizationId) && (
           <button
             className={`w-1/2 sm:w-auto py-2 px-4  ${
               value === 3

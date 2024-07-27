@@ -7,7 +7,7 @@ import OrganizationDescriptionCard from "../../../../../../Components/Cards/Orga
 
 const CompanyInfos = () => {
   const {  organizationId } = useParams();
-  const { data: currentOrganization, isLoading, isError } = useCompanyById(organizationId);
+  const { data: currentOrganization, isLoading, isError } = useOrganizationById(organizationId);
 
   if (isLoading) {
     return (
