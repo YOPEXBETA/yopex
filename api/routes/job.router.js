@@ -21,7 +21,7 @@ const {
   authenticateToken,
 } = require("../middlewares/authenticateToken.middleware");
 
-jobRouter.post("/add", authenticateToken, addJob);
+jobRouter.post("/add", addJob);
 jobRouter.get("/all", getAllJobs);
 jobRouter.put("/update/:id", authenticateToken, updateJob);
 jobRouter.get("/:companyId", authenticateToken, geJobById);

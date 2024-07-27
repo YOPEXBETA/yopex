@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../models/user.model");
 const Job = require("../models/job.model");
-const Company = require("../models/Organization.model");
+const Organization = require("../models/Organization.model");
 const Skill = require("../models/skill.model");
 const { sendEmail } = require("../middlewares/mail.middleware");
 const notificationModel = require("../models/notification.model");
@@ -11,25 +11,26 @@ const main = require("../server");
 
 const addJob = async (req, res, next) => {
   try {
-    const { companyId, ...jobDetails } = req.body;
-
-    if (!companyId) {
-      return res.status(400).json({ error: "CompanyId must be provided" });
+    const { organizationId, ...jobDetails } = req.body;
+console.log('id',organizationId)
+    if (!organizationId) {
+      return res.status(400).json({ error: "organizationId must be provided" });
     }
 
-    const company = await Company.findById(companyId);
+    const organization = await Organization.findById(organizationId);
 
-    if (!company) {
-      return res.status(400).json({ error: "Company not found" });
+    if (!organization) {
+      return res.status(400).json({ error: "organization not found" });
     }
 
     const jobOffer = new Job({
-      company: companyId,
+      organization: organizationId,
       ...jobDetails,
     });
 
     await jobOffer.save();
-
+    organization.jobs.push(jobOffer._id);
+    await organization.save();
     res
       .status(201)
       .json({ message: "Job offer created successfully", jobOffer });
@@ -58,7 +59,7 @@ const getAllJobs = async (req, res) => {
 
     const jobs = await Job.find(filters)
       .select("-acceptedAppliers")
-      .populate("company", "companyName companyLogo")
+      .populate("organization", "organizationName organizationLogo")
       .populate("skills");
 
     return res.status(200).json(jobs);
@@ -90,30 +91,47 @@ const updateJob = async (req, res, next) => {
 
 const geJobById = async (req, res, next) => {
   try {
-    const companyId = req.params.companyId;
+    const organizationId = req.params.companyId;
+    const q = req.query;
 
-    // Find the company based on the companyId
-    const company = await Company.findOne({ _id: companyId });
+    // Check if the organization exists
+    const organization = await Organization.findOne({ _id: organizationId });
 
-    if (!company) {
-      return res.status(400).json({ error: "Company not found" });
+    if (!organization) {
+      return res.status(400).json({ error: "Organization not found" });
     }
 
-    // Find all job offers related to the company and populate the 'company' field
-    const jobOffers = await Job.find({ company: companyId })
-      .populate("company", "companyName companyLogo _id")
-      .populate("skills");
+    // Build filters based on query parameters
+    const filters = {
+      ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+      ...(q.jobType && { jobType: q.jobType }),
+      ...(q.offerType && { offerType: q.offerType }),
+      ...(q.skills && {
+        skills: {
+          $in: (await Skill?.find({ name: { $in: q.skills } }))?.map(
+              (skill) => skill?._id
+          ),
+        },
+      }),
+      organization: organizationId  // Ensure jobs are related to the specified organization
+    };
+
+    // Find all job offers related to the company with filters
+    const jobOffers = await Job.find(filters)
+        .populate("organization", "organizationName organizationLogo _id")
+        .populate("skills");
 
     res.status(200).json(jobOffers);
   } catch (error) {
     res
-      .status(500)
-      .json({ error: `Failed to retrieve job offers: ${error.message}` });
+        .status(500)
+        .json({ error: `Failed to retrieve job offers: ${error.message}` });
   }
 };
 
 const deleteJob = async (req, res, next) => {
   const id = req.params.id;
+  console.log('')
   const ownerId = req.userId;
 
   let job;
@@ -124,10 +142,10 @@ const deleteJob = async (req, res, next) => {
       return res.status(404).json({ message: "Job not found" });
     }
 
-    if (job.company) {
-      const company = await Company.findById(job.company);
-      await company.jobs.pull(job);
-      await company.save();
+    if (job.organization) {
+      const organization = await Organization.findById(job.organization);
+      await organization.jobs.pull(job);
+      await organization.save();
       await Job.findByIdAndDelete(id);
     } else {
       const user = await User.findById(job.owner._id);
@@ -147,7 +165,7 @@ const getByUserId = async (req, res, next) => {
   const companyId = req.params.id;
   let companyJobs;
   try {
-    companyJobs = await Company.findById(companyId).populate("jobs"); //in populte you use the Ref in user.model
+    companyJobs = await Organization.findById(companyId).populate("jobs"); //in populte you use the Ref in user.model
   } catch (err) {
     return console.log(err);
   }
@@ -182,12 +200,12 @@ const applyJob = async (req, res) => {
     await user.save();
 
     // add notification to company
-    const company = await Company.findById(job.company).exec();
+    const company = await Organization.findById(job.company).exec();
     let notification = new notificationModel({
       type: "applied for a job",
       message: `Applied for your job of : ${job.title}`,
       job: job._id,
-      company: company._id,
+      organization: company._id,
       picture: user.picturePath,
       createdAt: new Date(),
     });

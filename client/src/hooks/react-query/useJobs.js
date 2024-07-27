@@ -30,6 +30,34 @@ export const useJobs = (searchQuery, skills, jobType, offerType) => {
   });
 };
 
+export const useJobById = (companyId, searchQuery, skills, jobType, offerType) => {
+  return useQuery({
+    queryKey: ["jobsById", companyId, searchQuery, skills, jobType, offerType],
+    queryFn: async () => {
+      // Construct query parameters
+      let query = "";
+      if (searchQuery) query += `&search=${searchQuery}`;
+
+      if (skills && skills.length > 0) {
+        query += skills.map((skill) => `&skills=${skill}`).join("");
+      }
+
+      if (jobType) {
+        query += `&jobType=${jobType}`;
+      }
+
+      if (offerType) {
+        query += `&offerType=${offerType}`;
+      }
+
+      // Make the request
+      const { data } = await axios.get(`${url}/job/${companyId}?${query}`);
+
+      return data;
+    },
+    enabled: !!companyId,
+  });
+};
 // get all the posts
 export const useJobTypes = () => {
   return useQuery({
@@ -51,18 +79,7 @@ export const useOfferTypes = () => {
   });
 };
 
-export const useJobById = (companyId) => {
-  return useQuery(
-    ["jobs", companyId],
-    async () => {
-      const { data } = await axios.get(`${url}/job/${companyId}`);
-      return data;
-    },
-    {
-      enabled: !!companyId,
-    }
-  );
-};
+
 
 export const useCreateJob = (user) => {
   const queryClient = useQueryClient();
@@ -90,6 +107,7 @@ export const useDeleteJob = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["jobsById"] });
       toast.success("Job successfully deleted!");
     },
     onError: (error) => {
@@ -145,13 +163,6 @@ export const useAcceptApplier = (jobId) => {
   return useMutation({
     mutationFn: async (userId) => {
       await axios.put(`${url}/job/jobs/${jobId}/appliers/${userId}/accept`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["jobs"] });
-      queryClient.invalidateQueries(["appliers"]);
-      queryClient.invalidateQueries({
-        queryKey: ["accepted/appliers"],
-      });
     },
     onSuccess: () => {
       toast.success("Applier accepted successfully");

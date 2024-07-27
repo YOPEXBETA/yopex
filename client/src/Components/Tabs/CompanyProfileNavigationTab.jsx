@@ -40,7 +40,7 @@ export const CompanyProfileNavigationTab = ({
         >
           Challenges ({company?.challenges?.length})
         </button>
-        {userPassed?.companies?.includes(companyId) && (
+        {userPassed?.organizations?.includes(companyId) && (
           <button
             className={`w-1/2 sm:w-auto py-2 px-4  ${
               value === 3
@@ -60,7 +60,7 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(4)}
         >
-          Team ({company?.user?.length})
+          Team ({company?.organizationMembers?.length})
         </button>
       </div>
     </div>

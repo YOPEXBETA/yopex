@@ -14,10 +14,12 @@ const EditOrganization = ({ extra }) => {
     const dispatch = useDispatch();
     const fileUploadMutation = useFileUpload();
     const { currentOrganization } = useSelector(state => state.organization);
-    const [logoPreview, setLogoPreview] = useState(currentOrganization?.organizationLogo || '');
-    const [bannerPreview, setBannerPreview] = useState(currentOrganization?.organizationBanner || '');
+    const [logoPreview, setLogoPreview] = useState(currentOrganization?.organizationLogo || "");
+    const [bannerPreview, setBannerPreview] = useState(currentOrganization?.organizationBanner || "");
+    const [logoFile, setLogoFile] = useState(null);
+    const [bannerFile, setBannerFile] = useState(null);
+
     const { mutate: updateOrganization, isLoading } = useEditOrganization(currentOrganization?._id);
-console.log('org2024', currentOrganization)
     const {
         register,
         handleSubmit,
@@ -41,8 +43,6 @@ console.log('org2024', currentOrganization)
     const onSubmit = async (data) => {
         try {
             const {
-                organizationLogo,
-                organizationBanner,
                 organizationName,
                 organizationDescription,
                 country,
@@ -52,24 +52,26 @@ console.log('org2024', currentOrganization)
                 sectorOfActivity
             } = data;
 
-            let logoUrl = logoPreview; // Use preview if no new file is selected
-            let bannerUrl = bannerPreview; // Use preview if no new file is selected
+            let logoUrl = currentOrganization?.organizationLogo || "";
+            let bannerUrl = currentOrganization?.organizationBanner || "";
 
             // Check if organizationLogo has files
-            if (organizationLogo && organizationLogo.length > 0) {
+            if (logoFile) {
                 const logoFormData = new FormData();
-                logoFormData.append("file", organizationLogo[0]);
+                logoFormData.append("file", logoFile);
                 const logoData = await fileUploadMutation.mutateAsync(logoFormData);
                 logoUrl = logoData?.data?.downloadURL || '';
             }
 
             // Check if organizationBanner has files
-            if (organizationBanner && organizationBanner.length > 0) {
+            if (bannerFile) {
                 const bannerFormData = new FormData();
-                bannerFormData.append("file", organizationBanner[0]);
+                bannerFormData.append("file", bannerFile);
                 const bannerData = await fileUploadMutation.mutateAsync(bannerFormData);
                 bannerUrl = bannerData?.data?.downloadURL || '';
             }
+            console.log('logo', logoUrl)
+            console.log('bannerUrl', bannerUrl)
 
             await updateOrganization({
                 organizationName,
@@ -92,9 +94,8 @@ console.log('org2024', currentOrganization)
         if (file) {
             const previewUrl = URL.createObjectURL(file);
             setLogoPreview(previewUrl);
-            console.log('logo', previewUrl)
+            setLogoFile(file);
         }
-        return file;
     };
 
     const handleBannerChange = (e) => {
@@ -102,10 +103,8 @@ console.log('org2024', currentOrganization)
         if (file) {
             const previewUrl = URL.createObjectURL(file);
             setBannerPreview(previewUrl);
-            console.log('banner', previewUrl)
+            setBannerFile(file);
         }
-
-        return file;
     };
 
 
@@ -141,10 +140,7 @@ console.log('org2024', currentOrganization)
                                 accept="image/*"
                                 type="file"
                                 {...register("organizationBanner")}
-                                onChange={(e) => {
-                                    const file = handleBannerChange(e);
-                                    setValue("organizationBanner", file);
-                                }}
+                                onChange={handleBannerChange}
                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                             />
                             <FaCamera className="w-4 h-4"/>
@@ -176,10 +172,7 @@ console.log('org2024', currentOrganization)
                                     accept="image/*"
                                     type="file"
                                     {...register("organizationLogo")}
-                                    onChange={(e) => {
-                                        const file = handleLogoChange(e);
-                                        setValue("organizationLogo", file);
-                                    }}
+                                    onChange={handleLogoChange}
                                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                 />
                                 <FaCamera className="w-4 h-4"/>

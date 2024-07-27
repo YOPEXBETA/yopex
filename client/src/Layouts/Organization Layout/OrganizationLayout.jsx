@@ -19,6 +19,21 @@ const OrganizationLayout = (props) => {
   const { ...rest } = props;
   const { organizationId } = useParams();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUser()).then((response) => {
+      const fetchedUser = response.payload;
+      if (fetchedUser) {
+        if (fetchedUser.currentWorkspace.label !== "Organization") {
+          navigate("/feed");
+        }
+      } else {
+        navigate("/login?redirect=" + location.pathname);
+      }
+    });
+  }, [dispatch, navigate, location.pathname]);
+
+  
   useEffect(() => {
     dispatch(fetchCurrentOrganization(organizationId));
   }, [dispatch, organizationId]);
@@ -35,19 +50,8 @@ const OrganizationLayout = (props) => {
     }
   }, [dispatch, organizationId, currentOrganization]);
 
-  useEffect(() => {
-    if (!user) {
-      dispatch(getCurrentUser()).then((response) => {
 
-        if (response.payload) {
 
-        } else {
-
-          navigate("/login?redirect=" + location.pathname);
-        }
-      });
-    }
-  }, [dispatch, user]);
 
   const handleNavigation = (route) => {
     setCurrentRoute(route);

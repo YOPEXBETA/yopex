@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useFetchOrganizations } from "../../hooks/react-query/useCompany";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {useUpdateUserWorkspace} from "../../hooks/react-query/useUsers";
 
 // ==============================|| CODE ||============================== //
 
 const WorkSpaceMenu = ({
   currentLayout,
-  currentWorkspace,
   organizations,
   onSwitch,
 }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data: fetchedOrganizations } = useFetchOrganizations(organizations);
   const { user } = useSelector((state) => state.auth);
   const [orgList, setOrgList] = useState([]);
+  const updateWorkspace = useUpdateUserWorkspace(user?._id);
+  const [navigatePath, setNavigatePath] = useState(null);
 
   useEffect(() => {
     if (fetchedOrganizations) {
@@ -22,16 +25,44 @@ const WorkSpaceMenu = ({
     }
   }, [fetchedOrganizations]);
 
+  useEffect(() => {
+    if (navigatePath) {
+      navigate(navigatePath);
+      setNavigatePath(null);
+    }
+  }, [navigatePath, navigate]);
+
   const handleOrganizationSwitch = async (organization) => {
-    navigate(`/organization/${organization._id}/dashboard`);
-    onSwitch({
-      organizationName: organization.organizationName,
-      organizationLogo: organization.organizationLogo,
-    });
+    try {
+      await updateWorkspace.mutateAsync({
+        workspace: 'Organization',
+        organizationID: organization._id // Include the organization ID
+      });
+
+      onSwitch({
+        organizationName: organization.organizationName,
+        organizationLogo: organization.organizationLogo,
+      });
+
+      setNavigatePath(`/organization/${organization._id}/dashboard`);
+    } catch (error) {
+      // Handle any error that might occur during workspace update
+      console.error("Failed to update workspace:", error.message);
+    }
   };
 
-  const handleUserWorkspaceSwitch = () => {
-    navigate("/feed");
+  const handleUserWorkspaceSwitch = async () => {
+    try {
+      await updateWorkspace.mutateAsync({
+        workspace: 'User',
+        organizationID: null // Set organizationId to null for user workspace
+      });
+
+      setNavigatePath("/feed");
+    } catch (error) {
+      // Handle any error that might occur during workspace update
+      console.error("Failed to update workspace:", error.message);
+    }
   };
 
   const handleLogout = () => {

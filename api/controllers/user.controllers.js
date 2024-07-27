@@ -693,6 +693,47 @@ const uploadFile = async (req, res) => {
   }
 };
 
+
+const updateUserWorkspace = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { workspace, organizationID } = req.body;
+
+
+    if (!['User', 'Organization'].includes(workspace)) {
+      console.error('Invalid workspace type:', workspace);
+      return res.status(400).json({ message: 'Invalid workspace type' });
+    }
+
+    const update = {
+      'currentWorkspace.label': workspace,
+      'currentWorkspace.organizationID': organizationID,
+    };
+
+    // Perform the update
+    const user = await userSchema.findByIdAndUpdate(
+        userId,
+        update,
+        { new: true }
+    );
+
+    if (!user) {
+      console.error('User not found for ID:', userId);
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+
+    res.json({ currentWorkspace: user.currentWorkspace });
+  } catch (error) {
+    // Log the error stack
+    console.error('Error updating workspace:', error);
+    res.status(500).json({ message: 'Error updating workspace' });
+  }
+};
+
+
+
+
 module.exports = {
   editProfile,
   SearchUsers,
@@ -717,4 +758,5 @@ module.exports = {
   uploadFile,
   updatepassword,
   updateSocialMediaLink,
+  updateUserWorkspace
 };

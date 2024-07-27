@@ -31,9 +31,11 @@ const WorkCard = ({ job, extra }) => {
   const handleDeleteClick = () => {
     setConfirmationDialogOpen(true);
   };
+  const isUserAuthorized = user?.organizations?.includes(job?.organization?._id);
+  console.log('isUserAuthorized', isUserAuthorized)
 
   const handleConfirmDelete = () => {
-    deleteJob(job._id);
+    deleteJob(job?._id);
     setConfirmationDialogOpen(false);
   };
 
@@ -49,8 +51,8 @@ const WorkCard = ({ job, extra }) => {
         <div className="flex gap-4">
           <img
             src={
-              job?.company?.companyLogo
-                ? job?.company?.companyLogo
+              job?.organization?.organizationLogo
+                ? job?.organization?.organizationLogo
                 : job?.owner?.picturePath
                 ? job?.owner?.picturePath
                 : ImagePlaceholder
@@ -96,8 +98,7 @@ const WorkCard = ({ job, extra }) => {
             className="font-medium p-2 flex hover:bg-zinc-500 rounded-full"
             onClick={(e) => e.stopPropagation()}
           >
-            {(user?.companies?.includes(job?.company?._id) ||
-              user?._id === job?.owner?._id) && (
+            {isUserAuthorized && (
               <div>
                 <Dropdown
                   button={
@@ -120,7 +121,6 @@ const WorkCard = ({ job, extra }) => {
           </button>
         </div>
       </div>
-      <JobOfferModal open={isOpen} handleClose={handleClose} job={job} />
       {openEdit && (
         <EditJobModal open={openEdit} handleClose={handleCloseEdit} job={job} />
       )}

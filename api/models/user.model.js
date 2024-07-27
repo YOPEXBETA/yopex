@@ -172,6 +172,18 @@ const UserSchema = new mongoose.Schema(
         ref: "Notification",
       },
     ],
+      currentWorkspace: {
+          label: {
+              type: String,
+              enum: ['User', 'Organization'],
+              default: 'User',
+          },
+          organizationID: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: 'Organization',
+              default: null,
+          },
+      },
     organizations: {
       type: [
         {

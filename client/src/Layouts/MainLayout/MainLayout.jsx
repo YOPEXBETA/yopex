@@ -21,7 +21,20 @@ const MainLayout = (props) => {
   const [open, setOpen] = useState(true);
   const [currentRoute, setCurrentRoute] = useState("feed");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // log the url of the current page
+
+  useEffect(() => {
+    dispatch(getCurrentUser()).then((response) => {
+      const fetchedUser = response.payload;
+      if (fetchedUser) {
+        if (fetchedUser.currentWorkspace.label !== "User" && fetchedUser.currentWorkspace.organizationID) {
+          navigate(`/organization/${fetchedUser.currentWorkspace.organizationID}/dashboard`);
+        }
+      } else {
+        navigate("/login?redirect=" + location.pathname);
+      }
+    });
+  }, [dispatch, navigate, location.pathname]);
+
 
   const handleCreateClick = () => {
     setIsModalOpen(true);
@@ -48,19 +61,6 @@ const MainLayout = (props) => {
     }
   }, [location.pathname, routes.children]);
 
-  useEffect(() => {
-    if (!user) {
-      dispatch(getCurrentUser()).then((response) => {
-        
-        if (response.payload) {
-         
-        } else {
-          
-          navigate("/login?redirect=" + location.pathname);
-        }
-      });
-    }
-  }, [dispatch, user]);
 
   if (!user) {
     return <Loader />; 
