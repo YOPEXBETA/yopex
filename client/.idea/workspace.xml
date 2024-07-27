@@ -4,10 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Organization Creation with the stepper">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Setting tab for the organization (update organization info, invite and manage members, update social links)">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/job.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/job.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/user.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/user.controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/models/job.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/job.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/user.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/routes/job.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/job.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/routes/user.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/user.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/TeamMembersListCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/TeamMembersListCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/WorkCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/WorkCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Modals/JobOfferModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Modals/JobOfferModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Tabs/CompanyProfileNavigationTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Tabs/CompanyProfileNavigationTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/MainLayout/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/MainLayout/MainLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/DashboardPage/DashboardPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/DashboardPage/DashboardPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/WorkspaceInformation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/WorkspaceInformation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/JobsPage/components/Jobs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/JobsPage/components/Jobs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +43,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;BahaEddinDridi&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ApplicationTestMode/YopexInternshipproject.git&quot;,
+    &quot;accountId&quot;: &quot;695a2979-8daa-442b-bfc2-7b2d1177e29f&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -39,7 +69,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;YOPEX-INTERNSHIP-REPO&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Baha-Eddine&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -97,6 +127,16 @@
       <workItem from="1721410900603" duration="3904000" />
       <workItem from="1721471327378" duration="1072000" />
       <workItem from="1721495533211" duration="3151000" />
+      <workItem from="1721593357102" duration="8478000" />
+      <workItem from="1721653054159" duration="17750000" />
+      <workItem from="1721749403187" duration="9023000" />
+      <workItem from="1721773059402" duration="6395000" />
+      <workItem from="1721824812750" duration="5768000" />
+      <workItem from="1721832139341" duration="2012000" />
+      <workItem from="1721918605644" duration="6971000" />
+      <workItem from="1721925942506" duration="284000" />
+      <workItem from="1721928584702" duration="201000" />
+      <workItem from="1721933415198" duration="82000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -114,14 +154,43 @@
       <option name="project" value="LOCAL" />
       <updated>1721501091792</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated the organization Form">
+      <option name="closed" value="true" />
+      <created>1721602254191</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1721602254191</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Setting tab for the organization (update organization info, invite and manage members, update social links)">
+      <option name="closed" value="true" />
+      <created>1721779486951</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1721779486951</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Organization Creation with the stepper" />
-    <option name="LAST_COMMIT_MESSAGE" value="Organization Creation with the stepper" />
+    <MESSAGE value="Updated the organization Form" />
+    <MESSAGE value="Setting tab for the organization (update organization info, invite and manage members, update social links)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Setting tab for the organization (update organization info, invite and manage members, update social links)" />
   </component>
 </project>

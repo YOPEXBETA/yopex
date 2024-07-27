@@ -5,6 +5,7 @@ import userSlice from "./user/userSlice";
 import postSlice from "./post/postSlice";
 import globalSlice from "./global/globalSlice";
 import organizationReducer from "./organization/organizationSlice";
+
 // import { createStore, applyMiddleware, compose } from "redux";
 
 // import thunk from "redux-thunk";

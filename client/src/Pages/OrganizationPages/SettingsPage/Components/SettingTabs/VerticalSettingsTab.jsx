@@ -28,7 +28,7 @@ const VerticalSettingsTab = ({ changeValue, value }) => {
         onClick={() => changeValue(1)}
       >
         <div className="flex items-center gap-4">
-          <p className="flex-auto hidden md:block">Overview</p>
+          <p className="flex-auto hidden md:block">Members</p>
         </div>
       </button>
 

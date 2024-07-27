@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useCompanyById } from "../../../../../../hooks/react-query/useCompany";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
+import { useOrganizationById } from "../../../../../../hooks/react-query/useCompany";
+import GeneralCompanyInfo from "../../../../../../Components/Cards/GeneralCompanyInfo";
 import OrganizationDescriptionCard from "../../../../../../Components/Cards/OrganizationDescriptionCard";
 
 const CompanyInfos = () => {

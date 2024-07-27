@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Controller } from "react-hook-form";
+import EyeIcon from "../../../../Components/icons/EyeIcon";
 
 const VerifyDocumentsStep = ({ control, formData, updateFormData }) => {
   const [selectedDocument, setSelectedDocument] = useState(null);
@@ -36,70 +37,80 @@ const VerifyDocumentsStep = ({ control, formData, updateFormData }) => {
   }, [formData.organizationDocument]);
 
   return (
-    <div>
-      <h2 className="text-lg mb-4">
-        If you’d like, you can provide your organization document to verify your
-        account.
-      </h2>
       <div>
-        <Controller
-          name="organizationDocument"
-          control={control}
-          defaultValue={formData.organizationDocument || ""}
-          render={({ field }) => (
-            <>
-              <input
-                type="file"
-                id="organizationDocument"
-                name="organizationDocument"
-                className="sr-only"
-                onChange={(e) => {
-                  field.onChange(e.target.files);
-                  handleDocumentChange(e); // Update local state
-                }}
-              />
-              <label
-                htmlFor="organizationDocument"
-                className="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer"
-              >
-                <div>
+          <div className="text-center mb-10">
+              <h2 className="text-2xl mt-6 font-bold text-left dark:text-white">
+                  Verification Document
+              </h2>
+          </div>
+          <h2 className="text-lg mb-4">
+              If you’d like, you can provide your organization document to verify your
+              account.
+          </h2>
+          <div>
+              <Controller
+                  name="organizationDocument"
+                  control={control}
+                  defaultValue={formData.organizationDocument || ""}
+                  render={({field}) => (
+                      <>
+                          <input
+                              type="file"
+                              id="organizationDocument"
+                              name="organizationDocument"
+                              className="sr-only"
+                              onChange={(e) => {
+                                  field.onChange(e.target.files);
+                                  handleDocumentChange(e); // Update local state
+                              }}
+                          />
+                          <label
+                              htmlFor="organizationDocument"
+                              className="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer"
+                          >
+                              <div>
                   <span className="mb-2 block text-xl font-semibold dark:text-white">
                     Drop file here or click to upload
                   </span>
-                  <span className="mb-2 block text-base font-medium text-[#6B7280]">
+                                  <span className="mb-2 block text-base font-medium text-[#6B7280]">
                     Single file allowed
                   </span>
-                  <span className="inline-flex rounded border hover:bg-zinc-200 dark:text-white border-[#e0e0e0] py-2 px-7 text-base font-medium">
+                                  <span
+                                      className="inline-flex rounded border hover:bg-zinc-200 dark:text-white border-[#e0e0e0] py-2 px-7 text-base font-medium">
                     Browse
                   </span>
-                </div>
-              </label>
-            </>
-          )}
-        />
-      </div>
-      <div className="mt-4">
-        {selectedDocument && (
-          <div className="flex items-center justify-between mt-2">
-            <a
-              href={URL.createObjectURL(selectedDocument)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-            >
-              {selectedDocument.name}
-            </a>
-            <button
-              type="button"
-              onClick={handleDocumentRemove}
-              className="ml-2 text-red-500 hover:text-red-700"
-            >
-              Remove
-            </button>
+                              </div>
+                          </label>
+                      </>
+                  )}
+              />
           </div>
-        )}
+          <div className="mt-4">
+              {selectedDocument && (
+                  <div className="flex gap-2 mt-2">
+
+                      <a
+                          href={URL.createObjectURL(selectedDocument)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="View document"
+                          className="text-blue-500 hover:underline"
+                      >
+                          <EyeIcon/>
+
+                      </a>
+                      <h1>{selectedDocument.name}</h1>
+                      <button
+                          type="button"
+                          onClick={handleDocumentRemove}
+                          className=" text-red-500 hover:text-red-700"
+                      >
+                          Remove
+                      </button>
+                  </div>
+              )}
+          </div>
       </div>
-    </div>
   );
 };
 

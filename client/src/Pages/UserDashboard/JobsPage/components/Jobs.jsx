@@ -26,7 +26,7 @@ const Jobs = ({
   const sortedJobs = jobs
     ? jobs.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     : [];
-console.log(jobs)
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-1 gap-2 xl:grid-cols-1 mb-16 xl:mb-4">

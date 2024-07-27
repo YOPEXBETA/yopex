@@ -320,3 +320,25 @@ export const useUsersData = (page, query) => {
     },
   });
 };
+
+export const useUpdateUserWorkspace = (userId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ workspace, organizationID }) => {
+      console.log('info',workspace, organizationID)
+      const response = await axios.post(`${url}/user/updateWorkspace/${userId}`, {
+        workspace,
+        organizationID,
+      });
+      return response.data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries('user');
+
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};

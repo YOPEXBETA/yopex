@@ -12,6 +12,7 @@ const organizationSchema = new mongoose.Schema(
         organizationName: { type: String, required: true },
         organizationDescription: { type: String },
         organizationLogo: { type: String },
+        organizationBanner: { type: String },
         country: { type: String },
         PhoneNumber: { type: String },
         address: { type: String },
@@ -19,6 +20,12 @@ const organizationSchema = new mongoose.Schema(
         organizationDocument: { type: String },
         verified: { type: Boolean, default: false },
         isDocumentSubmitted: { type: Boolean, default: false }, // Document submission status
+        socialMediaLinks: [
+            {
+                platform: { type: String, required: false },
+                url: { type: String, required: false },
+            },
+        ],
         jobs: [{ type: mongoose.Types.ObjectId, ref: "Job" }],
         challenges: {
             type: [

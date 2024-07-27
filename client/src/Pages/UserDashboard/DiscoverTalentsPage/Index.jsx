@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DiscoverTalents from "./components/DiscoverTalents";
 import { useSetquery, useUsersData } from "../../../hooks/react-query/useUsers";
-import { useCompanies } from "../../../hooks/react-query/useCompany";
+import { useOrganizations } from "../../../hooks/react-query/useCompany";
 
 import { useSelector } from "react-redux";
 import DiscoverTab from "./DiscoverTab";
@@ -15,8 +15,8 @@ const Index = () => {
 
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
-  const [companyQuery, setCompanyQuery] = useState("");
-  const [companypage, setCompanypage] = useState(1);
+  const [organizationQuery, setOrganizationQuery] = useState("");
+  const [organizationpage, setOrganizationpage] = useState(1);
   const { mutate, isSuccess } = useSetquery();
   const { user } = useSelector((state) => state.auth);
 
@@ -25,8 +25,8 @@ const Index = () => {
     page,
     query
   );
-  const { data: suggestedOrganizations, isLoading: OrganizationsLoading } =
-    useCompanies(companypage, companyQuery);
+  const { data: suggestedOrganizations, isLoading: organizationsLoading } =
+      useOrganizations(organizationpage, organizationQuery);
 
   const handleChangePage = (newPage) => {
     if (newPage <= totalPages && newPage > 0) {
@@ -34,24 +34,24 @@ const Index = () => {
     }
   };
 
-  const handleChangeCompanyPage = (newPage) => {
+  const handleChangeOrganizationPage = (newPage) => {
     if (newPage <= totalPages && newPage > 0) {
-      setCompanypage(newPage);
+      setOrganizationpage(newPage);
     }
   };
 
   const totalPages = Math?.ceil(suggestedUsers?.userCount / 6);
   const displayedPages = Math?.min(10, totalPages);
 
-  const companytotalPages = Math?.ceil(suggestedOrganizations?.companyCount / 6);
-  const displayedCompanyPages = Math?.min(10, companytotalPages);
+  const organizationtotalPages = Math?.ceil(suggestedOrganizations?.organizationCount / 6);
+  const displayedOrganizationPages = Math?.min(10, organizationtotalPages);
 
   const handleSearchUsers = (event) => {
     setQuery(event.target.value);
     mutate(event.target.value);
   };
   const handleSearchCompanies = (event) => {
-    setCompanyQuery(event.target.value);
+    setOrganizationQuery(event.target.value);
     mutate(event.target.value);
   };
 
@@ -61,7 +61,7 @@ const Index = () => {
         <div className="col-span-12 lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
           <DiscoverTab
             query={query}
-            companyQuery={companyQuery}
+            companyQuery={organizationQuery}
             handleSearchUsers={handleSearchUsers}
             handleSearchCompanies={handleSearchCompanies}
             changeValue={changeValue}
@@ -86,13 +86,13 @@ const Index = () => {
           <div className="col-span-12 lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
             <DiscoverOrganizations
               user={user}
-              companyQuery={companyQuery}
+              organizationQuery={organizationQuery}
               suggestedOrganizations={suggestedOrganizations}
-              isLoading={OrganizationsLoading}
-              handleChangePage={handleChangeCompanyPage}
-              companytotalPages={companytotalPages}
-              displayedCompanyPages={displayedCompanyPages}
-              page={companypage}
+              isLoading={organizationsLoading}
+              handleChangePage={handleChangeOrganizationPage}
+              organizationtotalPages={organizationtotalPages}
+              displayedOrganizationPages={displayedOrganizationPages}
+              page={organizationpage}
             />
           </div>
         )}

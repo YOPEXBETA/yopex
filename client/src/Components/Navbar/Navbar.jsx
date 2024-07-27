@@ -14,7 +14,7 @@ import {
 } from "../../hooks/react-query/useUsers";
 import { io } from "socket.io-client";
 import InvitationModal from "../Modals/InvitationModal";
-import {useAcceptInvitation, useCompanyById, useInvitationById} from "../../hooks/react-query/useCompany";
+import {useAcceptInvitation, useOrganizationById, useInvitationById} from "../../hooks/react-query/useCompany";
 import {useNavigate} from "react-router-dom";
 
 
@@ -34,7 +34,7 @@ const Navbar = (props) => {
 
   const { data: invitation } = useInvitationById(invitationData?.invitation);
   // Fetch organization by ID hook
-  const { data: organization } = useCompanyById(invitation?.organization);
+  const { data: organization } = useOrganizationById(invitation?.organization);
 
   const { mutate: acceptInvitation, isLoading: acceptLoading } = useAcceptInvitation();
 

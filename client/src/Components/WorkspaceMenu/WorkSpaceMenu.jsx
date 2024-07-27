@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useFetchOrganizations } from "../../hooks/react-query/useCompany";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {useUpdateUserWorkspace} from "../../hooks/react-query/useUsers";
 
 // ==============================|| CODE ||============================== //
 
@@ -11,10 +12,13 @@ const WorkSpaceMenu = ({
   organizations,
   onSwitch,
 }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data: fetchedOrganizations } = useFetchOrganizations(organizations);
   const { user } = useSelector((state) => state.auth);
   const [orgList, setOrgList] = useState([]);
+  const updateWorkspace = useUpdateUserWorkspace(user?._id);
+  const [navigatePath, setNavigatePath] = useState(null);
 
   useEffect(() => {
     if (fetchedOrganizations) {
@@ -22,16 +26,44 @@ const WorkSpaceMenu = ({
     }
   }, [fetchedOrganizations]);
 
+  useEffect(() => {
+    if (navigatePath) {
+      navigate(navigatePath);
+      setNavigatePath(null);
+    }
+  }, [navigatePath, navigate]);
+
   const handleOrganizationSwitch = async (organization) => {
-    navigate(`/organization/${organization._id}/dashboard`);
-    onSwitch({
-      organizationName: organization.organizationName,
-      organizationLogo: organization.organizationLogo,
-    });
+    try {
+      await updateWorkspace.mutateAsync({
+        workspace: 'Organization',
+        organizationID: organization._id // Include the organization ID
+      });
+
+      onSwitch({
+        organizationName: organization.organizationName,
+        organizationLogo: organization.organizationLogo,
+      });
+
+      setNavigatePath(`/organization/${organization._id}/dashboard`);
+    } catch (error) {
+      // Handle any error that might occur during workspace update
+      console.error("Failed to update workspace:", error.message);
+    }
   };
 
-  const handleUserWorkspaceSwitch = () => {
-    navigate("/feed");
+  const handleUserWorkspaceSwitch = async () => {
+    try {
+      await updateWorkspace.mutateAsync({
+        workspace: 'User',
+        organizationID: null // Set organizationId to null for user workspace
+      });
+
+      setNavigatePath("/feed");
+    } catch (error) {
+      // Handle any error that might occur during workspace update
+      console.error("Failed to update workspace:", error.message);
+    }
   };
 
   const handleLogout = () => {
@@ -39,6 +71,8 @@ const WorkSpaceMenu = ({
   };
 
   return (
+    <div className="flex w-56 flex-col rounded-[20px] bg-white py-2 shadow-xl shadow-shadow-500 dark:!bg-zinc-700 dark:text-white dark:shadow-none">
+      <hr className="border-gray-200 dark:border-gray-400" />
 
     <div className="absolute left-4 z-10 w-56 origin-top-right dark:bg-zinc-700 divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
       <div className="py-1" role="none">
@@ -71,11 +105,10 @@ const WorkSpaceMenu = ({
             <span>{`${user?.firstname} ${user?.lastname}`}</span>
           </div>
       )}</a>
-      </div>   
+      </div>
   </div>
-    
+
   );
 };
 
 export default WorkSpaceMenu;
-

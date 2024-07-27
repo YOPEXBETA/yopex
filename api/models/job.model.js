@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const JobSchema = new mongoose.Schema(
   {
-   organization: {
+    organization: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Organization",
+        ref: "Organization",
     },
     title: {
       type: String,

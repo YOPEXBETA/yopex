@@ -64,51 +64,51 @@ const DiscoverOrganizations = ({
           <span>Previous</span>
         </button>
 
-        <div className="items-center hidden md:flex gap-x-3">
-          {Array.from(
-            { length: displayedCompanyPages },
-            (_, index) => page + index
-          )
-            .filter((pageNumber) => pageNumber <= companytotalPages)
-            .map((pageNumber) => (
-              <button
-                key={pageNumber}
-                onClick={() => handleChangePage(pageNumber)}
-                className={`px-2 py-1 text-sm rounded-md ${
-                  pageNumber === page
-                    ? "text-green-500 bg-green-100"
-                    : "text-gray-500 dark:hover:bg-zinc-800 dark:text-gray-100 hover:bg-gray-100"
-                }`}
-              >
-                {pageNumber}
-              </button>
-            ))}
-        </div>
+                <div className="items-center hidden md:flex gap-x-3">
+                    {Array.from(
+                        {length: displayedOrganizationPages},
+                        (_, index) => page + index
+                    )
+                        .filter((pageNumber) => pageNumber <= organizationtotalPages)
+                        .map((pageNumber) => (
+                            <button
+                                key={pageNumber}
+                                onClick={() => handleChangePage(pageNumber)}
+                                className={`px-2 py-1 text-sm rounded-md ${
+                                    pageNumber === page
+                                        ? "text-green-500 bg-green-100"
+                                        : "text-gray-500 dark:hover:bg-zinc-800 dark:text-gray-100 hover:bg-gray-100"
+                                }`}
+                            >
+                                {pageNumber}
+                            </button>
+                        ))}
+                </div>
 
-        <button
-          onClick={() => handleChangePage(page + 1)}
-          className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
-          disabled={page === companytotalPages}
-        >
-          <span>Next</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-5 h-5 rtl:-scale-x-100"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-  );
+                <button
+                    onClick={() => handleChangePage(page + 1)}
+                    className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
+                    disabled={page === organizationtotalPages}
+                >
+                    <span>Next</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="w-5 h-5 rtl:-scale-x-100"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                        />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default DiscoverOrganizations;

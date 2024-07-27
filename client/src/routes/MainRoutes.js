@@ -159,6 +159,7 @@ const MainRoutes = {
         },
       ],
     },
+
     {
       name: "Profile",
       path: "profile",
@@ -171,7 +172,7 @@ const MainRoutes = {
       path: "organization",
       children: [
         {
-          path: ":organizationId",
+          path: ":companyId",
           element: <Company width={6} height={6} color={"grey-100"} />,
         },
       ],

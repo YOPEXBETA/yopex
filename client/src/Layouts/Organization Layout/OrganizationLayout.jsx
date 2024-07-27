@@ -7,15 +7,33 @@ import { useCurrentOrganization } from "../../hooks/react-query/useCompany";
 import { fetchCurrentOrganization } from "../../redux/organization/organizationSlice";
 import { useSelector, useDispatch } from "react-redux";
 import OrganizationNavbar from "./Components/NavBar/organizarionNavbar";
+import {getCurrentUser} from "../../redux/auth/authSlice";
 
 const OrganizationLayout = (props) => {
   const location = useLocation();
+  const { user } = useSelector((state) => state.auth);
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [currentRoute, setCurrentRoute] = useState("dashboard");
   const { ...rest } = props;
   const { organizationId } = useParams();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUser()).then((response) => {
+      const fetchedUser = response.payload;
+      if (fetchedUser) {
+        if (fetchedUser.currentWorkspace.label !== "Organization") {
+          navigate("/feed");
+        }
+      } else {
+        navigate("/login?redirect=" + location.pathname);
+      }
+    });
+  }, [dispatch, navigate, location.pathname]);
+
+  
   useEffect(() => {
     dispatch(fetchCurrentOrganization(organizationId));
   }, [dispatch, organizationId]);
@@ -24,8 +42,16 @@ const OrganizationLayout = (props) => {
     (state) => state.organization.currentOrganization
   );
   const isLoading = useSelector((state) => state.organization.loading);
+  const error = useSelector((state) => state.organization.error);
 
-  console.log("org1", currentOrganization);
+  useEffect(() => {
+    if (!currentOrganization || currentOrganization._id !== organizationId) {
+      dispatch(fetchCurrentOrganization(organizationId));
+    }
+  }, [dispatch, organizationId, currentOrganization]);
+
+
+
 
   const handleNavigation = (route) => {
     setCurrentRoute(route);

@@ -30,7 +30,7 @@ const {
   getStatistic,
   uploadFile,
   updatepassword,
-  updateSocialMediaLink,
+  updateSocialMediaLink, updateUserWorkspace,
 } = require("../controllers/user.controllers");
 
 const validate = require("../middlewares/SchemaValidation.middleware");
@@ -116,5 +116,6 @@ userRouter.patch("/special", async (req, res) => {
 userRouter.get("/get/stat", getStatistic);
 
 userRouter.post("/upload", upload.single("file"), uploadFile);
+userRouter.post('/user/updateWorkspace/:userId',authenticateToken, updateUserWorkspace);
 
 module.exports = userRouter;

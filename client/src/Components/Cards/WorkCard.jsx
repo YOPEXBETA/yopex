@@ -31,9 +31,11 @@ const WorkCard = ({ job, extra }) => {
   const handleDeleteClick = () => {
     setConfirmationDialogOpen(true);
   };
+  const isUserAuthorized = user?.organizations?.includes(job?.organization?._id);
+  console.log('isUserAuthorized', isUserAuthorized)
 
   const handleConfirmDelete = () => {
-    deleteJob(job._id);
+    deleteJob(job?._id);
     setConfirmationDialogOpen(false);
   };
 
@@ -96,8 +98,7 @@ const WorkCard = ({ job, extra }) => {
             className="font-medium p-2 flex hover:bg-zinc-500 rounded-full"
             onClick={(e) => e.stopPropagation()}
           >
-            {(user?.organizations?.includes(job?.organization?._id) ||
-              user?._id === job?.owner?._id) && (
+            {isUserAuthorized && (
               <div>
                 <Dropdown
                   button={
