@@ -48,7 +48,7 @@ const SearchInput = () => {
                     navigate(`/profile/${option._id}`);
                     setOpen(false);
                   } else {
-                    navigate(`/company/${option._id}`);
+                    navigate(`/organization/${option._id}`);
                     setOpen(false);
                   }
                 }}

@@ -73,7 +73,7 @@ const Banner = ({ changeValue, value }) => {
               className="mb-4 mr-5 flex items-center md:mr-10 hover:opacity-70"
               to={
                 challenge?.company?.companyLogo
-                  ? `/company/${challenge?.company?._id}`
+                  ? `/organization/${challenge?.company?._id}`
                   : `/profile/${challenge?.owner?._id}`
               }
             >

@@ -22,7 +22,7 @@ const DiscoverTab = ({
         {value === 0 && (
           <input
             type="text"
-            className="bg-lightPrimary border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
+            className="border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-200 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
             placeholder="Search for talents..."
             value={query}
             onChange={handleSearchUsers}
@@ -31,7 +31,7 @@ const DiscoverTab = ({
         {value === 1 && (
           <input
             type="text"
-            className="bg-lightPrimary border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
+            className="border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
             placeholder="Search for companies..."
             value={companyQuery}
             onChange={handleSearchCompanies}
@@ -57,7 +57,7 @@ const DiscoverTab = ({
           >
             <div className="flex gap-2">
               <CompanyIcon />
-              <span className="hidden sm:inline">Companies</span>
+              <span className="hidden sm:inline">Organizations</span>
             </div>
           </button>
         </div>

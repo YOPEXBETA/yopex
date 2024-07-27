@@ -82,7 +82,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
             onClick={() => {
               navigate(
                 otherUser.companyLogo
-                  ? "/company/" + otherUser._id
+                  ? "/organization/" + otherUser._id
                   : "/profile/" + otherUser._id
               );
             }}

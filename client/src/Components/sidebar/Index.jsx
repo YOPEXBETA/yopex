@@ -37,35 +37,32 @@ const Sidebar = ({
         open ? "translate-x-0" : "-translate-x-96"
       } ${isRouteWithSpecificWidth ? "w-[6.2rem]" : ""}`}
     >
-      <span
-        className="absolute top-4 right-4 block cursor-pointer xl:hidden"
-        onClick={onClose}
-      >
-        <HiX />
-      </span>
+     
 
-      <div className={`py-[0.6rem]`}>
-      <NavLink to="/feed">
-        <div className="flex items-center justify-center ">
-          {isRouteWithSpecificWidth ? (
-            <div className="absolute left-8 top-4 ">
-              <img
-                src={YopexLogo}
-                alt="Yopex Logo"
-                className="h-8 w-8 object-fill"
+      <div className={`py-[0.6rem] flex items-center justify-center justify-between pr-6`}>
+      <NavLink to="/overview">
+      <div className={`mx-[56px] flex items-center`}>
+        <div className="text-2xl capitalize font-bold  dark:text-white flex items-center gap-2 mt-2 hover:text-green-500">
+          <img
+              src={YopexLogo}
+              alt="Yopex Logo"
+              className="h-9 w-9 object-fill px-2 py-2 rounded-md bg-black"
               />
-            </div>
-          ) : (
-            <div className="mt-1 ml-1 text-left text-[1.7rem] font-bold uppercase dark:text-white">
-              YOPEX <span className="font-medium">HUB</span>
-            </div>
-          )}
+              YOPEX<span className="font-medium">HUB</span>
+          </div>      
         </div>
         </NavLink>
+        <span
+          className="top-4 right-4 block cursor-pointer xl:hidden"
+          onClick={onClose}
+        >
+          <HiX />
+        </span>
       </div>
 
+      <div class="h-px bg-gray-100 dark:bg-white/30" />
 
-      <div className="relative px-6 focus:ring-offset-2 focus:ring-offset-zinc-800 mt-4 w-full my-8">
+      <div className="relative px-6 focus:ring-offset-2 focus:ring-offset-zinc-800 mt-4 w-full my-6">
         <Dropdown
           button={<SwitchCardWorkspace user={user}  
           isRouteWithSpecificWidth={isRouteWithSpecificWidth}/>}

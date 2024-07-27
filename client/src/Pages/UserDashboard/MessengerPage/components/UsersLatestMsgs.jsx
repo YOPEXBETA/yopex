@@ -50,7 +50,7 @@ const UsersLatestMsgs = () => {
 
   return (
     <div>
-      <div className="flex justify-between px-3 pt-1 text-white">
+      <div className="flex justify-between px-3 pt-1 text-white ">
         <div className="flex items-center w-full py-2 ">
           <div className="relative flex items-center w-full  overflow-hidden text-gray-600 focus-within:text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center pl-4">

@@ -24,7 +24,7 @@ const SearchbarFilter = ({ setQuery }) => {
             <input
               type="text"
               id="voice-search"
-              className="bg-gray-50 rounded-lg border border-gray-300 text-gray-900 text-sm focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5  dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+              className="border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
               placeholder="Search for users"
               onChange={(e) => setQuery(e.currentTarget.value)}
             />

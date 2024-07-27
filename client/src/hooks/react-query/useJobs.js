@@ -51,15 +51,15 @@ export const useOfferTypes = () => {
   });
 };
 
-export const useJobById = (companyId) => {
+export const useJobById = (organizationId) => {
   return useQuery(
-    ["jobs", companyId],
+    ["jobs", organizationId],
     async () => {
-      const { data } = await axios.get(`${url}/job/${companyId}`);
+      const { data } = await axios.get(`${url}/job/${organizationId}`);
       return data;
     },
     {
-      enabled: !!companyId,
+      enabled: !!organizationId,
     }
   );
 };
@@ -68,8 +68,8 @@ export const useCreateJob = (user) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ companyId, JobData }) => {
-      await axios.post(`${url}/job/add`, { companyId, ...JobData }, {});
+    mutationFn: async ({ organizationId, JobData }) => {
+      await axios.post(`${url}/job/add`, { organizationId, ...JobData }, {});
     },
     onSuccess: () => {
       toast.success("Job added successfully");

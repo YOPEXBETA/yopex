@@ -34,7 +34,6 @@ export function SidebarLinks(props) {
                   </span>
                 )}
                 {/* Conditionally render the name based on the route and path */}
-                {!isRouteWithSpecificWidth && (
                   <p
                     className={`leading-1 ml-4 flex ${
                       activeRoute(route.path) === true
@@ -44,7 +43,7 @@ export function SidebarLinks(props) {
                   >
                     {route?.name}
                   </p>
-                )}
+              
               </li>
               {activeRoute(route.path) ? (
                 <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-green-500 dark:bg-green-500" />

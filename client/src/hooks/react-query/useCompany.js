@@ -42,8 +42,8 @@ export const useGetAllSectors = () => {
 export const useApproveCompany = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (companyId) => {
-      await axios.post(`${url}/admin/appCompany`, { companyId });
+    mutationFn: async (organizationId) => {
+      await axios.post(`${url}/admin/appCompany`, { organizationId });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -73,16 +73,16 @@ export const useCreateCompany = () => {
   });
 };
 
-export const useEditCompany = (companyId) => {
+export const useEditCompany = (organizationId) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (companyData) => {
-      await axios.put(`${url}/company/${companyId}`, companyData);
+      await axios.put(`${url}/company/${organizationId}`, companyData);
     },
     onSuccess: () => {
       toast.success("Company updated successfully");
-      queryClient.invalidateQueries(["company", companyId]);
+      queryClient.invalidateQueries(["company", organizationId]);
     },
     onError: (error) => {
       toast.error(`Error updating company: ${error.response.data.error.msg}`);
@@ -101,12 +101,12 @@ export const useEditCompany = (companyId) => {
   });
 };*/
 
-export const useDeleteCompany = (companyId) => {
+export const useDeleteCompany = (organizationId) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (companyId) => {
-      await axios.delete(`${url}/company/${companyId}`);
+    mutationFn: async (organizationId) => {
+      await axios.delete(`${url}/company/${organizationId}`);
     },
     onSuccess: () => {
       toast.success("Company deleted successfully");
@@ -115,15 +115,15 @@ export const useDeleteCompany = (companyId) => {
   });
 };
 
-export const useCompanyById = (companyId) => {
+export const useCompanyById = (organizationId) => {
   return useQuery(
-    ["company", companyId],
+    ["company", organizationId],
     async () => {
-      const { data } = await axios.get(`${url}/${companyId}`);
+      const { data } = await axios.get(`${url}/${organizationId}`);
       return data;
     },
     {
-      enabled: !!companyId,
+      enabled: !!organizationId,
     }
   );
 };

@@ -2,8 +2,8 @@ import React from "react";
 import DiscoverCompanyCard from "../../../../Components/Cards/DiscoverCompanyCard";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 
-const DiscoverCompanies = ({
-  suggestedCompanies,
+const DiscoverOrganizations = ({
+  suggestedOrganizations,
   isLoading,
   companyQuery,
   setCompanyQuery,
@@ -16,7 +16,7 @@ const DiscoverCompanies = ({
   return (
     <div>
       <h5 className="my-5 text-xl text-left dark:text-white">
-        Companies ({suggestedCompanies?.companyCount})
+        Organizations ({suggestedOrganizations?.companyCount})
       </h5>
       <hr />
       {isLoading ? (
@@ -25,8 +25,8 @@ const DiscoverCompanies = ({
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 mt-6 md:grid-cols-3 lg:grid-cols-2">
-          {suggestedCompanies?.companies?.length > 0 ? (
-            suggestedCompanies?.companies?.map((option, index) => (
+          {suggestedOrganizations?.organizations?.length > 0 ? (
+            suggestedOrganizations?.organizations?.map((option, index) => (
               <DiscoverCompanyCard
                 key={index}
                 option={option}
@@ -111,4 +111,4 @@ const DiscoverCompanies = ({
   );
 };
 
-export default DiscoverCompanies;
+export default DiscoverOrganizations;

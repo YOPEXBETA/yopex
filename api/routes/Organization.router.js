@@ -31,7 +31,7 @@ const {getUserNotifications} = require("../controllers/user.controllers");
 organizationRouter.put("/approve/:id/", authenticateToken, approveCompany);
 organizationRouter.put;
 organizationRouter.put("/:id/", authenticateToken, editProfile);
-organizationRouter.get("/get/:companyId/", authenticateToken, getOrganization);
+organizationRouter.get("/get/:organizationId/", authenticateToken, getOrganization);
 organizationRouter.get("/allcompanies", getAllOrganizations);
 organizationRouter.post("/challengeWinner", authenticateToken, ChallengeWinner);
 organizationRouter.get(

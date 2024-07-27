@@ -49,8 +49,8 @@ const WorkCard = ({ job, extra }) => {
         <div className="flex gap-4">
           <img
             src={
-              job?.company?.companyLogo
-                ? job?.company?.companyLogo
+              job?.organization?.organizationLogo
+                ? job?.organization?.organizationLogo
                 : job?.owner?.picturePath
                 ? job?.owner?.picturePath
                 : ImagePlaceholder
@@ -96,7 +96,7 @@ const WorkCard = ({ job, extra }) => {
             className="font-medium p-2 flex hover:bg-zinc-500 rounded-full"
             onClick={(e) => e.stopPropagation()}
           >
-            {(user?.companies?.includes(job?.company?._id) ||
+            {(user?.organizations?.includes(job?.organization?._id) ||
               user?._id === job?.owner?._id) && (
               <div>
                 <Dropdown

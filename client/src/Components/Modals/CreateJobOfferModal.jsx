@@ -25,8 +25,8 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [showUser, setShowUser] = useState(true);
   const [showCompanies, setShowCompanies] = useState(false);
-  const handleCardClick = (companyId) => {
-    setSelectedOption(companyId);
+  const handleCardClick = (organizationId) => {
+    setSelectedOption(organizationId);
   };
 
   const { user } = useSelector((state) => state.auth);
@@ -52,15 +52,15 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
   const { mutate } = useCreateJob(user);
 
   const onSubmit = (JobData) => {
-    const companyId = selectedOption;
+    const organizationId = selectedOption;
     const modifiedJobData = {
       ...JobData,
       description: content,
       category: JobData?.category?.map((category) => category?.value),
-      skills: JobData?.skills.map((skill) => skill.value),
+      skills: JobData?.skills?.map((skill) => skill.value),
     };
 
-    mutate({ companyId: companyId, JobData: modifiedJobData });
+    mutate({ organizationId: organizationId, JobData: modifiedJobData });
   };
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -104,13 +104,13 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                   <InfoIcon />
                 </span>
                 <h1 className="font-medium text-xl dark:text-white">
-                  Select a company to start posting job offers
+                  Select an organization to start posting job offers
                 </h1>
               </div>
 
               <div>
                 <div className="flex items-center justify-center">
-                  {userProfile?.organizations.length > 1 && (
+                  {userProfile?.organizations?.length > 1 && (
                     <button
                       onClick={handlePrevPage}
                       className="text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -126,26 +126,26 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                       </svg>
                     </button>
                   )}
-                  {userProfile?.organizations.length > 0 ? (
-                    userProfile.organizations
+                  {userProfile?.organizations?.length > 0 ? (
+                    userProfile?.organizations
                       .slice(currentPage, currentPage + 1)
                       .map((option, index) => (
                         <div
-                          key={option._id}
+                          key={option?._id}
                           className={`border-2 p-2 rounded-lg mb-2 cursor-pointer relative ${
-                            selectedOption === option._id
+                            selectedOption === option?._id
                               ? "border-green-500"
                               : "border-gray-300 "
                           }`}
-                          onClick={() => handleCardClick(option._id)}
+                          onClick={() => handleCardClick(option?._id)}
                         >
                           {/* Company image */}
                           <img
-                            src={option.organizationLogo}
-                            alt={option.organizationName}
+                            src={option?.organizationLogo}
+                            alt={option?.organizationName}
                             className={`w-32 h-32 object-cover border rounded-lg transition-transform transform hover:scale-110 `}
                           />
-                          {selectedOption === option._id && (
+                          {selectedOption === option?._id && (
                             <div className="absolute top-2 left-1/2 transform -translate-x-1/2 mb-2">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -259,7 +259,7 @@ const CreateJobOfferModal = ({ open, handleClose }) => {
                             isMulti
                             className="my-react-select-container"
                             classNamePrefix="my-react-select"
-                            required={true}
+                            required={false}
                             id="tags-outlined"
                             options={
                               skills

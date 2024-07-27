@@ -220,7 +220,7 @@ const UserProfileCard = () => {
                 </h5>
                 <ul className="flex justify-start gap-2">
                   {userProfile?.organizations?.map((organization, index) => (
-                    <Link key={index} to={`/company/${organization?._id}`}>
+                    <Link key={index} to={`/organization/${organization?._id}`}>
                       {organization?.organizationLogo ? (
                         <img
                           src={organization?.organizationLogo}
@@ -228,7 +228,7 @@ const UserProfileCard = () => {
                           className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
                         />
                       ) : (
-                        <div>No company logo available</div>
+                        <div>No organization logo available</div>
                       )}
                     </Link>
                   ))}

@@ -67,24 +67,19 @@ const MainLayout = (props) => {
     return <Loader />; 
   }
 
-  const isChatRoute = currentRoute?.toLowerCase() === "chat"  || false;
-
+  const isChatRoute = location.pathname.startsWith("/chat");
+ 
   return (
     <div>
       <div className="flex h-full w-full">
         <Sidebar
           open={open}
           onClose={() => setOpen(false)}
-          isRouteWithSpecificWidth={matchedRoute?.customWidth || false}
           handleCreateClick={handleCreateClick}
           closeCreateMenuModal={closeCreateMenuModal}
         />
         <div className="h-full w-full bg-white dark:!bg-zinc-900">
-          <main
-            className={`h-full flex-none transition-all  ${
-              matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[296px]"
-            }`}
-          >
+          <main className="h-full flex-none transition-all xl:ml-[296px]">
             <div className="h-full">
               <Navbar  
                 onOpenSidenav={() => setOpen(true)}

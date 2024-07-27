@@ -5,7 +5,7 @@ import { useCompanies } from "../../../hooks/react-query/useCompany";
 
 import { useSelector } from "react-redux";
 import DiscoverTab from "./DiscoverTab";
-import DiscoverCompanies from "./components/DiscoverCompanies";
+import DiscoverOrganizations from "./components/DiscoverOrganizations";
 
 const Index = () => {
   const [value, setValue] = useState(0);
@@ -25,7 +25,7 @@ const Index = () => {
     page,
     query
   );
-  const { data: suggestedCompanies, isLoading: companiesLoading } =
+  const { data: suggestedOrganizations, isLoading: OrganizationsLoading } =
     useCompanies(companypage, companyQuery);
 
   const handleChangePage = (newPage) => {
@@ -43,7 +43,7 @@ const Index = () => {
   const totalPages = Math?.ceil(suggestedUsers?.userCount / 6);
   const displayedPages = Math?.min(10, totalPages);
 
-  const companytotalPages = Math?.ceil(suggestedCompanies?.companyCount / 6);
+  const companytotalPages = Math?.ceil(suggestedOrganizations?.companyCount / 6);
   const displayedCompanyPages = Math?.min(10, companytotalPages);
 
   const handleSearchUsers = (event) => {
@@ -84,11 +84,11 @@ const Index = () => {
         )}
         {value === 1 && (
           <div className="col-span-12 lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
-            <DiscoverCompanies
+            <DiscoverOrganizations
               user={user}
               companyQuery={companyQuery}
-              suggestedCompanies={suggestedCompanies}
-              isLoading={companiesLoading}
+              suggestedOrganizations={suggestedOrganizations}
+              isLoading={OrganizationsLoading}
               handleChangePage={handleChangeCompanyPage}
               companytotalPages={companytotalPages}
               displayedCompanyPages={displayedCompanyPages}

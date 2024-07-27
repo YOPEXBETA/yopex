@@ -9,17 +9,9 @@ const UserProfileInformations = () => {
   const { userId } = useParams();
   const { data: userProfile, isLoading } = useUserById(userId);
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
   return (
     <div>
-      <UserInfoCard userProfile={userProfile} />
+      <UserInfoCard userProfile={userProfile} isLoading ={isLoading}/>
     </div>
   );
 };

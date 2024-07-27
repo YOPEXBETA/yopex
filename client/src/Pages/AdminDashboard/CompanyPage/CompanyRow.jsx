@@ -26,7 +26,7 @@ const CompanyRow = ({ company }) => {
       }}
     >
       <td className="py-4 px-4">
-        <Link to={`/company/${company._id}`} className="flex items-center">
+        <Link to={`/organization/${company._id}`} className="flex items-center">
           <div className="lg:w-1/6">
             <img
               src={company.companyLogo}

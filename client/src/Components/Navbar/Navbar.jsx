@@ -82,7 +82,7 @@ const Navbar = (props) => {
       await acceptInvitation(invitationData?.invitation);
       handleCloseModal();
       setTimeout(() => {
-        navigate(`/company/${invitation?.organization}`);
+        navigate(`/organization/${invitation?.organization}`);
       }, 500);
     } catch (error) {
       console.error("Error accepting invitation:", error);

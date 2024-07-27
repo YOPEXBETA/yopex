@@ -33,13 +33,12 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   };
 
   const [openPostModal, setOpenPostModal] = useState(false);
-  const { companyId } = useParams();
+  const { organizationId } = useParams();
   const { user } = useSelector((state) => state.auth);
-  const { mutate, isLoadinge } = useFollowCompany(user._id, companyId);
+  const { mutate, isLoadinge } = useFollowCompany(user._id, organizationId);
   const { mutate: deleteCompanyMutation, isSuccess } = useDeleteCompany();
   const handleDeleteCompany = async () => {
-    console.log('id',company)
-    await deleteCompanyMutation(company._id);
+    await deleteCompanyMutation(organization._id);
   };
 
   if (isSuccess) {
@@ -49,7 +48,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
   const [isfollow, setIsFollow] = useState(false);
 
   useEffect(() => {
-    if (user.followings.includes(companyId)) {
+    if (user.followings.includes(organizationId)) {
       setIsFollow(true);
     } else {
       setIsFollow(false);
@@ -61,7 +60,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
     setIsFollow((prev) => !prev);
   };
 
-  const { data: company, isLoading, isError } = useCompanyById(companyId);
+  const { data: organization, isLoading, isError } = useCompanyById(organizationId);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -83,7 +82,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <div className="w-24 h-24 sm:w-40 sm:h-40">
                 <img
                   alt="Profile picture"
-                  src={company?.organizationLogo}
+                  src={organization?.organizationLogo}
                   className="object-cover w-full h-full rounded-lg"
                 />
               </div>
@@ -91,19 +90,19 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
               <div className="space-y-2 sm:space-y-5 xl:block md:flex lg:block  flex flex-col ">
                 <div className="flex items-center gap-2">
                   <p className="text-2xl font-semibold dark:text-gray-200">
-                    {company?.organizationName}
+                    {organization?.organizationName}
                   </p>
 
                   <button
                     className="flex items-center gap-1"
                     aria-label="verification badge"
-                    disabled={!company?.verified}
+                    disabled={!organization?.verified}
                   >
                     <FaCheckCircle
                       className={`text-${
-                        company?.verified ? "green" : "gray"
+                        organization?.verified ? "green" : "gray"
                       }-500 w-4 h-4 sm:w-5 sm:h-5 mb-[0.1rem] ${
-                        !company?.verified
+                        !organization?.verified
                           ? "opacity-50 cursor-not-allowed"
                           : ""
                       }`}
@@ -113,13 +112,13 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 <div className="hidden xl:flex lg:flex md:flex flex-row sm:flex-row gap-6 sm:gap-4 w-full sm:w-72">
                   <a
                     className="text-base font-medium text-gray-700 dark:text-white hover:text-green-500 dark:hover:text-  -500"
-                    href={company?.websiteURL}
+                    href={organization?.websiteURL}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <div className="flex gap-2">
                       <GlobeIcon className="w-6 h-6 mr-2" />
-                      <p>{company?.websiteURL}</p>
+                      <p>{organization?.websiteURL}</p>
                     </div>
                   </a>
                 </div>
@@ -129,12 +128,12 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                     <button
                       className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-2 px-6 sm:p-4 rounded-lg text-white"
                       onClick={
-                        company && company?.user === user?._id
+                        organization && organization?.user === user?._id
                           ? toggleModal
                           : followCompany
                       }
                     >
-                      {company && company?.user === user?._id ? (
+                      {organization && organization?.user === user?._id ? (
                         <p>Edit</p>
                       ) : isfollow ? (
                         <FaUserMinus className="w-4 h-4" />
@@ -143,7 +142,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                       )}
                     </button>
                   </div>
-                  {company && company?.user === user?._id && (
+                  {organization && organization?.user === user?._id && (
                     <button
                       onClick={handleDeleteCompany}
                       className="xl:block lg:block md:block cursor-pointer capitalize font-medium hover:scale-105 bg-red-500 py-2 px-6 rounded-lg text-white"
@@ -160,12 +159,12 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                 <button
                   className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 p-2 sm:p-4 rounded-lg text-white"
                   onClick={
-                    company && company?.user === user?._id
+                    organization && organization?.user === user?._id
                       ? toggleModal
                       : followCompany
                   }
                 >
-                  {company && company?.user === user?._id ? (
+                  {organization && organization?.user === user?._id ? (
                     <FaEdit className="w-4 h-4 sm:w-6 sm:h-6" />
                   ) : isfollow ? (
                     <FaUserMinus className="w-4 h-4 sm:w-6 sm:h-6" />
@@ -174,7 +173,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
                   )}
                 </button>
               </a>
-              {company && company?.user === user?._id && (
+              {organization && organization?.user === user?._id && (
                 <button
                   onClick={handleDeleteClick}
                   className="xl:block lg:block md:block cursor-pointer capitalize font-medium hover:scale-105 bg-red-500 p-2 sm:p-4 rounded-lg text-white"
@@ -188,7 +187,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           <div className="flex xl:hidden lg:hidden md:hidden flex-row sm:flex-row justify-between px-16 py-4 border-y-2 border-gray">
             <div className="flex-col items-center">
               <p className="text-base font-bold text-center dark:text-gray-200">
-                {company?.challenges?.length}
+                {organization?.challenges?.length}
               </p>
               <p className="text-gray-500 text-md dark:text-gray-400">
                 Challenges
@@ -196,7 +195,7 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
             </div>
             <div className="flex-col items-center">
               <p className="text-base font-bold text-center dark:text-gray-200">
-                {company?.jobs?.length}
+                {organization?.jobs?.length}
               </p>
               <p className="text-gray-500 text-md dark:text-gray-400">Jobs</p>
             </div>
@@ -205,14 +204,14 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
           <EditCompanyModal
             open={openPostModal}
             handleClose={toggleModal}
-            company={company}
+            organization={organization}
           />
           <CompanyProfileNavigationTab
             changeValue={changeValue}
             value={value}
-            companyId={companyId}
+            organizationId={organizationId}
             userPassed={user}
-            company={company}
+            organization={organization}
           />
         </div>
       </div>

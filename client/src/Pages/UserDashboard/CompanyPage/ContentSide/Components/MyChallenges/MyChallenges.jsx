@@ -6,9 +6,9 @@ import ChallengeCard from "../../../../../../Components/Cards/ChallengeCard";
 import NewChallengeCard from "../../../../../../Components/Cards/NewChallengeCard";
 
 const MyCompanyChallenges = () => {
-  const { companyId } = useParams();
-  const { data: companyChallenges, isLoading } = useChallengesById(companyId);
-
+  const { organizationId } = useParams();
+  const { data: organizationChallenges, isLoading } = useChallengesById(organizationId);
+console.log(organizationChallenges)
   if (isLoading) {
     return (
       <div className="flex items-center justify-center">
@@ -20,11 +20,11 @@ const MyCompanyChallenges = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {companyChallenges?.length > 0 ? (
-          companyChallenges?.map((challenge) => (
+        {organizationChallenges?.length > 0 ? (
+          organizationChallenges?.map((challenge) => (
             <NewChallengeCard
               key={challenge?._id}
-              companyChallenges={companyChallenges}
+              organizationChallenges={organizationChallenges}
               challenge={challenge}
             />
           ))
