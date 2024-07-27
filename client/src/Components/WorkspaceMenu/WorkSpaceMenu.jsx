@@ -71,9 +71,6 @@ const WorkSpaceMenu = ({
   };
 
   return (
-    <div className="flex w-56 flex-col rounded-[20px] bg-white py-2 shadow-xl shadow-shadow-500 dark:!bg-zinc-700 dark:text-white dark:shadow-none">
-      <hr className="border-gray-200 dark:border-gray-400" />
-
     <div className="absolute left-4 z-10 w-56 origin-top-right dark:bg-zinc-700 divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
       <div className="py-1" role="none">
         <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-1">
@@ -104,10 +101,10 @@ const WorkSpaceMenu = ({
             />
             <span>{`${user?.firstname} ${user?.lastname}`}</span>
           </div>
-      )}</a>
+      )}
+        </a>
       </div>
   </div>
-
   );
 };
 

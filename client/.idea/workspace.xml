@@ -5,27 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Setting tab for the organization (update organization info, invite and manage members, update social links)">
-      <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/job.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/job.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/user.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/user.controllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/models/job.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/job.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/user.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/routes/job.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/job.router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/routes/user.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/user.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/TeamMembersListCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/TeamMembersListCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/WorkCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/WorkCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Modals/JobOfferModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Modals/JobOfferModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Tabs/CompanyProfileNavigationTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Tabs/CompanyProfileNavigationTab.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layouts/MainLayout/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/MainLayout/MainLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/DashboardPage/DashboardPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/DashboardPage/DashboardPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/WorkspaceInformation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/WorkspaceInformation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/JobsPage/components/Jobs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/JobsPage/components/Jobs.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/TopSide/CompanyProfileInformations.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/TopSide/CompanyProfileInformations.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +22,15 @@
       </list>
     </option>
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/Baha-Eddine" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="Baha-Eddine" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -69,7 +59,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Baha-Eddine&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;YOPEX-INTERNSHIP-REPO&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
