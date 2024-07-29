@@ -51,9 +51,10 @@ const MainLayout = (props) => {
   }, []);
 
   const currentPath = location?.pathname || "";
-  const matchedRoute = routes.children.find((route) =>
-    currentPath.includes(route.path)
+  const matchedRoute = routes?.children?.find((route) =>
+    currentPath?.includes(route?.path)
   );
+
 
   React.useEffect(() => {
     if (matchedRoute) {
@@ -66,34 +67,28 @@ const MainLayout = (props) => {
     return <Loader />; 
   }
 
-  const isChatRoute = currentRoute?.toLowerCase() === "chat"  || false;
-
+  const isChatRoute = location.pathname.startsWith("/chat");
+ 
   return (
     <div>
       <div className="flex h-full w-full">
         <Sidebar
           open={open}
           onClose={() => setOpen(false)}
-          isRouteWithSpecificWidth={matchedRoute?.customWidth || false}
           handleCreateClick={handleCreateClick}
           closeCreateMenuModal={closeCreateMenuModal}
         />
-        <div className="h-full w-full bg-lightPrimary dark:!bg-zinc-900">
-          <main
-            className={`h-full flex-none transition-all  ${
-              matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[313px]"
-            }`}
-          >
+        <div className="h-full w-full bg-white dark:!bg-zinc-900">
+          <main className="h-full flex-none transition-all xl:ml-[309px]">
             <div className="h-full">
-              <Navbar
-                
+              <Navbar  
                 onOpenSidenav={() => setOpen(true)}
                 brandText={currentRoute}
                 {...rest}
               />
               <div
                 className={`mb-auto min-h-[90vh] ${
-                  isChatRoute ? "" : " mt-4 md:mx-6 md:p-2"
+                  isChatRoute ? "": "mt-4 md:mx-6 md:p-2"
                 }`}
               >
                 <Outlet />

@@ -42,15 +42,15 @@ export const useUserChallenges = (user) => {
   });
 };
 
-export const useChallengesById = (companyId) => {
+export const useChallengesById = (organizationId) => {
   return useQuery(
-    ["challenges", companyId],
+    ["challenges", organizationId],
     async () => {
-      const { data } = await axios.get(`${url}/challenge/company/${companyId}`);
+      const { data } = await axios.get(`${url}/challenge/company/${organizationId}`);
       return data;
     },
     {
-      enabled: !!companyId,
+      enabled: !!organizationId,
     }
   );
 };

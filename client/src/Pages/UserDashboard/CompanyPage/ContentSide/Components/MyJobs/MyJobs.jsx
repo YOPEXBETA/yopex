@@ -5,8 +5,8 @@ import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import WorkCard from "../../../../../../Components/Cards/WorkCard";
 
 const MyCompanyJobs = () => {
-  const { companyId } = useParams();
-  const { data: companyJobs, isLoading } = useJobById(companyId);
+  const { organizationId } = useParams();
+  const { data: organizationJobs, isLoading } = useJobById(organizationId);
 
   if (isLoading) {
     return (
@@ -19,9 +19,9 @@ const MyCompanyJobs = () => {
   return (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 gap-4">
-        {companyJobs?.length > 0 ? (
-          companyJobs?.map((job) => (
-            <WorkCard key={job?._id} companyJobs={companyJobs} job={job} />
+        {organizationJobs?.length > 0 ? (
+          organizationJobs?.map((job) => (
+            <WorkCard key={job?._id} organizationJobs={organizationJobs} job={job} />
           ))
         ) : (
           <p className="dark:text-white">No jobs found.</p>

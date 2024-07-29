@@ -3,9 +3,9 @@ import React from "react";
 export const CompanyProfileNavigationTab = ({
   changeValue,
   value,
-  companyId,
+  organizationId,
   userPassed,
-  company,
+  organization,
 }) => {
   return (
     <div>
@@ -28,7 +28,7 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(1)}
         >
-          Jobs ({company?.jobs?.length})
+          Jobs ({organization?.jobs?.length})
         </button>
         <button
           className={`w-1/2 sm:w-auto py-2 px-4  ${
@@ -38,9 +38,9 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(2)}
         >
-          Challenges ({company?.challenges?.length})
+          Challenges ({organization?.challenges?.length})
         </button>
-        {userPassed?.organizations?.includes(companyId) && (
+        {userPassed?.organizations?.includes(organizationId) && (
           <button
             className={`w-1/2 sm:w-auto py-2 px-4  ${
               value === 3
@@ -60,7 +60,7 @@ export const CompanyProfileNavigationTab = ({
           }`}
           onClick={() => changeValue(4)}
         >
-          Team ({company?.organizationMembers?.length})
+          Team ({organization?.organizationMembers?.length})
         </button>
       </div>
     </div>

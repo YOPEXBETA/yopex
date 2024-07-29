@@ -121,6 +121,7 @@ const WorkCard = ({ job, extra }) => {
           </button>
         </div>
       </div>
+      <JobOfferModal open={isOpen} handleClose={handleClose} job={job} />
       {openEdit && (
         <EditJobModal open={openEdit} handleClose={handleCloseEdit} job={job} />
       )}

@@ -15,14 +15,13 @@ import InfoIcon from "../icons/InfoIcon";
 const CreateChallengeModal = ({ open, handleClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [objective, setObjective] = useState("Recrutement");
-  const handleCardClick = (companyId) => {
-    setSelectedOption(companyId);
+  const handleCardClick = (organizationId) => {
+    setSelectedOption(organizationId);
   };
   const [selectedOptionpaid, setSelectedOptionpaid] = useState("false");
   const [showUser, setShowUser] = useState(true);
   const [showCompanies, setShowCompanies] = useState(false);
   const { data: Skills } = useSkills();
-
   const { data: categorys } = useCategories();
 
   const {
@@ -51,16 +50,15 @@ const CreateChallengeModal = ({ open, handleClose }) => {
   //const fileUploadMutation = useFileUpload();
   const onSubmit = async (challengeData) => {
     if (showCompanies) {
-      const companyId = selectedOption;
-      mutate({ companyId, challengeData, paid: selectedOptionpaid, objective });
+      const organizationId = selectedOption;
+      mutate({ organizationId, challengeData, paid: selectedOptionpaid, objective });
     } else {
       mutate({ challengeData, paid: selectedOptionpaid, objective });
     }
     //handleClose();
   };
-
+console.log(selectedOption)
   const now = new Date().toISOString().slice(0, -8);
-
   const handleToggleUser = () => {
     setShowUser(true);
     setShowCompanies(false);

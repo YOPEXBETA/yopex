@@ -24,7 +24,7 @@ const {
 jobRouter.post("/add", addJob);
 jobRouter.get("/all", getAllJobs);
 jobRouter.put("/update/:id", authenticateToken, updateJob);
-jobRouter.get("/:companyId", authenticateToken, geJobById);
+jobRouter.get("/:organizationId", authenticateToken, geJobById);
 jobRouter.delete("/:id", authenticateToken, deleteJob);
 jobRouter.get("/user/:id", authenticateToken, getByUserId);
 jobRouter.put("/jobs/:jobId/apply/:userId", applyJob);

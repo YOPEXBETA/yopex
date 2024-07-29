@@ -17,9 +17,8 @@ const ContestDetails = () => {
   const { data: challenge, isLoading } = useChallengeById(challengeId);
 
   const { user } = useSelector((state) => state.auth);
-
-  const isOwner = user.companies.find(
-    (company) => company === challenge?.company?._id
+  const isOwner = user.organizations.find(
+    (organization) => organization === challenge?.organization?._id
   )
     ? true
     : challenge?.owner?._id === user._id

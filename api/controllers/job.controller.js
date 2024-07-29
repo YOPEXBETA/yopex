@@ -131,7 +131,6 @@ const geJobById = async (req, res, next) => {
 
 const deleteJob = async (req, res, next) => {
   const id = req.params.id;
-  console.log('')
   const ownerId = req.userId;
 
   let job;

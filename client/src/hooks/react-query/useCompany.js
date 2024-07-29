@@ -42,8 +42,8 @@ export const useGetAllSectors = () => {
 export const useApproveCompany = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (companyId) => {
-      await axios.post(`${url}/admin/appCompany`, { companyId });
+    mutationFn: async (organizationId) => {
+      await axios.post(`${url}/admin/appCompany`, { organizationId });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

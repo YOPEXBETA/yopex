@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const submissionModel = require("./submission.model");
-const organizationModel = require("./Organization.model");
 
 const ChallengeSchema = new mongoose.Schema(
   {
@@ -9,7 +8,7 @@ const ChallengeSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    company: {
+    organization: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Organization",
     },

@@ -51,8 +51,8 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                 <div className="flex flex-col items-center justify-center gap-4 mt-8">
                   <img
                     src={
-                      job?.company?.companyLogo
-                        ? job?.company?.companyLogo
+                      job?.organization?. organizationLogo
+                        ? job?.organization?.organizationLogo
                         : job?.owner?.picturePath
                         ? job?.owner?.picturePath
                         : ImagePlaceholder
@@ -63,33 +63,33 @@ const JobOfferModal = ({ open, handleClose, job }) => {
 
                   <div className="flex flex-col justify-center items-center">
                     <p className="text-2xl font-bold dark:text-gray-200 mb-2">
-                      {job.title}
+                      {job?.title}
                     </p>
                     <p className="dark:text-gray-200">
                       By{" "}
-                      {job?.company
-                        ? job?.company?.companyName
+                      {job?.organization
+                        ? job?.organization?.organizationName
                         : job?.owner?.firstname + " " + job?.owner?.lastname}
                     </p>
                   </div>
                   <div
                     className={`flex ${
-                      user && !user.companies.includes(job.company?._id)
+                      user && !user?.organizations?.includes(job?.organization?._id)
                         ? "dark:bg-zinc-800 gap-2"
                         : ""
                     } items-center bg-white`}
                   >
                     <Link
                       to={
-                        job?.company
-                          ? `/company/${job?.company?._id}`
+                        job?.organization
+                          ? `/organization/${job?.organization?._id}`
                           : `/profile/${job?.owner?._id}`
                       }
                     >
                       <button
                         className={`${
                           !user ||
-                          (user && !user.companies.includes(job.company?._id))
+                          (user && !user?.organizations?.includes(job?.organization?._id))
                             ? "w-full"
                             : "flex-1"
                         } bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded`}
@@ -102,7 +102,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                     </Link>
 
                     {user &&
-                      !user.companies.includes(job.company?._id) &&
+                      !user?.organizations?.includes(job?.organization?._id) &&
                       user?._id !== job?.owner?._id && (
                         <button
                           className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded"
@@ -151,7 +151,7 @@ const JobOfferModal = ({ open, handleClose, job }) => {
                   </div>
 
                   <div className="flex md:block lg:hidden w-full dark:bg-zinc-800 justify-between px-4 py-2 bg-white">
-                    {user && !user.companies.includes(job.company?._id) && (
+                    {user && !user?.organizations?.includes(job?.organization?._id) && (
                       <button
                         className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded  w-full"
                         onClick={onclick}

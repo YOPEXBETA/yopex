@@ -44,6 +44,7 @@ organizationRouter.delete("/:id", authenticateToken, deleteOrganization);
 organizationRouter.get("/notifications/:organizationId", authenticateToken, getOrganizationNotifications);
 organizationRouter.put("/update/:organizationId",authenticateToken, updateOrganization);
 organizationRouter.patch('/notifications/see/:organizationId', authenticateToken, seeOrganizationNotification);
+
 organizationRouter.get("/Recentcompanies", getRecentOrganizations);
 organizationRouter.post('/invite', inviteUserToOrganization);
 organizationRouter.get('/getInvitationById/:id',authenticateToken, getInvitationById);

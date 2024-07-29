@@ -165,6 +165,13 @@ export const useAcceptApplier = (jobId) => {
       await axios.put(`${url}/job/jobs/${jobId}/appliers/${userId}/accept`);
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries(["appliers"]);
+      queryClient.invalidateQueries({
+        queryKey: ["accepted/appliers"],
+      });
+    },
+    onSuccess: () => {
       toast.success("Applier accepted successfully");
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
       queryClient.invalidateQueries(["appliers"]);

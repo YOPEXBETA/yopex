@@ -56,7 +56,7 @@ const ProjectCard = ({ title, author, price, image, bidders, post, extra }) => {
                 key={post.userId}
                 to={
                   post?.companyName !== undefined
-                    ? `/company/${post.userId}`
+                    ? `/organization/${post.userId}`
                     : `/profile/${post.userId}`
                 }
                 style={{ textDecoration: "none", color: "#000000" }}

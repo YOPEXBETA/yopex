@@ -1,5 +1,7 @@
 import React from "react";
 import Card from "./index";
+import LocationIcon from "../icons/LocationIcon";
+import WebIcon from "../icons/WebIcon";
 
 const OrganizationProfileCard = ({ extra, currentOrganization }) => {
   return (
@@ -16,8 +18,14 @@ const OrganizationProfileCard = ({ extra, currentOrganization }) => {
         <div className="text-white pt-11 space-y-1">
           <h3 className="font-bold text-2xl">{currentOrganization?.organizationName}</h3>
           <div className="flex gap-4">
-            <div className="text-md">{currentOrganization?.country} ,</div>
-            <a className="text-md hover:text-green-500" href={currentOrganization?.websiteURL}>{currentOrganization?.websiteURL}</a>
+            <div className="flex gap-2">
+              <LocationIcon/>
+              <div className="text-md">{currentOrganization?.country},</div>
+            </div>
+            <div className="flex gap-2">
+              <WebIcon/>
+              <a className="text-md hover:text-green-500" href={currentOrganization?.websiteURL}>{currentOrganization?.websiteURL}</a>
+          </div>
           </div>
         </div>
     </div>

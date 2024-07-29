@@ -1,35 +1,63 @@
 import React from "react";
+import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 
-const SwitchCardWorkspace = ({ user }) => {
+const SwitchCardWorkspace = ({ user, isRouteWithSpecificWidth }) => {
   return (
-    <div className="flex items-center justify-between">
-      <img
-        className="w-12 h-12 rounded-full mr-4"
-        src={user?.picturePath}
-        alt="Profile Image"
-      />
-      <div className="flex items-center gap-8">
-      <div>
-        <h2 className="text-md font-medium">
-          {`${user?.firstname} ${user?.lastname}`}
-        </h2>
-        <p className="text-gray-600">Current Workspace</p>
-      </div>
-      <svg
-        className="w-5 h-5 ml-auto text-gray-400"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
+    <div>
+      <button
+        type="button"
+        className="inline-flex justify-center gap-x-1.5 rounded-md border-[1px] border-gray-200 px-3 py-4 text-sm hover:bg-gray-50 dark:hover:bg-zinc-500"
+        id="menu-button"
+        aria-expanded="true"
+        aria-haspopup="true"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M9 5l7 7-7 7"
-        ></path>
-      </svg>
-      </div>
+        <div className="flex items-center gap-2 justify-between">
+          {user?.picturePath ? (
+                             <img
+                             alt="picture"
+                             src={user?.picturePath}
+                             className="rounded-full  object-cover w-9 h-9 border-gray-200 border "
+                               />
+                           ) : (
+                             <img
+                               alt="default"
+                               src={AvatarProfile}
+                               className="rounded-full object-cover w-9 h-9 border-gray-200 border"
+                             />
+                           )}           
+          <div className="flex items-center gap-8">
+            <div className="flex flex-col items-start">
+              {!isRouteWithSpecificWidth && (
+                <>
+                  <p className="dark:text-white font-medium">Current WorkSpace</p>
+                  <h2 className="text-xs font-xs text-gray-400">
+                    {`${user?.firstname} ${user?.lastname}`}
+                  </h2>
+                </>
+              )}
+            </div>
+            {!isRouteWithSpecificWidth && (
+             <svg
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              className="w-6 h-6 text-gray-400 shrink-0"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+           >
+             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+             <path d="M8 9l4 -4l4 4"></path>
+             <path d="M16 15l-4 4l-4 -4"></path>
+           </svg>
+            )}
+          </div>
+        </div>
+      </button>
     </div>
   );
 };

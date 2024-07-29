@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useApplyJob } from "../../../hooks/react-query/useJobs";
 import { formatDistance } from "date-fns";
 import { useApplyJob } from "../../hooks/react-query/useJobs";
 import ImagePlaceholder from "../../assets/images/ImagePlaceholder.jpg";
@@ -7,15 +8,15 @@ import ImagePlaceholder from "../../assets/images/ImagePlaceholder.jpg";
 const JobOfferModal = ({ open, handleClose, job }) => {
   // Global states |  @redux/toolkit
   const { user } = useSelector((state) => state.auth);
-  console.log('user', user)
   const applyJobMutation = useApplyJob(job, user?._id);
-  console.log('job', job)
+  // Data fetching | react-query
 
   // React-hook-form
   const onclick = () => {
     applyJobMutation.mutate();
     handleClose();
   };
+
   return (
       <div
           className={`fixed inset-0 z-50 ${open ? "backdrop-blur-sm" : "hidden"}`}

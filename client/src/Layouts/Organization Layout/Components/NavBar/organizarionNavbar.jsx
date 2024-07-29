@@ -55,7 +55,7 @@ const OrganizationNavbar = (props) => {
     }, [socket]);
 
     return (
-        <nav className="sticky py-[0.6rem] top-0 z-40 bg-white dark:bg-zinc-800 border-gray-100 border-b-[1px] dark:border-zinc-700 w-full">
+        <nav className="sticky py-[0.6rem] top-0 z-40 w-full bg-white dark:bg-zinc-800 border-b-[1px] border-gray-100 dark:border-zinc-700">
             <div className="mx-auto  px-2 sm:px-6 lg:px-8">
                 <div className="relative flex py-1 h-11 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

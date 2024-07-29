@@ -5,7 +5,7 @@ import { useOrganizations } from "../../../hooks/react-query/useCompany";
 
 import { useSelector } from "react-redux";
 import DiscoverTab from "./DiscoverTab";
-import DiscoverCompanies from "./components/DiscoverCompanies";
+import DiscoverOrganizations from "./components/DiscoverOrganizations";
 
 const Index = () => {
   const [value, setValue] = useState(0);
@@ -84,7 +84,7 @@ const Index = () => {
         )}
         {value === 1 && (
           <div className="col-span-12 lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
-            <DiscoverCompanies
+            <DiscoverOrganizations
               user={user}
               organizationQuery={organizationQuery}
               suggestedOrganizations={suggestedOrganizations}

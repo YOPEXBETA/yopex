@@ -1,7 +1,7 @@
 const axios = require("axios");
 const ChallengeModel = require("../models/Challenge.model");
 const ContestConversationModel = require("../models/ContestConversation.model");
-const CompanyModel = require("../models/Organization.model");
+const OrganizationModel = require("../models/Organization.model");
 const submissionModel = require("../models/submission.model");
 const UserModel = require("../models/user.model");
 const Skill = require("../models/skill.model");
@@ -14,7 +14,7 @@ const CreateChallenge = async (req, res, next) => {
       description,
       categories,
       price,
-      companyId,
+      organizationId,
       deadline,
       skills,
       nbruser,
@@ -26,18 +26,19 @@ const CreateChallenge = async (req, res, next) => {
     const user = await UserModel.findById(userId);
     let owner = user;
 
-    if (companyId === "") {
-      return res.status(400).json({ error: "Company not found" });
-    }
+    const organization = await OrganizationModel.findById(organizationId);
 
-    if (companyId) {
-      owner = await CompanyModel.findOne({
+    if (!organization) {
+      return res.status(400).json({ error: "organization not found" });
+    }
+    if (organizationId) {
+      owner = await OrganizationModel.findOne({
         user: user._id,
-        _id: companyId,
+        _id:  organizationId,
       });
 
       if (!owner) {
-        return res.status(400).json({ error: "Company not found" });
+        return res.status(400).json({ error: "Organization not found" });
       }
     }
 
@@ -63,8 +64,8 @@ const CreateChallenge = async (req, res, next) => {
       verified: paid === "true" ? false : true,
       objective,
     });
-    if (companyId) {
-      challenge.company = owner._id;
+    if (organizationId) {
+      challenge.organization = owner._id;
       challenge.owner = user._id;
     } else {
       challenge.owner = owner._id;
@@ -76,7 +77,7 @@ const CreateChallenge = async (req, res, next) => {
       contestId: challenge._id,
     });
     await newCoversation.save();
-    if (companyId) {
+    if (organizationId) {
       owner.challenges.push(challenge._id);
       await owner.save();
     } else {
@@ -121,7 +122,7 @@ const getChallengeById = async (req, res) => {
 
   try {
     const challenge = await ChallengeModel.findById(challengeId)
-      .populate("company")
+      .populate("organization")
       .populate("owner", "firstname lastname picturePath _id")
       .populate("skills", "name _id")
       .populate({
@@ -158,7 +159,7 @@ const deleteChallenge = async (req, res) => {
       _id: req.params.id,
     });
     if (challenge.company) {
-      const company = await CompanyModel.findOne({ _id: challenge.company });
+      const company = await OrganizationModel.findOne({ _id: challenge.company });
       await company.challenges.pull(challenge._id);
       await company.save();
     } else {
@@ -176,18 +177,16 @@ const deleteChallenge = async (req, res) => {
 
 const getCompanyChallenges = async (req, res) => {
   try {
-    const companyId = req.params.companyId;
+    const organizationId = req.params.organizationId;
 
-    const company = await CompanyModel.findOne({ _id: companyId });
-
-    if (!company) {
-      return res.status(400).json({ error: "Company not found" });
+    const organization = await OrganizationModel.findOne({ _id: organizationId });
+    if (!organization) {
+      return res.status(400).json({ error: "organization not found" });
     }
-
     const challenges = await ChallengeModel.find({
-      company: companyId,
+      organization: organizationId,
       verified: true,
-    }).populate("company");
+    }).populate("organization");
 
     res.status(200).json(challenges);
   } catch (error) {

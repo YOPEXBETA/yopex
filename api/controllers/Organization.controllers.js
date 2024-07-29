@@ -196,7 +196,6 @@ const getCompanyNotifications = async (req, res) => {
 };
 const deleteOrganization = async (req, res) => {
   try {
-    console.log('id', req.params.id);
     const organization = await Organization.findById(req.params.id);
     if (!organization) {
       return res.status(404).json({ message: "Organization not found" });
@@ -210,7 +209,7 @@ const deleteOrganization = async (req, res) => {
 
     // Remove organization from user's list
     user.organizations = user.organizations.filter(
-        (companyId) => companyId.toString() !== req.params.id
+        (organizationId) => organizationId.toString() !== req.params.id
     );
     await user.save();
 

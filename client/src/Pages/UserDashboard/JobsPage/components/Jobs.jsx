@@ -27,7 +27,6 @@ const Jobs = ({
     ? jobs.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     : [];
 
-  console.log('jobs')
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-1 gap-2 xl:grid-cols-1 mb-16 xl:mb-4">
@@ -39,7 +38,7 @@ const Jobs = ({
           <div className="grid grid-cols-1 md:grid-cols-1 gap-2 lg:grid-cols-2 xl:grid-cols-2">
             {sortedJobs?.length > 0 ? (
               sortedJobs?.map((job) => (
-                <div key={job._id} onClick={() => handleClickOpenModalJob(job)}>
+                <div key={job?._id} onClick={() => handleClickOpenModalJob(job)}>
                   <WorkCard job={job} />
                 </div>
               ))

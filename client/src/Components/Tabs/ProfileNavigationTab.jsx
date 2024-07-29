@@ -14,75 +14,85 @@ export const ProfileNavigationTab = ({ changeValue, value, extra }) => {
 
   return (
     <Card extra={`${extra}`}>
-      <div className="p-2 overflow-hidden sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+      <div className="p-1 overflow-hidden sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4 bg-gray-100 rounded-lg">
         <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
+          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
             value === 0
-              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-              : "text-gray-500 border-gray-300 dark:text-gray-300"
+              ? "bg-white shadow"
+              : ""
           }`}
           onClick={() => changeValue(0)}
+        >
+          About
+        </button>
+        <button
+          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
+            value === 1
+              ? "bg-white shadow"
+              : ""
+          }`}
+          onClick={() => changeValue(1)}
         >
           Posts
         </button>
         <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 1
-              ? "bg-green-500 text-white dark:text-gray-200  border-green-500"
-              : "text-gray-500 border-gray-300 dark:text-gray-300"
+          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
+            value === 2
+              ? "bg-white shadow"
+              : ""
           }`}
-          onClick={() => changeValue(1)}
+          onClick={() => changeValue(2)}
         >
           Challenges
         </button>
         <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 2
-              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-              : "text-gray-500 border-gray-300 dark:text-gray-300"
-          }`}
-          onClick={() => changeValue(2)}
+          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
+            value === 3
+                ? "bg-white shadow"
+                : ""
+            }`}
+          onClick={() => changeValue(3)}
         >
           Followers
         </button>
         <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 3
-              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-              : "text-gray-500 border-gray-300 dark:text-gray-300"
-          }`}
-          onClick={() => changeValue(3)}
+          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
+            value === 4
+                ? "bg-white shadow"
+                : ""
+            }`}
+          onClick={() => changeValue(4)}
         >
           Followings
         </button>
         <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 4
-              ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-              : "text-gray-500 border-gray-300 dark:text-gray-300"
+          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
+            value === 5
+              ? "bg-white shadow"
+              : ""
           }`}
-          onClick={() => changeValue(4)}
+          onClick={() => changeValue(5)}
         >
           Badges
         </button>
         <button
-          className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-            value === 5
-              ? "bg-green-500 text-white "
-              : "text-gray-500 border-gray-300 dark:text-gray-300"
+          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
+            value === 6
+              ? "bg-white shadow"
+              : ""
           }`}
-          onClick={() => changeValue(5)}
+          onClick={() => changeValue(6)}
         >
           {`Reviews (${reviews?.length || 0})`}
         </button>
         {userId == user._id ? (
           <button
-            className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${
-              value === 6
-                ? "bg-green-500 text-white dark:text-gray-200 border-green-500"
-                : "text-gray-500 border-gray-300 dark:text-gray-300"
-            }`}
-            onClick={() => changeValue(6)}
+          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
+            value === 7
+              ? "bg-white shadow"
+              : ""
+          }`}
+            onClick={() => changeValue(7)}
           >
             {`Favorites (${userProfile?.bookmarks.length || 0})`}
           </button>

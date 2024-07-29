@@ -228,7 +228,7 @@ const UserProfileCard = () => {
                           className="rounded-lg w-11 h-11 cursor-pointer object-cover border-2 border-zinc-200"
                         />
                       ) : (
-                        <div>No company logo available</div>
+                        <div>No organization logo available</div>
                       )}
                     </Link>
                   ))}

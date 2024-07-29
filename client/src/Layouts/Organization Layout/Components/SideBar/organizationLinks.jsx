@@ -19,7 +19,7 @@ export function OrganizationSidebarLinks(props) {
           <Link key={index} to={route.path}>
             <ul className="relative mb-3 flex items-center hover:cursor-pointer">
               <li
-                className="my-[6px] flex cursor-pointer items-center px-8"
+                className="my-[6px] flex cursor-pointer items-center px-6"
                 key={index}
               >
                 {!route.hideIcon && (

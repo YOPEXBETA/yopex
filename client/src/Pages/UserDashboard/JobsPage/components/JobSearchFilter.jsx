@@ -34,7 +34,7 @@ const JobSearchFilter = ({
             <input
               type="text"
               onChange={(e) => setJobQuery(e.currentTarget.value)}
-              className="bg-lightPrimary border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
+              className="border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
               placeholder="Search for Job opportunities"
             />
           </div>

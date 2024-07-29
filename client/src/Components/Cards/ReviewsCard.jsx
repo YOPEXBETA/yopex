@@ -11,7 +11,7 @@ const ReviewsCard = ({ extra, review }) => {
       extra={`p-8 ${extra}`}
       onClick={() => {
         if (review && review.companyId && review.companyId._id) {
-          navigate(`/company/${review.companyId._id}`);
+          navigate(`/organization/${review.companyId._id}`);
         } else {
           navigate(`/profile/${review.challengeOwnerId._id}`);
         }

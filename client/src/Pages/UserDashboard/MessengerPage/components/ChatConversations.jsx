@@ -82,7 +82,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
             onClick={() => {
               navigate(
                 otherUser.companyLogo
-                  ? "/company/" + otherUser._id
+                  ? "/organization/" + otherUser._id
                   : "/profile/" + otherUser._id
               );
             }}
@@ -161,7 +161,7 @@ const ChatConversations = ({ conversationId, socket, otherUser }) => {
             )}
           </div>
         </div>
-        <div className="flex-none fixed bottom-0 right-0 lg:w-[68%] md:w-[56%] w-full">
+        <div className="flex-none sticky bottom-0 right-0  w-full">
           <div className="flex flex-row items-center p-4">
             <div className="relative flex-grow">
               <form onSubmit={handleCreateMessage} className="w-full">

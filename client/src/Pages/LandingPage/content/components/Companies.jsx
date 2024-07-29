@@ -4,10 +4,10 @@ import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import { Link } from "react-router-dom";
 
 const Companies = () => {
-  const { data: RecentCompanies, isLoading: companiesLoading } =
+  const { data: Recentorganizations, isLoading: organizationsLoading } =
     useRecentCompanies();
 
-  if (companiesLoading) {
+  if (organizationsLoading) {
     return (
       <div className="flex items-center justify-center">
         <LoadingSpinner />
@@ -31,19 +31,19 @@ const Companies = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
-        {RecentCompanies?.length > 0 ? (
-          RecentCompanies?.map((company) => (
-            <div key={company?.id} className="p-4">
-              <Link to={`/company/${company?._id}`}>
+        {Recentorganizations?.length > 0 ? (
+          Recentorganizations?.map((organization) => (
+            <div key={organization?.id} className="p-4">
+              <Link to={`/organization/${organization?._id}`}>
                 <div className="flex gap-3 items-center mb-4 flex-col">
                   <img
-                    src={company?.companyLogo}
+                    src={organization?.organizationLogo}
                     alt="Icon"
                     className="w-20 h-20 rounded-lg object-cover"
                   />
                   <div>
                     <h2 className="text-lg font-medium hover:text-amber-500">
-                      {company?.companyName}
+                      {organization?.organizationName}
                     </h2>
                   </div>
                 </div>

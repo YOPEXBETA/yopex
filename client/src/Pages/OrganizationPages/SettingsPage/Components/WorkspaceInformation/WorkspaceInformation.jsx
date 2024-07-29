@@ -3,11 +3,9 @@ import { FaCamera } from "react-icons/fa";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import countries from "../../../../../countries.json";
-import { format } from "date-fns";
 import {useEditOrganization} from "../../../../../hooks/react-query/useCompany";
 import {useFileUpload} from "../../../../../hooks/react-query/useUsers";
 import Card from "../../../../../Components/Cards";
-import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
 const EditOrganization = ({ extra }) => {
@@ -132,7 +130,7 @@ const EditOrganization = ({ extra }) => {
                         {/* Banner Input */}
                         <label
                             htmlFor="bannerInput"
-                            className="absolute -bottom-1.5 -right-1.5 p-2 bg-green-500 rounded-full text-white cursor-pointer"
+                            className="absolute bottom-1.5 right-1.5 p-2 bg-green-500 rounded-full text-white cursor-pointer"
                         >
                             <input
                                 id="bannerInput"
@@ -148,7 +146,7 @@ const EditOrganization = ({ extra }) => {
                     </div>
 
                     {/* Logo and Input */}
-                    <div className="absolute left-4 top-4 flex items-center gap-4 z-10">
+                    <div className="absolute left-4 top-14 flex items-center gap-4 z-10">
                         <div className="relative w-28 h-28">
                             {logoPreview ? (
                                 <img
@@ -193,8 +191,8 @@ const EditOrganization = ({ extra }) => {
                         {isSubmitting ? "Submitting" : "Save"}
                     </button>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 relative z-10">
-                    <div className="col-span-1">
+                <div className="grid grid-cols-1 gap-4">
+                <div className="col-span-1">
                         <label htmlFor="organizationName" className="block dark:text-gray-300">
                             Organization Name
                         </label>
@@ -202,14 +200,12 @@ const EditOrganization = ({ extra }) => {
                             id="organizationName"
                             type="text"
                             placeholder="Organization name"
-                            className="w-full border border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-300 rounded-md px-3 py-2 mt-1 bg-white"
+                            className="w-full border border-gray-300 dark:bg-zinc-700 mt-1 dark:border-zinc-600 dark:text-gray-300 rounded-md px-3 py-2 bg-white"
                             {...register("organizationName")}
                         />
                     </div>
                     <div className="col-span-1">
-                        <label htmlFor="organizationDescription" className="block dark:text-gray-300">
-                            Organization Description
-                        </label>
+                         <label className="dark:text-gray-300">Organization Description</label>
                         <textarea
                             id="organizationDescription"
                             placeholder="Description"

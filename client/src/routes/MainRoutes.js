@@ -7,6 +7,7 @@ import LeaderboardIcon from "../Components/icons/LeaderboardIcon";
 import StoreIcon from "../Components/icons/StoreIcon";
 import SettingsIcon from "../Components/icons/SettingsIcon";
 import ChatIcon from "../Components/icons/ChatIcon";
+import DashboardIcon from "../Components/icons/DashboardIcon";
 import ContestIcon from "../Components/icons/ContestIcon";
 import JobIcon from "../Components/icons/JobIcon";
 import ProjectIcon from "../Components/icons/ProjectIcon";
@@ -14,6 +15,11 @@ import DiscoverIcon from "../Components/icons/DiscoverIcon";
 import DashIcon from "../Components/icons/DashIcon";
 
 // ==============================|| USER PAGES ||============================== //
+
+//OverviewPage
+const OverviewLayout = Loadable(
+  lazy(() => import("../Pages/UserDashboard/OverviewPage/Index"))
+);
 //HomePage
 const HomeLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/HomePage/index"))
@@ -100,6 +106,13 @@ const MainRoutes = {
   children: [
     {
       index: true,
+      name: "Overview",
+      path: "overview",
+      icon: <DashboardIcon className="h-6 w-6" />,
+      element: <OverviewLayout width={6} height={6} color={"grey-100"} />,
+    },
+    {
+      index: true,
       name: "Feed",
       path: "feed",
       icon: <DashIcon className="h-6 w-6" />,
@@ -123,7 +136,7 @@ const MainRoutes = {
     {
       name: "Jobs",
       icon: <JobIcon width={6} height={6} color={"grey-100"} />,
-      path: "/jobs",
+      path: "jobs",
       element: <JobLayout />,
       customWidth: true,
     },
@@ -149,14 +162,14 @@ const MainRoutes = {
 
     {
       name: "Profile",
-      path: "/profile",
+      path: "profile",
       children: [{ path: ":userId", element: <UserProfileLayout /> }],
       hideInSidebar: true,
       customWidth: true,
     },
     {
       name: "Organization",
-      path: "/organization",
+      path: "organization",
       children: [
         {
           path: ":companyId",
@@ -171,22 +184,22 @@ const MainRoutes = {
       path: "leaderboard",
       element: <LeaderBoardLayout />,
       icon: <LeaderboardIcon width={6} height={6} color={"grey-100"} />,
-      customWidth: true,
+      customWidth: false,
     },
     {
       name: "Chat",
       path: "chat",
       icon: <ChatIcon width={6} height={6} color={"grey-100"} />,
-      customWidth: true,
-      hideInSidebar: false,
       children: [
         {
           index: true,
           element: <Messenger />,
+          customWidth: true,
         },
         {
           path: ":selectedConversationId",
           element: <Messenger />,
+          hideInSidebar: true,
         },
       ],
     },
@@ -198,14 +211,14 @@ const MainRoutes = {
     },
     {
       name: "post Details",
-      path: "/postDetails",
+      path: "postDetails",
       children: [{ path: ":id", element: <PostDetails /> }],
       hideInSidebar: true,
       customWidth: false,
     },
 
     {
-      path: "/paymentSuccess",
+      path: "paymentSuccess",
       element: <PaymentSuccess />,
       hideInSidebar: true,
     },
@@ -216,7 +229,7 @@ const MainRoutes = {
       hideInSidebar: true,
     },
     {
-      path: "/Notifications",
+      path: "Notifications",
       element: <MobileNotifications />,
       hideInSidebar: true,
     },

@@ -17,9 +17,9 @@ export function SidebarLinks(props) {
       if (!route.hideInSidebar) {
         return (
           <Link key={index} to={route.path}>
-            <ul className="relative mb-3 flex items-center hover:cursor-pointer">
+            <ul className="relative mb-2 flex items-center hover:cursor-pointer">
               <li
-                className="my-[6px] flex cursor-pointer items-center px-8"
+                className="my-[6px] flex cursor-pointer items-center px-6"
                 key={index}
               >
                 {!route.hideIcon && (
@@ -34,7 +34,6 @@ export function SidebarLinks(props) {
                   </span>
                 )}
                 {/* Conditionally render the name based on the route and path */}
-                {!isRouteWithSpecificWidth && (
                   <p
                     className={`leading-1 ml-4 flex ${
                       activeRoute(route.path) === true
@@ -44,7 +43,7 @@ export function SidebarLinks(props) {
                   >
                     {route?.name}
                   </p>
-                )}
+              
               </li>
               {activeRoute(route.path) ? (
                 <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-green-500 dark:bg-green-500" />
