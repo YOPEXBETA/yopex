@@ -18,28 +18,13 @@ const NotificationMenu = ({ notifications, user, mutate, onInvitationClick }) =>
                         onClick={() => notification?.type === 'invitation' ? onInvitationClick(notification) : mutate(notification?._id)}
                     >
                         <li>
-                            <button className="flex items-center p-4 space-x-4  hover:bg-gray-100 dark:hover:bg-zinc-800 w-full text-left">
-                                {notification?.user?.picturePath ||
-                                (notification?.job
-                                    ? notification?.job?.company?.picturePath
-                                    : user?.picturePath) ? (
-                                    <img
-                                        src={
-                                            notification?.user
-                                                ? notification?.user?.picturePath
-                                                : notification?.job
-                                                    ? notification?.job.company?.picturePath
-                                                    : user?.picturePath
-                                        }
-                                        className="w-10 h-10 rounded-full border"
-                                    />
-                                ) : (
-                                    <img
-                                        alt="default"
-                                        src={AvatarProfile}
-                                        className="w-10 h-10 rounded-full"
-                                    />
-                                )}
+                            <button
+                                className="flex items-center p-4 space-x-4  hover:bg-gray-100 dark:hover:bg-zinc-800 w-full text-left">
+                                <img
+                                    src={notification?.picture || AvatarProfile}
+                                    alt="notification"
+                                    className="w-10 h-10 rounded-full border"
+                                />
                                 <div className="flex-grow">
                                     <div className="flex items-center">
                                         <p className="text-sm text-gray-500 dark:text-gray-200 truncate w-80">
@@ -55,7 +40,7 @@ const NotificationMenu = ({ notifications, user, mutate, onInvitationClick }) =>
                                 </div>
                             </button>
                         </li>
-                        <hr className="border-t border-gray-200" />
+                        <hr className="border-t border-gray-200"/>
                     </div>
                 ))}
             </ul>

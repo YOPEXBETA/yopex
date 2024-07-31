@@ -5,7 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Setting tab for the organization (update organization info, invite and manage members, update social links)">
+      <change beforePath="$PROJECT_DIR$/../api/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/Organization.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/Organization.controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/job.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/job.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/routes/Organization.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/Organization.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/CompanyTeamCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/CompanyTeamCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/components/NotificationMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/components/NotificationMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/icons/NotificationBellIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/icons/NotificationBellIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/NavBar/organizarionNavbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/NavBar/organizarionNavbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/NavBar/organizationNotificationMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/NavBar/organizationNotificationMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationLinks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationLinks.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationSideBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationSideBar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/Members/MembersSettings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/Members/MembersSettings.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/WorkspaceInformation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/WorkspaceInformation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/Team/Team.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/ContentSide/Components/Team/Team.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/TopSide/CompanyProfileInformations.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CompanyPage/TopSide/CompanyProfileInformations.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useCompany.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/MainRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/MainRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +141,11 @@
       <workItem from="1721928584702" duration="201000" />
       <workItem from="1721933415198" duration="82000" />
       <workItem from="1722086141583" duration="3000" />
+      <workItem from="1722263228578" duration="3421000" />
+      <workItem from="1722284134387" duration="9680000" />
+      <workItem from="1722342722263" duration="3001000" />
+      <workItem from="1722360400518" duration="368000" />
+      <workItem from="1722419356144" duration="5924000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />

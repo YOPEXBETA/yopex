@@ -26,7 +26,7 @@ const OrganizationNavbar = (props) => {
     const { data: notification } = useGetOrganizationNotifications(currentOrganization?._id);
     const [notifications, setNotifications] = useState([]);
     const [socket, setSocket] = useState(null);
-    const { mutate } = useSeeOrganizationNotifications(currentOrganization?._id);
+    const { mutate } = useSeeOrganizationNotifications();
     const [nbrNotifications, setNbrNotifications] = useState(0);
     const url = process.env.REACT_APP_API_ENDPOINT;
 
@@ -42,7 +42,6 @@ const OrganizationNavbar = (props) => {
         if (!notification) return;
         setNotifications(notification.notification);
         setNbrNotifications(notification.nbr);
-        console.log('notif', notification)
     }, [notification]);
 
     useEffect(() => {
@@ -53,6 +52,13 @@ const OrganizationNavbar = (props) => {
         });
         return () => socket.off("notification");
     }, [socket]);
+
+    const handleBellClick = () => {
+        if (currentOrganization?._id) {
+            mutate(currentOrganization._id); // Pass organizationId to mutate
+            setNbrNotifications(0); // Reset notification count
+        }
+    };
 
     return (
         <nav className="sticky py-[0.6rem] top-0 z-40 w-full bg-white dark:bg-zinc-800 border-b-[1px] border-gray-100 dark:border-zinc-700">
@@ -136,6 +142,7 @@ const OrganizationNavbar = (props) => {
                                 button={
                                     <NotificationBellIcon
                                         notificationNumber={notification?.countNotSeenNotifications}
+                                        onClick={handleBellClick}
                                     />
                                 }
                                 animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"

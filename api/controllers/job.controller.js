@@ -12,7 +12,7 @@ const main = require("../server");
 const addJob = async (req, res, next) => {
   try {
     const { organizationId, ...jobDetails } = req.body;
-console.log('id',organizationId)
+    console.log('job', req.body)
     if (!organizationId) {
       return res.status(400).json({ error: "organizationId must be provided" });
     }
@@ -91,17 +91,16 @@ const updateJob = async (req, res, next) => {
 
 const geJobById = async (req, res, next) => {
   try {
-    const organizationId = req.params.companyId;
+    const organizationId = req.params.organizationId;
     const q = req.query;
 
-    // Check if the organization exists
+
     const organization = await Organization.findOne({ _id: organizationId });
 
     if (!organization) {
       return res.status(400).json({ error: "Organization not found" });
     }
 
-    // Build filters based on query parameters
     const filters = {
       ...(q.search && { title: { $regex: q.search, $options: "i" } }),
       ...(q.jobType && { jobType: q.jobType }),
@@ -113,10 +112,9 @@ const geJobById = async (req, res, next) => {
           ),
         },
       }),
-      organization: organizationId  // Ensure jobs are related to the specified organization
+      organization: organizationId
     };
 
-    // Find all job offers related to the company with filters
     const jobOffers = await Job.find(filters)
         .populate("organization", "organizationName organizationLogo _id")
         .populate("skills");

@@ -190,8 +190,26 @@ export const useAcceptInvitation = () => {
         const { data } = await axios.post(`${url}/company/accept-invitation/${invitationId}`);
 
         toast.success("Invitation accepted successfully");
-        // Optionally invalidate relevant queries if needed
-        // queryClient.invalidateQueries([...]);
+        return data;
+      } catch (error) {
+        toast.error(`Error accepting invitation: ${error.response.data.message}`);
+        throw new Error(error.response.data.message);
+      }
+    },
+    onError: (error) => {
+      console.error("Error accepting invitation:", error);
+    },
+  });
+};
+
+export const useRefuseInvitation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (invitationId) => {
+      try {
+        const { data } = await axios.delete(`${url}/company/refuse-invitation/${invitationId}`);
+        toast.success("Invitation refused successfully");
         return data;
       } catch (error) {
         toast.error(`Error accepting invitation: ${error.response.data.message}`);
@@ -249,7 +267,8 @@ export const useSeeOrganizationNotifications = () => {
 
   return useMutation({
     mutationFn: async (organizationId) => {
-      const { data } = await axios.post(`${url}/company/notifications/see/${organizationId}`);
+      console.log('idorg', organizationId)
+      const { data } = await axios.put(`${url}/company/notifications/see/${organizationId}`);
       return data;
     },
     onSuccess: () => {
@@ -317,5 +336,16 @@ export const useEditSocialMediaLinks = (organizationId) => {
     onError: (error) => {
       toast.error(`Error updating social media links: ${error.response.data.message}`);
     },
+  });
+};
+
+export const useGetUserRoleInOrganization = (organizationId, userId) => {
+  return useQuery({
+    queryKey: ["userRoleInOrganization", organizationId, userId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/company/getUserRoleInOrganization/${organizationId}/${userId}`);
+      return data;
+    },
+    enabled: !!organizationId && !!userId,
   });
 };

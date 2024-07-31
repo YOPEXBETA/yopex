@@ -42,7 +42,7 @@ const MobileNotifications = Loadable(
 );
 
 //CompanyPage
-const Company = Loadable(
+const Organization = Loadable(
   lazy(() => import("../Pages/UserDashboard/CompanyPage/index"))
 );
 
@@ -172,8 +172,8 @@ const MainRoutes = {
       path: "organization",
       children: [
         {
-          path: ":companyId",
-          element: <Company width={6} height={6} color={"grey-100"} />,
+          path: ":organizationId",
+          element: <Organization width={6} height={6} color={"grey-100"} />,
         },
       ],
       hideInSidebar: true,

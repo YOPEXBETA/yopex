@@ -93,7 +93,6 @@ const getOrganization = async (req, res) => {
     if (!organization) {
       return res.status(404).json({ message: "Organization not found" });
     }
-console.log('org', organization)
     res.status(200).json(organization);
   } catch (err) {
     res.status(500).json({ message: "Internal server error" });
@@ -284,7 +283,7 @@ const inviteUserToOrganization = async (req, res) => {
         const notification = new notificationModel({
           type: 'invitation',
           message: `You have been invited to join ${organization.organizationName} as a ${role.name}`,
-          picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
+          picture: organization.organizationLogo,
           user: existingUser._id,
           invitation: newInvitation._id
         });
@@ -336,13 +335,6 @@ const inviteUserToOrganization = async (req, res) => {
         return res.status(400).json({ message: `User not found: ${userId}` });
       }
 
-
-      const existingInvitation = await Invitation.findOne({ organization: organizationId, user: userId });
-      if (existingInvitation) {
-        return res.status(400).json({ message: "User has already been invited to this organization" });
-      }
-
-
       const newInvitation = new Invitation({
         organization: organizationId,
         user: userId,
@@ -354,7 +346,7 @@ const inviteUserToOrganization = async (req, res) => {
       const notification = new notificationModel({
         type: 'invitation',
         message: `You have been invited to join ${organization.organizationName} as a ${role.name}`,
-        picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
+        picture: organization.organizationLogo,
         user: userId,
         invitation: newInvitation._id
       });
@@ -426,7 +418,7 @@ const acceptInvitation = async (req, res) => {
       const notification = new notificationModel({
         type: 'invitation_accepted',
         message: `${user.firstname} ${user.lastname} accepted the invitation to join ${organization.organizationName} as a ${invitation.role}`,
-        picture: "https://icones.pro/wp-content/uploads/2021/04/icone-cloche-notification-verte.png",
+        picture: user.picturePath,
         organization: organization._id,
       });
       await notification.save();
@@ -446,6 +438,29 @@ const acceptInvitation = async (req, res) => {
     res.status(200).json({ message: "Invitation accepted", organization });
   } catch (error) {
     console.error("Error accepting invitation:", error);
+    res.status(500).json({ message: "An error occurred", error: error.message });
+  }
+};
+
+const refuseInvitation = async (req, res) => {
+  const { invitationId } = req.params;
+
+  try {
+    // Find the invitation
+    const invitation = await Invitation.findById(invitationId);
+    if (!invitation) {
+      return res.status(404).json({ message: "Invitation not found" });
+    }
+
+    // Delete the invitation
+    await Invitation.findByIdAndDelete(invitationId);
+
+    // Find and delete the associated notification
+    await notificationModel.deleteOne({ invitation: invitationId });
+
+    res.status(200).json({ message: "Invitation refused and notification deleted" });
+  } catch (error) {
+    console.error("Error refusing invitation:", error);
     res.status(500).json({ message: "An error occurred", error: error.message });
   }
 };
@@ -472,6 +487,7 @@ const getCurrentOrganization = async (req, res) => {
 const seeOrganizationNotification = async (req, res) => {
   try {
     const { organizationId } = req.params;
+    console.log('idorg', req.params)
     const organization = await Organization.findById(organizationId).select("notificationsOrganization");
 
     if (!organization) {
@@ -482,6 +498,7 @@ const seeOrganizationNotification = async (req, res) => {
       seen: false,
       organization: organizationId,
     });
+
     for (const notification of unseenNotifications) {
       notification.seen = true;
       await notification.save();
@@ -610,6 +627,36 @@ const updateSocialMediaLinks = async (req, res) => {
   }
 };
 
+const getUserRoleInOrganization = async (req, res) => {
+  try {
+    const { userId, organizationId } = req.params;
+
+    // Find the organization by its ID
+    const organization = await Organization.findById(organizationId);
+
+    if (!organization) {
+      return res.status(404).json({ message: 'Organization not found' });
+    }
+
+    // Check if the user is the owner of the organization
+    if (organization.user.toString() === userId) {
+      return res.status(200).json({ roleName: 'owner' });
+    }
+
+    // Check if the user is a member of the organization
+    const member = organization.organizationMembers.find(member => member.userId.toString() === userId);
+
+    if (!member) {
+      return res.status(404).json({ message: 'User is not a member of the organization' });
+    }
+
+    // Return the user's role
+    return res.status(200).json({ roleName: member.roleName });
+  } catch (error) {
+    console.error('Error fetching user role in organization:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 
 module.exports = {
@@ -625,10 +672,12 @@ module.exports = {
   inviteUserToOrganization,
   getInvitationById,
   acceptInvitation,
+  refuseInvitation,
   getCurrentOrganization,
   getOrganizationNotifications,
   seeOrganizationNotification,
   updateMemberRole,
   deleteMember,
-  updateSocialMediaLinks
+  updateSocialMediaLinks,
+  getUserRoleInOrganization
 };

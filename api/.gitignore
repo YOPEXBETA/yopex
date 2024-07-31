@@ -11,7 +11,9 @@
 
 # production
 /build
-/.idea
+.idea
+.idea/workspace.xml
+
 # misc
 .DS_Store
 .env.local

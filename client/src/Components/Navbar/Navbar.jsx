@@ -14,7 +14,12 @@ import {
 } from "../../hooks/react-query/useUsers";
 import { io } from "socket.io-client";
 import InvitationModal from "../Modals/InvitationModal";
-import {useAcceptInvitation, useOrganizationById, useInvitationById} from "../../hooks/react-query/useCompany";
+import {
+  useAcceptInvitation,
+  useOrganizationById,
+  useInvitationById,
+  useRefuseInvitation
+} from "../../hooks/react-query/useCompany";
 import {useNavigate} from "react-router-dom";
 
 
@@ -37,6 +42,8 @@ const Navbar = (props) => {
   const { data: organization } = useOrganizationById(invitation?.organization);
 
   const { mutate: acceptInvitation, isLoading: acceptLoading } = useAcceptInvitation();
+  const { mutate: refuseInvitation } = useRefuseInvitation();
+
 
   useEffect(() => {
     const newSocket = io(`${url}`);
@@ -89,11 +96,23 @@ const Navbar = (props) => {
     }
   };
 
-  const handleRefuseInvitation = () => {
-    // Handle refusing the invitation
-    handleCloseModal();
+  const handleRefuseInvitation = async () => {
+    if (!invitationData) return;
+
+    try {
+      await refuseInvitation(invitationData?.invitation);
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error accepting invitation:", error);
+    }
   };
 
+  const handleBellClick = () => {
+    if (user?._id) {
+      mutate(); // Mark all notifications as seen
+      setNbrNotifications(0); // Reset notification count
+    }
+  };
   return (
       <nav className="sticky py-[0.6rem] top-0 z-40 w-full bg-white dark:bg-zinc-800 border-b-[1px] border-gray-100 dark:border-zinc-700">
         <div className="mx-auto  px-2 sm:px-6 lg:px-8">
@@ -176,6 +195,7 @@ const Navbar = (props) => {
                     button={
                       <NotificationBellIcon
                           notificationNumber={notification?.countNotSeenNotifications}
+                          onClick={handleBellClick}
                       />
                     }
                     animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"

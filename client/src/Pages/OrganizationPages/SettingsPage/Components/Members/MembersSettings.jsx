@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Card from "../../../../../Components/Cards";
 import { useSelector, useDispatch } from "react-redux";
 import {FaEdit, FaPlus, FaTimes} from "react-icons/fa";
 import { useAllRoles } from "../../../../../hooks/react-query/useRoles";
@@ -8,6 +7,7 @@ import toast from "react-hot-toast";
 import { fetchCurrentOrganization } from "../../../../../redux/organization/organizationSlice";
 import DeleteMemberPopup from "../../../../../Components/Popup/DeleteMemberPopup";
 import MemberInvitationCard from "../../../../../Components/Cards/MembersInvitationCard";
+import AvatarProfile from "../../../../../assets/images/AvatarProfile.jpg";
 
 const MembersSettings = ({ extra }) => {
     const dispatch = useDispatch();
@@ -93,7 +93,7 @@ const MembersSettings = ({ extra }) => {
                             className="bg-white p-4 rounded-lg shadow-md flex items-center relative"
                         >
                             <img
-                                src={member.userId.picturePath}
+                                src={member.userId.picturePath || AvatarProfile}
                                 alt={`${member.userId.firstname} ${member.userId.lastname}`}
                                 className="w-12 h-12 rounded-full mr-4"
                             />

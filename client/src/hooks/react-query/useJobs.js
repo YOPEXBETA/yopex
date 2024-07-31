@@ -50,6 +50,9 @@ export const useJobById = (companyId, searchQuery, skills, jobType, offerType) =
         query += `&offerType=${offerType}`;
       }
 
+      if (query) {
+        query = "?" + query.slice(1);
+      }
       // Make the request
       const { data } = await axios.get(`${url}/job/${companyId}?${query}`);
 
@@ -85,12 +88,15 @@ export const useCreateJob = (user) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ companyId, JobData }) => {
-      await axios.post(`${url}/job/add`, { companyId, ...JobData }, {});
+    mutationFn: async ({ organizationId, JobData }) => {
+      console.log('jobdata', JobData)
+      await axios.post(`${url}/job/add`, { organizationId, ...JobData }, {});
     },
     onSuccess: () => {
       toast.success("Job added successfully");
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["jobsById"] });
+
     },
     onError: (error) => {
       toast.error(`can't create a job ${error.response.data.message}`);

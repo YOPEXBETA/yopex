@@ -16,7 +16,7 @@ const OrganizationSidebar = ({
   onClose,
   isRouteWithSpecificWidth,
   handleCreateClick,
-  closeCreateMenuModal,
+  closeCreateMenuModal, onPostChallengeClick, onPostJobClick
 }) => {
   const { currentOrganization } = useSelector((state) => state.organization);
   console.log('current org', currentOrganization)
@@ -94,6 +94,8 @@ const OrganizationSidebar = ({
         <OrganizationSidebarLinks
           routes={organizationRoutes}
           isRouteWithSpecificWidth={isRouteWithSpecificWidth}
+          onPostChallengeClick={onPostChallengeClick}
+          onPostJobClick={onPostJobClick}
         />
       </ul>
     </div>
