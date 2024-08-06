@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useSkills } from "../../hooks/react-query/useSkills";
 import { useCategories } from "../../hooks/react-query/useCategories";
@@ -6,8 +6,14 @@ import Modal from ".";
 import CloseIcon from "../icons/CloseIcon";
 import InfoIcon from "../icons/InfoIcon";
 import Select from "react-select";
+import {useSelector} from "react-redux";
+import {useCreateOrganizationChallenge} from "../../hooks/react-query/useChallenges";
 
 const CreateOrganizationChallengeModal = ({ open, handleClose }) => {
+    const currentOrganization = useSelector((state) => state.organization.currentOrganization);
+    const modalRef = useRef(null);
+
+    const { user } = useSelector((state) => state.auth);
     const {
         handleSubmit,
         register,
@@ -25,10 +31,36 @@ const CreateOrganizationChallengeModal = ({ open, handleClose }) => {
     const { data: Skills } = useSkills();
     const { data: categorys } = useCategories();
 
+    const createChallengeMutation = useCreateOrganizationChallenge();
+
     const onSubmit = async (challengeData) => {
-        // Implement your form submission logic here
-        console.log(challengeData);
+        console.log('data', challengeData)
+        try {
+            await createChallengeMutation.mutateAsync({
+                challengeData,
+                paid: challengeData.paid === "true",
+                objective: challengeData.objective,
+                organizationId: currentOrganization._id, // Pass the current organization ID
+                userId: user._id, // Pass the user ID
+            });
+            handleClose(); // Close the modal after successful submission
+        } catch (error) {
+            console.error("Error creating challenge:", error);
+        }
     };
+    const handleClickOutside = (event) => {
+        if (modalRef.current && !modalRef.current.contains(event.target)) {
+            handleClose();
+        }
+    };
+    useEffect(() => {
+        if (open) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [open]);
 
     return (
         <Modal
@@ -37,7 +69,8 @@ const CreateOrganizationChallengeModal = ({ open, handleClose }) => {
             className={`fixed inset-0 z-50 ${open ? "" : "hidden"}`}
         >
             <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
-                <div className="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
+                <div ref={modalRef}
+                    className="max-h-full w-full max-w-[39rem] overflow-y-auto sm:rounded-2xl bg-white dark:bg-zinc-800">
                     <div className="flex justify-between px-4 pt-4">
                         <h4 className="text-2xl font-bold mb-4 text-black dark:text-white">
                             Create Challenge

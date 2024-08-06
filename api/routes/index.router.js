@@ -24,6 +24,7 @@ const EducationRouter = require("./education.router");
 const levelRouter = require("./level.router");
 const roleRouter = require("./OrganizationRole.router");
 const sectorRouter = require("./sector.router");
+const OccupationRouter = require("./occupation.router");
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -48,6 +49,8 @@ router.use("/education", EducationRouter);
 router.use("/level", levelRouter);
 router.use("/oganizationRole", roleRouter);
 router.use("/sector", sectorRouter);
+router.use("/occupation", OccupationRouter);
+
 
 
 module.exports = router;
