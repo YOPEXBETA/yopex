@@ -118,7 +118,7 @@ const UserProfileInfoCard = ({extra }) => {
           <div className="flex flex-col lg:flex-row max-lg:gap-5 items-center justify-between py-0.5">
             <div className="flex items-center gap-4">
                   <div className="w-full ">
-                    {userId === user._id ? (
+                    {userId === user?._id ? (
                       <a href="/settings" className="block">
                         <button className="cursor-pointer capitalize font-medium hover:scale-105 bg-green-500 py-3 px-4 rounded-full w-full text-white">
                           Edit Profile
@@ -128,7 +128,7 @@ const UserProfileInfoCard = ({extra }) => {
                   <div className="flex items-center gap-2">
                     <button
                       className={
-                        userProfile.followers.includes(user._id)
+                        userProfile.followers.includes(user?._id)
                           ? "py-3.5 px-5 rounded-full bg-white dark:bg-zinc-800 dark:text-white border-[1px] text-base leading-7 shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-100 hover:bg-indigo-700"
                           : "py-3.5 px-5 cursor-pointer capitalize font-medium hover:scale-105 bg-indigo-600 rounded-full w-full text-white"
                       }
@@ -139,7 +139,7 @@ const UserProfileInfoCard = ({extra }) => {
                         <div>
                           <LoadingSpinner />
                         </div>
-                      ) : userProfile.followers.includes(user._id) ? (
+                      ) : userProfile.followers.includes(user?._id) ? (
                         "Unfollow"
                       ) : (
                         "Follow"
@@ -148,7 +148,7 @@ const UserProfileInfoCard = ({extra }) => {
 
                     <button
                       onClick={() =>
-                        contact({ senderId: user._id, receiverId: userId })
+                        contact({ senderId: user?._id, receiverId: userId })
                       }
                       className="py-3.5 px-5 rounded-full bg-indigo-50 text-indigo-600 font-semibold text-base leading-7 shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-100"
                     >
