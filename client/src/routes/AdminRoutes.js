@@ -15,6 +15,7 @@ import StarIcon from "../Components/icons/StarIcon";
 import EvaluationIcon from "../Components/icons/EvaluationIcon";
 import LevelIcon from "../Components/icons/LevelIcon";
 import SkillsIcon from "../Components/icons/SkillsIcon";
+import ProfessionIcon from "../Components/icons/PersonalInfoIcon";
 
 // render -
 
@@ -35,6 +36,9 @@ const BadgesPage = Loadable(
 );
 const Categories = Loadable(
   lazy(() => import("../Pages/AdminDashboard/Categories/Categories"))
+);
+const ProfessionsPage = Loadable(
+    lazy(() => import("../Pages/AdminDashboard/OccupationsPage/OccupationsPage"))
 );
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -71,6 +75,12 @@ const AdminRoutes = {
       icon: <SkillsIcon className="h-6 w-6" />,
       path: "skills",
       element: <SkillsPage />,
+    },
+    {
+      name: "Occupations",
+      icon: <SkillsIcon className="h-6 w-6" />,
+      path: "occupations",
+      element: <ProfessionsPage />,
     },
     {
       name: "Levels",

@@ -45,7 +45,7 @@ export function OrganizationSidebarLinks(props) {
                         </p>
                     )}
                 </Link>
-                {(route.name === "Challenges" || route.name === "Applicants") && (
+                {(route.name === "Challenges" || route.name === "Jobs") && (
                     <div className="relative ml-auto flex items-center">
                 <span
                     className="relative flex items-center justify-center w-8 h-8 rounded-full border-2 border-green-500 bg-white text-green-500 shadow-lg transition-transform duration-300 transform group-hover:scale-110 group-hover:shadow-xl"

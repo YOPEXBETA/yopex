@@ -2,7 +2,7 @@ import React from 'react';
 
 const DangerZone = ({ onDelete }) => {
     return (
-        <div className="mt-32">
+        <div className="mt-8">
             <h2 className="text-lg font-semibold text-red-600">Danger Zone</h2>
             <div className="mt-2 p-4 border border-red-500 rounded-lg">
                 <div className="flex justify-between items-center">
