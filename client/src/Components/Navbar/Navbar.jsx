@@ -36,6 +36,7 @@ const Navbar = (props) => {
   const [invitationData, setInvitationData] = useState(null);
   const [isInvitationModalOpen, setInvitationModalOpen] = useState(false);
   const url = process.env.REACT_APP_API_ENDPOINT;
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Track menu open status
 
   const { data: invitation } = useInvitationById(invitationData?.invitation);
   // Fetch organization by ID hook
@@ -56,7 +57,6 @@ const Navbar = (props) => {
     if (!notification) return;
     setNotifications(notification.notification);
     setNbrNotifications(notification.nbr);
-    console.log('notif', notification)
   }, [notification]);
 
   useEffect(() => {
@@ -108,10 +108,7 @@ const Navbar = (props) => {
   };
 
   const handleBellClick = () => {
-    if (user?._id) {
-      mutate(); // Mark all notifications as seen
-      setNbrNotifications(0); // Reset notification count
-    }
+    setIsMenuOpen((prev) => !prev);
   };
   return (
       <nav className="sticky py-[0.6rem] top-0 z-40 w-full bg-white dark:bg-zinc-800 border-b-[1px] border-gray-100 dark:border-zinc-700">
@@ -206,6 +203,7 @@ const Navbar = (props) => {
                             user={user}
                             mutate={mutate}
                             onInvitationClick={handleInvitationClick}
+                            isOpen={isMenuOpen}
                         />
                       </div>
                     }

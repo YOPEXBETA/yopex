@@ -29,6 +29,7 @@ const OrganizationNavbar = (props) => {
     const { mutate } = useSeeOrganizationNotifications();
     const [nbrNotifications, setNbrNotifications] = useState(0);
     const url = process.env.REACT_APP_API_ENDPOINT;
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // Track menu open status
 
 
     useEffect(() => {
@@ -54,10 +55,7 @@ const OrganizationNavbar = (props) => {
     }, [socket]);
 
     const handleBellClick = () => {
-        if (currentOrganization?._id) {
-            mutate(currentOrganization._id); // Pass organizationId to mutate
-            setNbrNotifications(0); // Reset notification count
-        }
+        setIsMenuOpen((prevs) => !prevs);
     };
 
     return (
@@ -151,6 +149,8 @@ const OrganizationNavbar = (props) => {
                                         <OrganizationNotificationMenu
                                             notifications={notification}
                                             organization={currentOrganization}
+                                            mutate={mutate}
+                                            isOpen={isMenuOpen}
                                         />
                                     </div>
                                 }

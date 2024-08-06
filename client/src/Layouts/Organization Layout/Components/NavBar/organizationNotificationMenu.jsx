@@ -1,10 +1,26 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 import {timeSince} from "../../../../utils";
 
-const OrganizationNotificationMenu = ({ notifications, organization }) => {
+const OrganizationNotificationMenu = ({ notifications, organization, mutate, isOpen }) => {
+    const menuRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                // Clicked outside the menu
+                if (organization?._id && isOpen) {
+                    mutate(organization._id); // Mark all notifications as seen
+                }
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [organization, mutate, isOpen]);
+
     return (
-        <div className="flex w-[360px] flex-col gap-3 rounded-[20px] bg-white p-4 shadow-xl shadow-shadow-500 dark:!bg-zinc-700 dark:text-white dark:shadow-none sm:w-[460px]">
+        <div ref={menuRef} className="flex w-[360px] flex-col gap-3 rounded-[20px] bg-white p-4 shadow-xl shadow-shadow-500 dark:!bg-zinc-700 dark:text-white dark:shadow-none sm:w-[460px]">
             <div className="flex items-center justify-between">
                 <p className="text-xl font-bold dark:text-white">
                     Notifications
@@ -18,7 +34,9 @@ const OrganizationNotificationMenu = ({ notifications, organization }) => {
                     >
                         <li>
                             <button
-                                className="flex items-center p-4 space-x-4  hover:bg-gray-100 dark:hover:bg-zinc-800 w-full text-left">
+                                className={`flex items-center p-4 space-x-4 hover:bg-gray-100 dark:hover:bg-zinc-800 w-full text-left ${
+                                    notification?.seen ? '' : 'font-bold text-black'
+                                }`}>
                                 <img
                                     src={notification?.picture || AvatarProfile}
                                     alt="notification"
