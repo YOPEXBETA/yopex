@@ -111,7 +111,7 @@ const UserProfileInfoCard = ({extra }) => {
                 />
               </svg>
               <span className="px-2 font-medium text-sm leading-5 text-gray-700 transition-all duration-500 group-hover:text-indigo-600">
-              {userProfile?.occupation || "No occupation selected"}
+              {userProfile.occupation?.name || "No occupation selected"}
               </span>
             </button>
           </div>
