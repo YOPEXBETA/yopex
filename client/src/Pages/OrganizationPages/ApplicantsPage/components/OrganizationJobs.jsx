@@ -4,6 +4,7 @@ import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import WorkCard from "../../../../Components/Cards/WorkCard";
 import OrganizationWorkCard from "./OrganizationWorkCard";
 import {useSelector} from "react-redux";
+import useDebounce from "../../../../hooks/useDebounce";
 
 const OrganizationJobs = ({
                   searchQuery,
@@ -18,9 +19,10 @@ const OrganizationJobs = ({
         setOpenJobModal(true);
     };
 
+    const debouncedJobQuery = useDebounce(searchQuery, 500);
     const { data: jobs, isLoading } = useJobById(
         currentOrganization?._id,
-        searchQuery,
+        debouncedJobQuery,
         selectedSkill,
         selectedJobType,
         selectedOfferType
@@ -30,7 +32,7 @@ const OrganizationJobs = ({
         ? jobs.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         : [];
 
-    console.log('jobs')
+    console.log('jobs', jobs)
     return (
         <div>
             <div className="grid grid-cols-1 md:grid-cols-1 gap-2 xl:grid-cols-1 mb-16 xl:mb-4">
