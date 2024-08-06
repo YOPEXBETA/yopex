@@ -14,15 +14,24 @@ export const useAdminCompanies = (page) => {
   });
 };
 
-export const useOrganizations = (organizationpage, organizationQuery) => {
+export const useOrganizations = (page, query, organizationTypes, isVerified, country) => {
   return useQuery({
-    queryKey: ["organizations", organizationpage, organizationQuery],
+    queryKey: ['organizations', page, query, organizationTypes, isVerified, country],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `${url}/company/getAllOrganizations?page=${organizationpage}&name=${organizationQuery}`,
-        {}
-      );
-console.log('orgs', data)
+      let queryString = '';
+
+      if (query) queryString += `&query=${encodeURIComponent(query)}`;
+      if (organizationTypes && organizationTypes.length > 0) {
+        queryString += `&organizationType=${organizationTypes.join(',')}`;
+      }
+
+      // Convert isVerified to a string
+      const verifiedStr = isVerified ? 'true' : 'false';
+      if (isVerified !== undefined) queryString += `&verified=${verifiedStr}`;
+      if (country) queryString += `&country=${encodeURIComponent(country)}`;
+console.log('query', queryString)
+      const { data } = await axios.get(`${url}/company/getAllOrganizations?page=${page}${queryString}`);
+
       return data;
     },
   });
@@ -240,9 +249,7 @@ export const useCurrentOrganization = (organizationId) => {
   return useQuery(
       ["organization", organizationId],
       async () => {
-        console.log('fetching org')
         const { data } = await axios.get(`${url}/company/getCurrentOrganization/${organizationId}`);
-        console.log('org2', data)
         return data;
       },
       {
@@ -347,5 +354,29 @@ export const useGetUserRoleInOrganization = (organizationId, userId) => {
       return data;
     },
     enabled: !!organizationId && !!userId,
+  });
+};
+
+export const useFetchOrganizationChallenges = (organizationId, filters) => {
+  return useQuery({
+    queryKey: ["organizationChallenges", organizationId, filters],
+    queryFn: async () => {
+      let queryString = '';
+
+      if (filters.query) queryString += `&search=${encodeURIComponent(filters.query)}`;
+      if (filters.min || filters.max) {
+        queryString += `&min=${filters.min || 0}&max=${filters.max || 100000}`;
+      }
+      if (filters.categories && filters.categories.length > 0) {
+        queryString += `&categories=${filters.categories.join(',')}`;
+      }
+      if (filters.skills && filters.skills.length > 0) {
+        queryString += `&skills=${filters.skills.join(',')}`;
+      }
+      const { data } = await axios.get(`${url}/challenge/company/${organizationId}?${queryString}`);
+
+      return data;
+    },
+    enabled: !!organizationId,
   });
 };

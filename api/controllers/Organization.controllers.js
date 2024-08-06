@@ -52,33 +52,39 @@ const updateOrganization = async (req, res) => {
     res.status(500).json({ message: "An error occurred", error: error.message });
   }
 };
-
-
 const getAllOrganizations = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = 6;
 
-    let organizationQuery = {};
-    if (req.query.name) {
-      const searchRegex = new RegExp(req.query.name, "i");
-      organizationQuery = { organizationName: { $regex: searchRegex } };
-    }
+    // Convert query parameters
+    const verified = req.query.verified === 'true' ? true : req.query.verified === 'false' ? false : undefined;
 
+    // Build the query filters
+    const filters = {
+      ...(req.query.query && {
+        organizationName: { $regex: new RegExp(req.query.query, "i") }
+      }),
+      ...(req.query.country && { country: req.query.country }),
+      ...(req.query.organizationType && {
+        organizationType: { $in: req.query.organizationType.split(',') }
+      }),
+      ...(verified !== undefined && { verified }) // Apply filter only if verified is true or false
+    };
     const organizations = await Organization
-      .find(organizationQuery)
-      .select(
-        "_id organizationName organizationLogo country address challenges jobs verified"
-      )
-      .sort({ createdAt: -1 })
-      .skip(pageSize * (page - 1))
-      .limit(pageSize)
-      .exec();
-    const totalCount = await Organization.countDocuments(organizationQuery);
+        .find(filters)
+        .select(
+            "_id organizationName organizationLogo country address challenges jobs verified"
+        )
+        .sort({ createdAt: -1 })
+        .skip(pageSize * (page - 1))
+        .limit(pageSize)
+        .exec();
+    const totalCount = await Organization.countDocuments(filters);
 
     res.status(200).json({ organizations, organizationCount: totalCount });
   } catch (err) {
-    res.status(404).json({ message: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -414,6 +420,7 @@ const acceptInvitation = async (req, res) => {
     }
 
     const organizationOwner = await userModel.findOne({ _id: organization.user });
+    console.log('owner', organizationOwner)
     if (organizationOwner) {
       const notification = new notificationModel({
         type: 'invitation_accepted',
