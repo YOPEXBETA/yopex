@@ -21,7 +21,6 @@ const CompanyProfileInformations = ({ changeValue, value }) => {
 
   const { data: organization, isLoading, isError } = useOrganizationById(organizationId);
   const [isFollow, setIsFollow] = useState(false);
-
   useEffect(() => {
     if (user.followings.includes(organizationId)) {
       setIsFollow(true);

@@ -13,7 +13,8 @@
 # production
 /build
 package-lock.json
-/.idea
+.idea
+.idea/workspace.xml
 
 # misc
 .DS_Store

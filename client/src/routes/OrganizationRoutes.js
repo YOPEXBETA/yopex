@@ -7,19 +7,20 @@ import OrganizationLayout from "../Layouts/Organization Layout/OrganizationLayou
 import ContestIcon from "../Components/icons/ContestIcon";
 import UsersIcon from "../Components/icons/UsersIcon";
 import CompanyIcon from "../Components/icons/CompanyIcon";
+import ApplicantsTable from "../Pages/OrganizationPages/ApplicantsPage/ApplicantsTable/ApplicantsTable";
 
 // ==============================|| ORGANIZATION PAGES ||============================== //
-//DashboardPage
-const Dashboard = Loadable(
-    lazy(() => import("../Pages/OrganizationPages/DashboardPage/DashboardPage"))
+//JobsPage
+const Jobs = Loadable(
+    lazy(() => import("../Pages/OrganizationPages/ApplicantsPage/JobsPage"))
 );
 //Challenges
 const Challenges = Loadable(
     lazy(() => import("../Pages/OrganizationPages/ChallengesPage/ChallengesPage"))
 );
-//Applicants
-const Applicants = Loadable(
-    lazy(() => import("../Pages/OrganizationPages/ApplicantsPage/ApplicantsPage"))
+//Dashboard
+const Dashboard = Loadable(
+    lazy(() => import("../Pages/OrganizationPages/DashboardPage/DashboardPage"))
 );
 //Settings
 const OrganizationSettings = Loadable(
@@ -59,10 +60,16 @@ const OrganizationRoutes = {
             element: <Challenges />,
         },
         {
-            name: "Applicants",
+            name: "Jobs",
             icon: <UsersIcon className="h-6 w-6" />,
-            path: "applicants",
-            element: <Applicants />,
+            path: "jobs",
+            element: <Jobs />,
+        },
+        {
+            name: "Applicant Details",
+            path: "jobs/:jobId/applicants",
+            element: <ApplicantsTable />,
+            hideInSidebar: true,
         },
         {
             name: "Settings",

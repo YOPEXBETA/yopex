@@ -256,6 +256,7 @@ export const useDeleteChallenge = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["challenges"] });
+      queryClient.invalidateQueries(["organizationChallenges"]);
       toast.success("Challenge deleted successfully");
     },
     onError: () => {
@@ -348,4 +349,25 @@ export const useGetChallengeSubmissions = (challengeId) => {
       return data;
     },
   });
+};
+
+export const useCreateOrganizationChallenge = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+      async ({ challengeData, paid, objective, organizationId, userId }) => {
+        const res = await axios.post(
+            `${url}/challenge/addOrganizationChallenge`,
+            { ...challengeData, paid, objective, organizationId, userId },
+            {}
+        );
+        if (res.status === 200) {
+          window.location.href = res.data;
+        }
+        if (res.status === 201) {
+          toast.success("Challenge created successfully");
+          queryClient.invalidateQueries(["challenges"]);
+          queryClient.invalidateQueries(["organizationChallenges"]);
+        }
+      }
+  );
 };

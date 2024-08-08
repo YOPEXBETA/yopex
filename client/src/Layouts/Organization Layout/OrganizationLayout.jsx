@@ -8,6 +8,8 @@ import { fetchCurrentOrganization } from "../../redux/organization/organizationS
 import { useSelector, useDispatch } from "react-redux";
 import OrganizationNavbar from "./Components/NavBar/organizarionNavbar";
 import {getCurrentUser} from "../../redux/auth/authSlice";
+import CreateOrganizationChallengeModal from "../../Components/Modals/CreateOrganizationChallengeModal";
+import CreateOrganizationJobOfferModal from "../../Components/Modals/CreateOrganizationJobOfferModal";
 
 const OrganizationLayout = (props) => {
   const location = useLocation();
@@ -15,6 +17,9 @@ const OrganizationLayout = (props) => {
 
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
+  const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false);
+  const [isJobModalOpen, setIsJobModalOpen] = useState(false);
+
   const [currentRoute, setCurrentRoute] = useState("dashboard");
   const { ...rest } = props;
   const { organizationId } = useParams();
@@ -77,6 +82,20 @@ const OrganizationLayout = (props) => {
 
   const isChatRoute = currentRoute?.toLowerCase() === "chat" || false;
 
+  const openPostChallengeModal = () => {
+    setIsChallengeModalOpen(true); // Open the modal
+  };
+
+  const closePostChallengeModal = () => {
+    setIsChallengeModalOpen(false); // Close the modal
+  };
+  const openPostJobModal = () => {
+    setIsJobModalOpen(true); // Open the modal
+  };
+
+  const closePostJobModal = () => {
+    setIsJobModalOpen(false); // Close the modal
+  };
   return (
     <div>
       <div>
@@ -86,6 +105,8 @@ const OrganizationLayout = (props) => {
             onClose={() => setOpen(false)}
             currentRoute={currentRoute}
             handleNavigation={handleNavigation}
+            onPostChallengeClick={openPostChallengeModal}
+            onPostJobClick={openPostJobModal}
           />
           <div className="h-full w-full bg-white dark:!bg-zinc-900">
             <main
@@ -111,6 +132,14 @@ const OrganizationLayout = (props) => {
           </div>
         </div>
       </div>
+      <CreateOrganizationChallengeModal
+          open={isChallengeModalOpen}
+          handleClose={closePostChallengeModal}
+      />
+      <CreateOrganizationJobOfferModal
+          open={isJobModalOpen}
+          handleClose={closePostJobModal}
+      />
     </div>
   );
 };

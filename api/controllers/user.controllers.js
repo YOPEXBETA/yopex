@@ -10,6 +10,7 @@ const ChallengeModel = require("../models/Challenge.model");
 const notificationModel = require("../models/notification.model");
 const { uploadFileToFirebase } = require("./firebase.controllers");
 const userModel = require("../models/user.model");
+const Skill = require("../models/skill.model");
 
 // ==============================|| EditProfile ||============================== //
 
@@ -200,7 +201,8 @@ const getUser = async (req, res) => {
       .populate("organizations")
       .populate("educations")
       .populate("experiences")
-      .populate("skills");
+      .populate("skills")
+        .populate("occupation");
 
     if (user) {
       res.status(200).json(user);
@@ -213,7 +215,6 @@ const getUser = async (req, res) => {
   }
 };
 
-//getAllUsers
 const getUsers = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -228,17 +229,31 @@ const getUsers = async (req, res) => {
       ];
     }
 
+    if (req.query.occupation) {
+      query.occupation = req.query.occupation;
+    }
+
+    if (req.query.country) {
+      query.country = req.query.country;
+    }
+
+    if (req.query.skills) {
+      const skills = req.query.skills.split(',');
+      query.skills = { $in: skills };
+    }
+    query.role = { $ne: 'admin' };
     const users = await userSchema
-      .find(query)
-      .select(
-        "_id firstname lastname picturePath score country occupation followers reviews challengesDone"
-      )
-      .populate("reviews")
-      .sort({ score: -1, createdAt: 1 })
-      .skip(pageSize * (page - 1))
-      .limit(pageSize)
-      .exec();
-    //for test purpose
+        .find(query)
+        .select(
+            "_id firstname lastname picturePath score country occupation followers reviews challengesDone skills"
+        )
+        .populate("reviews")
+        .sort({ score: -1, createdAt: 1 })
+        .skip(pageSize * (page - 1))
+        .limit(pageSize)
+        .exec();
+
+    // For test purposes
     users.forEach((user, index) => {
       user.rank = index + 1 + pageSize * (page - 1);
     });
@@ -250,6 +265,7 @@ const getUsers = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
 
 //getFollowers
 const getUserFriends = async (req, res) => {
@@ -631,7 +647,8 @@ const getCurrentUser = async (req, res) => {
     const user = await userSchema
       .findById(req.userId)
       .select("-password")
-      .populate("skills");
+      .populate("skills")
+        .populate("occupation");
 
     return res.status(200).json(user);
   } catch (error) {

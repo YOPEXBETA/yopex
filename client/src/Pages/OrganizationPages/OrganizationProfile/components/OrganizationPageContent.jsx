@@ -4,6 +4,7 @@ import PostJobCard from "../../../../Components/Cards/PostJobCard";
 import PostChallengeCard from "../../../../Components/Cards/PostChallengeCard";
 import TeamMembersListCard from "../../../../Components/Cards/TeamMembersListCard";
 import MyOrganizationJobs from "./MyJobs/MyOrganizationJobs";
+import MyOrganizationChallenges from "./MyChallenges/MyOrganizationChallenges";
 
 const OrganizationPageContent = ({ changeValue, value,currentOrganization }) => {
   return (
@@ -26,7 +27,7 @@ const OrganizationPageContent = ({ changeValue, value,currentOrganization }) => 
       {value === 2 && (
         <div className="flex justify-center">
           <div className="w-full lg:w-12/12 md:w-12/12 xs:w-full my-4">
-            <PostChallengeCard/>
+            <MyOrganizationChallenges/>
           </div>
         </div>
       )}

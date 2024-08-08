@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useApplyJob } from "../../../hooks/react-query/useJobs";
 import { formatDistance } from "date-fns";
 import { useApplyJob } from "../../hooks/react-query/useJobs";
 import ImagePlaceholder from "../../assets/images/ImagePlaceholder.jpg";

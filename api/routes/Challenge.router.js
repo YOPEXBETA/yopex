@@ -14,7 +14,7 @@ const {
   startChallenge,
   banUser,
   unBanUser,
-  getChallengeSubmission,
+  getChallengeSubmission, CreateOrganizationChallenge, getOrganizationChallenges,
 } = require("../controllers/Challenge.controller");
 const { CreateSubmission, editsubmission } = require("../controllers/submission.controllers");
 
@@ -35,6 +35,12 @@ ChallengeRouter.post(
   CreateChallenge,
   validate(challengeSchemaValidator)
 );
+ChallengeRouter.post(
+    "/addOrganizationChallenge",
+    authenticateToken,
+    CreateOrganizationChallenge,
+    validate(challengeSchemaValidator)
+);
 
 ChallengeRouter.get(
   "/single/:challengeId",
@@ -42,7 +48,7 @@ ChallengeRouter.get(
   getChallengeById
 );
 
-ChallengeRouter.get("/company/:organizationId", authenticateToken, getCompanyChallenges);
+ChallengeRouter.get("/company/:organizationId", authenticateToken, getOrganizationChallenges);
 ChallengeRouter.get("/challenges/all", getAllChallenges);
 ChallengeRouter.get("/getChallengeUsers", authenticateToken, getChallengeUsers);
 ChallengeRouter.get(

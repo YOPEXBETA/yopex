@@ -34,30 +34,24 @@ export const useJobById = (companyId, searchQuery, skills, jobType, offerType) =
   return useQuery({
     queryKey: ["jobsById", companyId, searchQuery, skills, jobType, offerType],
     queryFn: async () => {
-      // Construct query parameters
-      let query = "";
-      if (searchQuery) query += `&search=${searchQuery}`;
+      const queryParams = new URLSearchParams();
 
-      if (skills && skills.length > 0) {
-        query += skills.map((skill) => `&skills=${skill}`).join("");
-      }
+      if (searchQuery) queryParams.append('search', searchQuery);
+      if (skills && skills.length > 0) queryParams.append('skills', skills.join(','));
+      if (jobType) queryParams.append('jobType', jobType);
+      if (offerType) queryParams.append('offerType', offerType);
 
-      if (jobType) {
-        query += `&jobType=${jobType}`;
-      }
+      const queryString = queryParams.toString();
+      console.log('Constructed query:', queryString);
 
-      if (offerType) {
-        query += `&offerType=${offerType}`;
-      }
-
-      // Make the request
-      const { data } = await axios.get(`${url}/job/${companyId}?${query}`);
+      const { data } = await axios.get(`${url}/job/${companyId}?${queryString}`);
 
       return data;
     },
     enabled: !!companyId,
   });
 };
+
 // get all the posts
 export const useJobTypes = () => {
   return useQuery({
@@ -85,12 +79,15 @@ export const useCreateJob = (user) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ companyId, JobData }) => {
-      await axios.post(`${url}/job/add`, { companyId, ...JobData }, {});
+    mutationFn: async ({ organizationId, JobData }) => {
+      console.log('jobdata', JobData)
+      await axios.post(`${url}/job/add`, { organizationId, ...JobData }, {});
     },
     onSuccess: () => {
       toast.success("Job added successfully");
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["jobsById"] });
+
     },
     onError: (error) => {
       toast.error(`can't create a job ${error.response.data.message}`);

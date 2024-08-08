@@ -4,9 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="Setting tab for the organization (update organization info, invite and manage members, update social links)">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: general fixes and tweaks">
+      <change afterPath="$PROJECT_DIR$/src/Components/Cards/ProfessionCard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/MenuIcons/ProfessionMenuItem.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Modals/EditProfessionModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/icons/ProfessionIcon.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/user.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/user.controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/user.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/AdditionalUserInfoCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/AdditionalUserInfoCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationLinks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationLinks.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/AdminDashboard/CompanyPage/CompanyPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AdminDashboard/CompanyPage/CompanyPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/ApplicantsPage/ApplicantsPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/OrganizationProfile/components/OrganizationPageContent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/OrganizationProfile/components/OrganizationPageContent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/Components/DangerZone.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/Components/DangerZone.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/HomePage/components/ScoreLeaderboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/HomePage/components/ScoreLeaderboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/AdminRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AdminRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,15 +39,7 @@
       </list>
     </option>
   </component>
-  <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/Baha-Eddine" />
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$/.." value="Baha-Eddine" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -58,7 +68,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;YOPEX-INTERNSHIP-REPO&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Baha-Eddine&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -72,6 +82,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\ApplicantsPage" />
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\DashboardPage" />
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\AdminDashboard" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\UserDashboard\CreateCompanyPage\Components" />
     </key>
   </component>
@@ -126,6 +139,18 @@
       <workItem from="1721925942506" duration="284000" />
       <workItem from="1721928584702" duration="201000" />
       <workItem from="1721933415198" duration="82000" />
+      <workItem from="1722086141583" duration="3000" />
+      <workItem from="1722263228578" duration="3421000" />
+      <workItem from="1722284134387" duration="9680000" />
+      <workItem from="1722342722263" duration="3001000" />
+      <workItem from="1722360400518" duration="368000" />
+      <workItem from="1722419356144" duration="13765000" />
+      <workItem from="1722449051178" duration="4000" />
+      <workItem from="1722509420970" duration="12214000" />
+      <workItem from="1722551272818" duration="887000" />
+      <workItem from="1722598957498" duration="12356000" />
+      <workItem from="1722941185618" duration="11946000" />
+      <workItem from="1722956740084" duration="1175000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -159,23 +184,87 @@
       <option name="project" value="LOCAL" />
       <updated>1721779486951</updated>
     </task>
-    <task id="LOCAL-00005" summary="Setting tab for the organization (update organization info, invite and manage members, update social links)">
+    <task id="LOCAL-00005" summary="fix: workspace switch to show the current user&#10;feat: delete organization logic based on member role&#10;feat: add buttons in sidebar to post a challenge and a job offer&#10;fix: fetch correct image for notifications&#10;feat: add refuse invitation to organization logic">
       <option name="closed" value="true" />
-      <created>1722077001675</created>
+      <created>1722427330559</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1722077001675</updated>
+      <updated>1722427330559</updated>
     </task>
-    <task id="LOCAL-00006" summary="Setting tab for the organization (update organization info, invite and manage members, update social links)">
+    <task id="LOCAL-00006" summary="feat: added new logic for unread notifications">
       <option name="closed" value="true" />
-      <created>1722077363551</created>
+      <created>1722956973526</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1722077363551</updated>
+      <updated>1722956973526</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: added new Occupation CRUD to admin and integrated it in user profile">
+      <option name="closed" value="true" />
+      <created>1722957085947</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1722957085947</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: added filters to the discover organizations">
+      <option name="closed" value="true" />
+      <created>1722957279900</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1722957279900</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: added filters to the discover talents">
+      <option name="closed" value="true" />
+      <created>1722957344878</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722957344878</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: create a challenge as an organization">
+      <option name="closed" value="true" />
+      <created>1722957412755</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1722957412755</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: created list of challenges related to the organization">
+      <option name="closed" value="true" />
+      <created>1722957526622</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1722957526622</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: created list of jobs related to the organization and the applicants">
+      <option name="closed" value="true" />
+      <created>1722957592968</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1722957592968</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: added the useDebounce hook to the organization lists">
+      <option name="closed" value="true" />
+      <created>1722957652872</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1722957652872</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: added stats and analytics to the organization workspace">
+      <option name="closed" value="true" />
+      <created>1722957842427</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1722957842427</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +285,17 @@
     <MESSAGE value="Organization Creation with the stepper" />
     <MESSAGE value="Updated the organization Form" />
     <MESSAGE value="Setting tab for the organization (update organization info, invite and manage members, update social links)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setting tab for the organization (update organization info, invite and manage members, update social links)" />
+    <MESSAGE value="fix: workspace switch to show the current user&#10;feat: delete organization logic based on member role&#10;feat: add buttons in sidebar to post a challenge and a job offer&#10;fix: fetch correct image for notifications&#10;feat: add refuse invitation to organization logic" />
+    <MESSAGE value="feat: added new logic for unread notifications" />
+    <MESSAGE value="feat: added new Occupation CRUD to admin and integrated it in user profile" />
+    <MESSAGE value="feat: added filters to the discover organizations" />
+    <MESSAGE value="feat: added filters to the discover talents" />
+    <MESSAGE value="feat: create a challenge as an organization" />
+    <MESSAGE value="feat: created list of challenges related to the organization" />
+    <MESSAGE value="feat: created list of jobs related to the organization and the applicants" />
+    <MESSAGE value="feat: added the useDebounce hook to the organization lists" />
+    <MESSAGE value="feat: added stats and analytics to the organization workspace" />
+    <MESSAGE value="fix: general fixes and tweaks" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: general fixes and tweaks" />
   </component>
 </project>

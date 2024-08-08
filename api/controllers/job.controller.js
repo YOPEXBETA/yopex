@@ -12,7 +12,7 @@ const main = require("../server");
 const addJob = async (req, res, next) => {
   try {
     const { organizationId, ...jobDetails } = req.body;
-console.log('id',organizationId)
+    console.log('job', req.body)
     if (!organizationId) {
       return res.status(400).json({ error: "organizationId must be provided" });
     }
@@ -91,32 +91,32 @@ const updateJob = async (req, res, next) => {
 
 const geJobById = async (req, res, next) => {
   try {
-    const organizationId = req.params.companyId;
+    const organizationId = req.params.organizationId;
     const q = req.query;
+    console.log('Query params:', q);
 
-    // Check if the organization exists
     const organization = await Organization.findOne({ _id: organizationId });
 
     if (!organization) {
       return res.status(400).json({ error: "Organization not found" });
     }
 
-    // Build filters based on query parameters
     const filters = {
       ...(q.search && { title: { $regex: q.search, $options: "i" } }),
       ...(q.jobType && { jobType: q.jobType }),
       ...(q.offerType && { offerType: q.offerType }),
       ...(q.skills && {
         skills: {
-          $in: (await Skill?.find({ name: { $in: q.skills } }))?.map(
-              (skill) => skill?._id
+          $in: (await Skill.find({ name: { $in: q.skills.split(',') } })).map(
+              (skill) => skill._id
           ),
         },
       }),
-      organization: organizationId  // Ensure jobs are related to the specified organization
+      organization: organizationId,
     };
 
-    // Find all job offers related to the company with filters
+    console.log('Filters:', filters); // Debugging line
+
     const jobOffers = await Job.find(filters)
         .populate("organization", "organizationName organizationLogo _id")
         .populate("skills");
@@ -128,6 +128,7 @@ const geJobById = async (req, res, next) => {
         .json({ error: `Failed to retrieve job offers: ${error.message}` });
   }
 };
+
 
 const deleteJob = async (req, res, next) => {
   const id = req.params.id;
@@ -173,7 +174,7 @@ const getByUserId = async (req, res, next) => {
   }
   return res.status(200).json({ company: companyJobs });
 };
-////
+
 const applyJob = async (req, res) => {
   try {
     const job = await Job.findById(req.params.jobId).exec();
@@ -183,11 +184,9 @@ const applyJob = async (req, res) => {
     const user = await User.findById(req.params.userId).exec();
     if (!user) return res.status(400).json("User not found");
 
-    // Check if user has already applied
     if (job.appliers.includes(req.params.userId))
       return res.status(400).json("You have already applied for this job");
 
-    // Check if user has already been accepted
     if (job.acceptedAppliers.includes(req.params.userId))
       return res
         .status(400)
@@ -199,22 +198,23 @@ const applyJob = async (req, res) => {
     await user.save();
 
     // add notification to company
-    const company = await Organization.findById(job.company).exec();
+    const organization = await Organization.findById(job.organization).exec();
     let notification = new notificationModel({
       type: "applied for a job",
-      message: `Applied for your job of : ${job.title}`,
+      message: `${user.firstname} applied for your job of : ${job.title}`,
       job: job._id,
-      organization: company._id,
+      organization: organization._id,
       picture: user.picturePath,
       createdAt: new Date(),
     });
     notification.save();
     //use socket io to send notification to company
-    main.sendNotification(company.user.toString(), notification);
+    main.sendNotification(organization.user.toString(), notification);
     //company.notificationsCompany.push(notification._id);
     //await company.save();
     return res.status(200).json("Applied successfully");
   } catch (err) {
+    console.error(err);
     return res.status(500).json({ error: err.message });
   }
 };
@@ -256,13 +256,17 @@ const getAppliers = async (req, res) => {
 
   try {
     const job = await Job.findById(req.params.jobId)
-      .populate({
-        path: "appliers",
-        select: "firstname lastname email picturePath jobs",
-      })
-      .select({ appliers: 1 })
-      .lean()
-      .exec();
+        .populate({
+          path: 'appliers',
+          select: 'firstname lastname email picturePath skills',
+          populate: {
+            path: 'skills',   // Populate skills field
+            select: 'name'   // Adjust this according to the fields you need from the Skill model
+          }
+        })
+        .select({ appliers: 1 })
+        .lean()
+        .exec();
 
     if (job.appliers.length === 0) return res.status(204).json(job.appliers);
     return res.status(200).json(job.appliers);

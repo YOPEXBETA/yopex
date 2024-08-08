@@ -3,9 +3,7 @@ import Card from "./index";
 import Tag from "../tags/Index";
 
 const AdditionalUserInfoCard = ({ userProfile, extra, isLoading }) => {
-  console.log("userProfile", userProfile);
-
-  return (
+    return (
     <Card extra={`w-full h-full p-6 ${extra}`}>
         <div className="space-y-4">
         {/* Conditionally render Email */}

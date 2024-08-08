@@ -5,7 +5,7 @@ import LinkIcon from "../icons/LinkIcon";
 
 const GeneralCompanyInfo = ({ company }) => {
   const iconMapping = {
-    LinkedIn: <FaLinkedin className="text-blue-600" size={30} />,
+    Linkedin: <FaLinkedin className="text-blue-600" size={30} />,
     Instagram: <FaInstagram className="text-pink-600" size={30} />,
     Facebook: <FaFacebook className="text-blue-800" size={30} />,
     Twitter: <FaTwitter className="text-blue-400" size={30} />,
@@ -13,8 +13,6 @@ const GeneralCompanyInfo = ({ company }) => {
     Dribbble: <FaDribbble className="text-pink-400" size={30} />,
     Github: <FaGithub className="text-gray-900" size={30} />
   };
-
-
   return (
       <Card extra={"w-full p-3"}>
         {/* Header */}

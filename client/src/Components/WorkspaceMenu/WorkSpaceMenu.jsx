@@ -3,6 +3,7 @@ import { useFetchOrganizations } from "../../hooks/react-query/useCompany";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useUpdateUserWorkspace } from "../../hooks/react-query/useUsers";
+import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 
 // ==============================|| CODE ||============================== //
 
@@ -42,7 +43,7 @@ const WorkSpaceMenu = ({
     try {
       await updateWorkspace.mutateAsync({
         workspace: 'Organization',
-        organizationID: organization._id
+        organizationID: organization?._id
       });
 
       onSwitch({
@@ -77,16 +78,16 @@ const WorkSpaceMenu = ({
       <div className="py-1" role="none">
         {orgList?.map((organization) => (
           <div
-            key={organization._id}
+            key={organization?._id}
             className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 dark:text-white"
             onClick={() => handleOrganizationSwitch(organization)}
           >
             <input
               type="radio"
-              id={`org-${organization._id}`}
+              id={`org-${organization?._id}`}
               name="workspace"
-              value={`Organization-${organization._id}`}
-              checked={selectedWorkspace === organization._id} // Correctly checked based on organization ID
+              value={`Organization-${organization?._id}`}
+              checked={selectedWorkspace === organization?._id} // Correctly checked based on organization ID
               onChange={() => handleOrganizationSwitch(organization)} // This might be redundant
               className="mr-2"
             />
@@ -115,7 +116,7 @@ const WorkSpaceMenu = ({
           />
           <>
             <img
-              src={user?.picturePath}
+              src={user?.picturePath || AvatarProfile}
               alt={`${user?.firstname} ${user?.lastname}`}
               className="h-8 w-8 rounded-full mr-2"
             />
