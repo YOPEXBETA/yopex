@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useAdminCompanies } from "../../../hooks/react-query/useCompany";
 import CompanyRow from "./CompanyRow";
 import TableSkeleton from "../../../Components/SkeletonLoading/TableSkeleton";
 
 const CompanyPage = () => {
+
   const [page, setPage] = useState(1);
 
   const handleChangePage = (newPage) => {
@@ -14,7 +14,9 @@ const CompanyPage = () => {
   };
 
   const { data, isLoading } = useAdminCompanies(page);
-  const totalPages = Math?.ceil(data?.companyCount / 6);
+
+  const totalPages = Math?.ceil(data?.companyCount/6);
+
   const displayedPages = Math?.min(10, totalPages);
 
   if (isLoading) {

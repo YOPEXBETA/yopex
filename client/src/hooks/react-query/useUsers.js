@@ -309,12 +309,17 @@ export const useFileUpload = () => {
   );
 };
 
-export const useUsersData = (page, query) => {
+
+export const useUsersData = (page, query, occupation, country, skills) => {
+  const occupationQuery = occupation || '';
+  const countryQuery = country || '';
+  const skillsQuery = Array.isArray(skills) ? skills.join(',') : '';
+
   return useQuery({
-    queryKey: ["users", page, query],
+    queryKey: ["users", page, query, occupation, country, skills],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${url}/allusers?page=${page}&name=${query}`
+          `${url}/allusers?page=${page}&name=${query}&occupation=${occupationQuery}&country=${countryQuery}&skills=${skillsQuery}`
       );
       return data;
     },

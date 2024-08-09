@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import { useOrganizationById } from "../../../../../../hooks/react-query/useCompany";
 const Team = () => {
-  const { companyId } = useParams();
-  const { data: company, isLoading, isError } = useOrganizationById(companyId);
+  const { organizationId } = useParams();
+  const { data: organization, isLoading, isError } = useOrganizationById(organizationId);
   return (
     <div>
-      <CompanyTeamCard company={company} />
+      <CompanyTeamCard organization={organization} />
     </div>
   );
 };

@@ -38,7 +38,7 @@ const ScoreLeaderboard = ({ extra }) => {
                   {`${user?.firstname} ${user?.lastname}`}
                 </p>
                 <p className="text-sm dark:text-gray-300 leading-5 text-gray-600">
-                  {user?.occupation || "N/A"}
+                  {user?.occupation?.name || "N/A"}
                 </p>
               </div>
             </div>

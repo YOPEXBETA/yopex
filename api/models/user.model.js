@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema(
     lastname: { type: String, required: true },
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: false },
-    occupation: { type: String, required: false },
+      occupation: { type: mongoose.Types.ObjectId, ref: "Occupation" },
     websiteURL: { type: String, required: false },
     country: { type: String },
     picturePath: { type: String, required: false },

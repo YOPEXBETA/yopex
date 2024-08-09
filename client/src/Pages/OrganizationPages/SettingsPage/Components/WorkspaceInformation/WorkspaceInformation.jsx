@@ -3,38 +3,63 @@ import { FaCamera } from "react-icons/fa";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import countries from "../../../../../countries.json";
-import {useEditOrganization} from "../../../../../hooks/react-query/useCompany";
-import {useFileUpload} from "../../../../../hooks/react-query/useUsers";
+import {
+    useDeleteCompany,
+    useEditOrganization,
+    useGetUserRoleInOrganization
+} from "../../../../../hooks/react-query/useCompany";
+import {useFileUpload, useUpdateUserWorkspace} from "../../../../../hooks/react-query/useUsers";
 import Card from "../../../../../Components/Cards";
 import "react-phone-number-input/style.css";
+import DangerZone from "./Components/DangerZone";
+import DeletePagePopup from "../../../../../Components/Popup/DeletePagePopup";
+import {useNavigate} from "react-router-dom";
 
 const EditOrganization = ({ extra }) => {
     const dispatch = useDispatch();
+    const { mutate: deleteCompanyMutation, isSuccess: isDeleteSuccess } = useDeleteCompany();
+    const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const fileUploadMutation = useFileUpload();
     const { currentOrganization } = useSelector(state => state.organization);
     const [logoPreview, setLogoPreview] = useState(currentOrganization?.organizationLogo || "");
     const [bannerPreview, setBannerPreview] = useState(currentOrganization?.organizationBanner || "");
     const [logoFile, setLogoFile] = useState(null);
     const [bannerFile, setBannerFile] = useState(null);
-
+    const { user } = useSelector((state) => state.auth);
+    const [role, setRole] = useState(null);
     const { mutate: updateOrganization, isLoading } = useEditOrganization(currentOrganization?._id);
+    const { data: userRoleData } = useGetUserRoleInOrganization(currentOrganization?._id, user?._id);
+    const updateWorkspace = useUpdateUserWorkspace(user?._id);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (userRoleData) {
+            setRole(userRoleData.roleName); // Set the role in state
+        }
+    }, [userRoleData]);
     const {
         register,
         handleSubmit,
         setValue,
-        control,
+        reset,
         formState: { isSubmitting },
-    } = useForm({
-        defaultValues: {
-            organizationName: currentOrganization?.organizationName,
-            organizationDescription: currentOrganization?.organizationDescription,
-            country: currentOrganization?.country,
-            PhoneNumber: currentOrganization?.PhoneNumber,
-            address: currentOrganization?.address,
-            websiteURL: currentOrganization?.websiteURL,
-            sectorOfActivity: currentOrganization?.sectorOfActivity,
-        },
-    });
+    } = useForm();
+
+    useEffect(() => {
+        if (currentOrganization) {
+            setLogoPreview(currentOrganization.organizationLogo || "");
+            setBannerPreview(currentOrganization.organizationBanner || "");
+            reset({
+                organizationName: currentOrganization.organizationName,
+                organizationDescription: currentOrganization.organizationDescription,
+                country: currentOrganization.country,
+                PhoneNumber: currentOrganization.PhoneNumber,
+                address: currentOrganization.address,
+                websiteURL: currentOrganization.websiteURL,
+                sectorOfActivity: currentOrganization.sectorOfActivity,
+            });
+        }
+    }, [currentOrganization, reset]);
 
     const countryList = countries?.map((country) => country.name.common);
 
@@ -103,6 +128,31 @@ const EditOrganization = ({ extra }) => {
             setBannerPreview(previewUrl);
             setBannerFile(file);
         }
+    };
+    const handleUserWorkspaceSwitch = async () => {
+        try {
+            await updateWorkspace.mutateAsync({
+                workspace: 'User',
+                organizationID: null
+            });
+            navigate("/feed");
+        } catch (error) {
+            console.error("Failed to update workspace:", error.message);
+        }
+    };
+
+    const handleDeleteClick = () => {
+        setConfirmationDialogOpen(true);
+    };
+
+    const handleConfirmDelete = () => {
+        deleteCompanyMutation(currentOrganization?._id);
+        setConfirmationDialogOpen(false);
+        handleUserWorkspaceSwitch();
+    };
+
+    const handleCancelDelete = () => {
+        setConfirmationDialogOpen(false);
     };
 
 
@@ -265,6 +315,18 @@ const EditOrganization = ({ extra }) => {
                     </div>
                 </div>
             </form>
+            {role === "owner" || role === "admin" ? (
+                <div className="mt-6">
+                    <DangerZone onDelete={handleDeleteClick}/>
+                </div>
+            ) : null}
+            {confirmationDialogOpen && (
+                <DeletePagePopup
+                    open={confirmationDialogOpen}
+                    handleCancel={handleCancelDelete}
+                    handleConfirm={handleConfirmDelete}
+                />
+            )}
         </Card>
 
     );

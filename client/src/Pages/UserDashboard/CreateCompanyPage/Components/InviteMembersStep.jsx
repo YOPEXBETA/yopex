@@ -11,7 +11,6 @@ const InvitationsStep = ({ formData, updateFormData }) => {
   const { data: rolesData, isLoading: rolesLoading, isError: rolesError } = useAllRoles(); // Fetch all roles
   const [showSuggestions, setShowSuggestions] = useState(false); // State to control when to show suggestions
   const [email, setEmail] = useState(''); // State for email input
-
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     setShowSuggestions(true); // Show suggestions when typing

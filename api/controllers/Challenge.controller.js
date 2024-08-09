@@ -117,6 +117,105 @@ const CreateChallenge = async (req, res, next) => {
   }
 };
 
+const CreateOrganizationChallenge = async (req, res, next) => {
+  try {
+    const {
+      title,
+      description,
+      categories,
+      price,
+      deadline,
+      skills,
+      nbruser,
+      paid,
+      youtubeLink,
+      objective,
+      organizationId, // Extract this from the body
+      userId,
+    } = req.body;
+
+
+    // Verify the organization
+    const organization = await OrganizationModel.findById(organizationId);
+    if (!organization) {
+      return res.status(400).json({ error: "Organization not found" });
+    }
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    // Verify YouTube link if provided
+    if (youtubeLink) {
+      const youtubeRegex =
+          /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+      if (!youtubeRegex.test(youtubeLink)) {
+        return res.status(400).json({ message: "Invalid YouTube link" });
+      }
+    }
+
+    // Create the challenge
+    const challenge = new ChallengeModel({
+      title,
+      description,
+      categories,
+      deadline,
+      price: paid === "true" ? price : 0,
+      skills,
+      nbruser,
+      YoutubeLink: youtubeLink,
+      paid: paid === "true" ? true : false,
+      verified: paid === "true" ? false : true,
+      objective,
+      organization: organization._id,
+      owner: userId,
+    });
+
+    await challenge.save();
+
+    // Add challenge to the organization's challenges
+    organization.challenges.push(challenge._id);
+    await organization.save();
+
+    // Create a new conversation for the challenge
+    const newConversation = new ContestConversationModel({
+      contestId: challenge._id,
+    });
+    await newConversation.save();
+
+    // Handle payment if the challenge is paid
+    if (paid === "true") {
+      const url =
+          process.env.NODE_ENV === "development"
+              ? "http://localhost:8000/api/payment"
+              : "https://yopexhub.com/api/payment";
+
+      const response = await axios.post(
+          url,
+          {
+            amount: price * 1000,
+            firstName: req.user.firstname,
+            lastName: req.user.lastname,
+            email: req.user.email,
+            challengeId: challenge._id,
+          },
+          {
+            headers: {
+              Authorization: "token " + req.token,
+            },
+          }
+      );
+
+      return res.status(200).json(response.data.payUrl);
+    }
+
+    res.status(201).json({ message: "Challenge created successfully", challenge });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: `Failed to create challenge: ${error.message}` });
+  }
+};
+
 const getChallengeById = async (req, res) => {
   const challengeId = req.params.challengeId; // Assuming you're passing the challenge ID as a URL parameter
 
@@ -175,26 +274,47 @@ const deleteChallenge = async (req, res) => {
   }
 };
 
-const getCompanyChallenges = async (req, res) => {
-  try {
-    const organizationId = req.params.organizationId;
+const getOrganizationChallenges = async (req, res) => {
+  const q = req.query;
+  const organizationId = req.params.organizationId;
+  const filters = {
+    organization: organizationId,
+    verified: true,
+    ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+    ...((q.min || q.max) && {
+      price: {
+        ...(q.min && { $gte: parseFloat(q.min) }),
+        ...(q.max && { $lte: parseFloat(q.max) }),
+      },
+    }),
+    ...(q.categories && {
+      categories: {
+        $in: (await Category.find({ name: { $in: q.categories.split(",") } })).map(
+            (category) => category._id
+        ),
+      },
+    }),
+    ...(q.skills && {
+      skills: {
+        $in: (await Skill.find({ name: { $in: q.skills.split(",") } })).map(
+            (skill) => skill._id
+        ),
+      },
+    }),
+  };
 
-    const organization = await OrganizationModel.findOne({ _id: organizationId });
-    if (!organization) {
-      return res.status(400).json({ error: "organization not found" });
-    }
-    const challenges = await ChallengeModel.find({
-      organization: organizationId,
-      verified: true,
-    }).populate("organization");
+  try {
+    const challenges = await ChallengeModel.find(filters)
+        .populate("organization")
+        .populate("skills")
+        .populate("categories");
 
     res.status(200).json(challenges);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: `Failed to retrieve challenges: ${error.message}` });
+  } catch (err) {
+    res.status(500).json({ error: `Failed to retrieve challenges: ${err.message}` });
   }
 };
+
 
 const getAllChallenges = async (req, res) => {
   const q = req.query;
@@ -430,7 +550,7 @@ module.exports = {
   CreateChallenge,
   deleteChallenge,
   getChallengeById,
-  getCompanyChallenges,
+  getOrganizationChallenges,
   getAllChallenges,
   getChallengeUsers,
   getChallengeUserSubmit,
@@ -439,4 +559,5 @@ module.exports = {
   banUser,
   unBanUser,
   getChallengeSubmission,
+  CreateOrganizationChallenge
 };

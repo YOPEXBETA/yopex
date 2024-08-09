@@ -13,7 +13,8 @@ const {
   getRecentOrganizations,
   inviteUserToOrganization,
   acceptInvitation, getInvitationById, getCurrentOrganization, getOrganizationNotifications, seeOrganizationNotification,
-  updateMemberRole, deleteMember, updateOrganization, updateSocialMediaLinks
+  updateMemberRole, deleteMember, updateOrganization, updateSocialMediaLinks, getUserRoleInOrganization,
+  refuseInvitation
 } = require("../controllers/Organization.controllers");
 const { getOrganization } = require("../controllers/Organization.controllers");
 
@@ -43,14 +44,17 @@ organizationRouter.get(
 organizationRouter.delete("/:id", authenticateToken, deleteOrganization);
 organizationRouter.get("/notifications/:organizationId", authenticateToken, getOrganizationNotifications);
 organizationRouter.put("/update/:organizationId",authenticateToken, updateOrganization);
-organizationRouter.patch('/notifications/see/:organizationId', authenticateToken, seeOrganizationNotification);
+organizationRouter.put('/notifications/see/:organizationId', authenticateToken, seeOrganizationNotification);
 
 organizationRouter.get("/Recentcompanies", getRecentOrganizations);
 organizationRouter.post('/invite', inviteUserToOrganization);
 organizationRouter.get('/getInvitationById/:id',authenticateToken, getInvitationById);
 organizationRouter.post('/accept-invitation/:invitationId', authenticateToken , acceptInvitation);
+organizationRouter.delete('/refuse-invitation/:invitationId', authenticateToken , refuseInvitation);
 organizationRouter.get("/getCurrentOrganization/:organizationId", authenticateToken, getCurrentOrganization);
 organizationRouter.put('/update-social-links/:organizationId', authenticateToken , updateSocialMediaLinks);
 organizationRouter.put("/:organizationId/:memberId", authenticateToken , updateMemberRole);
 organizationRouter.delete("/:organizationId/:memberId", authenticateToken , deleteMember);
+organizationRouter.get('/getUserRoleInOrganization/:organizationId/:userId', authenticateToken , getUserRoleInOrganization);
+
 module.exports = organizationRouter;

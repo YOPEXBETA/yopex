@@ -23,6 +23,8 @@ const UserProfileCard = () => {
   const { userId } = useParams();
   const { data: levelsData, isLoading: levelsLoading } = useGetLevels();
   const { data: userProfile, isLoading: userLoading } = useUserById(userId);
+  console.log('occ', userProfile.professions?.[0]?.name)
+
   const { mutate, isLoading } = useFollowUser(user._id, userId);
   const { data: reviews } = useUserReviews(userId);
   const { mutate: contact } = useCreateConversation(user._id);
@@ -91,7 +93,7 @@ const UserProfileCard = () => {
             </div>
             {userProfile ? (
               <p className="text-md whitespace-normal dark:text-gray-200">
-                {userProfile.occupation || "No occupation selected"}
+                {userProfile.professions?.[0]?.name || "No occupation selected"}
               </p>
             ) : (
               <LoadingSkeleton width={120} height={16} />
