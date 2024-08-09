@@ -41,21 +41,21 @@ const OrganizationNavbar = (props) => {
 
     useEffect(() => {
         if (!notification) return;
-        setNotifications(notification.notification);
-        setNbrNotifications(notification.nbr);
+        setNotifications(notification.notification || []);
+        setNbrNotifications(notification.nbr || 0);
     }, [notification]);
 
     useEffect(() => {
         if (!socket) return;
         socket.on("notification", (notification) => {
-            setNotifications((prev) => [notification, ...prev]);
-            setNbrNotifications((prev) => prev + 1);
+            setNotifications((prev) => Array.isArray(prev) ? [notification, ...prev] : [notification]);
+            setNbrNotifications((prev) => typeof prev === 'number' ? prev + 1 : 1);
         });
         return () => socket.off("notification");
     }, [socket]);
 
     const handleBellClick = () => {
-        setIsMenuOpen((prevs) => !prevs);
+        setIsMenuOpen((prev) => !prev);
     };
 
     return (

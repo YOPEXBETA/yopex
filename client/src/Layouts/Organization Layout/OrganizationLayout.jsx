@@ -83,7 +83,7 @@ const OrganizationLayout = (props) => {
   const isChatRoute = currentRoute?.toLowerCase() === "chat" || false;
 
   const openPostChallengeModal = () => {
-    setIsChallengeModalOpen(true); // Open the modal
+    navigate(`/create-challenge`);
   };
 
   const closePostChallengeModal = () => {

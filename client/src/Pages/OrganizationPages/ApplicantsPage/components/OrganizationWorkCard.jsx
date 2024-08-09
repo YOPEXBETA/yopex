@@ -102,7 +102,7 @@ const OrganizationWorkCard = ({ job, extra }) => {
                         onClick={handleApplicantsClick}
                         className="font-medium p-2 bg-green-500 text-white rounded-md hover:bg-green-600"
                     >
-                        Applicants
+                        Applicants {job?.appliers.length}/{job?.appliersNumber}
                     </button>
                     <button
                         className="font-medium p-2 flex hover:bg-zinc-500 rounded-full"

@@ -5,26 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: general fixes and tweaks">
-      <change afterPath="$PROJECT_DIR$/src/Components/Cards/ProfessionCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/MenuIcons/ProfessionMenuItem.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Modals/EditProfessionModal.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/icons/ProfessionIcon.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/user.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/user.controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/models/Organization.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/Organization.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../api/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/user.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/routes/index.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/index.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/AdditionalUserInfoCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/AdditionalUserInfoCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationLinks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationLinks.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/AdminDashboard/CompanyPage/CompanyPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AdminDashboard/CompanyPage/CompanyPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/ApplicantsPage/ApplicantsPage.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/OrganizationProfile/components/OrganizationPageContent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/OrganizationProfile/components/OrganizationPageContent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/Components/DangerZone.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/Components/DangerZone.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/HomePage/components/ScoreLeaderboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/HomePage/components/ScoreLeaderboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/AdminRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AdminRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Modals/CreateOrganizationJobOfferModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Modals/CreateOrganizationJobOfferModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/NavBar/organizarionNavbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/NavBar/organizarionNavbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/ApplicantsPage/components/OrganizationWorkCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/ApplicantsPage/components/OrganizationWorkCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/JobsPage/components/Jobs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/JobsPage/components/Jobs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/FormRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/FormRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +25,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="YOPEX-INTERNSHIP-REPO" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -68,8 +64,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Baha-Eddine&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/organization-challenge&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client/src&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -81,6 +77,10 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src" />
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\ApplicantsPage" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\DashboardPage" />
@@ -151,6 +151,7 @@
       <workItem from="1722598957498" duration="12356000" />
       <workItem from="1722941185618" duration="11946000" />
       <workItem from="1722956740084" duration="1175000" />
+      <workItem from="1723198531879" duration="5589000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
