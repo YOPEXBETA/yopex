@@ -5,10 +5,13 @@ import { BsThreeDots } from "react-icons/bs";
 import { useDeleteChallenge } from "../../hooks/react-query/useChallenges";
 import { EditChallengeModal } from "../shared/Modals/EditChallengeModal";
 import DeleteChallengePopup from "../Popup/DeleteChallengePopup";
+import {useDeleteTeamChallenge} from "../../hooks/react-query/useTeamChallenge";
 
-const ChallengeMenuIcon = ({ challenge }) => {
+const ChallengeMenuIcon = ({ challenge, type }) => {
   const { user } = useSelector((state) => state.auth);
   const { mutate: deleteChallenge } = useDeleteChallenge();
+  const { mutate: deleteTeamChallenge } = useDeleteTeamChallenge();
+
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -26,7 +29,11 @@ const ChallengeMenuIcon = ({ challenge }) => {
   const toggleOpen = () => setIsOpen((prev) => !prev);
 
   const handleConfirmDelete = () => {
-    deleteChallenge(challenge._id);
+    if (type === 'Challenge') {
+      deleteChallenge(challenge._id);
+    } else if (type === 'TeamChallenge') {
+      deleteTeamChallenge(challenge._id);
+    }
     setConfirmationDialogOpen(false);
     setIsOpen(false);
   };
@@ -77,6 +84,7 @@ const ChallengeMenuIcon = ({ challenge }) => {
           open={openEdit}
           handleClose={handleCloseEdit}
           challenge={challenge}
+          type={type}
         />
         {confirmationDialogOpen && (
           <DeleteChallengePopup

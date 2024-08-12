@@ -26,6 +26,8 @@ export const useEditChallenge = (challengeId) => {
     onSuccess: () => {
       toast.success("Challenge edited successfully");
       queryClient.invalidateQueries(["challenges"]);
+      queryClient.invalidateQueries(["organizationChallenges"]);
+
     },
   });
 };

@@ -5,7 +5,7 @@ const {
     getTeamChallengeById,
     getAllTeamChallenges,
     updateTeamChallenge,
-    deleteTeamChallenge,
+    deleteTeamChallenge, getOrganizationTeamChallenges,
 } = require("../controllers/teamChallenge.controller");
 const { authenticateToken } = require("../middlewares/authenticateToken.middleware");
 
@@ -36,5 +36,6 @@ TeamChallengeRouter.delete(
     deleteTeamChallenge
 );
 
+TeamChallengeRouter.get("/organization/:organizationId", authenticateToken, getOrganizationTeamChallenges);
 
 module.exports = TeamChallengeRouter;

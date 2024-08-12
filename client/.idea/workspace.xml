@@ -4,18 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: general fixes and tweaks">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: adding a team challenge as an organization">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/models/Organization.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/Organization.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/user.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/Challenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/Challenge.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/job.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/job.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/models/job.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/job.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/models/team.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/team.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../api/routes/index.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/index.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/routes/teamChallenge.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/teamChallenge.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Modals/CreateOrganizationJobOfferModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Modals/CreateOrganizationJobOfferModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/NavBar/organizarionNavbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/NavBar/organizarionNavbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/OrganizationLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/ApplicantsPage/components/OrganizationWorkCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/ApplicantsPage/components/OrganizationWorkCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/JobsPage/components/Jobs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/JobsPage/components/Jobs.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/FormRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/FormRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/NewChallengeCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/NewChallengeCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/MenuIcons/ChallengeMenuIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MenuIcons/ChallengeMenuIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/Modals/EditChallengeModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modals/EditChallengeModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/ChallengesPage/ChallengesPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/ChallengesPage/ChallengesPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/ChallengesPage/Components/OrganizationChallenges.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/ChallengesPage/Components/OrganizationChallenges.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/CreateChallenge/Components/ReviewStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/CreateChallenge/Components/ReviewStep.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/BrowsePage/Index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/BrowsePage/Index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/TopSide/Banner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/TopSide/Banner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/TaskDescription.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/TaskDescription.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/ParticipantsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/ParticipantsTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useChallenges.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useChallenges.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useCompany.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/OrganizationRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/OrganizationRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +40,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -65,7 +80,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;feature/organization-challenge&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client/src&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client/src/Pages/OrganizationPages/ChallengesPage/Components&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -78,10 +93,13 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\ChallengesPage\Components" />
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\UserDashboard\BrowsePage" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\ApplicantsPage" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\DashboardPage" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\AdminDashboard" />
@@ -151,7 +169,9 @@
       <workItem from="1722598957498" duration="12356000" />
       <workItem from="1722941185618" duration="11946000" />
       <workItem from="1722956740084" duration="1175000" />
-      <workItem from="1723198531879" duration="5589000" />
+      <workItem from="1723198531879" duration="8998000" />
+      <workItem from="1723383863830" duration="7886000" />
+      <workItem from="1723459646835" duration="19112000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -265,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722957842427</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="feat: adding a team challenge as an organization">
+      <option name="closed" value="true" />
+      <created>1723204658560</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1723204658561</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,6 +325,7 @@
     <MESSAGE value="feat: added the useDebounce hook to the organization lists" />
     <MESSAGE value="feat: added stats and analytics to the organization workspace" />
     <MESSAGE value="fix: general fixes and tweaks" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: general fixes and tweaks" />
+    <MESSAGE value="feat: adding a team challenge as an organization" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: adding a team challenge as an organization" />
   </component>
 </project>

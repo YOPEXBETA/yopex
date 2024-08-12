@@ -54,7 +54,7 @@ const ReviewAndSubmitStep = ({ formData }) => {
                 <div className="col-span-1 space-y-4">
                     <div className="mb-4">
                         <h4 className="font-medium text-gray-700 dark:text-gray-300">Description</h4>
-                        <p className="text-gray-900 dark:text-gray-100">{formData.description}</p>
+                        <p className="text-sm h-20 break-words overflow-ellipsis overflow-hidden dark:text-gray-100">{formData.description}</p>
                     </div>
 
                     <div className="mb-4">

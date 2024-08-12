@@ -8,6 +8,11 @@ const SubmissionSchema = new mongoose.Schema(
       ref: "Challenge",
       required: true,
     },
+      teamChallengeId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "TeamChallenge",
+          required: true,
+      },
     //the id of the user that put the review
     userId: {
       type: mongoose.Schema.Types.ObjectId,

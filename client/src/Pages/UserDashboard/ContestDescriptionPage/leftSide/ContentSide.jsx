@@ -11,11 +11,11 @@ import Start from "./Components/ChallengeDescription/Start";
 import Removed from "./Components/ParticipantsTableSection/Removed";
 import Submission from "./Components/ParticipantsTableSection/Submission";
 
-const ContentSide = ({ value, isOwner, start, isRegistered }) => {
+const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type }) => {
   const { id: challengeId } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { data: conversation } = useGetContestConversation(challengeId);
-
+console.log('isowner', isOwner)
   if (user && conversation)
     return (
       <div className="">
@@ -23,17 +23,17 @@ const ContentSide = ({ value, isOwner, start, isRegistered }) => {
           {value === 0 && (
             <div className="grid grid-cols-12 md:gap-10 mt-4 md:mt-0">
               <div className="lg:col-span-8 md:col-span-12 sm:col-span-12 col-span-12">
-                <TasksDescription />
+                <TasksDescription challenge={challenge} type={type} />
               </div>
               <div className="lg:block md:block lg:col-span-4 md:col-span-12 sm:col-span-12 col-span-12  mb-20">
-                <CompanyCard isRegistered={isRegistered} isOwner={isOwner} />
+                <CompanyCard isRegistered={isRegistered} isOwner={isOwner} challenge={challenge} type={type}/>
                 {isOwner && !start && <Start />}
               </div>
             </div>
           )}
           {value === 1 && (
             <div className="lg:col-span-12 md:col-span-12 mt-4 md:mt-0">
-              <MTable isOwner={isOwner} />
+              <MTable isOwner={isOwner} challenge={challenge} type={type} />
             </div>
           )}
           {value === 2 && (

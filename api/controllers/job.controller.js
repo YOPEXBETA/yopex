@@ -93,7 +93,6 @@ const geJobById = async (req, res, next) => {
   try {
     const organizationId = req.params.organizationId;
     const q = req.query;
-    console.log('Query params:', q);
 
     const organization = await Organization.findOne({ _id: organizationId });
 
@@ -115,7 +114,6 @@ const geJobById = async (req, res, next) => {
       organization: organizationId,
     };
 
-    console.log('Filters:', filters); // Debugging line
 
     const jobOffers = await Job.find(filters)
         .populate("organization", "organizationName organizationLogo _id")
@@ -183,6 +181,10 @@ const applyJob = async (req, res) => {
 
     const user = await User.findById(req.params.userId).exec();
     if (!user) return res.status(400).json("User not found");
+
+    if (job.appliersNumber && job.appliers.length >= job.appliersNumber) {
+      return res.status(400).json("The maximum number of appliers has been reached for this job");
+    }
 
     if (job.appliers.includes(req.params.userId))
       return res.status(400).json("You have already applied for this job");

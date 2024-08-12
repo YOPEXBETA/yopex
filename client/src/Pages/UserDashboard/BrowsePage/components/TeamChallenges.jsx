@@ -1,11 +1,11 @@
 import React from "react";
 import NewChallengeCard from "../../../../Components/Cards/NewChallengeCard";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
+import TeamChallengeCard from "../../../../Components/Cards/TeamChallengeCard";
 
-const OrganizationChallenges = ({ challenges, isLoading }) => {
-    // Sort challenges by the newest ones first
-    const sortedChallenges = challenges
-        ? challenges
+const TeamChallenges = ({ teamChallenges, isLoading }) => {
+    const sortedChallenges = teamChallenges
+        ? teamChallenges
             .slice()
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         : [];
@@ -16,10 +16,10 @@ const OrganizationChallenges = ({ challenges, isLoading }) => {
                 <div>
                     <LoadingSpinner />
                 </div>
-            ) : sortedChallenges?.length > 0 ? (
+            ) : sortedChallenges.length > 0 ? (
                 sortedChallenges?.map((item) => (
-                    <div key={item._id}>
-                        <NewChallengeCard challenge={item} />
+                    <div>
+                        <TeamChallengeCard key={item._id} teamChallenge={item} />
                     </div>
                 ))
             ) : (
@@ -29,4 +29,4 @@ const OrganizationChallenges = ({ challenges, isLoading }) => {
     );
 };
 
-export default OrganizationChallenges;
+export default TeamChallenges;

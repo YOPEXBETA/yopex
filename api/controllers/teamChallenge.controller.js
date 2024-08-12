@@ -111,16 +111,16 @@ console.log('body', req.body)
 
 
 const getTeamChallengeById = async (req, res) => {
-    const challengeId = req.params.challengeId;
-
+    const challengeId = req.params.teamChallengeId;
     try {
         const challenge = await TeamChallengeModel.findById(challengeId)
             .populate("organization")
             .populate("owner", "firstname lastname picturePath _id")
             .populate("skills", "name _id")
+            .populate("categories", "name _id")
             .populate({
                 path: "banned",
-                select: "firstname lastname picturePath _id",
+                select: "name teamPicture _id",
             })
             .populate({
                 path: "teams",
@@ -148,9 +148,8 @@ const getTeamChallengeById = async (req, res) => {
 const deleteTeamChallenge = async (req, res) => {
     try {
         const challenge = await TeamChallengeModel.findOneAndDelete({
-            _id: req.params.id,
+            _id: req.params.teamChallengeId,
         });
-
         if (challenge.organization) {
             const organization = await OrganizationModel.findOne({ _id: challenge.organization });
             await organization.teamChallenges.pull(challenge._id);
@@ -288,7 +287,9 @@ const getTeamChallengeTeamSubmit = async (req, res) => {
 
 const updateTeamChallenge = async (req, res) => {
     const { description, title, teamSize, price, categories, skills } = req.body;
-    const challengeId = req.params.challengeId;
+    const challengeId = req.params.teamChallengeId;
+console.log('data', req.body)
+    console.log('challengeId', challengeId)
 
     try {
         const Challenge = await TeamChallengeModel.findByIdAndUpdate(challengeId, {

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const submissionModel = require("./submission.model");
 
 const TeamChallengeSchema = new mongoose.Schema(
     {
@@ -82,7 +83,7 @@ TeamChallengeSchema.pre(
             const query = this;
             const teamChallengeId = query._conditions._id;
 
-            await submissionModel.deleteMany({ challengeId: teamChallengeId }).exec();
+            await submissionModel.deleteMany({ teamChallengeId: teamChallengeId }).exec();
 
             next();
         } catch (error) {
@@ -91,5 +92,6 @@ TeamChallengeSchema.pre(
         }
     }
 );
+const TeamChallenge = mongoose.models.TeamChallenge || mongoose.model("TeamChallenge", TeamChallengeSchema);
 
-module.exports = mongoose.model("TeamChallenge", TeamChallengeSchema);
+module.exports = TeamChallenge;

@@ -224,7 +224,8 @@ const getChallengeById = async (req, res) => {
       .populate("organization")
       .populate("owner", "firstname lastname picturePath _id")
       .populate("skills", "name _id")
-      .populate({
+        .populate("categories", "name _id")
+        .populate({
         path: "banned",
         select: "firstname lastname picturePath _id",
       })
@@ -348,7 +349,7 @@ const getAllChallenges = async (req, res) => {
 
   try {
     const ChallengePosts = await ChallengeModel.find(filters)
-      .populate("company")
+      .populate("organization")
       .populate("skills")
       .populate("categories");
 
