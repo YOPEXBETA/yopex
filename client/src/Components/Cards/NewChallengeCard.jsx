@@ -10,11 +10,11 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
   const { currentOrganization } = useSelector(state => state.organization);
 
-  const currentWorkspace = user.currentWorkspace.label
+  const currentWorkspace = user?.currentWorkspace?.label
 
 
   const baseUrl = currentWorkspace === "Organization"
-      ? `/organization/${currentOrganization._id}/challenges/challengeDetails/`
+      ? `/organization/${currentOrganization?._id}/challenges/challengeDetails/`
       : `/challenges/challengeDetails/`;
 
   useEffect(() => {

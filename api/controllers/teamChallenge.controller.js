@@ -307,6 +307,35 @@ console.log('data', req.body)
     }
 };
 
+const banTeam = async (req, res) => {
+    try {
+        const teamChallengeId = req.params.teamChallengeId;
+        const { teamId } = req.body;
+        const owner = req.userId;
+        // Find the challenge and the current user
+        const challenge = await TeamChallengeModel.findById(teamChallengeId);
+        const user = await UserModel.findById(owner);
+
+        if (
+            challenge.owner?.toString() !== owner.toString() &&
+            !user.companies.includes(challenge.organization.toString())
+        ) {
+            return res.status(400).json({ message: "Not authorized" });
+        }
+
+        // Ban the team
+        challenge.banned.push(teamId);
+        challenge.teams = challenge.teams.filter(
+            (team) => team.team.toString() !== teamId.toString()
+        );
+        await challenge.save();
+
+        res.status(200).json({ message: "Team banned" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
 module.exports = {
     CreateTeamChallenge,
     getTeamChallengeById,
@@ -315,5 +344,6 @@ module.exports = {
     getAllTeamChallenges,
     getTeamChallengeTeams,
     getTeamChallengeTeamSubmit,
+    banTeam,
     updateTeamChallenge,
 };

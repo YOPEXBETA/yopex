@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { timeSince } from "../../../utils";
 import AvatarProfile from "../../../assets/images/AvatarProfile.jpg";
 
-const NotificationMenu = ({ notifications, user, mutate, onInvitationClick, isOpen }) => {
+const NotificationMenu = ({ notifications, user, mutate, onInvitationClick,onTeamInvitationClick, isOpen }) => {
     const menuRef = useRef(null);
 
     useEffect(() => {
@@ -34,6 +34,8 @@ const NotificationMenu = ({ notifications, user, mutate, onInvitationClick, isOp
                         onClick={() => {
                             if (notification?.type === 'invitation') {
                                 onInvitationClick(notification);
+                            } else if (notification?.type === 'teamInvitation') {
+                                onTeamInvitationClick(notification);
                             } else {
                                 mutate(notification?._id);
                             }

@@ -99,13 +99,15 @@ const TeamCreationModal = ({ open, handleClose , challenge}) => {
                             // For user invitations
                             await inviteUserToTeamMutation.mutateAsync({
                                 teamId,
-                                userId: invitation.user.userId
+                                userId: invitation.user.userId,
+                                challengeId: challenge._id,
                             });
                         } else if (invitation.email) {
                             // For email invitations
                             await inviteUserToTeamMutation.mutateAsync({
                                 teamId,
-                                email: invitation.email
+                                email: invitation.email,
+                                challengeId: challenge._id,
                             });
                         }
                     })

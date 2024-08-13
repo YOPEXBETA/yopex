@@ -145,7 +145,7 @@ const UserSchema = new mongoose.Schema(
     },
 
     challenges: [{ type: mongoose.Types.ObjectId, ref: "Challenge" }],
-
+      teamChallenges: [{ type: mongoose.Types.ObjectId, ref: "TeamChallenge" }],
     badgesEarned: {
       type: [
         {

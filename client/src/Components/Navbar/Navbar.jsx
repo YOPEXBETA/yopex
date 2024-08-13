@@ -21,6 +21,12 @@ import {
   useRefuseInvitation
 } from "../../hooks/react-query/useCompany";
 import {useNavigate} from "react-router-dom";
+import TeamInvitationModal from "../Modals/TeamInvitationModal";
+import {
+  useAcceptTeamInvitation,
+  useRefuseTeamInvitation,
+  useTeamInvitationById
+} from "../../hooks/react-query/useTeamChallenge";
 
 
 const Navbar = (props) => {
@@ -35,16 +41,21 @@ const Navbar = (props) => {
   const [nbrNotifications, setNbrNotifications] = useState(0);
   const [invitationData, setInvitationData] = useState(null);
   const [isInvitationModalOpen, setInvitationModalOpen] = useState(false);
+  const [isTeamInvitationModalOpen, setTeamInvitationModalOpen] = useState(false);
+
   const url = process.env.REACT_APP_API_ENDPOINT;
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Track menu open status
 
   const { data: invitation } = useInvitationById(invitationData?.invitation);
-  // Fetch organization by ID hook
+  const { data: teamInvitation } = useTeamInvitationById(invitationData?.teamInvitation);
+
   const { data: organization } = useOrganizationById(invitation?.organization);
 
   const { mutate: acceptInvitation, isLoading: acceptLoading } = useAcceptInvitation();
   const { mutate: refuseInvitation } = useRefuseInvitation();
 
+  const { mutate: acceptTeamInvitation, isLoading: acceptTeamLoading } = useAcceptTeamInvitation();
+  const { mutate: refuseTeamInvitation } = useRefuseTeamInvitation();
 
   useEffect(() => {
     const newSocket = io(`${url}`);
@@ -103,10 +114,47 @@ const Navbar = (props) => {
       await refuseInvitation(invitationData?.invitation);
       handleCloseModal();
     } catch (error) {
-      console.error("Error accepting invitation:", error);
+      console.error("Error refusing invitation:", error);
     }
   };
 
+
+  const handleTeamInvitationClick = async (notification) => {
+    try {
+      setInvitationData(notification);
+      setTeamInvitationModalOpen(true);
+    } catch (error) {
+      console.error("Error fetching team invitation:", error);
+    }
+  };
+  const handleCloseTeamModal = () => {
+    setTeamInvitationModalOpen(false);
+    setInvitationData(null);
+  };
+  const handleAcceptTeamInvitation = async () => {
+    if (!invitationData) return;
+
+    try {
+      await acceptTeamInvitation(invitationData?.teamInvitation);
+      handleCloseTeamModal();
+      setTimeout(() => {
+        navigate(`/challenges/challengeDetails/${teamInvitation?.challenge?._id}`);
+      }, 500);
+    } catch (error) {
+      console.error("Error accepting team invitation:", error);
+    }
+  };
+
+  const handleRefuseTeamInvitation = async () => {
+    if (!invitationData) return;
+
+    try {
+      await refuseTeamInvitation(invitationData?.teamInvitation);
+      handleCloseTeamModal();
+    } catch (error) {
+      console.error("Error refusing team invitation:", error);
+    }
+  };
   const handleBellClick = () => {
     setIsMenuOpen((prev) => !prev);
   };
@@ -203,6 +251,7 @@ const Navbar = (props) => {
                             user={user}
                             mutate={mutate}
                             onInvitationClick={handleInvitationClick}
+                            onTeamInvitationClick={handleTeamInvitationClick}
                             isOpen={isMenuOpen}
                         />
                       </div>
@@ -247,6 +296,14 @@ const Navbar = (props) => {
             onClose={handleCloseModal}
             onAccept={handleAcceptInvitation}
             onRefuse={handleRefuseInvitation}
+        />
+        <TeamInvitationModal
+            team={teamInvitation?.team}
+            challenge={teamInvitation?.challenge}
+            isOpen={isTeamInvitationModalOpen}
+            onClose={handleCloseTeamModal}
+            onAccept={handleAcceptTeamInvitation}
+            onRefuse={handleRefuseTeamInvitation}
         />
       </nav>
   );

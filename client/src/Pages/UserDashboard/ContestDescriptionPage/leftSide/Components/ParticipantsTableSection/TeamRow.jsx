@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AvatarProfile from "../../../../../../assets/images/AvatarProfile.jpg";
 import RemoveParticipantPopup from "../../../../../../Components/Popup/RemoveParticipantPopup";
+import {useBanTeam} from "../../../../../../hooks/react-query/useTeamChallenge";
 
 const TeamRow = ({ team, index, challenge, isOwner }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+    const {mutate: banTeam} = useBanTeam();
 
     const toggleOpen = () => {
         setIsOpen((prev) => !prev);
@@ -24,7 +26,14 @@ const TeamRow = ({ team, index, challenge, isOwner }) => {
     }
 
     const canEdit = team?.team?.teamLeader?._id === currentUser._id && challenge?.start && new Date() < new Date(challenge.deadline);
-
+    const handleRemove = async () => {
+        try {
+            await banTeam({ teamChallengeId: challenge._id, teamId: team.team._id });
+            setConfirmationDialogOpen(false);
+        } catch (error) {
+            console.error("Error banning team:", error);
+        }
+    };
     return (
         <tr
             key={team?.team?._id}
@@ -93,6 +102,7 @@ const TeamRow = ({ team, index, challenge, isOwner }) => {
                 <RemoveParticipantPopup
                     open={confirmationDialogOpen}
                     handleCancel={() => setConfirmationDialogOpen(false)}
+                    handleConfirm={handleRemove}
                 />
             )}
         </tr>

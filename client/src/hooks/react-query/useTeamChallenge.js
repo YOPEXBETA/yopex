@@ -134,8 +134,8 @@ export const useCreateTeam = () => {
                 queryClient.invalidateQueries(["teams"]);
                 return data;
             },
-            onError: () => {
-                toast.error("Error creating team");
+            onError: (error) => {
+                toast.error(`Error creating team: ${error.response.data.message}`);
             },
         }
     );
@@ -155,6 +155,77 @@ export const useInviteUserToTeam = () => {
             },
             onError: () => {
                 toast.error("Error sending invitation");
+            },
+        }
+    );
+};
+
+export const useBanTeam = () => {
+    const queryClient = useQueryClient();
+    return useMutation(
+        async ({ teamChallengeId, teamId }) => {
+            console.log('challenge', teamChallengeId, teamId)
+            const res = await axios.put(`${url}/teamChallenge/banTeam/${teamChallengeId}`, { teamId });
+            return res.data;
+        },
+        {
+            onSuccess: () => {
+                toast.success("Team banned successfully");
+                queryClient.invalidateQueries(["teamChallenges"]);
+                queryClient.invalidateQueries(["organizationTeamChallenges"]);
+            },
+            onError: () => {
+                toast.error("Error banning team");
+            },
+        }
+    );
+};
+
+export const useTeamInvitationById = (invitationId) => {
+    return useQuery(
+        ['teamInvitation', invitationId],
+        async () => {
+            const { data } = await axios.get(`${url}/team/getInviteById/${invitationId}`);
+            return data;
+        },
+        {
+            enabled: !!invitationId,
+        }
+    );
+}
+export const useAcceptTeamInvitation = () => {
+    const queryClient = useQueryClient();
+    return useMutation(
+        async (invitationId) => {
+            const res = await axios.put(`${url}/team/acceptInvite/${invitationId}`);
+            return res.data;
+        },
+        {
+            onSuccess: () => {
+                toast.success("Invitation accepted successfully");
+                queryClient.invalidateQueries(["teamInvitations"]);
+            },
+            onError: () => {
+                toast.error("Error accepting invitation");
+            },
+        }
+    );
+};
+
+export const useRefuseTeamInvitation = () => {
+    const queryClient = useQueryClient();
+    return useMutation(
+        async (invitationId) => {
+            const res = await axios.put(`${url}/team/refuseInvite/${invitationId}`);
+            return res.data;
+        },
+        {
+            onSuccess: () => {
+                toast.success("Invitation declined successfully");
+                queryClient.invalidateQueries(["teamInvitations"]);
+            },
+            onError: () => {
+                toast.error("Error declining invitation");
             },
         }
     );
