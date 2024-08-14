@@ -428,7 +428,7 @@ const startChallenge = async (req, res, next) => {
     const user = await UserModel.findById(userId);
     if (
       challenge.owner?.toString() !== userId.toString() &&
-      !user.companies.includes(challenge.company.toString())
+      !user.organizations.includes(challenge.organization.toString())
     ) {
       return res.status(400).json({ message: "Not authorized" });
     }
@@ -525,7 +525,7 @@ const getChallengeSubmission = async (req, res) => {
     }
     if (
       challenge.owner?.toString() !== userId.toString() &&
-      !user.companies.includes(challenge.company?.toString())
+      !user.organizations.includes(challenge.organization?.toString())
     ) {
       const submission = await submissionModel
         .find({

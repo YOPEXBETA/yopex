@@ -10,7 +10,7 @@ import Modal from "../../Modals/index";
 import CloseIcon from "../../icons/CloseIcon";
 import Select from "react-select";
 
-const maxSize = 5 * 1024 * 1024; // 5 megabytes
+const maxSize = 5 * 1024 * 1024;
 
 const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
   const url = process.env.REACT_APP_API_ENDPOINT;
