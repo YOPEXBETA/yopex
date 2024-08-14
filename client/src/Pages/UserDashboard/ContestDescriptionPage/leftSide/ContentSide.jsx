@@ -15,7 +15,6 @@ const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type }) =>
   const { id: challengeId } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { data: conversation } = useGetContestConversation(challengeId);
-console.log('isowner', isOwner)
   if (user && conversation)
     return (
       <div className="">
@@ -27,7 +26,7 @@ console.log('isowner', isOwner)
               </div>
               <div className="lg:block md:block lg:col-span-4 md:col-span-12 sm:col-span-12 col-span-12  mb-20">
                 <CompanyCard isRegistered={isRegistered} isOwner={isOwner} challenge={challenge} type={type}/>
-                {isOwner && !start && <Start />}
+                {isOwner && !start && <Start challenge={challenge} type={type}/>}
               </div>
             </div>
           )}
@@ -51,7 +50,7 @@ console.log('isowner', isOwner)
           )}
           {value === 4 && (
             <div className="lg:col-span-12 md:col-span-12">
-              <Removed isOwner={isOwner} />
+              <Removed isOwner={isOwner} challenge={challenge} type={type}/>
             </div>
           )}
           {value === 5 && (

@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: fetching team challenges and registering as a team">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: Sending , accepting and refusing team invitations for a team challenge">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/Team.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/Team.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/routes/team.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/team.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/NewChallengeCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/NewChallengeCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Modals/TeamCreationModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Modals/TeamCreationModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/components/NotificationMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/components/NotificationMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/CreateChallenge/Components/CreateChallengeForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/CreateChallenge/Components/CreateChallengeForm.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/TeamRow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/TeamRow.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
     </list>
@@ -154,7 +153,7 @@
       <workItem from="1723198531879" duration="8998000" />
       <workItem from="1723383863830" duration="7886000" />
       <workItem from="1723459646835" duration="19757000" />
-      <workItem from="1723543087393" duration="6924000" />
+      <workItem from="1723543087393" duration="12812000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -284,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723491344190</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat: Sending , accepting and refusing team invitations for a team challenge">
+      <option name="closed" value="true" />
+      <created>1723551491993</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1723551491993</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,6 +325,7 @@
     <MESSAGE value="fix: general fixes and tweaks" />
     <MESSAGE value="feat: adding a team challenge as an organization" />
     <MESSAGE value="feat: fetching team challenges and registering as a team" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: fetching team challenges and registering as a team" />
+    <MESSAGE value="feat: Sending , accepting and refusing team invitations for a team challenge" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Sending , accepting and refusing team invitations for a team challenge" />
   </component>
 </project>

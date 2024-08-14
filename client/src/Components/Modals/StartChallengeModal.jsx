@@ -4,9 +4,11 @@ import moment from "moment";
 import CloseIcon from "../icons/CloseIcon";
 import { useForm, Controller } from "react-hook-form";
 import { useStartChallenge } from "../../hooks/react-query/useChallenges";
+import {useStartTeamChallenge} from "../../hooks/react-query/useTeamChallenge";
 
-const StartChallengeModal = ({ open, handleClose }) => {
-  const { mutate } = useStartChallenge();
+const StartChallengeModal = ({ open, handleClose, challenge, type }) => {
+  const { mutate: startChallenge } = useStartChallenge();
+  const { mutate: startTeamChallenge } = useStartTeamChallenge();
   const {
     handleSubmit,
     watch,
@@ -20,13 +22,22 @@ const StartChallengeModal = ({ open, handleClose }) => {
   now = now.toISOString().slice(0, -8);
 
   function onSubmit(data) {
-    mutate(data, {
-      onSuccess: () => {
-        handleClose();
-      },
-    });
+    if (type === "challenge") {
+      startChallenge(data, {
+        onSuccess: () => {
+          handleClose();
+        },
+      });
+    } else if (type === "teamChallenge") {
+      startTeamChallenge(data, {
+        onSuccess: () => {
+          handleClose();
+        },
+      });
+    } else {
+      console.error("Invalid type provided");
+    }
   }
-
   return (
     <Modal
       open={open}

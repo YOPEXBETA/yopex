@@ -53,7 +53,7 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
   const toggleTeamModal = () => setTeamModalOpen((prev) => !prev); // Toggle function for team challenge modal
 
   const handleTeamChallengeRegister = () => {
-    setTeamModalOpen(true); // Open the team challenge modal
+    setTeamModalOpen(true);
   };
   return (
     <div className="space-y-6">

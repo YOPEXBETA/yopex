@@ -273,10 +273,122 @@ const getTeamInvitationById = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+const getTeamById = async (req, res) => {
+    try {
+        const { teamId } = req.params;
+
+        const team = await Team.findById(teamId)
+            .populate({
+                path: 'teamLeader',
+                select: 'firstname lastname picturePath _id', // Fields to populate
+            })
+            .populate({
+                path: 'members',
+                select: 'firstname lastname picturePath _id', // Fields to populate
+            });
+
+        if (!team) {
+            return res.status(404).json({ message: 'Team not found' });
+        }
+
+        res.status(200).json(team);
+    } catch (error) {
+        console.error('Error fetching team:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+const removeTeamMember = async (req, res) => {
+    const { teamId, userId } = req.body;
+    try {
+        const team = await Team.findById(teamId);
+
+        if (!team) {
+            return res.status(404).json({ message: 'Team not found' });
+        }
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'user not found' });
+        }
+        const memberIndex = team.members.findIndex(member => member.toString() === userId);
+        if (memberIndex === -1) {
+            return res.status(400).json({ message: 'User is not a member of this team' });
+        }
+
+        team.members.splice(memberIndex, 1);
+
+        await team.save();
+
+        const notification = new notificationModel({
+            type: 'challengeTeam',
+            message: `You have been removed from ${team.name}`,
+            picture: team.teamPicture,
+            user: user._id,
+            team: team._id,
+        });
+        await notification.save();
+
+
+        res.status(200).json({
+            message: 'User removed from the team successfully',
+            team
+        });
+    } catch (error) {
+        console.error('Error removing team member:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+const leaveTeam = async (req, res) => {
+    const { teamId, userId } = req.body;
+    try {
+        const team = await Team.findById(teamId);
+
+        if (!team) {
+            return res.status(404).json({ message: 'Team not found' });
+        }
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'user not found' });
+        }
+        const memberIndex = team.members.findIndex(member => member.toString() === userId);
+        if (memberIndex === -1) {
+            return res.status(400).json({ message: 'User is not a member of this team' });
+        }
+
+        team.members.splice(memberIndex, 1);
+
+        await team.save();
+
+        const notification = new notificationModel({
+            type: 'challengeTeam',
+            message: `${user.firstname} has left your team ${team.name}`,
+            picture: user.picturePath,
+            user: team.teamLeader,
+            team: team._id,
+        });
+        await notification.save();
+
+
+        res.status(200).json({
+            message: 'You have left the team successfully',
+            team
+        });
+    } catch (error) {
+        console.error('Error leaving the team:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
 module.exports = {
     createTeam,
     inviteUserToTeam,
     acceptInvitation,
     refuseInvitation,
-    getTeamInvitationById
+    getTeamInvitationById,
+    getTeamById,
+    removeTeamMember,
+    leaveTeam
 };

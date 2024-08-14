@@ -13,7 +13,6 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered,challenge,isO
     if (diff < 0) return "0 Days 0 Hours 0 Minutes";
   };
   const handleProgress = (card) => {
-    console.log(getDeadlineDifference(card?.deadline));
     if (getDeadlineDifference(card?.deadline) === "0 Days 0 Hours 0 Minutes")
       return true;
     return false;

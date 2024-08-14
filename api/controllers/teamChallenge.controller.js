@@ -6,6 +6,9 @@ const UserModel = require("../models/user.model");
 const Skill = require("../models/skill.model");
 const Category = require("../models/Category.model");
 const submissionModel = require("../models/submission.model");
+const notificationModel = require("../models/notification.model");
+const Team = require("../models/team.model");
+const ChallengeModel = require("../models/Challenge.model");
 
 const CreateTeamChallenge = async (req, res) => {
     try {
@@ -23,10 +26,8 @@ const CreateTeamChallenge = async (req, res) => {
             youtubeLink,
             objective,
         } = req.body;
-console.log('body', req.body)
 
         const userId = req.userId;
-        console.log('userId', userId)
 
         const user = await UserModel.findById(userId);
 
@@ -126,7 +127,7 @@ const getTeamChallengeById = async (req, res) => {
                 path: "teams",
                 populate: {
                     path: "team",
-                    select: "name _id",
+                    select: "name teamPicture _id",
                 },
             });
 
@@ -256,7 +257,7 @@ const getTeamChallengeTeams = async (req, res) => {
             path: "teams",
             populate: {
                 path: "team",
-                select: "name _id",
+                select: "name teamPicture _id",
             },
         });
         const ChallengeTeams = ChallengePost.teams.sort((a, b) => {
@@ -312,28 +313,101 @@ const banTeam = async (req, res) => {
         const teamChallengeId = req.params.teamChallengeId;
         const { teamId } = req.body;
         const owner = req.userId;
-        // Find the challenge and the current user
         const challenge = await TeamChallengeModel.findById(teamChallengeId);
         const user = await UserModel.findById(owner);
-
+        const team = await Team.findById(teamId);
         if (
             challenge.owner?.toString() !== owner.toString() &&
-            !user.companies.includes(challenge.organization.toString())
+            !user.organizations.includes(challenge.organization.toString())
         ) {
             return res.status(400).json({ message: "Not authorized" });
         }
-
-        // Ban the team
         challenge.banned.push(teamId);
         challenge.teams = challenge.teams.filter(
             (team) => team.team.toString() !== teamId.toString()
         );
         await challenge.save();
+        const notification = new notificationModel({
+            type: 'challengeTeam',
+            message: `Your team ${team.name} have been banned from ${challenge.title}`,
+            picture: team.teamPicture,
+            user: team.teamLeader,
+            team: team._id,
+            teamChallenge: teamChallengeId
+        });
+        await notification.save();
 
         res.status(200).json({ message: "Team banned" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Server error" });
+    }
+};
+
+const unbanTeam = async (req, res) => {
+    try {
+        const teamChallengeId = req.params.teamChallengeId;
+        const { teamId } = req.body;
+        const owner = req.userId;
+        const challenge = await TeamChallengeModel.findById(teamChallengeId);
+        const user = await UserModel.findById(owner);
+        const team = await Team.findById(teamId);
+        if (
+            challenge.owner?.toString() !== owner.toString() &&
+            !user.organizations.includes(challenge.organization.toString())
+        ) {
+            return res.status(400).json({ message: "Not authorized" });
+        }
+
+        challenge.banned = challenge.banned.filter(
+            (team) => team.toString() !== teamId.toString()
+        );
+
+        challenge.teams.push({
+            team: teamId,
+            registrationDate: Date.now(),
+        });
+
+        await challenge.save();
+        const notification = new notificationModel({
+            type: 'challengeTeam',
+            message: `Your team ${team.name} have been unbanned from ${challenge.title}`,
+            picture: team.teamPicture,
+            user: team.teamLeader,
+            team: team._id,
+            teamChallenge: teamChallengeId
+        });
+        await notification.save();
+
+        res.status(200).json({ message: "Team unbanned" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+const startTeamChallenge = async (req, res, next) => {
+    try {
+        const teamChallengeId = req.params.teamChallengeId;
+        const challenge = await TeamChallengeModel.findById(teamChallengeId);
+        const userId = req.userId;
+        const user = await UserModel.findById(userId);
+        if (
+            challenge.owner?.toString() !== userId.toString() &&
+            !user.organizations.includes(challenge.organization.toString())
+        ) {
+            return res.status(400).json({ message: "Not authorized" });
+        }
+        if (challenge.teams.length === 0) {
+            return res.status(400).json({ message: "No teams registered" });
+        }
+        challenge.start = true;
+        challenge.deadline = req.body.deadline;
+        await challenge.save();
+        res.status(200).json({ message: "Challenge started" });
+    } catch (err) {
+        res.status(400).json({ message: "bad" });
+        return console.log(err);
     }
 };
 module.exports = {
@@ -345,5 +419,7 @@ module.exports = {
     getTeamChallengeTeams,
     getTeamChallengeTeamSubmit,
     banTeam,
+    unbanTeam,
     updateTeamChallenge,
+    startTeamChallenge
 };

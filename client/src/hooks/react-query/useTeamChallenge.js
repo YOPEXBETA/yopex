@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { axios } from "../../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import {useParams} from "react-router-dom";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
@@ -181,6 +182,28 @@ export const useBanTeam = () => {
     );
 };
 
+
+export const useUnbanTeam = () => {
+    const queryClient = useQueryClient();
+    return useMutation(
+        async ({ teamChallengeId, teamId }) => {
+            const res = await axios.put(`${url}/teamChallenge/unbanTeam/${teamChallengeId}`, { teamId });
+            return res.data;
+        },
+        {
+            onSuccess: () => {
+                toast.success("Team unbanned successfully");
+                queryClient.invalidateQueries(["teamChallenges"]);
+                queryClient.invalidateQueries(["organizationTeamChallenges"]);
+            },
+            onError: () => {
+                toast.error("Error unbanning team");
+            },
+        }
+    );
+};
+
+
 export const useTeamInvitationById = (invitationId) => {
     return useQuery(
         ['teamInvitation', invitationId],
@@ -229,4 +252,86 @@ export const useRefuseTeamInvitation = () => {
             },
         }
     );
+};
+
+
+export const useTeamById = (teamId) => {
+    return useQuery(
+        ['team', teamId],
+        async () => {
+            const { data } = await axios.get(`${url}/team/getTeamById/${teamId}`);
+            return data;
+        },
+        {
+            enabled: !!teamId,
+        }
+    );
+};
+
+export const useRemoveTeamMember = () => {
+    const queryClient = useQueryClient();
+    return useMutation(
+
+        async ({ teamId, userId }) => {
+            console.log('remove')
+
+            const res = await axios.delete(`${url}/team/removeMember`, {
+                data: { teamId, userId }
+            });
+            return res.data;
+        },
+        {
+            onSuccess: () => {
+                toast.success("Member removed successfully");
+                queryClient.invalidateQueries(["teamById"]);
+            },
+            onError: () => {
+                toast.error("Error removing member");
+            },
+        }
+    );
+};
+
+export const useLeaveTeam = () => {
+    const queryClient = useQueryClient();
+    return useMutation(
+        async ({ teamId, userId }) => {
+            console.log('leave')
+
+            const res = await axios.delete(`${url}/team/leaveTeam`, {
+                data: { teamId, userId }
+            });
+            return res.data;
+        },
+        {
+            onSuccess: () => {
+                toast.success("Left the team successfully");
+                queryClient.invalidateQueries(["teamById"]);
+            },
+            onError: () => {
+                toast.error("Error leaving the team");
+            },
+        }
+    );
+};
+
+export const useStartTeamChallenge = () => {
+    const queryClient = useQueryClient();
+    const { id: teamChallengeId } = useParams();
+    return useMutation({
+        mutationFn: async (data) => {
+            await axios.put(`${url}/teamChallenge/start/${teamChallengeId}`, data);
+        },
+        onSuccess: () => {
+            toast.success("Challenge started successfully");
+            queryClient.invalidateQueries(["teamChallenges"]);
+            queryClient.invalidateQueries(["organizationTeamChallenges"]);
+        },
+        onError: (data) => {
+            console.log(data);
+            if (data.response.data.message === "No teams registered") {
+                toast.error("No teams registered");
+            } else toast.error("Error starting challenge");
+        },
+    });
 };

@@ -10,7 +10,7 @@ const CreateSubmission = async (req, res, next) => {
     const { challengeId, userId, title, description, filesPaths, links } =
       req.body;
 
-    // Create submission object
+   console.log('body', req.body)
     const submission = new Submission({
       challengeId,
       userId,
@@ -22,7 +22,7 @@ const CreateSubmission = async (req, res, next) => {
 
     // check if challenge is started
     const challenge =
-      await ChallengeModel.findById(challengeId).populate("company");
+      await ChallengeModel.findById(challengeId).populate("organization");
     if (!challenge) {
       return res.status(400).json({ message: "Challenge not found" });
     }
@@ -63,7 +63,7 @@ const CreateSubmission = async (req, res, next) => {
       picture: user.profilePicture,
     });
     await notification.save();
-    main.sendNotification(userId.toString(), notification);
+
     const notification2 = new notificationModel({
       type: "submission",
       message: `A user (${user.firstname} ${user.lastname}) has submitted a solution for ${challenge.title}`,
@@ -71,8 +71,7 @@ const CreateSubmission = async (req, res, next) => {
       picture: user.picturePath,
     });
     await notification2.save();
-    main.sendNotification(challenge.owner.toString(), notification2);
-    main.sendNotification(challenge.company.user.toString(), notification2);
+
 
     res.status(201).json(user);
   } catch (error) {

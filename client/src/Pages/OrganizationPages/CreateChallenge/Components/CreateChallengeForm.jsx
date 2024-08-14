@@ -94,7 +94,6 @@ const CreateChallengeForm = () => {
             } = updatedData;
 
             if (challengeTypeS === "Team") {
-console.log('team')
                 const createTeamChallengeResponse = await createTeamChallenge.mutateAsync({
                     title,
                     description,
@@ -113,7 +112,6 @@ console.log('team')
 
                 console.log("Create team challenge response:", createTeamChallengeResponse);
             } else if (challengeTypeS === "Individual") {
-                // Call the useCreateOrganizationChallenge hook
                 const createOrganizationChallengeResponse = await createOrganizationChallenge.mutateAsync({
                     challengeData: {
                         title,
