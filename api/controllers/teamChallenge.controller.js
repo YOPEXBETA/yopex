@@ -127,7 +127,7 @@ const getTeamChallengeById = async (req, res) => {
                 path: "teams",
                 populate: {
                     path: "team",
-                    select: "name teamPicture _id",
+                    select: "name teamLeader teamPicture _id",
                 },
             });
 
@@ -410,6 +410,41 @@ const startTeamChallenge = async (req, res, next) => {
         return console.log(err);
     }
 };
+
+const unjoinTeamChallenge = async (req, res) => {
+    try {
+        const { idChallenge, teamId } = req.body;
+        console.log('body', req.body)
+        // Fetch the team and challenge
+        const team = await Team.findById(teamId);
+        const challenge = await TeamChallengeModel.findById(idChallenge);
+
+        if (!team || !challenge) {
+            return res.status(404).send("Team or Challenge not found.");
+        }
+
+        // Remove the team from the challenge's teams array
+        challenge.teams = challenge.teams.filter(
+            (teamEntry) => teamEntry.team.toString() !== teamId.toString()
+        );
+        await challenge.save();
+
+        // Check if the team leader is part of this team
+        const teamLeader = await UserModel.findById(team.teamLeader);
+        if (teamLeader) {
+            // Remove the challenge from the team leader's challenges list
+            teamLeader.teamChallenges = teamLeader.teamChallenges.filter(
+                (challengeId) => challengeId.toString() !== idChallenge.toString()
+            );
+            await teamLeader.save();
+        }
+
+        res.status(200).send(challenge);
+    } catch (error) {
+        console.log("Error unjoining team challenge:", error);
+        res.status(500).send("Error unjoining team challenge.");
+    }
+};
 module.exports = {
     CreateTeamChallenge,
     getTeamChallengeById,
@@ -421,5 +456,6 @@ module.exports = {
     banTeam,
     unbanTeam,
     updateTeamChallenge,
-    startTeamChallenge
+    startTeamChallenge,
+    unjoinTeamChallenge
 };

@@ -15,6 +15,7 @@ import { useJoinContestConversation } from "../../../../../../hooks/react-query/
 import LoadingSpinner from "../../../../../../Components/LoadingSpinner";
 import Card from "../../../../../../Components/Cards";
 import TeamCreationModal from "../../../../../../Components/Modals/TeamCreationModal";
+import {useUnjoinTeamChallenge} from "../../../../../../hooks/react-query/useTeamChallenge";
 
 const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -25,8 +26,8 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
   const { user } = useSelector((state) => state.auth);
   const { data } = useUserChallenges(user);
   const { data: submissions } = useUserSubmission(challenge._id, user);
-  const { mutate: unRegisterMutate, isLoading: isloadingun } =
-    useUnregisterChallenge(challenge, user);
+  const { mutate: unRegisterChallengeMutate, isLoading: isLoadingUnRegister } = useUnregisterChallenge(challenge, user);
+  const { mutate: unjoinTeamChallengeMutate } = useUnjoinTeamChallenge();
   const { mutate: registerMutate, isLoading } = useRegisterChallenge(
     challenge,
     user
@@ -54,6 +55,17 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
 
   const handleTeamChallengeRegister = () => {
     setTeamModalOpen(true);
+  };
+  const handleUnregister = () => {
+    if (type === 'teamChallenge') {
+      const userTeam = challenge.teams.find(
+          (teamEntry) => teamEntry.team.teamLeader.toString() === user._id.toString()
+      );
+      console.log('id', userTeam)
+      unjoinTeamChallengeMutate({ idChallenge: challenge._id, teamId: userTeam.team._id }); // Pass teamId from user or other source
+    } else {
+      unRegisterChallengeMutate();
+    }
   };
   return (
     <div className="space-y-6">
@@ -95,12 +107,12 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
                 {isRegistered ? (
                   <button
                     className={`px-5 py-3 text-white w-full bg-purple-500 h-16 hover:bg-green-600 rounded-full animate-pulse ${
-                      isloadingun ? "opacity-50 cursor-not-allowed" : ""
+                        isLoadingUnRegister ? "opacity-50 cursor-not-allowed" : ""
                     }`}
-                    onClick={unRegisterMutate}
-                    disabled={isloadingun}
+                    onClick={handleUnregister} // Updated to use handleUnregister
+                    disabled={isLoadingUnRegister}
                   >
-                    {isloadingun ? <LoadingSpinner /> : "Unregister"}
+                    {isLoadingUnRegister ? <LoadingSpinner /> : "Unregister"}
                   </button>
                 ) : (
                   <div>

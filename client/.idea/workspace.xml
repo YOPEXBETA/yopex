@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: managing team members and team challenge start">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: challenge now is fetched based on type from param">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/NewChallengeCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/NewChallengeCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/TeamChallengeCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/TeamChallengeCard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useChallenges.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useChallenges.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +153,8 @@
       <workItem from="1723459646835" duration="19757000" />
       <workItem from="1723543087393" duration="12812000" />
       <workItem from="1723638475497" duration="12098000" />
-      <workItem from="1723708268849" duration="2173000" />
+      <workItem from="1723708268849" duration="2593000" />
+      <workItem from="1723720943652" duration="2273000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -309,7 +308,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723655974638</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="fix: challenge now is fetched based on type from param">
+      <option name="closed" value="true" />
+      <created>1723710844929</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1723710844929</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,6 +353,7 @@
     <MESSAGE value="feat: Sending , accepting and refusing team invitations for a team challenge" />
     <MESSAGE value="fix: Submitting as a user to an individuals challenge" />
     <MESSAGE value="feat: managing team members and team challenge start" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: managing team members and team challenge start" />
+    <MESSAGE value="fix: challenge now is fetched based on type from param" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: challenge now is fetched based on type from param" />
   </component>
 </project>

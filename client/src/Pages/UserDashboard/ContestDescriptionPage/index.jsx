@@ -20,14 +20,13 @@ const ContestDetails = () => {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
   const entityType = queryParams.get("type");
-  console.log('type', entityType)
-  console.log('challengeId', challengeId)
+
   const { data: challengeData, isLoading: isChallengeLoading } = useChallengeById(challengeId, entityType);
   const { data: teamChallengeData, isLoading: isTeamChallengeLoading } = useTeamChallengeById(challengeId, entityType);
 
   const challenge = entityType === "challenge" ? challengeData : teamChallengeData;
   const loading = entityType === "challenge" ? isChallengeLoading : isTeamChallengeLoading;
-
+console.log('challenge', challenge)
   const { user } = useSelector((state) => state.auth);
   const isOwner = user?.organizations?.find(
     (organization) => organization === challenge?.organization?._id
@@ -37,11 +36,21 @@ const ContestDetails = () => {
 
   useEffect(() => {
     if (!challenge) return;
-    const registered = challenge?.users?.find(
-      (item) => item?.user?._id === user?._id
-    );
-    setIsRegistered(registered ? true : false);
-  }, [challenge]);
+
+    if (entityType === "challenge") {
+      const registered = challenge?.users?.find(
+          (item) => item?.user?._id === user?._id
+      );
+      setIsRegistered(!!registered);
+    }
+
+    if (entityType === "teamChallenge") {
+      const teamLeader = challenge?.teams?.find(
+          (team) => team.team.teamLeader === user?._id
+      );
+      setIsRegistered(!!teamLeader);
+    }
+  }, [challenge, entityType, user]);
 
   if (loading) {
     return (

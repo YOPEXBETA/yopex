@@ -336,3 +336,22 @@ export const useStartTeamChallenge = () => {
         },
     });
 };
+export const useUnjoinTeamChallenge = () => {
+    const queryClient = useQueryClient();
+    return useMutation(
+        async ({ idChallenge, teamId }) => {
+            const res = await axios.post(`${url}/teamChallenge/unjoin`, { idChallenge, teamId });
+            return res.data;
+        },
+        {
+            onSuccess: () => {
+                toast.success("Successfully unjoined the team challenge");
+                queryClient.invalidateQueries(["teamChallenges"]);
+                queryClient.invalidateQueries(["organizationTeamChallenges"]);
+            },
+            onError: () => {
+                toast.error("Error unjoining the team challenge");
+            },
+        }
+    );
+};
