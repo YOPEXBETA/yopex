@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import { useChallengeById } from "../../../hooks/react-query/useChallenges";
 import Banner from "./TopSide/Banner";
 import ContentSide from "./leftSide/ContentSide";
@@ -14,25 +14,19 @@ const ContestDetails = () => {
   const changeValue = (newValue) => {
     setValue(newValue);
   };
-  const [entityType, setEntityType] = useState(null); // Track the type of entity
-  const [challenge, setChallenge] = useState(null); // Track the current challenge data
-  const [loading, setLoading] = useState(true); // Track loading state
 
 
-  const { id: challengeId } = useParams();
-  const { data: challengeData, isLoading: isChallengeLoading } = useChallengeById(challengeId);
-  const { data: teamChallengeData, isLoading: isTeamChallengeLoading } = useTeamChallengeById(challengeId);
-  useEffect(() => {
-    if (challengeData) {
-      setEntityType('challenge');
-      setChallenge(challengeData);
-      setLoading(false);
-    } else if (teamChallengeData) {
-      setEntityType('teamChallenge');
-      setChallenge(teamChallengeData);
-      setLoading(false);
-    }
-  }, [challengeData, teamChallengeData]);
+  const { id: challengeId} = useParams();
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const entityType = queryParams.get("type");
+  console.log('type', entityType)
+  console.log('challengeId', challengeId)
+  const { data: challengeData, isLoading: isChallengeLoading } = useChallengeById(challengeId, entityType);
+  const { data: teamChallengeData, isLoading: isTeamChallengeLoading } = useTeamChallengeById(challengeId, entityType);
+
+  const challenge = entityType === "challenge" ? challengeData : teamChallengeData;
+  const loading = entityType === "challenge" ? isChallengeLoading : isTeamChallengeLoading;
 
   const { user } = useSelector((state) => state.auth);
   const isOwner = user?.organizations?.find(

@@ -5,13 +5,14 @@ import {useParams} from "react-router-dom";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-export const useTeamChallengeById = (teamChallengeId) => {
+export const useTeamChallengeById = (teamChallengeId, entityType) => {
     return useQuery({
         queryKey: ["teamChallenges", teamChallengeId],
         queryFn: async () => {
             const { data } = await axios.get(`${url}/teamChallenge/single/${teamChallengeId}`);
             return data;
         },
+        enabled: !!teamChallengeId && entityType === "teamChallenge",
     });
 };
 

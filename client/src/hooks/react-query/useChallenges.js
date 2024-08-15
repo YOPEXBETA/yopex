@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-export const useChallengeById = (challengeId) => {
+export const useChallengeById = (challengeId, entityType) => {
   return useQuery({
     queryKey: ["challenges", challengeId],
     queryFn: async () => {
@@ -14,6 +14,7 @@ export const useChallengeById = (challengeId) => {
       );
       return data;
     },
+    enabled: !!challengeId && entityType === "challenge",
   });
 };
 

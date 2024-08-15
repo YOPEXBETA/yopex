@@ -45,7 +45,7 @@ const TeamChallengeCard = ({ teamChallenge, extra }) => {
                 <Link
                     to={
                         teamChallenge
-                            ? `${baseUrl}${teamChallenge._id}`
+                            ? `${baseUrl}${teamChallenge._id}?type=teamChallenge`
                             : "#"
                     }
                 >

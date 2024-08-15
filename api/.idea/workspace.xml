@@ -6,17 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="fix: general fixes and tweaks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/Challenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Challenge.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/Team.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Team.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/submission.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/submission.controllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/teamChallenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/teamChallenge.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/submission.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/submission.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/team.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/team.router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/teamChallenge.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teamChallenge.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/OrganizationPages/CreateChallenge/Components/CreateChallengeForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/OrganizationPages/CreateChallenge/Components/CreateChallengeForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/TeamRow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/TeamRow.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +164,8 @@
       <workItem from="1723459614936" duration="13716000" />
       <workItem from="1723488810718" duration="2368000" />
       <workItem from="1723542979832" duration="10480000" />
-      <workItem from="1723638177993" duration="8302000" />
+      <workItem from="1723638177993" duration="9018000" />
+      <workItem from="1723708171946" duration="1082000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />

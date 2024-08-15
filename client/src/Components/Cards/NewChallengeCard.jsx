@@ -45,7 +45,7 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
         <Link
             to={
               challenge
-                  ? `${baseUrl}${challenge._id}`
+                  ? `${baseUrl}${challenge._id}?type=challenge`
                   : "#"
             }
         >
