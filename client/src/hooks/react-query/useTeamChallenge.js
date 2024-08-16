@@ -355,3 +355,18 @@ export const useUnjoinTeamChallenge = () => {
         }
     );
 };
+
+
+
+export const useSubmitToTeamChallenge = ({ teamChallengeId }) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (submission) => {
+            await axios.post(`${url}/teamChallenge/teamSubmit`, submission);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(["challenges", teamChallengeId]);
+            toast.success("You submited to the challenge!");
+        },
+    });
+};

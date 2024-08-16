@@ -4,6 +4,8 @@ const Submission = require("../models/submission.model");
 const User = require("../models/user.model");
 const { updateUserSubmissionsBadges } = require("../utils/utilities");
 const main = require("../server");
+const Team = require("../models/team.model");
+const TeamChallengeModel = require("../models/TeamChallenge.model");
 
 const CreateSubmission = async (req, res, next) => {
   try {
@@ -60,13 +62,13 @@ const CreateSubmission = async (req, res, next) => {
       type: "submission",
       message: `You have submitted a solution for ${challenge.title}`,
       user: userId,
-      picture: user.profilePicture,
+      picture: user.picturePath,
     });
     await notification.save();
 
     const notification2 = new notificationModel({
       type: "submission",
-      message: `A user (${user.firstname} ${user.lastname}) has submitted a solution for ${challenge.title}`,
+      message: `${user.firstname} ${user.lastname} has submitted a solution for ${challenge.title}`,
       user: challenge.owner,
       picture: user.picturePath,
     });
@@ -78,6 +80,103 @@ const CreateSubmission = async (req, res, next) => {
     console.log(error);
     res.status(500).json({ message: "Server error" });
   }
+};
+
+
+const CreateTeamSubmission = async (req, res, next) => {
+    try {
+        const { teamChallengeId, teamId, title, description, filesPaths, links } = req.body;
+
+        console.log('body', req.body);
+
+        const submission = new Submission({
+            teamChallengeId,
+            teamId,
+            title,
+            description,
+            filesPaths,
+            links,
+        });
+
+        // Check if challenge is started
+        const teamChallenge = await TeamChallengeModel.findById(teamChallengeId).populate("organization");
+        if (!teamChallenge) {
+            return res.status(400).json({ message: "Challenge not found" });
+        }
+
+        if (!teamChallenge.start) {
+            return res.status(400).json({ message: "Challenge not started" });
+        }
+        if (teamChallenge.deadline < Date.now()) {
+            return res.status(400).json({ message: "Challenge is closed" });
+        }
+
+        // Save submission to database
+        const savedSubmission = await submission.save();
+
+        // Add submission to challenge
+        const team = await Team.findById(teamId);
+        const leader = await User.findById(team.teamLeader);
+        teamChallenge.submissions.push(savedSubmission._id);
+        leader.submissions.push(savedSubmission._id);
+
+        // Update team members' submissions
+        const memberUpdates = team.members.map(async memberId => {
+            const member = await User.findById(memberId);
+            if (member) {
+                member.submissions.push(savedSubmission._id);
+                await member.save();
+
+                // Create notification for each member
+                const memberNotification = new notificationModel({
+                    type: "submission",
+                    message: `Your team ${team.name} has submitted a solution for ${teamChallenge.title}`,
+                    user: member._id,
+                    picture: team.teamPicture,
+                });
+                await memberNotification.save();
+                updateUserSubmissionsBadges(member);
+            }
+        });
+
+        // Wait for all member updates and notifications to complete
+        await Promise.all(memberUpdates);
+
+        // Update leader submissions
+        updateUserSubmissionsBadges(leader);
+
+        // Update team challenge with submission date
+        teamChallenge.teams.map((teamEntry, index) => {
+            if (teamEntry.team._id.toString() === teamId) {
+                teamChallenge.teams[index].submissionDate = new Date();
+            }
+        });
+        await teamChallenge.save();
+        await leader.save();
+
+        // Create notifications for the team leader and challenge owner
+        const notification = new notificationModel({
+            type: "submission",
+            message: `Your team ${team.name} has submitted a solution for ${teamChallenge.title}`,
+            user: leader._id,
+            picture: leader.picturePath,
+        });
+        await notification.save();
+
+        const notification2 = new notificationModel({
+            type: "submission",
+            message: `${team.name} has submitted a solution for ${teamChallenge.title}`,
+            user: teamChallenge.owner,
+            organization: teamChallenge.organization,
+            picture: team.teamPicture,
+        });
+        await notification2.save();
+
+        res.status(201).json(leader);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Server error" });
+    }
 };
 
 const editsubmission = async (req, res) => {
@@ -105,4 +204,5 @@ const editsubmission = async (req, res) => {
 module.exports = {
   CreateSubmission,
   editsubmission,
+    CreateTeamSubmission
 };

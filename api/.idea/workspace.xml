@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="fix: general fixes and tweaks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/teamChallenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/teamChallenge.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/submission.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/submission.controllers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/teamChallenge.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teamChallenge.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +169,8 @@
       <workItem from="1723542979832" duration="10480000" />
       <workItem from="1723638177993" duration="9018000" />
       <workItem from="1723708171946" duration="1589000" />
-      <workItem from="1723720894690" duration="2410000" />
+      <workItem from="1723720894690" duration="3015000" />
+      <workItem from="1723741547815" duration="3830000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />

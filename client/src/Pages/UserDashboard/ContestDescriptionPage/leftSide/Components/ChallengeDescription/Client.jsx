@@ -22,6 +22,7 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [deadline, setDeadline] = useState(null);
   const [teamModalOpen, setTeamModalOpen] = useState(false);
+  const [team, setTeam] = useState(null);
 
   const { user } = useSelector((state) => state.auth);
   const { data } = useUserChallenges(user);
@@ -51,7 +52,7 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
     registerMutate();
     join({ contestId: challenge?._id, userId: user._id });
   };
-  const toggleTeamModal = () => setTeamModalOpen((prev) => !prev); // Toggle function for team challenge modal
+  const toggleTeamModal = () => setTeamModalOpen((prev) => !prev);
 
   const handleTeamChallengeRegister = () => {
     setTeamModalOpen(true);
@@ -60,9 +61,11 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
     if (type === 'teamChallenge') {
       const userTeam = challenge.teams.find(
           (teamEntry) => teamEntry.team.teamLeader.toString() === user._id.toString()
+
       );
-      console.log('id', userTeam)
-      unjoinTeamChallengeMutate({ idChallenge: challenge._id, teamId: userTeam.team._id }); // Pass teamId from user or other source
+      console.log('teamUser', userTeam)
+      setTeam(userTeam.team);
+      unjoinTeamChallengeMutate({ idChallenge: challenge._id, teamId: userTeam.team._id });
     } else {
       unRegisterChallengeMutate();
     }
@@ -169,6 +172,9 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
         handleClose={toggleModal}
         setIsSubmitted={setIsSubmitted}
         isRegistered={isRegistered}
+        challenge={challenge}
+        type={type}
+        team={team}
       />
       <TeamCreationModal
           open={teamModalOpen}

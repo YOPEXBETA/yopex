@@ -9,10 +9,12 @@ import toast from "react-hot-toast";
 import Modal from "../../Modals/index";
 import CloseIcon from "../../icons/CloseIcon";
 import Select from "react-select";
+import TermsAndConditionsModal from "./TermsAndConditionsModal";
+import {useSubmitToTeamChallenge} from "../../../hooks/react-query/useTeamChallenge";
 
 const maxSize = 5 * 1024 * 1024;
 
-const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
+const SubmitModal = ({ open, handleClose, setIsSubmitted, challenge, type, team }) => {
   const url = process.env.REACT_APP_API_ENDPOINT;
   const [filesSelected, setFilesSelected] = useState([]);
   const [SubmissionTitle, setSubmissionTitle] = useState("");
@@ -22,6 +24,9 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
   const [link, setLink] = useState("");
   const [links, setLinks] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [termsError, setTermsError] = useState(false);
+  const [termsModalOpen, setTermsModalOpen] = useState(false);
 
   const handleAddLink = () => {
     setLinks([...links, { platform, link }]);
@@ -29,10 +34,11 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
     setLink("");
   };
 
-  const { id } = useParams();
 
   const { user } = useSelector((state) => state.auth);
-  const { mutate, isSuccess, isLoading } = useSubmitToChallenge(id);
+  const { mutate: submitToChallenge, isLoading: isChallengeLoading } = useSubmitToChallenge(challenge._id);
+  const { mutate: submitToTeamChallenge, isLoading: isTeamLoading } = useSubmitToTeamChallenge(challenge._id);
+
   const [validFiles, setValidFiles] = useState([]);
 
   const handleFileUpload = async (file) => {
@@ -53,8 +59,14 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
       console.log(error);
     }
   };
+  console.log('team', team);
 
-  const handleSubmit = async (data) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!agreeToTerms) {
+      setTermsError(true);
+      return;
+    }
     setIsUploading(true);
     const filesPaths = [];
     for (let i = 0; i < validFiles.length; i++) {
@@ -64,14 +76,25 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
     }
     console.log(filesPaths);
     setIsUploading(false);
-    mutate({
-      challengeId: id,
-      userId: user._id,
-      title: SubmissionTitle,
-      description: SubmissionDescription,
-      filesPaths: filesPaths,
-      links: links,
-    });
+    if (type === "challenge") {
+      submitToChallenge({
+        challengeId: challenge._id,
+        userId: user._id,
+        title: SubmissionTitle,
+        description: SubmissionDescription,
+        filesPaths: filesPaths,
+        links: links,
+      });
+    } else if (type === "teamChallenge") {
+      submitToTeamChallenge({
+        teamChallengeId: challenge._id,
+        teamId: team?._id,
+        title: SubmissionTitle,
+        description: SubmissionDescription,
+        filesPaths: filesPaths,
+        links: links,
+      });
+    }
 
     handleClose();
   };
@@ -124,38 +147,38 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                     submission Title
                   </label>
                   <input
-                    type="text"
-                    name="title"
-                    placeholder="submission Title"
-                    onChange={(e) => setSubmissionTitle(e.target.value)}
-                    className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 dark:bg-zinc-700 bg-gray-100 mb-4 dark:text-white"
-                    required
+                      type="text"
+                      name="title"
+                      placeholder="submission Title"
+                      onChange={(e) => setSubmissionTitle(e.target.value)}
+                      className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 dark:bg-zinc-700 bg-gray-100 mb-4 dark:text-white"
+                      required
                   />
 
                   <label className="block dark:text-white mb-2">
                     Submission Description
                   </label>
                   <textarea
-                    name="description"
-                    type="text"
-                    placeholder="Submission Description"
-                    onChange={(e) => setSubmissionDescription(e.target.value)}
-                    className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 dark:bg-zinc-700 bg-gray-100 dark:text-white"
-                    required
-                    rows={6}
+                      name="description"
+                      type="text"
+                      placeholder="Submission Description"
+                      onChange={(e) => setSubmissionDescription(e.target.value)}
+                      className=" w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-green-500 dark:bg-zinc-700 bg-gray-100 dark:text-white"
+                      required
+                      rows={6}
                   />
                 </form>
               </div>
               <div className=" items-center space-y-2 ">
                 <div>
                   <input
-                    accept=".jpg,.jpeg,.png,.gif,.avi,.zip,application/*"
-                    type="file"
-                    id="fileInput"
-                    name="file"
-                    onChange={handleFileSelect}
-                    multiple
-                    className="dark:text-white"
+                      accept=".jpg,.jpeg,.png,.gif,.avi,.zip,application/*"
+                      type="file"
+                      id="fileInput"
+                      name="file"
+                      onChange={handleFileSelect}
+                      multiple
+                      className="dark:text-white"
                   />
                 </div>
               </div>
@@ -164,12 +187,12 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                 <label className="block dark:text-white mb-2">Add Link</label>
                 <div className="flex gap-2">
                   <select
-                    type="text"
-                    name="platform"
-                    placeholder="platform"
-                    value={platform}
-                    onChange={(e) => setPlatform(e.target.value)}
-                    className="w-[20%] border border-gray-300 dark:text-white dark:bg-zinc-700 rounded-md px-3 py-2 mt-1"
+                      type="text"
+                      name="platform"
+                      placeholder="platform"
+                      value={platform}
+                      onChange={(e) => setPlatform(e.target.value)}
+                      className="w-[20%] border border-gray-300 dark:text-white dark:bg-zinc-700 rounded-md px-3 py-2 mt-1"
                   >
                     <option value="">Select...</option>
                     <option value="Youtube">Youtube</option>
@@ -179,50 +202,83 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted }) => {
                     <option value="others">others</option>
                   </select>
                   <input
-                    type="text"
-                    name="link"
-                    placeholder="link"
-                    value={link}
-                    onChange={(e) => setLink(e.target.value)}
-                    className="w-[70%] border border-gray-300 rounded-md px-3 py-2 mt-1 dark:bg-zinc-700 dark:text-white"
+                      type="text"
+                      name="link"
+                      placeholder="link"
+                      value={link}
+                      onChange={(e) => setLink(e.target.value)}
+                      className="w-[70%] border border-gray-300 rounded-md px-3 py-2 mt-1 dark:bg-zinc-700 dark:text-white"
                   />
                   <button
-                    onClick={handleAddLink}
-                    className="bg-black text-white rounded-lg w-[10%] flex items-center justify-center hover:bg-green-500 hover:scale-105"
+                      onClick={handleAddLink}
+                      className="bg-black text-white rounded-lg w-[10%] flex items-center justify-center hover:bg-green-500 hover:scale-105"
                   >
-                    <FaPlus />
+                    <FaPlus/>
                   </button>
                 </div>
               </div>
               <div>
                 {links.length > 0 &&
-                  links.map((link) => {
-                    return (
-                      <p key={link.link} className="dark:text-white">
-                        {link.platform} : {link.link}
-                      </p>
-                    );
-                  })}
+                    links.map((link) => {
+                      return (
+                          <p key={link.link} className="dark:text-white">
+                            {link.platform} : {link.link}
+                          </p>
+                      );
+                    })}
               </div>
-              {isUploading && <LoadingSpinner />}
-              <button
-                type="submit"
-                className="bg-green-500 px-5 py-3 rounded-lg w-full hover:bg-green-700 text-white"
-                onClick={handleSubmit}
-                disabled={
-                  isUploading ||
-                  (!isLoading &&
-                  (SubmissionTitle === "" || SubmissionDescription === "")
-                    ? true
-                    : false)
-                }
-              >
-                Submit
-              </button>
+              <div className="mt-4">
+                <div className="flex items-center">
+                  <input
+                      type="checkbox"
+                      id="termsCheckbox"
+                      className="mr-2"
+                      checked={agreeToTerms}
+                      onChange={(e) => {
+                        setAgreeToTerms(e.target.checked);
+                        setTermsError(false);
+                      }}
+                  />
+                  <label
+                      htmlFor="termsCheckbox"
+                      className="dark:text-white"
+                  >
+                    I agree to the{" "}
+                    <span
+                        className="text-blue-500 hover:underline cursor-pointer"
+                        onClick={() => setTermsModalOpen(true)}
+                    >
+                      Terms and Conditions
+                    </span>
+                  </label>
+                </div>
+                {termsError && (
+                    <p className="text-red-500 text-sm mt-2">
+                      You must agree to the <span
+                        className="text-blue-500 hover:underline cursor-pointer"
+                        onClick={() => setTermsModalOpen(true)}
+                    >Terms and Conditions</span> before submitting.
+                    </p>
+                )}
+              </div>
+              <div className="flex justify-end mt-4">
+                <button
+                    type="submit"
+                    onClick={handleSubmit}
+                    className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                    disabled={isChallengeLoading || isTeamLoading || isUploading}
+                >
+                  {isChallengeLoading || isTeamLoading ? "Submitting..." : "Submit"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <TermsAndConditionsModal
+          open={termsModalOpen}
+          handleClose={() => setTermsModalOpen(false)}
+      />
     </Modal>
   );
 };

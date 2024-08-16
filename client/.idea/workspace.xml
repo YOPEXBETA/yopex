@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: challenge now is fetched based on type from param">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: unregister as a team from a challenge">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/Modals/SubmitModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modals/SubmitModal.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
     </list>
@@ -154,7 +154,8 @@
       <workItem from="1723543087393" duration="12812000" />
       <workItem from="1723638475497" duration="12098000" />
       <workItem from="1723708268849" duration="2593000" />
-      <workItem from="1723720943652" duration="2273000" />
+      <workItem from="1723720943652" duration="3109000" />
+      <workItem from="1723741699859" duration="4832000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -316,7 +317,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723710844929</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat: unregister as a team from a challenge">
+      <option name="closed" value="true" />
+      <created>1723723555313</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1723723555314</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,6 +363,7 @@
     <MESSAGE value="fix: Submitting as a user to an individuals challenge" />
     <MESSAGE value="feat: managing team members and team challenge start" />
     <MESSAGE value="fix: challenge now is fetched based on type from param" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: challenge now is fetched based on type from param" />
+    <MESSAGE value="feat: unregister as a team from a challenge" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: unregister as a team from a challenge" />
   </component>
 </project>
