@@ -99,6 +99,7 @@ const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
             open={reviewisOpen}
             participant={user}
             handleClose={togglereview}
+            type="challenge"
             companyId={
               challenge?.organization?._id
                 ? challenge?.organization?._id

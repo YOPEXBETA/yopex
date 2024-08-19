@@ -404,3 +404,18 @@ export const useEditTeamSubmission = (challengeId, teamId) => {
         },
     });
 };
+export const useAddTeamReview = (userId) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (review) => {
+            await axios.post(`${url}/teamChallenge/teamReview/create`, review, );
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(["reviews", userId]);
+            toast.success("Review added successfully");
+        },
+        onError: () => {
+            toast.error("review already exists");
+        },
+    });
+};

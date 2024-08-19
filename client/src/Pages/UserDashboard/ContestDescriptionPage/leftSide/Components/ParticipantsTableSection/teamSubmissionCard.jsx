@@ -100,6 +100,8 @@ const TeamSubmissionCard = ({ extra, item, isOwner, team, challenge }) => {
                     <ReviewModel
                         open={reviewisOpen}
                         participant={user}
+                        type="teamChallenge"
+                        team={item.teamId}
                         handleClose={togglereview}
                         companyId={
                             challenge?.organization?._id
