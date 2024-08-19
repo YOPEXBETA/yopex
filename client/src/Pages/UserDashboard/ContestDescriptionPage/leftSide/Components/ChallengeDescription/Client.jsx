@@ -46,6 +46,17 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
     setDeadline(formatteDate);
   }, [challenge?.deadline]);
 
+  useEffect(() => {
+    if (type === 'teamChallenge' && challenge?.teams) {
+      const userTeam = challenge.teams.find(
+          (teamEntry) => teamEntry.team.teamLeader.toString() === user._id.toString()
+      );
+      if (userTeam) {
+        setTeam(userTeam);
+      }
+    }
+  }, [challenge?.teams, user._id, type]);
+
   const toggleModal = () => setModalOpen((prev) => !prev);
 
   const handleregiser = () => {
@@ -59,13 +70,7 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
   };
   const handleUnregister = () => {
     if (type === 'teamChallenge') {
-      const userTeam = challenge.teams.find(
-          (teamEntry) => teamEntry.team.teamLeader.toString() === user._id.toString()
-
-      );
-      console.log('teamUser', userTeam)
-      setTeam(userTeam.team);
-      unjoinTeamChallengeMutate({ idChallenge: challenge._id, teamId: userTeam.team._id });
+      unjoinTeamChallengeMutate({ idChallenge: challenge._id, teamId: team?._id });
     } else {
       unRegisterChallengeMutate();
     }
@@ -112,7 +117,7 @@ const ClientCard = ({ isRegistered, isOwner, type, challenge }) => {
                     className={`px-5 py-3 text-white w-full bg-purple-500 h-16 hover:bg-green-600 rounded-full animate-pulse ${
                         isLoadingUnRegister ? "opacity-50 cursor-not-allowed" : ""
                     }`}
-                    onClick={handleUnregister} // Updated to use handleUnregister
+                    onClick={handleUnregister}
                     disabled={isLoadingUnRegister}
                   >
                     {isLoadingUnRegister ? <LoadingSpinner /> : "Unregister"}

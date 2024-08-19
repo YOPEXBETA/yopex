@@ -560,9 +560,8 @@ const getUserChallenges = async (req, res) => {
       path: "challenges",
       model: "Challenge",
       populate: {
-        path: "company",
-        model: "Company",
-        select: "-password",
+        path: "organization",
+        model: "Organization",
       },
     });
 

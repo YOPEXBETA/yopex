@@ -6,9 +6,10 @@ const {
     getAllTeamChallenges,
     updateTeamChallenge,
     deleteTeamChallenge, getOrganizationTeamChallenges, banTeam, unbanTeam, startTeamChallenge, unjoinTeamChallenge,
+    getTeamChallengeSubmissions,
 } = require("../controllers/teamChallenge.controller");
 const { authenticateToken } = require("../middlewares/authenticateToken.middleware");
-const {CreateSubmission, CreateTeamSubmission} = require("../controllers/submission.controllers");
+const {CreateSubmission, CreateTeamSubmission, editsubmission, editTeamSubmission} = require("../controllers/submission.controllers");
 
 
 TeamChallengeRouter.post(
@@ -60,5 +61,7 @@ TeamChallengeRouter.post(
 );
 
 TeamChallengeRouter.post("/teamSubmit", authenticateToken, CreateTeamSubmission);
+TeamChallengeRouter.get("/submissions/:teamChallengeId", authenticateToken, getTeamChallengeSubmissions);
+TeamChallengeRouter.post("/editTeamSubmission", authenticateToken, editTeamSubmission);
 
 module.exports = TeamChallengeRouter;

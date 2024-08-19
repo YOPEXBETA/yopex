@@ -370,3 +370,37 @@ export const useSubmitToTeamChallenge = ({ teamChallengeId }) => {
         },
     });
 };
+
+export const useGetTeamChallengeSubmissions = (teamChallengeId, type) => {
+    return useQuery(
+        ["teamChallengeSubmissions", teamChallengeId],
+        async () => {
+            try {
+                const { data } = await axios.get(`${url}/teamChallenge/submissions/${teamChallengeId}`);
+                return data;
+            } catch (error) {
+                toast.error("Failed to fetch team challenge submissions");
+                throw new Error(error.response.data.message || "An error occurred while fetching submissions.");
+            }
+        },
+        {
+            enabled: !!teamChallengeId && type === "teamChallenge",
+        }
+    );
+};
+
+export const useEditTeamSubmission = (challengeId, teamId) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (submission) => {
+            await axios.post(`${url}/teamChallenge/editTeamSubmission`, submission);
+        },
+        onSuccess: () => {
+            toast.success("Team submission edited successfully");
+            queryClient.invalidateQueries(["teamChallengeSubmissions", challengeId]);
+        },
+        onError: () => {
+            toast.error("Error editing submission");
+        },
+    });
+};

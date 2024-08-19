@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: unregister as a team from a challenge">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: Terms and Conditions check in the submittion form">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/routes/teamChallenge.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/teamChallenge.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/Modals/EditSubmit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modals/EditSubmit.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/shared/Modals/SubmitModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modals/SubmitModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/TopSide/Banner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/TopSide/Banner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/Submission.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/Submission.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/submissionCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/submissionCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useChallenges.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useChallenges.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,6 +165,8 @@
       <workItem from="1723708268849" duration="2593000" />
       <workItem from="1723720943652" duration="3109000" />
       <workItem from="1723741699859" duration="4832000" />
+      <workItem from="1723805231820" duration="5333000" />
+      <workItem from="1724067453016" duration="9273000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -325,7 +336,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723723555314</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat: Terms and Conditions check in the submittion form">
+      <option name="closed" value="true" />
+      <created>1723805383854</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1723805383854</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,6 +383,7 @@
     <MESSAGE value="feat: managing team members and team challenge start" />
     <MESSAGE value="fix: challenge now is fetched based on type from param" />
     <MESSAGE value="feat: unregister as a team from a challenge" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: unregister as a team from a challenge" />
+    <MESSAGE value="feat: Terms and Conditions check in the submittion form" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Terms and Conditions check in the submittion form" />
   </component>
 </project>

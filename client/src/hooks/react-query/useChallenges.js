@@ -342,15 +342,14 @@ export const useUnBanUser = () => {
   });
 };
 
-export const useGetChallengeSubmissions = (challengeId) => {
+export const useGetChallengeSubmissions = (challengeId, type) => {
   return useQuery({
     queryKey: ["submissions", challengeId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `${url}/challenge/getChallengeSubmission/${challengeId}`
-      );
+      const { data } = await axios.get(`${url}/challenge/getChallengeSubmission/${challengeId}`);
       return data;
     },
+    enabled: !!challengeId && type === "challenge",
   });
 };
 

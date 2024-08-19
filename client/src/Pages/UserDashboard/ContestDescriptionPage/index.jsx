@@ -26,7 +26,6 @@ const ContestDetails = () => {
 
   const challenge = entityType === "challenge" ? challengeData : teamChallengeData;
   const loading = entityType === "challenge" ? isChallengeLoading : isTeamChallengeLoading;
-console.log('challenge', challenge)
   const { user } = useSelector((state) => state.auth);
   const isOwner = user?.organizations?.find(
     (organization) => organization === challenge?.organization?._id

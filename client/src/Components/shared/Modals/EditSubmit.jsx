@@ -12,10 +12,11 @@ import LoadingSpinner from "../../LoadingSpinner";
 import CloseIcon from "../../icons/CloseIcon";
 import Modal from "../../Modals";
 import { MdDelete } from "react-icons/md";
+import {useEditTeamSubmission} from "../../../hooks/react-query/useTeamChallenge";
 
 const maxSize = 5 * 1024 * 1024; // 5 megabytes
 
-const EditSubmitModal = ({ open, handleClose, participant }) => {
+const EditSubmitModal = ({ open, handleClose,challenge, participant, submission, team, type }) => {
   const url = process.env.REACT_APP_API_ENDPOINT;
   const [filesSelected, setFilesSelected] = useState([]);
   const [SubmissionTitle, setSubmissionTitle] = useState("");
@@ -24,20 +25,19 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   const [platform, setPlatform] = useState("");
   const [link, setLink] = useState("");
   const [links, setLinks] = useState([]);
-  const { id } = useParams();
-  const { data: submissions } = useUserSubmission(id, participant);
+
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
-    if (submissions) {
-      setSubmissionTitle(submissions.title);
-      setSubmissionDescription(submissions.description);
-      setFilesPaths(submissions.filesPaths);
-      setLinks(submissions.links);
-      setFilesSelected(submissions.filesPaths);
-      setPlatform(submissions.links.platform);
+    if (submission) {
+      setSubmissionTitle(submission.title);
+      setSubmissionDescription(submission.description);
+      setFilesPaths(submission.filesPaths);
+      setLinks(submission.links);
+      setFilesSelected(submission.filesPaths);
+      setPlatform(submission.links.platform);
     }
-  }, [submissions]);
+  }, [submission]);
 
   const handleAddLink = () => {
     setLinks([...links, { platform, link }]);
@@ -46,7 +46,8 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
   };
 
   const { user } = useSelector((state) => state.auth);
-  const { mutate } = useEditSubmission(id, participant);
+  const { mutate: editSubmittion } = useEditSubmission(challenge?._id, participant);
+  const { mutate: editTeamSubmittion } = useEditTeamSubmission(challenge?._id, team?.team?._id);
 
   const handleFileUpload = async (file) => {
     const formData = new FormData();
@@ -67,18 +68,26 @@ const EditSubmitModal = ({ open, handleClose, participant }) => {
     }
   };
 
-  // const dispatch = useDispatch();
-
   const handleSubmit = async () => {
-    mutate({
-      challengeId: id,
-      userId: user._id,
+    if (type === "challenge") {
+      editSubmittion({
+      challengeId: challenge?._id,
+      userId: user?._id,
       title: SubmissionTitle,
       description: SubmissionDescription,
       filesPaths: filesPaths,
       links: links,
-    });
-
+      });
+    } else if (type === "teamChallenge") {
+      editTeamSubmittion({
+        teamChallengeId: challenge?._id,
+        teamId: team?.team?._id,
+        title: SubmissionTitle,
+        description: SubmissionDescription,
+        filesPaths: filesPaths,
+        links: links,
+      });
+    }
     handleClose();
   };
 

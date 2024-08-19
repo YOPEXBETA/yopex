@@ -289,9 +289,6 @@ const getTeamChallengeTeamSubmit = async (req, res) => {
 const updateTeamChallenge = async (req, res) => {
     const { description, title, teamSize, price, categories, skills } = req.body;
     const challengeId = req.params.teamChallengeId;
-console.log('data', req.body)
-    console.log('challengeId', challengeId)
-
     try {
         const Challenge = await TeamChallengeModel.findByIdAndUpdate(challengeId, {
             title,
@@ -445,6 +442,57 @@ const unjoinTeamChallenge = async (req, res) => {
         res.status(500).send("Error unjoining team challenge.");
     }
 };
+
+
+const getTeamChallengeSubmissions = async (req, res) => {
+    try {
+        const teamChallengeId = req.params.teamChallengeId;
+        const userId = req.userId;
+
+
+        const teamChallenge = await TeamChallengeModel.findById(teamChallengeId)
+            .populate('teams.team', 'name teamPicture teamLeader members');
+
+        const user = await UserModel.findById(userId);
+
+        if (!teamChallenge) {
+            return res.status(404).json({ message: "Team Challenge not found" });
+        }
+
+
+        // Check if the user is the owner and belongs to the organization
+        if (teamChallenge.owner && teamChallenge.owner.toString() === userId.toString() &&
+            user?.organizations?.includes(teamChallenge.organization?.toString())) {
+            const submissions = await submissionModel
+                .find({ teamChallengeId: teamChallengeId })
+                .populate('teamId', 'name teamPicture');
+            return res.status(200).json(submissions);
+        }
+
+        // Safeguard to ensure teamObj.team.leader and teamObj.team.members are defined
+        const userTeam = teamChallenge.teams.find(teamObj => {
+
+            return teamObj.team.teamLeader?.toString() === userId.toString() ||
+                teamObj.team.members?.some(member => member.toString() === userId.toString());
+        });
+
+        if (userTeam) {
+            const submissions = await submissionModel
+                .find({ teamChallengeId: teamChallengeId, teamId: userTeam.team._id })
+                .populate('teamId', 'name teamPicture');
+            return res.status(200).json(submissions);
+        } else {
+            return res.status(403).json({ message: "Access denied. You are not a member of any team in this challenge." });
+        }
+
+    } catch (err) {
+        console.error('Error:', err.message);
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
+
 module.exports = {
     CreateTeamChallenge,
     getTeamChallengeById,
@@ -457,5 +505,6 @@ module.exports = {
     unbanTeam,
     updateTeamChallenge,
     startTeamChallenge,
-    unjoinTeamChallenge
+    unjoinTeamChallenge,
+    getTeamChallengeSubmissions
 };

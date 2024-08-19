@@ -55,8 +55,8 @@ const Banner = ({ changeValue, value , type}) => {
 
   useEffect(() => {
     if (!data) return;
-    const registered = data.challenges.find(
-      (item) => item._id === challenge._id
+    const registered = data?.challenges.find(
+      (item) => item?._id === challenge?._id
     );
     setIsRegistered(registered ? true : false);
   }, [challenge, data]);

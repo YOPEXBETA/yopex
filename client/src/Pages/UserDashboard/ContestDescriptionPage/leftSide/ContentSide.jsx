@@ -55,7 +55,7 @@ const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type }) =>
           )}
           {value === 5 && (
             <div className="lg:col-span-12 md:col-span-12">
-              <Submission isOwner={isOwner} />
+              <Submission isOwner={isOwner} challenge={challenge} type={type} />
             </div>
           )}
         </div>

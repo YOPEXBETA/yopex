@@ -59,7 +59,6 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted, challenge, type, team 
       console.log(error);
     }
   };
-  console.log('team', team);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,6 +74,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted, challenge, type, team 
       filesPaths.push(fileUrl);
     }
     console.log(filesPaths);
+
     setIsUploading(false);
     if (type === "challenge") {
       submitToChallenge({
@@ -88,7 +88,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted, challenge, type, team 
     } else if (type === "teamChallenge") {
       submitToTeamChallenge({
         teamChallengeId: challenge._id,
-        teamId: team?._id,
+        teamId: team?.team?._id,
         title: SubmissionTitle,
         description: SubmissionDescription,
         filesPaths: filesPaths,
