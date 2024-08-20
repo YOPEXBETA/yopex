@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: team challenge owner can add review to the whole team">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: fixed old bugs and issues">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/DiscoverUserCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/DiscoverUserCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/SwitchCardWorkspace.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/SwitchCardWorkspace.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Modals/CreateMenuModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Modals/CreateMenuModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationSideBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationSideBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/Winner/winner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/Winner/winner.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/DiscoverTalentsPage/components/DiscoverTalents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/DiscoverTalentsPage/components/DiscoverTalents.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/Modals/SubmitModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modals/SubmitModal.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +157,7 @@
       <workItem from="1723805231820" duration="5333000" />
       <workItem from="1724067453016" duration="12039000" />
       <workItem from="1724088366425" duration="855000" />
-      <workItem from="1724153827890" duration="12137000" />
+      <workItem from="1724153827890" duration="13146000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -360,7 +351,39 @@
       <option name="project" value="LOCAL" />
       <updated>1724080803265</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fix: the review attribute for the admin is fixed">
+      <option name="closed" value="true" />
+      <created>1724171147358</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1724171147358</updated>
+    </task>
+    <task id="LOCAL-00026" summary="feat: choosing the winning team in a team challenge">
+      <option name="closed" value="true" />
+      <created>1724171197509</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1724171197509</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fix: fixed the workspace switch to correctly show the current workspace">
+      <option name="closed" value="true" />
+      <created>1724171266609</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1724171266609</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix: fixed old bugs and issues">
+      <option name="closed" value="true" />
+      <created>1724171291445</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1724171291445</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,9 +401,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Organization Creation with the stepper" />
-    <MESSAGE value="Updated the organization Form" />
-    <MESSAGE value="Setting tab for the organization (update organization info, invite and manage members, update social links)" />
     <MESSAGE value="fix: workspace switch to show the current user&#10;feat: delete organization logic based on member role&#10;feat: add buttons in sidebar to post a challenge and a job offer&#10;fix: fetch correct image for notifications&#10;feat: add refuse invitation to organization logic" />
     <MESSAGE value="feat: added new logic for unread notifications" />
     <MESSAGE value="feat: added new Occupation CRUD to admin and integrated it in user profile" />
@@ -402,6 +422,10 @@
     <MESSAGE value="feat: Terms and Conditions check in the submittion form" />
     <MESSAGE value="feat: Team can edit challenge submission" />
     <MESSAGE value="feat: team challenge owner can add review to the whole team" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: team challenge owner can add review to the whole team" />
+    <MESSAGE value="fix: the review attribute for the admin is fixed" />
+    <MESSAGE value="feat: choosing the winning team in a team challenge" />
+    <MESSAGE value="fix: fixed the workspace switch to correctly show the current workspace" />
+    <MESSAGE value="fix: fixed old bugs and issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: fixed old bugs and issues" />
   </component>
 </project>

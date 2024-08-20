@@ -62,18 +62,35 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted, challenge, type, team 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!SubmissionTitle.trim()) {
+      toast.error("Submission title is required.");
+      return;
+    }
+
+    if (!SubmissionDescription.trim()) {
+      toast.error("Submission description is required.");
+      return;
+    }
+
+    setIsUploading(true);
+    const uploadedFilesPaths = [];
+    for (let i = 0; i < validFiles.length; i++) {
+      const file = validFiles[i];
+      const fileUrl = await handleFileUpload(file);
+      uploadedFilesPaths.push(fileUrl);
+    }
+
+    if (uploadedFilesPaths.length === 0) {
+      toast.error("At least one file is required.");
+      setIsUploading(false);
+      return;
+    }
     if (!agreeToTerms) {
       setTermsError(true);
       return;
     }
-    setIsUploading(true);
-    const filesPaths = [];
-    for (let i = 0; i < validFiles.length; i++) {
-      const file = validFiles[i];
-      const fileUrl = await handleFileUpload(file);
-      filesPaths.push(fileUrl);
-    }
-    console.log(filesPaths);
+    console.log(uploadedFilesPaths);
 
     setIsUploading(false);
     if (type === "challenge") {
@@ -82,7 +99,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted, challenge, type, team 
         userId: user._id,
         title: SubmissionTitle,
         description: SubmissionDescription,
-        filesPaths: filesPaths,
+        filesPaths: uploadedFilesPaths,
         links: links,
       });
     } else if (type === "teamChallenge") {
@@ -91,7 +108,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted, challenge, type, team 
         teamId: team?.team?._id,
         title: SubmissionTitle,
         description: SubmissionDescription,
-        filesPaths: filesPaths,
+        filesPaths: uploadedFilesPaths,
         links: links,
       });
     }
