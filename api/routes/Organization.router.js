@@ -29,13 +29,13 @@ const {
   companyEditProfileValidator,
 } = require("../validators/company.auth.validators");
 const {getUserNotifications} = require("../controllers/user.controllers");
+organizationRouter.post("/challengeWinner", authenticateToken, ChallengeWinner);
 
 organizationRouter.put("/approve/:id/", authenticateToken, approveCompany);
 organizationRouter.put;
 organizationRouter.put("/:id/", authenticateToken, editProfile);
 organizationRouter.get("/get/:organizationId", authenticateToken, getOrganization);
 organizationRouter.get("/getAllOrganizations", getAllOrganizations);
-organizationRouter.post("/challengeWinner", authenticateToken, ChallengeWinner);
 organizationRouter.get(
   "/company/:userId/notifications",
   authenticateToken,
