@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="feat: Team can edit challenge submission">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/review.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/review.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Review.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Review.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/Organization.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Organization.controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/teamChallenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/teamChallenge.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/Organization.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/Organization.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/teamChallenge.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teamChallenge.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/submissionCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/submissionCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/teamSubmissionCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/teamSubmissionCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +173,10 @@
       <workItem from="1723720894690" duration="3015000" />
       <workItem from="1723741547815" duration="3830000" />
       <workItem from="1723805201063" duration="6636000" />
-      <workItem from="1724067176421" duration="7724000" />
+      <workItem from="1724067176421" duration="8054000" />
+      <workItem from="1724088291781" duration="935000" />
+      <workItem from="1724151611589" duration="312000" />
+      <workItem from="1724153653644" duration="11154000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />

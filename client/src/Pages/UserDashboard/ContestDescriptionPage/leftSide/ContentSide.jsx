@@ -37,7 +37,7 @@ const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type }) =>
           )}
           {value === 2 && (
             <div className="lg:col-span-12 md:col-span-12">
-              <ChooseWinner />
+              <ChooseWinner challenge={challenge} type={type} />
             </div>
           )}
           {value === 3 && (

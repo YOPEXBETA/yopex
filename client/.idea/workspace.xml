@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: Team can edit challenge submission">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: team challenge owner can add review to the whole team">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/review.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/review.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/models/Review.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/Review.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/routes/teamChallenge.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/teamChallenge.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/shared/Modals/ReviewModel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modals/ReviewModel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/submissionCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/submissionCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/teamSubmissionCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/teamSubmissionCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/DiscoverUserCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/DiscoverUserCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/SwitchCardWorkspace.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/SwitchCardWorkspace.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Modals/CreateMenuModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Modals/CreateMenuModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/WorkspaceMenu/WorkSpaceMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationSideBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationSideBar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/Winner/winner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/Winner/winner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/DiscoverTalentsPage/components/DiscoverTalents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/DiscoverTalentsPage/components/DiscoverTalents.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -161,7 +164,9 @@
       <workItem from="1723720943652" duration="3109000" />
       <workItem from="1723741699859" duration="4832000" />
       <workItem from="1723805231820" duration="5333000" />
-      <workItem from="1724067453016" duration="11728000" />
+      <workItem from="1724067453016" duration="12039000" />
+      <workItem from="1724088366425" duration="855000" />
+      <workItem from="1724153827890" duration="12137000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -347,7 +352,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724078492805</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="feat: team challenge owner can add review to the whole team">
+      <option name="closed" value="true" />
+      <created>1724080803265</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1724080803265</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,6 +401,7 @@
     <MESSAGE value="feat: unregister as a team from a challenge" />
     <MESSAGE value="feat: Terms and Conditions check in the submittion form" />
     <MESSAGE value="feat: Team can edit challenge submission" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Team can edit challenge submission" />
+    <MESSAGE value="feat: team challenge owner can add review to the whole team" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: team challenge owner can add review to the whole team" />
   </component>
 </project>

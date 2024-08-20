@@ -138,7 +138,7 @@ const Navbar = (props) => {
       await acceptTeamInvitation(invitationData?.teamInvitation);
       handleCloseTeamModal();
       setTimeout(() => {
-        navigate(`/challenges/challengeDetails/${teamInvitation?.challenge?._id}`);
+        navigate(`/challenges/challengeDetails/${teamInvitation?.challenge?._id}?type=teamChallenge`);
       }, 500);
     } catch (error) {
       console.error("Error accepting team invitation:", error);

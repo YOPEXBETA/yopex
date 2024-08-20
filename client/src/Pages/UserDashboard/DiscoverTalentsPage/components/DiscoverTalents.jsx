@@ -25,7 +25,7 @@ const DiscoverTalents = ({
                          }) => {
   const [openFiltersModal, setOpenFiltersModal] = useState(false);
   const toggleFiltersModal = () => setOpenFiltersModal((prev) => !prev);
-
+console.log('suggestedUsers', suggestedUsers)
   return (
       <div>
         <div className="flex space-x-4 mb-5">
