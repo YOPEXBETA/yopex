@@ -9,6 +9,7 @@ const submissionModel = require("../models/submission.model");
 const notificationModel = require("../models/notification.model");
 const Team = require("../models/team.model");
 const ChallengeModel = require("../models/Challenge.model");
+const ReviewModel = require("../models/Review.model");
 
 const CreateTeamChallenge = async (req, res) => {
     try {
@@ -460,8 +461,7 @@ const getTeamChallengeSubmissions = async (req, res) => {
         }
 
 
-        // Check if the user is the owner and belongs to the organization
-        if (teamChallenge.owner && teamChallenge.owner.toString() === userId.toString() &&
+        if (teamChallenge.owner && teamChallenge.owner.toString() === userId.toString() ||
             user?.organizations?.includes(teamChallenge.organization?.toString())) {
             const submissions = await submissionModel
                 .find({ teamChallengeId: teamChallengeId })
@@ -469,7 +469,6 @@ const getTeamChallengeSubmissions = async (req, res) => {
             return res.status(200).json(submissions);
         }
 
-        // Safeguard to ensure teamObj.team.leader and teamObj.team.members are defined
         const userTeam = teamChallenge.teams.find(teamObj => {
 
             return teamObj.team.teamLeader?.toString() === userId.toString() ||
@@ -491,7 +490,88 @@ const getTeamChallengeSubmissions = async (req, res) => {
     }
 };
 
+const chooseWinningTeam = async (req, res) => {
+    try {
+        const { teamChallengeId, teamId } = req.body;
+        const owner = req.userId;
 
+        const teamChallenge = await TeamChallengeModel.findById(teamChallengeId);
+        if (!teamChallenge) {
+            return res.status(404).json({ message: "Team challenge not found" });
+        }
+
+
+        const requestOwner = await UserModel.findById(owner);
+        if (
+            teamChallenge.owner?.toString() !== owner.toString() &&
+            !requestOwner.organizations.includes(
+                teamChallenge.organization?.toString()
+            )
+        ) {
+            return res.status(400).json({ message: "Not authorized" });
+        }
+        const challengeTeam = teamChallenge.teams.find(
+            (teamEntry) => teamEntry.team.toString() === teamId
+        );
+
+        if (!challengeTeam) {
+            return res.status(404).json({ message: "Team not found in challenge" });
+        }
+
+
+        const team = await Team.findById(teamId).populate("members").populate("teamLeader");
+        if (!team) {
+            return res.status(404).json({ message: "Team not found" });
+        }
+
+
+        const teamReview = await ReviewModel.findOne({
+            teamChallengeId,
+            teamId,
+        });
+
+        if (!teamReview) {
+            return res.status(404).json({
+                message: "To be able to select this team as the winner, a team review must be added.",
+            });
+        }
+
+
+        const AdminUser = await UserModel.findOne({ role: "admin" });
+        const challengePrize = teamChallenge.price;
+
+        // Create a combined list of members and the leader
+        const participants = [team.teamLeader, ...team.members];
+
+        // Update balance, challengesWon, score, and send notifications for each participant
+        for (const participant of participants) {
+            participant.balance = (participant.balance ? participant.balance : 0) + challengePrize * 0.9 / participants.length;
+            participant.challengesWon = (participant.challengesWon ? participant.challengesWon : 0) + 1;
+            participant.score += 100;
+
+            const notification = new notificationModel({
+                type: "won a team challenge",
+                message: `Your team won the challenge ${teamChallenge.title}`,
+                picture: teamChallenge.picturePath,
+                user: participant._id,
+            });
+
+            await notification.save();
+            await participant.save();
+        }
+
+        AdminUser.balance =
+            (AdminUser.balance ? AdminUser.balance : 0) + challengePrize * 0.1;
+        await AdminUser.save();
+
+        teamChallenge.winner = team._id;
+        const updatedChallenge = await teamChallenge.save();
+
+        res.status(200).json({ updatedChallenge });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 module.exports = {
     CreateTeamChallenge,
@@ -506,5 +586,6 @@ module.exports = {
     updateTeamChallenge,
     startTeamChallenge,
     unjoinTeamChallenge,
-    getTeamChallengeSubmissions
+    getTeamChallengeSubmissions,
+    chooseWinningTeam
 };

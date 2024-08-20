@@ -134,6 +134,8 @@ export const useCreateTeam = () => {
             onSuccess: (data) => {
                 toast.success("Team created successfully");
                 queryClient.invalidateQueries(["teams"]);
+                queryClient.invalidateQueries(["teamChallenges"]);
+                queryClient.invalidateQueries(["organizationTeamChallenges"]);
                 return data;
             },
             onError: (error) => {
@@ -418,4 +420,24 @@ export const useAddTeamReview = (userId) => {
             toast.error("review already exists");
         },
     });
+};
+
+export const useChooseWinningTeam = (teamChallengeId) => {
+    const queryClient = useQueryClient();
+    return useMutation(
+        async ({ teamChallengeId, teamId }) => {
+            const res = await axios.post(`${url}/teamChallenge/chooseWinningTeam`, { teamChallengeId, teamId });
+            return res.data;
+        },
+        {
+            onSuccess: (data) => {
+                toast.success("Team selected as winner successfully");
+                queryClient.invalidateQueries(["teamChallenges", teamChallengeId]);
+                queryClient.invalidateQueries(["organizationTeamChallenges", teamChallengeId]);
+            },
+            onError: (error) => {
+                toast.error(`Error selecting team: ${error.response?.data?.message || "An error occurred"}`);
+            },
+        }
+    );
 };
