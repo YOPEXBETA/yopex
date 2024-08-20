@@ -65,7 +65,7 @@ const WorkSpaceMenu = ({
         organizationID: null
       });
 
-      setSelectedWorkspace(null); // Update selectedWorkspace to null
+      setSelectedWorkspace(null);
       setNavigatePath("/feed");
     } catch (error) {
       console.error("Failed to update workspace:", error.message);
@@ -87,7 +87,7 @@ const WorkSpaceMenu = ({
               id={`org-${organization?._id}`}
               name="workspace"
               value={`Organization-${organization?._id}`}
-              checked={selectedWorkspace === organization?._id} // Correctly checked based on organization ID
+              checked={selectedWorkspace === organization?._id}
               onChange={() => handleOrganizationSwitch(organization)} // This might be redundant
               className="mr-2"
             />

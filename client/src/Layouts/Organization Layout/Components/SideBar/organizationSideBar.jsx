@@ -66,7 +66,7 @@ const OrganizationSidebar = ({
       </div>
       <div className="relative px-6 focus:ring-offset-2 focus:ring-offset-zinc-800 mt-4 w-full my-8">
         <Dropdown
-          button={<SwitchCardWorkspace user={user}/>}
+          button={<SwitchCardWorkspace organization={currentOrganization}/>}
           children={
             <div>
               <WorkSpaceMenu
