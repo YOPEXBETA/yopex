@@ -4,6 +4,8 @@ const TeamInvitation = require("../models/teamInvitation");
 const TeamChallenge = require("../models/teamChallenge.model");
 const { sendEmail } = require("../middlewares/mail.middleware");
 const userModel = require("../models/user.model");
+const TeamChallengeConversation = require("../models/TeamChallengeConversation.model");
+const TeamConversation = require("../models/TeamConversation.model");
 
 const createTeam = async (req, res) => {
     const { name, picture, challengeId, leaderId } = req.body;
@@ -76,6 +78,29 @@ const createTeam = async (req, res) => {
                 teamChallenge: challenge._id
             });
             await notification.save();
+
+            const teamConversation = new TeamConversation({
+                teamChallenge: challengeId,
+                team: newTeam._id,
+                members: [leaderId],
+            });
+
+            await teamConversation.save();
+
+            let teamChallengeConversation = await TeamChallengeConversation.findOne({ teamChallenge: challenge._id });
+
+            if (!teamChallengeConversation) {
+                teamChallengeConversation = new TeamChallengeConversation({
+                    teamChallenge: challenge._id,
+                    members: [leaderId],
+                });
+            } else {
+                if (!teamChallengeConversation.members.includes(leaderId)) {
+                    teamChallengeConversation.members.push(leaderId);
+                }
+            }
+
+            await teamChallengeConversation.save();
         }
 
         res.status(201).json(newTeam);
@@ -208,6 +233,40 @@ const acceptInvitation = async (req, res) => {
             await team.save();
         }
 
+        let teamConversation = await TeamConversation.findOne({ team: team._id });
+
+        if (!teamConversation) {
+            teamConversation = new TeamConversation({
+                team: team._id,
+                members: [invitation.user],
+            });
+        } else {
+            if (!teamConversation.members.includes(invitation.user)) {
+                teamConversation.members.push(invitation.user);
+            }
+        }
+
+        await teamConversation.save();
+
+        const challenge = await TeamChallenge.findById(invitation.challenge);
+
+        if (challenge) {
+
+            let teamChallengeConversation = await TeamChallengeConversation.findOne({ teamChallenge: challenge._id });
+
+            if (!teamChallengeConversation) {
+                teamChallengeConversation = new TeamChallengeConversation({
+                    teamChallenge: challenge._id,
+                    members: [invitation.user],
+                });
+            } else {
+                if (!teamChallengeConversation.members.includes(invitation.user)) {
+                    teamChallengeConversation.members.push(invitation.user);
+                }
+            }
+
+            await teamChallengeConversation.save();
+        }
         // Remove related notifications
         await notificationModel.deleteMany({
             type: 'teamInvitation',

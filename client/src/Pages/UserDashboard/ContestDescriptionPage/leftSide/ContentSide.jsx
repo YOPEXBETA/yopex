@@ -10,6 +10,8 @@ import ChallengeConversation from "./Components/ChallengeConversation";
 import Start from "./Components/ChallengeDescription/Start";
 import Removed from "./Components/ParticipantsTableSection/Removed";
 import Submission from "./Components/ParticipantsTableSection/Submission";
+import TeamChallengeConversation from "./Components/TeamChallengeConversations/TeamChallengeConversation";
+import ConversationTabs from "./Components/TeamChallengeConversations/ConversationsTabs";
 
 const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type }) => {
   const { id: challengeId } = useParams();
@@ -42,10 +44,18 @@ const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type }) =>
           )}
           {value === 3 && (
             <div className="lg:col-span-12 md:col-span-12">
-              <ChallengeConversation
-                conversationId={challengeId}
-                id={conversation?.id}
-              />
+                {type === "challenge"  && (
+                    <ChallengeConversation
+                        conversationId={challengeId}
+                        id={challengeId}
+                    />
+                )}
+                {type === "teamChallenge" &&  (
+                    <ConversationTabs
+                        challenge={challenge}
+                        user={user}
+                    />
+                )}
             </div>
           )}
           {value === 4 && (

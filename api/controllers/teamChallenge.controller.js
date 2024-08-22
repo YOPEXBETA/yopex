@@ -10,6 +10,7 @@ const notificationModel = require("../models/notification.model");
 const Team = require("../models/team.model");
 const ChallengeModel = require("../models/Challenge.model");
 const ReviewModel = require("../models/Review.model");
+const TeamChallengeConversation = require("../models/TeamChallengeConversation.model");
 
 const CreateTeamChallenge = async (req, res) => {
     try {
@@ -68,7 +69,10 @@ const CreateTeamChallenge = async (req, res) => {
 
         await teamChallenge.save();
 
-        const newConversation = new ContestConversationModel({ contestId: teamChallenge._id });
+        const newConversation = new TeamChallengeConversation({
+            teamChallenge: teamChallenge._id,
+            members: [teamChallenge.owner],
+        });
         await newConversation.save();
 
         if (organizationId) {
@@ -128,7 +132,7 @@ const getTeamChallengeById = async (req, res) => {
                 path: "teams",
                 populate: {
                     path: "team",
-                    select: "name teamLeader teamPicture _id",
+                    select: "name teamLeader teamPicture members _id",
                 },
             });
 

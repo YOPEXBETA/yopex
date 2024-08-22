@@ -27,6 +27,7 @@ const sectorRouter = require("./sector.router");
 const OccupationRouter = require("./occupation.router");
 const TeamChallengeRouter = require("./teamChallenge.router");
 const TeamRouter = require("./team.router");
+const TeamChallengeConversationRouter = require("./TeamChallengeConversation.router");
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -54,6 +55,7 @@ router.use("/sector", sectorRouter);
 router.use("/occupation", OccupationRouter);
 router.use("/teamChallenge", TeamChallengeRouter)
 router.use("/team", TeamRouter)
+router.use("/teamChallengeConversation", TeamChallengeConversationRouter)
 
 
 

@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="feat: Team can edit challenge submission">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/socket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/Team.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Team.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/teamChallenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/teamChallenge.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeConversation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeConversation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +90,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\api\models" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -172,7 +184,9 @@
       <workItem from="1724067176421" duration="8054000" />
       <workItem from="1724088291781" duration="935000" />
       <workItem from="1724151611589" duration="312000" />
-      <workItem from="1724153653644" duration="12439000" />
+      <workItem from="1724153653644" duration="14396000" />
+      <workItem from="1724242050669" duration="12682000" />
+      <workItem from="1724331935102" duration="3246000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />

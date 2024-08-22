@@ -44,10 +44,10 @@ const ContestDetails = () => {
     }
 
     if (entityType === "teamChallenge") {
-      const teamLeader = challenge?.teams?.find(
-          (team) => team.team.teamLeader === user?._id
+      const isTeamMemberOrLeader = challenge?.teams?.some((team) =>
+          team?.team?.teamLeader === user?._id || team?.team?.members?.includes(user?._id)
       );
-      setIsRegistered(!!teamLeader);
+      setIsRegistered(isTeamMemberOrLeader);
     }
   }, [challenge, entityType, user]);
 
