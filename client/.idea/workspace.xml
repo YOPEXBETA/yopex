@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: check if the challange input submission not null">
-      <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/config/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/config/socket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/Team.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/Team.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/routes/index.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/index.router.js" afterDir="false" />
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: Chat group for all participants of the team challenge">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeConversation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeConversation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamChallengeConversation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamChallengeConversation.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +160,7 @@
       <workItem from="1724088366425" duration="855000" />
       <workItem from="1724153827890" duration="15756000" />
       <workItem from="1724243659259" duration="15002000" />
-      <workItem from="1724332127209" duration="6934000" />
+      <workItem from="1724332127209" duration="9903000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -399,7 +394,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724171984153</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="feat: Chat group for all participants of the team challenge">
+      <option name="closed" value="true" />
+      <created>1724341391055</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1724341391055</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,7 +420,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: added new logic for unread notifications" />
     <MESSAGE value="feat: added new Occupation CRUD to admin and integrated it in user profile" />
     <MESSAGE value="feat: added filters to the discover organizations" />
     <MESSAGE value="feat: added filters to the discover talents" />
@@ -442,6 +444,7 @@
     <MESSAGE value="fix: fixed the workspace switch to correctly show the current workspace" />
     <MESSAGE value="fix: fixed old bugs and issues" />
     <MESSAGE value="fix: check if the challange input submission not null" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: check if the challange input submission not null" />
+    <MESSAGE value="feat: Chat group for all participants of the team challenge" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Chat group for all participants of the team challenge" />
   </component>
 </project>
