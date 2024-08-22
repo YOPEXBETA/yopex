@@ -21,7 +21,7 @@ import EmojiIcon from "../../../../../../Components/icons/EmojiIcon";
 const TeamChallengeConversation = ({ challenge }) => {
     const chatContainerRef = useRef(null);
     const [membersVisible, setMembersVisible] = useState(false);
-    const [sidebarVisible, setSidebarVisible] = useState(true);
+    const [sidebarVisible, setSidebarVisible] = useState(false);
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const { data: teamChallengeConversation } = useGetTeamChallengeConversation(challenge?._id);
     const [members, setMembers] = useState([]);
@@ -98,10 +98,10 @@ const TeamChallengeConversation = ({ challenge }) => {
         setMessage((prev) => prev + emoji.emoji);
     };
     return (
-        <div className="container mx-auto shadow-lg bg-white rounded-lg grid grid-cols-3">
-            <div className={`col-span-${sidebarVisible ? "2" : "3"} flex flex-col justify-between`}>
-                <div className="flex flex-col">
-                    <div className="flex items-center bg-white rounded-t-lg shadow-md p-4 border-b border-gray-300">
+        <div className="container mx-auto grid grid-cols-3">
+            <div className={`col-span-${sidebarVisible ? "2" : "3"} bg-white flex shadow-md rounded-lg flex-col justify-between`}>
+                <div className="flex flex-col ">
+                    <div className="flex items-center bg-white rounded-t-lg drop-shadow-md p-4 border-b border-gray-300">
                         <img
                             src={user.picturePath || AvatarProfile}
                             className="object-cover h-10 w-10 rounded-full"
@@ -170,7 +170,7 @@ const TeamChallengeConversation = ({ challenge }) => {
                         <input
                             value={message}
                             onChange={(event) => setMessage(event.target.value)}
-                            className="w-full bg-gray-100 py-2 px-3 rounded-l-xl"
+                            className="w-full shadow-inner bg-gray-100 py-2 px-3 rounded-l-xl"
                             type="text"
                             placeholder="type your message here..."
                         />
@@ -199,7 +199,7 @@ const TeamChallengeConversation = ({ challenge }) => {
             </div>
 
             {sidebarVisible && (
-                <div className="col-span-1 border-l border-gray-400 flex flex-col">
+                <div className="col-span-1 bg-white rounded-lg shadow-md ml-2 flex flex-col">
                     <div className="flex text-center pt-2 items-center flex-col">
                         <img
                             src={challenge.picturePath}

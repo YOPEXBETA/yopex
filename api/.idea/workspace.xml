@@ -6,10 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="feat: Team can edit challenge submission">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/TeamChallengeConversation.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/TeamChallengeConversation.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/conversation.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/conversation.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/conversation.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/conversation.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/ChallengeOwnerConversation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/ChallengeOwnerConversation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/ConversationsTabs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/ConversationsTabs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamChallengeConversation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamChallengeConversation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamConversation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamConversation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" afterDir="false" />
     </list>
@@ -184,7 +186,7 @@
       <workItem from="1724151611589" duration="312000" />
       <workItem from="1724153653644" duration="14396000" />
       <workItem from="1724242050669" duration="12682000" />
-      <workItem from="1724331935102" duration="4500000" />
+      <workItem from="1724331935102" duration="10719000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />
