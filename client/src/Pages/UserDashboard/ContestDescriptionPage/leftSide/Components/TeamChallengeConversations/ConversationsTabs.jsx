@@ -4,7 +4,7 @@ import TeamChallengeConversation from "./TeamChallengeConversation";
 import TeamConversation from "./TeamConversation";
 import ChallengeOwnerConversation from "./ChallengeOwnerConversation"; // Example icons, update as needed
 
-const ConversationTabs = ({ challenge, user }) => {
+const ConversationTabs = ({ challenge, user, isOwner, isRegistered, team }) => {
     const [activeTab, setActiveTab] = useState("teamChallenge");
 
     const renderContent = () => {
@@ -12,7 +12,7 @@ const ConversationTabs = ({ challenge, user }) => {
             case "teamChallenge":
                 return <TeamChallengeConversation challenge={challenge} />;
             case "teamConversation":
-                return <TeamConversation />;
+                return isRegistered && !isOwner ? <TeamConversation challenge={challenge} team={team} /> : null;
             case "ownerConversation":
                 return <ChallengeOwnerConversation />;
             default:
@@ -37,19 +37,21 @@ const ConversationTabs = ({ challenge, user }) => {
                         <span className=" font-semibold">Chat With Everyone</span>
                     </button>
                 </li>
-                <li>
-                    <button
-                        className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${
-                            activeTab === "teamConversation"
-                                ? "text-white bg-green-500 dark:bg-blue-600 shadow-lg hover:shadow-xl"
-                                : "text-gray-900 bg-gray-50 dark:bg-gray-800 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
-                        }`}
-                        onClick={() => setActiveTab("teamConversation")}
-                    >
-                        <RiChat1Line className="w-6 h-6 me-2" /> {/* Larger icon */}
-                        <span className=" font-semibold">Chat With Your Team</span> {/* Improved title styling */}
-                    </button>
-                </li>
+                {isRegistered && !isOwner && (
+                    <li>
+                        <button
+                            className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${
+                                activeTab === "teamConversation"
+                                    ? "text-white bg-green-500 dark:bg-blue-600 shadow-lg hover:shadow-xl"
+                                    : "text-gray-900 bg-gray-50 dark:bg-gray-800 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
+                            }`}
+                            onClick={() => setActiveTab("teamConversation")}
+                        >
+                            <RiChat1Line className="w-6 h-6 me-2" />
+                            <span className=" font-semibold">Chat With Your Team</span>
+                        </button>
+                    </li>
+                )}
                 <li>
                     <button
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${

@@ -10,6 +10,7 @@ import {useTeamChallengeById} from "../../../hooks/react-query/useTeamChallenge"
 
 const ContestDetails = () => {
   const [isRegistered, setIsRegistered] = useState(false);
+  const [team, setTeam] = useState(null);
   const [value, setValue] = useState(0);
   const changeValue = (newValue) => {
     setValue(newValue);
@@ -44,10 +45,13 @@ const ContestDetails = () => {
     }
 
     if (entityType === "teamChallenge") {
-      const isTeamMemberOrLeader = challenge?.teams?.some((team) =>
+      const isTeamMemberOrLeader = challenge?.teams?.find((team) =>
           team?.team?.teamLeader === user?._id || team?.team?.members?.includes(user?._id)
       );
-      setIsRegistered(isTeamMemberOrLeader);
+      setIsRegistered(!!isTeamMemberOrLeader);
+      if (isTeamMemberOrLeader) {
+        setTeam(isTeamMemberOrLeader);
+      }
     }
   }, [challenge, entityType, user]);
 
@@ -84,6 +88,7 @@ const ContestDetails = () => {
                 isRegistered={isRegistered}
                 type={entityType}
                 challenge={challenge}
+                team={team}
               />
             </div>
           </div>

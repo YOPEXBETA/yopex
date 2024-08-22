@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: Chat group for all participants of the team challenge">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: Team members can chat together in a private channel">
+      <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/TeamChallengeConversation.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/TeamChallengeConversation.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamChallengeConversation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamChallengeConversation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/ConversationsTabs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/ConversationsTabs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamConversation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/TeamChallengeConversations/TeamConversation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/ContentSide.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +163,7 @@
       <workItem from="1724088366425" duration="855000" />
       <workItem from="1724153827890" duration="15756000" />
       <workItem from="1724243659259" duration="15002000" />
-      <workItem from="1724332127209" duration="9903000" />
+      <workItem from="1724332127209" duration="13338000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -402,7 +405,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724341391055</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="feat: users can now add Emojis to their messages">
+      <option name="closed" value="true" />
+      <created>1724343842206</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1724343842206</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,8 +431,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: added new Occupation CRUD to admin and integrated it in user profile" />
-    <MESSAGE value="feat: added filters to the discover organizations" />
     <MESSAGE value="feat: added filters to the discover talents" />
     <MESSAGE value="feat: create a challenge as an organization" />
     <MESSAGE value="feat: created list of challenges related to the organization" />
@@ -445,6 +454,8 @@
     <MESSAGE value="fix: fixed old bugs and issues" />
     <MESSAGE value="fix: check if the challange input submission not null" />
     <MESSAGE value="feat: Chat group for all participants of the team challenge" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Chat group for all participants of the team challenge" />
+    <MESSAGE value="feat: users can now add Emojis to their messages" />
+    <MESSAGE value="feat: Team members can chat together in a private channel" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Team members can chat together in a private channel" />
   </component>
 </project>

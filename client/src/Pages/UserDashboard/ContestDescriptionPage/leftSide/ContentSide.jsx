@@ -13,11 +13,11 @@ import Submission from "./Components/ParticipantsTableSection/Submission";
 import TeamChallengeConversation from "./Components/TeamChallengeConversations/TeamChallengeConversation";
 import ConversationTabs from "./Components/TeamChallengeConversations/ConversationsTabs";
 
-const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type }) => {
+const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type, team }) => {
   const { id: challengeId } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { data: conversation } = useGetContestConversation(challengeId);
-  if (user && conversation)
+  if (user )
     return (
       <div className="">
         <div className="space-y-2 ">
@@ -54,6 +54,9 @@ const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type }) =>
                     <ConversationTabs
                         challenge={challenge}
                         user={user}
+                        isOwner={isOwner}
+                        isRegistered={isRegistered}
+                        team={team}
                     />
                 )}
             </div>

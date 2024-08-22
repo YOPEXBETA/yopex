@@ -118,8 +118,14 @@ const getTeamConversation = async (req, res) => {
         const conversation = await TeamConversation.findOne({
             teamChallenge: teamChallenge,
             team: team
+        }).populate({
+            path: 'members',
+            select: 'firstname lastname picturePath _id'
         });
-        res.status(200).json({ id: conversation?._id });
+        if (!conversation) {
+            return res.status(404).json({ message: 'Conversation not found' });
+        }
+        res.status(200).json(conversation);
     } catch (error) {
         console.log(error, "Error");
         res.status(400).send(error.message);
@@ -135,7 +141,6 @@ const createTeamChallengeMessage = async (req, res) => {
     if (req.userId !== req.body.sender) {
         return res.status(401).json({ error: "Not authorized" });
     }
-console.log('body', req.body)
     const newMessage = new TeamChallengeMessage(req.body);
 
     try {
