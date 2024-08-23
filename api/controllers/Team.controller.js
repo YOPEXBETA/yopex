@@ -78,7 +78,11 @@ const createTeam = async (req, res) => {
                 teamChallenge: challenge._id
             });
             await notification.save();
-
+            const owner = await userModel.findById(challenge.owner);
+            const message = `
+            ${newTeam.name} has joined your challenge ${challenge.title}
+          `;
+            await sendEmail(owner.email, message);
             const teamConversation = new TeamConversation({
                 teamChallenge: challengeId,
                 team: newTeam._id,

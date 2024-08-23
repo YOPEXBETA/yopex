@@ -11,6 +11,7 @@ const Team = require("../models/team.model");
 const ChallengeModel = require("../models/Challenge.model");
 const ReviewModel = require("../models/Review.model");
 const TeamChallengeConversation = require("../models/TeamChallengeConversation.model");
+const { sendEmail } = require("../middlewares/mail.middleware");
 
 const CreateTeamChallenge = async (req, res) => {
     try {
@@ -416,8 +417,6 @@ const startTeamChallenge = async (req, res, next) => {
 const unjoinTeamChallenge = async (req, res) => {
     try {
         const { idChallenge, teamId } = req.body;
-        console.log('body', req.body)
-        // Fetch the team and challenge
         const team = await Team.findById(teamId);
         const challenge = await TeamChallengeModel.findById(idChallenge);
 
@@ -425,16 +424,13 @@ const unjoinTeamChallenge = async (req, res) => {
             return res.status(404).send("Team or Challenge not found.");
         }
 
-        // Remove the team from the challenge's teams array
         challenge.teams = challenge.teams.filter(
             (teamEntry) => teamEntry.team.toString() !== teamId.toString()
         );
         await challenge.save();
 
-        // Check if the team leader is part of this team
         const teamLeader = await UserModel.findById(team.teamLeader);
         if (teamLeader) {
-            // Remove the challenge from the team leader's challenges list
             teamLeader.teamChallenges = teamLeader.teamChallenges.filter(
                 (challengeId) => challengeId.toString() !== idChallenge.toString()
             );
@@ -559,7 +555,10 @@ const chooseWinningTeam = async (req, res) => {
                 picture: teamChallenge.picturePath,
                 user: participant._id,
             });
-
+            const message = `
+            Your team won the challenge ${teamChallenge.title}, log in to check your prize!
+          `;
+            await sendEmail(participant.email, message);
             await notification.save();
             await participant.save();
         }
