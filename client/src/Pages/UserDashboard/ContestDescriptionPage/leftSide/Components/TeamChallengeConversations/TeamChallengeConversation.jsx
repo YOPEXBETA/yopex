@@ -100,8 +100,8 @@ const TeamChallengeConversation = ({ challenge }) => {
     return (
         <div className="container mx-auto grid grid-cols-3">
             <div className={`col-span-${sidebarVisible ? "2" : "3"} bg-white flex shadow-md rounded-lg flex-col justify-between`}>
-                <div className="flex flex-col ">
-                    <div className="flex items-center bg-white rounded-t-lg drop-shadow-md p-4 border-b border-gray-300">
+                <div className="flex flex-col  ">
+                    <div className="flex  items-center bg-white rounded-t-lg drop-shadow-md p-4 border-b border-gray-300">
                         <img
                             src={user.picturePath || AvatarProfile}
                             className="object-cover h-10 w-10 rounded-full"
@@ -130,12 +130,12 @@ const TeamChallengeConversation = ({ challenge }) => {
                         <div
                             id="messages"
                             ref={chatContainerRef}
-                            className="flex flex-col space-y-4 lg:p-3 p-0 scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch min-h-80 max-h-[22rem] overflow-y-auto w-full"
+                            className="flex flex-col  space-y-4 lg:p-3 p-0 scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch min-h-80 max-h-[22rem] overflow-y-auto w-full"
                         >
                             {arrivalMessage?.map((message, index) => (
                                 <div
                                     key={index}
-                                    className={`flex flex-col items-${message.sender._id === user._id ? "end" : "start"} mb-4`}
+                                    className={`flex  flex-col items-${message.sender._id === user._id ? "end" : "start"} mb-4`}
                                 >
                                     <div className="flex items-end">
                                         {message.sender._id !== user._id && (
