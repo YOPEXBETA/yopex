@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import ChallengeTab from "./ChallengeTab";
 import {useFindTeamChallenges} from "../../../hooks/react-query/useTeamChallenge";
 import TeamChallenges from "./components/TeamChallenges";
+import useDebounce from "../../../hooks/useDebounce";
 
 const Index = () => {
   const [value, setValue] = useState(0);
@@ -26,24 +27,25 @@ const Index = () => {
     if (error) {
       toast.error("Payment failed");
     }
-  }, []);
+  }, [success, error]);
 
   const [minAmount, setMinAmount] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
 
-  
+
+  const debouncedChallengeQuery = useDebounce(contestQuery, 500);
 
   const { data: challenges, isLoading } = useFindChallenges(
     minAmount,
     maxAmount,
-    contestQuery,
+      debouncedChallengeQuery,
     selectedSkill,
     selectedCategory
   );
   const { data: teamChallenges, isTeamLoading } = useFindTeamChallenges(
       minAmount,
       maxAmount,
-      contestQuery,
+      debouncedChallengeQuery,
       selectedSkill,
       selectedCategory
   );
