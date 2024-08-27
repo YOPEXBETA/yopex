@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: Members can now chat is a separate channel with the moderator of the challenge">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: the submissions are now unique">
+      <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/job.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/job.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/models/job.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/job.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/routes/job.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/job.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Cards/WorkCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/WorkCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Modals/CreateJobOfferModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Modals/CreateJobOfferModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/Modals/EditJobModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modals/EditJobModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,6 +167,10 @@
       <workItem from="1724153827890" duration="15756000" />
       <workItem from="1724243659259" duration="15002000" />
       <workItem from="1724332127209" duration="24776000" />
+      <workItem from="1724416037023" duration="3496000" />
+      <workItem from="1724423084253" duration="2645000" />
+      <workItem from="1724675764417" duration="7947000" />
+      <workItem from="1724758946061" duration="5713000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -423,7 +436,55 @@
       <option name="project" value="LOCAL" />
       <updated>1724366226899</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="feat: Mail notifications related to challenges">
+      <option name="closed" value="true" />
+      <created>1724417339026</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1724417339026</updated>
+    </task>
+    <task id="LOCAL-00035" summary="feat: updated UI for the challenge filters">
+      <option name="closed" value="true" />
+      <created>1724759973527</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1724759973527</updated>
+    </task>
+    <task id="LOCAL-00036" summary="feat: updated UI for the challenge filters">
+      <option name="closed" value="true" />
+      <created>1724760006961</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1724760006961</updated>
+    </task>
+    <task id="LOCAL-00037" summary="feat: updated UI for the team challenge chat">
+      <option name="closed" value="true" />
+      <created>1724760028346</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1724760028346</updated>
+    </task>
+    <task id="LOCAL-00038" summary="feat: updated UI for the team challenge multi steps form">
+      <option name="closed" value="true" />
+      <created>1724760071472</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1724760071472</updated>
+    </task>
+    <task id="LOCAL-00039" summary="fix: the submissions are now unique">
+      <option name="closed" value="true" />
+      <created>1724760098817</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1724760098817</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,11 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: create a challenge as an organization" />
-    <MESSAGE value="feat: created list of challenges related to the organization" />
-    <MESSAGE value="feat: created list of jobs related to the organization and the applicants" />
-    <MESSAGE value="feat: added the useDebounce hook to the organization lists" />
-    <MESSAGE value="feat: added stats and analytics to the organization workspace" />
     <MESSAGE value="fix: general fixes and tweaks" />
     <MESSAGE value="feat: adding a team challenge as an organization" />
     <MESSAGE value="feat: fetching team challenges and registering as a team" />
@@ -466,6 +522,11 @@
     <MESSAGE value="feat: users can now add Emojis to their messages" />
     <MESSAGE value="feat: Team members can chat together in a private channel" />
     <MESSAGE value="feat: Members can now chat is a separate channel with the moderator of the challenge" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Members can now chat is a separate channel with the moderator of the challenge" />
+    <MESSAGE value="feat: Mail notifications related to challenges" />
+    <MESSAGE value="feat: updated UI for the challenge filters" />
+    <MESSAGE value="feat: updated UI for the team challenge chat" />
+    <MESSAGE value="feat: updated UI for the team challenge multi steps form" />
+    <MESSAGE value="fix: the submissions are now unique" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: the submissions are now unique" />
   </component>
 </project>

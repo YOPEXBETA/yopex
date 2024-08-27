@@ -2,7 +2,7 @@ const express = require("express");
 const jobRouter = express.Router();
 
 const {
-  addJob,
+  addJobOffer,
   getAllJobs,
   updateJob,
   geJobById,
@@ -21,7 +21,7 @@ const {
   authenticateToken,
 } = require("../middlewares/authenticateToken.middleware");
 
-jobRouter.post("/add", addJob);
+jobRouter.post("/add", addJobOffer);
 jobRouter.get("/all", getAllJobs);
 jobRouter.put("/update/:id", authenticateToken, updateJob);
 jobRouter.get("/:organizationId", authenticateToken, geJobById);

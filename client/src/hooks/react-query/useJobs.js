@@ -75,13 +75,12 @@ export const useOfferTypes = () => {
 
 
 
-export const useCreateJob = (user) => {
+export const useCreateJob = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ organizationId, JobData }) => {
-      console.log('jobdata', JobData)
-      await axios.post(`${url}/job/add`, { organizationId, ...JobData }, {});
+    mutationFn: async ({ organizationId, userId, JobData }) => {
+      await axios.post(`${url}/job/add`, { organizationId, userId, ...JobData }, {});
     },
     onSuccess: () => {
       toast.success("Job added successfully");
@@ -160,13 +159,6 @@ export const useAcceptApplier = (jobId) => {
   return useMutation({
     mutationFn: async (userId) => {
       await axios.put(`${url}/job/jobs/${jobId}/appliers/${userId}/accept`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["jobs"] });
-      queryClient.invalidateQueries(["appliers"]);
-      queryClient.invalidateQueries({
-        queryKey: ["accepted/appliers"],
-      });
     },
     onSuccess: () => {
       toast.success("Applier accepted successfully");

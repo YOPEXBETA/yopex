@@ -7,39 +7,56 @@ const { sendEmail } = require("../middlewares/mail.middleware");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
 
-// companyRoutes.js
-
-const addJob = async (req, res, next) => {
+const addJobOffer = async (req, res, next) => {
   try {
-    const { organizationId, ...jobDetails } = req.body;
-    console.log('job', req.body)
-    if (!organizationId) {
-      return res.status(400).json({ error: "organizationId must be provided" });
+    const { organizationId, userId, ...jobDetails } = req.body;
+
+    if (!organizationId && !userId) {
+      return res.status(400).json({ error: "Either organizationId or userId must be provided" });
     }
 
-    const organization = await Organization.findById(organizationId);
+    let jobOffer;
 
-    if (!organization) {
-      return res.status(400).json({ error: "organization not found" });
+    if (organizationId) {
+      const organization = await Organization.findById(organizationId);
+      if (!organization) {
+        return res.status(400).json({ error: "Organization not found" });
+      }
+
+      jobOffer = new Job({
+        organization: organizationId,
+        ...jobDetails,
+      });
+
+      await jobOffer.save();
+
+      organization.jobs.push(jobOffer._id);
+      await organization.save();
     }
 
-    const jobOffer = new Job({
-      organization: organizationId,
-      ...jobDetails,
-    });
+    if (userId) {
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(400).json({ error: "User not found" });
+      }
 
-    await jobOffer.save();
-    organization.jobs.push(jobOffer._id);
-    await organization.save();
-    res
-      .status(201)
-      .json({ message: "Job offer created successfully", jobOffer });
+      jobOffer = new Job({
+        owner: userId,
+        ...jobDetails,
+      });
+
+      await jobOffer.save();
+
+      user.jobs.push(jobOffer._id);
+      await user.save();
+    }
+
+    res.status(201).json({ message: "Job offer created successfully", jobOffer });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: `Failed to create job offer: ${error.message}` });
+    res.status(500).json({ error: `Failed to create job offer: ${error.message}` });
   }
 };
+
 
 const getAllJobs = async (req, res) => {
   try {
@@ -60,6 +77,7 @@ const getAllJobs = async (req, res) => {
     const jobs = await Job.find(filters)
       .select("-acceptedAppliers")
       .populate("organization", "organizationName organizationLogo")
+        .populate("owner", "firstname lastname picturePath")
       .populate("skills");
 
     return res.status(200).json(jobs);
@@ -352,7 +370,7 @@ const getAcceptedAppliers = async (req, res) => {
 };
 
 module.exports = {
-  addJob,
+  addJobOffer,
   getAllJobs,
   updateJob,
   deleteJob,

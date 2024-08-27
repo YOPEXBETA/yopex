@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const JobSchema = new mongoose.Schema(
     {
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        },
         organization: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Organization",
