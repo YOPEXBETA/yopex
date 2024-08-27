@@ -87,7 +87,10 @@ const CreateTeamSubmission = async (req, res, next) => {
     try {
         const {teamChallengeId, teamId, title, description, filesPaths, links} = req.body;
 
-        console.log('body', req.body);
+        const existingSubmission = await Submission.findOne({ teamChallengeId, teamId, title });
+        if (existingSubmission) {
+            return res.status(400).json({ message: "A submission with this title already exists for this team and challenge." });
+        }
 
         const submission = new Submission({
             teamChallengeId,
