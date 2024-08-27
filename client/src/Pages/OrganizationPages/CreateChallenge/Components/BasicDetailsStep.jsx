@@ -1,5 +1,7 @@
 import React from "react";
 import { Controller } from "react-hook-form";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 
 const BasicDetailsStep = ({ control, formData, updateFormData }) => {
     const handleInputChange = (field, value) => {
@@ -10,7 +12,7 @@ const BasicDetailsStep = ({ control, formData, updateFormData }) => {
         today.setHours(0, 0, 0, 0); // Reset time to the start of the day
         return new Date(date) < today;
     };
-console.log('form', formData)
+
     return (
         <div>
             <div className="text-center mb-3">
@@ -21,6 +23,7 @@ console.log('form', formData)
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
                 <div className="md:col-span-1">
+                    {/* Title Input */}
                     <div className="mb-4">
                         <label className="text-sm text-black mb-2 block dark:text-white">
                             What is the title of your challenge?
@@ -53,6 +56,7 @@ console.log('form', formData)
                         />
                     </div>
 
+                    {/* Objective Select */}
                     <div className="mb-4">
                         <label className="text-sm text-black mb-2 block dark:text-white">
                             Select the objective of your challenge
@@ -91,6 +95,7 @@ console.log('form', formData)
                     </div>
                 </div>
 
+                {/* Date Input */}
                 <div className="md:col-span-1">
                     <div className="mb-4">
                         <label className="text-sm text-black mb-2 block dark:text-white">
@@ -100,7 +105,8 @@ console.log('form', formData)
                             name="deadline"
                             control={control}
                             defaultValue={formData.deadline || ""}
-                            rules={{ required: "Deadline is required",
+                            rules={{
+                                required: "Deadline is required",
                                 validate: {
                                     notInThePast: (value) =>
                                         value && !isDateInThePast(value) ? true : "Deadline cannot be in the past",
@@ -128,6 +134,8 @@ console.log('form', formData)
                             )}
                         />
                     </div>
+
+                    {/* Number Input */}
                     <div className="mb-6">
                         <Controller
                             name="nbruser"
@@ -166,6 +174,7 @@ console.log('form', formData)
                 </div>
             </div>
 
+            {/* Description Editor */}
             <div>
                 <label className="text-sm text-black mb-2 block dark:text-white">
                     Can you describe your challenge?
@@ -183,19 +192,21 @@ console.log('form', formData)
                     }}
                     render={({ field, fieldState }) => (
                         <div>
-                            <textarea
-                                {...field}
-                                onChange={(e) => {
-                                    handleInputChange("description", e.target.value);
-                                    field.onChange(e.target.value);
-                                }}
-                                placeholder="Challenge Description"
-                                className={`w-full h-40 p-2 border mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 ${
-                                    fieldState.invalid ? "border-red-500" : "border-gray-300"
-                                }`}
-                            />
+                            <div className="mb-2">
+                                <ReactQuill
+                                    value={field.value}
+                                    onChange={(value) => {
+                                        handleInputChange("description", value);
+                                        field.onChange(value);
+                                    }}
+                                    className={`w-full h-40 p-2 mt-1 rounded dark:text-white focus:outline-none resize-none dark:bg-zinc-700 ${
+                                        fieldState.invalid ? "border-red-500" : "border-gray-300"
+                                    }`}
+                                />
+                            </div>
+                            {/* Ensure error message is below the editor */}
                             {fieldState.invalid && (
-                                <span className="text-red-500 text-sm mt-1">
+                                <span className="text-red-500 text-sm block mt-2">
                                     {fieldState.error?.message}
                                 </span>
                             )}

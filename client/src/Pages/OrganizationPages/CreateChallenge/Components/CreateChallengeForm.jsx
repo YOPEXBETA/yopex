@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {FaCheck, FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import { useSelector } from "react-redux";
 import { useFileUpload } from "../../../../hooks/react-query/useUsers";
@@ -144,23 +144,38 @@ const CreateChallengeForm = () => {
     };
 
 
-
-    const progressPercentage = ((step - 1) / 4) * 100;
-
+    const isStepCompleted = (stepNumber) => {
+        return step > stepNumber;
+    };
     return (
         <div className="flex flex-col h-full w-full p-8"> {/* Full height and width */}
-            <p className="text-gray-700 text-base">Step {step}/5</p>
-            <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                <div
-                    className="bg-green-400 text-xs font-medium text-green-100 text-center p-0.5 leading-none rounded-full"
-                    style={{ width: `${progressPercentage}%` }}
-                >
-                    {`${Math.round(progressPercentage)}%`}
-                </div>
-            </div>
+            <ol className="flex items-center justify-between w-full text-sm font-medium text-gray-500 dark:text-gray-400 sm:text-base">
+                {[...Array(5).keys()].map((index) => (
+                    <li
+                        key={index}
+                        className={`flex md:w-full items-center ${isStepCompleted(index + 1) ? 'text-blue-600 dark:text-blue-500' : ''} ${index < 4 ? 'after:content-[""] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-3  dark:after:border-gray-700' : ''}`}
+                    >
+            <span
+                className="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+            >
+                {isStepCompleted(index + 1) ? (
+                    <FaCheck className="text-green-600"/>
+                ) : (
+                    <span className="mr-2">{index + 1}</span>
+                )}
+                {index === 0 && 'Challenge Type'}
+                {index === 1 && 'Basic Details'}
+                {index === 2 && 'Media Settings'}
+                {index === 3 && 'Skills & Categories'}
+                {index === 4 && 'Review & Submit'}
+            </span>
+                    </li>
+                ))}
+            </ol>
+
             <div className="flex flex-col flex-grow mt-8"> {/* Flex container */}
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-full">
-                    {step === 1 && <ChallengeTypeStep onNext={handleType} />}
+                    {step === 1 && <ChallengeTypeStep onNext={handleType}/>}
                     {step === 2 && (
                         <div>
                             <BasicDetailsStep
@@ -177,7 +192,7 @@ const CreateChallengeForm = () => {
                                 formData={formData}
                                 updateFormData={updateFormData}
                                 isPaid={formData.paid}
-                                setIsPaid={(paid) => updateFormData({ paid })}
+                                setIsPaid={(paid) => updateFormData({paid})}
                             />
                         </div>
                     )}
@@ -208,7 +223,7 @@ const CreateChallengeForm = () => {
                                     className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-black transition bg-gray-100 rounded-full shadow ripple hover:shadow-lg hover:bg-gray-200 focus:outline-none"
                                 >
                                     <div className="flex items-center justify-between flex-1 gap-4">
-                                        <FaChevronLeft />
+                                        <FaChevronLeft/>
                                         <span className="text-lg font-medium dark:text-white">
                                             Previous
                                         </span>
@@ -226,7 +241,7 @@ const CreateChallengeForm = () => {
                                         <span className="text-lg font-medium text-white">
                                             Next
                                         </span>
-                                        <FaChevronRight />
+                                        <FaChevronRight/>
                                     </div>
                                 </button>
                             </div>
@@ -250,7 +265,7 @@ const CreateChallengeForm = () => {
                 <div className="absolute inset-0 flex items-center justify-center z-50 bg-white bg-opacity-80">
                     <div className="flex flex-col items-center justify-center h-full">
                         <div className="text-center">
-                            <LoadingSpinner />
+                            <LoadingSpinner/>
                         </div>
                         <h1 className="mt-4 text-lg font-medium text-gray-700 dark:text-gray-200">
                             Submitting your challenge ...
