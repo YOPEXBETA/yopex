@@ -7,11 +7,8 @@
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="feat: Team can edit challenge submission">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/job.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/job.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/job.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/job.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/job.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/job.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/hooks/react-query/useJobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/hooks/react-query/useJobs.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +187,8 @@
       <workItem from="1724675591870" duration="1579000" />
       <workItem from="1724692279763" duration="648000" />
       <workItem from="1724722232261" duration="623000" />
-      <workItem from="1724758894130" duration="3132000" />
+      <workItem from="1724758894130" duration="4007000" />
+      <workItem from="1724842817713" duration="2812000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />

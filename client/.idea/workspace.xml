@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: the submissions are now unique">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: create and manage job offers as an individual">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/job.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/job.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/models/job.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/job.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/routes/job.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/routes/job.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/WorkCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/WorkCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Modals/CreateJobOfferModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Modals/CreateJobOfferModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/shared/Modals/EditJobModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modals/EditJobModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useJobs.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +162,9 @@
       <workItem from="1724416037023" duration="3496000" />
       <workItem from="1724423084253" duration="2645000" />
       <workItem from="1724675764417" duration="7947000" />
-      <workItem from="1724758946061" duration="5713000" />
+      <workItem from="1724758946061" duration="5729000" />
+      <workItem from="1724800127263" duration="52000" />
+      <workItem from="1724800197991" duration="25000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -484,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724760098817</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="feat: create and manage job offers as an individual">
+      <option name="closed" value="true" />
+      <created>1724768274332</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1724768274332</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,7 +504,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: general fixes and tweaks" />
     <MESSAGE value="feat: adding a team challenge as an organization" />
     <MESSAGE value="feat: fetching team challenges and registering as a team" />
     <MESSAGE value="feat: Sending , accepting and refusing team invitations for a team challenge" />
@@ -527,6 +528,7 @@
     <MESSAGE value="feat: updated UI for the team challenge chat" />
     <MESSAGE value="feat: updated UI for the team challenge multi steps form" />
     <MESSAGE value="fix: the submissions are now unique" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: the submissions are now unique" />
+    <MESSAGE value="feat: create and manage job offers as an individual" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: create and manage job offers as an individual" />
   </component>
 </project>

@@ -107,7 +107,7 @@ const updateJob = async (req, res, next) => {
   }
 };
 
-const geJobById = async (req, res, next) => {
+const getJobByOrganizationId = async (req, res, next) => {
   try {
     const organizationId = req.params.organizationId;
     const q = req.query;
@@ -369,6 +369,64 @@ const getAcceptedAppliers = async (req, res) => {
   }
 };
 
+const getJobById = async (req, res) => {
+  try {
+    const jobId = req.params.jobId;
+    const job = await Job.findById(jobId)
+        .populate("organization", "organizationName organizationLogo") // Populate organization details
+        .populate("owner", "firstname lastname picturePath") // Populate owner details
+        .populate("skills"); // Populate skills
+
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    return res.status(200).json(job);
+  } catch (error) {
+    console.error("Error fetching job by ID:", error);
+    return res.status(500).json({ error: `Failed to retrieve job: ${error.message}` });
+  }
+};
+const getAppliersWithStatus = async (req, res) => {
+  try {
+    const jobId = req.params.jobId;
+
+    // Fetch the job and populate appliers
+    const job = await Job.findById(jobId)
+        .populate({
+          path: 'appliers',
+          select: 'firstname lastname email picturePath skills',
+          populate: {
+            path: 'skills',
+            select: 'name',
+          },
+        })
+        .select('appliers acceptedAppliers')
+        .lean()
+        .exec();
+
+    if (!job) return res.status(404).json({ message: "Job not found" });
+
+    // Map appliers to include their status
+    const appliersWithStatus = job.appliers.map(applier => {
+      // Check if the applier is in the acceptedAppliers list
+      const isAccepted = job.acceptedAppliers.some(
+          accepted => accepted.user.toString() === applier._id.toString()
+      );
+
+      return {
+        ...applier,
+        status: isAccepted ? 'Accepted' : 'Pending',
+      };
+    });
+
+    return res.status(200).json(appliersWithStatus);
+  } catch (error) {
+    console.error("Error fetching appliers with status:", error);
+    return res.status(500).json({ error: `Failed to retrieve appliers: ${error.message}` });
+  }
+};
+
 module.exports = {
   addJobOffer,
   getAllJobs,
@@ -381,5 +439,7 @@ module.exports = {
   applyJob,
   getAcceptedAppliers,
   getSortedAppliers,
-  geJobById,
+  getJobByOrganizationId,
+  getJobById,
+  getAppliersWithStatus
 };

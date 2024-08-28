@@ -5,7 +5,6 @@ const {
   addJobOffer,
   getAllJobs,
   updateJob,
-  geJobById,
   deleteJob,
   getByUserId,
   applyJob,
@@ -13,7 +12,7 @@ const {
   getAppliers,
   acceptApplier,
   getAcceptedAppliers,
-  getSortedAppliers,
+  getSortedAppliers, getJobByOrganizationId, getJobById, getAppliersWithStatus,
 } = require("../controllers/job.controller");
 
 //imported MiddleWare
@@ -24,7 +23,9 @@ const {
 jobRouter.post("/add", addJobOffer);
 jobRouter.get("/all", getAllJobs);
 jobRouter.put("/update/:id", authenticateToken, updateJob);
-jobRouter.get("/:organizationId", authenticateToken, geJobById);
+jobRouter.get("/:organizationId", authenticateToken, getJobByOrganizationId);
+jobRouter.get("/getJobById/:jobId", authenticateToken, getJobById);
+jobRouter.get('/appliersWithStatus/:jobId', getAppliersWithStatus);
 jobRouter.delete("/:id", authenticateToken, deleteJob);
 jobRouter.get("/user/:id", authenticateToken, getByUserId);
 jobRouter.put("/jobs/:jobId/apply/:userId", applyJob);

@@ -219,3 +219,31 @@ export const useEditJob = (jobId) => {
     },
   });
 };
+
+export const useJobByJobId = (jobId) => {
+  return useQuery({
+    queryKey: ["jobById", jobId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/job/getJobById/${jobId}`);
+      return data;
+    },
+    enabled: !!jobId, // Only run the query if jobId is provided
+    onError: (error) => {
+      toast.error(`Error fetching job: ${error.response?.data?.message || "Unknown error"}`);
+    },
+  });
+};
+
+export const useAppliersWithStatus = (jobId) => {
+  return useQuery({
+    queryKey: ["appliersWithStatus", jobId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/job/appliersWithStatus/${jobId}`);
+      return data;
+    },
+    enabled: !!jobId, // Only fetch if jobId is provided
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
+    },
+  });
+};
