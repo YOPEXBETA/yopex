@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bb5c893e-d2a7-4163-b76b-45d04bad54eb" name="Changes" comment="feat: Team can edit challenge submission">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/job.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/job.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/job.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/job.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +186,9 @@
       <workItem from="1724692279763" duration="648000" />
       <workItem from="1724722232261" duration="623000" />
       <workItem from="1724758894130" duration="4007000" />
-      <workItem from="1724842817713" duration="2812000" />
+      <workItem from="1724842817713" duration="3410000" />
+      <workItem from="1724860355887" duration="920000" />
+      <workItem from="1724936680033" duration="555000" />
     </task>
     <task id="LOCAL-00001" summary="Company Creation and Invitation">
       <option name="closed" value="true" />

@@ -2,14 +2,17 @@ import React, {useState} from "react";
 import { useParams } from "react-router-dom";
 import {useAppliers, useAppliersWithStatus, useJobByJobId} from "../../../../hooks/react-query/useJobs";
 import {FaUsers, FaCheckCircle, FaClock, FaTag, FaBriefcase, FaDollarSign, FaStar} from 'react-icons/fa';
+import ApplicantInfoCard from "../../../../Components/Cards/ApplicantInfoCard";
+import AvatarProfile from "../../../../assets/images/AvatarProfile.jpg";
 
 const ApplicantsTable = () => {
-    const { jobId } = useParams();  // Get jobId from URL parameters
+    const { jobId } = useParams();
     const { data: job, isLoading: jobLoading, isError: jobError, error: jobErrorMessage } = useJobByJobId(jobId);
     const [searchTerm, setSearchTerm] = useState("");
-    const [filter, setFilter] = useState("All"); // State to manage filter selection
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown visibility
-console.log('job', job)
+    const [filter, setFilter] = useState("All");
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedApplicantId, setSelectedApplicantId] = useState(null);
+    const [selectedApplicantStatus, setSelectedApplicantStatus] = useState(null);
     const { data: appliersWithStatus, isLoading, isError, error } = useAppliersWithStatus(jobId);
     if (jobLoading || isLoading) return <p>Loading...</p>;
     if (jobError || isError) return <p>Error: {jobError ? jobErrorMessage.message : error.message}</p>;
@@ -29,7 +32,10 @@ console.log('job', job)
         setFilter(status);
         setIsDropdownOpen(false); // Close the dropdown after selection
     };
-
+    const handleViewApplicant = (applicantId, status) => {
+        setSelectedApplicantId(applicantId);
+        setSelectedApplicantStatus(status)// Set the selected applicant ID
+    };
     return (
         <div className="p-4">
             <div className=" flex items-center justify-between mb-4 p-2 bg-white dark:bg-gray-900 rounded-lg shadow-md">
@@ -38,7 +44,7 @@ console.log('job', job)
                     {job.organization ? (
                         <>
                             <img
-                                src={job.organization.organizationLogo || 'https://via.placeholder.com/50'}
+                                src={job.organization.organizationLogo || AvatarProfile}
                                 alt={job.organization.organizationName}
                                 className="w-28 h-28 rounded-lg border border-gray-300 dark:border-gray-600 mr-4"
                             />
@@ -88,7 +94,7 @@ console.log('job', job)
                     </div>
                 </div>
             </div>
-            <div className="bg-white dark:bg-gray-900 p-6 mb-2 rounded-lg shadow-lg">
+            <div className="bg-white dark:bg-gray-900 p-6 mb-2 rounded-lg shadow-md">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div className="flex items-center">
                         <div>
@@ -254,6 +260,14 @@ console.log('job', job)
                     />
                 </div>
             </div>
+            {selectedApplicantId && (
+                <ApplicantInfoCard
+                    applicantId={selectedApplicantId}
+                    onClose={() => setSelectedApplicantId(null)}
+                    job={job}
+                    status={selectedApplicantStatus}
+                />
+            )}
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -281,7 +295,7 @@ console.log('job', job)
                                 <td className="px-6 py-4">
                                     <div className="flex items-center space-x-3">
                                         <img
-                                            src={applicant.picturePath || 'https://via.placeholder.com/40'}
+                                            src={applicant.picturePath || AvatarProfile}
                                             alt={applicant.firstname}
                                             className="w-10 h-10 object-cover rounded-full"
                                         />
@@ -306,7 +320,13 @@ console.log('job', job)
                                     </div>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <button className="text-blue-600 hover:text-blue-900">View</button>
+                                    <button
+                                        className="text-blue-600 hover:text-blue-900"
+                                        onClick={() => handleViewApplicant(applicant._id, applicant.status)}
+                                    >
+                                        View
+                                    </button>
+
                                 </td>
                             </tr>
                         ))
