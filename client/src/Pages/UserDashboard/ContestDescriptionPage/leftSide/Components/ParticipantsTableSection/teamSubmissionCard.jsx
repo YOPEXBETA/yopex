@@ -21,9 +21,10 @@ const TeamSubmissionCard = ({ extra, item, isOwner, team, challenge }) => {
     const toggleedit = () => seteditIsOpen((prev) => !prev);
     const togglereview = () => setreviewIsOpen((prev) => !prev);
     const canedit =
-        user?._id === team?.team?.teamLeader &&
+        (user?._id === team?.team?.teamLeader || team?.team?.members?.includes(user?._id)) &&
         challenge?.start &&
         new Date() < new Date(challenge.deadline);
+
     return (
         <div
             onClick={() => {

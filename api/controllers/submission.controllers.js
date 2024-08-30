@@ -119,7 +119,8 @@ const CreateTeamSubmission = async (req, res, next) => {
 
         // Add submission to challenge
         const team = await Team.findById(teamId);
-        const leader = await User.findById(team.teamLeader);
+        console.log('team', teamId)
+        const leader = await User.findById(team?.teamLeader);
         teamChallenge.submissions.push(savedSubmission._id);
         leader.submissions.push(savedSubmission._id);
 

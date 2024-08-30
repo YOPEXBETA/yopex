@@ -33,7 +33,7 @@ const SubmitModal = ({ open, handleClose, setIsSubmitted, challenge, type, team 
     setPlatform("");
     setLink("");
   };
-
+console.log('team', team)
 
   const { user } = useSelector((state) => state.auth);
   const { mutate: submitToChallenge, isLoading: isChallengeLoading } = useSubmitToChallenge(challenge._id);

@@ -20,8 +20,8 @@ const Submission = ({ isOwner, challenge, type }) => {
 
   useEffect(() => {
     if (type === 'teamChallenge' && challenge?.teams) {
-      const userTeam = challenge.teams.find(
-          (teamEntry) => teamEntry.team.teamLeader.toString() === user._id.toString()
+      const userTeam = challenge?.teams?.find((team) =>
+          team?.team?.teamLeader === user?._id || team?.team?.members?.includes(user?._id)
       );
       if (userTeam) {
         setTeam(userTeam);
