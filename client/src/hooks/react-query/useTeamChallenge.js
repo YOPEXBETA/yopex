@@ -370,6 +370,10 @@ export const useSubmitToTeamChallenge = ({ teamChallengeId }) => {
             queryClient.invalidateQueries(["challenges", teamChallengeId]);
             toast.success("You submited to the challenge!");
         },
+        onError: (error) => {
+            const errorMessage = error?.response?.data?.message || "Error submitting the team challenge";
+            toast.error(errorMessage);
+        },
     });
 };
 

@@ -417,7 +417,10 @@ const startTeamChallenge = async (req, res, next) => {
 const unjoinTeamChallenge = async (req, res) => {
     try {
         const { idChallenge, teamId } = req.body;
+
+        console.log("Looking for team with ID:", teamId);
         const team = await Team.findById(teamId);
+        console.log("Team found:", team);
         const challenge = await TeamChallengeModel.findById(idChallenge);
 
         if (!team || !challenge) {

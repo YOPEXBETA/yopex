@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="feat: organization can check the applicant info and decide whether to accept or refuse them">
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: team members can now submit and edit the submission in the team challenge">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/submission.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/submission.controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/shared/Modals/SubmitModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modals/SubmitModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ChallengeDescription/Client.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/teamSubmissionCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/ContestDescriptionPage/leftSide/Components/ParticipantsTableSection/teamSubmissionCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +170,9 @@
       <workItem from="1724843260791" duration="11314000" />
       <workItem from="1724858980569" duration="6000" />
       <workItem from="1724937265458" duration="12759000" />
-      <workItem from="1725029926434" duration="850000" />
+      <workItem from="1725029926434" duration="2104000" />
+      <workItem from="1725038728428" duration="137000" />
+      <workItem from="1725044321946" duration="995000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -518,7 +518,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724950220707</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="fix: team members can now submit and edit the submission in the team challenge">
+      <option name="closed" value="true" />
+      <created>1725030880205</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1725030880205</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +544,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: Submitting as a user to an individuals challenge" />
     <MESSAGE value="feat: managing team members and team challenge start" />
     <MESSAGE value="fix: challenge now is fetched based on type from param" />
     <MESSAGE value="feat: unregister as a team from a challenge" />
@@ -561,6 +568,7 @@
     <MESSAGE value="fix: updated UI for tha organization invitation" />
     <MESSAGE value="feat: organization now can see the details of the job offers they post with the list of applicants" />
     <MESSAGE value="feat: organization can check the applicant info and decide whether to accept or refuse them" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: organization can check the applicant info and decide whether to accept or refuse them" />
+    <MESSAGE value="fix: team members can now submit and edit the submission in the team challenge" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: team members can now submit and edit the submission in the team challenge" />
   </component>
 </project>
