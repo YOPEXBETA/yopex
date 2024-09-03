@@ -94,7 +94,8 @@ const createConversation = async (req, res) => {
 
 const getConversations = async (req, res) => {
   try {
-    
+    console.log('ID50250')
+
     const userId = req.userId;
     
     const conversations = await ConversationModel.find({
@@ -198,8 +199,9 @@ const getConversations = async (req, res) => {
 };
 
 const getConversationById = async (req, res) => {
-  try { 
-    
+  try {
+    console.log('ID250')
+
     const conversationId = new ObjectId(req.params.id);
     const userId = req.userId;
     const conversation = await ConversationModel.findById(conversationId).populate("members", "firstname lastname role picturePath userDescription phoneNumber email")
@@ -212,10 +214,46 @@ const getConversationById = async (req, res) => {
   }
 }
 
+const getConversationByMembers = async (req, res) => {
+  try {
+    const { member1Id, member2Id } = req.query;
+    console.log('ID1', member1Id);
+    console.log('ID2', member2Id);
+
+    if (!member1Id || !member2Id) {
+      return res.status(400).json({ error: "Member IDs are required" });
+    }
+
+    // Find existing conversation
+    let conversation = await ConversationModel.findOne({
+      members: { $all: [member1Id, member2Id] },
+    }).populate("members", "firstname lastname picturePath");
+
+    if (conversation) {
+      return res.status(200).json(conversation);
+    }
+
+    // If no conversation is found, create a new one
+    conversation = new ConversationModel({
+      members: [member1Id, member2Id],
+    });
+
+    await conversation.save();
+
+    // Populate new conversation members
+    await conversation.populate("members", "firstname lastname picturePath").execPopulate();
+
+    res.status(201).json(conversation); // Status 201 indicates creation
+  } catch (error) {
+    console.log(error, "Error");
+    res.status(500).json({ error: error.message });
+  }
+};
 
 
 module.exports = {
   createConversation,
   getConversations,
-  getConversationById
+  getConversationById,
+  getConversationByMembers
 };

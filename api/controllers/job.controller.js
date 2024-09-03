@@ -7,39 +7,56 @@ const { sendEmail } = require("../middlewares/mail.middleware");
 const notificationModel = require("../models/notification.model");
 const main = require("../server");
 
-// companyRoutes.js
-
-const addJob = async (req, res, next) => {
+const addJobOffer = async (req, res, next) => {
   try {
-    const { organizationId, ...jobDetails } = req.body;
-    console.log('job', req.body)
-    if (!organizationId) {
-      return res.status(400).json({ error: "organizationId must be provided" });
+    const { organizationId, userId, ...jobDetails } = req.body;
+
+    if (!organizationId && !userId) {
+      return res.status(400).json({ error: "Either organizationId or userId must be provided" });
     }
 
-    const organization = await Organization.findById(organizationId);
+    let jobOffer;
 
-    if (!organization) {
-      return res.status(400).json({ error: "organization not found" });
+    if (organizationId) {
+      const organization = await Organization.findById(organizationId);
+      if (!organization) {
+        return res.status(400).json({ error: "Organization not found" });
+      }
+
+      jobOffer = new Job({
+        organization: organizationId,
+        ...jobDetails,
+      });
+
+      await jobOffer.save();
+
+      organization.jobs.push(jobOffer._id);
+      await organization.save();
     }
 
-    const jobOffer = new Job({
-      organization: organizationId,
-      ...jobDetails,
-    });
+    if (userId) {
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(400).json({ error: "User not found" });
+      }
 
-    await jobOffer.save();
-    organization.jobs.push(jobOffer._id);
-    await organization.save();
-    res
-      .status(201)
-      .json({ message: "Job offer created successfully", jobOffer });
+      jobOffer = new Job({
+        owner: userId,
+        ...jobDetails,
+      });
+
+      await jobOffer.save();
+
+      user.jobs.push(jobOffer._id);
+      await user.save();
+    }
+
+    res.status(201).json({ message: "Job offer created successfully", jobOffer });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: `Failed to create job offer: ${error.message}` });
+    res.status(500).json({ error: `Failed to create job offer: ${error.message}` });
   }
 };
+
 
 const getAllJobs = async (req, res) => {
   try {
@@ -60,6 +77,7 @@ const getAllJobs = async (req, res) => {
     const jobs = await Job.find(filters)
       .select("-acceptedAppliers")
       .populate("organization", "organizationName organizationLogo")
+        .populate("owner", "firstname lastname picturePath")
       .populate("skills");
 
     return res.status(200).json(jobs);
@@ -89,11 +107,10 @@ const updateJob = async (req, res, next) => {
   }
 };
 
-const geJobById = async (req, res, next) => {
+const getJobByOrganizationId = async (req, res, next) => {
   try {
     const organizationId = req.params.organizationId;
     const q = req.query;
-    console.log('Query params:', q);
 
     const organization = await Organization.findOne({ _id: organizationId });
 
@@ -115,7 +132,6 @@ const geJobById = async (req, res, next) => {
       organization: organizationId,
     };
 
-    console.log('Filters:', filters); // Debugging line
 
     const jobOffers = await Job.find(filters)
         .populate("organization", "organizationName organizationLogo _id")
@@ -183,6 +199,10 @@ const applyJob = async (req, res) => {
 
     const user = await User.findById(req.params.userId).exec();
     if (!user) return res.status(400).json("User not found");
+
+    if (job.appliersNumber && job.appliers.length >= job.appliersNumber) {
+      return res.status(400).json("The maximum number of appliers has been reached for this job");
+    }
 
     if (job.appliers.includes(req.params.userId))
       return res.status(400).json("You have already applied for this job");
@@ -349,8 +369,66 @@ const getAcceptedAppliers = async (req, res) => {
   }
 };
 
+const getJobById = async (req, res) => {
+  try {
+    const jobId = req.params.jobId;
+    const job = await Job.findById(jobId)
+        .populate("organization", "organizationName organizationLogo") // Populate organization details
+        .populate("owner", "firstname lastname picturePath") // Populate owner details
+        .populate("skills"); // Populate skills
+
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    return res.status(200).json(job);
+  } catch (error) {
+    console.error("Error fetching job by ID:", error);
+    return res.status(500).json({ error: `Failed to retrieve job: ${error.message}` });
+  }
+};
+const getAppliersWithStatus = async (req, res) => {
+  try {
+    const jobId = req.params.jobId;
+
+    // Fetch the job and populate appliers
+    const job = await Job.findById(jobId)
+        .populate({
+          path: 'appliers',
+          select: 'firstname lastname email picturePath skills',
+          populate: {
+            path: 'skills',
+            select: 'name',
+          },
+        })
+        .select('appliers acceptedAppliers')
+        .lean()
+        .exec();
+
+    if (!job) return res.status(404).json({ message: "Job not found" });
+
+    // Map appliers to include their status
+    const appliersWithStatus = job.appliers.map(applier => {
+      // Check if the applier is in the acceptedAppliers list
+      const isAccepted = job.acceptedAppliers.some(
+          accepted => accepted.user.toString() === applier._id.toString()
+      );
+
+      return {
+        ...applier,
+        status: isAccepted ? 'Accepted' : 'Pending',
+      };
+    });
+
+    return res.status(200).json(appliersWithStatus);
+  } catch (error) {
+    console.error("Error fetching appliers with status:", error);
+    return res.status(500).json({ error: `Failed to retrieve appliers: ${error.message}` });
+  }
+};
+
 module.exports = {
-  addJob,
+  addJobOffer,
   getAllJobs,
   updateJob,
   deleteJob,
@@ -361,5 +439,7 @@ module.exports = {
   applyJob,
   getAcceptedAppliers,
   getSortedAppliers,
-  geJobById,
+  getJobByOrganizationId,
+  getJobById,
+  getAppliersWithStatus
 };

@@ -224,7 +224,8 @@ const getChallengeById = async (req, res) => {
       .populate("organization")
       .populate("owner", "firstname lastname picturePath _id")
       .populate("skills", "name _id")
-      .populate({
+        .populate("categories", "name _id")
+        .populate({
         path: "banned",
         select: "firstname lastname picturePath _id",
       })
@@ -348,7 +349,7 @@ const getAllChallenges = async (req, res) => {
 
   try {
     const ChallengePosts = await ChallengeModel.find(filters)
-      .populate("company")
+      .populate("organization")
       .populate("skills")
       .populate("categories");
 
@@ -427,7 +428,7 @@ const startChallenge = async (req, res, next) => {
     const user = await UserModel.findById(userId);
     if (
       challenge.owner?.toString() !== userId.toString() &&
-      !user.companies.includes(challenge.company.toString())
+      !user.organizations.includes(challenge.organization.toString())
     ) {
       return res.status(400).json({ message: "Not authorized" });
     }
@@ -524,7 +525,7 @@ const getChallengeSubmission = async (req, res) => {
     }
     if (
       challenge.owner?.toString() !== userId.toString() &&
-      !user.companies.includes(challenge.company?.toString())
+      !user.organizations.includes(challenge.organization?.toString())
     ) {
       const submission = await submissionModel
         .find({

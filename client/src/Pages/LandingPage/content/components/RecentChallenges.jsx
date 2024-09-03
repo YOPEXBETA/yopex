@@ -6,7 +6,6 @@ import { useFindChallenges } from "../../../../hooks/react-query/useChallenges";
 const RecentChallenges = () => {
   const { data: challenges, isLoading } = useFindChallenges();
 
-  // Sort challenges by the newest ones first
   const sortedChallenges = challenges
     ? challenges
         .slice(0, 6)

@@ -10,7 +10,6 @@ import { IoLinkSharp } from "react-icons/io5";
 
 const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
   const { user: currentUser } = useSelector((state) => state.auth);
-
   const [isOpen, setIsOpen] = useState(false);
   const [reviewisOpen, setreviewIsOpen] = useState(false);
   const [editisOpen, seteditIsOpen] = useState(false);
@@ -100,9 +99,10 @@ const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
             open={reviewisOpen}
             participant={user}
             handleClose={togglereview}
+            type="challenge"
             companyId={
-              challenge?.company?._id
-                ? challenge?.company?._id
+              challenge?.organization?._id
+                ? challenge?.organization?._id
                 : challenge?.owner?._id
             }
           />
@@ -110,6 +110,9 @@ const SubmissionCard = ({ extra, item, isOwner, user, challenge }) => {
             open={editisOpen}
             handleClose={toggleedit}
             participant={user}
+            submission={item}
+            type="challenge"
+            challenge={challenge}
           />
         </>
       }

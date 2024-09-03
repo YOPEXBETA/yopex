@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-export const useChallengeById = (challengeId) => {
+export const useChallengeById = (challengeId, entityType) => {
   return useQuery({
     queryKey: ["challenges", challengeId],
     queryFn: async () => {
@@ -14,6 +14,7 @@ export const useChallengeById = (challengeId) => {
       );
       return data;
     },
+    enabled: !!challengeId && entityType === "challenge",
   });
 };
 
@@ -26,6 +27,8 @@ export const useEditChallenge = (challengeId) => {
     onSuccess: () => {
       toast.success("Challenge edited successfully");
       queryClient.invalidateQueries(["challenges"]);
+      queryClient.invalidateQueries(["organizationChallenges"]);
+
     },
   });
 };
@@ -339,15 +342,14 @@ export const useUnBanUser = () => {
   });
 };
 
-export const useGetChallengeSubmissions = (challengeId) => {
+export const useGetChallengeSubmissions = (challengeId, type) => {
   return useQuery({
     queryKey: ["submissions", challengeId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `${url}/challenge/getChallengeSubmission/${challengeId}`
-      );
+      const { data } = await axios.get(`${url}/challenge/getChallengeSubmission/${challengeId}`);
       return data;
     },
+    enabled: !!challengeId && type === "challenge",
   });
 };
 

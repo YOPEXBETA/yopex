@@ -38,6 +38,14 @@ const initializeSocketIO = (httpServer) => {
     socket.on("sendMessageinContest", (data) => {
       io.to(data.conversationId).emit("getMessageinContest", data);
     });
+
+    socket.on("sendTeamChallengeMessage", (data) => {
+      io.to(data.conversationId).emit("getTeamChallengeMessage", data);
+    });
+
+    socket.on("sendTeamMessage", (data) => {
+      io.to(data.conversationId).emit("getTeamMessage", data);
+    });
   });
   return sendNotification;
 };

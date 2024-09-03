@@ -1,9 +1,10 @@
 const reviewModel = require("../models/Review.model");
 const userModel = require("../models/user.model");
-
+const TeamChallengeModel = require("../models/TeamChallenge.model");
 const challengeModel = require("../models/Challenge.model");
-const companyModel = require("../models/Organization.model");
+const organizationModel = require("../models/Organization.model");
 const ObjectId = require("mongoose").Types.ObjectId;
+const Team = require("../models/team.model");
 
 const createReview = async (req, res) => {
   try {
@@ -23,7 +24,7 @@ const createReview = async (req, res) => {
     }
 
     const newReview = new reviewModel({
-      companyId: req.body.companyId,
+      organizationId: req.body.organizationId,
       userId: req.body.userId,
       description: req.body.description,
       star: req.body.star,
@@ -50,10 +51,10 @@ const createReview = async (req, res) => {
 
     await challenge.save();
 
-    const company = await companyModel.findById(req.body.companyId);
-    if (!company) {
-      newReview.companyId = null;
-      newReview.challengeOwnerId = req.body.companyId;
+    const organization = await organizationModel.findById(req.body.organizationId);
+    if (!organization) {
+      newReview.organizationId = null;
+      newReview.challengeOwnerId = req.body.organizationId;
     }
 
     const savedReview = await newReview.save();
@@ -89,9 +90,9 @@ const getReviews = async (req, res) => {
         select: "firstname lastname picturePath",
       })
       .populate({
-        path: "companyId",
-        model: "Company",
-        select: "companyName companyLogo",
+        path: "organizationId",
+        model: "Organization",
+        select: "organizationName organizationLogo",
       })
       .populate({ path: "challengeId", model: "Challenge", select: "title" });
 
@@ -136,9 +137,76 @@ const getReviewsByChallengeUser = async (req, res) => {
     return res.status(500).json(error);
   }
 };
+
+const createTeamReview = async (req, res) => {
+  try {
+    const { teamChallengeId, teamId, star, description } = req.body;
+
+    if (star > 10 || star < 1) {
+      return res.status(400).json({ message: "Star value must be between 1 and 10" });
+    }
+
+    const existingReview = await reviewModel.findOne({
+      teamId,
+      teamChallengeId,
+    });
+
+    if (existingReview) {
+      return res.status(400).json({ message: "Review for this team already exists" });
+    }
+
+    // Create a new review
+    const newReview = new reviewModel({
+      teamId,
+      teamChallengeId,
+      description,
+      star,
+      challengeOwnerId: req.body.challengeOwnerId,
+    });
+
+    const teamChallenge = await TeamChallengeModel.findById(teamChallengeId);
+    if (!teamChallenge) {
+      return res.status(404).json({ message: "Team challenge not found" });
+    }
+
+    const team = teamChallenge.teams.find(
+        (teamEntry) => teamEntry.team.toString() === teamId
+    );
+
+    if (!team) {
+      return res.status(404).json({ message: "Team not found in challenge" });
+    }
+    const currentTeam =await Team.findById(team.team)
+    for (const member of currentTeam?.members) {
+      const memberUser = await userModel.findById(member);
+      if (memberUser) {
+        memberUser.reviews.push(newReview._id);
+        memberUser.score += star * 10;
+        await memberUser.save();
+      }
+    }
+
+    const teamLeader = await userModel.findById(currentTeam?.teamLeader);
+    if (teamLeader) {
+      teamLeader.reviews.push(newReview._id);
+      teamLeader.score += star * 10;
+      await teamLeader.save();
+    }
+
+    const savedReview = await newReview.save();
+
+    return res.status(200).json(savedReview);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+};
+
+
 module.exports = {
   createReview,
   getReviews,
   deleteReview,
   getReviewsByChallengeUser,
+  createTeamReview
 };

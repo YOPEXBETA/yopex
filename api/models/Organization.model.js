@@ -36,6 +36,15 @@ const organizationSchema = new mongoose.Schema(
             ],
             default: [],
         },
+        teamChallenges: {
+            type: [
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "TeamChallenge",
+                },
+            ],
+            default: [],
+        },
         organizationBalance: { type: Number, default: 0.0 },
         dateOfFoundation: { type: Date },
         notificationsOrganization: [

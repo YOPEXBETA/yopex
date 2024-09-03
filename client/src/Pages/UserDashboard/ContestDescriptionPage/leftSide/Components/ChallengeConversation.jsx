@@ -108,8 +108,8 @@ const ChallengeConversation = ({ conversationId, id }) => {
                               alt="image"
                               className="h-11 w-11 rounded-full bg-green-500"
                               src={
-                                message.sender.companyLogo
-                                  ? message.sender.companyLogo
+                                message.sender.organizationLogo
+                                  ? message.sender.organizationLogo
                                   : message.sender.picturePath
                                   ? message.sender.picturePath
                                   : ""

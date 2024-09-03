@@ -8,6 +8,14 @@ import challengeBanner from "../../assets/images/challengeBanner.jpg";
 const NewChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
+  const { currentOrganization } = useSelector(state => state.organization);
+
+  const currentWorkspace = user?.currentWorkspace?.label
+
+
+  const baseUrl = currentWorkspace === "Organization"
+      ? `/organization/${currentOrganization?._id}/challenges/challengeDetails/`
+      : `/challenges/challengeDetails/`;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -35,31 +43,33 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
     <div>
       <Card extra={`p-4 h-full ${extra}`}>
         <Link
-          to={
-            challenge ? `/challenges/challengeDetails/${challenge?._id}` : "#"
-          }
+            to={
+              challenge
+                  ? `${baseUrl}${challenge._id}?type=challenge`
+                  : "#"
+            }
         >
           <div className="flex flex-col gap-4">
             <div className="flex justify-between">
               <div className="flex items-center gap-4">
                 <img
                   src={
-                    challenge?.company?.companyLogo
-                      ? challenge?.company?.companyLogo
+                    challenge?.organization?.organizationLogo
+                      ? challenge?.organization?.organizationLogo
                       : challengeBanner
                   }
                   alt="Icon"
                   className="w-16 h-16 rounded-lg object-cover border hidden md:block lg:block"
                 />
                 <p className="mt-1 font-medium dark:text-gray-400 md:mt-2">
-                  {challenge.company?.companyName}
+                  {challenge.organization?.organizationName}
                 </p>
               </div>
               <div className="flex items-center justify-start gap-2">
-                {(user?.companies?.includes(challenge?.company?._id) ||
+                {(user?.organizations?.includes(challenge?.organization?._id) ||
                   challenge?.owner === user?._id) && (
                   <div onClick={(e) => e.preventDefault()}>
-                    <ChallengeMenuIcon challenge={challenge} />
+                    <ChallengeMenuIcon challenge={challenge} type="Challenge"/>
                   </div>
                 )}
               </div>

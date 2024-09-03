@@ -2,10 +2,9 @@ const express = require("express");
 const jobRouter = express.Router();
 
 const {
-  addJob,
+  addJobOffer,
   getAllJobs,
   updateJob,
-  geJobById,
   deleteJob,
   getByUserId,
   applyJob,
@@ -13,7 +12,7 @@ const {
   getAppliers,
   acceptApplier,
   getAcceptedAppliers,
-  getSortedAppliers,
+  getSortedAppliers, getJobByOrganizationId, getJobById, getAppliersWithStatus,
 } = require("../controllers/job.controller");
 
 //imported MiddleWare
@@ -21,10 +20,12 @@ const {
   authenticateToken,
 } = require("../middlewares/authenticateToken.middleware");
 
-jobRouter.post("/add", addJob);
+jobRouter.post("/add", addJobOffer);
 jobRouter.get("/all", getAllJobs);
 jobRouter.put("/update/:id", authenticateToken, updateJob);
-jobRouter.get("/:organizationId", authenticateToken, geJobById);
+jobRouter.get("/:organizationId", authenticateToken, getJobByOrganizationId);
+jobRouter.get("/getJobById/:jobId", authenticateToken, getJobById);
+jobRouter.get('/appliersWithStatus/:jobId', getAppliersWithStatus);
 jobRouter.delete("/:id", authenticateToken, deleteJob);
 jobRouter.get("/user/:id", authenticateToken, getByUserId);
 jobRouter.put("/jobs/:jobId/apply/:userId", applyJob);

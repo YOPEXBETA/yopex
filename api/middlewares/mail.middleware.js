@@ -4,13 +4,13 @@ async function sendEmail(userEmail, message) {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "test@gmail.com",
-      pass: "password",
+      user: "bahaeddine170@gmail.com",
+      pass: "tuit gzjd egmq atwx",
     },
   });
 
   let mailOptions = {
-    from: "test@gmail.com", // replace with your email address
+    from: "bahaeddine170@gmail.com", // replace with your email address
     to: userEmail,
     subject: "Message from your app!",
     text: message,

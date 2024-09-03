@@ -75,13 +75,12 @@ export const useOfferTypes = () => {
 
 
 
-export const useCreateJob = (user) => {
+export const useCreateJob = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ organizationId, JobData }) => {
-      console.log('jobdata', JobData)
-      await axios.post(`${url}/job/add`, { organizationId, ...JobData }, {});
+    mutationFn: async ({ organizationId, userId, JobData }) => {
+      await axios.post(`${url}/job/add`, { organizationId, userId, ...JobData }, {});
     },
     onSuccess: () => {
       toast.success("Job added successfully");
@@ -162,13 +161,6 @@ export const useAcceptApplier = (jobId) => {
       await axios.put(`${url}/job/jobs/${jobId}/appliers/${userId}/accept`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["jobs"] });
-      queryClient.invalidateQueries(["appliers"]);
-      queryClient.invalidateQueries({
-        queryKey: ["accepted/appliers"],
-      });
-    },
-    onSuccess: () => {
       toast.success("Applier accepted successfully");
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
       queryClient.invalidateQueries(["appliers"]);
@@ -224,6 +216,34 @@ export const useEditJob = (jobId) => {
 
     onError: (error) => {
       toast.error(`can't update a job ${error.response.data.message}`);
+    },
+  });
+};
+
+export const useJobByJobId = (jobId) => {
+  return useQuery({
+    queryKey: ["jobById", jobId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/job/getJobById/${jobId}`);
+      return data;
+    },
+    enabled: !!jobId, // Only run the query if jobId is provided
+    onError: (error) => {
+      toast.error(`Error fetching job: ${error.response?.data?.message || "Unknown error"}`);
+    },
+  });
+};
+
+export const useAppliersWithStatus = (jobId) => {
+  return useQuery({
+    queryKey: ["appliersWithStatus", jobId],
+    queryFn: async () => {
+      const { data } = await axios.get(`${url}/job/appliersWithStatus/${jobId}`);
+      return data;
+    },
+    enabled: !!jobId, // Only fetch if jobId is provided
+    onError: (error) => {
+      toast.error(`${error.response.data.message}`);
     },
   });
 };

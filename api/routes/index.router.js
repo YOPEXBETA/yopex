@@ -25,6 +25,9 @@ const levelRouter = require("./level.router");
 const roleRouter = require("./OrganizationRole.router");
 const sectorRouter = require("./sector.router");
 const OccupationRouter = require("./occupation.router");
+const TeamChallengeRouter = require("./teamChallenge.router");
+const TeamRouter = require("./team.router");
+const TeamChallengeConversationRouter = require("./TeamChallengeConversation.router");
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -50,6 +53,9 @@ router.use("/level", levelRouter);
 router.use("/oganizationRole", roleRouter);
 router.use("/sector", sectorRouter);
 router.use("/occupation", OccupationRouter);
+router.use("/teamChallenge", TeamChallengeRouter)
+router.use("/team", TeamRouter)
+router.use("/teamChallengeConversation", TeamChallengeConversationRouter)
 
 
 

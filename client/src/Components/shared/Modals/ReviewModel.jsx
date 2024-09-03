@@ -3,17 +3,39 @@ import { useAddReviews } from "../../../hooks/react-query/useReviews";
 import { useParams } from "react-router-dom";
 import Slider from "../../slider/Slider";
 import { FaStar } from "react-icons/fa";
+import {useAddTeamReview} from "../../../hooks/react-query/useTeamChallenge";
 
-export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
+export const ReviewModel = ({ open, participant, handleClose, companyId, type, team }) => {
   const [description, setDescription] = useState("");
   const { id: challengeId } = useParams();
   const [rating, setRating] = useState(1);
-  const { mutate, isLoading } = useAddReviews(participant?._id);
-
+  const { mutate:addReview, isLoading } = useAddReviews(participant?._id);
+  const { mutate:addTeamReview, isTeamLoading } = useAddTeamReview(participant?._id);
+console.log('team', team)
   const handleStarClick = (e) => {
     console.log(e);
     setRating(e.target.value);
   };
+  const handleSubmit = () => {
+    if (type === "challenge") {
+      addReview({
+        description: description,
+        star: rating / 10,
+        companyId: companyId,
+        userId: participant?._id,
+        challengeId: challengeId,
+      });
+    } else if (type === "teamChallenge") {
+      addTeamReview({
+        description: description,
+        star: rating / 10,
+        companyId: companyId,
+        teamChallengeId: challengeId,
+        teamId: team?._id,
+      });
+    }
+  };
+
 
   return (
     <div
@@ -90,17 +112,9 @@ export const ReviewModel = ({ open, participant, handleClose, companyId }) => {
             <div className="flex items-center pt-3 border-t border-gray-200 rounded-b dark:border-gray-600">
               <button
                 type="button"
-                onClick={() => {
-                  mutate({
-                    description,
-                    star: rating / 10,
-                    companyId,
-                    userId: participant._id,
-                    challengeId,
-                  });
-                }}
+                onClick={handleSubmit}
                 className="text-white bg-green-400 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  "
-                disabled={isLoading}
+                disabled={isLoading || isTeamLoading}
               >
                 send review
               </button>

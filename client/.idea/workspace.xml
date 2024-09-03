@@ -4,27 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: general fixes and tweaks">
-      <change afterPath="$PROJECT_DIR$/src/Components/Cards/ProfessionCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/MenuIcons/ProfessionMenuItem.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Modals/EditProfessionModal.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/icons/ProfessionIcon.jsx" afterDir="false" />
+    <list default="true" id="5c7f3f28-12c2-4fe4-8a51-8fcf2ded358f" name="Changes" comment="fix: team members can now submit and edit the submission in the team challenge">
       <change beforePath="$PROJECT_DIR$/../api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/controllers/user.controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/user.controllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/models/user.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../api/controllers/teamChallenge.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Cards/AdditionalUserInfoCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Cards/AdditionalUserInfoCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationLinks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layouts/Organization Layout/Components/SideBar/organizationLinks.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/AdminDashboard/CompanyPage/CompanyPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AdminDashboard/CompanyPage/CompanyPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/ApplicantsPage/ApplicantsPage.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/OrganizationProfile/components/OrganizationPageContent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/OrganizationProfile/components/OrganizationPageContent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/Components/DangerZone.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/OrganizationPages/SettingsPage/Components/WorkspaceInformation/Components/DangerZone.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/CreateCompanyPage/Components/InviteMembersStep.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserDashboard/HomePage/components/ScoreLeaderboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserDashboard/HomePage/components/ScoreLeaderboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useUsers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/AdminRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AdminRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/react-query/useTeamChallenge.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="YOPEX-INTERNSHIP-REPO" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -68,8 +57,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Baha-Eddine&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/organization-challenge&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/bahae/OneDrive/Documents/GitHub/YopexInternshipproject/client/src/Pages/OrganizationPages/ChallengesPage/Components&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -81,7 +70,14 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\ChallengesPage\Components" />
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\UserDashboard\BrowsePage" />
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src" />
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\ApplicantsPage" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\OrganizationPages\DashboardPage" />
       <recent name="C:\Users\bahae\OneDrive\Documents\GitHub\YopexInternshipproject\client\src\Pages\AdminDashboard" />
@@ -151,6 +147,32 @@
       <workItem from="1722598957498" duration="12356000" />
       <workItem from="1722941185618" duration="11946000" />
       <workItem from="1722956740084" duration="1175000" />
+      <workItem from="1723198531879" duration="8998000" />
+      <workItem from="1723383863830" duration="7886000" />
+      <workItem from="1723459646835" duration="19757000" />
+      <workItem from="1723543087393" duration="12812000" />
+      <workItem from="1723638475497" duration="12098000" />
+      <workItem from="1723708268849" duration="2593000" />
+      <workItem from="1723720943652" duration="3109000" />
+      <workItem from="1723741699859" duration="4832000" />
+      <workItem from="1723805231820" duration="5333000" />
+      <workItem from="1724067453016" duration="12039000" />
+      <workItem from="1724088366425" duration="855000" />
+      <workItem from="1724153827890" duration="15756000" />
+      <workItem from="1724243659259" duration="15002000" />
+      <workItem from="1724332127209" duration="24776000" />
+      <workItem from="1724416037023" duration="3496000" />
+      <workItem from="1724423084253" duration="2645000" />
+      <workItem from="1724675764417" duration="7947000" />
+      <workItem from="1724758946061" duration="5729000" />
+      <workItem from="1724800127263" duration="52000" />
+      <workItem from="1724800197991" duration="25000" />
+      <workItem from="1724843260791" duration="11314000" />
+      <workItem from="1724858980569" duration="6000" />
+      <workItem from="1724937265458" duration="12759000" />
+      <workItem from="1725029926434" duration="2104000" />
+      <workItem from="1725038728428" duration="137000" />
+      <workItem from="1725044321946" duration="995000" />
     </task>
     <task id="LOCAL-00001" summary="Organization Creation with the stepper">
       <option name="closed" value="true" />
@@ -264,7 +286,247 @@
       <option name="project" value="LOCAL" />
       <updated>1722957842427</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="feat: adding a team challenge as an organization">
+      <option name="closed" value="true" />
+      <created>1723204658560</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1723204658561</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: fetching team challenges and registering as a team">
+      <option name="closed" value="true" />
+      <created>1723491344190</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1723491344190</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: Sending , accepting and refusing team invitations for a team challenge">
+      <option name="closed" value="true" />
+      <created>1723551491993</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1723551491993</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: Submitting as a user to an individuals challenge">
+      <option name="closed" value="true" />
+      <created>1723655919962</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1723655919962</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: managing team members and team challenge start">
+      <option name="closed" value="true" />
+      <created>1723655974638</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1723655974638</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fix: challenge now is fetched based on type from param">
+      <option name="closed" value="true" />
+      <created>1723710844929</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1723710844929</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: unregister as a team from a challenge">
+      <option name="closed" value="true" />
+      <created>1723723555313</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1723723555314</updated>
+    </task>
+    <task id="LOCAL-00022" summary="feat: Terms and Conditions check in the submittion form">
+      <option name="closed" value="true" />
+      <created>1723805383854</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1723805383854</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat: Team can edit challenge submission">
+      <option name="closed" value="true" />
+      <created>1724078492805</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1724078492805</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: team challenge owner can add review to the whole team">
+      <option name="closed" value="true" />
+      <created>1724080803265</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1724080803265</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fix: the review attribute for the admin is fixed">
+      <option name="closed" value="true" />
+      <created>1724171147358</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1724171147358</updated>
+    </task>
+    <task id="LOCAL-00026" summary="feat: choosing the winning team in a team challenge">
+      <option name="closed" value="true" />
+      <created>1724171197509</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1724171197509</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fix: fixed the workspace switch to correctly show the current workspace">
+      <option name="closed" value="true" />
+      <created>1724171266609</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1724171266609</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix: fixed old bugs and issues">
+      <option name="closed" value="true" />
+      <created>1724171291445</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1724171291445</updated>
+    </task>
+    <task id="LOCAL-00029" summary="fix: check if the challange input submission not null">
+      <option name="closed" value="true" />
+      <created>1724171984153</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1724171984153</updated>
+    </task>
+    <task id="LOCAL-00030" summary="feat: Chat group for all participants of the team challenge">
+      <option name="closed" value="true" />
+      <created>1724341391055</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1724341391055</updated>
+    </task>
+    <task id="LOCAL-00031" summary="feat: users can now add Emojis to their messages">
+      <option name="closed" value="true" />
+      <created>1724343842206</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1724343842206</updated>
+    </task>
+    <task id="LOCAL-00032" summary="feat: Team members can chat together in a private channel">
+      <option name="closed" value="true" />
+      <created>1724351329490</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1724351329490</updated>
+    </task>
+    <task id="LOCAL-00033" summary="feat: Members can now chat is a separate channel with the moderator of the challenge">
+      <option name="closed" value="true" />
+      <created>1724366226899</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1724366226899</updated>
+    </task>
+    <task id="LOCAL-00034" summary="feat: Mail notifications related to challenges">
+      <option name="closed" value="true" />
+      <created>1724417339026</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1724417339026</updated>
+    </task>
+    <task id="LOCAL-00035" summary="feat: updated UI for the challenge filters">
+      <option name="closed" value="true" />
+      <created>1724759973527</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1724759973527</updated>
+    </task>
+    <task id="LOCAL-00036" summary="feat: updated UI for the challenge filters">
+      <option name="closed" value="true" />
+      <created>1724760006961</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1724760006961</updated>
+    </task>
+    <task id="LOCAL-00037" summary="feat: updated UI for the team challenge chat">
+      <option name="closed" value="true" />
+      <created>1724760028346</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1724760028346</updated>
+    </task>
+    <task id="LOCAL-00038" summary="feat: updated UI for the team challenge multi steps form">
+      <option name="closed" value="true" />
+      <created>1724760071472</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1724760071472</updated>
+    </task>
+    <task id="LOCAL-00039" summary="fix: the submissions are now unique">
+      <option name="closed" value="true" />
+      <created>1724760098817</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1724760098817</updated>
+    </task>
+    <task id="LOCAL-00040" summary="feat: create and manage job offers as an individual">
+      <option name="closed" value="true" />
+      <created>1724768274332</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1724768274332</updated>
+    </task>
+    <task id="LOCAL-00041" summary="fix: updated UI for tha organization invitation">
+      <option name="closed" value="true" />
+      <created>1724845368101</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1724845368101</updated>
+    </task>
+    <task id="LOCAL-00042" summary="feat: organization now can see the details of the job offers they post with the list of applicants">
+      <option name="closed" value="true" />
+      <created>1724854769261</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1724854769261</updated>
+    </task>
+    <task id="LOCAL-00043" summary="feat: organization can check the applicant info and decide whether to accept or refuse them">
+      <option name="closed" value="true" />
+      <created>1724950220706</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1724950220707</updated>
+    </task>
+    <task id="LOCAL-00044" summary="fix: team members can now submit and edit the submission in the team challenge">
+      <option name="closed" value="true" />
+      <created>1725030880205</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1725030880205</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,20 +544,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Organization Creation with the stepper" />
-    <MESSAGE value="Updated the organization Form" />
-    <MESSAGE value="Setting tab for the organization (update organization info, invite and manage members, update social links)" />
-    <MESSAGE value="fix: workspace switch to show the current user&#10;feat: delete organization logic based on member role&#10;feat: add buttons in sidebar to post a challenge and a job offer&#10;fix: fetch correct image for notifications&#10;feat: add refuse invitation to organization logic" />
-    <MESSAGE value="feat: added new logic for unread notifications" />
-    <MESSAGE value="feat: added new Occupation CRUD to admin and integrated it in user profile" />
-    <MESSAGE value="feat: added filters to the discover organizations" />
-    <MESSAGE value="feat: added filters to the discover talents" />
-    <MESSAGE value="feat: create a challenge as an organization" />
-    <MESSAGE value="feat: created list of challenges related to the organization" />
-    <MESSAGE value="feat: created list of jobs related to the organization and the applicants" />
-    <MESSAGE value="feat: added the useDebounce hook to the organization lists" />
-    <MESSAGE value="feat: added stats and analytics to the organization workspace" />
-    <MESSAGE value="fix: general fixes and tweaks" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: general fixes and tweaks" />
+    <MESSAGE value="feat: managing team members and team challenge start" />
+    <MESSAGE value="fix: challenge now is fetched based on type from param" />
+    <MESSAGE value="feat: unregister as a team from a challenge" />
+    <MESSAGE value="feat: Terms and Conditions check in the submittion form" />
+    <MESSAGE value="feat: Team can edit challenge submission" />
+    <MESSAGE value="feat: team challenge owner can add review to the whole team" />
+    <MESSAGE value="fix: the review attribute for the admin is fixed" />
+    <MESSAGE value="feat: choosing the winning team in a team challenge" />
+    <MESSAGE value="fix: fixed the workspace switch to correctly show the current workspace" />
+    <MESSAGE value="fix: fixed old bugs and issues" />
+    <MESSAGE value="fix: check if the challange input submission not null" />
+    <MESSAGE value="feat: Chat group for all participants of the team challenge" />
+    <MESSAGE value="feat: users can now add Emojis to their messages" />
+    <MESSAGE value="feat: Team members can chat together in a private channel" />
+    <MESSAGE value="feat: Members can now chat is a separate channel with the moderator of the challenge" />
+    <MESSAGE value="feat: Mail notifications related to challenges" />
+    <MESSAGE value="feat: updated UI for the challenge filters" />
+    <MESSAGE value="feat: updated UI for the team challenge chat" />
+    <MESSAGE value="feat: updated UI for the team challenge multi steps form" />
+    <MESSAGE value="fix: the submissions are now unique" />
+    <MESSAGE value="feat: create and manage job offers as an individual" />
+    <MESSAGE value="fix: updated UI for tha organization invitation" />
+    <MESSAGE value="feat: organization now can see the details of the job offers they post with the list of applicants" />
+    <MESSAGE value="feat: organization can check the applicant info and decide whether to accept or refuse them" />
+    <MESSAGE value="fix: team members can now submit and edit the submission in the team challenge" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: team members can now submit and edit the submission in the team challenge" />
   </component>
 </project>

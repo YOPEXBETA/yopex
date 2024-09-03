@@ -33,6 +33,9 @@ const OrganizationProfile = Loadable(
 const NotFoundPage = Loadable(
     lazy(() => import("../Pages/UserDashboard/NotFoundPage/NotFoundPage"))
 );
+const ContestDetails = Loadable(
+    lazy(() => import("../Pages/UserDashboard/ContestDescriptionPage/index"))
+);
 
 // ==============================|| MAIN ORGANIZATION ROUTING ||============================== //
 
@@ -57,7 +60,19 @@ const OrganizationRoutes = {
             name: "Challenges",
             path: "challenges",
             icon: <ContestIcon className="h-6 w-6" />,
-            element: <Challenges />,
+            children: [
+                {
+                    index: true,
+                    element: <Challenges />,
+                    customWidth: true,
+                },
+                {
+                    path: "challengeDetails/:id",
+                    element: <ContestDetails />,
+                    hideInSidebar: true,
+                    customWidth: false,
+                },
+            ],
         },
         {
             name: "Jobs",

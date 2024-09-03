@@ -127,7 +127,7 @@ const ChallengeWinner = async (req, res) => {
     const requestOwner = await userModel.findById(owner);
     if (
       Challenge.owner?.toString() !== owner.toString() &&
-      !requestOwner.companies.includes(Challenge.company.toString())
+      !requestOwner.organizations.includes(Challenge.organization.toString())
     ) {
       return res.status(400).json({ message: "Not authorized" });
     }

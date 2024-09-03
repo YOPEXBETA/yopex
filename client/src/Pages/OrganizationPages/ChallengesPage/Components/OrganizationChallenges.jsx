@@ -16,8 +16,8 @@ const OrganizationChallenges = ({ challenges, isLoading }) => {
                 <div>
                     <LoadingSpinner />
                 </div>
-            ) : sortedChallenges.length > 0 ? (
-                sortedChallenges.map((item) => (
+            ) : sortedChallenges?.length > 0 ? (
+                sortedChallenges?.map((item) => (
                     <div key={item._id}>
                         <NewChallengeCard challenge={item} />
                     </div>

@@ -5,9 +5,7 @@ import Card from "../../../../../../Components/Cards";
 import Tag from "../../../../../../Components/tags/Index";
 import YouTube from "react-youtube";
 
-const TasksDescription = () => {
-  const { id: challengeId } = useParams();
-  const { data: challenge } = useChallengeById(challengeId);
+const TasksDescription = ({challenge, type}) => {
   const opts = {
     width: "100%",
     height: "450",
@@ -45,15 +43,34 @@ const TasksDescription = () => {
               ) : null}
             </div>
             <div
-              className="text-md dark:text-white mb-4"
+              className="text-md dark:text-white mb-4 break-words overflow-ellipsis overflow-hidden"
               dangerouslySetInnerHTML={{ __html: challenge?.description }}
             />
           </div>
           <hr className="my-4" />
           <div className="mb-4">
+            <div className="mb-4 flex gap-2">
+            <strong>Objective: </strong>
+              <h1>{challenge.objective}</h1>
+            </div>
+            { challenge.paid && (
+                <div className="mb-4 flex gap-2">
+                  <strong>Price: </strong>
+                  <h1>{challenge.price}</h1>
+                </div>
+            )}
+            <div className="mb-4">
+              <strong>Skills: </strong>
+              <div className="flex flex-wrap gap-2">
+                {challenge.skills.map((skill, index) => (
+                    <Tag key={index}>{skill.name}</Tag>
+                ))}
+              </div>
+            </div>
+            <strong>Categories: </strong>
             <div className="flex flex-wrap gap-2">
-              {challenge.skills.map((skill, index) => (
-                <Tag key={index}>{skill.name}</Tag>
+              {challenge.categories.map((category, index) => (
+                  <Tag key={index}>{category.name}</Tag>
               ))}
             </div>
           </div>

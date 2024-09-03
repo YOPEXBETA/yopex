@@ -31,8 +31,7 @@ const WorkCard = ({ job, extra }) => {
   const handleDeleteClick = () => {
     setConfirmationDialogOpen(true);
   };
-  const isUserAuthorized = user?.organizations?.includes(job?.organization?._id);
-  console.log('isUserAuthorized', isUserAuthorized)
+  const isUserAuthorized = user?.organizations?.includes(job?.organization?._id) || user?._id === job?.owner?._id;
 
   const handleConfirmDelete = () => {
     deleteJob(job?._id);

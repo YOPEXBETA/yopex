@@ -380,3 +380,27 @@ export const useFetchOrganizationChallenges = (organizationId, filters) => {
     enabled: !!organizationId,
   });
 };
+
+export const useFetchOrganizationTeamChallenges = (organizationId, filters) => {
+  return useQuery({
+    queryKey: ["organizationTeamChallenges", organizationId, filters],
+    queryFn: async () => {
+      let queryString = '';
+
+      if (filters.query) queryString += `&search=${encodeURIComponent(filters.query)}`;
+      if (filters.min || filters.max) {
+        queryString += `&min=${filters.min || 0}&max=${filters.max || 100000}`;
+      }
+      if (filters.categories && filters.categories.length > 0) {
+        queryString += `&categories=${filters.categories.join(',')}`;
+      }
+      if (filters.skills && filters.skills.length > 0) {
+        queryString += `&skills=${filters.skills.join(',')}`;
+      }
+      const { data } = await axios.get(`${url}/teamChallenge/organization/${organizationId}?${queryString}`);
+
+      return data;
+    },
+    enabled: !!organizationId,
+  });
+};

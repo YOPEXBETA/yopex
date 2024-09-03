@@ -248,6 +248,7 @@ const getUsers = async (req, res) => {
             "_id firstname lastname picturePath score country occupation followers reviews challengesDone skills"
         )
         .populate("reviews")
+        .populate("occupation")
         .sort({ score: -1, createdAt: 1 })
         .skip(pageSize * (page - 1))
         .limit(pageSize)
@@ -560,9 +561,8 @@ const getUserChallenges = async (req, res) => {
       path: "challenges",
       model: "Challenge",
       populate: {
-        path: "company",
-        model: "Company",
-        select: "-password",
+        path: "organization",
+        model: "Organization",
       },
     });
 

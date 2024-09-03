@@ -79,3 +79,16 @@ export const useGetConversationById = (conversationId) => {
     },
   });
 }
+
+export const useGetConversationByMembers = (member1Id, member2Id) => {
+  return useQuery({
+    queryKey: ["conversationByMembers", member1Id, member2Id],
+    queryFn: async () => {
+      if (!member1Id || !member2Id) return;
+      const { data } = await axios.get(`${url}/conversation/ByMembers`, {
+        params: { member1Id, member2Id }
+      });
+      return data;
+    },
+  });
+};

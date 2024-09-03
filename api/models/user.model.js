@@ -91,7 +91,15 @@ const UserSchema = new mongoose.Schema(
       ],
       default: [],
     },
-
+      createdTeamChallenge: {
+          type: [
+              {
+                  type: mongoose.Schema.Types.ObjectId,
+                  ref: "TeamChallenge",
+              },
+          ],
+          default: [],
+      },
     socialMediaLinks: [
       {
         platform: { type: String, required: false },
@@ -137,7 +145,7 @@ const UserSchema = new mongoose.Schema(
     },
 
     challenges: [{ type: mongoose.Types.ObjectId, ref: "Challenge" }],
-
+      teamChallenges: [{ type: mongoose.Types.ObjectId, ref: "TeamChallenge" }],
     badgesEarned: {
       type: [
         {
