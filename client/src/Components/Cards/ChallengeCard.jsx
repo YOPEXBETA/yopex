@@ -20,98 +20,87 @@ const ChallengeCard = ({ challenge, type, extra }) => {
 
   return (
     <div>
-      <Card extra={`lg:pr-11 overflow-hidden lg:h-40   ${extra}`}>
-        <Link to={`/challenges/challengeDetails/${challenge._id}?type=challenge`}>
-          <div className={`flex-col gap-6 md:flex-row flex`}>
-            <div className="w-full xl:w-[30%]">
-              <img
-                className={`h-full xl:h-30 md:h-40 w-screen md:rounded-l-lg object-cover lg:block`}
-                src={
-                  challenge?.company?.companyLogo
-                    ? challenge?.company.companyLogo
-                    : challengeBanner
-                }
-                alt="picture"
-              />
-            </div>
-            <div className="flex w-full flex-col justify-between xl:w-[70%] lg:px-0 px-4">
-              <div className="py-4 pb-4 flex justify-between items-center">
-                <h5 className="text-2xl font-bold leading-none tracking-tight dark:text-white">
-                  {challenge.title}
-                </h5>
-
-                {user?.companies?.includes(challenge?.company?._id) ? (
-                  <div onClick={(e) => e.preventDefault()}>
-                    <ChallengeMenuIcon challenge={challenge} />
-                  </div>
-                ) : (
-                  <p></p>
-                )}
-              </div>
-
-              <p></p>
-
-              <div className="flex items-center justify-between gap-2 pb-4">
-                <p className="truncate w-[35rem] dark:text-white">
-                  {challenge.description}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap justify-between pb-8">
-                <div className="flex items-center justify-start gap-2">
-                  <div>
-                    <FaUsers size={20} className="dark:text-white" />
-                  </div>
-                  <div className="flex gap-1">
-                    <p className="font-bold dark:text-white">
-                      {challenge.users.length}
-                    </p>
-                    <div className="dark:text-white">/</div>
-                    <p className="font-bold dark:text-white">
-                      {challenge.nbruser}
-                    </p>
-                    <p className="dark:text-white">Participants</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-start gap-2">
-                  {challenge.price > 0 ? (
-                    <div className="flex gap-1">
-                      <p className="font-bold dark:text-white">
-                        {challenge.price}
-                      </p>
-                      <p className="dark:text-white">Paid Entry</p>
-                    </div>
-                  ) : (
-                    <p className="font-bold dark:text-white">Free Entry</p>
-                  )}
-                </div>
-
-                <div className="flex items-center justify-start gap-2">
-                  <button
-                    className={`${
-                      isChallengeInProgress(challenge)
-                        ? "text-green-500 font-bold"
-                        : "text-red-500 font-bold"
-                    } p-0`}
-                  >
-                    {isChallengeInProgress(challenge) ? (
-                      <div className="flex items-center gap-1">
-                        <FaCheck size={20} />
-                        <p>In Progress</p>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-1">
-                        <FaTimes size={20} />
-                        <p>Finished</p>
-                      </div>
-                    )}
-                  </button>
-                </div>
-              </div>
-            </div>
+      <Card extra={`${extra}`}>
+      <div>
+      <div className="max-w-sm mx-auto overflow-hidden sm:max-w-md md:max-w-lg lg:max-w-xl">
+      <div className="relative">
+        <img
+          className="w-full h-64 object-cover"
+          src={
+            challenge?.organization?.organizationLogo
+              ? challenge.organization.organizationLogo
+              : challengeBanner
+          }
+          alt="Hackathon"
+        />
+  
+      <button
+        className={`absolute top-4 left-4 bg-purple-500 text-white text-sm px-2 py-1 rounded ${
+          isChallengeInProgress(challenge)
+            ? "text-green-500 font-bold"
+            : "text-red-500 font-bold"
+        } p-0`}
+      >
+        {isChallengeInProgress(challenge) ? (
+          <div className="flex items-center gap-1">
+            <FaCheck size={20} />
+            <p>In Progress</p>
           </div>
+        ) : (
+          <div className="flex items-center gap-1">
+            <FaTimes size={20} />
+            <p>Finished</p>
+          </div>
+        )}
+      </button>
+      </div>
+      <div className="p-6">
+        <h2 className="text-2xl font-semibold mb-2 dark:text-white text-black">{challenge?.title}</h2>
+        <p className="text-sm font-light text-gray-400 mb-6 overflow-hidden whitespace-nowrap text-ellipsis">
+          {challenge?.description}
+        </p>
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <p className="text-sm text-gray-400">Organized by</p>
+            <p className="text-base dark:text-white text-black">{challenge.organization?.organizationName}</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-400">Total Prize</p>
+            <p className="text-base dark:text-white text-black">{challenge.price > 0 ? `${challenge?.price} pts` : "Free"}</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-2 mb-6">
+          <div>
+            <p className="text-sm text-gray-400">Open To</p>
+            <p className="text-base dark:text-white text-black">Everyone</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-400">Participants</p>
+            <p className="text-base dark:text-white text-black">{challenge?.users?.length} | {challenge?.nbruser}</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-400">Objective</p>
+            <p className="text-base dark:text-white text-black">{challenge?.objective}</p>
+          </div>
+        </div>
+        <div className="flex justify-between items-center">
+        <Link to={`/challenges/challengeDetails/${challenge._id}?type=challenge`}>
+
+          <button className="bg-transparent border border-gray-400 text-gray-400 px-4 py-2 rounded hover:bg-gray-700 transition">
+            Details
+          </button>
         </Link>
+
+          {(user?.organizations?.includes(challenge?.organization?._id) ||
+                challenge?.owner === user?._id) && (
+                <div onClick={(e) => e.preventDefault()}>
+                  <ChallengeMenuIcon challenge={challenge} type="Challenge" />
+                </div>
+            )}
+        </div>
+      </div>
+    </div>
+    </div>
       </Card>
     </div>
   );
