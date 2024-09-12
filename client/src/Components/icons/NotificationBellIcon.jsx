@@ -4,7 +4,7 @@ const NotificationBellIcon = ({ notificationNumber, onClick  }) => {
   return (
     <button
       type="button"
-      className="relative rounded-full border-gray-200 py-3  text-gray-400 dark:text-white"
+      className="relative rounded-full border-gray-200 py-3 text-gray-400 dark:text-white"
       onClick={onClick}
     >
       <svg

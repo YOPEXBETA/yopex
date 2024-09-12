@@ -25,33 +25,13 @@ const DiscoverTalents = ({
                          }) => {
   const [openFiltersModal, setOpenFiltersModal] = useState(false);
   const toggleFiltersModal = () => setOpenFiltersModal((prev) => !prev);
-console.log('suggestedUsers', suggestedUsers)
   return (
       <div>
-        <div className="flex space-x-4 mb-5">
-          <div className="relative w-full">
-            <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-              <SearchIcon />
-            </div>
-            <input
-                type="text"
-                id="talent-search"
-                value={query}
-                onChange={(e) => setQuery(e.currentTarget.value)}
-                className="border rounded-full border-gray-300 block w-full pl-10 p-2.5 dark:bg-zinc-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white hover:border-green-500"
-                placeholder="Search for Talents"
-            />
-          </div>
-          <button
-              onClick={toggleFiltersModal}
-              type="button"
-              className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-black rounded-full border hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-blue-800"
-          >
-            <FilterIcon />
-            Filters
-          </button>
-        </div>
-
+        <div className="flex justify-between items-center mb-5">
+        
+        <h5 className="my-5 text-xl text-left dark:text-white">
+          Talents ({suggestedUsers?.userCount})
+        </h5>
         <TalentFiltersModal
             open={openFiltersModal}
             handleClose={toggleFiltersModal}
@@ -63,9 +43,16 @@ console.log('suggestedUsers', suggestedUsers)
             setSelectedSkills={setSelectedSkills}
         />
 
-        <h5 className="my-5 text-xl text-left dark:text-white">
-          Talents ({suggestedUsers?.userCount})
-        </h5>
+        <button
+              onClick={toggleFiltersModal}
+              type="button"
+              className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-black rounded-full border hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-blue-800"
+          >
+            <FilterIcon />
+            Filters
+          </button>
+        </div>
+
         <hr />
         {isLoading ? (
             <div className="text-center mt-4">

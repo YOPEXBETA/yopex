@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { HiX } from "react-icons/hi";
-import YopexLogo from "../../../../assets/icons/yopexPointIcon.png";
+import YopexLogo from "../../../../assets/images/LogoYopex.png";
 import organizationRoutes from "../../../../routes/OrganizationRoutes";
 import OrganizationSidebarLinks from "./organizationLinks";
 import WorkspaceSwitch from "../../../../Components/sidebar/components/WorkspaceSwitch";
@@ -10,6 +10,7 @@ import ProfileMenu from "../../../../Components/ProfileMenu/ProfileMenu";
 import { NavLink, useLocation } from 'react-router-dom';
 import WorkSpaceMenu from "../../../../Components/WorkspaceMenu/WorkSpaceMenu";
 import SwitchCardWorkspace from "../../../../Components/Cards/SwitchCardWorkspace";
+import SidebarCard from "../../../../Components/sidebar/components/SidebarCard";
 
 const OrganizationSidebar = ({
   open,
@@ -19,9 +20,9 @@ const OrganizationSidebar = ({
   closeCreateMenuModal, onPostChallengeClick, onPostJobClick
 }) => {
   const { currentOrganization } = useSelector((state) => state.organization);
-  console.log('current org', currentOrganization)
+  //console.log('current org', currentOrganization)
   const { user, error } = useSelector((state) => state.auth);
-  console.log('current user', user)
+  //console.log('current user', user)
 
   const organizations = user?.organizations || [];
   const [currentWorkspace, setCurrentWorkspace] = useState({
@@ -34,37 +35,30 @@ const OrganizationSidebar = ({
   };
   return (
     <div
-    className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-white pb-10 border-r-[1px] border-gray-100 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white md:!z-50 lg:!z-50 xl:z-30 dark:border-zinc-700  ${
+    className={`sm:none duration-175 linear fixed  flex min-h-full flex-col bg-gray-950 pb-10 border-r-[1px] border-gray-100 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white z-30  dark:border-zinc-700  ${
       open ? "translate-x-0" : "-translate-x-96"
-      } ${isRouteWithSpecificWidth ? "w-[6.2rem]" : ""}`}
-    >
-      <span
-        className="absolute top-4 right-4 block cursor-pointer xl:hidden"
-        onClick={onClose}
-      >
-        <HiX />
-      </span>
-
-      <div className={`py-[0.6rem]`}>
-      <NavLink to="/feed">
-        <div className="flex items-center justify-center ">
-          {isRouteWithSpecificWidth ? (
-            <div className="absolute left-8 top-4 ">
-              <img
-                src={YopexLogo}
-                alt="Yopex Logo"
-                className="h-8 w-8 object-fill"
+    } ${isRouteWithSpecificWidth ? "w-[6.2rem]" : ""}`}
+  >
+   
+       <div className={`py-[0.6rem] flex items-center justify-center justify-between pr-6`}>
+      <div className={`mx-6 flex items-center`}>
+        <div className="text-2xl capitalize font-bold dark:text-white text-white flex items-center gap-1 mt-2 hover:text-green-500">
+          <img
+              src={YopexLogo}
+              alt="Yopex Logo"
+              className="h-12 w-12 object-fill px-2 py-2"
               />
-            </div>
-          ) : (
-            <div className="mt-1 ml-1 text-left text-[1.7rem] font-bold uppercase dark:text-white">
-              YOPEX <span className="font-medium">HUB</span>
-            </div>
-          )}
+              YOPEXHUB
+          </div>      
         </div>
-        </NavLink>
+        <span
+          className="top-4 right-4 block cursor-pointer xl:hidden"
+          onClick={onClose}
+        >
+          <HiX />
+        </span>
       </div>
-      <div className="relative px-6 focus:ring-offset-2 focus:ring-offset-zinc-800 mt-4 w-full my-8">
+      <div className="relative px-6 focus:ring-offset-2 focus:ring-offset-zinc-800 w-full my-6">
         <Dropdown
           button={<SwitchCardWorkspace organization={currentOrganization}/>}
           children={
@@ -80,16 +74,6 @@ const OrganizationSidebar = ({
           classNames={"relative inline-block text-left"}
         />
       </div>
-      {/*<div className="px-4">
-        <WorkspaceSwitch
-          currentWorkspace={currentWorkspace}
-          organizations={organizations}
-          onSwitch={handleSwitch}
-        />
-      </div>*/}
-
-      {/* Nav item */}
-
       <ul className="mb-auto pt-1 flex flex-col justify-center">
         <OrganizationSidebarLinks
           routes={organizationRoutes}
@@ -98,6 +82,13 @@ const OrganizationSidebar = ({
           onPostJobClick={onPostJobClick}
         />
       </ul>
+      <div className="flex justify-center mt-4">
+        <SidebarCard
+          isRouteWithSpecificWidth={isRouteWithSpecificWidth}
+          handleCreateClick={handleCreateClick}
+          closeCreateMenuModal={closeCreateMenuModal}
+        />
+      </div>
     </div>
   );
 };

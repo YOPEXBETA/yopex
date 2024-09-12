@@ -82,15 +82,6 @@ const WorkSpaceMenu = ({
             className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 dark:text-white"
             onClick={() => handleOrganizationSwitch(organization)}
           >
-            <input
-              type="radio"
-              id={`org-${organization?._id}`}
-              name="workspace"
-              value={`Organization-${organization?._id}`}
-              checked={selectedWorkspace === organization?._id}
-              onChange={() => handleOrganizationSwitch(organization)} // This might be redundant
-              className="mr-2"
-            />
             <img
               src={organization?.organizationLogo}
               alt={organization?.organizationName}
@@ -105,15 +96,6 @@ const WorkSpaceMenu = ({
           className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
           onClick={handleUserWorkspaceSwitch}
         >
-          <input
-            type="radio"
-            id="user-workspace"
-            name="workspace"
-            value="User"
-            checked={selectedWorkspace === null} // Correctly checked for user workspace
-            onChange={handleUserWorkspaceSwitch} // This might be redundant
-            className="mr-2"
-          />
           <>
             <img
               src={user?.picturePath || AvatarProfile}

@@ -7,13 +7,14 @@ import challengeBanner from "../../assets/images/challengeBanner.jpg";
 
 const NewChallengeCard = ({ challenge, type, extra }) => {
   const { user } = useSelector((state) => state.auth);
+  const { currentOrganization } = useSelector((state) => state.organization);
+
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
-  const { currentOrganization } = useSelector(state => state.organization);
 
-  const currentWorkspace = user?.currentWorkspace?.label
+  const currentWorkspace = user?.currentWorkspace?.label;
 
-
-  const baseUrl = currentWorkspace === "Organization"
+  const baseUrl =
+    currentWorkspace === "Organization"
       ? `/organization/${currentOrganization?._id}/challenges/challengeDetails/`
       : `/challenges/challengeDetails/`;
 
@@ -41,88 +42,69 @@ const NewChallengeCard = ({ challenge, type, extra }) => {
 
   return (
     <div>
-      <Card extra={`p-4 h-full ${extra}`}>
-        <Link
-            to={
-              challenge
-                  ? `${baseUrl}${challenge._id}?type=challenge`
-                  : "#"
-            }
-        >
-          <div className="flex flex-col gap-4">
-            <div className="flex justify-between">
-              <div className="flex items-center gap-4">
-                <img
-                  src={
-                    challenge?.organization?.organizationLogo
-                      ? challenge?.organization?.organizationLogo
-                      : challengeBanner
-                  }
-                  alt="Icon"
-                  className="w-16 h-16 rounded-lg object-cover border hidden md:block lg:block"
-                />
-                <p className="mt-1 font-medium dark:text-gray-400 md:mt-2">
-                  {challenge.organization?.organizationName}
-                </p>
-              </div>
-              <div className="flex items-center justify-start gap-2">
-                {(user?.organizations?.includes(challenge?.organization?._id) ||
-                  challenge?.owner === user?._id) && (
-                  <div onClick={(e) => e.preventDefault()}>
-                    <ChallengeMenuIcon challenge={challenge} type="Challenge"/>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="mb-3 flex items-center justify-between px-1 md:items-start">
-              <div className="mb-2">
-                <p className="text-lg md:truncate md:w-96 w-full font-semibold">
-                  {challenge.title}
-                </p>
-                <div className="flex items-center gap-3 mt-4">
-                  <span className="text-sm flex gap-1 items-center text-purple-700 bg-purple-100  px-3 py-1 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
-                      />
-                    </svg>
-                    <p className="">{challenge.users.length}</p>
-                    <div className="">/</div>
-                    <p className=" ">{challenge.nbruser}</p>
-                  </span>
-                  <span className="bg-amber-100 text-amber-600 rounded-full px-3 py-1 text-sm">
-                    {challenge.price > 0 ? (
-                      <div className="flex gap-1">
-                        <p className="">{challenge.price} pts</p>
-                      </div>
-                    ) : (
-                      <p>Free</p>
-                    )}
-                  </span>
-                  <span className="bg-green-100 text-emerald-700 rounded-full px-3 py-1 text-sm">
-                    {challenge.objective}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="border px-4 py-3 rounded-2xl dark:bg-zinc-700">
-              <p className="text-center font-bold text-lg dark:text-emerald-400">
-                {challenge?.start ? timeRemaining : "Open"}
-              </p>
-            </div>
+      <div className="max-w-sm mx-auto dark:bg-zinc-800 dark:text-white rounded-lg shadow-lg overflow-hidden sm:max-w-md md:max-w-lg lg:max-w-xl">
+      <div className="relative">
+        <img
+          className="w-full h-64 object-cover"
+          src={
+            challenge?.organization?.organizationLogo
+              ? challenge.organization.organizationLogo
+              : challengeBanner
+          }
+          alt="Hackathon"
+        />
+        <span className="absolute top-4 left-4 bg-purple-500 text-white text-sm px-2 py-1 rounded">
+        {challenge?.start ? timeRemaining : "Upcoming Challenge"}
+        </span>
+      </div>
+      <div className="p-6">
+        <h2 className="text-2xl font-semibold mb-2 dark:text-white text-black">{challenge?.title}</h2>
+        <p className="text-sm font-light text-gray-400 mb-6 overflow-hidden whitespace-nowrap text-ellipsis">
+          {challenge?.description}
+        </p>
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <p className="text-sm text-gray-400">Organized by</p>
+            <p className="text-base dark:text-white text-black">{challenge.organization?.organizationName}</p>
           </div>
+          <div>
+            <p className="text-sm text-gray-400">Total Prize</p>
+            <p className="text-base dark:text-white text-black">{challenge.price > 0 ? `${challenge?.price} pts` : "Free"}</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-2 mb-6">
+          <div>
+            <p className="text-sm text-gray-400">Open To</p>
+            <p className="text-base dark:text-white text-black">Everyone</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-400">Participants</p>
+            <p className="text-base dark:text-white text-black">{challenge?.users?.length} | {challenge?.nbruser}</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-400">Objective</p>
+            <p className="text-base dark:text-white text-black">{challenge?.objective}</p>
+          </div>
+        </div>
+        <div className="flex justify-between items-center">
+        <Link
+          to={challenge ? `${baseUrl}${challenge._id}?type=challenge` : "#"}
+          className="block"
+        >
+          <button className="bg-transparent border border-gray-400 text-gray-400 px-4 py-2 rounded hover:bg-gray-700 transition">
+            Details
+          </button>
         </Link>
-      </Card>
+
+          {(user?.organizations?.includes(challenge?.organization?._id) ||
+                challenge?.owner === user?._id) && (
+                <div onClick={(e) => e.preventDefault()}>
+                  <ChallengeMenuIcon challenge={challenge} type="Challenge" />
+                </div>
+            )}
+        </div>
+      </div>
+    </div>
     </div>
   );
 };

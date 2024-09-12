@@ -9,7 +9,7 @@ const SwitchCardWorkspace = ({ user, organization, isRouteWithSpecificWidth }) =
         <div>
             <button
                 type="button"
-                className="inline-flex justify-center gap-x-1.5 rounded-md border-[1px] border-gray-200 px-3 py-4 text-sm hover:bg-gray-50 dark:hover:bg-zinc-500"
+                className="inline-flex justify-center gap-x-1.5 rounded-md border-[1px] border-gray-500 px-3 py-4 text-sm hover:bg-green-800 dark:hover:bg-green-800"
                 id="menu-button"
                 aria-expanded="true"
                 aria-haspopup="true"
@@ -24,7 +24,7 @@ const SwitchCardWorkspace = ({ user, organization, isRouteWithSpecificWidth }) =
                         <div className="flex flex-col items-start">
                             {!isRouteWithSpecificWidth && (
                                 <>
-                                    <p className="dark:text-white font-medium">
+                                    <p className="dark:text-white text-white font-medium">
                                         {user ? "Current Workspace" : "Current Organization"}
                                     </p>
                                     <h2 className="text-xs font-xs text-gray-400">

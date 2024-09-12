@@ -16,10 +16,6 @@ import DashIcon from "../Components/icons/DashIcon";
 
 // ==============================|| USER PAGES ||============================== //
 
-//OverviewPage
-const OverviewLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/OverviewPage/Index"))
-);
 //HomePage
 const HomeLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/HomePage/index"))
@@ -104,13 +100,6 @@ const MainRoutes = {
   path: "/",
   element: <MainLayout />,
   children: [
-    {
-      index: true,
-      name: "Overview",
-      path: "overview",
-      icon: <DashboardIcon className="h-6 w-6" />,
-      element: <OverviewLayout width={6} height={6} color={"grey-100"} />,
-    },
     {
       index: true,
       name: "Feed",

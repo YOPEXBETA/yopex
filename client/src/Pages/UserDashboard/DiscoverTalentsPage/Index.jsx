@@ -85,7 +85,11 @@ const Index = () => {
             <DiscoverTab
                 changeValue={changeValue}
                 value={value}
-            />
+                organizationQuery={organizationQuery}
+                setCompanyQuery={setOrganizationQuery}
+                query={query}
+                setQuery={setQuery}                
+                />
           </div>
           {value === 0 && (
               <div className="col-span-12 lg:col-span-12 md:col-span-12 mt-4 md:mt-0">

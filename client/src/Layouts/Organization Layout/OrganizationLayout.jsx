@@ -10,6 +10,7 @@ import OrganizationNavbar from "./Components/NavBar/organizarionNavbar";
 import {getCurrentUser} from "../../redux/auth/authSlice";
 import CreateOrganizationChallengeModal from "../../Components/Modals/CreateOrganizationChallengeModal";
 import CreateOrganizationJobOfferModal from "../../Components/Modals/CreateOrganizationJobOfferModal";
+import CreateMenuModal from "../../Components/Modals/CreateMenuModal";
 
 const OrganizationLayout = (props) => {
   const location = useLocation();
@@ -19,11 +20,20 @@ const OrganizationLayout = (props) => {
   const [open, setOpen] = useState(true);
   const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false);
   const [isJobModalOpen, setIsJobModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [currentRoute, setCurrentRoute] = useState("dashboard");
   const { ...rest } = props;
   const { organizationId } = useParams();
   const dispatch = useDispatch();
+  const handleCreateClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeCreateMenuModal = () => {
+    setIsModalOpen(false);
+  };
+
 
   useEffect(() => {
     dispatch(getCurrentUser()).then((response) => {
@@ -98,8 +108,7 @@ const OrganizationLayout = (props) => {
   };
   return (
     <div>
-      <div>
-        <div className="flex h-full w-full">
+      <div className="flex h-full w-full">
           <OrganizationSideBar
             open={open}
             onClose={() => setOpen(false)}
@@ -107,39 +116,42 @@ const OrganizationLayout = (props) => {
             handleNavigation={handleNavigation}
             onPostChallengeClick={openPostChallengeModal}
             onPostJobClick={openPostJobModal}
-          />
-          <div className="h-full w-full bg-white dark:!bg-zinc-900">
-            <main
-              className={`h-full flex-none transition-all  ${
-                matchedRoute?.customWidth ? "xl:ml-[100px]" : "xl:ml-[296px]"
-              }`}
-            >
-              <div className="h-full">
+            handleCreateClick={handleCreateClick}
+
+          />     
+        <div className="h-full w-full bg-white dark:!bg-zinc-900">
+          <main className="h-full flex-none transition-all xl:ml-[318px]">
+            <div className="h-full">
                 <OrganizationNavbar
                   onOpenSidenav={() => setOpen(true)}
                   brandText={currentRoute}
                   {...rest}
                 />
                 <div
-                  className={`mb-auto min-h-[90vh] ${
-                    isChatRoute ? "" : " mt-4 md:mx-6 md:p-2"
-                  }`}
-                >
+                className={`mb-auto min-h-[90vh] ${
+                  isChatRoute ? "": "mt-4 md:mx-6 md:p-2"
+                }`}
+              >
                   <Outlet />
                 </div>
               </div>
             </main>
           </div>
         </div>
-      </div>
-      <CreateOrganizationChallengeModal
+      {/*<CreateOrganizationChallengeModal
           open={isChallengeModalOpen}
           handleClose={closePostChallengeModal}
       />
       <CreateOrganizationJobOfferModal
           open={isJobModalOpen}
           handleClose={closePostJobModal}
-      />
+      />*/}
+   {isModalOpen && (
+        <CreateMenuModal
+          onClose={closeCreateMenuModal}
+          handleCreateClick={handleCreateClick}
+        />
+      )}
     </div>
   );
 };

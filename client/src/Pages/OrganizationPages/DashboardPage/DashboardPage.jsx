@@ -21,7 +21,6 @@ const DashboardPage = () => {
         dispatch(fetchCurrentOrganization(organizationId));
     }, [dispatch, organizationId]);
     const { data: jobs, isLoading } = useJobById(currentOrganization?._id,);
-console.log('jobs', jobs)
     const { data: notifications } = useGetOrganizationNotifications(currentOrganization?._id);
 
     const totalJobs = currentOrganization?.jobs?.length ?? 0;
@@ -41,8 +40,7 @@ console.log('jobs', jobs)
 
     const members = currentOrganization?.organizationMembers || [];
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-semibold mb-6">Dashboard</h1>
+        <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 <BasicStatsCard title="Total Number of Jobs" value={totalJobs}/>
                 <BasicStatsCard title="Total Challenges" value={totalChallenges}/>

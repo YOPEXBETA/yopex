@@ -9,7 +9,7 @@ export const CompanyProfileNavigationTab = ({
 }) => {
   return (
     <div>
-      <div className="flex flex-wrap bg-white">
+      <div className="flex flex-wrap">
         <button
           className={`w-1/2 sm:w-auto py-2 px-4 ${
             value === 0

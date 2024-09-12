@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./index";
 import LocationIcon from "../icons/LocationIcon";
 import WebIcon from "../icons/WebIcon";
+import { FaCheckCircle } from "react-icons/fa";
 
 const OrganizationProfileCard = ({ extra, currentOrganization }) => {
   return (
@@ -15,18 +16,24 @@ const OrganizationProfileCard = ({ extra, currentOrganization }) => {
         <div className="w-36 h-36 rounded-lg border-4 border-white shadow-lg overflow-hidden">
           <img src={currentOrganization?.organizationLogo} alt={currentOrganization?.organizationName}/>
         </div>
-        <div className="text-white pt-11 space-y-1">
-          <h3 className="font-bold text-2xl">{currentOrganization?.organizationName}</h3>
-          <div className="flex gap-4">
-            <div className="flex gap-2">
-              <LocationIcon/>
-              <div className="text-md">{currentOrganization?.country},</div>
-            </div>
-            <div className="flex gap-2">
-              <WebIcon/>
-              <a className="text-md hover:text-green-500" href={currentOrganization?.websiteURL}>{currentOrganization?.websiteURL}</a>
-          </div>
-          </div>
+        <div className="text-white pt-16 space-y-1">
+        <div className="flex items-center gap-2">
+                    <p className="text-2xl font-semibold dark:text-gray-200">
+                      {currentOrganization?.organizationName}
+                    </p>
+
+                    <button
+                        className="flex items-center gap-1"
+                        aria-label="verification badge"
+                        disabled={!currentOrganization?.verified}
+                    >
+                      <FaCheckCircle
+                          className={`text-${currentOrganization?.verified ? "green" : "gray"}-500 w-4 h-4 sm:w-5 sm:h-5 mb-[0.1rem] ${
+                              !currentOrganization?.verified ? "opacity-50 cursor-not-allowed" : ""
+                          }`}
+                      />
+                    </button>
+                  </div>          
         </div>
     </div>
   </div>   

@@ -34,7 +34,7 @@ const Sidebar = ({
 
   return (
     <div
-      className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-white pb-10 border-r-[1px] border-gray-100 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white md:!z-50 lg:!z-50 xl:z-30 dark:border-zinc-700  ${
+      className={`sm:none duration-175 linear fixed  flex min-h-full flex-col bg-zinc-900 pb-10 border-r-[1px] border-gray-100 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white z-30  dark:border-zinc-700  ${
         open ? "translate-x-0" : "-translate-x-96"
       } ${isRouteWithSpecificWidth ? "w-[6.2rem]" : ""}`}
     >
@@ -43,26 +43,23 @@ const Sidebar = ({
       <div className={`py-[0.6rem] flex items-center justify-center justify-between pr-6`}>
       <NavLink to="/overview">
       <div className={`mx-6 flex items-center`}>
-        <div className="text-2xl capitalize font-bold  dark:text-white flex items-center gap-2 mt-2 hover:text-green-500">
+        <div className="text-2xl capitalize font-bold dark:text-white text-white flex items-center gap-1 mt-2 hover:text-green-500">
           <img
               src={YopexLogo}
               alt="Yopex Logo"
-              className="h-9 w-9 object-fill px-2 py-2 rounded-md bg-black"
+              className="h-12 w-12 object-fill px-2 py-2"
               />
               YOPEXHUB
           </div>      
         </div>
         </NavLink>
         <span
-          className="top-4 right-4 block cursor-pointer xl:hidden"
+          className="top-4 right-4 block cursor-pointer xl:hidden text-white"
           onClick={onClose}
         >
           <HiX />
         </span>
       </div>
-
-      <div class="h-px bg-gray-100 dark:bg-white/30" />
-
       <div className="relative px-6 focus:ring-offset-2 focus:ring-offset-zinc-800 w-full my-6">
         <Dropdown
           button={<SwitchCardWorkspace user={user}  
@@ -80,14 +77,6 @@ const Sidebar = ({
           classNames={"relative inline-block text-left"}
         />
       </div>
-
-      {/*<WorkspaceSwitch
-          currentLayout="UserLayout"
-          currentWorkspace={currentWorkspace}
-          organizations={organizations}
-          onSwitch={handleSwitch}
-        />*/}
-      {/* Nav item */}
 
       <ul className="mb-auto flex flex-col justify-center">
         <SidebarLinks
