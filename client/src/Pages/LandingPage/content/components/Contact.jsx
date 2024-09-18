@@ -4,9 +4,9 @@ const Contact = () => {
   return (
     <div
       name="contact"
-      className="w-full px-4 bg-emerald-50 lg:px-24 md:px-11  dark:bg-zinc-800"
+      className="w-full px-4 lg:px-24 md:px-11"
     >
-      <section className="relative  overflow-hidden bg-emerald-50 dark:bg-zinc-800 py-20 lg:py-[120px]">
+      <section className="relative  overflow-hidden py-20 lg:py-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap lg:justify-between">
             <div className="w-full px-4 lg:w-1/2 xl:w-6/12">

@@ -78,7 +78,7 @@ const MainLayout = (props) => {
           handleCreateClick={handleCreateClick}
           closeCreateMenuModal={closeCreateMenuModal}
         />
-        <div className="h-full w-full bg-white dark:!bg-zinc-900">
+        <div className="h-full w-full bg-white dark:!bg-zinc-800">
           <main className="h-full flex-none transition-all xl:ml-[309px]">
             <div className="h-full">
               <Navbar  

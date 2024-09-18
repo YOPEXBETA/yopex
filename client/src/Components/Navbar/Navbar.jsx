@@ -159,7 +159,7 @@ const Navbar = (props) => {
     setIsMenuOpen((prev) => !prev);
   };
   return (
-      <nav className="sticky py-[0.6rem] top-0 z-20 w-full bg-white dark:bg-zinc-900 border-b-[1px] border-gray-100 dark:border-zinc-700">
+      <nav className="sticky py-[0.6rem] top-0 z-50 w-full bg-white dark:bg-zinc-800 border-b-[1px] border-gray-100 dark:border-zinc-700">
         <div className="mx-auto  px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-11 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

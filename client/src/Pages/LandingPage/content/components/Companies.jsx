@@ -16,17 +16,14 @@ const Companies = () => {
   }
 
   return (
-    <div id="companies" className="pb-8 pt-20 lg:pb-[70px] bg-emerald-50">
+    <div id="companies" className="pb-8 pt-20 lg:pb-[70px]">
       <div className="mb-12 space-y-2 text-center">
         <div class="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
-          <span class="mb-2 block text-xl font-semibold text-amber-500">
-            Companies
-          </span>
-          <h2 class="mb-3 text-3xl font-bold text-dark sm:text-4xl md:text-[40px] md:leading-[1.2">
-            Recent Companies
+          <h2 class="mb-3 text-3xl font-bold text-dark sm:text-4xl md:text-[40px] dark:text-white">
+            Recent Organizations
           </h2>
-          <p class="text-base text-body-color">
-            Discover our Newly Registered Companies
+          <p class="text-base text-body-color dark:text-white">
+            Discover our Newly Registered Organizations
           </p>
         </div>
       </div>
@@ -51,7 +48,7 @@ const Companies = () => {
             </div>
           ))
         ) : (
-          <p className="">No companies available.</p>
+          <p className="text-center dark:text-white">No organization available.</p>
         )}
       </div>
     </div>

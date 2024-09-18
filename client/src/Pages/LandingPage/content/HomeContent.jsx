@@ -12,29 +12,29 @@ import Partners from "./components/Partners";
 const HomeContent = () => {
   return (
     <div>
-      <div className="dark:bg-zinc-800 bg-white">
+      <div className="">
         <HomeSection />
       </div>
       {/*<div className="dark:bg-zinc-800 bg-white">
         <Partners />
   </div>*/}
-      <div className="dark:bg-zinc-800 bg-white">
+      <div className="dark:bg-zinc-800">
         <Features />
       </div>
-      <div className="dark:bg-zinc-800 bg-white">
+      <div className="dark:bg-zinc-800">
         <Companies />
       </div>
-      <div className="dark:bg-zinc-800 bg-white">
+      <div className="dark:bg-zinc-800">
         <RecentChallenges />
       </div>
 
-      <div className="pb-16 dark:bg-zinc-800 bg-white">
+      <div className="dark:bg-zinc-800">
         <GetStartedNow />
       </div>
-      <div className="pb-16 dark:bg-zinc-800 bg-white">
+      <div className="dark:bg-zinc-800">
         <RecentJobs />
       </div>
-      <div className="dark:bg-zinc-800 bg-white">
+      <div className="dark:bg-zinc-800">
         <Contact />
       </div>
     </div>

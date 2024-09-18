@@ -35,7 +35,7 @@ const OrganizationSidebar = ({
   };
   return (
     <div
-    className={`sm:none duration-175 linear fixed  flex min-h-full flex-col bg-gray-950 pb-10 border-r-[1px] border-gray-100 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white z-30  dark:border-zinc-700  ${
+    className={`sm:none duration-175 linear fixed  flex min-h-full flex-col bg-gradient-to-l from-zinc-800 to-black pb-10 border-r-[1px] border-gray-100 shadow-2xl shadow-white/5 transition-all dark:bg-zinc-800 dark:text-white z-30  dark:border-zinc-700  ${
       open ? "translate-x-0" : "-translate-x-96"
     } ${isRouteWithSpecificWidth ? "w-[6.2rem]" : ""}`}
   >

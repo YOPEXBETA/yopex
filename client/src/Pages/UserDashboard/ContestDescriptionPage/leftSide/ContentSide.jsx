@@ -17,7 +17,6 @@ const ContentSide = ({ value, isOwner, start, isRegistered,challenge, type, team
   const { id: challengeId } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { data: conversation } = useGetContestConversation(challengeId);
-  console.log('regis', isRegistered)
   if (user )
     return (
       <div className="">

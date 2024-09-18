@@ -218,7 +218,7 @@ const HomeHeader = () => {
             )}
             {!user && (
               <a href="/register" className="block">
-                <button className="bg-black dark:bg-amber-500 dark:hover:bg-amber-600 text-white rounded-3xl px-4 py-2 font-medium hover:scale-105 duration-200">
+                <button className="bg-green-500 text-white rounded-md px-4 py-2 font-medium hover:scale-105 duration-200">
                   Sign up
                 </button>
               </a>

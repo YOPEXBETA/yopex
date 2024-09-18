@@ -41,14 +41,14 @@ const ConversationTabs = ({ challenge, user, isOwner, isRegistered, team }) => {
     };
 
     return (
-        <div className="md:flex rounded-xl bg-gray-200 p-2">
-            <ul className="flex flex-col space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
+        <div className="md:flex">
+            <ul className="flex flex-col space-y-4 w-96 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
                 <li>
                     <button
-                        className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${
+                        className={`inline-flex items-center px-4 py-4 rounded-lg w-full ${
                             activeTab === "teamChallenge"
-                                ? "text-white bg-green-500 dark:bg-blue-600 shadow-lg hover:shadow-xl"
-                                : "text-gray-900 bg-gray-50 dark:bg-gray-800 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
+                                ? "text-white bg-green-500 dark:bg-green-600 shadow-lg hover:shadow-xl"
+                                : "text-gray-900 bg-gray-50 dark:bg-zinc-500  dark:text-white hover:bg-zinc-100 bg-zinc-200 hover:shadow-lg"
                         }`}
                         onClick={() => setActiveTab("teamChallenge")}
                         aria-current={activeTab === "teamChallenge" ? "page" : undefined}
@@ -62,8 +62,8 @@ const ConversationTabs = ({ challenge, user, isOwner, isRegistered, team }) => {
                         <button
                             className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${
                                 activeTab === "teamConversation"
-                                    ? "text-white bg-green-500 dark:bg-blue-600 shadow-lg hover:shadow-xl"
-                                    : "text-gray-900 bg-gray-50 dark:bg-gray-800 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
+                                    ? "text-white bg-green-500 dark:bg-green-600 shadow-lg hover:shadow-xl"
+                                    : "text-gray-900 bg-gray-50 dark:bg-zinc-500  dark:text-white hover:bg-zinc-100 bg-zinc-200 hover:shadow-lg"
                             }`}
                             onClick={() => setActiveTab("teamConversation")}
                         >
@@ -77,8 +77,8 @@ const ConversationTabs = ({ challenge, user, isOwner, isRegistered, team }) => {
                     <button
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${
                             activeTab === "ownerConversation"
-                                ? "text-white bg-green-500 dark:bg-blue-600 shadow-lg hover:shadow-xl"
-                                : "text-gray-900 bg-gray-50 dark:bg-gray-800 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
+                                 ? "text-white bg-green-500 dark:bg-green-600 shadow-lg hover:shadow-xl"
+                                 : "text-gray-900 bg-gray-50 dark:bg-zinc-500  dark:text-white hover:bg-zinc-100 bg-zinc-200 hover:shadow-lg"
                         }`}
                         onClick={() => setActiveTab("ownerConversation")}
                     >
@@ -92,8 +92,8 @@ const ConversationTabs = ({ challenge, user, isOwner, isRegistered, team }) => {
                         <button
                             className={`inline-flex items-center px-1 py-1 rounded-lg w-full ${
                                 activeTab === member._id
-                                    ? "text-white bg-green-500 dark:bg-blue-600 shadow-lg hover:shadow-xl"
-                                    : "text-gray-900 bg-gray-50 dark:bg-gray-800 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
+                                    ? "text-white bg-green-500 dark:bg-green-600 shadow-lg hover:shadow-xl"
+                                    : "text-gray-900 bg-gray-50 dark:bg-zinc-500  dark:text-white hover:bg-zinc-100 bg-zinc-200 hover:shadow-lg"
                             }`}
                             onClick={() => setActiveTab(member._id)}
                         >
@@ -108,7 +108,7 @@ const ConversationTabs = ({ challenge, user, isOwner, isRegistered, team }) => {
                 ))}
 
             </ul>
-            <div className="  dark:bg-gray-800 rounded-lg w-full">
+            <div className="dark:bg-gray-800 rounded-lg w-full">
                 {renderContent()}
             </div>
         </div>

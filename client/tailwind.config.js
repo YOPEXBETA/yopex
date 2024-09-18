@@ -105,7 +105,6 @@ module.exports = {
         "99p": "99%",
       },
       fontFamily: {
-        satoshi: ['Satoshi', 'sans-serif'],
       },
       boxShadow: {
         "3xl": "14px 17px 40px 4px",

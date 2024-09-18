@@ -40,7 +40,7 @@ const CreateFormLayout = (props) => {
   }
 
   return (
-    <div className="w-full h-screen bg-gradient-to-r from-indigo-500 via-blue-500 to-green-500 background-animate dark:!bg-zinc-900">
+    <div className="w-full h-screen bg-gradient-to-t from-zinc-800 to-green-700 background-animate dark:!bg-zinc-900">
       <div className="h-screen">
         {/*<Navbar brandText={currentRoute} {...rest} />*/}
 

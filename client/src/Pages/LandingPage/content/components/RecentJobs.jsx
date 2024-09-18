@@ -27,11 +27,8 @@ const RecentJobs = () => {
     >
       <div className="mb-12 space-y-2 text-center">
         <div class="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
-          <span class="mb-2 block text-xl font-semibold text-amber-500">
-            Job Offers
-          </span>
           <h2 class="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
-            Recent Job Opportunities
+            Recent Jobs
           </h2>
           <p class="text-base text-body-color dark:text-white">
             Explore Yopex's Latest Job Opportunities!

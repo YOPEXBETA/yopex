@@ -16,7 +16,7 @@ const HomeSection = () => {
   return (
     <div
       id="home"
-      className="relative overflow-hidden bg-gradient-to-r from-emerald-600  to-emerald-800 pt-[120px] md:pt-[130px] lg:pt-[160px]"
+      className="relative overflow-hidden bg-gradient-to-r from-zinc-800 to-black text-center py-20 pt-[120px] md:pt-[130px] lg:pt-[160px]"
     >
       <div>
         <div className="-mx-4 flex flex-wrap items-center">
@@ -28,16 +28,13 @@ const HomeSection = () => {
               <h1 className="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]">
                 Where Talent Meets Opportunity
               </h1>
-              <p className="mx-auto mb-9 max-w-[600px] text-base text-white sm:text-lg sm:leading-[1.44]">
-                Tackle exciting challenges, apply for numerous job openings, and
-                join the Yopex community in your thriving industry. Your next
-                adventure awaits!
-              </p>
+              <p className="mx-auto mb-9 text-base text-white sm:text-lg sm:leading-[1.44]">
+              Join Yopex, the leading hub for next-gen hackathons! Whether in-person or online, we’re redefining the hackathon experience.</p>
               <ul className="mb-10 flex flex-wrap items-center justify-center gap-5">
                 <li>
                   <a
                     href="/login"
-                    className="inline-flex items-center justify-center rounded-md hover:bg-amber-700 bg-amber-500 text-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2 hover:text-body-color"
+                    className="inline-flex items-center justify-center rounded-md hover:bg-green-700 bg-green-500 text-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2 hover:text-body-color"
                   >
                     REGISTER TODAY
                   </a>
