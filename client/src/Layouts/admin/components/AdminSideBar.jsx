@@ -22,7 +22,7 @@ const AdminSidebar = ({ open, onClose }) => {
       </span>
       <div className="mt-[40px] mx-16 flex items-center">
         <div className="mt-1 ml-1  font-poppins text-[26px] font-bold uppercase text-white dark:text-white">
-          {/*YOPEX*/} Talent <span className="font-medium">HUB</span>
+          YOPEX <span className="font-medium">HUB</span>
         </div>
       </div>
       <hr className="w-full border-t-1 border-gray-400 my-10" />

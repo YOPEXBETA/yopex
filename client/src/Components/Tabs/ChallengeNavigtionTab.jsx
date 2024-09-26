@@ -103,14 +103,14 @@ const ChallengeNavigationTab = ({ value, changeValue, isRegistered,challenge,isO
               Removed
             </button>
           )}
-          <button
+          {/*<button
               className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300   ${  
               "bg-green-500 text-white dark:text-gray-200 border-green-500 ml-2"
               }`}
               onClick={copyUrlToClipboard}
             >
               Copy URL
-            </button>
+            </button>*/}
         </div>
       </Card>
     </div>

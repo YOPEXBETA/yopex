@@ -59,11 +59,12 @@ const AdminRoutes = {
       element: <AdminUsersTable />,
     },
     {
-      name: "Companies",
+      name: "Organizations",
       icon: <CompanyIcon className="h-6 w-6" />,
-      path: "Companies",
+      path: "Organizations",
       element: <CompanyPage />,
     },
+    {/*the variable is null because the company table should have organization instead of company as an attribute*/},
     {
       name: "Categories",
       icon: <CategoryIcon className="h-6 w-6" />,

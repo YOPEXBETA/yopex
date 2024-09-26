@@ -8,9 +8,9 @@ import {useSelector} from "react-redux";
 import OrganizationChallengesHeader from "./Components/OrganizationChallengesHeader";
 import OrganizationChallenges from "./Components/OrganizationChallenges";
 import useDebounce from "../../../hooks/useDebounce";
-import ChallengeTab from "../../UserDashboard/BrowsePage/ChallengeTab";
-import ContestsHeader from "../../UserDashboard/BrowsePage/components/ContestsHeader";
-import TeamChallenges from "../../UserDashboard/BrowsePage/components/TeamChallenges";
+import ChallengeTab from "../../UserDashboard/ChallengePage/ChallengeTab";
+import ContestsHeader from "../../UserDashboard/ChallengePage/components/ContestsHeader";
+import TeamChallenges from "../../UserDashboard/ChallengePage/components/TeamChallenges";
 import {useFindTeamChallenges} from "../../../hooks/react-query/useTeamChallenge";
 
 const OrganizationChallengesPage = () => {

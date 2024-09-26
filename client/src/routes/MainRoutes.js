@@ -71,7 +71,7 @@ const ContestDetails = Loadable(
 
 //BrowsePage
 const BrowseLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/BrowsePage/Index"))
+  lazy(() => import("../Pages/UserDashboard/ChallengePage/Index"))
 );
 //JobPage
 const JobLayout = Loadable(

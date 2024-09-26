@@ -18,7 +18,7 @@ export function AdminSideBarLinks(props) {
         <Link key={index} to={route.path}>
           <ul className="relative mb-5 flex items-center hover:cursor-pointer">
             <li
-              className="my-[6px] flex cursor-pointer items-center px-8"
+              className="my-[1px] flex cursor-pointer items-center px-8"
               key={index}
             >
               {!route.hideIcon && (
