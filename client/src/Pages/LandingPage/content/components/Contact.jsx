@@ -11,8 +11,8 @@ const Contact = () => {
           <div className="-mx-4 flex flex-wrap lg:justify-between">
             <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
               <div className="mb-12 max-w-[570px] lg:mb-0">
-                <h2 className="mb-6 text-[32px] dark:text-white font-bold uppercase text-dark sm:text-[40px] lg:text-[36px] xl:text-[40px]">
-                  GET IN TOUCH WITH US
+                <h2 className="mb-6 text-[32px] dark:text-white font-bold text-dark sm:text-[40px] lg:text-[36px] xl:text-[40px]">
+                  Get in touch with us
                 </h2>
                 <p className="mb-9 dark:text-white text-base leading-relaxed text-body-color">
                   Have questions, suggestions, or need assistance? We're here to
