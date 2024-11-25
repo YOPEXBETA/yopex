@@ -100,8 +100,8 @@ const HomeHeader = () => {
                     : "px-4 cursor-pointer capitalize dark:text-white  text-white hover:scale-105 duration-200"
                 }
               >
-                <Link to="features" smooth duration={500}>
-                  Features
+                <Link to="about" smooth duration={500}>
+                  About
                 </Link>
               </li>
               <li

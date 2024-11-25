@@ -2,7 +2,7 @@ import React from "react";
 
 const GetStartedNow = () => {
   return (
-    <section class="relative overflow-hidden py-20 lg:py-[115px] bg-gradient-to-r from-zinc-800 to-black ">
+    <section class="relative overflow-hidden py-20 lg:py-30 bg-gradient-to-r from-zinc-800 to-black mx-24 rounded-3xl">
       <div class="container mx-auto">
         <div class="relative overflow-hidden">
           <div class="-mx-4 flex flex-wrap items-stretch">
@@ -10,18 +10,19 @@ const GetStartedNow = () => {
               <div class="mx-auto max-w-[570px] text-center">
                 <h2 class="mb-2.5 text-3xl font-bold text-white md:text-[38px] md:leading-[1.44]">
                   <span>What Are You Looking For?</span>
+                  <br/>
                   <span class="text-3xl font-normal md:text-[40px]">
                     Get Started Now
                   </span>
                 </h2>
-                <p class="mx-auto mb-6 max-w-[515px] text-base leading-[1.5] text-white">
+                <p class="mx-auto mb-6 max-w-[515px] text-lg leading-[1.5] text-white">
                   Join Yopex and be part of our global and diverse community.
                 </p>
                 <a
                   href="/login"
-                  class="inline-block rounded-md border border-transparent bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-green-700 bg-green-500"
+                  class="inline-block rounded-md border border-transparent bg-orange-500 px-6 py-3 text-lg  text-white transition hover:bg-orange-700"
                 >
-                  REGISTER TODAY
+                Get Started
                 </a>
               </div>
             </div>

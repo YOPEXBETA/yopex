@@ -7,7 +7,6 @@ import GetStartedNow from "./components/GetStartedNow";
 import RecentChallenges from "./components/RecentChallenges";
 import Partners from "./components/Partners";
 import AboutUs from "./components/AboutUs";
-import HighlightSection from "./components/HighlightSection";
 
 const HomeContent = () => {
   return (
@@ -17,12 +16,9 @@ const HomeContent = () => {
       </div>
       {/*<div className="dark:bg-zinc-800 bg-white">
         <Partners />
-  </div>*/}
+      </div>*/}
       <div className="dark:bg-zinc-800">
         <AboutUs/>
-      </div>
-      <div className="dark:bg-zinc-800">
-        <HighlightSection/>
       </div>
       <div className="dark:bg-zinc-800">
         <RecentChallenges />
