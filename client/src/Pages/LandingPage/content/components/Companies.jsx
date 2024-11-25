@@ -16,7 +16,7 @@ const Companies = () => {
   }
 
   return (
-    <div id="companies" className="pb-8 pt-20 lg:pb-[70px]">
+    <div id="organizations" className="pb-8 pt-20 lg:pb-[70px]">
       <div className="mb-12 space-y-2 text-center">
         <div class="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
           <h2 class="mb-3 text-3xl font-bold text-dark sm:text-4xl md:text-[40px] dark:text-white">

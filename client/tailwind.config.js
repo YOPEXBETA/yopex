@@ -3,6 +3,10 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      animation: {
+        'spin-slow': 'spin 10s linear infinite',
+        'spin-slow-reverse': 'spin 10s linear infinite reverse',
+      },
       width: {
         "1p": "1%",
         "2p": "2%",
@@ -322,6 +326,7 @@ module.exports = {
       }),
     },
   },
+
 
   plugins: [require("tailwind-scrollbar")],
 };

@@ -111,8 +111,8 @@ const HomeHeader = () => {
                     : "px-4 cursor-pointer capitalize dark:text-white  text-white hover:scale-105 duration-200"
                 }
               >
-                <Link to="companies" smooth duration={500}>
-                  Companies
+                <Link to="organizations" smooth duration={500}>
+                  Organizations
                 </Link>
               </li>
               <li
@@ -218,7 +218,7 @@ const HomeHeader = () => {
             )}
             {!user && (
               <a href="/register" className="block">
-                <button className="bg-green-500 text-white rounded-md px-4 py-2 font-medium hover:scale-105 duration-200">
+                <button className="bg-orange-500 text-white rounded-md px-4 py-2 font-medium hover:scale-105 duration-200">
                   Sign up
                 </button>
               </a>

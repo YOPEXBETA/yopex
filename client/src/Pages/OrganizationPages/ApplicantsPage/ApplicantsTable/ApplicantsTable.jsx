@@ -24,6 +24,7 @@ const ApplicantsTable = () => {
         .filter(applicant =>
             filter === "All" || applicant.status === filter
         );
+        
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };

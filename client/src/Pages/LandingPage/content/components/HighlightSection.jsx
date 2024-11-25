@@ -13,35 +13,45 @@ const HighlightSection = () => {
     );
   }
   return (
-    <div className="dark:bg-zinc-800">
-      <div className=" max-w-7xl mx-auto px-6 md:px-12 xl:px-6 pt-16 ">
-        <div className="py-8    border-y border-gray-100 dark:border-transparent sm:flex justify-between flex-wrap">
-          <div className="text-left w-full sm:w-1/2 md:w-1/4">
-            <h6 className="text-2xl font-semibold  dark:text-white">
-              {data?.countusers}
-            </h6>
-            <p className="mt-2 dark:text-white">Registered users</p>
+    <div className="bg-zinc-800">
+       <div className="mx-auto max-w-7xl px-6 lg:px-8 bg-zinc-800">
+            <div className="mx-auto max-w-2xl lg:max-w-none">
+              <dl className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+                <div className="flex flex-col bg-white/5 p-8">
+                  <dt className=" text-md font-medium leading-6 text-gray-300">
+                    Users
+                  </dt>
+                  <dd className="order-first text-3xl font-semibold tracking-tight text-white">
+                    {data?.countusers}
+                  </dd>
+                </div>
+                <div className="flex flex-col bg-white/5 p-8">
+                  <dt className=" text-md font-medium leading-6 text-gray-300">
+                    Organizations
+                  </dt>
+                  <dd className="order-first text-3xl font-semibold tracking-tight text-white">
+                    {data?.countcompanies}
+                  </dd>
+                </div>
+                <div className="flex flex-col bg-white/5 p-8">
+                  <dt className=" text-md font-medium leading-6 text-gray-300">
+                    Job Offers
+                  </dt>
+                  <dd className="order-first text-3xl font-semibold tracking-tight text-white">
+                    {data?.countjobs}
+                  </dd>
+                </div>
+                <div className="flex flex-col bg-white/5 p-8">
+                  <dt className=" text-md font-medium leading-6 text-gray-300">
+                    Challenges
+                  </dt>
+                  <dd className="order-first text-3xl font-semibold tracking-tight text-white">
+                    {data?.countchallenges}
+                  </dd>
+                </div>
+              </dl>
+            </div>
           </div>
-          <div className="text-left w-full sm:w-1/2 md:w-1/4">
-            <h6 className="text-2xl font-semibold  dark:text-white">
-              {data?.countcompanies}
-            </h6>
-            <p className="mt-2  dark:text-white">Registered companies</p>
-          </div>
-          <div className="text-left w-full sm:w-1/2 md:w-1/4">
-            <h6 className="text-2xl font-semibold  dark:text-white">
-              {data?.countjobs}
-            </h6>
-            <p className="mt-2  dark:text-white">Posted Jobs</p>
-          </div>
-          <div className="text-left w-full sm:w-1/2 md:w-1/4">
-            <h6 className="text-2xl font-semibold  dark:text-white">
-              {data?.countchallenges}
-            </h6>
-            <p className="mt-2  dark:text-white">Posted Challenges</p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
