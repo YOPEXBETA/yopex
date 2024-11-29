@@ -27,13 +27,13 @@ export const ProfileNavigationTab = ({ changeValue, value, extra }) => {
         </button>
         <button
           className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
-            value === 1
+            value === 0
               ? "bg-white shadow"
               : ""
           }`}
           onClick={() => changeValue(1)}
         >
-          Posts
+          Bootcamps
         </button>
         <button
           className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
@@ -73,32 +73,8 @@ export const ProfileNavigationTab = ({ changeValue, value, extra }) => {
           }`}
           onClick={() => changeValue(5)}
         >
-          Badges
-        </button>
-        <button
-          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
-            value === 6
-              ? "bg-white shadow"
-              : ""
-          }`}
-          onClick={() => changeValue(6)}
-        >
           {`Reviews (${reviews?.length || 0})`}
         </button>
-        {userId == user._id ? (
-          <button
-          className={`flex-1 items-center rounded-lg dark:text-black transition-colors duration-300 ease-in focus:outline-none hover:text-indigo-500 focus:text-indigo-500 px-4 py-2   ${
-            value === 7
-              ? "bg-white shadow"
-              : ""
-          }`}
-            onClick={() => changeValue(7)}
-          >
-            {`Favorites (${userProfile?.bookmarks.length || 0})`}
-          </button>
-        ) : (
-          ""
-        )}
       </div>
     </Card>
   );

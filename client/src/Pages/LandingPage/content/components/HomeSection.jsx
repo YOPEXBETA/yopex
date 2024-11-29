@@ -15,10 +15,10 @@ const HomeSection = () => {
   }
 
   return (
-    <div className="relative bg-gradient-to-r from-green-900 to-black md:py-96 overflow-hidden px-4 py-80" id="home">
+    <div className="relative bg-gradient-to-r from-green-900 to-black md:py-96 overflow-hidden px-4 py-80" id="home" >
       {/* Decorative Gradient Elements */}
       <div className="absolute top-0 left-0 transform -translate-x-1/6 -translate-y-1/2 w-[55rem] h-[11rem] bg-gradient-to-br from-green-700 to-green-900 rounded-full"></div>
-      <div className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/3 w-[50rem] h-[50rem] bg-gradient-to-tr from-green-200 to-green-800 opacity-80 rounded-full"></div>
+      <div className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/3 w-[50rem] h-[50rem] bg-gradient-to-tr from-green-200 to-green-800 opacity-80 rounded-full animate-pulse"></div>
 
       {/* Futuristic Shapes */}
       <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-gradient-to-br from-green-700 to-white opacity-60 rounded-full mix-blend-lighten transform rotate-45"></div>
@@ -56,42 +56,42 @@ const HomeSection = () => {
             {/* Metric Cards */}
             <div className="absolute top-64 right-28 transform -translate-x-1/6 -translate-y-1/2">
               {/* Card 1 */}
-              <div className="bg-white shadow-2xl rounded-lg p-6">
+              <div className="bg-white dark:bg-zinc-900 shadow-2xl rounded-lg p-6">
                 <div className="flex items-center">
                   {/* Visitor Count and Description */}
                   <div className="flex-shrink-0">
-                    <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                    <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900 dark:text-white">
                     {data?.countusers}
                     </span>
-                    <h3 className="text-base font-normal text-gray-500">Registered users</h3>
+                    <h3 className="text-base font-normal text-gray-500 dark:text-gray-300">Registered users</h3>
                   </div>
                 </div>
               </div>
             </div>  
             <div className="absolute top-[26rem] left-28 transform -translate-x-1/6 -translate-y-1/2">
               {/* Card 1 */}
-              <div className="bg-white shadow-2xl rounded-lg p-6">
+              <div className="bg-white dark:bg-zinc-900 shadow-2xl rounded-lg p-6">
                 <div className="flex items-center">
                   {/* Visitor Count and Description */}
                   <div className="flex-shrink-0">
-                    <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                    <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900 dark:text-white">
                     {data?.countchallenges}
                     </span>
-                    <h3 className="text-base font-normal text-gray-500">Posted Challenges</h3>
+                    <h3 className="text-base font-normal text-gray-500 dark:text-gray-300">Posted Challenges</h3>
                   </div>
                 </div>
               </div>
             </div>   
             <div className="absolute top-[35rem] right-28 transform -translate-x-1/6 -translate-y-1/2">
               {/* Card 1 */}
-              <div className="bg-white shadow-2xl rounded-lg p-6">
+              <div className="bg-white dark:bg-zinc-900 shadow-2xl rounded-lg p-6">
                 <div className="flex items-center">
                   {/* Visitor Count and Description */}
                   <div className="flex-shrink-0">
-                    <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                    <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900 dark:text-white">
                     {data?.countjobs}
                     </span>
-                    <h3 className="text-base font-normal text-gray-500">Posted Job Offers</h3>
+                    <h3 className="text-base font-normal text-gray-500 dark:text-gray-300">Posted Job Offers</h3>
                   </div>
                 </div>
               </div>

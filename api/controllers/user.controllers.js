@@ -199,8 +199,6 @@ const getUser = async (req, res) => {
       .populate("jobs")
       .populate("challenges")
       .populate("organizations")
-      .populate("educations")
-      .populate("experiences")
       .populate("skills")
         .populate("occupation");
 

@@ -2,9 +2,9 @@ import React, { lazy } from "react";
 import Loadable from "../Components/PageLoading/Loadable";
 import CreateFormLayout from "../Layouts/FormLayout/CreateFormLayout";
 
-// CreateCompany component
-const CreateCompany = Loadable(
-    lazy(() => import("../Pages/UserDashboard/CreateCompanyPage/index"))
+// CreateOrganization component
+const CreateOrganization = Loadable(
+    lazy(() => import("../Pages/UserDashboard/CreateOrganizationPage/index"))
 );
 const CreateChallenge = Loadable(
     lazy(() => import("../Pages/OrganizationPages/CreateChallenge/index"))
@@ -17,7 +17,7 @@ const FormRoutes = {
     {
       name: "Create organization",
       path: "create-organization",
-      element: <CreateCompany />,
+      element: <CreateOrganization/>,
       hideInSidebar: true,
     },{
       name: "Create Challenge",

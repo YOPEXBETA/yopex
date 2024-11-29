@@ -5,8 +5,7 @@ const authRouter = require("./auth.user.router");
 const userRouter = require("./user.router");
 const swaggerRouter = require("./swagger.router");
 const adminRouter = require("./admin.router");
-const PostsRouter = require("./Posts.router");
-const ChallengeRouter = require("./Challenge.router");
+const ChallengeRouter = require("./Challenge.router");//jawha bh
 const companyRouter = require("./Organization.router");
 const jobRouter = require("./job.router");
 const conversationRouter = require("./conversation.router");
@@ -19,8 +18,6 @@ const payementRouter = require("./payment.router");
 const skillRouter = require("./skill.router");
 const contestConversationRouter = require("./contestConversation.router");
 const FirebaseRouter = require("./firebase.router");
-const ExperienceRouter = require("./experience.router");
-const EducationRouter = require("./education.router");
 const levelRouter = require("./level.router");
 const roleRouter = require("./OrganizationRole.router");
 const sectorRouter = require("./sector.router");
@@ -35,7 +32,6 @@ router.use("/", userRouter);
 router.use("/company", companyRouter);
 router.use("/api-docs", swaggerRouter);
 router.use("/admin", adminRouter);
-router.use("/post", PostsRouter);
 router.use("/challenge", ChallengeRouter);
 router.use("/conversation", conversationRouter);
 router.use("/messages", MessageRouter);
@@ -47,15 +43,13 @@ router.use("/api", payementRouter);
 router.use("/skill", skillRouter);
 router.use("/contestconversation", contestConversationRouter);
 router.use("/firebase", FirebaseRouter);
-router.use("/experience", ExperienceRouter);
-router.use("/education", EducationRouter);
 router.use("/level", levelRouter);
 router.use("/oganizationRole", roleRouter);
 router.use("/sector", sectorRouter);
 router.use("/occupation", OccupationRouter);
-router.use("/teamChallenge", TeamChallengeRouter)
+router.use("/teamChallenge", TeamChallengeRouter)//bech na7iw hedhi
 router.use("/team", TeamRouter)
-router.use("/teamChallengeConversation", TeamChallengeConversationRouter)
+router.use("/teamChallengeConversation", TeamChallengeConversationRouter)//bech na7iw hedhi
 
 
 

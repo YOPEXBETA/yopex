@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAppliers } from "../../hooks/react-query/useJobs";
-import ApplierMenuIcon from "../../Pages/UserDashboard/CompanyPage/ContentSide/Components/MyAppliers/ApplierMenuIcon";
+import ApplierMenuIcon from "../../Pages/UserDashboard/OrganizationPage/ContentSide/Components/MyAppliers/ApplierMenuIcon";
 import LoadingSpinner from "../LoadingSpinner";
 import AvatarProfile from "../../assets/images/AvatarProfile.jpg";
 

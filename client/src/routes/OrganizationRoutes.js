@@ -1,7 +1,6 @@
 import React, { lazy } from "react";
 import Loadable from "../Components/PageLoading/Loadable";
 import DashboardIcon from "../Components/icons/DashboardIcon";
-
 import SettingsIcon from "../Components/icons/SettingsIcon";
 import OrganizationLayout from "../Layouts/Organization Layout/OrganizationLayout";
 import ContestIcon from "../Components/icons/ContestIcon";
@@ -34,7 +33,7 @@ const NotFoundPage = Loadable(
     lazy(() => import("../Pages/UserDashboard/NotFoundPage/NotFoundPage"))
 );
 const ContestDetails = Loadable(
-    lazy(() => import("../Pages/UserDashboard/ContestDescriptionPage/index"))
+    lazy(() => import("../Pages/UserDashboard/ChallengeDetailsPage/index"))
 );
 
 // ==============================|| MAIN ORGANIZATION ROUTING ||============================== //

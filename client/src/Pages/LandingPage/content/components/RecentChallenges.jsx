@@ -16,7 +16,7 @@ const RecentChallenges = () => {
   return (
     <div
       id="challenges"
-      className="bg-gray-100 pt-20 dark:bg-zinc-800 lg:pt-[120px] md:px-24 px-4 overflow-hidden"
+      className="bg-gray-100 pt-20 dark:bg-zinc-800 lg:pt-[120px] md:px-24 px-4 overflow-hidden lg:pb-[90px] pb-8" 
     >
       <div className="mb-12 space-y-2 text-center">
         <div className="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
@@ -35,18 +35,14 @@ const RecentChallenges = () => {
           </div>
         ) : sortedChallenges.length > 0 ? (
           sortedChallenges.map((item) => (
-            <div key={item._id} className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-1 gap-4 lg:pb-[90px] pb-8">
+            <div key={item._id} className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-1 gap-4">
               <NewChallengeCard challenge={item} />
             </div>
           ))
         ) : (
           <div className="flex flex-col items-center justify-center w-full">
           {/* Center the image and text */}
-          <img
-            src={NoContentAvailable}
-            alt="No content available"
-            className="w-[40rem] h-[40rem] mx-auto"
-          />
+          <p className="dark:text-white">No Available Challenges yet</p>
         </div>
         )}
       </div>

@@ -13,15 +13,10 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: false },
     occupation: { type: mongoose.Types.ObjectId, ref: "Occupation" },
     websiteURL: { type: String, required: false },
-    country: { type: String },
+    country: { type: String, required: false },
     picturePath: { type: String, required: false },
     userDescription: { type: String, required: false },
     birthDate: { type: Date, required: false },
-    rank: { type: Number, default: 1 },
-    /*level: {
-      type: Number,
-      default: 1,
-    },*/
     score: { type: Number, default: 0 },
     gender: {
       type: String,
@@ -30,23 +25,21 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin", "moderator"],
+      enum: ["user", "admin", "moderator","instructor"],
       default: "user",
     },
     resetToken: { type: String, default: undefined },
     isVerified: { type: Boolean, default: false },
     status: { type: String, default: "active" },
     balance: { type: Number, default: 0.0 },
-    yearsRegistered: { type: Number, default: 0 },
+    /*yearsRegistered: { type: Number, default: 0 },*/
     challengesDone: { type: Number, default: 0 },
     challengesWon: { type: Number, default: 0 },
-    viewedProfile: { type: Number },
-    impressions: { type: Number },
-    phoneNumber: {
+    /*phoneNumber: {
       type: String,
       maxLength: 14,
       default: "",
-    },
+    },*/
     followers: {
       type: Array,
       default: [],
@@ -91,7 +84,7 @@ const UserSchema = new mongoose.Schema(
       ],
       default: [],
     },
-      createdTeamChallenge: {
+      /*createdTeamChallenge: {
           type: [
               {
                   type: mongoose.Schema.Types.ObjectId,
@@ -99,7 +92,7 @@ const UserSchema = new mongoose.Schema(
               },
           ],
           default: [],
-      },
+      },*/
     socialMediaLinks: [
       {
         platform: { type: String, required: false },
@@ -107,45 +100,8 @@ const UserSchema = new mongoose.Schema(
       },
     ],
 
-    experiences: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Experience",
-        },
-      ],
-      default: [],
-    },
-    educations: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Education",
-        },
-      ],
-      default: [],
-    },
-    posts: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Post",
-        },
-      ],
-      default: [],
-    },
-    bookmarks: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Post",
-        },
-      ],
-      default: [],
-    },
-
     challenges: [{ type: mongoose.Types.ObjectId, ref: "Challenge" }],
-      teamChallenges: [{ type: mongoose.Types.ObjectId, ref: "TeamChallenge" }],
+    /*teamChallenges: [{ type: mongoose.Types.ObjectId, ref: "TeamChallenge" }],*/
     badgesEarned: {
       type: [
         {
@@ -180,13 +136,13 @@ const UserSchema = new mongoose.Schema(
         ref: "Notification",
       },
     ],
-      currentWorkspace: {
-          label: {
+    currentWorkspace: {
+        label: {
               type: String,
               enum: ['User', 'Organization'],
               default: 'User',
           },
-          organizationID: {
+        organizationID: {
               type: mongoose.Schema.Types.ObjectId,
               ref: 'Organization',
               default: null,
@@ -230,8 +186,6 @@ UserSchema.pre(
 
       const query = this;
       const userId = query._conditions._id;
-
-      SocialMediaPost.deleteMany({ userId: userId }).exec();
 
       Organization.deleteMany({ user: userId }).exec();
 

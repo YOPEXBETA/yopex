@@ -1,36 +1,25 @@
 import React, { lazy } from "react";
 import Loadable from "../Components/PageLoading/Loadable";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
-import PaymentFail from "../Pages/UserDashboard/SettingsPage/AccountSettings/Billing/PaymentFail";
-import Store from "../Pages/UserDashboard/StorePage/Store";
-import LeaderboardIcon from "../Components/icons/LeaderboardIcon";
-import StoreIcon from "../Components/icons/StoreIcon";
 import SettingsIcon from "../Components/icons/SettingsIcon";
-import ChatIcon from "../Components/icons/ChatIcon";
-import DashboardIcon from "../Components/icons/DashboardIcon";
 import ContestIcon from "../Components/icons/ContestIcon";
 import JobIcon from "../Components/icons/JobIcon";
-import ProjectIcon from "../Components/icons/ProjectIcon";
 import DiscoverIcon from "../Components/icons/DiscoverIcon";
 import DashIcon from "../Components/icons/DashIcon";
 
 // ==============================|| USER PAGES ||============================== //
 
 //HomePage
-const HomeLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/HomePage/index"))
+const BootcamPage = Loadable(
+  lazy(() => import("../Pages/UserDashboard/BootcampPage/Index"))
 );
 //Discover
 const DiscoverTalentsLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/DiscoverTalentsPage/Index"))
 );
 //CreateCompany
-const CreateCompany = Loadable(
-  lazy(() => import("../Pages/UserDashboard/CreateCompanyPage/index"))
-);
-//CreateProject
-const PostDetails = Loadable(
-  lazy(() => import("../Pages/UserDashboard/PostDetailsPage/index"))
+const CreateOrganization = Loadable(
+  lazy(() => import("../Pages/UserDashboard/CreateOrganizationPage/index"))
 );
 //HomePage
 const MobileNotifications = Loadable(
@@ -39,7 +28,7 @@ const MobileNotifications = Loadable(
 
 //CompanyPage
 const Organization = Loadable(
-  lazy(() => import("../Pages/UserDashboard/CompanyPage/index"))
+  lazy(() => import("../Pages/UserDashboard/OrganizationPage/index"))
 );
 
 //NotFoundPage
@@ -47,18 +36,9 @@ const NotFoundPage = Loadable(
   lazy(() => import("../Pages/UserDashboard/NotFoundPage/NotFoundPage"))
 );
 
-//Messenger
-const Messenger = Loadable(
-  lazy(() => import("../Pages/UserDashboard/MessengerPage/Index"))
-);
-
 //UserProfilePage
 const UserProfileLayout = Loadable(
   lazy(() => import("../Pages/UserDashboard/UserProfile/index"))
-);
-//LeaderBoardPage
-const LeaderBoardLayout = Loadable(
-  lazy(() => import("../Pages/UserDashboard/LeaderBoardPage/index"))
 );
 //SettingsPage
 const SettingsLayout = Loadable(
@@ -66,7 +46,7 @@ const SettingsLayout = Loadable(
 );
 //ContestDetailsPage
 const ContestDetails = Loadable(
-  lazy(() => import("../Pages/UserDashboard/ContestDescriptionPage/index"))
+  lazy(() => import("../Pages/UserDashboard/ChallengeDetailsPage/index"))
 );
 
 //BrowsePage
@@ -86,13 +66,6 @@ const PaymentSuccess = Loadable(
   )
 );
 
-const paymentFail = Loadable(
-  lazy(() =>
-    import(
-      "../Pages/UserDashboard/SettingsPage/AccountSettings/Billing/PaymentFail"
-    )
-  )
-);
 
 // ==============================|| MAIN USER ROUTING ||============================== //
 
@@ -102,10 +75,29 @@ const MainRoutes = {
   children: [
     {
       index: true,
-      name: "Feed",
-      path: "feed",
+      name: "Bootcamps",
+      path: "bootcamps",
       icon: <DashIcon className="h-6 w-6" />,
-      element: <HomeLayout width={6} height={6} color={"grey-100"} />,
+      element: <BootcamPage width={6} height={6} color={"grey-100"} />,
+    },
+    {
+      name: "Challenges",
+      icon: <ContestIcon className="h-6 w-6" />,
+      path: "challenges",
+      customWidth: true,
+      children: [
+        {
+          index: true,
+          element: <BrowseLayout />,
+          customWidth: true,
+        },
+        {
+          path: "challengeDetails/:id",
+          element: <ContestDetails />,
+          hideInSidebar: true,
+          customWidth: false,
+        },
+      ],
     },
     {
       name: "Discover",
@@ -130,26 +122,6 @@ const MainRoutes = {
       customWidth: true,
     },
     {
-      name: "Challenges",
-      icon: <ContestIcon className="h-6 w-6" />,
-      path: "challenges",
-      customWidth: true,
-      children: [
-        {
-          index: true,
-          element: <BrowseLayout />,
-          customWidth: true,
-        },
-        {
-          path: "challengeDetails/:id",
-          element: <ContestDetails />,
-          hideInSidebar: true,
-          customWidth: false,
-        },
-      ],
-    },
-
-    {
       name: "Profile",
       path: "profile",
       children: [{ path: ":userId", element: <UserProfileLayout /> }],
@@ -169,43 +141,11 @@ const MainRoutes = {
       customWidth: false,
     },
     {
-      name: "Leaderboard",
-      path: "leaderboard",
-      element: <LeaderBoardLayout />,
-      icon: <LeaderboardIcon width={6} height={6} color={"grey-100"} />,
-      customWidth: false,
-    },
-    {
-      name: "Chat",
-      path: "chat",
-      icon: <ChatIcon width={6} height={6} color={"grey-100"} />,
-      children: [
-        {
-          index: true,
-          element: <Messenger />,
-          customWidth: true,
-        },
-        {
-          path: ":selectedConversationId",
-          element: <Messenger />,
-          hideInSidebar: true,
-        },
-      ],
-    },
-    {
       name: "Settings",
       path: "settings",
       element: <SettingsLayout width={6} height={6} color={"grey-100"} />,
       icon: <SettingsIcon />,
     },
-    {
-      name: "post Details",
-      path: "postDetails",
-      children: [{ path: ":id", element: <PostDetails /> }],
-      hideInSidebar: true,
-      customWidth: false,
-    },
-
     {
       path: "paymentSuccess",
       element: <PaymentSuccess />,
