@@ -2,6 +2,7 @@ import React from "react";
 import { useJobs } from "../../../../hooks/react-query/useJobs";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import WorkCard from "../../../../Components/Cards/WorkCard";
+import NoContentAvailable from "../../../../assets/images/NoContent.png";
 
 const RecentJobs = () => {
   const { data: jobs, isLoading } = useJobs();
@@ -35,15 +36,26 @@ const RecentJobs = () => {
           </p>
         </div>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-4">
-        {sortedJobs?.map((job) => (
-          <div key={job._id}>
-            <WorkCard job={job} />
+      <div>
+        {isLoading ? (
+          <div className="flex justify-center items-center">
+            <LoadingSpinner />
           </div>
-        ))}
+        ) : sortedJobs?.length > 0 ? (
+          sortedJobs?.map((job) => (
+            <div key={job._id} className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-1 gap-4">
+              <WorkCard job={job} />
+            </div>
+          ))
+        ) : (
+          <div className="flex flex-col items-center justify-center w-full">
+          <img src={NoContentAvailable} className="h-60 w-60"/>
+        </div>
+        )}
       </div>
     </div>
+
+    
   );
 };
 

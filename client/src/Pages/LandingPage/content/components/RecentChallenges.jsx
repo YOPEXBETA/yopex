@@ -2,7 +2,7 @@ import React from "react";
 import NewChallengeCard from "../../../../Components/Cards/NewChallengeCard";
 import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import { useFindChallenges } from "../../../../hooks/react-query/useChallenges";
-import NoContentAvailable from "../../../../assets/images/NoContentAvailable.png";
+import NoContentAvailable from "../../../../assets/images/NoContent.png";
 
 const RecentChallenges = () => {
   const { data: challenges, isLoading } = useFindChallenges();
@@ -16,7 +16,7 @@ const RecentChallenges = () => {
   return (
     <div
       id="challenges"
-      className="bg-gray-100 pt-20 dark:bg-zinc-800 lg:pt-[120px] md:px-24 px-4 overflow-hidden lg:pb-[90px] pb-8" 
+      className="bg-gray-100 pt-20 dark:bg-zinc-800  md:px-24 px-4 overflow-hidden lg:pb-[90px] pb-8" 
     >
       <div className="mb-12 space-y-2 text-center">
         <div className="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
@@ -41,9 +41,8 @@ const RecentChallenges = () => {
           ))
         ) : (
           <div className="flex flex-col items-center justify-center w-full">
-          {/* Center the image and text */}
-          <p className="dark:text-white">No Available Challenges yet</p>
-        </div>
+             <img src={NoContentAvailable} className="h-60 w-60"/>
+          </div>
         )}
       </div>
     </div>
