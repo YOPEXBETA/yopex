@@ -2,7 +2,7 @@ import React from "react";
 
 const GetStartedNow = () => {
   return (
-    <section class="relative overflow-hidden py-20 lg:py-30 bg-gradient-to-r from-zinc-800 to-black mx-24 rounded-3xl">
+    <section class="relative overflow-hidden py-20 lg:py-30 bg-gradient-to-r from-green-800 to-black">
       <div class="container mx-auto">
         <div class="relative overflow-hidden">
           <div class="-mx-4 flex flex-wrap items-stretch">

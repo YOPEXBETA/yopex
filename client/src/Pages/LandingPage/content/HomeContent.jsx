@@ -1,7 +1,7 @@
 import React from "react";
 import HomeSection from "./components/HomeSection";
 import RecentJobs from "./components/RecentJobs";
-import Companies from "./components/Companies";
+import Organizations from "./components/Organizations";
 import Contact from "./components/Contact";
 import GetStartedNow from "./components/GetStartedNow";
 import RecentChallenges from "./components/RecentChallenges";
@@ -24,7 +24,7 @@ const HomeContent = () => {
         <RecentChallenges />
       </div>
       <div className="dark:bg-zinc-800">
-        <Companies />
+        <Organizations />
       </div>
       <div className="dark:bg-zinc-800">
         <GetStartedNow />

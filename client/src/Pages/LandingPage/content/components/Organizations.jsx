@@ -4,7 +4,7 @@ import LoadingSpinner from "../../../../Components/LoadingSpinner";
 import { Link } from "react-router-dom";
 import NoContentAvailable from "../../../../assets/images/NoContent.png";
 
-const Companies = () => {
+const Organizations = () => {
   const { data: Recentorganizations, isLoading: organizationsLoading } =
     useRecentCompanies();
 
@@ -23,7 +23,7 @@ const Companies = () => {
           <h2 class="mb-3 text-3xl font-bold text-dark sm:text-4xl md:text-[40px] dark:text-white">
             Recent Organizations
           </h2>
-          <p class="text-base text-body-color dark:text-white">
+          <p className="text-lg dark:text-white">
             Discover our Newly Registered Organizations
           </p>
         </div>
@@ -62,4 +62,4 @@ const Companies = () => {
   );
 };
 
-export default Companies;
+export default  Organizations;

@@ -16,14 +16,17 @@ const RecentChallenges = () => {
   return (
     <div
       id="challenges"
-      className="bg-gray-100 pt-20 dark:bg-zinc-800  md:px-24 px-4 overflow-hidden lg:pb-[90px] pb-8" 
+      className="relative bg-gray-100 dark:bg-zinc-600 pt-20 md:px-24 px-4 overflow-hidden lg:pb-[90px] pb-8" 
     >
+
+      {/* Futuristic Shapes */}
+
       <div className="mb-12 space-y-2 text-center">
         <div className="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
-          <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
+          <h2 className="mb-3 text-3xl font-bold dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
             Recent Challenges
           </h2>
-          <p className="text-base text-body-color dark:text-white">
+          <p className="text-lg dark:text-white">
             Explore Yopex's Latest Challenge Opportunities.
           </p>
         </div>
