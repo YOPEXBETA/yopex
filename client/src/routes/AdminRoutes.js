@@ -12,7 +12,7 @@ import CategoryIcon from "../Components/icons/CategoryIcon";
 import CompanyIcon from "../Components/icons/CompanyIcon";
 import CreditCardIcon from "../Components/icons/CreditCardIcon";
 import StarIcon from "../Components/icons/StarIcon";
-import EvaluationIcon from "../Components/icons/EvaluationIcon";
+// import EvaluationIcon from "../Components/icons/EvaluationIcon";
 import LevelIcon from "../Components/icons/LevelIcon";
 import SkillsIcon from "../Components/icons/SkillsIcon";
 import ProfessionIcon from "../Components/icons/PersonalInfoIcon";
@@ -40,12 +40,21 @@ const Categories = Loadable(
 const ProfessionsPage = Loadable(
     lazy(() => import("../Pages/AdminDashboard/OccupationsPage/OccupationsPage"))
 );
+const WaitingList = Loadable(
+    lazy(() => import("../Pages/AdminDashboard/WaitingList/WaitingList"))
+);
 // ==============================|| AUTH ROUTING ||============================== //
 
 const AdminRoutes = {
   path: "/",
   element: <AdminLayout />,
   children: [
+    {
+      name: "WaitingList",
+      icon: <DashboardIcon className="h-6 w-6" />,
+      path: "WaitingList",
+      element: <WaitingList />,
+    },
     {
       name: "Dashboard",
       icon: <DashboardIcon className="h-6 w-6" />,

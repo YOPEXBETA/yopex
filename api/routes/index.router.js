@@ -25,6 +25,7 @@ const OccupationRouter = require("./occupation.router");
 const TeamChallengeRouter = require("./teamChallenge.router");
 const TeamRouter = require("./team.router");
 const TeamChallengeConversationRouter = require("./TeamChallengeConversation.router");
+const WaitingList=require("./waitingList.router")
 
 router.use("/job", jobRouter);
 router.use("/auth", authRouter);
@@ -50,7 +51,7 @@ router.use("/occupation", OccupationRouter);
 router.use("/teamChallenge", TeamChallengeRouter)//bech na7iw hedhi
 router.use("/team", TeamRouter)
 router.use("/teamChallengeConversation", TeamChallengeConversationRouter)//bech na7iw hedhi
-
+router.use("/waitingList", WaitingList )
 
 
 module.exports = router;
